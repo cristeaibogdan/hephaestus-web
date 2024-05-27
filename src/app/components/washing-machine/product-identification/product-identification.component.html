@@ -1,0 +1,158 @@
+<form [formGroup]="washingMachineForm" (ngSubmit)="onSubmit()" (reset)="onReset($event)">
+<mat-card class="mat-elevation-z8">
+  <mat-card-title>{{"I18N.PRODUCT_IDENTIFICATION.TITLE" | translate}}</mat-card-title>
+
+  <article class="product-information">
+    <fieldset class="text-align-center">
+      <legend>&nbsp; {{"I18N.COMMON.IDENTIFICATION_MODE" | translate}} &nbsp; <span>*</span> &nbsp;
+        <mat-icon 
+          matTooltip='{{"I18N.HELP_TOOLTIP.IDENTIFICATION_MODE" | translate}}' 
+          matTooltipPosition='right' 
+          svgIcon="help">
+        </mat-icon>
+        &nbsp;
+      </legend>
+
+      <mat-button-toggle-group formControlName="identificationMode"
+        (valueChange)="disableDataFields_WHEN_QRCodeIsSelected()">
+        <mat-button-toggle value="QR Code" (change)="openCameraDialog()">
+          {{"I18N.PRODUCT_IDENTIFICATION.QR_CODE" | translate}}
+        </mat-button-toggle>
+        <mat-button-toggle value="Data Matrix">
+          {{"I18N.PRODUCT_IDENTIFICATION.DATA_MATRIX" | translate}}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </fieldset>
+
+    <mat-form-field appearance="fill">
+      <mat-label>{{"I18N.COMMON.PRODUCT_CATEGORY" | translate}}</mat-label>
+      <input matInput formControlName="category">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>{{"I18N.COMMON.MANUFACTURER" | translate}}</mat-label>
+      <!-- I have to use ngModelChange or model and type won't be filled when i click scan on QR Code camera -->
+      <mat-select formControlName="manufacturer"
+        (ngModelChange)="populateDataMatrix_Model_Type_Fields($event)">
+
+        <mat-option *ngFor="let manufacturer of availableManufacturers"
+          [value]="manufacturer">{{manufacturer}}
+        </mat-option>
+
+      </mat-select>
+      <mat-error>{{"I18N.MAT_ERROR.MANUFACTURER_REQUIRED" | translate}}</mat-error>
+    </mat-form-field>
+       
+    <mat-form-field class="normal-span" appearance="fill" formGroupName="modelAndType">
+      <mat-label>{{"I18N.COMMON.MODEL" | translate}}</mat-label>
+      <mat-select formControlName="model">
+        
+        <mat-option *ngFor="let model of availableModels" 
+          [value]="model">{{model}}
+        </mat-option>
+
+      </mat-select>
+      <mat-error>{{"I18N.MAT_ERROR.MODEL_OR_TYPE_REQUIRED" | translate}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="normal-span" appearance="fill" formGroupName="modelAndType">
+      <mat-label>{{"I18N.COMMON.TYPE" | translate}}</mat-label>
+      <mat-select formControlName="type">
+
+        <mat-option *ngFor="let type of availableTypes" 
+          [value]="type">{{type}}
+        </mat-option>
+
+      </mat-select>
+      <mat-error>{{"I18N.MAT_ERROR.MODEL_OR_TYPE_REQUIRED" | translate}}</mat-error>
+    </mat-form-field>    
+    
+    <mat-form-field appearance="fill">
+      <mat-label>{{"I18N.COMMON.SERIAL_NUMBER" | translate}}</mat-label>
+      <input matInput formControlName="serialNumber">   
+
+      <mat-error *ngIf="washingMachineForm.controls.serialNumber.errors?.required">
+        {{"I18N.MAT_ERROR.SERIAL_NUMBER_REQUIRED" | translate}}
+      </mat-error>
+
+      <mat-error *ngIf="washingMachineForm.controls.serialNumber.errors?.backendError">
+        {{"I18N.MAT_ERROR.NO_CONNECTION" | translate}}
+      </mat-error>
+
+      <mat-error *ngIf="washingMachineForm.controls.serialNumber.errors?.invalid">
+        {{"I18N.MAT_ERROR.SERIAL_NUMBER_TAKEN" | translate}}
+      </mat-error>
+      
+      <mat-hint *ngIf="washingMachineForm.controls.serialNumber.pending">
+        {{"I18N.MAT_HINT.PENDING" | translate}}
+      </mat-hint>
+      <mat-hint *ngIf="washingMachineForm.controls.serialNumber.valid">
+        {{"I18N.MAT_HINT.SERIAL_NUMBER_VALID" | translate}}
+      </mat-hint>
+    </mat-form-field>
+
+    <fieldset class="text-align-center">
+      <legend>&nbsp; {{"I18N.COMMON.RETURN_TYPE" | translate}} &nbsp; <span>*</span> &nbsp;
+        <mat-icon 
+          matTooltip='{{"I18N.HELP_TOOLTIP.RETURN_TYPE" | translate}}' 
+          matTooltipPosition='right' 
+          svgIcon="help">
+        </mat-icon>
+        &nbsp;
+      </legend>
+
+      <mat-button-toggle-group formControlName="returnType"
+        (valueChange)="disableDamageTypeBasedOnReturnTypeValue()">
+        <mat-button-toggle value="Service">
+          {{"I18N.PRODUCT_IDENTIFICATION.SERVICE" | translate}}
+        </mat-button-toggle>
+        <mat-button-toggle value="Commercial">
+          {{"I18N.PRODUCT_IDENTIFICATION.COMMERCIAL" | translate}}
+        </mat-button-toggle>
+        <mat-button-toggle value="Transport">
+          {{"I18N.PRODUCT_IDENTIFICATION.TRANSPORT" | translate}}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </fieldset>
+
+    <fieldset class="text-align-center">
+      <legend>&nbsp; {{"I18N.COMMON.DAMAGE_TYPE" | translate}} &nbsp; <span>*</span> &nbsp;
+        <mat-icon
+          matTooltip='{{"I18N.HELP_TOOLTIP.DAMAGE_TYPE" | translate}}'
+          matTooltipPosition='right'
+          svgIcon="help">              
+        </mat-icon>
+        &nbsp;
+      </legend>
+
+      <mat-button-toggle-group formControlName="damageType">
+        <mat-button-toggle value="In Use" [disabled]="disableInUse">
+          {{"I18N.PRODUCT_IDENTIFICATION.IN_USE" | translate}}
+        </mat-button-toggle>
+        <mat-button-toggle value="In Transit" [disabled]="disableInTransit">          
+          {{"I18N.PRODUCT_IDENTIFICATION.IN_TRANSIT" | translate}}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </fieldset>
+  </article>
+
+</mat-card>
+
+<div stepper-buttons>
+  <button mat-raised-button type="reset" color="warn">
+    {{"I18N.COMMON.RESET" | translate}}
+  </button>
+
+  <button mat-raised-button type="submit" color="primary">
+    {{"I18N.COMMON.NEXT" | translate}}
+  </button>
+</div>
+</form>
+
+<!-- <pre> ====== FORM ======
+  {{washingMachineForm.getRawValue() | json}}
+</pre> -->
+
+<!-- <pre> ====== SERVICE ======
+  {{this._washingMachineService.product | async | json}}
+</pre> -->

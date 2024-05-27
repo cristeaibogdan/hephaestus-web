@@ -1,0 +1,252 @@
+import { Injectable } from "@angular/core";
+import { MatStepper } from "@angular/material/stepper";
+import { BehaviorSubject} from "rxjs";
+import { DataService } from "./data.service";
+import { TranslateService } from "@ngx-translate/core";
+import { ImageFile } from "../components/models/image-file.model";
+import { WashingMachineDetailsDTO } from "../components/models/dtos/washing-machine-details.dto";
+import { WashingMachineDTO } from "../components/models/dtos/washing-machine.dto";
+import { WashingMachineIdentification } from "../components/models/washing-machine-identification.model";
+
+@Injectable({providedIn: 'root'})
+export class WashingMachineService {
+  
+  constructor(
+    private _dataService: DataService,
+    private translate: TranslateService 
+  ) { }
+
+// **************************************
+// *** STEP 1 = PRODUCT IDENTIFICATION
+// **************************************
+
+  private washingMachine = new BehaviorSubject<WashingMachineDTO>({
+    category:"",
+
+    damageType:"",
+    returnType:"",
+    identificationMode:"",
+    
+    manufacturer:"",
+    serialNumber:"",
+    model:"",
+    type:"",
+
+    damageLevel:0,
+    recommendation:""
+  });
+
+  getWashingMachine() {
+    return this.washingMachine.asObservable();
+  }
+
+  getSerialNumber() {
+    return this.washingMachine.value.serialNumber;
+  }
+
+  setWashingMachineIdentificationValues(washingMachineIdentification:WashingMachineIdentification) {
+    this.washingMachine.value.category = washingMachineIdentification.category;
+    this.washingMachine.value.damageType = washingMachineIdentification.damageType;
+    this.washingMachine.value.returnType = washingMachineIdentification.returnType;
+    this.washingMachine.value.identificationMode = washingMachineIdentification.identificationMode;
+    this.washingMachine.value.manufacturer = washingMachineIdentification.manufacturer;
+    this.washingMachine.value.serialNumber = washingMachineIdentification.serialNumber;
+    this.washingMachine.value.model = washingMachineIdentification.model;
+    this.washingMachine.value.type = washingMachineIdentification.type;
+  }
+
+  resetWashingMachineIdentificationValues() {
+    this.washingMachine.value.damageType = "";
+    this.washingMachine.value.returnType = "";
+    this.washingMachine.value.identificationMode = "";
+
+    this.washingMachine.value.manufacturer = "";
+    this.washingMachine.value.serialNumber = "";
+    this.washingMachine.value.model = "";
+    this.washingMachine.value.type = "";
+
+    this.washingMachine.value.damageLevel = 0;
+    this.washingMachine.value.recommendation = "";    
+  }
+
+// **************************************
+// *** STEP 1.1 = PRODUCT IDENTIFICATION - CAMERA DIALOG
+// **************************************
+
+private stepperContainer!: MatStepper;
+
+setStepper(stepper :MatStepper) {
+  this.stepperContainer = stepper;
+}
+
+nextStep() {
+  this.stepperContainer?.next();   
+}
+
+previousStep() {
+  this.stepperContainer?.previous();   
+}
+  
+// *****************************************
+// *** STEP 2 = PRODUCT DAMAGE ASSESSMENT
+// *****************************************
+
+  private washingMachineDetails = new BehaviorSubject<WashingMachineDetailsDTO>({
+    applicablePackageDamage:false,
+    packageDamaged:false,
+    packageDirty:false,
+    packageMaterialAvailable:false,
+
+
+    applicableVisibleSurfacesDamage:false,
+
+    visibleSurfacesHasScratches:false,
+    visibleSurfacesScratchesLength:0,
+
+    visibleSurfacesHasDents:false,
+    visibleSurfacesDentsDepth:0,
+
+    visibleSurfacesHasSmallDamage:false,
+    visibleSurfacesSmallDamage:"",
+
+    visibleSurfacesHasBigDamage:false,
+    visibleSurfacesBigDamage:"",
+
+
+    applicableHiddenSurfacesDamage:false,
+
+    hiddenSurfacesHasScratches:false,
+    hiddenSurfacesScratchesLength:0,
+
+    hiddenSurfacesHasDents:false,
+    hiddenSurfacesDentsDepth:0,
+
+    hiddenSurfacesHasSmallDamage:false,
+    hiddenSurfacesSmallDamage:"",
+
+    hiddenSurfacesHasBigDamage:false,
+    hiddenSurfacesBigDamage:"",
+
+    price:0,
+    repairPrice:0
+  });
+
+  setWashingMachineDetails(washingMachineDetails:WashingMachineDetailsDTO) {
+    this.washingMachineDetails.next(washingMachineDetails);
+  }
+
+  getWashingMachineDetails() {
+    return this.washingMachineDetails.asObservable();
+  }
+
+// **************************************
+// *** STEP 2 = SELECTED FILES
+// **************************************
+  
+  private selectedFiles!:ImageFile[];
+
+  setSelectedFiles(selectedFiles :ImageFile[]) {
+    this.selectedFiles = selectedFiles;
+  }
+
+  getSelectedFiles() {
+    return this.selectedFiles;
+  }
+    
+// **************************************
+// *** RESETS FOR STEP 2
+// **************************************
+
+  resetWashingMachineDamageAssessmentValues() {    
+    this.washingMachineDetails.value.applicablePackageDamage = false;
+    this.washingMachineDetails.value.packageDamaged = false;
+    this.washingMachineDetails.value.packageDirty = false;
+    this.washingMachineDetails.value.packageMaterialAvailable = false;
+
+
+    this.washingMachineDetails.value.applicableVisibleSurfacesDamage = false;
+
+    this.washingMachineDetails.value.visibleSurfacesHasScratches = false;   
+    this.washingMachineDetails.value.visibleSurfacesScratchesLength = 0;
+
+    this.washingMachineDetails.value.visibleSurfacesHasDents = false;   
+    this.washingMachineDetails.value.visibleSurfacesDentsDepth = 0;
+
+    this.washingMachineDetails.value.visibleSurfacesHasSmallDamage = false;   
+    this.washingMachineDetails.value.visibleSurfacesSmallDamage = "";
+
+    this.washingMachineDetails.value.visibleSurfacesHasBigDamage = false;   
+    this.washingMachineDetails.value.visibleSurfacesBigDamage = "";
+
+    
+    this.washingMachineDetails.value.applicableHiddenSurfacesDamage = false;
+
+    this.washingMachineDetails.value.hiddenSurfacesHasScratches = false;   
+    this.washingMachineDetails.value.hiddenSurfacesScratchesLength = 0;
+
+    this.washingMachineDetails.value.hiddenSurfacesHasDents = false;   
+    this.washingMachineDetails.value.hiddenSurfacesDentsDepth = 0;
+
+    this.washingMachineDetails.value.hiddenSurfacesHasSmallDamage = false;   
+    this.washingMachineDetails.value.hiddenSurfacesSmallDamage = "";
+
+    this.washingMachineDetails.value.hiddenSurfacesHasBigDamage = false;   
+    this.washingMachineDetails.value.hiddenSurfacesBigDamage = "";
+
+    this.washingMachineDetails.value.price = 0;   
+    this.washingMachineDetails.value.repairPrice = 0; 
+    
+    this.selectedFiles = [];
+  }
+
+// **************************************
+// *** STEP 3 = OVERVIEW
+// **************************************
+
+// Executes when NEXT on STEP 2 is clicked
+  generateWashingMachineDamageEvaluationAndGoToNextStep() {
+    this._dataService.generateWashingMachineEvaluation(this.washingMachineDetails.getValue()).subscribe(
+      (response) => {        
+      this.washingMachine.value.damageLevel = response.damageLevel;
+      this.washingMachine.value.recommendation = response.recommendation;
+      this.nextStep();
+    });
+  }
+
+// **************************************
+// *** STEP 4 = RECOMMENDED DECISION
+// **************************************
+
+  saveWashingMachine() {
+    const washingMachine:WashingMachineDTO = {
+      category: this.washingMachine.value.category,
+      manufacturer: this.washingMachine.value.manufacturer,
+
+      damageType: this.washingMachine.value.damageType,
+      returnType: this.washingMachine.value.returnType,
+      identificationMode: this.washingMachine.value.identificationMode,
+      
+      serialNumber: this.washingMachine.value.serialNumber,
+      model: this.washingMachine.value.model,
+      type: this.washingMachine.value.type,
+
+      damageLevel: this.washingMachine.value.damageLevel,
+      recommendation: this.washingMachine.value.recommendation,
+      
+      washingMachineDetails: this.washingMachineDetails.getValue()
+    };
+    
+    console.log("Saving = ", washingMachine);
+    const formData = new FormData();
+    formData.append("washingMachine", new Blob ([JSON.stringify(washingMachine)],{type: 'application/json'}));
+
+    this.selectedFiles.forEach(file => {
+      formData.append("imageFiles", file.file);
+    });
+
+    this._dataService.saveWashingMachine(formData).subscribe(() => {
+      this._dataService.openSnackBar_Success(this.translate.instant("I18N.CUSTOM_SUCCESS.PRODUCT_SAVED"),4000);       
+    });
+  }
+  
+}

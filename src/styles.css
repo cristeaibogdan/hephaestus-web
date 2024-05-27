@@ -1,0 +1,112 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+/* **************************************
+// *** STYLES for general uses
+// **************************************/
+
+.text-align-center {
+  text-align: center;
+}
+
+.text-color {
+  color: #444;
+}
+
+.background-color {
+  background-color: #f2f2f2;
+}
+
+/* **************************************
+// *** STYLES for snackbars
+// **************************************/
+
+.notif-error, .notif-error .mat-simple-snackbar-action {
+  color: #f8e7e9 !important;
+  background-color: #c72c41 !important;
+  white-space: pre-wrap;
+}
+
+.notif-success, .notif-success .mat-simple-snackbar-action {
+  color: #f8e7e9 !important;
+  background-color: #4e8d7c !important;
+  white-space: pre-wrap;
+}
+
+.notif-warning, .notif-warning .mat-simple-snackbar-action {
+  color: #f8e7e9 !important;
+  background-color: #f08c00 !important;
+  white-space: pre-wrap;
+}
+
+/* **************************************
+// *** STYLES for recommendation
+// **************************************/
+
+.disassemble {
+  background-color: #fa5252;
+  color: white !important;
+  font-weight: 500;
+
+  border: none;
+}
+
+.repair {
+  background-color: #ffa94d;
+  color: #444;
+  font-weight: 500;
+  
+  border: none;
+}
+
+.repackage {
+  background-color: #a5d8ff;
+  color: #444;
+  font-weight: 500;
+
+  border: none;
+}
+
+.resale {
+  background-color: #c0eb75;
+  color: #444;
+  font-weight: 500;
+  
+  border: none;
+}
+
+/* **************************************
+// *** STYLES for MAT DIALOG
+// **************************************/
+
+.custom-dialog .mat-dialog-container {
+  padding: 0% 0% 2% 0%;
+  border-radius: 8px;
+}
+
+.camera-dialog .mat-dialog-container {
+  padding: 0 0 24px 0;
+  border-radius: 12px;
+}
+
+.camera-dialog .mat-dialog-content {
+  margin: 0;
+}
+
+/* **************************************
+// *** STYLES for MAT TOOLTIP
+// **************************************/
+
+.mat-tooltip {
+  font-size: 12px;
+  white-space: pre-line;
+}
+

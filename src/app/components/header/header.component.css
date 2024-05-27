@@ -1,0 +1,70 @@
+header {
+  height: 50px;
+  background-color: #ced3e7;
+  padding: 0 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ****************************************** */
+/* *** LEFT SIDE OF THE HEADER */
+/* ****************************************** */
+
+.logo-menu {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+  margin-right: 1rem;
+}
+
+.logo-menu span {
+  color: #556eb0;
+  font-size: 1.25rem;
+  font-family: ui-serif;
+  cursor: pointer;;
+}
+
+/* ****************************************** */
+/* *** CENTER OF THE HEADER */
+/* ****************************************** */
+
+.title {
+  color: #556eb0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  font-family: ui-serif;
+}
+
+/* ****************************************** */
+/* *** RIGHT SIDE OF THE HEADER */
+/* ****************************************** */
+
+.language-profile-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem
+}
+
+.profile-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  cursor: pointer;
+}
+
+.profile-menu span {
+  color: #556eb0;
+}
+
+mat-icon {
+  color: #556eb0;
+  vertical-align: middle;
+}

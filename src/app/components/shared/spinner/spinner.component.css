@@ -1,0 +1,11 @@
+::ng-deep .borderless-dialog .mat-dialog-container {  
+  background-color: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Without when you first enter product identification 
+a scrollbar will appear on the right, even though it is not needed */
+/* ::ng-deep .borderless-dialog .cdk-global-scrollblock {
+  overflow-y: auto !important;
+} */

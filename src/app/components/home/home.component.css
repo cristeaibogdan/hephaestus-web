@@ -1,0 +1,68 @@
+ul {
+  padding: 0;
+  margin: 6% 0;
+
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(3, 280px);
+
+  column-gap: 6rem;
+}
+
+mat-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  padding: 0;
+  border-radius: 18px;
+
+  cursor: pointer;  
+}
+
+img {
+  align-self: center;
+  height: 220px;
+  width: 220px;
+ 
+  padding: 10% 0;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+
+  color: #556eb0;
+  background-color: #eaecf4;
+
+  padding: 1rem 0;
+}
+
+/* label related */
+
+.label {
+  position: absolute;
+  top: 10%;
+  right: -26%;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #444;
+  background-color: #ffd43b;
+  padding: 0.6rem 4rem;
+  transform: rotate(45deg);
+}
+
+/* ************************************** */
+/* ANIMATIONS */
+/* ************************************** */
+
+mat-card {
+  transition: all 0.5s;
+}
+
+mat-card:hover {
+  transform: translateY(-1.5rem);
+}

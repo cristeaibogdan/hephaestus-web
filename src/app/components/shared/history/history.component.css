@@ -1,0 +1,184 @@
+h3 {
+  background-color: #BBC2CC;
+  color: #444;
+  padding: 5px;
+  text-align: center;
+  font-weight: 500;
+
+  margin:0;
+  margin-bottom: 2%;
+}
+
+/* ************************************ */
+/* *** TABLE POSITION */
+/* ************************************ */
+
+.table-container {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.mat-table {
+  display: block;
+  overflow: auto;
+}
+
+/* ************************************ */
+/* *** TABLE RELATED */
+/* ************************************ */
+
+th, td {
+  color: #444;
+  font-size: 14px;
+  text-align: center !important;
+
+  border-right: 2px solid #909ca0;
+}
+
+th {
+  background-color: #d0ebff;
+  border-bottom: 2px solid #909ca0 !important;
+}
+
+tr:nth-child(odd) {
+  background-color: #e9edee;
+}
+
+tr:hover {
+  background-color: #d3f9d8;
+}
+
+/* BREAKES LONG TEXT SO IT DOESN'T APPEAR OUTSIDE THE CONTAINER */
+tr {
+  word-wrap: break-word;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.recommendation-text {
+  color: #444;  
+  padding: 8px 16px;
+  border-radius: 50px;
+}
+
+/* INDIVIDUAL WIDTH OF COLUMNS */
+.mat-column-createdAt, .mat-column-createdAt-filter {
+  max-width: 170px;
+}
+
+.mat-column-manufacturer, .mat-column-manufacturer-filter {
+  max-width: 150px;
+}
+
+.mat-column-damageType, .mat-column-damageType-filter {
+  max-width: 130px;
+}
+
+.mat-column-returnType, .mat-column-returnType-filter {
+  max-width: 130px;
+}
+
+.mat-column-identificationMode, .mat-column-identificationMode-filter {
+  max-width: 150px;
+}
+
+.mat-column-serialNumber, .mat-column-serialNumber-filter {
+  max-width: 150px;
+}
+
+.mat-column-model, .mat-column-model-filter {
+  max-width: 160px;
+}
+
+.mat-column-type, .mat-column-type-filter {
+  max-width: 160px;
+}
+
+.mat-column-damageLevel, .mat-column-damageLevel-filter {
+  max-width: 100px;
+}
+
+.mat-column-recommendation, .mat-column-recommendation-filter {
+  max-width: 140px;
+}
+
+.mat-column-actions, .mat-column-actions-filter {
+  min-width: 180px;
+}
+
+/* ************************************ */
+/* *** TABLE SORTING */
+/* ************************************ */
+
+/* Makes the arrow go beneath the header */
+::ng-deep .mat-sort-header-container {
+  flex-direction: column;
+}
+
+/* Removes the default margin of the arrow */
+::ng-deep .mat-sort-header-arrow {
+  margin: 0 !important;
+}
+
+/* ************************************************************ */
+/* *** MATINPUTS STYLES */
+/* ************************************************************ */
+
+.filter-input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 10px;
+}
+
+/* REMOVE UNUSED SPACE, UNDERLINE AND TOP BORDER FOR ALL MAT-FORM-FIELDS */
+.filter-input ::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+.filter-input ::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+.filter-input ::ng-deep .mat-form-field-infix {
+  border: 0;
+  padding: 0.5rem 0;
+}
+
+/* FIX THE POSITION BUG OF THE PREFIX 
+KNOWN BUG FOR MATINPUT WITH OUTLINE */
+.filter-input ::ng-deep .mat-form-field-prefix {
+  top: 0.45rem;
+  color: #556eb0;
+  margin-right: 5px;
+}
+
+/* FIX THE POSITION BUG OF THE SUFFIX 
+KNOWN BUG FOR MATINPUT WITH OUTLINE */
+.filter-input ::ng-deep .mat-form-field-suffix {
+  top: 0.45rem;
+}
+
+/* FIX THE POSITION BUG OF DATEPICKER ICON */
+.filter-input ::ng-deep .mat-icon-button {
+  color: #556eb0;
+  position: relative;
+  width: 24px !important;
+  height: 24px !important;
+}
+
+/* ************************************************************ */
+/* *** REMOVE DEFAULT PADDING FROM FIRST AND LAST COLUMN */
+/* ************************************************************ */
+
+th:first-child, td:first-child {
+  padding: 0 !important;
+}
+
+th:last-child, td:last-child {
+  padding: 0 !important;
+  border-right: none;
+}

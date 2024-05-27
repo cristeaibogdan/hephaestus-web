@@ -1,0 +1,11 @@
+.global-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f2f2f2;
+}
+
+.global-content {
+  flex-grow: 1;
+  overflow: auto;
+}

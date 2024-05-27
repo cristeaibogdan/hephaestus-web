@@ -1,0 +1,26 @@
+.washing-machine-status {
+  background-color: #228be6;
+  color: white;
+  height: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 20px;
+}
+
+.washing-machine-title {
+  font-size: 1rem;
+}
+
+/* Span the stepper container to max left and right */
+::ng-deep .mat-horizontal-content-container {
+  padding: 0 !important;
+}
+
+/* Disable stepper header navigation */
+::ng-deep .mat-horizontal-stepper-header {
+  pointer-events: none;
+}
+

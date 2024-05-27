@@ -1,0 +1,42 @@
+.language-selector {
+  margin-left: 0.8rem !important;
+  font-size: 1rem;
+  width: 9rem !important;
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+}
+
+img {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.75rem;
+  vertical-align: middle;
+}
+
+/* REMOVE UNUSED SPACE, UNDERLINE AND TOP BORDER FOR LANGUAGE SELECTOR */
+
+.language-selector ::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+.language-selector ::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+.language-selector ::ng-deep .mat-form-field-infix {
+  border: 0;
+}
+
+/* COLOR SELECTED VALUE AND OPTIONS */
+
+.language-selector ::ng-deep .mat-select-value {    
+  color: #556eb0 !important;
+}
+
+.options {
+  color: #556eb0;
+}
+

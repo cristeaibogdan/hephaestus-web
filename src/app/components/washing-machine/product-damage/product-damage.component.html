@@ -1,0 +1,414 @@
+<input type="file" #fileInput
+  multiple
+  accept=".png, .jpg, .jpeg, .bmp" 
+  onClick="this.value=null"
+  (change)="onFileUpload($event)"> 
+
+<form [formGroup]="washingMachineDetailsForm" (ngSubmit)="onSubmit()" (reset)="onReset($event)">
+<ul>
+<mat-card class="mat-elevation-z8">
+  <mat-card-title>{{"I18N.PRODUCT_DAMAGE.UPLOAD_IMAGES_TITLE" | translate}} <span>*</span></mat-card-title>
+  <fieldset dragAndDrop (filesDropped)="onDrop($event)">
+    <legend class="text-align-center">
+      <button mat-raised-button type="button" color="primary" 
+        (click)="fileInput.click()"
+        [disabled]="selectedFiles.length === 3">
+        <mat-icon svgIcon="upload"></mat-icon> &nbsp; {{"I18N.COMMON.UPLOAD_IMAGES" | translate}} &nbsp; {{selectedFiles.length}} / 3
+      </button>
+  
+      <mat-icon class="text-color help-tip" 
+        matTooltip='{{"I18N.HELP_TOOLTIP.UPLOAD_IMAGES" | translate}}'
+        matTooltipPosition='right' 
+        svgIcon="help">
+      </mat-icon>
+    </legend>
+  
+    <section class="images-list">
+      <ng-container *ngIf="selectedFiles.length > 0; else noImagesPlaceholder">
+        <div class="image-container" *ngFor="let file of selectedFiles; let i = index">
+          <img [src]="file.url"/>
+          <button class="button-remove-image" (click)="onRemoveImage(i)">x</button>
+        </div>
+      </ng-container>
+    </section>
+  
+    <ng-template #noImagesPlaceholder>
+      <div class="text-color no-images-placeholder">
+        <img src="assets/images/drag-and-drop.png" class="placeholder-image">
+        <div>{{"I18N.PRODUCT_DAMAGE.NO_IMAGES_PLACEHOLDER_1" | translate}}</div>
+        <div>{{"I18N.PRODUCT_DAMAGE.NO_IMAGES_PLACEHOLDER_2" | translate}}</div>
+        <div></div>   
+      </div>
+    </ng-template>
+  </fieldset>
+</mat-card>
+
+<mat-card class="mat-elevation-z8">
+  <mat-card-title>{{"I18N.PRODUCT_DAMAGE.SELECT_DAMAGE_TITLE" | translate}} <span>*</span></mat-card-title>
+
+  <section class="damage-panels">    
+    <mat-expansion-panel [expanded]="washingMachineDetailsForm.controls.applicablePackageDamage.value">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{"I18N.COMMON.PACKAGE" | translate}}</mat-panel-title>
+        <mat-panel-description>
+          {{"I18N.PRODUCT_DAMAGE.SELECT_APPLICABLE" | translate}} 
+          {{"I18N.COMMON.PACKAGE" | translate}}
+          <mat-checkbox formControlName="applicablePackageDamage">
+            {{"I18N.COMMON.APPLICABLE" | translate}}
+          </mat-checkbox>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <article class="container-damages-repackage" formGroupName="packageForm">
+        <mat-checkbox formControlName="packageDamaged">{{"I18N.COMMON.PACKAGE_DAMAGED" | translate}}</mat-checkbox>
+        <mat-checkbox formControlName="packageDirty">{{"I18N.COMMON.PACKAGE_DIRTY" | translate}}</mat-checkbox>
+        <mat-checkbox formControlName="packageMaterialAvailable">{{"I18N.COMMON.PACKAGE_REPACKAGE" | translate}}</mat-checkbox>
+      </article>  
+    </mat-expansion-panel>
+  
+    <mat-expansion-panel [expanded]="washingMachineDetailsForm.controls.applicableVisibleSurfacesDamage.value">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{"I18N.COMMON.VISIBLE_SURFACES" | translate}}</mat-panel-title>
+        <mat-panel-description>
+          {{"I18N.PRODUCT_DAMAGE.SELECT_APPLICABLE" | translate}} 
+          {{"I18N.COMMON.VISIBLE_SURFACES" | translate}}
+          <mat-checkbox formControlName="applicableVisibleSurfacesDamage">
+            {{"I18N.COMMON.APPLICABLE" | translate}}
+          </mat-checkbox>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="container-damages" formGroupName="visibleSurfacesForm">              
+        <article>
+          <div class="container-checkbox">
+            <mat-checkbox formControlName="visibleSurfacesHasScratches"
+              (change)="toggle_VisibleSurfaces_ScratchesLength()"> 
+              {{"I18N.PRODUCT_DAMAGE.SCRATCHES" | translate}}
+            </mat-checkbox>
+          </div>
+
+          <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.SELECT_SCRATCHES_LENGTH" | translate}}</h4>
+
+          <div class="container-slider">
+            <span class="slider-label">0
+              <br>
+              {{"I18N.COMMON.CM" | translate}}
+            </span>
+            <mat-slider formControlName="visibleSurfacesScratchesLength" 
+              thumbLabel 
+              [min]=0 
+              [max]=10 
+              step=0.5
+              tickInterval=1>
+            </mat-slider>
+            <span class="slider-label">10
+              <br>
+              {{"I18N.COMMON.CM" | translate}}
+            </span>
+          </div>
+        </article>
+
+        <article>
+          <div class="container-checkbox">
+            <mat-checkbox formControlName="visibleSurfacesHasDents"
+            (change)="toggle_VisibleSurfaces_DentsDepth()">
+              {{"I18N.PRODUCT_DAMAGE.DENTS" | translate}} 
+            </mat-checkbox>
+          </div>
+
+          <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.SELECT_DENTS_DEPTH" | translate}}</h4>
+
+          <div class="container-slider">
+            <span class="slider-label">0
+              <br>
+              {{"I18N.COMMON.CM" | translate}}
+            </span>
+            <mat-slider formControlName="visibleSurfacesDentsDepth" 
+              thumbLabel 
+              [min]=0
+              [max]=10
+              step=0.5 
+              tickInterval=1>
+            </mat-slider>
+            <span class="slider-label">10
+              <br>
+              {{"I18N.COMMON.CM" | translate}}
+            </span>
+          </div>
+        </article>
+          
+        <article>
+          <div class="container-checkbox">
+            <mat-checkbox formControlName="visibleSurfacesHasSmallDamage"
+            (change)="toggle_VisibleSurfaces_SmallDamage()">
+              {{"I18N.COMMON.SMALL_DAMAGES" | translate}}
+            </mat-checkbox>
+          </div>
+
+          <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.INPUT_SMALL_DAMAGES" | translate}}</h4>
+          
+          <div class="text-align-center">
+            <mat-form-field class="text-area" appearance="outline">
+              <mat-label>{{"I18N.COMMON.SMALL_DAMAGES" | translate}}</mat-label>
+              <textarea matInput formControlName="visibleSurfacesSmallDamage"
+                [maxlength]="smallDamageDescriptionCharacterLimit"                 
+                rows="5"></textarea>
+              <mat-error>{{"I18N.MAT_ERROR.SMALL_DAMAGES_REQUIRED" | translate}}</mat-error>
+    
+              <mat-hint>
+                {{
+                  washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesSmallDamage.value.length
+                  +" / "+
+                  smallDamageDescriptionCharacterLimit
+                }}
+              </mat-hint>
+            </mat-form-field>  
+          </div>
+        </article>
+
+        <article>
+          <div class="container-checkbox">
+            <mat-checkbox formControlName="visibleSurfacesHasBigDamage"
+            (change)="toggle_VisibleSurfaces_BigDamage()">
+              {{"I18N.COMMON.BIG_DAMAGES" | translate}}
+            </mat-checkbox>
+          </div>
+
+          <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.INPUT_BIG_DAMAGES" | translate}}</h4>
+          
+          <div class="text-align-center">
+            <mat-form-field class="text-area" appearance="outline">
+              <mat-label>{{"I18N.COMMON.BIG_DAMAGES" | translate}}</mat-label>
+              <textarea matInput formControlName="visibleSurfacesBigDamage"
+                [maxlength]="smallDamageDescriptionCharacterLimit"                 
+                rows="5"></textarea>
+              <mat-error>{{"I18N.MAT_ERROR.BIG_DAMAGES_REQUIRED" | translate}}</mat-error>
+    
+              <mat-hint>
+                {{
+                  washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesBigDamage.value.length
+                  +" / "+
+                  bigDamageDescriptionCharacterLimit
+                }}
+              </mat-hint>
+            </mat-form-field>  
+          </div>
+        </article>          
+      </div>
+    </mat-expansion-panel> 
+
+    <mat-expansion-panel [expanded]="washingMachineDetailsForm.controls.applicableHiddenSurfacesDamage.value">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{"I18N.COMMON.HIDDEN_SURFACES" | translate}}</mat-panel-title>
+        <mat-panel-description>
+          {{"I18N.PRODUCT_DAMAGE.SELECT_APPLICABLE" | translate}} 
+          {{"I18N.COMMON.HIDDEN_SURFACES" | translate}}
+          <mat-checkbox formControlName="applicableHiddenSurfacesDamage">
+            {{"I18N.COMMON.APPLICABLE" | translate}}
+          </mat-checkbox>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="container-damages" formGroupName="hiddenSurfacesForm">          
+            
+        <article>
+          <div class="container-checkbox">
+            <mat-checkbox formControlName="hiddenSurfacesHasScratches"
+              (change)="toggle_HiddenSurfaces_ScratchesLength()"> 
+              {{"I18N.PRODUCT_DAMAGE.SCRATCHES" | translate}}
+            </mat-checkbox>
+          </div>
+
+          <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.SELECT_SCRATCHES_LENGTH" | translate}}</h4>
+
+          <div class="container-slider">
+            <span class="slider-label">0
+              <br>
+              {{"I18N.COMMON.CM" | translate}}
+            </span>
+            <mat-slider formControlName="hiddenSurfacesScratchesLength" 
+              thumbLabel 
+              [min]=0 
+              [max]=10 
+              step=0.5
+              tickInterval=1>
+            </mat-slider>
+            <span class="slider-label">10
+              <br>
+              {{"I18N.COMMON.CM" | translate}}
+            </span>
+          </div>
+        </article>
+
+        <article>
+          <div class="container-checkbox">
+            <mat-checkbox formControlName="hiddenSurfacesHasDents"
+            (change)="toggle_HiddenSurfaces_DentsDepth()">
+              {{"I18N.PRODUCT_DAMAGE.DENTS" | translate}} 
+            </mat-checkbox>
+          </div>
+
+          <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.SELECT_DENTS_DEPTH" | translate}}</h4>
+
+          <div class="container-slider">
+            <span class="slider-label">0
+              <br>
+              {{"I18N.COMMON.CM" | translate}}
+            </span>
+            <mat-slider formControlName="hiddenSurfacesDentsDepth" 
+              thumbLabel 
+              [min]=0
+              [max]=10
+              step=0.5 
+              tickInterval=1>
+            </mat-slider>
+            <span class="slider-label">10
+              <br>
+              {{"I18N.COMMON.CM" | translate}}
+            </span>
+          </div>
+        </article>
+          
+        <article>
+          <div class="container-checkbox">
+            <mat-checkbox formControlName="hiddenSurfacesHasSmallDamage"
+            (change)="toggle_HiddenSurfaces_SmallDamage()">
+              {{"I18N.COMMON.SMALL_DAMAGES" | translate}}
+            </mat-checkbox>
+          </div>
+
+          <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.INPUT_SMALL_DAMAGES" | translate}}</h4>
+          
+          <div class="text-align-center">
+            <mat-form-field class="text-area" appearance="outline">
+              <mat-label>{{"I18N.COMMON.SMALL_DAMAGES" | translate}}</mat-label>
+              <textarea matInput formControlName="hiddenSurfacesSmallDamage"
+                [maxlength]="smallDamageDescriptionCharacterLimit"                 
+                rows="5"></textarea>
+              <mat-error>{{"I18N.MAT_ERROR.SMALL_DAMAGES_REQUIRED" | translate}}</mat-error>
+    
+              <mat-hint>
+                {{
+                  washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesSmallDamage.value.length
+                  +" / "+
+                  smallDamageDescriptionCharacterLimit
+                }}
+              </mat-hint>
+            </mat-form-field>  
+          </div>
+        </article>
+
+        <article>
+          <div class="container-checkbox">
+            <mat-checkbox formControlName="hiddenSurfacesHasBigDamage"
+            (change)="toggle_HiddenSurfaces_BigDamage()">
+              {{"I18N.COMMON.BIG_DAMAGES" | translate}}
+            </mat-checkbox>
+          </div>
+
+          <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.INPUT_BIG_DAMAGES" | translate}}</h4>
+          
+          <div class="text-align-center">
+            <mat-form-field class="text-area" appearance="outline">
+              <mat-label>{{"I18N.COMMON.BIG_DAMAGES" | translate}}</mat-label>
+              <textarea matInput formControlName="hiddenSurfacesBigDamage"
+                [maxlength]="smallDamageDescriptionCharacterLimit"                 
+                rows="5"></textarea>
+              <mat-error>{{"I18N.MAT_ERROR.BIG_DAMAGES_REQUIRED" | translate}}</mat-error>
+    
+              <mat-hint>
+                {{
+                  washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesBigDamage.value.length
+                  +" / "+
+                  bigDamageDescriptionCharacterLimit
+                }}
+              </mat-hint>
+            </mat-form-field>
+          </div>
+        </article>
+        
+      </div>
+    </mat-expansion-panel>
+  </section>  
+</mat-card>
+
+<mat-card class="mat-elevation-z8">
+  <mat-card-title>Evaluate Price</mat-card-title>
+
+  <section class="container-price" [formGroup]="washingMachinePricingForm">
+    <mat-form-field appearance="fill">
+      <mat-label>{{"I18N.COMMON.PRODUCT_PRICE" | translate | titlecase}}</mat-label>
+      <input matInput type="number" formControlName="price">
+      <span matPrefix>€&nbsp;</span>
+
+      <mat-error *ngIf="washingMachinePricingForm.controls.price.errors?.min">
+        {{"I18N.MAT_ERROR.PRODUCT_PRICE_MINIMUM" | translate}}
+      </mat-error>
+      <mat-error *ngIf="washingMachinePricingForm.controls.price.errors?.max">
+        {{"I18N.MAT_ERROR.PRODUCT_PRICE_MAXIMUM" | translate}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>{{"I18N.COMMON.PRODUCT_REPAIR_PRICE" | translate | titlecase}}</mat-label>
+      <input matInput type="number" formControlName="repairPrice">
+      <span matPrefix>€&nbsp;</span>
+
+      <mat-error *ngIf="washingMachinePricingForm.controls.repairPrice.errors?.min">
+        {{"I18N.MAT_ERROR.REPAIR_PRICE_MINIMUM" | translate}}
+      </mat-error>
+      <mat-error *ngIf="washingMachinePricingForm.controls.repairPrice.errors?.max">
+        {{"I18N.MAT_ERROR.REPAIR_PRICE_MAXIMUM" | translate}}
+      </mat-error>
+    </mat-form-field>
+  </section>
+</mat-card>
+</ul>
+
+<div stepper-buttons>
+  <button mat-raised-button type="reset" matStepperPrevious>
+    {{"I18N.COMMON.BACK" | translate}}
+  </button>
+
+  <button mat-raised-button color="warn" type="reset">
+    {{"I18N.COMMON.RESET" | translate}}
+  </button>
+
+  <!-- Comments for Next button disable functionality:
+    1. Disabled if no files have been uploaded
+    2. Disabled if productDamageForm is INVALID
+    3. Disabled if productPricingForm is INVALID -->
+
+  <button mat-raised-button color="primary" type="submit" 
+    [disabled]="selectedFiles.length == 0 ||
+      washingMachineDetailsForm.invalid || 
+      washingMachinePricingForm.invalid">
+    {{"I18N.COMMON.NEXT" | translate}}
+  </button>  
+</div>
+</form>
+
+
+<!-- <pre>{{productDamageSource$ | async | json}}</pre> -->
+
+<!-- <pre>
+  {{functionalDamageForm.getRawValue() | json}}
+</pre> -->
+
+<!-- <pre>
+  {{selectedFiles}}
+  and length
+  {{selectedFiles.length}}
+</pre> -->
+
+<!-- <pre>
+  {{functionalDamageForm.getRawValue() | json}}
+</pre> 
+
+<pre>
+  {{productPricingForm.getRawValue() | json}}
+</pre> 
+
+<pre>
+  {{productDamageForm.getRawValue() | json}}
+</pre> -->

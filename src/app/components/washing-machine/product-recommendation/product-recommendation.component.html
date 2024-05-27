@@ -1,0 +1,43 @@
+<div class="text-align-center" *ngIf="showRecommendation">
+  <button mat-raised-button color="primary" 
+    (click)="toggleShowRecommendation(); saveWashingMachine()">
+    {{"I18N.PRODUCT_RECOMMENDATION.GENERATE_RECOMMENDATION" | translate}}
+  </button>
+</div>
+  
+<app-damage-overview *ngIf="!showRecommendation">
+  <div header class="text-align-center" *ngIf="!showRecommendation">
+    <ng-container *ngIf="washingMachine$ | async as washingMachine">
+      {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_1" | translate}}
+      {{washingMachine.serialNumber}} 
+      {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_2" | translate}} {{washingMachine.manufacturer}},
+      {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_3" | translate}}:
+
+      <div class="text-align-center">
+        <button class="recommendation-text"
+          [ngClass]="{
+            disassemble: washingMachine.recommendation === 'DISASSEMBLE', 
+            repair: washingMachine.recommendation === 'REPAIR',
+            repackage: washingMachine.recommendation === 'REPACKAGE',
+            resale: washingMachine.recommendation === 'RESALE'}">
+          {{washingMachine.recommendation}}
+        </button>
+      </div>
+    </ng-container>
+
+    <p class="before-overview">
+      {{"I18N.PRODUCT_RECOMMENDATION.SUBTITLE" | translate}}
+    </p>
+  </div>
+</app-damage-overview>
+
+<div stepper-buttons *ngIf="!showRecommendation">
+  <button mat-raised-button color="primary"
+    (click) = "onDownload()">
+    {{"I18N.COMMON.DOWNLOAD_RECOMMENDATION" | translate}}
+  </button>
+  
+  <button type="button" color="primary" mat-raised-button routerLink="/home">
+    {{"I18N.COMMON.FINISH" | translate}}
+  </button>
+</div>

@@ -1,0 +1,162 @@
+.title {
+  background-color: #e3fafc;
+  color: #444;
+
+  text-align: center;
+  font-size: 1.5rem;
+
+  padding: 12px;
+}
+
+/* ******************************************* */
+/* ***CAMERA */
+/* ******************************************* */
+
+.camera-container {
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: 2rem;
+}
+
+.camera-scanner {
+  display: inline-block;
+  position: relative;
+}
+
+/* size for video for various cameras */
+zxing-scanner ::ng-deep video {
+  width: 400px;
+  height: 300px;
+  border: solid gray;
+  border-radius: 15px;
+}
+
+.camera-scanner-switch {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index:999;
+}
+
+.camera-scanner-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index:999;
+
+  width: 300px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.camera-scanner-placeholder img {
+  width: 100px;
+}
+
+.camera-scanner-placeholder p {
+  text-align: center;
+  padding: 0;
+  margin: 10px 0 0 0;
+}
+
+.camera-scanner-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index:999;
+}
+
+/* ******************************************* */
+/* *** CAMERA BUTTONS */
+/* ******************************************* */
+
+.mat-raised-button {
+  width: 100%;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+
+  width: 300px;
+}
+
+.upload-image-info {
+  margin: 2rem 0 0 0;
+  text-align: center;
+
+  color: #444;
+  background-color: #dee2e6;
+  padding: 15px 10px;
+
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+/* ******************************************* */
+/* *** RESULT */
+/* ******************************************* */
+
+.result-container {
+  text-align: center;
+
+  color: #444;
+  background-color: #dee2e6;
+  padding: 15px 10px;
+
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.result-title {
+  margin-bottom: 10px;
+}
+
+/* ******************************************* */
+/* *** UPLOAD IMAGE */
+/* ******************************************* */
+
+input[type=file] {
+  display: none;
+}
+
+.upload-image-button {
+  position: relative;
+  height: 50px;
+  margin-bottom: 2rem;  
+}
+
+.close-button {
+  height: 50px;
+}
+
+/* ******************************************* */
+/* *** ICONS */
+/* ******************************************* */
+
+.icon-camera {
+  width: 40px;
+  height: 40px;
+  padding: 4% 0;
+}
+
+.help-tip {
+  vertical-align: middle;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+
+  color: white;
+
+  position: absolute;
+  top: 50%;
+  right: 0;
+
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,13 @@
+<mat-form-field class="language-selector">
+  <img matPrefix [src]="selectedLanguage.flag">
+
+  <mat-select [(ngModel)]="selectedLanguage" (ngModelChange)="changeLanguage($event)">
+    <mat-option class="options" *ngFor="let language of languageList" [value]="language">
+      <div class="language-option">
+        <img [src]="language.flag">
+        {{language.display}}
+      </div>
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+

@@ -1,0 +1,124 @@
+<mat-card class="mat-elevation-z8">
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+  <mat-card-content>
+    <aside>
+      <img class="service-logo" src="assets/logos/hephaestus-logo.png"/>
+      <div class="service-title">
+        {{ "I18N.COMMON.SERVICE_TITLE" | translate | titlecase }}
+      </div>
+    </aside>
+
+    <section class="registration-form">
+      <div class="form-title">
+        {{ "I18N.REGISTER.TITLE" | translate }}
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{"I18N.COMMON.REGISTER_CODE" | translate}}</mat-label>
+        <input matInput formControlName="code"/>
+
+        <mat-error *ngIf="registerForm.controls.code.errors?.required">
+          {{ "I18N.MAT_ERROR.REGISTER_CODE_REQUIRED" | translate }}
+        </mat-error>
+
+        <mat-error *ngIf="registerForm.controls.code.errors?.invalid">
+          {{ "I18N.MAT_ERROR.REGISTER_CODE_INVALID" | translate }}
+        </mat-error>
+
+        <mat-error *ngIf="registerForm.controls.code.errors?.backendError">
+          {{ "I18N.MAT_ERROR.NO_CONNECTION" | translate }}
+        </mat-error>
+
+        <mat-hint *ngIf="registerForm.controls.code.pending">
+          {{ "I18N.MAT_HINT.PENDING" | translate }}
+        </mat-hint>
+        <mat-hint *ngIf="registerForm.controls.code.valid">
+          {{ "I18N.MAT_HINT.REGISTER_CODE_VALID" | translate }}
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "I18N.COMMON.COUNTRY" | translate }}</mat-label>
+        <input matInput formControlName="country" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{"I18N.COMMON.ORGANIZATION" | translate}}</mat-label>
+        <input matInput formControlName="organization"/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "I18N.COMMON.EMAIL" | translate }}</mat-label>
+        <input matInput formControlName="email"/>
+
+        <mat-error *ngIf="registerForm.controls.email.errors?.required">
+          {{ "I18N.MAT_ERROR.EMAIL_REQUIRED" | translate }}
+        </mat-error>
+
+        <mat-error *ngIf="registerForm.controls.email.errors?.email">
+          {{ "I18N.MAT_ERROR.EMAIL_INVALID" | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "I18N.COMMON.USERNAME" | translate }}</mat-label>
+        <input matInput formControlName="username"/>
+
+        <mat-error>
+          {{ "I18N.MAT_ERROR.USERNAME_REQUIRED" | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" id="password">
+        <mat-label>{{ "I18N.COMMON.PASSWORD" | translate }}</mat-label>
+        <input matInput type="password" formControlName="password"/>
+
+        <mat-error *ngIf="registerForm.controls.password.errors?.required">
+          {{ "I18N.MAT_ERROR.PASSWORD_REQUIRED" | translate }}
+        </mat-error>
+
+        <mat-error *ngIf="registerForm.controls.password.errors?.minlength">
+          {{ "I18N.MAT_ERROR.PASSWORD_LENGTH" | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{"I18N.COMMON.CONFIRM_PASSWORD" | translate}}</mat-label>
+        <input matInput type="password" formControlName="confirmPassword"/>
+
+        <mat-error *ngIf="registerForm.controls.confirmPassword.errors?.required">
+          {{ "I18N.MAT_ERROR.CONFIRM_PASSWORD_REQUIRED" | translate }}
+        </mat-error>
+
+        <mat-error *ngIf="registerForm.controls.confirmPassword.errors?.passwordMismatch">
+          {{ "I18N.MAT_ERROR.PASSWORDS_MATCHING" | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <footer>
+        <button mat-raised-button type="submit" color="primary" class="margin-bottom">
+          {{ "I18N.COMMON.REGISTER" | translate | uppercase }}
+        </button>
+
+        <button mat-raised-button type="reset" color="warn">
+          {{ "I18N.COMMON.RESET" | translate | uppercase }}
+        </button>
+
+        <div class="account-existence-text">
+          {{ "I18N.REGISTER.ACCOUNT_EXISTS" | translate }}
+          &nbsp;
+          <span class="login-text" routerLink="/login">
+            {{ "I18N.COMMON.LOG_IN" | translate }}
+          </span>
+        </div>
+      </footer>
+    </section>    
+  </mat-card-content>
+  </form>
+
+  <app-language-selector class="language-container"></app-language-selector>
+</mat-card>
+
+<!-- <pre>
+  {{registerForm.getRawValue() | json}}
+</pre> -->

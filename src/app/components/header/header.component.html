@@ -1,0 +1,23 @@
+<header>
+  <section class="logo-menu">
+    <img class="logo" src="assets/logos/hephaestus-logo.png">
+    <span mat-menu-item routerLink="/home">Home</span>
+    <span mat-menu-item routerLink="/history">History</span>
+  </section>
+
+  <p class="title">{{"I18N.COMMON.SERVICE_TITLE" | translate}}</p>
+
+  <section class="language-profile-menu">
+    <app-language-selector></app-language-selector>
+
+    <article class="profile-menu" [matMenuTriggerFor]="menu">
+      <mat-icon svgIcon="profile"></mat-icon>
+      <span>{{(currentUser$ | async)?.username}}</span>
+    </article>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Profile</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </section>
+</header>

@@ -1,0 +1,98 @@
+<div mat-dialog-title class="title">QR Scanner</div>
+
+<mat-dialog-content class="camera-container">  
+
+  <section class="camera-scanner">
+    <zxing-scanner
+      [formats]="allowedFormats"
+      [enable]="scannerEnabled"
+
+      (camerasFound)="camerasFoundHandler($event)"
+      (camerasNotFound)="camerasNotFoundHandler()"
+      
+      (scanSuccess)="onScanSuccess($event)">    
+    </zxing-scanner>
+
+    <div class="camera-scanner-placeholder" *ngIf="!scannerEnabled">
+      <img src="../../../assets/images/scanner-qr.png">
+      <p *ngIf="noCamerasFound"> 
+        No cameras found. <br> 
+        Use Upload Image to scan from an image file.
+      </p>
+    </div>
+
+    <div class="camera-scanner-loading" *ngIf="cameraIsLoading">
+      <app-spinner></app-spinner>
+    </div>
+
+    <div class="camera-scanner-switch" *ngIf="scannerEnabled">
+      <button mat-raised-button type="button" color="primary"
+        (click)="onSwitch()"
+        [disabled]="cameraIsLoading || availableCameras.length === 1">
+        <mat-icon class="icon-camera" svgIcon="camera_SWITCH"></mat-icon>
+      </button>
+    </div>
+  </section>
+</mat-dialog-content>
+
+<input #QRInput type="file" 
+  accept=".png, .jpg, .jpeg, .bmp"
+  onClick="this.value=null" 
+  (change)="onFileSelectedQR($event)"
+>
+
+<mat-dialog-actions class="buttons-container">
+  <div class="result-container" *ngIf="scanResult">
+    <!-- <div>Here's the image (test purpose only)</div>
+    <img *ngIf="QRCodeFile" [src]="QRCodeFile.url"/> -->
+  
+    <div class="result-title"><b>QR Scan Result</b></div>
+    <div>{{scanResult}}</div>
+  </div>
+
+  <button mat-raised-button type="button"       
+    [color]="scannerEnabled && !cameraIsPaused ? 'warn' : 'primary'"
+    (click)="onStart()"
+    [disabled]="cameraIsLoading || noCamerasFound">
+
+    <ng-container *ngIf="scannerEnabled && !cameraIsPaused; else onButton">
+      <mat-icon class="icon-camera" svgIcon="camera_OFF"></mat-icon>
+    </ng-container>
+    
+    <ng-template #onButton>
+      <mat-icon class="icon-camera" svgIcon="camera_ON"></mat-icon>
+    </ng-template>      
+  </button>
+
+  <p class="upload-image-info">
+    In case of scanning failure or unavailable cameras,    
+    use <b>Upload Image</b> option to scan from an image file.  
+  </p>
+
+  <button class="upload-image-button" mat-raised-button type="button" color="primary" (click)="QRInput.click()">
+    <mat-icon svgIcon="upload"></mat-icon> &nbsp; Upload Image
+    
+    <mat-icon class="text-color help-tip" 
+      [matTooltip]=uploadHelp
+      matTooltipPosition="right" 
+      svgIcon="help">
+    </mat-icon>
+  </button>
+
+  <button class="close-button" mat-raised-button color="warn" type="button"
+    (click)="onClose()"> 
+    Close
+  </button>
+</mat-dialog-actions>
+ 
+<!-- <pre *ngIf="availableCameras">
+  === Selected camera ===
+  {{availableCameras[cameraIndex] | json}}
+
+  === Available cameras ===
+  {{availableCameras | json}}
+</pre> -->
+
+
+
+
