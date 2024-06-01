@@ -43,76 +43,19 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
           if (err.status === 418) { 
             // 418 (I AM A TEAPOT) = CUSTOM ERROR FROM BACKEND                   
-            const errorResponse: ErrorResponse = err.error;          
-            // this._dataService.openSnackBar_Error(errorResponse.errorMessage, 0);
+            const errorResponse: ErrorResponse = err.error;
 
-            switch(errorResponse.errorCode) {
-              case 1001:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.CUSTOM_ERROR.1001"), 0);
-                break;
-              case 1002:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.CUSTOM_ERROR.1002"), 0);
-                break;
-              case 1003:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.CUSTOM_ERROR.1003"), 0);
-                break;
-              case 1004:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.CUSTOM_ERROR.1004"), 0);
-                break;
-              case 1005:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.CUSTOM_ERROR.1005"), 0);
-                break;
-              case 1006:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.CUSTOM_ERROR.1006"), 0);
-                break;
-              case 1007:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.CUSTOM_ERROR.1007"), 0);
-                break;
-              case 1008:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.CUSTOM_ERROR.1008"), 0);
-                break;
-              case 1009:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.CUSTOM_ERROR.1009"), 0);
-                break;
-              case 1010:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.CUSTOM_ERROR.1010"), 0);
-                break;
-              case 1011:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.CUSTOM_ERROR.1011"), 0);
-                break;
+            const errorCode = errorResponse.errorCode;
+            const errorMessage = `I18N.CUSTOM_ERROR.${errorCode}`;
+            
+            const translatedErrorMessage = this.translate.instant(errorMessage);
+    
+            // Check if translation exists, if not, provide a fallback message
+            if(errorMessage == translatedErrorMessage) {
+              return this._dataService.openSnackBar_Error("Error not translated, yet...", 0);
+            }
 
-            //*************************************************
-            //**** CUSTOM ERRORS FROM COMMON BACKEND => 2xxx
-            //*************************************************
-
-              case 2000:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.CUSTOM_ERROR.2000"), 0);
-                break;
-              case 2001:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.CUSTOM_ERROR.2001"), 0);
-                break;
-              case 2002:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.CUSTOM_ERROR.2002"), 0);
-                break;
-              // case 2003:
-              //   this._dataService.openSnackBar_Error(this.translate.instant("I18N.CUSTOM_ERROR.2003"), 0);
-              //   break;
-
-            //*************************************************
-            //**** CUSTOM ERRORS FROM SCANNER BACKEND => 3xxx
-            //*************************************************
-
-              case 3001:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.CUSTOM_ERROR.3001"), 0);
-                break;
-              case 3002:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.CUSTOM_ERROR.3002"), 0);
-                break;
-                
-              default:
-                this._dataService.openSnackBar_Error(errorResponse.errorMessage+" => No translation, yet ...", 0);
-                break;
-              }
+            this._dataService.openSnackBar_Error(translatedErrorMessage, 0);
 
           } else { // GENERAL ERRORS FROM BACKEND
 
