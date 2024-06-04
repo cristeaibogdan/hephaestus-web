@@ -179,7 +179,9 @@
 
       "2000": "Could not establish connection to common server",
       "2001": "No manufacturers were found for the given product category",
-      "2002": "No common products were found for the given product manufacturer"
+      "2002": "No common products were found for the given product manufacturer",
+
+      "9999": "Internal server error"
     },
 
     "CUSTOM_SUCCESS": {
