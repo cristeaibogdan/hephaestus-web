@@ -233,12 +233,12 @@ previousStep() {
       damageLevel: this.washingMachine.value.damageLevel,
       recommendation: this.washingMachine.value.recommendation,
       
-      washingMachineDetails: this.washingMachineDetails.getValue()
+      washingMachineDetailsDTO: this.washingMachineDetails.getValue()
     };
     
     console.log("Saving = ", washingMachine);
     const formData = new FormData();
-    formData.append("washingMachine", new Blob ([JSON.stringify(washingMachine)],{type: 'application/json'}));
+    formData.append("washingMachineDTO", new Blob ([JSON.stringify(washingMachine)],{type: 'application/json'}));
 
     this.selectedFiles.forEach(file => {
       formData.append("imageFiles", file.file);

@@ -17,6 +17,6 @@ export interface WashingMachineDTO {
   recommendation?:string,
   createdAt?:Date
   
-  washingMachineDetails?:WashingMachineDetailsDTO,      
+  washingMachineDetailsDTO?:WashingMachineDetailsDTO,      
   washingMachineImages?:WashingMachineImageDTO[]
 }
