@@ -96,7 +96,7 @@ zxing-scanner ::ng-deep video {
   padding: 15px 10px;
 
   border-radius: 10px;
-  font-size: 14px;
+  font-size: 14px;  
 }
 
 /* ******************************************* */
@@ -104,11 +104,12 @@ zxing-scanner ::ng-deep video {
 /* ******************************************* */
 
 .result-container {
-  text-align: center;
+  text-align: center;  
 
   color: #444;
-  background-color: #dee2e6;
+  background-color: #b2f2bb;
   padding: 15px 10px;
+  margin-bottom: 1.5rem;
 
   border-radius: 10px;
   font-size: 14px;
