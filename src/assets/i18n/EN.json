@@ -167,21 +167,7 @@
       "IMAGE_FILE": "File",
       "IMAGE_EXTENSION_TEXT": "is not suported. Only jpg, jpeg, png and bmp extensions are supported.",
       "IMAGE_SIZE_TEXT": "exceeds the limit of 3 MB",
-      "REPORT": "Error generating report. Please try again later.",
-
-      "1001": "Invalid registration code",
-      "1002": "Email is taken. Please choose another",
-      "1003": "Username is taken. Please choose another",
-      "1004": "Invalid username or password",
-      "1005": "Save failed. Serial Number is already in use",
-      "1006": "No product found for the selected filters",
-      "1011": "Could not generate report. Please try again later",
-
-      "2000": "Could not establish connection to common server",
-      "2001": "No manufacturers were found for the given product category",
-      "2002": "No common products were found for the given product manufacturer",
-
-      "9999": "Internal server error"
+      "REPORT": "Error generating report. Please try again later."
     },
 
     "CUSTOM_SUCCESS": {
