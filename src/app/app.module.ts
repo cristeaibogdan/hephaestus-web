@@ -97,10 +97,10 @@ export function createTranslateLoader(HttpBackend: HttpBackend) {
       useClass: MomentDateAdapter, 
       deps: [MAT_DATE_LOCALE] 
     },
-    // {
-    //   provide: MatPaginatorIntl,
-    //   useClass: PaginatorI18n
-    // }
+    {
+      provide: MatPaginatorIntl,
+      useClass: PaginatorI18n
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -157,6 +157,15 @@
       "REPAIR_PRICE_MAXIMUM": "Repair price must be below 10000"
     },
 
+    "MAT_INTERNAL": {
+      "PAGINATOR_OF": "of",
+      "PAGINATOR_PRODUCTS_PER_PAGE_LABEL": "Products per page:",
+      "PAGINATOR_FIRST_PAGE": "First page",
+      "PAGINATOR_LAST_PAGE": "Last page",
+      "PAGINATOR_NEXT_PAGE": "Next page",
+      "PAGINATOR_PREVIOUS_PAGE": "Previous page"
+    },
+
     "GENERAL_ERROR": {
       "DEFAULT": "Internal server error",
       "0": "Could not establish connection to server"
