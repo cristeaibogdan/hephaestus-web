@@ -19,7 +19,7 @@ The project consists of two components:
  - Backend developed using Java
 
 <div align="center">
-   <img width="450" src="src\assets\images\Application.gif" >
+   <img src="src\assets\images\Application.gif" >
 </div>
 
 ## Requirements
