@@ -24,7 +24,8 @@ The project consists of two components:
 
 ## Requirements
 * Visual Studio Code (VSC)
-* Angular
+* Node.js
+* npm
 * Angular CLI 15
 
 ## Usage
