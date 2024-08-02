@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LanguageSelectorComponent } from './components/shared/language-selector/language-selector.component';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
-import { PaginatorI18n } from './components/shared/paginator.i18n';
+import { PaginatorI18n } from './components/shared/paginator-i18n/paginator.i18n';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
