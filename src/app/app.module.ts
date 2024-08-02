@@ -18,12 +18,6 @@ import { PaginatorI18n } from './angular-material/paginator.i18n';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-import { SpinnerComponent } from './components/shared/spinner/spinner.component';
-import { WashingMachineComponent } from './components/washing-machine/washing-machine.component';
-import { ProductIdentificationComponent } from './components/washing-machine/product-identification/product-identification.component';
-import { ProductRecommendationComponent } from './components/washing-machine/product-recommendation/product-recommendation.component';
-import { OverviewComponent } from './components/washing-machine/damage-overview/damage-overview.component';
-import { StepperButtonsDirective } from './components/shared/directives/stepper-buttons.directive';
 import { HistoryComponent } from './components/shared/history/history.component';
 import { HistoryViewComponent } from './components/shared/history/history-view/history-view.component';
 import { A11yModule } from '@angular/cdk/a11y';
@@ -32,10 +26,7 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateFormatYYYYMMDDDirective } from './components/shared/directives/date-format-yyyy-mm-dd.directive';
 import { DateFormatSlashYYYYMMDDDirective } from './components/shared/directives/date-format-slash-yyyy-mm-dd.directive';
 import { DateFormatMMYYYYDirective } from './components/shared/directives/date-format-mm-yyyy.directive';
-import { ZXingScannerModule } from '@zxing/ngx-scanner';
-import { CameraComponent } from './components/camera/camera.component';
-import { DragAndDropDirective } from './components/shared/directives/drag-and-drop.directive';
-import { ProductDamage } from './components/washing-machine/product-damage/product-damage.component';
+import { WashingMachineModule } from './components/washing-machine/washing-machine.module';
 
 export function createTranslateLoader(HttpBackend: HttpBackend) {
   return new TranslateHttpLoader(new HttpClient(HttpBackend), "./assets/i18n/", ".json")
@@ -50,34 +41,27 @@ export function createTranslateLoader(HttpBackend: HttpBackend) {
     LanguageSelectorComponent,
     RegisterComponent,
     LoginComponent,
-    SpinnerComponent,
-    WashingMachineComponent,
-    ProductIdentificationComponent,
-    ProductRecommendationComponent,
-    ProductDamage,
 
-    OverviewComponent,
     HistoryComponent,
-    HistoryViewComponent,
-    CameraComponent,
+    HistoryViewComponent,    
     
     // DIRECTIVES
-    StepperButtonsDirective,
-    DragAndDropDirective,
     DateFormatYYYYMMDDDirective,
     DateFormatSlashYYYYMMDDDirective,
     DateFormatMMYYYYDirective
   ],
   imports: [
+    ReactiveFormsModule,
+    WashingMachineModule,
+
     BrowserModule,
     BrowserAnimationsModule,
     A11yModule,
     AppRoutingModule,
     AngularMaterialModule,
-    ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    ZXingScannerModule,
+    
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
