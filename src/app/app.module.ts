@@ -7,14 +7,10 @@ import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularMaterialModule } from './angular-material/angular-material.module';
-import { HttpBackend, HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LanguageSelectorComponent } from './components/shared/language-selector/language-selector.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
-import { PaginatorI18n } from './angular-material/paginator.i18n';
+import { PaginatorI18n } from './components/shared/paginator.i18n';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
@@ -27,10 +23,7 @@ import { DateFormatYYYYMMDDDirective } from './components/shared/directives/date
 import { DateFormatSlashYYYYMMDDDirective } from './components/shared/directives/date-format-slash-yyyy-mm-dd.directive';
 import { DateFormatMMYYYYDirective } from './components/shared/directives/date-format-mm-yyyy.directive';
 import { WashingMachineModule } from './components/washing-machine/washing-machine.module';
-
-export function createTranslateLoader(HttpBackend: HttpBackend) {
-  return new TranslateHttpLoader(new HttpClient(HttpBackend), "./assets/i18n/", ".json")
-}
+import { SharedModule } from './components/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +31,7 @@ export function createTranslateLoader(HttpBackend: HttpBackend) {
     HomeComponent,
     FooterComponent,
     HeaderComponent,
-    LanguageSelectorComponent,
+    
     RegisterComponent,
     LoginComponent,
 
@@ -50,25 +43,16 @@ export function createTranslateLoader(HttpBackend: HttpBackend) {
     DateFormatSlashYYYYMMDDDirective,
     DateFormatMMYYYYDirective
   ],
-  imports: [
-    ReactiveFormsModule,
+  imports: [    
+    SharedModule,
     WashingMachineModule,
 
     BrowserModule,
     BrowserAnimationsModule,
     A11yModule,
-    AppRoutingModule,
-    AngularMaterialModule,
-    FormsModule,
-    HttpClientModule,
-    
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpBackend]
-      }
-    })
+
+    AppRoutingModule,    
+    HttpClientModule
   ],
   providers: [
     {
