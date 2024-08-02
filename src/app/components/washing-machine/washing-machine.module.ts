@@ -5,7 +5,7 @@ import { OverviewComponent } from './damage-overview/damage-overview.component';
 import { ProductDamage } from './product-damage/product-damage.component';
 import { ProductIdentificationComponent } from './product-identification/product-identification.component';
 import { ProductRecommendationComponent } from './product-recommendation/product-recommendation.component';
-import { CameraComponent } from '../camera/camera.component';
+import { CameraComponent } from './product-identification/camera/camera.component';
 import { AngularMaterialModule } from 'src/app/angular-material/angular-material.module';
 import { HttpBackend } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -21,12 +21,12 @@ import { StepperButtonsDirective } from '../shared/directives/stepper-buttons.di
   declarations: [
     WashingMachineComponent,
     ProductIdentificationComponent,
+    CameraComponent,
     ProductDamage,
     OverviewComponent,
     ProductRecommendationComponent,
-    CameraComponent,
-
-    // drag and drop directive for camera
+    
+    
     DragAndDropDirective,
     StepperButtonsDirective,
 

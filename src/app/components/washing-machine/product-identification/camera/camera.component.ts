@@ -5,9 +5,9 @@ import { BarcodeFormat } from '@zxing/library';
 import { ɵunwrapSafeValue } from "@angular/core"
 import { BrowserQRCodeReader } from '@zxing/browser/es2015/readers/BrowserQRCodeReader';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
-import { ImageFile } from '../models/image-file.model';
+import { ImageFile } from '../../../models/image-file.model';
 import { MatDialogRef } from '@angular/material/dialog';
-import { QrResult } from '../models/qr-result.model';
+import { QrResult } from '../../../models/qr-result.model';
 
 @Component({
   selector: 'app-camera',

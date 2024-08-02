@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { WashingMachineService } from 'src/app/services/washing-machine.service';
 import { SerialNumberValidator } from 'src/app/components/validators/async-validators/serial-number.validator';
-import { CameraComponent } from '../../camera/camera.component';
+import { CameraComponent } from './camera/camera.component';
 import { QrResult } from '../../models/qr-result.model';
 import { CustomValidators } from '../../validators/custom.validators';
 import { WashingMachineIdentification } from '../../models/washing-machine-identification.model';
