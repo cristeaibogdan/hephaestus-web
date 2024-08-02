@@ -9,6 +9,13 @@ import { DragAndDropDirective } from './directives/drag-and-drop.directive';
 import { StepperButtonsDirective } from './directives/stepper-buttons.directive';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LanguageSelectorComponent } from './language-selector/language-selector.component';
+import { DateFormatMMYYYYDirective } from './directives/date-format-mm-yyyy.directive';
+import { DateFormatSlashYYYYMMDDDirective } from './directives/date-format-slash-yyyy-mm-dd.directive';
+import { DateFormatYYYYMMDDDirective } from './directives/date-format-yyyy-mm-dd.directive';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { PaginatorI18n } from './paginator-i18n/paginator.i18n';
 
 export function createTranslateLoader(HttpBackend: HttpBackend) {
   return new TranslateHttpLoader(new HttpClient(HttpBackend), "./assets/i18n/", ".json")
@@ -18,9 +25,13 @@ export function createTranslateLoader(HttpBackend: HttpBackend) {
   declarations: [
     SpinnerComponent,
     LanguageSelectorComponent,
-            
+    
+    // DIRECTIVES
     DragAndDropDirective,
-    StepperButtonsDirective,  
+    StepperButtonsDirective,
+    DateFormatYYYYMMDDDirective,
+    DateFormatSlashYYYYMMDDDirective,
+    DateFormatMMYYYYDirective
   ],
   imports: [
     CommonModule,
@@ -47,8 +58,25 @@ export function createTranslateLoader(HttpBackend: HttpBackend) {
     SpinnerComponent,
     LanguageSelectorComponent,
 
+    // DIRECTIVES
     DragAndDropDirective,
-    StepperButtonsDirective,
-  ]
+    StepperButtonsDirective,   
+
+    // DIRECTIVES USED BY HISTORY - that's why they are also exported
+    DateFormatYYYYMMDDDirective,
+    DateFormatSlashYYYYMMDDDirective,
+    DateFormatMMYYYYDirective
+  ],
+  providers: [
+    { // To be able to modify the datepicker format we need an adapter, hence MomentDateAdapter
+      provide: DateAdapter, 
+      useClass: MomentDateAdapter, 
+      deps: [MAT_DATE_LOCALE] 
+    },
+    { // Custom translation of history paginator
+      provide: MatPaginatorIntl,
+      useClass: PaginatorI18n
+    }
+  ],
 })
 export class SharedModule { }
