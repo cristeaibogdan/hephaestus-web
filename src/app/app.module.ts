@@ -9,8 +9,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
-import { PaginatorI18n } from './components/shared/paginator-i18n/paginator.i18n';
-import { MatPaginatorIntl } from '@angular/material/paginator';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { HistoryComponent } from './components/shared/history/history.component';
