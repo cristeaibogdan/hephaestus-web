@@ -15,7 +15,7 @@ export class ProductRecommendationComponent {
 
   constructor(
     private _washingMachineService: WashingMachineService,
-    private _dataService:DataService
+    private _dataService:DataService,
   ) { }
 
 // **********************************
@@ -41,7 +41,7 @@ export class ProductRecommendationComponent {
       // Download the file
       const downloadLink = document.createElement('a');
       downloadLink.href = blobUrl;
-      downloadLink.download = 'Recommendation Report_'+formattedDate+'.pdf';
+      downloadLink.download = 'Recommendation Report_' + formattedDate + '.pdf';
       downloadLink.click();      
     });
   }

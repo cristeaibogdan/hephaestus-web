@@ -7,6 +7,7 @@ import { ProductRecommendationComponent } from './product-recommendation/product
 import { CameraComponent } from './product-identification/camera/camera.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { SharedModule } from '../shared/shared.module';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     SharedModule,
+    AppRoutingModule, // Added so Finish button on product-recommendation can redirect to /home
     ZXingScannerModule
   ],
   exports: []
