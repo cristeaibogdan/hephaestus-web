@@ -18,4 +18,8 @@ export class OverviewComponent {
   selectedFiles:ImageFile[] = this._washingMachineService.getSelectedFiles();
 
   constructor(private _washingMachineService: WashingMachineService) { }  
+
+  saveWashingMachine() {
+    this._washingMachineService.saveWashingMachine();    
+  }
 }

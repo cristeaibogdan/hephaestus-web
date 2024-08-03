@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WashingMachineService } from 'src/app/services/washing-machine.service';
 import { DataService } from 'src/app/services/data.service';
-import { TranslateService } from '@ngx-translate/core';
 import { WashingMachineDTO } from '../../models/dtos/washing-machine.dto';
 
 @Component({
@@ -18,16 +17,6 @@ export class ProductRecommendationComponent {
     private _washingMachineService: WashingMachineService,
     private _dataService:DataService
   ) { }
-  
-  showRecommendation:boolean = true;
-  
-  toggleShowRecommendation() {
-    this.showRecommendation = !this.showRecommendation;
-  }
-  
-  saveWashingMachine() {
-    this._washingMachineService.saveWashingMachine();    
-  }
 
 // **********************************
 // *** DOWNLOAD FILE FUNCTIONALITY
