@@ -140,14 +140,12 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
     this._washingMachineService.nextStep();
   }
 
-  // TODO: In Angular 15, this is no longer needed. The (reset) in html is no longer needed.
-  // Reset will reset the values to the DEFAULT ones set in the form
+  
   onReset(e:Event) {
-    e.preventDefault();
+    e.preventDefault(); // Prevent the default behavior. The disabled input will not appear empty and will preserve its value
     this.washingMachineForm.reset();
-
-    // clear model and type arrays
-    this.resetAvailableModelsAndTypes();
+    
+    this.resetAvailableModelsAndTypes(); // clear model and type arrays
   }
 
 // **********************************
