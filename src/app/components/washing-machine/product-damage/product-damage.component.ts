@@ -3,8 +3,8 @@ import { Subscription } from 'rxjs';
 import { WashingMachineService } from 'src/app/services/washing-machine.service';
 import { DataService } from 'src/app/services/data.service';
 import { TranslateService } from '@ngx-translate/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { AbstractControl, NonNullableFormBuilder, ValidationErrors, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
+import { AbstractControl, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ImageFile } from '../../models/image-file.model';
 import { CustomValidators } from '../../validators/custom.validators';
 import { WashingMachineDetailsDTO } from '../../models/dtos/washing-machine-details.dto';
@@ -55,15 +55,15 @@ export class ProductDamage implements OnInit, OnDestroy {
         [Validators.required, Validators.min(0.5)]
       ],
 
-      visibleSurfacesHasSmallDamage: [false],
-      visibleSurfacesSmallDamage : [{
+      visibleSurfacesHasMinorDamage: [false],
+      visibleSurfacesMinorDamage : [{
         value:"",
         disabled: true},
         [Validators.required]
       ],
 
-      visibleSurfacesHasBigDamage: [false],
-      visibleSurfacesBigDamage : [{
+      visibleSurfacesHasMajorDamage: [false],
+      visibleSurfacesMajorDamage : [{
         value:"",
         disabled: true},
         [Validators.required]
@@ -71,8 +71,8 @@ export class ProductDamage implements OnInit, OnDestroy {
     }, {validators: CustomValidators.atLeastOneOutOfFourTrue(
       "visibleSurfacesHasScratches",
       "visibleSurfacesHasDents",
-      "visibleSurfacesHasSmallDamage",
-      "visibleSurfacesHasBigDamage"
+      "visibleSurfacesHasMinorDamage",
+      "visibleSurfacesHasMajorDamage"
     )}
     ),
 
@@ -93,15 +93,15 @@ export class ProductDamage implements OnInit, OnDestroy {
         [Validators.required, Validators.min(0.5)]
       ],
 
-      hiddenSurfacesHasSmallDamage: [false],
-      hiddenSurfacesSmallDamage : [{
+      hiddenSurfacesHasMinorDamage: [false],
+      hiddenSurfacesMinorDamage : [{
         value:"",
         disabled: true},
         [Validators.required]
       ],
 
-      hiddenSurfacesHasBigDamage: [false],
-      hiddenSurfacesBigDamage : [{
+      hiddenSurfacesHasMajorDamage: [false],
+      hiddenSurfacesMajorDamage : [{
         value:"",
         disabled: true},
         [Validators.required]
@@ -109,8 +109,8 @@ export class ProductDamage implements OnInit, OnDestroy {
     }, {validators: CustomValidators.atLeastOneOutOfFourTrue(
         "hiddenSurfacesHasScratches",
         "hiddenSurfacesHasDents",
-        "hiddenSurfacesHasSmallDamage",
-        "hiddenSurfacesHasBigDamage"
+        "hiddenSurfacesHasMinorDamage",
+        "hiddenSurfacesHasMajorDamage"
       )}
     ),
   },{validators: CustomValidators.atLeastOneOutOfThreeTrue(
@@ -124,8 +124,8 @@ export class ProductDamage implements OnInit, OnDestroy {
     repairPrice : [0, [Validators.min(0), Validators.max(10000)]],
   });
   
-  smallDamageDescriptionCharacterLimit:number = 200;
-  bigDamageDescriptionCharacterLimit:number = 200;
+  minorDamageDescriptionCharacterLimit:number = 200;
+  majorDamageDescriptionCharacterLimit:number = 200;
 
   ngOnInit() {
     // *****************************
@@ -182,8 +182,8 @@ export class ProductDamage implements OnInit, OnDestroy {
       if(value) {
         visibleSurfacesForm.controls.visibleSurfacesHasScratches.enable({emitEvent: false});
         visibleSurfacesForm.controls.visibleSurfacesHasDents.enable({emitEvent: false});
-        visibleSurfacesForm.controls.visibleSurfacesHasSmallDamage.enable({emitEvent: false});
-        visibleSurfacesForm.controls.visibleSurfacesHasBigDamage.enable({emitEvent: false});
+        visibleSurfacesForm.controls.visibleSurfacesHasMinorDamage.enable({emitEvent: false});
+        visibleSurfacesForm.controls.visibleSurfacesHasMajorDamage.enable({emitEvent: false});
       } else {
         visibleSurfacesForm.reset();
         visibleSurfacesForm.disable({emitEvent: false});
@@ -209,8 +209,8 @@ export class ProductDamage implements OnInit, OnDestroy {
       if(value) {
         hiddenSurfacesForm.controls.hiddenSurfacesHasScratches.enable({emitEvent: false});
         hiddenSurfacesForm.controls.hiddenSurfacesHasDents.enable({emitEvent: false});
-        hiddenSurfacesForm.controls.hiddenSurfacesHasSmallDamage.enable({emitEvent: false});
-        hiddenSurfacesForm.controls.hiddenSurfacesHasBigDamage.enable({emitEvent: false});
+        hiddenSurfacesForm.controls.hiddenSurfacesHasMinorDamage.enable({emitEvent: false});
+        hiddenSurfacesForm.controls.hiddenSurfacesHasMajorDamage.enable({emitEvent: false});
       } else {
         hiddenSurfacesForm.reset();
         hiddenSurfacesForm.disable({emitEvent: false});
@@ -250,15 +250,15 @@ export class ProductDamage implements OnInit, OnDestroy {
     this.toggleFormControl(control, enableWhen);
   }
 
-  toggle_VisibleSurfaces_SmallDamage() {  
-    const control = this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesSmallDamage;
-    const enableWhen = this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasSmallDamage.value;
+  toggle_VisibleSurfaces_MinorDamage() {  
+    const control = this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesMinorDamage;
+    const enableWhen = this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMinorDamage.value;
     this.toggleFormControl(control, enableWhen);
   }
 
-  toggle_VisibleSurfaces_BigDamage() {
-    const control = this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesBigDamage;
-    const enableWhen = this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasBigDamage.value;
+  toggle_VisibleSurfaces_MajorDamage() {
+    const control = this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesMajorDamage;
+    const enableWhen = this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMajorDamage.value;
     this.toggleFormControl(control, enableWhen);
   }
     
@@ -278,15 +278,15 @@ export class ProductDamage implements OnInit, OnDestroy {
     this.toggleFormControl(control, enableWhen);
   }
 
-  toggle_HiddenSurfaces_SmallDamage() {
-    const control = this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesSmallDamage;
-    const enableWhen = this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasSmallDamage.value;
+  toggle_HiddenSurfaces_MinorDamage() {
+    const control = this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMinorDamage;
+    const enableWhen = this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMinorDamage.value;
     this.toggleFormControl(control, enableWhen);
   }
 
-  toggle_HiddenSurfaces_BigDamage() {  
-    const control = this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesBigDamage;
-    const enableWhen = this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasBigDamage.value;
+  toggle_HiddenSurfaces_MajorDamage() {  
+    const control = this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMajorDamage;
+    const enableWhen = this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMajorDamage.value;
     this.toggleFormControl(control, enableWhen);
   }
 
@@ -317,11 +317,11 @@ export class ProductDamage implements OnInit, OnDestroy {
       visibleSurfacesHasDents: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasDents.value,
       visibleSurfacesDentsDepth: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesDentsDepth.value,
 
-      visibleSurfacesHasSmallDamage: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasSmallDamage.value,
-      visibleSurfacesSmallDamage: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesSmallDamage.value,
+      visibleSurfacesHasMinorDamage: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMinorDamage.value,
+      visibleSurfacesMinorDamage: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesMinorDamage.value,
 
-      visibleSurfacesHasBigDamage: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasBigDamage.value,
-      visibleSurfacesBigDamage: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesBigDamage.value,
+      visibleSurfacesHasMajorDamage: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMajorDamage.value,
+      visibleSurfacesMajorDamage: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesMajorDamage.value,
 
 
       applicableHiddenSurfacesDamage: this.washingMachineDetailsForm.controls.applicableHiddenSurfacesDamage.value,
@@ -332,11 +332,11 @@ export class ProductDamage implements OnInit, OnDestroy {
       hiddenSurfacesHasDents: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasDents.value,
       hiddenSurfacesDentsDepth: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesDentsDepth.value,
 
-      hiddenSurfacesHasSmallDamage: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasSmallDamage.value,
-      hiddenSurfacesSmallDamage: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesSmallDamage.value,
+      hiddenSurfacesHasMinorDamage: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMinorDamage.value,
+      hiddenSurfacesMinorDamage: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMinorDamage.value,
 
-      hiddenSurfacesHasBigDamage: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasBigDamage.value,
-      hiddenSurfacesBigDamage: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesBigDamage.value,
+      hiddenSurfacesHasMajorDamage: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMajorDamage.value,
+      hiddenSurfacesMajorDamage: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMajorDamage.value,
 
       price: this.washingMachinePricingForm.controls.price.value,
       repairPrice: this.washingMachinePricingForm.controls.repairPrice.value

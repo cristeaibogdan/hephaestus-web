@@ -106,11 +106,11 @@ previousStep() {
     visibleSurfacesHasDents:false,
     visibleSurfacesDentsDepth:0,
 
-    visibleSurfacesHasSmallDamage:false,
-    visibleSurfacesSmallDamage:"",
+    visibleSurfacesHasMinorDamage:false,
+    visibleSurfacesMinorDamage:"",
 
-    visibleSurfacesHasBigDamage:false,
-    visibleSurfacesBigDamage:"",
+    visibleSurfacesHasMajorDamage:false,
+    visibleSurfacesMajorDamage:"",
 
 
     applicableHiddenSurfacesDamage:false,
@@ -121,11 +121,11 @@ previousStep() {
     hiddenSurfacesHasDents:false,
     hiddenSurfacesDentsDepth:0,
 
-    hiddenSurfacesHasSmallDamage:false,
-    hiddenSurfacesSmallDamage:"",
+    hiddenSurfacesHasMinorDamage:false,
+    hiddenSurfacesMinorDamage:"",
 
-    hiddenSurfacesHasBigDamage:false,
-    hiddenSurfacesBigDamage:"",
+    hiddenSurfacesHasMajorDamage:false,
+    hiddenSurfacesMajorDamage:"",
 
     price:0,
     repairPrice:0
@@ -172,11 +172,11 @@ previousStep() {
     this.washingMachineDetails.value.visibleSurfacesHasDents = false;   
     this.washingMachineDetails.value.visibleSurfacesDentsDepth = 0;
 
-    this.washingMachineDetails.value.visibleSurfacesHasSmallDamage = false;   
-    this.washingMachineDetails.value.visibleSurfacesSmallDamage = "";
+    this.washingMachineDetails.value.visibleSurfacesHasMinorDamage = false;   
+    this.washingMachineDetails.value.visibleSurfacesMinorDamage = "";
 
-    this.washingMachineDetails.value.visibleSurfacesHasBigDamage = false;   
-    this.washingMachineDetails.value.visibleSurfacesBigDamage = "";
+    this.washingMachineDetails.value.visibleSurfacesHasMajorDamage = false;   
+    this.washingMachineDetails.value.visibleSurfacesMajorDamage = "";
 
     
     this.washingMachineDetails.value.applicableHiddenSurfacesDamage = false;
@@ -187,11 +187,11 @@ previousStep() {
     this.washingMachineDetails.value.hiddenSurfacesHasDents = false;   
     this.washingMachineDetails.value.hiddenSurfacesDentsDepth = 0;
 
-    this.washingMachineDetails.value.hiddenSurfacesHasSmallDamage = false;   
-    this.washingMachineDetails.value.hiddenSurfacesSmallDamage = "";
+    this.washingMachineDetails.value.hiddenSurfacesHasMinorDamage = false;   
+    this.washingMachineDetails.value.hiddenSurfacesMinorDamage = "";
 
-    this.washingMachineDetails.value.hiddenSurfacesHasBigDamage = false;   
-    this.washingMachineDetails.value.hiddenSurfacesBigDamage = "";
+    this.washingMachineDetails.value.hiddenSurfacesHasMajorDamage = false;   
+    this.washingMachineDetails.value.hiddenSurfacesMajorDamage = "";
 
     this.washingMachineDetails.value.price = 0;   
     this.washingMachineDetails.value.repairPrice = 0; 

@@ -15,11 +15,11 @@ export interface WashingMachineDetailsDTO {
     visibleSurfacesHasDents:boolean,
     visibleSurfacesDentsDepth:number,
 
-    visibleSurfacesHasSmallDamage:boolean,
-    visibleSurfacesSmallDamage:string,
+    visibleSurfacesHasMinorDamage:boolean,
+    visibleSurfacesMinorDamage:string,
 
-    visibleSurfacesHasBigDamage:boolean,
-    visibleSurfacesBigDamage:string,
+    visibleSurfacesHasMajorDamage:boolean,
+    visibleSurfacesMajorDamage:string,
 
 // HIDDEN SURFACES
     applicableHiddenSurfacesDamage:boolean,
@@ -30,11 +30,11 @@ export interface WashingMachineDetailsDTO {
     hiddenSurfacesHasDents:boolean,
     hiddenSurfacesDentsDepth:number,
 
-    hiddenSurfacesHasSmallDamage:boolean,
-    hiddenSurfacesSmallDamage:string,
+    hiddenSurfacesHasMinorDamage:boolean,
+    hiddenSurfacesMinorDamage:string,
 
-    hiddenSurfacesHasBigDamage:boolean,
-    hiddenSurfacesBigDamage:string,
+    hiddenSurfacesHasMajorDamage:boolean,
+    hiddenSurfacesMajorDamage:string,
 
 // PRICING
     price:number,

@@ -47,8 +47,8 @@
 
       "CM": "cm",
 
-      "SMALL_DAMAGES": "Small Damages",
-      "BIG_DAMAGES": "Big Damages",
+      "MINOR_DAMAGES": "Minor Damages",
+      "MAJOR_DAMAGES": "Major Damages",
       "PRODUCT_PRICE": "Product Price",
       "PRODUCT_REPAIR_PRICE": "Product Repair Price",
 
@@ -105,8 +105,8 @@
       "DENTS": "Dents",
       "SELECT_SCRATCHES_LENGTH": "Select scratches length (cm)",
       "SELECT_DENTS_DEPTH": "Select dents depth (cm)",
-      "INPUT_SMALL_DAMAGES": "Input small damages description",
-      "INPUT_BIG_DAMAGES": "Input big damages description"
+      "INPUT_MINOR_DAMAGES": "Input minor damages description",
+      "INPUT_MAJOR_DAMAGES": "Input major damages description"
     },
 
     "PRODUCT_RECOMMENDATION": {
@@ -149,8 +149,8 @@
       "MODEL_OR_TYPE_REQUIRED": "At least model or type is required",
       "SERIAL_NUMBER_REQUIRED": "Serial number is required",
       "SERIAL_NUMBER_TAKEN": "Serial number is already in use",
-      "SMALL_DAMAGES_REQUIRED": "Small damages field is required",
-      "BIG_DAMAGES_REQUIRED": "Big damages field is required",
+      "MINOR_DAMAGES_REQUIRED": "Minor damages field is required",
+      "MAJOR_DAMAGES_REQUIRED": "Major damages field is required",
       "PRODUCT_PRICE_MINIMUM": "Product price must be above 0",
       "PRODUCT_PRICE_MAXIMUM": "Product price must be below 10000",
       "REPAIR_PRICE_MINIMUM": "Repair price must be above 0",

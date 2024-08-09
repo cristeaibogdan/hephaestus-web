@@ -139,27 +139,27 @@
           
         <article>
           <div class="container-checkbox">
-            <mat-checkbox formControlName="visibleSurfacesHasSmallDamage"
-            (change)="toggle_VisibleSurfaces_SmallDamage()">
-              {{"I18N.COMMON.SMALL_DAMAGES" | translate}}
+            <mat-checkbox formControlName="visibleSurfacesHasMinorDamage"
+            (change)="toggle_VisibleSurfaces_MinorDamage()">
+              {{"I18N.COMMON.MINOR_DAMAGES" | translate}}
             </mat-checkbox>
           </div>
 
-          <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.INPUT_SMALL_DAMAGES" | translate}}</h4>
+          <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.INPUT_MINOR_DAMAGES" | translate}}</h4>
           
           <div class="text-align-center">
             <mat-form-field class="text-area" appearance="outline">
-              <mat-label>{{"I18N.COMMON.SMALL_DAMAGES" | translate}}</mat-label>
-              <textarea matInput formControlName="visibleSurfacesSmallDamage"
-                [maxlength]="smallDamageDescriptionCharacterLimit"                 
+              <mat-label>{{"I18N.COMMON.MINOR_DAMAGES" | translate}}</mat-label>
+              <textarea matInput formControlName="visibleSurfacesMinorDamage"
+                [maxlength]="minorDamageDescriptionCharacterLimit"                 
                 rows="5"></textarea>
-              <mat-error>{{"I18N.MAT_ERROR.SMALL_DAMAGES_REQUIRED" | translate}}</mat-error>
+              <mat-error>{{"I18N.MAT_ERROR.MINOR_DAMAGES_REQUIRED" | translate}}</mat-error>
     
               <mat-hint>
                 {{
-                  washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesSmallDamage.value.length
+                  washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesMinorDamage.value.length
                   +" / "+
-                  smallDamageDescriptionCharacterLimit
+                  minorDamageDescriptionCharacterLimit
                 }}
               </mat-hint>
             </mat-form-field>  
@@ -168,27 +168,27 @@
 
         <article>
           <div class="container-checkbox">
-            <mat-checkbox formControlName="visibleSurfacesHasBigDamage"
-            (change)="toggle_VisibleSurfaces_BigDamage()">
-              {{"I18N.COMMON.BIG_DAMAGES" | translate}}
+            <mat-checkbox formControlName="visibleSurfacesHasMajorDamage"
+            (change)="toggle_VisibleSurfaces_MajorDamage()">
+              {{"I18N.COMMON.MAJOR_DAMAGES" | translate}}
             </mat-checkbox>
           </div>
 
-          <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.INPUT_BIG_DAMAGES" | translate}}</h4>
+          <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.INPUT_MAJOR_DAMAGES" | translate}}</h4>
           
           <div class="text-align-center">
             <mat-form-field class="text-area" appearance="outline">
-              <mat-label>{{"I18N.COMMON.BIG_DAMAGES" | translate}}</mat-label>
-              <textarea matInput formControlName="visibleSurfacesBigDamage"
-                [maxlength]="smallDamageDescriptionCharacterLimit"                 
+              <mat-label>{{"I18N.COMMON.MAJOR_DAMAGES" | translate}}</mat-label>
+              <textarea matInput formControlName="visibleSurfacesMajorDamage"
+                [maxlength]="majorDamageDescriptionCharacterLimit"                 
                 rows="5"></textarea>
-              <mat-error>{{"I18N.MAT_ERROR.BIG_DAMAGES_REQUIRED" | translate}}</mat-error>
+              <mat-error>{{"I18N.MAT_ERROR.MAJOR_DAMAGES_REQUIRED" | translate}}</mat-error>
     
               <mat-hint>
                 {{
-                  washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesBigDamage.value.length
+                  washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesMajorDamage.value.length
                   +" / "+
-                  bigDamageDescriptionCharacterLimit
+                  majorDamageDescriptionCharacterLimit
                 }}
               </mat-hint>
             </mat-form-field>  
@@ -271,27 +271,27 @@
           
         <article>
           <div class="container-checkbox">
-            <mat-checkbox formControlName="hiddenSurfacesHasSmallDamage"
-            (change)="toggle_HiddenSurfaces_SmallDamage()">
-              {{"I18N.COMMON.SMALL_DAMAGES" | translate}}
+            <mat-checkbox formControlName="hiddenSurfacesHasMinorDamage"
+            (change)="toggle_HiddenSurfaces_MinorDamage()">
+              {{"I18N.COMMON.MINOR_DAMAGES" | translate}}
             </mat-checkbox>
           </div>
 
-          <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.INPUT_SMALL_DAMAGES" | translate}}</h4>
+          <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.INPUT_MINOR_DAMAGES" | translate}}</h4>
           
           <div class="text-align-center">
             <mat-form-field class="text-area" appearance="outline">
-              <mat-label>{{"I18N.COMMON.SMALL_DAMAGES" | translate}}</mat-label>
-              <textarea matInput formControlName="hiddenSurfacesSmallDamage"
-                [maxlength]="smallDamageDescriptionCharacterLimit"                 
+              <mat-label>{{"I18N.COMMON.MINOR_DAMAGES" | translate}}</mat-label>
+              <textarea matInput formControlName="hiddenSurfacesMinorDamage"
+                [maxlength]="minorDamageDescriptionCharacterLimit"                 
                 rows="5"></textarea>
-              <mat-error>{{"I18N.MAT_ERROR.SMALL_DAMAGES_REQUIRED" | translate}}</mat-error>
+              <mat-error>{{"I18N.MAT_ERROR.MINOR_DAMAGES_REQUIRED" | translate}}</mat-error>
     
               <mat-hint>
                 {{
-                  washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesSmallDamage.value.length
+                  washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMinorDamage.value.length
                   +" / "+
-                  smallDamageDescriptionCharacterLimit
+                  minorDamageDescriptionCharacterLimit
                 }}
               </mat-hint>
             </mat-form-field>  
@@ -300,27 +300,27 @@
 
         <article>
           <div class="container-checkbox">
-            <mat-checkbox formControlName="hiddenSurfacesHasBigDamage"
-            (change)="toggle_HiddenSurfaces_BigDamage()">
-              {{"I18N.COMMON.BIG_DAMAGES" | translate}}
+            <mat-checkbox formControlName="hiddenSurfacesHasMajorDamage"
+            (change)="toggle_HiddenSurfaces_MajorDamage()">
+              {{"I18N.COMMON.MAJOR_DAMAGES" | translate}}
             </mat-checkbox>
           </div>
 
-          <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.INPUT_BIG_DAMAGES" | translate}}</h4>
+          <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.INPUT_MAJOR_DAMAGES" | translate}}</h4>
           
           <div class="text-align-center">
             <mat-form-field class="text-area" appearance="outline">
-              <mat-label>{{"I18N.COMMON.BIG_DAMAGES" | translate}}</mat-label>
-              <textarea matInput formControlName="hiddenSurfacesBigDamage"
-                [maxlength]="smallDamageDescriptionCharacterLimit"                 
+              <mat-label>{{"I18N.COMMON.MAJOR_DAMAGES" | translate}}</mat-label>
+              <textarea matInput formControlName="hiddenSurfacesMajorDamage"
+                [maxlength]="minorDamageDescriptionCharacterLimit"                 
                 rows="5"></textarea>
-              <mat-error>{{"I18N.MAT_ERROR.BIG_DAMAGES_REQUIRED" | translate}}</mat-error>
+              <mat-error>{{"I18N.MAT_ERROR.MAJOR_DAMAGES_REQUIRED" | translate}}</mat-error>
     
               <mat-hint>
                 {{
-                  washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesBigDamage.value.length
+                  washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMajorDamage.value.length
                   +" / "+
-                  bigDamageDescriptionCharacterLimit
+                  majorDamageDescriptionCharacterLimit
                 }}
               </mat-hint>
             </mat-form-field>
