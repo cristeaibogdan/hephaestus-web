@@ -204,8 +204,8 @@ previousStep() {
 // **************************************
 
 // Executes when NEXT on STEP 2 is clicked
-  generateWashingMachineDamageEvaluationAndGoToNextStep() {
-    this._dataService.generateWashingMachineEvaluation(this.washingMachineDetails.getValue()).subscribe(
+  getDamageEvaluationAndGoToNextStep() {
+    this._dataService.getDamageEvaluation(this.washingMachineDetails.getValue()).subscribe(
       (response) => {        
       this.washingMachine.value.damageLevel = response.damageLevel;
       this.washingMachine.value.recommendation = response.recommendation;
@@ -217,7 +217,7 @@ previousStep() {
 // *** STEP 4 = RECOMMENDED DECISION
 // **************************************
 
-  saveWashingMachine() {
+  save() {
     const washingMachine:WashingMachineDTO = {
       category: this.washingMachine.value.category,
       manufacturer: this.washingMachine.value.manufacturer,
@@ -244,7 +244,7 @@ previousStep() {
       formData.append("imageFiles", file.file);
     });
 
-    this._dataService.saveWashingMachine(formData).subscribe(() => {
+    this._dataService.save(formData).subscribe(() => {
       this._dataService.openSnackBar_Success(this.translate.instant("I18N.CUSTOM_SUCCESS.PRODUCT_SAVED"),4000);       
     });
   }

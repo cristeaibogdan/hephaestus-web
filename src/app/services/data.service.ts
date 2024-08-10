@@ -36,7 +36,7 @@ export class DataService {
     return this.http.get<string[]>(url);
   }
   
-  getModelsAndTypes(productManufacturer: string){
+  getModelsAndTypes(productManufacturer: string) {
     const url = this.apiURL.concat("/api/v1/products/")
       .concat(productManufacturer)
       .concat("/models-and-types");
@@ -48,7 +48,7 @@ export class DataService {
 //*** STEP 3 = OVERVIEW
 //**************************************
   
-  generateWashingMachineEvaluation(washingMachineDetails:WashingMachineDetailsDTO){
+  getDamageEvaluation(washingMachineDetails:WashingMachineDetailsDTO) {
     const url = this.apiURL.concat("/api/v1/washing-machines/evaluate");
     return this.http.post<WashingMachineEvaluationDTO>(url, washingMachineDetails);
   }
@@ -57,12 +57,12 @@ export class DataService {
 //*** STEP 4 = RECOMMENDED DECISION
 //**************************************
 
-  saveWashingMachine(washingMachine:FormData){
+  save(washingMachine:FormData) {
     const url = this.apiURL.concat("/api/v1/washing-machines/save");
     return this.http.post(url, washingMachine);
   }
 
-  getWashingMachineReport(serialNumber:string){
+  getReport(serialNumber:string) {
     const url = this.apiURL.concat("/api/v1/washing-machines/")
       .concat(serialNumber)
       .concat("/report");
@@ -74,13 +74,13 @@ export class DataService {
 //*** HISTORY
 //**************************************
 
-  getPaginatedAndFilteredWashingMachines(pageRequestDTO:PageRequestDTO){
+  loadPaginatedAndFiltered(pageRequestDTO:PageRequestDTO) {
     const url = this.apiURL.concat("/api/v1/washing-machines");
     const payload = pageRequestDTO;
     return this.http.post<Page<WashingMachineDTO>>(url, payload);
   }
 
-  getWashingMachineExpanded(productSerialNumber:string){
+  loadExpanded(productSerialNumber:string) {
     const url = this.apiURL.concat("/api/v1/washing-machines/")
       .concat(productSerialNumber)
       .concat("/expanded");
@@ -124,7 +124,7 @@ export class DataService {
   }
 
 //*****************************
-//*** USER PROFILE
+//*** USER PROFILE => To be implemented
 //*****************************
 
   updateUserAccount(userUpdateContainer:UserUpdateContainer) {

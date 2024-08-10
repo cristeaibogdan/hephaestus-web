@@ -20,7 +20,7 @@ export class HistoryViewComponent implements OnInit {
   ngOnInit() { }
 
   onDownload() {
-    this._dataService.getWashingMachineReport(this.washingMachine.serialNumber).subscribe(response => {
+    this._dataService.getReport(this.washingMachine.serialNumber).subscribe(response => {
 
       // Convert to blob
       const arraybuffer = this._dataService.base64ToArrayBuffer(response.report);

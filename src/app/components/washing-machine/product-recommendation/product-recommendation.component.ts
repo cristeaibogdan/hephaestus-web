@@ -25,7 +25,7 @@ export class ProductRecommendationComponent {
   serialNumber:string = this._washingMachineService.getSerialNumber();
 
   onDownload() {    
-    this._dataService.getWashingMachineReport(this.serialNumber).subscribe(response => {
+    this._dataService.getReport(this.serialNumber).subscribe(response => {
 
       // Convert to blob
       const arraybuffer = this._dataService.base64ToArrayBuffer(response.report);

@@ -40,7 +40,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   ]; 
 
   ngOnInit() {
-    this.getPaginatedAndFilteredWashingMachines();    
+    this.loadPaginatedAndFiltered();    
   }
 
 // *****************************************
@@ -89,22 +89,22 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   changePage(e:PageEvent) {
     this.pageNumber = e.pageIndex;
     this.pageSize = e.pageSize;
-    this.getPaginatedAndFilteredWashingMachines();
+    this.loadPaginatedAndFiltered();
   }
 
   onFilter() {
     // Return to the first page after clicking on filter
     this.pageNumber = 0;
-    this.getPaginatedAndFilteredWashingMachines();
+    this.loadPaginatedAndFiltered();
   }
 
   onReset() {
     // Test to see if i need to return to first page after reset
-    this.getPaginatedAndFilteredWashingMachines();
+    this.loadPaginatedAndFiltered();
   }
 
   // 3. USE VALUES OF PAGINATOR TO REQUEST DATA
-  getPaginatedAndFilteredWashingMachines() {
+  loadPaginatedAndFiltered() {
     const pageRequestDTO:PageRequestDTO = {
       pageIndex: this.pageNumber,
       pageSize: this.pageSize,
@@ -124,7 +124,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     console.log("pageRequestDTO = ", pageRequestDTO);
 
     // 4. UPDATE VALUES OF PAGINATOR FROM RESPONSE
-    this._dataService.getPaginatedAndFilteredWashingMachines(pageRequestDTO).subscribe({
+    this._dataService.loadPaginatedAndFiltered(pageRequestDTO).subscribe({
       next: response => {
         console.log("Response = ",response);
         this.washingMachines.data = response.content;
@@ -166,7 +166,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
   onView(washingMachine:WashingMachineDTO) {
     if(!washingMachine.washingMachineDetailsDTO) {
-      this._dataService.getWashingMachineExpanded(washingMachine.serialNumber).subscribe(response => {
+      this._dataService.loadExpanded(washingMachine.serialNumber).subscribe(response => {
         console.log("Response for details => ",response);
         washingMachine.washingMachineDetailsDTO = response.washingMachineDetails;
         washingMachine.washingMachineImages = response.washingMachineImages;

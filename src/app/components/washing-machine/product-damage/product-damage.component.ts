@@ -344,7 +344,7 @@ export class ProductDamage implements OnInit, OnDestroy {
 
     this._washingMachineService.setWashingMachineDetails(washingMachineDetails);
     this._washingMachineService.setSelectedFiles(this.selectedFiles);
-    this._washingMachineService.generateWashingMachineDamageEvaluationAndGoToNextStep();
+    this._washingMachineService.getDamageEvaluationAndGoToNextStep();
   }
 
 

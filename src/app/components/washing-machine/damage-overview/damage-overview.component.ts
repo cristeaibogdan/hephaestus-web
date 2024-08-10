@@ -19,7 +19,7 @@ export class OverviewComponent {
 
   constructor(private _washingMachineService: WashingMachineService) { }  
 
-  saveWashingMachine() {
-    this._washingMachineService.saveWashingMachine();    
+  save() {
+    this._washingMachineService.save();    
   }
 }
