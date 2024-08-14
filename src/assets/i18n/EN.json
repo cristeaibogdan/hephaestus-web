@@ -167,7 +167,6 @@
     },
 
     "GENERAL_ERROR": {
-      "DEFAULT": "Internal server error",
       "0": "Could not establish connection to server"
     },
 

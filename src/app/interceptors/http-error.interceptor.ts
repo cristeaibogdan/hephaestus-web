@@ -50,40 +50,20 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         error: (err: HttpErrorResponse) => {
         // console.log('Error returned by the server/backend', err);
 
-          if (err.status === 418) { 
+        switch (err.status) {
+          case 0:
+            this._dataService.openSnackBar_Error(this.translate.instant("I18N.GENERAL_ERROR.0"), 0);
+            break;
+
+          case 404:
+            this._dataService.openSnackBar_Error(this.translate.instant("I18N.GENERAL_ERROR.404"), 0);
+            break;
+
+          default: // CUSTOM ERRORS FROM BACKEND
             const errorMessage:string = err.error;
             this._dataService.openSnackBar_Error(errorMessage, 0);
-          } else { // GENERAL ERRORS FROM BACKEND
-
-            switch (err.status) {
-              case 0:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.GENERAL_ERROR.0"), 0);
-                break;
-
-              // case 400:
-              //   let exceptionMessage: string[] = [];
-
-              //   for (let index = 0; index < err.error.errors.length; index++) {
-              //     const message: string = err.error.errors[index].defaultMessage;
-              //     exceptionMessage.push(message);
-              //   }
-
-              //   console.log(err);
-              //   console.log(err.error.errors);
-
-              //   this._dataService.openSnackBar_Error(exceptionMessage.join('\n'), 0);
-              //   break;
-
-              case 404:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.GENERAL_ERROR.404"), 0);
-                break;
-    
-              default:
-                this._dataService.openSnackBar_Error(this.translate.instant("I18N.GENERAL_ERROR.DEFAULT"), 0);
-                console.log(err);
-                break;
-            }
-          }        
+            break;
+        }
       }
       }),
 
