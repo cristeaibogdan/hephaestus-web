@@ -167,7 +167,8 @@
     },
 
     "GENERAL_ERROR": {
-      "0": "Could not establish connection to server"
+      "0": "Could not establish connection to server",
+      "404": "Could not connect to http address"
     },
 
     "CUSTOM_ERROR": {
