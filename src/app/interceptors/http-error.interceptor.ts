@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 import { DataService } from '../services/data.service';
 import { MatDialog } from '@angular/material/dialog';
-import { SpinnerComponent } from '../components/shared/spinner/spinner.component';
+import { SpinnerComponent } from '../shared/components/spinner/spinner.component';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../services/language.service';
 

@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { UserAccountDTO } from '../models/dtos/user-account.dto';
 import { DataService } from 'src/app/services/data.service';
 import { Subscription } from 'rxjs';
-import { RegisterCodeValidator } from 'src/app/components/validators/async-validators/register-code.validator';
+import { RegisterCodeValidator } from 'src/app/shared/validators/async-validators/register-code.validator';
 import { TranslateService } from '@ngx-translate/core';
-import { CustomValidators } from '../validators/custom.validators';
+import { CustomValidators } from '../../shared/validators/custom.validators';
 
 @Component({
   selector: 'app-register',

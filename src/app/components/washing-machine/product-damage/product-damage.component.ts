@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AbstractControl, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ImageFile } from '../../models/image-file.model';
-import { CustomValidators } from '../../validators/custom.validators';
+import { CustomValidators } from '../../../shared/validators/custom.validators';
 import { WashingMachineDetailsDTO } from '../../models/dtos/washing-machine-details.dto';
 
 @Component({

@@ -5,10 +5,10 @@ import { DataService } from 'src/app/services/data.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { PageRequestDTO } from '../../models/dtos/page-request.dto';
+import { PageRequestDTO } from '../../../components/models/dtos/page-request.dto';
 import { FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
-import { WashingMachineDTO } from '../../models/dtos/washing-machine.dto';
+import { WashingMachineDTO } from '../../../components/models/dtos/washing-machine.dto';
 
 @Component({
   selector: 'app-history',

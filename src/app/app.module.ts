@@ -11,10 +11,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS, HttpBackend, HttpClient } from '@a
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-import { HistoryComponent } from './components/shared/history/history.component';
-import { HistoryViewComponent } from './components/shared/history/history-view/history-view.component';
+import { HistoryComponent } from './shared/components/history/history.component';
+import { HistoryViewComponent } from './shared/components/history/history-view/history-view.component';
 import { A11yModule } from '@angular/cdk/a11y';
-import { SharedModule } from './components/shared/shared.module';
+import { SharedModule } from './shared/shared.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 

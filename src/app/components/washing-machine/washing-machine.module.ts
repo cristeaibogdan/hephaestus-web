@@ -6,7 +6,7 @@ import { ProductIdentificationComponent } from './product-identification/product
 import { ProductRecommendationComponent } from './product-recommendation/product-recommendation.component';
 import { CameraComponent } from './product-identification/camera/camera.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [{
