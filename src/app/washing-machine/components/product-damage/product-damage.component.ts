@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { WashingMachineService } from 'src/app/services/washing-machine.service';
-import { DataService } from 'src/app/services/data.service';
 import { TranslateService } from '@ngx-translate/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AbstractControl, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from '../../../shared/validators/custom.validators';
-import { WashingMachineDetailsDTO } from 'src/app/components/models/dtos/washing-machine-details.dto';
-import { ImageFile } from 'src/app/components/models/image-file.model';
+import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
+import { WashingMachineDetailsDTO } from '../../models/dtos/washing-machine-details.dto';
+import { WashingMachineService } from '../../services/washing-machine.service';
+import { WashingMachineDataService } from '../../services/washing-machine.data.service';
 
 @Component({
   selector: 'app-product-damage',
@@ -20,7 +20,7 @@ export class ProductDamage implements OnInit, OnDestroy {
 
   constructor(
     private _washingMachineService: WashingMachineService,
-    private _dataService: DataService,
+    private _washingMachineDataService: WashingMachineDataService,
     private _translate: TranslateService,
     private sanitizer:DomSanitizer,
     private fb:NonNullableFormBuilder,
@@ -364,7 +364,7 @@ export class ProductDamage implements OnInit, OnDestroy {
     // 1. Validate file length
     const totalFilesCount = this.selectedFiles.length + event.target.files.length;
     if (totalFilesCount > 3) {
-      this._dataService.openSnackBar_Error(this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_LIMIT"),0);
+      this._washingMachineDataService.openSnackBar_Error(this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_LIMIT"),0);
       return;
     }
       
@@ -373,7 +373,7 @@ export class ProductDamage implements OnInit, OnDestroy {
       
       // 2. Validate file extension
       if(this.invalidFileExtension(uploadedFile.name)) {
-        this._dataService.openSnackBar_Error(
+        this._washingMachineDataService.openSnackBar_Error(
           this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_FILE")
           +" "+uploadedFile.name+" "+
           this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_EXTENSION_TEXT"),0);
@@ -382,7 +382,7 @@ export class ProductDamage implements OnInit, OnDestroy {
       
       // 3. Validate file size, must not exceed 3 MB
       if(this.invalidFileSize(uploadedFile.size, 3)) {
-        this._dataService.openSnackBar_Error(
+        this._washingMachineDataService.openSnackBar_Error(
           this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_FILE")
           +" "+uploadedFile.name+" "+
           this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_SIZE_TEXT"),0);

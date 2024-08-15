@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { UserAccountDTO } from '../components/models/dtos/user-account.dto';
+import { UserAccountDTO } from '../washing-machine/models/dtos/user-account.dto';
 import { BehaviorSubject } from 'rxjs';
-import { DataService } from './data.service';
 import { Router } from '@angular/router';
-import { UserCredentialsDTO } from '../components/models/dtos/user-credentials.dto';
+import { UserCredentialsDTO } from '../washing-machine/models/dtos/user-credentials.dto';
+import { AuthDataService } from './auth.data.service';
 
 @Injectable({providedIn: 'root'})
 export class AuthService { 
@@ -21,7 +21,7 @@ export class AuthService {
   });
 
   constructor(
-    private _dataService: DataService,
+    private _authDataService: AuthDataService,
     private router: Router
   ) {}
 
@@ -50,7 +50,7 @@ export class AuthService {
   }
 
   login(userCredentialsDTO: UserCredentialsDTO) { 
-    this._dataService.login(userCredentialsDTO).subscribe((response:UserAccountDTO) => {
+    this._authDataService.login(userCredentialsDTO).subscribe((response:UserAccountDTO) => {
       this.isLoggedIn = true;
       this.loggedUser.next(response);
 

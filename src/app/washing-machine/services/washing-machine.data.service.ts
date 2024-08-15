@@ -1,22 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment'
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment'
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserAccountDTO } from '../components/models/dtos/user-account.dto';
-import { UserUpdateContainer } from '../components/models/user-update-container.model';
-import { Page } from '../components/models/page.model';
-import { UserCredentialsDTO } from '../components/models/dtos/user-credentials.dto';
-import { PageRequestDTO } from '../components/models/dtos/page-request.dto';
-import { ProductModelTypeDTO } from '../components/models/dtos/product-model-type.dto';
-import { OrganizationAndCountryDTO } from '../components/models/dtos/organization-and-country.dto';
-import { WashingMachineEvaluationDTO } from '../components/models/dtos/washing-machine-evaluation.dto';
-import { WashingMachineReportDTO } from '../components/models/dtos/washing-machine-report.dto';
-import { WashingMachineDTO } from '../components/models/dtos/washing-machine.dto';
-import { WashingMachineExpandedDTO } from '../components/models/dtos/washing-machine-expanded.dto';
-import { WashingMachineDetailsDTO } from '../components/models/dtos/washing-machine-details.dto';
+import { Page } from '../../shared/models/page.model';
+import { PageRequestDTO } from '../models/dtos/page-request.dto';
+import { ProductModelTypeDTO } from '../models/dtos/product-model-type.dto';
+import { WashingMachineDetailsDTO } from '../models/dtos/washing-machine-details.dto';
+import { WashingMachineEvaluationDTO } from '../models/dtos/washing-machine-evaluation.dto';
+import { WashingMachineExpandedDTO } from '../models/dtos/washing-machine-expanded.dto';
+import { WashingMachineReportDTO } from '../models/dtos/washing-machine-report.dto';
+import { WashingMachineDTO } from '../models/dtos/washing-machine.dto';
 
 @Injectable({providedIn: 'root'})
-export class DataService {
+export class WashingMachineDataService {
   apiURL = environment.apiBaseUrl;
 
   constructor(
@@ -86,57 +82,6 @@ export class DataService {
       .concat("/expanded");
 
     return this.http.get<WashingMachineExpandedDTO>(url);
-  }
-
-//******************************
-//*** AUTH - REGISTER
-//******************************
-
-  register(userAccountDTO:UserAccountDTO) {
-    const url = this.apiURL.concat("/api/v1/users/register");
-    const payload = userAccountDTO;
-
-    return this.http
-      .post<void>(url, payload);
-  }
-
-  getOrganizationAndCountry(registerCode: string) {
-    const url = this.apiURL.concat("/api/v1/users/")
-      .concat(registerCode)
-      .concat("/organization-and-country");
-
-    // Header so interceptor ignores it
-    const headers = new HttpHeaders().set('AsyncValidator', 'true');
-
-    return this.http
-      .get<OrganizationAndCountryDTO>(url, {headers});
-  }
-
-//******************************
-//*** AUTH - LOGIN
-//******************************
-
-  login(userCredentialDTO: UserCredentialsDTO) {
-    const url = this.apiURL.concat("/api/v1/users/login");
-    const payload = userCredentialDTO;
-    return this.http
-      .post<UserAccountDTO>(url, payload);
-  }
-
-//*****************************
-//*** USER PROFILE => To be implemented
-//*****************************
-
-  updateUserAccount(userUpdateContainer:UserUpdateContainer) {
-    const url = this.apiURL.concat("/auth/update");
-    const payload = userUpdateContainer
-    return this.http.put(url, payload);
-  }
-
-  updateUserAccountPassword(userUpdateContainer:UserUpdateContainer) {
-    const url = this.apiURL.concat("/auth/password");
-    const payload = userUpdateContainer
-    return this.http.put(url, payload);
   }
 
 //****************************

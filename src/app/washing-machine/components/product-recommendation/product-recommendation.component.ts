@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { WashingMachineService } from 'src/app/services/washing-machine.service';
-import { DataService } from 'src/app/services/data.service';
-import { WashingMachineDTO } from 'src/app/components/models/dtos/washing-machine.dto';
+import { WashingMachineDTO } from '../../models/dtos/washing-machine.dto';
+import { WashingMachineService } from '../../services/washing-machine.service';
+import { WashingMachineDataService } from '../../services/washing-machine.data.service';
 
 @Component({
   selector: 'app-product-recommendation',
@@ -15,7 +15,7 @@ export class ProductRecommendationComponent {
 
   constructor(
     private _washingMachineService: WashingMachineService,
-    private _dataService:DataService,
+    private _washingMachineDataService:WashingMachineDataService,
   ) { }
 
 // **********************************
@@ -25,10 +25,10 @@ export class ProductRecommendationComponent {
   serialNumber:string = this._washingMachineService.getSerialNumber();
 
   onDownload() {    
-    this._dataService.getReport(this.serialNumber).subscribe(response => {
+    this._washingMachineDataService.getReport(this.serialNumber).subscribe(response => {
 
       // Convert to blob
-      const arraybuffer = this._dataService.base64ToArrayBuffer(response.report);
+      const arraybuffer = this._washingMachineDataService.base64ToArrayBuffer(response.report);
       const blob = new Blob([arraybuffer], { type: 'application/pdf' });
       const blobUrl = window.URL.createObjectURL(blob);
 

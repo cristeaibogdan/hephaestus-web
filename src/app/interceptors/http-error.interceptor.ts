@@ -8,7 +8,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
-import { DataService } from '../services/data.service';
+import { WashingMachineDataService } from '../washing-machine/services/washing-machine.data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SpinnerComponent } from '../shared/components/spinner/spinner.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -20,7 +20,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(
     private translate: TranslateService,
     private _languageService: LanguageService,
-    private _dataService: DataService,
+    private _washingMachineDataService: WashingMachineDataService,
     private dialog: MatDialog
   ) {}
 
@@ -51,17 +51,17 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
         switch (err.status) {
           case 0:
-            this._dataService.openSnackBar_Error(this.translate.instant("I18N.GENERAL_ERROR.0"), 0);
+            this._washingMachineDataService.openSnackBar_Error(this.translate.instant("I18N.GENERAL_ERROR.0"), 0);
             break;
 
           case 404:
-            this._dataService.openSnackBar_Error(this.translate.instant("I18N.GENERAL_ERROR.404"), 0);
+            this._washingMachineDataService.openSnackBar_Error(this.translate.instant("I18N.GENERAL_ERROR.404"), 0);
             break;
 
           default: 
             (typeof err.error === "string") 
-              ? this._dataService.openSnackBar_Error(err.error, 0) // CUSTOM ERRORS FROM BACKEND
-              : this._dataService.openSnackBar_Error(this.translate.instant("I18N.GENERAL_ERROR.DEFAULT"), 0); // GENERAL ERRORS FROM BACKEND            
+              ? this._washingMachineDataService.openSnackBar_Error(err.error, 0) // CUSTOM ERRORS FROM BACKEND
+              : this._washingMachineDataService.openSnackBar_Error(this.translate.instant("I18N.GENERAL_ERROR.DEFAULT"), 0); // GENERAL ERRORS FROM BACKEND            
             break;   
         }
       }

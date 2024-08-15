@@ -1,18 +1,19 @@
 import { Injectable } from "@angular/core";
 import { MatStepper } from "@angular/material/stepper";
 import { BehaviorSubject} from "rxjs";
-import { DataService } from "./data.service";
 import { TranslateService } from "@ngx-translate/core";
-import { ImageFile } from "../components/models/image-file.model";
-import { WashingMachineDetailsDTO } from "../components/models/dtos/washing-machine-details.dto";
-import { WashingMachineDTO } from "../components/models/dtos/washing-machine.dto";
-import { WashingMachineIdentification } from "../components/models/washing-machine-identification.model";
+import { WashingMachineDetailsDTO } from "../models/dtos/washing-machine-details.dto";
+import { WashingMachineDTO } from "../models/dtos/washing-machine.dto";
+import { ImageFile } from "../models/image-file.model";
+import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
+import { WashingMachineDataService } from "./washing-machine.data.service";
+
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineService {
   
   constructor(
-    private _dataService: DataService,
+    private _washingMachineDataService: WashingMachineDataService,
     private translate: TranslateService 
   ) { }
 
@@ -205,7 +206,7 @@ previousStep() {
 
 // Executes when NEXT on STEP 2 is clicked
   getDamageEvaluationAndGoToNextStep() {
-    this._dataService.getDamageEvaluation(this.washingMachineDetails.getValue()).subscribe(
+    this._washingMachineDataService.getDamageEvaluation(this.washingMachineDetails.getValue()).subscribe(
       (response) => {        
       this.washingMachine.value.damageLevel = response.damageLevel;
       this.washingMachine.value.recommendation = response.recommendation;
@@ -244,8 +245,8 @@ previousStep() {
       formData.append("imageFiles", file.file);
     });
 
-    this._dataService.save(formData).subscribe(() => {
-      this._dataService.openSnackBar_Success(this.translate.instant("I18N.CUSTOM_SUCCESS.PRODUCT_SAVED"),4000);       
+    this._washingMachineDataService.save(formData).subscribe(() => {
+      this._washingMachineDataService.openSnackBar_Success(this.translate.instant("I18N.CUSTOM_SUCCESS.PRODUCT_SAVED"),4000);       
     });
   }
   
