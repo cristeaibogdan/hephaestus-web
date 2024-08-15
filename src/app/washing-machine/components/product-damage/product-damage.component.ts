@@ -7,7 +7,7 @@ import { CustomValidators } from '../../../shared/validators/custom.validators';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
 import { WashingMachineDetailsDTO } from '../../models/dtos/washing-machine-details.dto';
 import { WashingMachineService } from '../../services/washing-machine.service';
-import { WashingMachineDataService } from '../../services/washing-machine.data.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-product-damage',
@@ -20,7 +20,7 @@ export class ProductDamage implements OnInit, OnDestroy {
 
   constructor(
     private _washingMachineService: WashingMachineService,
-    private _washingMachineDataService: WashingMachineDataService,
+    private _notifService: NotificationService,
     private _translate: TranslateService,
     private sanitizer:DomSanitizer,
     private fb:NonNullableFormBuilder,
@@ -364,7 +364,7 @@ export class ProductDamage implements OnInit, OnDestroy {
     // 1. Validate file length
     const totalFilesCount = this.selectedFiles.length + event.target.files.length;
     if (totalFilesCount > 3) {
-      this._washingMachineDataService.openSnackBar_Error(this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_LIMIT"),0);
+      this._notifService.showError(this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_LIMIT"),0);
       return;
     }
       
@@ -373,7 +373,7 @@ export class ProductDamage implements OnInit, OnDestroy {
       
       // 2. Validate file extension
       if(this.invalidFileExtension(uploadedFile.name)) {
-        this._washingMachineDataService.openSnackBar_Error(
+        this._notifService.showError(
           this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_FILE")
           +" "+uploadedFile.name+" "+
           this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_EXTENSION_TEXT"),0);
@@ -382,7 +382,7 @@ export class ProductDamage implements OnInit, OnDestroy {
       
       // 3. Validate file size, must not exceed 3 MB
       if(this.invalidFileSize(uploadedFile.size, 3)) {
-        this._washingMachineDataService.openSnackBar_Error(
+        this._notifService.showError(
           this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_FILE")
           +" "+uploadedFile.name+" "+
           this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_SIZE_TEXT"),0);

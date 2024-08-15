@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment'
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Page } from '../../shared/models/page.model';
 import { PageRequestDTO } from '../models/dtos/page-request.dto';
 import { ProductModelTypeDTO } from '../models/dtos/product-model-type.dto';
@@ -15,10 +14,7 @@ import { WashingMachineDTO } from '../models/dtos/washing-machine.dto';
 export class WashingMachineDataService {
   apiURL = environment.apiBaseUrl;
 
-  constructor(
-    private http: HttpClient,
-    private _snackBar: MatSnackBar
-  ) { }
+  constructor(private http: HttpClient) { }
 
 //**************************************
 //*** STEP 1 = PRODUCT IDENTIFICATION
@@ -83,44 +79,5 @@ export class WashingMachineDataService {
 
     return this.http.get<WashingMachineExpandedDTO>(url);
   }
-
-//****************************
-//*** SNACKBAR NOTIFICATIONS
-//****************************
-
-  openSnackBar_Error(errorMessage:string, displayDuration:number) {
-    this._snackBar.open(errorMessage, 'X', 
-    {
-      duration: displayDuration,
-      panelClass: 'notif-error'
-    });
-  }
-
-  openSnackBar_Success(successMessage:string, displayDuration:number) {
-    this._snackBar.open(successMessage, 'X', 
-    {
-      duration: displayDuration,
-      panelClass: 'notif-success'
-    });
-  }
-
-  openSnackBar_Warning(successMessage:string, displayDuration:number) {
-    this._snackBar.open(successMessage, 'X', 
-    {
-      duration: displayDuration,
-      panelClass: 'notif-warning'
-    });
-  }
-
-//****************************
-//*** BYTE64 CONVERTOR
-//****************************
-
-  base64ToArrayBuffer(base64:string):ArrayBuffer {
-    const binary_string = atob(base64);
-    const bytes = Uint8Array.from(binary_string, char => char.charCodeAt(0));
-    return bytes.buffer;
-  }
-
 }
 

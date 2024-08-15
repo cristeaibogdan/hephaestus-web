@@ -1,5 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { NotificationService } from 'src/app/services/notification.service';
 import { WashingMachineDTO } from 'src/app/washing-machine/models/dtos/washing-machine.dto';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 
@@ -8,22 +9,21 @@ import { WashingMachineDataService } from 'src/app/washing-machine/services/wash
   templateUrl: './history-view.component.html',
   styleUrls: ['./history-view.component.css']
 })
-export class HistoryViewComponent implements OnInit {
+export class HistoryViewComponent {
 
   washingMachine:WashingMachineDTO = this.data.washingMachine;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data:any,
-    private _washingMachineDataService:WashingMachineDataService
+    private _washingMachineDataService:WashingMachineDataService,
+    private _notifService:NotificationService
   ) {}
-
-  ngOnInit() { }
 
   onDownload() {
     this._washingMachineDataService.getReport(this.washingMachine.serialNumber).subscribe(response => {
 
       // Convert to blob
-      const arraybuffer = this._washingMachineDataService.base64ToArrayBuffer(response.report);
+      const arraybuffer = this._notifService.base64ToArrayBuffer(response.report);
       const blob = new Blob([arraybuffer], { type: 'application/pdf' });
       const blobUrl = window.URL.createObjectURL(blob);
 

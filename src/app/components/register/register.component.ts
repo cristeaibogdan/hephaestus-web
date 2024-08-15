@@ -7,7 +7,7 @@ import { RegisterCodeValidator } from 'src/app/shared/validators/async-validator
 import { TranslateService } from '@ngx-translate/core';
 import { CustomValidators } from '../../shared/validators/custom.validators';
 import { AuthDataService } from 'src/app/services/auth.data.service';
-import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -20,8 +20,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private fb: NonNullableFormBuilder, 
     private router: Router,
     private translate:TranslateService,
-    private _washingMachineDataService: WashingMachineDataService,
     private _authDataService: AuthDataService,
+    private _notifService: NotificationService,
     private registerCodeValidator:RegisterCodeValidator
   ) {}
 
@@ -80,7 +80,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     };
 
     this._authDataService.register(userAccount).subscribe(() => {              
-        this._washingMachineDataService.openSnackBar_Success(this.translate.instant("I18N.CUSTOM_SUCCESS.ACCOUNT_CREATED"),0);
+        this._notifService.showSuccess(this.translate.instant("I18N.CUSTOM_SUCCESS.ACCOUNT_CREATED"),0);
         this.goToLoginPage();
       }
     );

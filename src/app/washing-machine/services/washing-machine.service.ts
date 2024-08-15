@@ -7,6 +7,7 @@ import { WashingMachineDTO } from "../models/dtos/washing-machine.dto";
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
 import { WashingMachineDataService } from "./washing-machine.data.service";
+import { NotificationService } from "src/app/services/notification.service";
 
 
 @Injectable({providedIn: 'root'})
@@ -14,6 +15,7 @@ export class WashingMachineService {
   
   constructor(
     private _washingMachineDataService: WashingMachineDataService,
+    private _notifService: NotificationService,
     private translate: TranslateService 
   ) { }
 
@@ -246,7 +248,7 @@ previousStep() {
     });
 
     this._washingMachineDataService.save(formData).subscribe(() => {
-      this._washingMachineDataService.openSnackBar_Success(this.translate.instant("I18N.CUSTOM_SUCCESS.PRODUCT_SAVED"),4000);       
+      this._notifService.showSuccess(this.translate.instant("I18N.CUSTOM_SUCCESS.PRODUCT_SAVED"),4000);       
     });
   }
   

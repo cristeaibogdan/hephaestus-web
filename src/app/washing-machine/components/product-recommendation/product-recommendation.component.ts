@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { WashingMachineDTO } from '../../models/dtos/washing-machine.dto';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { WashingMachineDataService } from '../../services/washing-machine.data.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-product-recommendation',
@@ -15,7 +16,8 @@ export class ProductRecommendationComponent {
 
   constructor(
     private _washingMachineService: WashingMachineService,
-    private _washingMachineDataService:WashingMachineDataService,
+    private _washingMachineDataService: WashingMachineDataService,
+    private _notifService: NotificationService
   ) { }
 
 // **********************************
@@ -28,7 +30,7 @@ export class ProductRecommendationComponent {
     this._washingMachineDataService.getReport(this.serialNumber).subscribe(response => {
 
       // Convert to blob
-      const arraybuffer = this._washingMachineDataService.base64ToArrayBuffer(response.report);
+      const arraybuffer = this._notifService.base64ToArrayBuffer(response.report);
       const blob = new Blob([arraybuffer], { type: 'application/pdf' });
       const blobUrl = window.URL.createObjectURL(blob);
 
