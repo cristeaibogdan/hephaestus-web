@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { HistoryViewComponent } from './history-view/history-view.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DataService } from 'src/app/services/data.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { PageRequestDTO } from '../../models/dtos/page-request.dto';
+import { PageRequestDTO } from '../../../washing-machine/models/dtos/page-request.dto';
 import { FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
-import { WashingMachineDTO } from '../../models/dtos/washing-machine.dto';
+import { WashingMachineDTO } from 'src/app/washing-machine/models/dtos/washing-machine.dto';
+import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 
 @Component({
   selector: 'app-history',
@@ -19,7 +19,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
   constructor(
     private dialog: MatDialog,
-    private _dataService:DataService,
+    private _washingMachineDataService:WashingMachineDataService,
     private fb:FormBuilder
   ) { }
 
@@ -124,7 +124,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     console.log("pageRequestDTO = ", pageRequestDTO);
 
     // 4. UPDATE VALUES OF PAGINATOR FROM RESPONSE
-    this._dataService.loadPaginatedAndFiltered(pageRequestDTO).subscribe({
+    this._washingMachineDataService.loadPaginatedAndFiltered(pageRequestDTO).subscribe({
       next: response => {
         console.log("Response = ",response);
         this.washingMachines.data = response.content;
@@ -166,7 +166,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
   onView(washingMachine:WashingMachineDTO) {
     if(!washingMachine.washingMachineDetailsDTO) {
-      this._dataService.loadExpanded(washingMachine.serialNumber).subscribe(response => {
+      this._washingMachineDataService.loadExpanded(washingMachine.serialNumber).subscribe(response => {
         console.log("Response for details => ",response);
         washingMachine.washingMachineDetailsDTO = response.washingMachineDetails;
         washingMachine.washingMachineImages = response.washingMachineImages;

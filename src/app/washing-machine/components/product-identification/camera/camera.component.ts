@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BarcodeFormat } from '@zxing/library';
 import { ɵunwrapSafeValue } from "@angular/core"
 import { BrowserQRCodeReader } from '@zxing/browser/es2015/readers/BrowserQRCodeReader';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
-import { ImageFile } from '../../../models/image-file.model';
 import { MatDialogRef } from '@angular/material/dialog';
-import { QrResult } from '../../../models/qr-result.model';
+import { QrResult } from 'src/app/washing-machine/models/qr-result.model';
+import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-camera',
@@ -17,8 +17,8 @@ import { QrResult } from '../../../models/qr-result.model';
 export class CameraComponent implements AfterViewInit {
 
   constructor(
-    private _dataService:DataService, 
-    private sanitizer:DomSanitizer,
+    private _notifService: NotificationService,
+    private sanitizer: DomSanitizer,
     private dialogRef: MatDialogRef<CameraComponent>
   ) { }
 
@@ -72,7 +72,7 @@ onScanSuccess(result:string) {
   this.pauseScan(); 
    
   if(this.scanResult) {
-    this._dataService.openSnackBar_Success("QR code succesfully identified!", 0);
+    this._notifService.showSuccess("QR code succesfully identified!", 0);
   }
 }
 
@@ -147,7 +147,7 @@ camerasFoundHandler(foundCameras:MediaDeviceInfo[]) {
   );
 
   if(backCameraIndex > 0) {
-    this._dataService.openSnackBar_Success("back camera index = "+backCameraIndex, 0);
+    this._notifService.showSuccess("back camera index = "+backCameraIndex, 0);
     this.cameraIndex = backCameraIndex;
   }
 }
@@ -171,7 +171,7 @@ QRCodeFile!:ImageFile;
 
     // 0. Validate file extension
     if(this.invalidFileExtension(uploadedFile.name)) {
-      this._dataService.openSnackBar_Error("File "+uploadedFile.name+" is not supported. Only jpg, jpeg, png and bmp extensions are supported.",0);
+      this._notifService.showError("File "+uploadedFile.name+" is not supported. Only jpg, jpeg, png and bmp extensions are supported.",0);
       return;
     }
 
@@ -192,7 +192,7 @@ QRCodeFile!:ImageFile;
     try {
       resultFromQRCode = (await codeReader.decodeFromImageUrl(ɵunwrapSafeValue(handledFile.url))).getText();
     } catch (error) {
-      this._dataService.openSnackBar_Error("Unsupported Code. Only QR Codes are supported", 0);
+      this._notifService.showError("Unsupported Code. Only QR Codes are supported", 0);
       return;
     }
 
@@ -201,7 +201,7 @@ QRCodeFile!:ImageFile;
 
     // 4. Send to backend to retrieve WashingMachine
     if(this.scanResult) {
-      this._dataService.openSnackBar_Success("QR code succesfully identified!", 0);
+      this._notifService.showSuccess("QR code succesfully identified!", 0);
     }
   }
   
@@ -227,7 +227,7 @@ QRCodeFile!:ImageFile;
     if(QRCodeResult.startsWith("This")) {
       return QRCodeResult;
     } else {
-      this._dataService.openSnackBar_Error(
+      this._notifService.showError(
         "The QR code does not belong to a supported washing machine. Scanned result: "+QRCodeResult,0);
       return "";
     }

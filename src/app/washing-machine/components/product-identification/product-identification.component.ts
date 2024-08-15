@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit,} from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { DataService } from 'src/app/services/data.service';
-import { WashingMachineService } from 'src/app/services/washing-machine.service';
-import { SerialNumberValidator } from 'src/app/components/validators/async-validators/serial-number.validator';
+import { SerialNumberValidator } from 'src/app/shared/validators/async-validators/serial-number.validator';
 import { CameraComponent } from './camera/camera.component';
-import { QrResult } from '../../models/qr-result.model';
-import { CustomValidators } from '../../validators/custom.validators';
-import { WashingMachineIdentification } from '../../models/washing-machine-identification.model';
+import { CustomValidators } from '../../../shared/validators/custom.validators';
+import { QrResult } from 'src/app/washing-machine/models/qr-result.model';
+import { WashingMachineIdentification } from 'src/app/washing-machine/models/washing-machine-identification.model';
+import { WashingMachineService } from '../../services/washing-machine.service';
+import { WashingMachineDataService } from '../../services/washing-machine.data.service';
 
 @Component({
   selector: 'app-product-identification',
@@ -18,7 +18,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
 
   constructor(
     private _washingMachineService: WashingMachineService,
-    private _dataService:DataService, 
+    private _washingMachineDataService:WashingMachineDataService, 
     private dialog:MatDialog, 
     private fb:NonNullableFormBuilder,
               
@@ -162,7 +162,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
   }
 
   populateDataMatrix_Manufacturer_Field(category:string) {   
-    this._dataService.getManufacturers(category).subscribe(response => {
+    this._washingMachineDataService.getManufacturers(category).subscribe(response => {
       this.availableManufacturers = response;
     });  
   }
@@ -175,7 +175,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this._dataService.getModelsAndTypes(manufacturer).subscribe(response => {    
+    this._washingMachineDataService.getModelsAndTypes(manufacturer).subscribe(response => {    
 
       // clear model and type arrays
       this.resetAvailableModelsAndTypes();

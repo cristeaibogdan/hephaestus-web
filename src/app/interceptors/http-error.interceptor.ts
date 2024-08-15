@@ -8,11 +8,11 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
-import { DataService } from '../services/data.service';
 import { MatDialog } from '@angular/material/dialog';
-import { SpinnerComponent } from '../components/shared/spinner/spinner.component';
+import { SpinnerComponent } from '../shared/components/spinner/spinner.component';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../services/language.service';
+import { NotificationService } from '../services/notification.service';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
@@ -20,7 +20,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(
     private translate: TranslateService,
     private _languageService: LanguageService,
-    private _dataService: DataService,
+    private _notifService: NotificationService,
     private dialog: MatDialog
   ) {}
 
@@ -44,7 +44,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       }
     });
 
-
     return next.handle(modifiedRequest).pipe(
       tap({
         error: (err: HttpErrorResponse) => {
@@ -52,17 +51,18 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
         switch (err.status) {
           case 0:
-            this._dataService.openSnackBar_Error(this.translate.instant("I18N.GENERAL_ERROR.0"), 0);
+            this._notifService.showError(this.translate.instant("I18N.GENERAL_ERROR.0"), 0);
             break;
 
           case 404:
-            this._dataService.openSnackBar_Error(this.translate.instant("I18N.GENERAL_ERROR.404"), 0);
+            this._notifService.showError(this.translate.instant("I18N.GENERAL_ERROR.404"), 0);
             break;
 
-          default: // CUSTOM ERRORS FROM BACKEND
-            const errorMessage:string = err.error;
-            this._dataService.openSnackBar_Error(errorMessage, 0);
-            break;
+          default: 
+            (typeof err.error === "string") 
+              ? this._notifService.showError(err.error, 0) // CUSTOM ERRORS FROM BACKEND
+              : this._notifService.showError(this.translate.instant("I18N.GENERAL_ERROR.DEFAULT"), 0); // GENERAL ERRORS FROM BACKEND            
+            break;   
         }
       }
       }),

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { UserAccountDTO } from '../models/dtos/user-account.dto';
+import { UserAccountDTO } from '../../washing-machine/models/dtos/user-account.dto';
 
 @Component({
   selector: 'app-header',

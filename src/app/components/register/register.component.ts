@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Validators, NonNullableFormBuilder, ValidationErrors, AbstractControl, ValidatorFn, FormGroup } from '@angular/forms';
+import { Validators, NonNullableFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserAccountDTO } from '../models/dtos/user-account.dto';
-import { DataService } from 'src/app/services/data.service';
+import { UserAccountDTO } from '../../washing-machine/models/dtos/user-account.dto';
 import { Subscription } from 'rxjs';
-import { RegisterCodeValidator } from 'src/app/components/validators/async-validators/register-code.validator';
+import { RegisterCodeValidator } from 'src/app/shared/validators/async-validators/register-code.validator';
 import { TranslateService } from '@ngx-translate/core';
-import { CustomValidators } from '../validators/custom.validators';
+import { CustomValidators } from '../../shared/validators/custom.validators';
+import { AuthDataService } from 'src/app/services/auth.data.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private fb: NonNullableFormBuilder, 
     private router: Router,
     private translate:TranslateService,
-    private _dataService: DataService,
+    private _authDataService: AuthDataService,
+    private _notifService: NotificationService,
     private registerCodeValidator:RegisterCodeValidator
   ) {}
 
@@ -44,7 +46,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     // Subscribe to registerCode statusChanges and call a HTTP method to retrieve values from BACKEND
     this.codeSubscription = this.registerForm.controls.code.statusChanges.subscribe(() => {
       if (this.registerForm.controls.code.valid) {
-        this._dataService.getOrganizationAndCountry(this.registerForm.controls.code.value.toString()).subscribe(organizationAndCountry => {
+        this._authDataService.getOrganizationAndCountry(this.registerForm.controls.code.value.toString()).subscribe(organizationAndCountry => {
           this.registerForm.patchValue(organizationAndCountry);
         });
 
@@ -77,8 +79,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
       password: this.registerForm.controls.password.value
     };
 
-    this._dataService.register(userAccount).subscribe(() => {              
-        this._dataService.openSnackBar_Success(this.translate.instant("I18N.CUSTOM_SUCCESS.ACCOUNT_CREATED"),0);
+    this._authDataService.register(userAccount).subscribe(() => {              
+        this._notifService.showSuccess(this.translate.instant("I18N.CUSTOM_SUCCESS.ACCOUNT_CREATED"),0);
         this.goToLoginPage();
       }
     );
