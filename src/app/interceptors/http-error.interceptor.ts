@@ -44,7 +44,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       }
     });
 
-
     return next.handle(modifiedRequest).pipe(
       tap({
         error: (err: HttpErrorResponse) => {
@@ -59,10 +58,11 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             this._dataService.openSnackBar_Error(this.translate.instant("I18N.GENERAL_ERROR.404"), 0);
             break;
 
-          default: // CUSTOM ERRORS FROM BACKEND
-            const errorMessage:string = err.error;
-            this._dataService.openSnackBar_Error(errorMessage, 0);
-            break;
+          default: 
+            (typeof err.error === "string") 
+              ? this._dataService.openSnackBar_Error(err.error, 0) // CUSTOM ERRORS FROM BACKEND
+              : this._dataService.openSnackBar_Error(this.translate.instant("I18N.GENERAL_ERROR.DEFAULT"), 0); // GENERAL ERRORS FROM BACKEND            
+            break;   
         }
       }
       }),
