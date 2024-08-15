@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WashingMachineService } from 'src/app/services/washing-machine.service';
 import { DataService } from 'src/app/services/data.service';
-import { WashingMachineDTO } from '../../models/dtos/washing-machine.dto';
+import { WashingMachineDTO } from 'src/app/components/models/dtos/washing-machine.dto';
 
 @Component({
   selector: 'app-product-recommendation',

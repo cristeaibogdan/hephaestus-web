@@ -5,9 +5,9 @@ import { DataService } from 'src/app/services/data.service';
 import { WashingMachineService } from 'src/app/services/washing-machine.service';
 import { SerialNumberValidator } from 'src/app/shared/validators/async-validators/serial-number.validator';
 import { CameraComponent } from './camera/camera.component';
-import { QrResult } from '../../models/qr-result.model';
 import { CustomValidators } from '../../../shared/validators/custom.validators';
-import { WashingMachineIdentification } from '../../models/washing-machine-identification.model';
+import { QrResult } from 'src/app/components/models/qr-result.model';
+import { WashingMachineIdentification } from 'src/app/components/models/washing-machine-identification.model';
 
 @Component({
   selector: 'app-product-identification',

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { CameraComponent } from './components/washing-machine/product-identification/camera/camera.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { CameraComponent } from './washing-machine/components/product-identification/camera/camera.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HistoryComponent } from './shared/components/history/history.component';
 
@@ -21,7 +21,7 @@ const appRoutes: Routes = [
       
       { // TODO: Refactor the import if you change the packages
         path: "washing-machines", 
-        loadChildren: () => import("./components/washing-machine/washing-machine.module").then(m => m.WashingMachineModule) 
+        loadChildren: () => import("./washing-machine/washing-machine.module").then(m => m.WashingMachineModule) 
       },
 
       { path: "", redirectTo: "/home", pathMatch: "full" }

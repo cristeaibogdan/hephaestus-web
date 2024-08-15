@@ -3,7 +3,7 @@ import { UntypedFormBuilder, Validators} from '@angular/forms';
 import { WashingMachineService } from 'src/app/services/washing-machine.service';
 import { MatStepper } from '@angular/material/stepper';
 import { Observable } from 'rxjs';
-import { WashingMachineDTO } from '../models/dtos/washing-machine.dto';
+import { WashingMachineDTO } from '../../components/models/dtos/washing-machine.dto';
 
 @Component({
   selector: 'app-washing-machine',

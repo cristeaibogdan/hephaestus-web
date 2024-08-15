@@ -5,9 +5,9 @@ import { DataService } from 'src/app/services/data.service';
 import { TranslateService } from '@ngx-translate/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AbstractControl, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { ImageFile } from '../../models/image-file.model';
 import { CustomValidators } from '../../../shared/validators/custom.validators';
-import { WashingMachineDetailsDTO } from '../../models/dtos/washing-machine-details.dto';
+import { WashingMachineDetailsDTO } from 'src/app/components/models/dtos/washing-machine-details.dto';
+import { ImageFile } from 'src/app/components/models/image-file.model';
 
 @Component({
   selector: 'app-product-damage',
