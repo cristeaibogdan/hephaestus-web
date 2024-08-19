@@ -7,7 +7,7 @@ import { ProductModelTypeDTO } from '../models/dtos/product-model-type.dto';
 import { WashingMachineDetailsDTO } from '../models/dtos/washing-machine-details.dto';
 import { WashingMachineEvaluationDTO } from '../models/dtos/washing-machine-evaluation.dto';
 import { WashingMachineExpandedDTO } from '../models/dtos/washing-machine-expanded.dto';
-import { WashingMachineReportDTO } from '../models/dtos/washing-machine-report.dto';
+import { WashingMachineReportVO } from '../models/vos/washing-machine-report.vo';
 import { WashingMachineDTO } from '../models/dtos/washing-machine.dto';
 
 @Injectable({providedIn: 'root'})
@@ -59,7 +59,7 @@ export class WashingMachineDataService {
       .concat(serialNumber)
       .concat("/report");
 
-    return this.http.get<WashingMachineReportDTO>(url);
+    return this.http.get<WashingMachineReportVO>(url);
   }
 
 //**************************************
