@@ -1,12 +1,14 @@
+import { ReturnType } from '../enums/return-type.enum';
+
 export interface WashingMachineIdentification {
-  identificationMode:string,
-  category:string,
-  manufacturer:string,
+  identificationMode: string;
+  category: string;
+  manufacturer: string;
 
-  model:string,
-  type:string,
+  model: string;
+  type: string;
 
-  serialNumber:string,
-  returnType:string,
-  damageType:string
+  serialNumber: string;
+  returnType: ReturnType;
+  damageType: string;
 }

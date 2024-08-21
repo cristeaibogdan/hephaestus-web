@@ -8,6 +8,7 @@ import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
 import { WashingMachineDataService } from "./washing-machine.data.service";
 import { NotificationService } from "src/app/services/notification.service";
+import { ReturnType } from "../enums/return-type.enum";
 
 
 @Injectable({providedIn: 'root'})
@@ -27,8 +28,8 @@ export class WashingMachineService {
     category:"",
 
     damageType:"",
-    returnType:"",
-    identificationMode:"",
+    returnType:ReturnType.SERVICE, //TODO: Needs a default value because it is an Enum
+    identificationMode:"", 
     
     manufacturer:"",
     serialNumber:"",
@@ -60,7 +61,7 @@ export class WashingMachineService {
 
   resetWashingMachineIdentificationValues() {
     this.washingMachine.value.damageType = "";
-    this.washingMachine.value.returnType = "";
+    this.washingMachine.value.returnType = ReturnType.SERVICE; //TODO: Needs a default value because it is an Enum
     this.washingMachine.value.identificationMode = "";
 
     this.washingMachine.value.manufacturer = "";
@@ -69,7 +70,7 @@ export class WashingMachineService {
     this.washingMachine.value.type = "";
 
     this.washingMachine.value.damageLevel = 0;
-    this.washingMachine.value.recommendation = "";    
+    this.washingMachine.value.recommendation = "";
   }
 
 // **************************************

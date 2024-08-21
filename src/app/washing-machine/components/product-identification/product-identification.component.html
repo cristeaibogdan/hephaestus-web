@@ -103,13 +103,13 @@
 
       <mat-button-toggle-group formControlName="returnType"
         (valueChange)="disableDamageTypeBasedOnReturnTypeValue()">
-        <mat-button-toggle value="Service">
+        <mat-button-toggle [value]="returnType.SERVICE">
           {{"I18N.PRODUCT_IDENTIFICATION.SERVICE" | translate}}
         </mat-button-toggle>
-        <mat-button-toggle value="Commercial">
+        <mat-button-toggle [value]="returnType.COMMERCIAL">
           {{"I18N.PRODUCT_IDENTIFICATION.COMMERCIAL" | translate}}
         </mat-button-toggle>
-        <mat-button-toggle value="Transport">
+        <mat-button-toggle [value]="returnType.TRANSPORT">
           {{"I18N.PRODUCT_IDENTIFICATION.TRANSPORT" | translate}}
         </mat-button-toggle>
       </mat-button-toggle-group>

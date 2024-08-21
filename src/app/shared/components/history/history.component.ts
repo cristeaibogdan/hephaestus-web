@@ -9,6 +9,7 @@ import { FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
 import { WashingMachineDTO } from 'src/app/washing-machine/models/dtos/washing-machine.dto';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
+import { ReturnType } from 'src/app/washing-machine/enums/return-type.enum';
 
 @Component({
   selector: 'app-history',
@@ -60,6 +61,8 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   filterColumns: string[] = this.displayedColumns.map(column => column + "-filter");
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  returnTypeOptions: ReturnType[] = Object.values(ReturnType);
 
   filterForm = this.fb.group({
     category: null,

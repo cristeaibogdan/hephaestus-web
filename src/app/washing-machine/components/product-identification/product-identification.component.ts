@@ -8,6 +8,7 @@ import { QrResult } from 'src/app/washing-machine/models/qr-result.model';
 import { WashingMachineIdentification } from 'src/app/washing-machine/models/washing-machine-identification.model';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { WashingMachineDataService } from '../../services/washing-machine.data.service';
+import { ReturnType } from '../../enums/return-type.enum';
 
 @Component({
   selector: 'app-product-identification',
@@ -33,6 +34,8 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
     this._washingMachineService.resetWashingMachineIdentificationValues();
     this._washingMachineService.resetWashingMachineDamageAssessmentValues();
   }
+
+  returnType = ReturnType;
 
   washingMachineForm = this.fb.group({
     identificationMode: ["", Validators.required],
@@ -75,10 +78,10 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
   disableInTransit!:boolean;
 
   disableDamageTypeBasedOnReturnTypeValue() {    
-    this.disableInUse = (this.washingMachineForm.value.returnType === "Transport");
+    this.disableInUse = (this.washingMachineForm.value.returnType === ReturnType.TRANSPORT);
     this.disableInTransit = (
-      this.washingMachineForm.value.returnType === "Service" || 
-      this.washingMachineForm.value.returnType === "Commercial"
+      this.washingMachineForm.value.returnType === ReturnType.SERVICE || 
+      this.washingMachineForm.value.returnType === ReturnType.COMMERCIAL
     );
 
     this.washingMachineForm.controls.damageType.reset();
@@ -132,7 +135,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
       type: washingMachineType,
       
       serialNumber: this.washingMachineForm.controls.serialNumber.value.toString(),
-      returnType: this.washingMachineForm.controls.returnType.value,
+      returnType: this.washingMachineForm.controls.returnType.value as ReturnType,
       damageType: this.washingMachineForm.controls.damageType.value
     }
 
