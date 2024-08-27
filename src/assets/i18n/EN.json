@@ -169,7 +169,8 @@
     "GENERAL_ERROR": {
       "0": "Could not establish connection to server",
       "404": "Could not connect to http address",
-      "DEFAULT": "Internal server error"
+      "DEFAULT": "Internal server error",
+      "EMPTY_PAGE": "No products match the selected filter criteria"
     },
 
     "CUSTOM_ERROR": {

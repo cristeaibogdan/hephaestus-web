@@ -10,6 +10,8 @@ import * as moment from 'moment';
 import { WashingMachineDTO } from 'src/app/washing-machine/models/dtos/washing-machine.dto';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 import { ReturnType } from 'src/app/washing-machine/enums/return-type.enum';
+import { NotificationService } from 'src/app/services/notification.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-history',
@@ -21,6 +23,8 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   constructor(
     private dialog: MatDialog,
     private _washingMachineDataService:WashingMachineDataService,
+    private translate: TranslateService,
+    private _notifService:NotificationService,
     private fb:FormBuilder
   ) { }
 
@@ -130,6 +134,11 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     this._washingMachineDataService.loadPaginatedAndFiltered(pageRequestDTO).subscribe({
       next: response => {
         console.log("Response = ",response);
+
+        if(response.content.length == 0) {
+          this._notifService.showWarning(this.translate.instant("I18N.GENERAL_ERROR.EMPTY_PAGE"), 0);
+        }
+
         this.washingMachines.data = response.content;
         this.pageNumber = response.number;
         this.pageSize = response.size;
