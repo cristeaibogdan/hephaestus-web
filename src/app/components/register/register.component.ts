@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor(
     private fb: NonNullableFormBuilder, 
     private router: Router,
-    private translate:TranslateService,
+    private _translate:TranslateService,
     private _authDataService: AuthDataService,
     private _notifService: NotificationService,
     private registerCodeValidator:RegisterCodeValidator
@@ -80,7 +80,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     };
 
     this._authDataService.register(userAccount).subscribe(() => {              
-        this._notifService.showSuccess(this.translate.instant("I18N.CUSTOM_SUCCESS.ACCOUNT_CREATED"),0);
+        this._notifService.showSuccess(this._translate.instant("I18N.CUSTOM_SUCCESS.ACCOUNT_CREATED"),0);
         this.goToLoginPage();
       }
     );

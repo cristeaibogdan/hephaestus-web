@@ -5,16 +5,16 @@ import { TranslateService } from '@ngx-translate/core';
 @Injectable()
 export class PaginatorI18n extends MatPaginatorIntl {
 
-  constructor(private translate: TranslateService) {
+  constructor(private _translate: TranslateService) {
     super();
     this.translateLabels();
-    this.translate.onLangChange.subscribe(() => {
+    this._translate.onLangChange.subscribe(() => {
       this.translateLabels();
     });
   }
 
   override getRangeLabel = (page: number, pageSize: number, length: number) => {
-    const rangeLabel = this.translate.instant("I18N.MAT_INTERNAL.PAGINATOR_OF");
+    const rangeLabel = this._translate.instant("I18N.MAT_INTERNAL.PAGINATOR_OF");
 
     if (length === 0 || pageSize === 0) {
       return `0 ${rangeLabel} ${length }`;
@@ -29,7 +29,7 @@ export class PaginatorI18n extends MatPaginatorIntl {
   }
 
   translateLabels() {
-    this.translate.get([
+    this._translate.get([
       "I18N.MAT_INTERNAL.PAGINATOR_PRODUCTS_PER_PAGE_LABEL",
       "I18N.MAT_INTERNAL.PAGINATOR_FIRST_PAGE",
       "I18N.MAT_INTERNAL.PAGINATOR_LAST_PAGE",
@@ -37,11 +37,11 @@ export class PaginatorI18n extends MatPaginatorIntl {
       "I18N.MAT_INTERNAL.PAGINATOR_PREVIOUS_PAGE"
     ])
     .subscribe(() => {
-      super.itemsPerPageLabel = this.translate.instant("I18N.MAT_INTERNAL.PAGINATOR_PRODUCTS_PER_PAGE_LABEL")
-      super.firstPageLabel = this.translate.instant("I18N.MAT_INTERNAL.PAGINATOR_FIRST_PAGE");
-      super.lastPageLabel = this.translate.instant("I18N.MAT_INTERNAL.PAGINATOR_LAST_PAGE");
-      super.nextPageLabel = this.translate.instant("I18N.MAT_INTERNAL.PAGINATOR_NEXT_PAGE");
-      super.previousPageLabel = this.translate.instant("I18N.MAT_INTERNAL.PAGINATOR_PREVIOUS_PAGE");
+      super.itemsPerPageLabel = this._translate.instant("I18N.MAT_INTERNAL.PAGINATOR_PRODUCTS_PER_PAGE_LABEL")
+      super.firstPageLabel = this._translate.instant("I18N.MAT_INTERNAL.PAGINATOR_FIRST_PAGE");
+      super.lastPageLabel = this._translate.instant("I18N.MAT_INTERNAL.PAGINATOR_LAST_PAGE");
+      super.nextPageLabel = this._translate.instant("I18N.MAT_INTERNAL.PAGINATOR_NEXT_PAGE");
+      super.previousPageLabel = this._translate.instant("I18N.MAT_INTERNAL.PAGINATOR_PREVIOUS_PAGE");
     });
     this.changes.next();
   }

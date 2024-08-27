@@ -23,7 +23,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   constructor(
     private dialog: MatDialog,
     private _washingMachineDataService:WashingMachineDataService,
-    private translate: TranslateService,
+    private _translate: TranslateService,
     private _notifService:NotificationService,
     private fb:FormBuilder
   ) { }
@@ -136,7 +136,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         console.log("Response = ",response);
 
         if(response.content.length == 0) {
-          this._notifService.showWarning(this.translate.instant("I18N.GENERAL_ERROR.EMPTY_PAGE"), 0);
+          this._notifService.showWarning(this._translate.instant("I18N.GENERAL_ERROR.EMPTY_PAGE"), 0);
         }
 
         this.washingMachines.data = response.content;

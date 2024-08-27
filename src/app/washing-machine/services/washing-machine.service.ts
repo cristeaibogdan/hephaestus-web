@@ -17,7 +17,7 @@ export class WashingMachineService {
   constructor(
     private _washingMachineDataService: WashingMachineDataService,
     private _notifService: NotificationService,
-    private translate: TranslateService 
+    private _translate: TranslateService 
   ) { }
 
 // **************************************
@@ -249,7 +249,7 @@ previousStep() {
     });
 
     this._washingMachineDataService.save(formData).subscribe(() => {
-      this._notifService.showSuccess(this.translate.instant("I18N.CUSTOM_SUCCESS.PRODUCT_SAVED"),4000);       
+      this._notifService.showSuccess(this._translate.instant("I18N.CUSTOM_SUCCESS.PRODUCT_SAVED"),4000);       
     });
   }
   
