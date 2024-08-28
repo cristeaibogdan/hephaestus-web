@@ -75,11 +75,11 @@ tr {
 }
 
 .mat-column-damageType, .mat-column-damageType-filter {
-  max-width: 130px;
+  max-width: 150px;
 }
 
 .mat-column-returnType, .mat-column-returnType-filter {
-  max-width: 130px;
+  max-width: 150px;
 }
 
 .mat-column-identificationMode, .mat-column-identificationMode-filter {
