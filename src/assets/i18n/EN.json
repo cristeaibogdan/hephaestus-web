@@ -55,7 +55,7 @@
       "OVERVIEW": "Overview",
       "PRODUCT_INFORMATION_TITLE": "Product Information",
       "CATEGORY": "Category",
-      "DAMAGE_IDENTIFICATION_TITLE": "Damage Type and Identification Mode",
+      "DAMAGE_IDENTIFICATION_TITLE": "Identification Mode and Damage Type",
       "DAMAGED_PRODUCT_IMAGES_TITLE": "Damaged Product Images",
       "DAMAGES_TITLE": "Damages",
       "DAMAGE_LEVEL": "Damage Level",
@@ -85,7 +85,7 @@
     },
 
     "PRODUCT_IDENTIFICATION": {
-      "TITLE": "Select Damage Type and Identification Mode",
+      "TITLE": "Select Identification Mode and Damage Type",
       "QR_CODE": "QR Code",
       "DATA_MATRIX": "Data Matrix",
       "SERVICE": "Service",
