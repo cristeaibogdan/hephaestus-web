@@ -168,10 +168,15 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   handleTab(event: KeyboardEvent) {
     const focusedElement = document.activeElement as HTMLElement;
 
-    if (!(focusedElement.tagName == "INPUT")) {
-      document.getElementById("first")?.focus();
-      event.preventDefault();
+    const isOfTypeInput: boolean = focusedElement.tagName == "INPUT";
+    const isOfTypeMatSelect: boolean = focusedElement.tagName == "MAT-SELECT";
+
+    if (isOfTypeInput || isOfTypeMatSelect) {
+      return;
     }
+
+    document.getElementById("first")?.focus();
+    event.preventDefault();
   }
 
 // *****************************************
