@@ -1,3 +1,4 @@
+import { DamageType } from '../enums/damage-type.enum';
 import { ReturnType } from '../enums/return-type.enum';
 
 export interface WashingMachineIdentification {
@@ -10,5 +11,5 @@ export interface WashingMachineIdentification {
 
   serialNumber: string;
   returnType: ReturnType;
-  damageType: string;
+  damageType: DamageType;
 }

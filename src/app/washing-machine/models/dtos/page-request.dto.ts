@@ -1,3 +1,4 @@
+import { DamageType } from '../../enums/damage-type.enum';
 import { ReturnType } from '../../enums/return-type.enum';
 
 export interface PageRequestDTO {
@@ -7,7 +8,7 @@ export interface PageRequestDTO {
   category: string;
   manufacturer: string;
 
-  damageType: string;
+  damageType: DamageType;
   returnType: ReturnType;
   identificationMode: string;
 

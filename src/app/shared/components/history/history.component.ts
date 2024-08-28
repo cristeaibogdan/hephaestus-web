@@ -12,6 +12,7 @@ import { WashingMachineDataService } from 'src/app/washing-machine/services/wash
 import { ReturnType } from 'src/app/washing-machine/enums/return-type.enum';
 import { NotificationService } from 'src/app/services/notification.service';
 import { TranslateService } from '@ngx-translate/core';
+import { DamageType } from 'src/app/washing-machine/enums/damage-type.enum';
 
 @Component({
   selector: 'app-history',
@@ -67,6 +68,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   returnTypeOptions: ReturnType[] = Object.values(ReturnType);
+  damageTypeOptions: DamageType[] = Object.values(DamageType);
 
   filterForm = this.fb.group({
     category: null,

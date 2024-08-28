@@ -50,7 +50,13 @@
           <th mat-header-cell *matHeaderCellDef>
             <mat-form-field class="filter-input" appearance="outline">
               <mat-icon matPrefix svgIcon="search"></mat-icon>
-              <input matInput formControlName="damageType"/>
+              <mat-select matInput formControlName="damageType"> 
+                <mat-option></mat-option> <!-- Empty option to ensure null is sent to backend -->
+                <mat-option *ngFor="let option of damageTypeOptions"
+                  [value]= "option">
+                  {{option}}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </th>
         </ng-container>

@@ -126,10 +126,10 @@
       </legend>
 
       <mat-button-toggle-group formControlName="damageType">
-        <mat-button-toggle value="In Use" [disabled]="disableInUse">
+        <mat-button-toggle [value]="damageType.IN_USE" [disabled]="disableInUse">
           {{"I18N.PRODUCT_IDENTIFICATION.IN_USE" | translate}}
         </mat-button-toggle>
-        <mat-button-toggle value="In Transit" [disabled]="disableInTransit">          
+        <mat-button-toggle [value]="damageType.IN_TRANSIT" [disabled]="disableInTransit">          
           {{"I18N.PRODUCT_IDENTIFICATION.IN_TRANSIT" | translate}}
         </mat-button-toggle>
       </mat-button-toggle-group>

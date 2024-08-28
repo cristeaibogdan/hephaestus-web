@@ -9,6 +9,7 @@ import { WashingMachineIdentification } from 'src/app/washing-machine/models/was
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { WashingMachineDataService } from '../../services/washing-machine.data.service';
 import { ReturnType } from '../../enums/return-type.enum';
+import { DamageType } from '../../enums/damage-type.enum';
 
 @Component({
   selector: 'app-product-identification',
@@ -36,6 +37,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
   }
 
   returnType = ReturnType;
+  damageType = DamageType;
 
   washingMachineForm = this.fb.group({
     identificationMode: ["", Validators.required],
@@ -136,7 +138,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
       
       serialNumber: this.washingMachineForm.controls.serialNumber.value.toString(),
       returnType: this.washingMachineForm.controls.returnType.value as ReturnType,
-      damageType: this.washingMachineForm.controls.damageType.value
+      damageType: this.washingMachineForm.controls.damageType.value as DamageType
     }
 
     this._washingMachineService.setWashingMachineIdentificationValues(productIdentificationResult);
