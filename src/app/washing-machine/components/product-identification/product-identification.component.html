@@ -15,10 +15,10 @@
 
       <mat-button-toggle-group formControlName="identificationMode"
         (valueChange)="disableDataFields_WHEN_QRCodeIsSelected()">
-        <mat-button-toggle value="QR Code" (change)="openCameraDialog()">
+        <mat-button-toggle [value]="identificationMode.QR_CODE" (change)="openCameraDialog()">
           {{"I18N.PRODUCT_IDENTIFICATION.QR_CODE" | translate}}
         </mat-button-toggle>
-        <mat-button-toggle value="Data Matrix">
+        <mat-button-toggle [value]="identificationMode.DATA_MATRIX">
           {{"I18N.PRODUCT_IDENTIFICATION.DATA_MATRIX" | translate}}
         </mat-button-toggle>
       </mat-button-toggle-group>

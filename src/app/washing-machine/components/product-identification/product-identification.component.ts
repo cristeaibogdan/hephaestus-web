@@ -10,6 +10,7 @@ import { WashingMachineService } from '../../services/washing-machine.service';
 import { WashingMachineDataService } from '../../services/washing-machine.data.service';
 import { ReturnType } from '../../enums/return-type.enum';
 import { DamageType } from '../../enums/damage-type.enum';
+import { IdentificationMode } from '../../enums/identification-mode.enum';
 
 @Component({
   selector: 'app-product-identification',
@@ -38,6 +39,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
 
   returnType = ReturnType;
   damageType = DamageType;
+  identificationMode = IdentificationMode;
 
   washingMachineForm = this.fb.group({
     identificationMode: ["", Validators.required],
@@ -69,7 +71,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
     this.washingMachineForm.controls.serialNumber.enable();
     this.washingMachineForm.controls.modelAndType.enable();
 
-    if (this.washingMachineForm.value.identificationMode === "QR Code") {
+    if (this.washingMachineForm.value.identificationMode === IdentificationMode.QR_CODE) {
       this.washingMachineForm.controls.manufacturer.disable();
       this.washingMachineForm.controls.serialNumber.disable();
       this.washingMachineForm.controls.modelAndType.disable();
@@ -129,7 +131,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
       : this.washingMachineForm.controls.modelAndType.controls.type.value;
 
     const productIdentificationResult:WashingMachineIdentification = {
-      identificationMode: this.washingMachineForm.controls.identificationMode.value,
+      identificationMode: this.washingMachineForm.controls.identificationMode.value as IdentificationMode,
       category: this.washingMachineForm.controls.category.value,
       manufacturer: this.washingMachineForm.controls.manufacturer.value,
 

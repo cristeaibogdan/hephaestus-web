@@ -1,4 +1,5 @@
 import { DamageType } from '../../enums/damage-type.enum';
+import { IdentificationMode } from '../../enums/identification-mode.enum';
 import { ReturnType } from '../../enums/return-type.enum';
 
 export interface PageRequestDTO {
@@ -10,7 +11,7 @@ export interface PageRequestDTO {
 
   damageType: DamageType;
   returnType: ReturnType;
-  identificationMode: string;
+  identificationMode: IdentificationMode;
 
   serialNumber: string;
   model: string;

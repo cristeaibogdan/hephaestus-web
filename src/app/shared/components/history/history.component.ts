@@ -13,6 +13,7 @@ import { ReturnType } from 'src/app/washing-machine/enums/return-type.enum';
 import { NotificationService } from 'src/app/services/notification.service';
 import { TranslateService } from '@ngx-translate/core';
 import { DamageType } from 'src/app/washing-machine/enums/damage-type.enum';
+import { IdentificationMode } from 'src/app/washing-machine/enums/identification-mode.enum';
 
 @Component({
   selector: 'app-history',
@@ -69,6 +70,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
   returnTypeOptions: ReturnType[] = Object.values(ReturnType);
   damageTypeOptions: DamageType[] = Object.values(DamageType);
+  identificationModeOptions: IdentificationMode[] = Object.values(IdentificationMode); 
 
   filterForm = this.fb.group({
     category: null,
