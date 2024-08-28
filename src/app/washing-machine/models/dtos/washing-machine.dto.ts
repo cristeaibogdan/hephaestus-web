@@ -6,15 +6,15 @@ import { WashingMachineImageDTO } from './washing-machine-image.dto';
 
 export interface WashingMachineDTO {
   category: string;
-  identificationMode: IdentificationMode;
+  identificationMode: IdentificationMode | null;
   manufacturer: string;
 
   model: string;
   type: string;
   serialNumber: string;
 
-  returnType: ReturnType;
-  damageType: DamageType;
+  returnType: ReturnType | null;
+  damageType: DamageType | null;
 
   damageLevel?: number;
   recommendation?: string;

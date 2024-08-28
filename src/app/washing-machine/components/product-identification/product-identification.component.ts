@@ -150,9 +150,9 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
   
   onReset(e:Event) {
     e.preventDefault(); // Prevent the default behavior. The disabled input will not appear empty and will preserve its value
-    this.washingMachineForm.reset();
-    
+    this.washingMachineForm.reset();    
     this.clearAvailableModelsAndTypes(); // clear model and type arrays
+    this._washingMachineService.resetWashingMachineIdentificationValues();
   }
 
 // **********************************

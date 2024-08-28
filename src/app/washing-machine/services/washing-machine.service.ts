@@ -8,9 +8,6 @@ import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
 import { WashingMachineDataService } from "./washing-machine.data.service";
 import { NotificationService } from "src/app/services/notification.service";
-import { ReturnType } from "../enums/return-type.enum";
-import { DamageType } from "../enums/damage-type.enum";
-import { IdentificationMode } from "../enums/identification-mode.enum";
 
 
 @Injectable({providedIn: 'root'})
@@ -29,9 +26,9 @@ export class WashingMachineService {
   private washingMachine = new BehaviorSubject<WashingMachineDTO>({
     category: "",
 
-    damageType: DamageType.IN_TRANSIT, //TODO: Needs a default value because it is an Enum
-    returnType: ReturnType.SERVICE, //TODO: Needs a default value because it is an Enum
-    identificationMode: IdentificationMode.DATA_MATRIX, //TODO: Needs a default value because it is an Enum
+    damageType: null,
+    returnType: null,
+    identificationMode: null,
     
     manufacturer: "",
     serialNumber: "",
@@ -62,9 +59,9 @@ export class WashingMachineService {
   }
 
   resetWashingMachineIdentificationValues() {
-    this.washingMachine.value.damageType = DamageType.IN_TRANSIT; //TODO: Needs a default value because it is an Enum
-    this.washingMachine.value.returnType = ReturnType.SERVICE; //TODO: Needs a default value because it is an Enum
-    this.washingMachine.value.identificationMode = IdentificationMode.DATA_MATRIX; //TODO: Needs a default value because it is an Enum;
+    this.washingMachine.value.damageType = null;
+    this.washingMachine.value.returnType = null;
+    this.washingMachine.value.identificationMode = null;
 
     this.washingMachine.value.manufacturer = "";
     this.washingMachine.value.serialNumber = "";
