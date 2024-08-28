@@ -168,11 +168,12 @@
       <td mat-cell *matCellDef="let damagedProduct"> 
         <button class="recommendation-text" 
           [ngClass]="{
-            disassemble: damagedProduct.recommendation === 'DISASSEMBLE', 
-            repair: damagedProduct.recommendation === 'REPAIR',
             repackage: damagedProduct.recommendation === 'REPACKAGE',
-            resale: damagedProduct.recommendation === 'RESALE'}"
-          >
+            resale: damagedProduct.recommendation === 'RESALE',
+            outlet: damagedProduct.recommendation === 'OUTLET',
+            repair: damagedProduct.recommendation === 'REPAIR',
+            disassemble: damagedProduct.recommendation === 'DISASSEMBLE'            
+          }">
           {{damagedProduct.recommendation}}
         </button> 
       </td>

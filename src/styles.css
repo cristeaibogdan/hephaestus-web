@@ -83,6 +83,14 @@ body {
   border: none;
 }
 
+.outlet {
+  background-color: #e0aaff;
+  color: #444;
+  font-weight: 500;
+  
+  border: none;
+}
+
 /* **************************************
 // *** STYLES for MAT DIALOG
 // **************************************/
