@@ -7,11 +7,12 @@
            
       <div class="text-align-center">
         <button class="recommendation-text"
-        [ngClass]="{
-          disassemble : washingMachine.recommendation === 'DISASSEMBLE', 
-          repair : washingMachine.recommendation === 'REPAIR',
-          repackage : washingMachine.recommendation === 'REPACKAGE',
-          resale: washingMachine.recommendation === 'RESALE'}">
+          [ngClass]="{
+            repackage: washingMachine.recommendation === 'REPACKAGE',
+            resale: washingMachine.recommendation === 'RESALE',
+            outlet: washingMachine.recommendation === 'OUTLET',
+            repair: washingMachine.recommendation === 'REPAIR',
+            disassemble: washingMachine.recommendation === 'DISASSEMBLE'}">
           {{washingMachine.recommendation}}
         </button>
       </div>
