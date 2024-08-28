@@ -25,63 +25,6 @@
           </th>
         </ng-container>
 
-    <ng-container matColumnDef="manufacturer">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.MANUFACTURER" | translate | uppercase}}</th>
-      <td mat-cell *matCellDef="let damagedProduct"> {{damagedProduct.manufacturer}} </td>
-    </ng-container>
-
-        <!-- Additional filter column -->
-        <ng-container matColumnDef="manufacturer-filter">
-          <th mat-header-cell *matHeaderCellDef>
-            <mat-form-field class="filter-input" appearance="outline">
-              <mat-icon matPrefix svgIcon="search"></mat-icon>
-              <input matInput formControlName="manufacturer"/>
-            </mat-form-field>
-          </th>
-        </ng-container>
-    
-    <ng-container matColumnDef="damageType">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.DAMAGE_TYPE" | translate | uppercase}}</th>
-      <td mat-cell *matCellDef="let damagedProduct"> {{damagedProduct.damageType}} </td>
-    </ng-container>
-
-        <!-- Additional filter column -->
-        <ng-container matColumnDef="damageType-filter">
-          <th mat-header-cell *matHeaderCellDef>
-            <mat-form-field class="filter-input" appearance="outline">
-              <mat-icon matPrefix svgIcon="search"></mat-icon>
-              <mat-select matInput formControlName="damageType"> 
-                <mat-option></mat-option> <!-- Empty option to ensure null is sent to backend -->
-                <mat-option *ngFor="let option of damageTypeOptions"
-                  [value]= "option">
-                  {{option}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </th>
-        </ng-container>
-    
-    <ng-container matColumnDef="returnType">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.RETURN_TYPE" | translate | uppercase}}</th>
-      <td mat-cell *matCellDef="let damagedProduct"> {{damagedProduct.returnType}} </td>
-    </ng-container>
-    
-        <!-- Additional filter column -->
-        <ng-container matColumnDef="returnType-filter">
-          <th mat-header-cell *matHeaderCellDef>
-            <mat-form-field class="filter-input" appearance="outline">
-              <mat-icon matPrefix svgIcon="search"></mat-icon>
-              <mat-select matInput formControlName="returnType"> 
-                <mat-option></mat-option> <!-- Empty option to ensure null is sent to backend -->
-                <mat-option *ngFor="let option of returnTypeOptions"
-                  [value]= "option">
-                  {{option}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </th>
-        </ng-container>
-
     <ng-container matColumnDef="identificationMode">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.IDENTIFICATION_MODE" | translate | uppercase}}</th>
       <td mat-cell *matCellDef="let damagedProduct"> {{damagedProduct.identificationMode}} </td>
@@ -102,22 +45,22 @@
             </mat-form-field>
           </th>
         </ng-container>
-    
-    <ng-container matColumnDef="serialNumber">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.SERIAL_NUMBER" | translate | uppercase}}</th>
-      <td mat-cell *matCellDef="let damagedProduct"> {{damagedProduct.serialNumber}} </td>
+
+    <ng-container matColumnDef="manufacturer">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.MANUFACTURER" | translate | uppercase}}</th>
+      <td mat-cell *matCellDef="let damagedProduct"> {{damagedProduct.manufacturer}} </td>
     </ng-container>
 
         <!-- Additional filter column -->
-        <ng-container matColumnDef="serialNumber-filter">
+        <ng-container matColumnDef="manufacturer-filter">
           <th mat-header-cell *matHeaderCellDef>
             <mat-form-field class="filter-input" appearance="outline">
               <mat-icon matPrefix svgIcon="search"></mat-icon>
-              <input matInput formControlName="serialNumber"/>
+              <input matInput formControlName="manufacturer"/>
             </mat-form-field>
           </th>
         </ng-container>
-
+    
     <ng-container matColumnDef="model">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.MODEL" | translate | uppercase}}</th>
       <td mat-cell *matCellDef="let damagedProduct"> {{damagedProduct.model}} </td>
@@ -147,7 +90,64 @@
             </mat-form-field>
           </th>
         </ng-container>
+
+    <ng-container matColumnDef="serialNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.SERIAL_NUMBER" | translate | uppercase}}</th>
+      <td mat-cell *matCellDef="let damagedProduct"> {{damagedProduct.serialNumber}} </td>
+    </ng-container>
+
+        <!-- Additional filter column -->
+        <ng-container matColumnDef="serialNumber-filter">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-form-field class="filter-input" appearance="outline">
+              <mat-icon matPrefix svgIcon="search"></mat-icon>
+              <input matInput formControlName="serialNumber"/>
+            </mat-form-field>
+          </th>
+        </ng-container>
+
+    <ng-container matColumnDef="returnType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.RETURN_TYPE" | translate | uppercase}}</th>
+      <td mat-cell *matCellDef="let damagedProduct"> {{damagedProduct.returnType}} </td>
+    </ng-container>
     
+        <!-- Additional filter column -->
+        <ng-container matColumnDef="returnType-filter">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-form-field class="filter-input" appearance="outline">
+              <mat-icon matPrefix svgIcon="search"></mat-icon>
+              <mat-select matInput formControlName="returnType"> 
+                <mat-option></mat-option> <!-- Empty option to ensure null is sent to backend -->
+                <mat-option *ngFor="let option of returnTypeOptions"
+                  [value]= "option">
+                  {{option}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </th>
+        </ng-container>
+
+    <ng-container matColumnDef="damageType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.DAMAGE_TYPE" | translate | uppercase}}</th>
+      <td mat-cell *matCellDef="let damagedProduct"> {{damagedProduct.damageType}} </td>
+    </ng-container>
+
+        <!-- Additional filter column -->
+        <ng-container matColumnDef="damageType-filter">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-form-field class="filter-input" appearance="outline">
+              <mat-icon matPrefix svgIcon="search"></mat-icon>
+              <mat-select matInput formControlName="damageType"> 
+                <mat-option></mat-option> <!-- Empty option to ensure null is sent to backend -->
+                <mat-option *ngFor="let option of damageTypeOptions"
+                  [value]= "option">
+                  {{option}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </th>
+        </ng-container>
+        
     <ng-container matColumnDef="damageLevel">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.DAMAGE_LEVEL" | translate | uppercase}}</th>
       <td mat-cell *matCellDef="let damagedProduct"> {{damagedProduct.damageLevel}} </td>

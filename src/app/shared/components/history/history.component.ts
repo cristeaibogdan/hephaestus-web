@@ -34,13 +34,13 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     
   displayedColumns: string[] = [
     "createdAt",
-    "manufacturer",
-    "damageType",
-    "returnType",
     "identificationMode",
-    "serialNumber",
+    "manufacturer",
     "model",
     "type",
+    "serialNumber",
+    "returnType",
+    "damageType",
     "damageLevel",
     "recommendation",
     "actions"
@@ -73,7 +73,6 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   identificationModeOptions: IdentificationMode[] = Object.values(IdentificationMode); 
 
   filterForm = this.fb.group({
-    category: null,
     manufacturer: null,
     damageType: null,
     returnType: null,
@@ -119,17 +118,16 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     const pageRequestDTO:PageRequestDTO = {
       pageIndex: this.pageNumber,
       pageSize: this.pageSize,
-      category: this.filterForm.value.category!,
-      manufacturer: this.filterForm.value.manufacturer!,
-      damageType: this.filterForm.value.damageType!,
-      returnType: this.filterForm.value.returnType!,
       identificationMode: this.filterForm.value.identificationMode!,
-      serialNumber: this.filterForm.value.serialNumber!,
+      manufacturer: this.filterForm.value.manufacturer!,
       model: this.filterForm.value.model!,
       type: this.filterForm.value.type!,
+      serialNumber: this.filterForm.value.serialNumber!,
+      returnType: this.filterForm.value.returnType!,
+      damageType: this.filterForm.value.damageType!,
       damageLevel: this.filterForm.value.damageLevel!,
       recommendation: this.filterForm.value.recommendation!,
-      createdAt: this.handleDate(this.filterForm.value.createdAt!)!     
+      createdAt: this.handleDate(this.filterForm.value.createdAt!)! 
     };
 
     console.log("pageRequestDTO = ", pageRequestDTO);

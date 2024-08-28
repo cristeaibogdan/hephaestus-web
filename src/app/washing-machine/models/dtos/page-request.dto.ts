@@ -5,20 +5,19 @@ import { ReturnType } from '../../enums/return-type.enum';
 export interface PageRequestDTO {
   pageIndex: number;
   pageSize: number;
-
-  category: string;
-  manufacturer: string;
-
-  damageType: DamageType;
-  returnType: ReturnType;
+  
   identificationMode: IdentificationMode;
-
-  serialNumber: string;
+  manufacturer: string;
+  
   model: string;
   type: string;
-
+  serialNumber: string;
+  
+  returnType: ReturnType;
+  damageType: DamageType;
+  
   damageLevel: number;
-  recommendation: string;
-
+  recommendation: string;  
+  
   createdAt: string;
 }
