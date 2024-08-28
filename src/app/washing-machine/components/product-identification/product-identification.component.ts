@@ -150,7 +150,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
     e.preventDefault(); // Prevent the default behavior. The disabled input will not appear empty and will preserve its value
     this.washingMachineForm.reset();
     
-    this.resetAvailableModelsAndTypes(); // clear model and type arrays
+    this.clearAvailableModelsAndTypes(); // clear model and type arrays
   }
 
 // **********************************
@@ -161,7 +161,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
   availableModels:string[] = [];
   availableTypes:string[] = [];
 
-  resetAvailableModelsAndTypes() {
+  clearAvailableModelsAndTypes() {
     this.availableModels = [];
     this.availableTypes = [];
   }
@@ -183,7 +183,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
     this._washingMachineDataService.getModelsAndTypes(manufacturer).subscribe(response => {    
 
       // clear model and type arrays
-      this.resetAvailableModelsAndTypes();
+      this.clearAvailableModelsAndTypes();
 
       response.forEach(ProductModelTypeDTO => {
         this.availableModels.push(ProductModelTypeDTO.model);
