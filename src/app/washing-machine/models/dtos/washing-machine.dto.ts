@@ -1,5 +1,6 @@
 import { DamageType } from '../../enums/damage-type.enum';
 import { IdentificationMode } from '../../enums/identification-mode.enum';
+import { Recommendation } from '../../enums/recommendation.enum';
 import { ReturnType } from '../../enums/return-type.enum';
 import { WashingMachineDetailsDTO } from './washing-machine-details.dto';
 import { WashingMachineImageDTO } from './washing-machine-image.dto';
@@ -16,7 +17,7 @@ export interface WashingMachineDTO {
   returnType: ReturnType | null;
   damageType: DamageType | null;
 
-  recommendation?: string;
+  recommendation?: Recommendation | null;
   createdAt?: Date;
 
   washingMachineDetailsDTO?: WashingMachineDetailsDTO;

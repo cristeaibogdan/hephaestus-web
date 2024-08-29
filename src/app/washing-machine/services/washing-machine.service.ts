@@ -35,7 +35,7 @@ export class WashingMachineService {
     model: "",
     type: "",
 
-    recommendation:""
+    recommendation: null
   });
 
   getWashingMachine() {
@@ -67,7 +67,7 @@ export class WashingMachineService {
     this.washingMachine.value.model = "";
     this.washingMachine.value.type = "";
 
-    this.washingMachine.value.recommendation = "";
+    this.washingMachine.value.recommendation = null;
   }
 
 // **************************************
