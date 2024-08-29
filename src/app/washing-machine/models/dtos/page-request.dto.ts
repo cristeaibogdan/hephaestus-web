@@ -1,5 +1,6 @@
 import { DamageType } from '../../enums/damage-type.enum';
 import { IdentificationMode } from '../../enums/identification-mode.enum';
+import { Recommendation } from '../../enums/recommendation.enum';
 import { ReturnType } from '../../enums/return-type.enum';
 
 export interface PageRequestDTO {
@@ -16,7 +17,7 @@ export interface PageRequestDTO {
   returnType: ReturnType;
   damageType: DamageType;
   
-  recommendation: string;
+  recommendation: Recommendation;
   
   createdAt: string;
 }
