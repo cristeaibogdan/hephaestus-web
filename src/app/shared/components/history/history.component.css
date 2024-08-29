@@ -98,10 +98,6 @@ tr {
   max-width: 160px;
 }
 
-.mat-column-damageLevel, .mat-column-damageLevel-filter {
-  max-width: 100px;
-}
-
 .mat-column-recommendation, .mat-column-recommendation-filter {
   max-width: 140px;
 }

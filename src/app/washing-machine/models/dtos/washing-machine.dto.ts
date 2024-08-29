@@ -16,7 +16,6 @@ export interface WashingMachineDTO {
   returnType: ReturnType | null;
   damageType: DamageType | null;
 
-  damageLevel?: number;
   recommendation?: string;
   createdAt?: Date;
 

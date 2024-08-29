@@ -16,8 +16,7 @@ export interface PageRequestDTO {
   returnType: ReturnType;
   damageType: DamageType;
   
-  damageLevel: number;
-  recommendation: string;  
+  recommendation: string;
   
   createdAt: string;
 }

@@ -41,7 +41,6 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     "serialNumber",
     "returnType",
     "damageType",
-    "damageLevel",
     "recommendation",
     "actions"
   ]; 
@@ -82,7 +81,6 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     model: null,
     type: null,
 
-    damageLevel: null,
     recommendation: null,
 
     createdAt: null
@@ -125,7 +123,6 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       serialNumber: this.filterForm.value.serialNumber!,
       returnType: this.filterForm.value.returnType!,
       damageType: this.filterForm.value.damageType!,
-      damageLevel: this.filterForm.value.damageLevel!,
       recommendation: this.filterForm.value.recommendation!,
       createdAt: this.handleDate(this.filterForm.value.createdAt!)! 
     };

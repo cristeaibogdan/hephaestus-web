@@ -35,7 +35,6 @@ export class WashingMachineService {
     model: "",
     type: "",
 
-    damageLevel:0,
     recommendation:""
   });
 
@@ -68,7 +67,6 @@ export class WashingMachineService {
     this.washingMachine.value.model = "";
     this.washingMachine.value.type = "";
 
-    this.washingMachine.value.damageLevel = 0;
     this.washingMachine.value.recommendation = "";
   }
 
@@ -210,7 +208,6 @@ previousStep() {
   getDamageEvaluationAndGoToNextStep() {
     this._washingMachineDataService.getDamageEvaluation(this.washingMachineDetails.getValue()).subscribe(
       (response) => {        
-      this.washingMachine.value.damageLevel = response.damageLevel;
       this.washingMachine.value.recommendation = response.recommendation;
       this.nextStep();
     });
@@ -233,7 +230,6 @@ previousStep() {
       model: this.washingMachine.value.model,
       type: this.washingMachine.value.type,
 
-      damageLevel: this.washingMachine.value.damageLevel,
       recommendation: this.washingMachine.value.recommendation,
       
       washingMachineDetailsDTO: this.washingMachineDetails.getValue()

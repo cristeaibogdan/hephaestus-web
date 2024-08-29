@@ -27,9 +27,6 @@
 
   <h2>{{"I18N.COMMON.DAMAGES_TITLE" | translate}}</h2>
   <section *ngIf="washingMachineDetails$ | async as washingMachineDetails">
-    <ul class="product-information-list">
-      <li>{{"I18N.COMMON.DAMAGE_LEVEL" | translate}}: {{washingMachine.damageLevel}}</li>
-    </ul> 
     
     <div class="damages-container">
       <article *ngIf="washingMachineDetails.applicablePackageDamage">

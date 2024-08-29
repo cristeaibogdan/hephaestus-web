@@ -147,21 +147,6 @@
             </mat-form-field>
           </th>
         </ng-container>
-        
-    <ng-container matColumnDef="damageLevel">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.DAMAGE_LEVEL" | translate | uppercase}}</th>
-      <td mat-cell *matCellDef="let damagedProduct"> {{damagedProduct.damageLevel}} </td>
-    </ng-container>
-    
-        <!-- Additional filter column -->
-        <ng-container matColumnDef="damageLevel-filter">
-          <th mat-header-cell *matHeaderCellDef>
-            <mat-form-field class="filter-input" appearance="outline">
-              <mat-icon matPrefix svgIcon="search"></mat-icon>
-              <input type="number" matInput formControlName="damageLevel"/>
-            </mat-form-field>
-          </th>
-        </ng-container>
 
     <ng-container matColumnDef="recommendation">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.RECOMMENDATION" | translate | uppercase}}</th>
