@@ -5,10 +5,10 @@ import { Page } from '../../shared/models/page.model';
 import { PageRequestDTO } from '../models/dtos/page-request.dto';
 import { ProductModelTypeDTO } from '../models/dtos/product-model-type.dto';
 import { WashingMachineDetailsDTO } from '../models/dtos/washing-machine-details.dto';
-import { WashingMachineEvaluationDTO } from '../models/dtos/washing-machine-evaluation.dto';
 import { WashingMachineExpandedDTO } from '../models/dtos/washing-machine-expanded.dto';
 import { WashingMachineReportVO } from '../models/vos/washing-machine-report.vo';
 import { WashingMachineDTO } from '../models/dtos/washing-machine.dto';
+import { Recommendation } from '../enums/recommendation.enum';
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineDataService {
@@ -40,9 +40,9 @@ export class WashingMachineDataService {
 //*** STEP 3 = OVERVIEW
 //**************************************
   
-  getDamageEvaluation(washingMachineDetails:WashingMachineDetailsDTO) {
-    const url = this.apiURL.concat("/api/v1/washing-machines/evaluate");
-    return this.http.post<WashingMachineEvaluationDTO>(url, washingMachineDetails);
+  getRecommendation(washingMachineDetails:WashingMachineDetailsDTO) {
+    const url = this.apiURL.concat("/api/v1/washing-machines/recommendation");
+    return this.http.post<Recommendation>(url, washingMachineDetails);
   }
 
 //**************************************

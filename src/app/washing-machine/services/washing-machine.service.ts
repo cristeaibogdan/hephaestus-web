@@ -205,10 +205,10 @@ previousStep() {
 // **************************************
 
 // Executes when NEXT on STEP 2 is clicked
-  getDamageEvaluationAndGoToNextStep() {
-    this._washingMachineDataService.getDamageEvaluation(this.washingMachineDetails.getValue()).subscribe(
+  getRecommendationAndGoToNextStep() {
+    this._washingMachineDataService.getRecommendation(this.washingMachineDetails.getValue()).subscribe(
       (response) => {        
-      this.washingMachine.value.recommendation = response.recommendation;
+      this.washingMachine.value.recommendation = response;
       this.nextStep();
     });
   }
