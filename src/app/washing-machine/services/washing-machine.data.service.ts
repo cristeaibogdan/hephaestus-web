@@ -6,7 +6,7 @@ import { PageRequestDTO } from '../models/dtos/page-request.dto';
 import { ProductModelTypeDTO } from '../models/dtos/product-model-type.dto';
 import { WashingMachineDetailsDTO } from '../models/dtos/washing-machine-details.dto';
 import { WashingMachineExpandedDTO } from '../models/dtos/washing-machine-expanded.dto';
-import { WashingMachineReportVO } from '../models/vos/washing-machine-report.vo';
+import { WashingMachineReportDTO } from '../models/dtos/washing-machine-report.dto';
 import { WashingMachineDTO } from '../models/dtos/washing-machine.dto';
 import { Recommendation } from '../enums/recommendation.enum';
 
@@ -59,7 +59,7 @@ export class WashingMachineDataService {
       .concat(serialNumber)
       .concat("/report");
 
-    return this.http.get<WashingMachineReportVO>(url);
+    return this.http.get<WashingMachineReportDTO>(url);
   }
 
 //**************************************
