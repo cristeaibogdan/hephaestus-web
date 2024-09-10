@@ -42,77 +42,77 @@
     </section>
   
     <h2>{{"I18N.COMMON.DAMAGES_TITLE" | translate}}</h2>                  
-    <section class="damages-container" *ngIf="washingMachine.washingMachineDetailsDTO as washingMachineDetails">
+    <section class="damages-container" *ngIf="washingMachine.washingMachineDetailDTO as washingMachineDetail">
 
-      <article *ngIf="washingMachineDetails.applicablePackageDamage">
+      <article *ngIf="washingMachineDetail.applicablePackageDamage">
         <h3>{{"I18N.COMMON.PACKAGE" | translate}}</h3>
 
         <ul class="damages-list">
-          <li *ngIf="washingMachineDetails.packageDamaged">{{"I18N.COMMON.PACKAGE_DAMAGED" | translate}}</li>
-          <li *ngIf="washingMachineDetails.packageDirty">{{"I18N.COMMON.PACKAGE_DIRTY" | translate}}</li>
-          <li *ngIf="washingMachineDetails.packageMaterialAvailable">{{"I18N.COMMON.PACKAGE_REPACKAGE" | translate}}</li>
+          <li *ngIf="washingMachineDetail.packageDamaged">{{"I18N.COMMON.PACKAGE_DAMAGED" | translate}}</li>
+          <li *ngIf="washingMachineDetail.packageDirty">{{"I18N.COMMON.PACKAGE_DIRTY" | translate}}</li>
+          <li *ngIf="washingMachineDetail.packageMaterialAvailable">{{"I18N.COMMON.PACKAGE_REPACKAGE" | translate}}</li>
         </ul>  
       </article>
 
-      <article *ngIf="washingMachineDetails.applicableVisibleSurfacesDamage">
+      <article *ngIf="washingMachineDetail.applicableVisibleSurfacesDamage">
         <h3>{{"I18N.COMMON.VISIBLE_SURFACES" | translate}}</h3>
 
         <ul class="damages-list">
-          <li *ngIf="washingMachineDetails.visibleSurfacesHasScratches">
+          <li *ngIf="washingMachineDetail.visibleSurfacesHasScratches">
             {{"I18N.COMMON.SCRATCHES_LENGTH" | translate}}:
-            {{washingMachineDetails.visibleSurfacesScratchesLength}} 
+            {{washingMachineDetail.visibleSurfacesScratchesLength}} 
             {{"I18N.COMMON.CM" | translate}}
           </li>
-          <li *ngIf="washingMachineDetails.visibleSurfacesHasDents">
+          <li *ngIf="washingMachineDetail.visibleSurfacesHasDents">
             {{"I18N.COMMON.DENTS_DEPTH" | translate}}:
-            {{washingMachineDetails.visibleSurfacesDentsDepth}} 
+            {{washingMachineDetail.visibleSurfacesDentsDepth}} 
             {{"I18N.COMMON.CM" | translate}}
           </li>
-          <li *ngIf="washingMachineDetails.visibleSurfacesHasMinorDamage">
+          <li *ngIf="washingMachineDetail.visibleSurfacesHasMinorDamage">
             {{"I18N.COMMON.MINOR_DAMAGES" | translate}}:
-            {{washingMachineDetails.visibleSurfacesMinorDamage}}
+            {{washingMachineDetail.visibleSurfacesMinorDamage}}
           </li>
-          <li *ngIf="washingMachineDetails.visibleSurfacesHasMajorDamage">
+          <li *ngIf="washingMachineDetail.visibleSurfacesHasMajorDamage">
             {{"I18N.COMMON.MAJOR_DAMAGES" | translate}}:
-            {{washingMachineDetails.visibleSurfacesMajorDamage}}
+            {{washingMachineDetail.visibleSurfacesMajorDamage}}
           </li>
         </ul>
       </article>
 
-      <article *ngIf="washingMachineDetails.applicableHiddenSurfacesDamage">
+      <article *ngIf="washingMachineDetail.applicableHiddenSurfacesDamage">
         <h3>{{"I18N.COMMON.HIDDEN_SURFACES" | translate}}</h3>
 
         <ul class="damages-list">
-          <li *ngIf="washingMachineDetails.hiddenSurfacesHasScratches">
+          <li *ngIf="washingMachineDetail.hiddenSurfacesHasScratches">
             {{"I18N.COMMON.SCRATCHES_LENGTH" | translate}}:
-            {{washingMachineDetails.hiddenSurfacesScratchesLength}} 
+            {{washingMachineDetail.hiddenSurfacesScratchesLength}} 
             {{"I18N.COMMON.CM" | translate}}
           </li>
-          <li *ngIf="washingMachineDetails.hiddenSurfacesHasDents">
+          <li *ngIf="washingMachineDetail.hiddenSurfacesHasDents">
             {{"I18N.COMMON.DENTS_DEPTH" | translate}}:
-            {{washingMachineDetails.hiddenSurfacesDentsDepth}} 
+            {{washingMachineDetail.hiddenSurfacesDentsDepth}} 
             {{"I18N.COMMON.CM" | translate}}
           </li>
-          <li *ngIf="washingMachineDetails.hiddenSurfacesHasMinorDamage">
+          <li *ngIf="washingMachineDetail.hiddenSurfacesHasMinorDamage">
             {{"I18N.COMMON.MINOR_DAMAGES" | translate}}:
-            {{washingMachineDetails.hiddenSurfacesMinorDamage}}
+            {{washingMachineDetail.hiddenSurfacesMinorDamage}}
           </li>
-          <li *ngIf="washingMachineDetails.hiddenSurfacesHasMajorDamage">
+          <li *ngIf="washingMachineDetail.hiddenSurfacesHasMajorDamage">
             {{"I18N.COMMON.MAJOR_DAMAGES" | translate}}:
-            {{washingMachineDetails.hiddenSurfacesMajorDamage}}
+            {{washingMachineDetail.hiddenSurfacesMajorDamage}}
           </li>
         </ul>
       </article>
 
-      <article *ngIf="washingMachineDetails.price > 0 && washingMachineDetails.repairPrice > 0">
+      <article *ngIf="washingMachineDetail.price > 0 && washingMachineDetail.repairPrice > 0">
         <h3>{{"I18N.COMMON.PRICING" | translate}}</h3>
 
         <ul class="damages-list">
           <li>
-            {{"I18N.COMMON.PRODUCT_PRICE" | translate}}: {{washingMachineDetails.price}} €
+            {{"I18N.COMMON.PRODUCT_PRICE" | translate}}: {{washingMachineDetail.price}} €
           </li>
           <li>
-            {{"I18N.COMMON.PRODUCT_REPAIR_PRICE" | translate}}: {{washingMachineDetails.repairPrice}} €
+            {{"I18N.COMMON.PRODUCT_REPAIR_PRICE" | translate}}: {{washingMachineDetail.repairPrice}} €
           </li>
         </ul>
       </article>    

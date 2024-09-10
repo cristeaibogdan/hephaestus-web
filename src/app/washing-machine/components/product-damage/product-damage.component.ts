@@ -5,7 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AbstractControl, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from '../../../shared/validators/custom.validators';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
-import { WashingMachineDetailsDTO } from '../../models/dtos/washing-machine-details.dto';
+import { WashingMachineDetailDTO } from '../../models/dtos/washing-machine-detail.dto';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -26,7 +26,7 @@ export class ProductDamage implements OnInit, OnDestroy {
     private fb:NonNullableFormBuilder,
   ) {}
 
-  washingMachineDetailsForm = this.fb.group({
+  washingMachineDetailForm = this.fb.group({
     applicablePackageDamage: [false],
     packageForm : this.fb.group({
       packageDamaged : [false],
@@ -132,8 +132,8 @@ export class ProductDamage implements OnInit, OnDestroy {
     // *** PACKAGE DAMAGE
     // *****************************
 
-    const applicablePackageDamage = this.washingMachineDetailsForm.controls.applicablePackageDamage
-    const packageForm = this.washingMachineDetailsForm.controls.packageForm;
+    const applicablePackageDamage = this.washingMachineDetailForm.controls.applicablePackageDamage
+    const packageForm = this.washingMachineDetailForm.controls.packageForm;
 
     // 1. If false from the start, reset and disable packageForm
     if(!applicablePackageDamage.value) {
@@ -168,8 +168,8 @@ export class ProductDamage implements OnInit, OnDestroy {
     // *** VISIBLE SURFACES DAMAGE
     // *****************************
 
-    const applicableVisibleSurfacesDamage = this.washingMachineDetailsForm.controls.applicableVisibleSurfacesDamage
-    const visibleSurfacesForm = this.washingMachineDetailsForm.controls.visibleSurfacesForm;
+    const applicableVisibleSurfacesDamage = this.washingMachineDetailForm.controls.applicableVisibleSurfacesDamage
+    const visibleSurfacesForm = this.washingMachineDetailForm.controls.visibleSurfacesForm;
 
     // 1. If false from the start, reset and disable visibleSurfacesForm
     if(!applicableVisibleSurfacesDamage.value) {
@@ -195,8 +195,8 @@ export class ProductDamage implements OnInit, OnDestroy {
     // *** HIDDEN SURFACES DAMAGE
     // *****************************
 
-    const applicableHiddenSurfacesDamage = this.washingMachineDetailsForm.controls.applicableHiddenSurfacesDamage
-    const hiddenSurfacesForm = this.washingMachineDetailsForm.controls.hiddenSurfacesForm;
+    const applicableHiddenSurfacesDamage = this.washingMachineDetailForm.controls.applicableHiddenSurfacesDamage
+    const hiddenSurfacesForm = this.washingMachineDetailForm.controls.hiddenSurfacesForm;
 
     // 1. If false from the start, reset and disable hiddenSurfacesForm
     if(!applicableHiddenSurfacesDamage.value) {
@@ -239,26 +239,26 @@ export class ProductDamage implements OnInit, OnDestroy {
   }
 
   toggle_VisibleSurfaces_ScratchesLength() {   
-    const control = this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesScratchesLength;
-    const enableWhen = this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasScratches.value;
+    const control = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesScratchesLength;
+    const enableWhen = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasScratches.value;
     this.toggleFormControl(control, enableWhen);
   }
 
   toggle_VisibleSurfaces_DentsDepth() {
-    const control = this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesDentsDepth;
-    const enableWhen = this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasDents.value;
+    const control = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesDentsDepth;
+    const enableWhen = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasDents.value;
     this.toggleFormControl(control, enableWhen);
   }
 
   toggle_VisibleSurfaces_MinorDamage() {  
-    const control = this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesMinorDamage;
-    const enableWhen = this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMinorDamage.value;
+    const control = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesMinorDamage;
+    const enableWhen = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMinorDamage.value;
     this.toggleFormControl(control, enableWhen);
   }
 
   toggle_VisibleSurfaces_MajorDamage() {
-    const control = this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesMajorDamage;
-    const enableWhen = this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMajorDamage.value;
+    const control = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesMajorDamage;
+    const enableWhen = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMajorDamage.value;
     this.toggleFormControl(control, enableWhen);
   }
     
@@ -267,26 +267,26 @@ export class ProductDamage implements OnInit, OnDestroy {
 // *********************************
 
   toggle_HiddenSurfaces_ScratchesLength() {
-    const control = this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesScratchesLength;
-    const enableWhen = this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasScratches.value;
+    const control = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesScratchesLength;
+    const enableWhen = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasScratches.value;
     this.toggleFormControl(control, enableWhen);
   }
 
   toggle_HiddenSurfaces_DentsDepth() {  
-    const control = this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesDentsDepth;
-    const enableWhen = this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasDents.value;
+    const control = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesDentsDepth;
+    const enableWhen = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasDents.value;
     this.toggleFormControl(control, enableWhen);
   }
 
   toggle_HiddenSurfaces_MinorDamage() {
-    const control = this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMinorDamage;
-    const enableWhen = this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMinorDamage.value;
+    const control = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMinorDamage;
+    const enableWhen = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMinorDamage.value;
     this.toggleFormControl(control, enableWhen);
   }
 
   toggle_HiddenSurfaces_MajorDamage() {  
-    const control = this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMajorDamage;
-    const enableWhen = this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMajorDamage.value;
+    const control = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMajorDamage;
+    const enableWhen = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMajorDamage.value;
     this.toggleFormControl(control, enableWhen);
   }
 
@@ -296,53 +296,53 @@ export class ProductDamage implements OnInit, OnDestroy {
   
   onReset(e:Event) {
     e.preventDefault();
-    this.washingMachineDetailsForm.reset();
+    this.washingMachineDetailForm.reset();
     this.washingMachinePricingForm.reset();
     this.resetSelectedFiles();    
   }  
 
   onSubmit() {
-    const washingMachineDetails:WashingMachineDetailsDTO = {
-      applicablePackageDamage: this.washingMachineDetailsForm.controls.applicablePackageDamage.value,
-      packageDamaged: this.washingMachineDetailsForm.controls.packageForm.controls.packageDamaged.value,
-      packageDirty: this.washingMachineDetailsForm.controls.packageForm.controls.packageDirty.value,
-      packageMaterialAvailable: this.washingMachineDetailsForm.controls.packageForm.controls.packageMaterialAvailable.value,
+    const washingMachineDetail:WashingMachineDetailDTO = {
+      applicablePackageDamage: this.washingMachineDetailForm.controls.applicablePackageDamage.value,
+      packageDamaged: this.washingMachineDetailForm.controls.packageForm.controls.packageDamaged.value,
+      packageDirty: this.washingMachineDetailForm.controls.packageForm.controls.packageDirty.value,
+      packageMaterialAvailable: this.washingMachineDetailForm.controls.packageForm.controls.packageMaterialAvailable.value,
 
 
-      applicableVisibleSurfacesDamage: this.washingMachineDetailsForm.controls.applicableVisibleSurfacesDamage.value,
+      applicableVisibleSurfacesDamage: this.washingMachineDetailForm.controls.applicableVisibleSurfacesDamage.value,
 
-      visibleSurfacesHasScratches: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasScratches.value,
-      visibleSurfacesScratchesLength: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesScratchesLength.value,
+      visibleSurfacesHasScratches: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasScratches.value,
+      visibleSurfacesScratchesLength: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesScratchesLength.value,
 
-      visibleSurfacesHasDents: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasDents.value,
-      visibleSurfacesDentsDepth: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesDentsDepth.value,
+      visibleSurfacesHasDents: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasDents.value,
+      visibleSurfacesDentsDepth: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesDentsDepth.value,
 
-      visibleSurfacesHasMinorDamage: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMinorDamage.value,
-      visibleSurfacesMinorDamage: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesMinorDamage.value,
+      visibleSurfacesHasMinorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMinorDamage.value,
+      visibleSurfacesMinorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesMinorDamage.value,
 
-      visibleSurfacesHasMajorDamage: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMajorDamage.value,
-      visibleSurfacesMajorDamage: this.washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesMajorDamage.value,
+      visibleSurfacesHasMajorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMajorDamage.value,
+      visibleSurfacesMajorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesMajorDamage.value,
 
 
-      applicableHiddenSurfacesDamage: this.washingMachineDetailsForm.controls.applicableHiddenSurfacesDamage.value,
+      applicableHiddenSurfacesDamage: this.washingMachineDetailForm.controls.applicableHiddenSurfacesDamage.value,
 
-      hiddenSurfacesHasScratches: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasScratches.value,
-      hiddenSurfacesScratchesLength: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesScratchesLength.value,
+      hiddenSurfacesHasScratches: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasScratches.value,
+      hiddenSurfacesScratchesLength: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesScratchesLength.value,
 
-      hiddenSurfacesHasDents: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasDents.value,
-      hiddenSurfacesDentsDepth: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesDentsDepth.value,
+      hiddenSurfacesHasDents: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasDents.value,
+      hiddenSurfacesDentsDepth: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesDentsDepth.value,
 
-      hiddenSurfacesHasMinorDamage: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMinorDamage.value,
-      hiddenSurfacesMinorDamage: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMinorDamage.value,
+      hiddenSurfacesHasMinorDamage: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMinorDamage.value,
+      hiddenSurfacesMinorDamage: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMinorDamage.value,
 
-      hiddenSurfacesHasMajorDamage: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMajorDamage.value,
-      hiddenSurfacesMajorDamage: this.washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMajorDamage.value,
+      hiddenSurfacesHasMajorDamage: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMajorDamage.value,
+      hiddenSurfacesMajorDamage: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMajorDamage.value,
 
       price: this.washingMachinePricingForm.controls.price.value,
       repairPrice: this.washingMachinePricingForm.controls.repairPrice.value
     };
 
-    this._washingMachineService.setWashingMachineDetails(washingMachineDetails);
+    this._washingMachineService.setWashingMachineDetail(washingMachineDetail);
     this._washingMachineService.setSelectedFiles(this.selectedFiles);
     this._washingMachineService.getRecommendationAndGoToNextStep();
   }

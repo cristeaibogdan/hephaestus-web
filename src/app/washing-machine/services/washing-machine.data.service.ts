@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment'
 import { Page } from '../../shared/models/page.model';
 import { PageRequestDTO } from '../models/dtos/page-request.dto';
 import { ProductModelTypeDTO } from '../models/dtos/product-model-type.dto';
-import { WashingMachineDetailsDTO } from '../models/dtos/washing-machine-details.dto';
+import { WashingMachineDetailDTO } from '../models/dtos/washing-machine-detail.dto';
 import { WashingMachineExpandedDTO } from '../models/dtos/washing-machine-expanded.dto';
 import { WashingMachineReportDTO } from '../models/dtos/washing-machine-report.dto';
 import { WashingMachineDTO } from '../models/dtos/washing-machine.dto';
@@ -40,9 +40,9 @@ export class WashingMachineDataService {
 //*** STEP 3 = OVERVIEW
 //**************************************
   
-  getRecommendation(washingMachineDetails:WashingMachineDetailsDTO) {
+  getRecommendation(washingMachineDetail:WashingMachineDetailDTO) {
     const url = this.apiURL.concat("/api/v1/washing-machines/recommendation");
-    return this.http.post<Recommendation>(url, washingMachineDetails);
+    return this.http.post<Recommendation>(url, washingMachineDetail);
   }
 
 //**************************************
