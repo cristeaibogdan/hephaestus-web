@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
-import { WashingMachineDetailsDTO } from '../../models/dtos/washing-machine-details.dto';
+import { WashingMachineDetailDTO } from '../../models/dtos/washing-machine-detail.dto';
 import { WashingMachineDTO } from '../../models/dtos/washing-machine.dto';
 import { WashingMachineService } from '../../services/washing-machine.service';
 
@@ -13,7 +13,7 @@ import { WashingMachineService } from '../../services/washing-machine.service';
 export class OverviewComponent {
 
   washingMachine$:Observable<WashingMachineDTO> = this._washingMachineService.getWashingMachine();
-  washingMachineDetails$:Observable<WashingMachineDetailsDTO> = this._washingMachineService.getWashingMachineDetails(); 
+  washingMachineDetail$:Observable<WashingMachineDetailDTO> = this._washingMachineService.getWashingMachineDetail(); 
    
   selectedFiles:ImageFile[] = this._washingMachineService.getSelectedFiles();
 

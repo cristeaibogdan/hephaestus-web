@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { MatStepper } from "@angular/material/stepper";
 import { BehaviorSubject} from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
-import { WashingMachineDetailsDTO } from "../models/dtos/washing-machine-details.dto";
+import { WashingMachineDetailDTO } from "../models/dtos/washing-machine-detail.dto";
 import { WashingMachineDTO } from "../models/dtos/washing-machine.dto";
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
@@ -92,7 +92,7 @@ previousStep() {
 // *** STEP 2 = PRODUCT DAMAGE ASSESSMENT
 // *****************************************
 
-  private washingMachineDetails = new BehaviorSubject<WashingMachineDetailsDTO>({
+  private washingMachineDetail = new BehaviorSubject<WashingMachineDetailDTO>({
     applicablePackageDamage:false,
     packageDamaged:false,
     packageDirty:false,
@@ -132,12 +132,12 @@ previousStep() {
     repairPrice:0
   });
 
-  setWashingMachineDetails(washingMachineDetails:WashingMachineDetailsDTO) {
-    this.washingMachineDetails.next(washingMachineDetails);
+  setWashingMachineDetail(washingMachineDetail:WashingMachineDetailDTO) {
+    this.washingMachineDetail.next(washingMachineDetail);
   }
 
-  getWashingMachineDetails() {
-    return this.washingMachineDetails.asObservable();
+  getWashingMachineDetail() {
+    return this.washingMachineDetail.asObservable();
   }
 
 // **************************************
@@ -159,43 +159,43 @@ previousStep() {
 // **************************************
 
   resetWashingMachineDamageAssessmentValues() {    
-    this.washingMachineDetails.value.applicablePackageDamage = false;
-    this.washingMachineDetails.value.packageDamaged = false;
-    this.washingMachineDetails.value.packageDirty = false;
-    this.washingMachineDetails.value.packageMaterialAvailable = false;
+    this.washingMachineDetail.value.applicablePackageDamage = false;
+    this.washingMachineDetail.value.packageDamaged = false;
+    this.washingMachineDetail.value.packageDirty = false;
+    this.washingMachineDetail.value.packageMaterialAvailable = false;
 
 
-    this.washingMachineDetails.value.applicableVisibleSurfacesDamage = false;
+    this.washingMachineDetail.value.applicableVisibleSurfacesDamage = false;
 
-    this.washingMachineDetails.value.visibleSurfacesHasScratches = false;   
-    this.washingMachineDetails.value.visibleSurfacesScratchesLength = 0;
+    this.washingMachineDetail.value.visibleSurfacesHasScratches = false;   
+    this.washingMachineDetail.value.visibleSurfacesScratchesLength = 0;
 
-    this.washingMachineDetails.value.visibleSurfacesHasDents = false;   
-    this.washingMachineDetails.value.visibleSurfacesDentsDepth = 0;
+    this.washingMachineDetail.value.visibleSurfacesHasDents = false;   
+    this.washingMachineDetail.value.visibleSurfacesDentsDepth = 0;
 
-    this.washingMachineDetails.value.visibleSurfacesHasMinorDamage = false;   
-    this.washingMachineDetails.value.visibleSurfacesMinorDamage = "";
+    this.washingMachineDetail.value.visibleSurfacesHasMinorDamage = false;   
+    this.washingMachineDetail.value.visibleSurfacesMinorDamage = "";
 
-    this.washingMachineDetails.value.visibleSurfacesHasMajorDamage = false;   
-    this.washingMachineDetails.value.visibleSurfacesMajorDamage = "";
+    this.washingMachineDetail.value.visibleSurfacesHasMajorDamage = false;   
+    this.washingMachineDetail.value.visibleSurfacesMajorDamage = "";
 
     
-    this.washingMachineDetails.value.applicableHiddenSurfacesDamage = false;
+    this.washingMachineDetail.value.applicableHiddenSurfacesDamage = false;
 
-    this.washingMachineDetails.value.hiddenSurfacesHasScratches = false;   
-    this.washingMachineDetails.value.hiddenSurfacesScratchesLength = 0;
+    this.washingMachineDetail.value.hiddenSurfacesHasScratches = false;   
+    this.washingMachineDetail.value.hiddenSurfacesScratchesLength = 0;
 
-    this.washingMachineDetails.value.hiddenSurfacesHasDents = false;   
-    this.washingMachineDetails.value.hiddenSurfacesDentsDepth = 0;
+    this.washingMachineDetail.value.hiddenSurfacesHasDents = false;   
+    this.washingMachineDetail.value.hiddenSurfacesDentsDepth = 0;
 
-    this.washingMachineDetails.value.hiddenSurfacesHasMinorDamage = false;   
-    this.washingMachineDetails.value.hiddenSurfacesMinorDamage = "";
+    this.washingMachineDetail.value.hiddenSurfacesHasMinorDamage = false;   
+    this.washingMachineDetail.value.hiddenSurfacesMinorDamage = "";
 
-    this.washingMachineDetails.value.hiddenSurfacesHasMajorDamage = false;   
-    this.washingMachineDetails.value.hiddenSurfacesMajorDamage = "";
+    this.washingMachineDetail.value.hiddenSurfacesHasMajorDamage = false;   
+    this.washingMachineDetail.value.hiddenSurfacesMajorDamage = "";
 
-    this.washingMachineDetails.value.price = 0;   
-    this.washingMachineDetails.value.repairPrice = 0; 
+    this.washingMachineDetail.value.price = 0;   
+    this.washingMachineDetail.value.repairPrice = 0; 
     
     this.selectedFiles = [];
   }
@@ -206,7 +206,7 @@ previousStep() {
 
 // Executes when NEXT on STEP 2 is clicked
   getRecommendationAndGoToNextStep() {
-    this._washingMachineDataService.getRecommendation(this.washingMachineDetails.getValue()).subscribe(
+    this._washingMachineDataService.getRecommendation(this.washingMachineDetail.getValue()).subscribe(
       (response) => {        
       this.washingMachine.value.recommendation = response;
       this.nextStep();
@@ -232,7 +232,7 @@ previousStep() {
 
       recommendation: this.washingMachine.value.recommendation,
       
-      washingMachineDetailsDTO: this.washingMachineDetails.getValue()
+      washingMachineDetailDTO: this.washingMachineDetail.getValue()
     };
     
     console.log("Saving = ", washingMachine);

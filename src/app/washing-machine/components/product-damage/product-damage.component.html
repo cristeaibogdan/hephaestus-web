@@ -4,7 +4,7 @@
   onClick="this.value=null"
   (change)="onFileUpload($event)"> 
 
-<form [formGroup]="washingMachineDetailsForm" (ngSubmit)="onSubmit()" (reset)="onReset($event)">
+<form [formGroup]="washingMachineDetailForm" (ngSubmit)="onSubmit()" (reset)="onReset($event)">
 <ul>
 <mat-card class="mat-elevation-z8">
   <mat-card-title>{{"I18N.PRODUCT_DAMAGE.UPLOAD_IMAGES_TITLE" | translate}} <span>*</span></mat-card-title>
@@ -47,7 +47,7 @@
   <mat-card-title>{{"I18N.PRODUCT_DAMAGE.SELECT_DAMAGE_TITLE" | translate}} <span>*</span></mat-card-title>
 
   <section class="damage-panels">    
-    <mat-expansion-panel [expanded]="washingMachineDetailsForm.controls.applicablePackageDamage.value">
+    <mat-expansion-panel [expanded]="washingMachineDetailForm.controls.applicablePackageDamage.value">
       <mat-expansion-panel-header>
         <mat-panel-title>{{"I18N.COMMON.PACKAGE" | translate}}</mat-panel-title>
         <mat-panel-description>
@@ -66,7 +66,7 @@
       </article>  
     </mat-expansion-panel>
   
-    <mat-expansion-panel [expanded]="washingMachineDetailsForm.controls.applicableVisibleSurfacesDamage.value">
+    <mat-expansion-panel [expanded]="washingMachineDetailForm.controls.applicableVisibleSurfacesDamage.value">
       <mat-expansion-panel-header>
         <mat-panel-title>{{"I18N.COMMON.VISIBLE_SURFACES" | translate}}</mat-panel-title>
         <mat-panel-description>
@@ -157,7 +157,7 @@
     
               <mat-hint>
                 {{
-                  washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesMinorDamage.value.length
+                  washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesMinorDamage.value.length
                   +" / "+
                   minorDamageDescriptionCharacterLimit
                 }}
@@ -186,7 +186,7 @@
     
               <mat-hint>
                 {{
-                  washingMachineDetailsForm.controls.visibleSurfacesForm.controls.visibleSurfacesMajorDamage.value.length
+                  washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesMajorDamage.value.length
                   +" / "+
                   majorDamageDescriptionCharacterLimit
                 }}
@@ -197,7 +197,7 @@
       </div>
     </mat-expansion-panel> 
 
-    <mat-expansion-panel [expanded]="washingMachineDetailsForm.controls.applicableHiddenSurfacesDamage.value">
+    <mat-expansion-panel [expanded]="washingMachineDetailForm.controls.applicableHiddenSurfacesDamage.value">
       <mat-expansion-panel-header>
         <mat-panel-title>{{"I18N.COMMON.HIDDEN_SURFACES" | translate}}</mat-panel-title>
         <mat-panel-description>
@@ -289,7 +289,7 @@
     
               <mat-hint>
                 {{
-                  washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMinorDamage.value.length
+                  washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMinorDamage.value.length
                   +" / "+
                   minorDamageDescriptionCharacterLimit
                 }}
@@ -318,7 +318,7 @@
     
               <mat-hint>
                 {{
-                  washingMachineDetailsForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMajorDamage.value.length
+                  washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMajorDamage.value.length
                   +" / "+
                   majorDamageDescriptionCharacterLimit
                 }}
@@ -381,7 +381,7 @@
 
   <button mat-raised-button color="primary" type="submit" 
     [disabled]="selectedFiles.length == 0 ||
-      washingMachineDetailsForm.invalid || 
+      washingMachineDetailForm.invalid || 
       washingMachinePricingForm.invalid">
     {{"I18N.COMMON.NEXT" | translate}}
   </button>  
