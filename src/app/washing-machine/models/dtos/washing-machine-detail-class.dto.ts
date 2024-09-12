@@ -38,21 +38,21 @@ export class WashingMachineDetailClassDTO {
 
   isApplicablePackageDamage() {
     return this.packageDamaged || 
-        this.packageDirty || 
-        this.packageMaterialAvailable;
+      this.packageDirty || 
+      this.packageMaterialAvailable;
   }
 
   isApplicableVisibleSurfacesDamage() {
     return this.visibleSurfacesHasScratches ||
-        this.visibleSurfacesHasDents ||
-        this.visibleSurfacesHasMinorDamage ||
-        this.visibleSurfacesHasMajorDamage;
+      this.visibleSurfacesHasDents ||
+      this.visibleSurfacesHasMinorDamage ||
+      this.visibleSurfacesHasMajorDamage;
   }
 
   isApplicableHiddenSurfacesDamage() {
     return this.hiddenSurfacesHasScratches ||
-        this.hiddenSurfacesHasDents ||
-        this.hiddenSurfacesHasMinorDamage ||
-        this.hiddenSurfacesHasMajorDamage;
+      this.hiddenSurfacesHasDents ||
+      this.hiddenSurfacesHasMinorDamage ||
+      this.hiddenSurfacesHasMajorDamage;
   }
 }
