@@ -5,9 +5,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AbstractControl, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from '../../../shared/validators/custom.validators';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
-import { WashingMachineDetailDTO } from '../../models/dtos/washing-machine-detail.dto';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { WashingMachineDetailDTO } from '../../models/dtos/washing-machine-detail.dto';
 
 @Component({
   selector: 'app-product-damage',
@@ -302,14 +302,11 @@ export class ProductDamage implements OnInit, OnDestroy {
   }  
 
   onSubmit() {
-    const washingMachineDetail:WashingMachineDetailDTO = {
-      applicablePackageDamage: this.washingMachineDetailForm.controls.applicablePackageDamage.value,
+    const washingMachineDetail:WashingMachineDetailDTO = new WashingMachineDetailDTO ({
       packageDamaged: this.washingMachineDetailForm.controls.packageForm.controls.packageDamaged.value,
       packageDirty: this.washingMachineDetailForm.controls.packageForm.controls.packageDirty.value,
       packageMaterialAvailable: this.washingMachineDetailForm.controls.packageForm.controls.packageMaterialAvailable.value,
 
-
-      applicableVisibleSurfacesDamage: this.washingMachineDetailForm.controls.applicableVisibleSurfacesDamage.value,
 
       visibleSurfacesHasScratches: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasScratches.value,
       visibleSurfacesScratchesLength: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesScratchesLength.value,
@@ -323,8 +320,6 @@ export class ProductDamage implements OnInit, OnDestroy {
       visibleSurfacesHasMajorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMajorDamage.value,
       visibleSurfacesMajorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesMajorDamage.value,
 
-
-      applicableHiddenSurfacesDamage: this.washingMachineDetailForm.controls.applicableHiddenSurfacesDamage.value,
 
       hiddenSurfacesHasScratches: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasScratches.value,
       hiddenSurfacesScratchesLength: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesScratchesLength.value,
@@ -340,7 +335,7 @@ export class ProductDamage implements OnInit, OnDestroy {
 
       price: this.washingMachinePricingForm.controls.price.value,
       repairPrice: this.washingMachinePricingForm.controls.repairPrice.value
-    };
+    });
 
     this._washingMachineService.setWashingMachineDetail(washingMachineDetail);
     this._washingMachineService.setSelectedFiles(this.selectedFiles);

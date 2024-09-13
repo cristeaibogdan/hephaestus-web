@@ -2,12 +2,12 @@ import { Injectable } from "@angular/core";
 import { MatStepper } from "@angular/material/stepper";
 import { BehaviorSubject} from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
-import { WashingMachineDetailDTO } from "../models/dtos/washing-machine-detail.dto";
 import { WashingMachineDTO } from "../models/dtos/washing-machine.dto";
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
 import { WashingMachineDataService } from "./washing-machine.data.service";
 import { NotificationService } from "src/app/services/notification.service";
+import { WashingMachineDetailDTO } from "../models/dtos/washing-machine-detail.dto";
 
 
 @Injectable({providedIn: 'root'})
@@ -92,14 +92,11 @@ previousStep() {
 // *** STEP 2 = PRODUCT DAMAGE ASSESSMENT
 // *****************************************
 
-  private washingMachineDetail = new BehaviorSubject<WashingMachineDetailDTO>({
-    applicablePackageDamage:false,
+  private washingMachineDetail = new BehaviorSubject<WashingMachineDetailDTO>(
+    new WashingMachineDetailDTO({
     packageDamaged:false,
     packageDirty:false,
     packageMaterialAvailable:false,
-
-
-    applicableVisibleSurfacesDamage:false,
 
     visibleSurfacesHasScratches:false,
     visibleSurfacesScratchesLength:0,
@@ -112,9 +109,6 @@ previousStep() {
 
     visibleSurfacesHasMajorDamage:false,
     visibleSurfacesMajorDamage:"",
-
-
-    applicableHiddenSurfacesDamage:false,
 
     hiddenSurfacesHasScratches:false,
     hiddenSurfacesScratchesLength:0,
@@ -130,7 +124,7 @@ previousStep() {
 
     price:0,
     repairPrice:0
-  });
+  }));
 
   setWashingMachineDetail(washingMachineDetail:WashingMachineDetailDTO) {
     this.washingMachineDetail.next(washingMachineDetail);
@@ -159,13 +153,10 @@ previousStep() {
 // **************************************
 
   resetWashingMachineDamageAssessmentValues() {    
-    this.washingMachineDetail.value.applicablePackageDamage = false;
     this.washingMachineDetail.value.packageDamaged = false;
     this.washingMachineDetail.value.packageDirty = false;
     this.washingMachineDetail.value.packageMaterialAvailable = false;
 
-
-    this.washingMachineDetail.value.applicableVisibleSurfacesDamage = false;
 
     this.washingMachineDetail.value.visibleSurfacesHasScratches = false;   
     this.washingMachineDetail.value.visibleSurfacesScratchesLength = 0;
@@ -178,9 +169,7 @@ previousStep() {
 
     this.washingMachineDetail.value.visibleSurfacesHasMajorDamage = false;   
     this.washingMachineDetail.value.visibleSurfacesMajorDamage = "";
-
     
-    this.washingMachineDetail.value.applicableHiddenSurfacesDamage = false;
 
     this.washingMachineDetail.value.hiddenSurfacesHasScratches = false;   
     this.washingMachineDetail.value.hiddenSurfacesScratchesLength = 0;

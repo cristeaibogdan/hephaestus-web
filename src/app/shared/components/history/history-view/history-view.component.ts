@@ -13,6 +13,10 @@ export class HistoryViewComponent {
 
   washingMachine:WashingMachineDTO = this.data.washingMachine;
 
+  isApplicablePackageDamage = this.washingMachine.washingMachineDetailDTO?.isApplicablePackageDamage();
+  isApplicableVisibleSurfacesDamage = this.washingMachine.washingMachineDetailDTO?.isApplicableVisibleSurfacesDamage();
+  isApplicableHiddenSurfacesDamage = this.washingMachine.washingMachineDetailDTO?.isApplicableHiddenSurfacesDamage();
+
   constructor(
     @Inject(MAT_DIALOG_DATA) private data:any,
     private _washingMachineDataService:WashingMachineDataService,

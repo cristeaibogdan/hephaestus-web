@@ -29,7 +29,7 @@
   <section *ngIf="washingMachineDetail$ | async as washingMachineDetail">
     
     <div class="damages-container">
-      <article *ngIf="washingMachineDetail.applicablePackageDamage">
+      <article *ngIf="washingMachineDetail.isApplicablePackageDamage()">
         <h3>{{"I18N.COMMON.PACKAGE" | translate}}</h3>
 
         <ul class="damages-list">
@@ -39,7 +39,7 @@
         </ul>
       </article>
 
-      <article *ngIf="washingMachineDetail.applicableVisibleSurfacesDamage">
+      <article *ngIf="washingMachineDetail.isApplicableVisibleSurfacesDamage()">
         <h3>{{"I18N.COMMON.VISIBLE_SURFACES" | translate}}</h3>
 
         <ul class="damages-list">
@@ -64,7 +64,7 @@
         </ul>
       </article>
 
-      <article *ngIf="washingMachineDetail.applicableHiddenSurfacesDamage">
+      <article *ngIf="washingMachineDetail.isApplicableHiddenSurfacesDamage()">
         <h3>{{"I18N.COMMON.HIDDEN_SURFACES" | translate}}</h3>
 
         <ul class="damages-list">

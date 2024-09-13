@@ -15,6 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DamageType } from 'src/app/washing-machine/enums/damage-type.enum';
 import { IdentificationMode } from 'src/app/washing-machine/enums/identification-mode.enum';
 import { Recommendation } from 'src/app/washing-machine/enums/recommendation.enum';
+import { WashingMachineDetailDTO } from 'src/app/washing-machine/models/dtos/washing-machine-detail.dto';
 
 @Component({
   selector: 'app-history',
@@ -185,12 +186,12 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   onView(washingMachine:WashingMachineDTO) {
     if(!washingMachine.washingMachineDetailDTO) {
       this._washingMachineDataService.loadExpanded(washingMachine.serialNumber).subscribe(response => {
-        console.log("Response for details => ",response);
-        washingMachine.washingMachineDetailDTO = response.washingMachineDetail;
+        console.log("Response for details => ", response);
+        washingMachine.washingMachineDetailDTO = new WashingMachineDetailDTO(response.washingMachineDetail); // otherwise the applicable methods return undefined
         washingMachine.washingMachineImages = response.washingMachineImages;
 
         this.openDialog(washingMachine);
-      });
+      });     
       
     } else {
       this.openDialog(washingMachine);

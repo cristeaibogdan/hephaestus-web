@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
-import { WashingMachineDetailDTO } from '../../models/dtos/washing-machine-detail.dto';
 import { WashingMachineDTO } from '../../models/dtos/washing-machine.dto';
 import { WashingMachineService } from '../../services/washing-machine.service';
+import { WashingMachineDetailDTO } from '../../models/dtos/washing-machine-detail.dto';
 
 @Component({
   selector: 'app-damage-overview',
