@@ -119,15 +119,15 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     const pageRequestDTO:PageRequestDTO = {
       pageIndex: this.pageNumber,
       pageSize: this.pageSize,
-      identificationMode: this.filterForm.value.identificationMode!,
-      manufacturer: this.filterForm.value.manufacturer!,
-      model: this.filterForm.value.model!,
-      type: this.filterForm.value.type!,
-      serialNumber: this.filterForm.value.serialNumber!,
-      returnType: this.filterForm.value.returnType!,
-      damageType: this.filterForm.value.damageType!,
-      recommendation: this.filterForm.value.recommendation!,
-      createdAt: this.handleDate(this.filterForm.value.createdAt!)! 
+      identificationMode: this.filterForm.value.identificationMode || null,
+      manufacturer: this.filterForm.value.manufacturer || null,
+      model: this.filterForm.value.model || null,
+      type: this.filterForm.value.type || null,
+      serialNumber: this.filterForm.value.serialNumber || null,
+      returnType: this.filterForm.value.returnType || null,
+      damageType: this.filterForm.value.damageType || null,
+      recommendation: this.filterForm.value.recommendation || null,
+      createdAt: this.handleDate(this.filterForm.value.createdAt!) 
     };
 
     console.log("pageRequestDTO = ", pageRequestDTO);

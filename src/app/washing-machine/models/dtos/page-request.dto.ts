@@ -7,17 +7,17 @@ export interface PageRequestDTO {
   pageIndex: number;
   pageSize: number;
   
-  identificationMode: IdentificationMode;
-  manufacturer: string;
+  identificationMode: IdentificationMode | null;
+  manufacturer: string | null;
   
-  model: string;
-  type: string;
-  serialNumber: string;
+  model: string | null;
+  type: string | null;
+  serialNumber: string | null;
   
-  returnType: ReturnType;
-  damageType: DamageType;
+  returnType: ReturnType | null;
+  damageType: DamageType | null;
   
-  recommendation: Recommendation;
+  recommendation: Recommendation | null;
   
-  createdAt: string;
+  createdAt: string | null;
 }
