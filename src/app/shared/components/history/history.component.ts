@@ -15,6 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DamageType } from 'src/app/washing-machine/enums/damage-type.enum';
 import { IdentificationMode } from 'src/app/washing-machine/enums/identification-mode.enum';
 import { Recommendation } from 'src/app/washing-machine/enums/recommendation.enum';
+import { WashingMachineFullResponseDTO } from 'src/app/washing-machine/models/dtos/washing-machine-full-response.dto';
 
 @Component({
   selector: 'app-history',
@@ -31,7 +32,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     private fb:FormBuilder
   ) { }
 
-  washingMachines = new MatTableDataSource<WashingMachineDTO>();
+  washingMachines = new MatTableDataSource<WashingMachineFullResponseDTO>();
     
   displayedColumns: string[] = [
     "createdAt",

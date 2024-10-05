@@ -5,10 +5,11 @@ import { Page } from '../../shared/models/page.model';
 import { PageRequestDTO } from '../models/dtos/page-request.dto';
 import { ProductModelTypeDTO } from '../models/dtos/product-model-type.dto';
 import { WashingMachineDetailDTO } from '../models/dtos/washing-machine-detail.dto';
-import { WashingMachineExpandedDTO } from '../models/dtos/washing-machine-expanded.dto';
+import { GetWashingMachineExpandedResponseDTO } from '../models/dtos/get-washing-machine-expanded-response.dto';
 import { WashingMachineReportDTO } from '../models/dtos/washing-machine-report.dto';
 import { WashingMachineDTO } from '../models/dtos/washing-machine.dto';
 import { Recommendation } from '../enums/recommendation.enum';
+import { GetWashingMachineSimpleResponseDTO } from '../models/dtos/get-washing-machine-simple-response.dto';
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineDataService {
@@ -69,7 +70,7 @@ export class WashingMachineDataService {
   loadPaginatedAndFiltered(pageRequestDTO:PageRequestDTO) {
     const url = this.apiURL.concat("/api/v1/washing-machines");
     const payload = pageRequestDTO;
-    return this.http.post<Page<WashingMachineDTO>>(url, payload);
+    return this.http.post<Page<GetWashingMachineSimpleResponseDTO>>(url, payload);
   }
 
   loadExpanded(productSerialNumber:string) {
@@ -77,7 +78,7 @@ export class WashingMachineDataService {
       .concat(productSerialNumber)
       .concat("/expanded");
 
-    return this.http.get<WashingMachineExpandedDTO>(url);
+    return this.http.get<GetWashingMachineExpandedResponseDTO>(url);
   }
 }
 
