@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { PageRequestDTO } from '../../../washing-machine/models/dtos/page-request.dto';
+import { SearchWashingMachineRequestDTO } from '../../../washing-machine/models/dtos/search-washing-machine-request.dto';
 import { FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
 import { WashingMachineDTO } from 'src/app/washing-machine/models/dtos/washing-machine.dto';
@@ -116,7 +116,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
   // 3. USE VALUES OF PAGINATOR TO REQUEST DATA
   loadPaginatedAndFiltered() {
-    const pageRequestDTO:PageRequestDTO = {
+    const searchWashingMachineRequestDTO: SearchWashingMachineRequestDTO = {
       pageIndex: this.pageNumber,
       pageSize: this.pageSize,
       identificationMode: this.filterForm.value.identificationMode || null,
@@ -130,10 +130,10 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       createdAt: this.handleDate(this.filterForm.value.createdAt!) 
     };
 
-    console.log("pageRequestDTO = ", pageRequestDTO);
+    console.log("searchWashingMachineRequestDTO = ", searchWashingMachineRequestDTO);
 
     // 4. UPDATE VALUES OF PAGINATOR FROM RESPONSE
-    this._washingMachineDataService.loadPaginatedAndFiltered(pageRequestDTO).subscribe({
+    this._washingMachineDataService.loadPaginatedAndFiltered(searchWashingMachineRequestDTO).subscribe({
       next: response => {
         console.log("Response = ",response);
 

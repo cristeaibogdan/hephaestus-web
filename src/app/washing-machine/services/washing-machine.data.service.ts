@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment'
 import { Page } from '../../shared/models/page.model';
-import { PageRequestDTO } from '../models/dtos/page-request.dto';
+import { SearchWashingMachineRequestDTO } from '../models/dtos/search-washing-machine-request.dto';
 import { ProductModelTypeDTO } from '../models/dtos/product-model-type.dto';
 import { WashingMachineDetailDTO } from '../models/dtos/washing-machine-detail.dto';
 import { GetWashingMachineExpandedResponseDTO } from '../models/dtos/get-washing-machine-expanded-response.dto';
@@ -67,7 +67,7 @@ export class WashingMachineDataService {
 //*** HISTORY
 //**************************************
 
-  loadPaginatedAndFiltered(pageRequestDTO:PageRequestDTO) {
+  loadPaginatedAndFiltered(pageRequestDTO:SearchWashingMachineRequestDTO) {
     const url = this.apiURL.concat("/api/v1/washing-machines");
     const payload = pageRequestDTO;
     return this.http.post<Page<GetWashingMachineSimpleResponseDTO>>(url, payload);
