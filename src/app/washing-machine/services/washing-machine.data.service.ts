@@ -67,9 +67,9 @@ export class WashingMachineDataService {
 //*** HISTORY
 //**************************************
 
-  loadPaginatedAndFiltered(pageRequestDTO:SearchWashingMachineRequestDTO) {
+  loadPaginatedAndFiltered(searchWashingMachineRequestDTO: SearchWashingMachineRequestDTO) {
     const url = this.apiURL.concat("/api/v1/washing-machines");
-    const payload = pageRequestDTO;
+    const payload = searchWashingMachineRequestDTO;
     return this.http.post<Page<GetWashingMachineSimpleResponseDTO>>(url, payload);
   }
 
