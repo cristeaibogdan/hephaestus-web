@@ -7,7 +7,6 @@ import { ProductModelTypeDTO } from '../models/dtos/product-model-type.dto';
 import { WashingMachineDetailDTO } from '../models/dtos/washing-machine-detail.dto';
 import { GetWashingMachineExpandedResponseDTO } from '../models/dtos/get-washing-machine-expanded-response.dto';
 import { WashingMachineReportDTO } from '../models/dtos/washing-machine-report.dto';
-import { WashingMachineDTO } from '../models/dtos/washing-machine.dto';
 import { Recommendation } from '../enums/recommendation.enum';
 import { GetWashingMachineSimpleResponseDTO } from '../models/dtos/get-washing-machine-simple-response.dto';
 

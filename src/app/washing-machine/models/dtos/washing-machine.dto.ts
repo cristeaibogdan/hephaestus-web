@@ -5,7 +5,7 @@ import { ReturnType } from '../../enums/return-type.enum';
 import { WashingMachineDetailDTO } from './washing-machine-detail.dto';
 import { WashingMachineImageDTO } from './washing-machine-image.dto';
 
-export interface WashingMachineDTO {
+export interface CreateWashingMachineRequestDTO {
   category: string;
   identificationMode: IdentificationMode | null;
   manufacturer: string;
