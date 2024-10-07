@@ -144,7 +144,7 @@ previousStep() {
 // *** STEP 2 = SELECTED FILES
 // **************************************
   
-  private selectedFiles!:ImageFile[];
+  private selectedFiles:ImageFile[] = [];
 
   setSelectedFiles(selectedFiles :ImageFile[]) {
     this.selectedFiles = selectedFiles;
