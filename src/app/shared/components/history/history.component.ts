@@ -7,7 +7,6 @@ import { MatSort } from '@angular/material/sort';
 import { SearchWashingMachineRequestDTO } from '../../../washing-machine/models/dtos/search-washing-machine-request.dto';
 import { FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
-import { WashingMachineDTO } from 'src/app/washing-machine/models/dtos/washing-machine.dto';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 import { ReturnType } from 'src/app/washing-machine/enums/return-type.enum';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -183,7 +182,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 // *** ROW ACTIONS
 // *****************************************
 
-  onView(washingMachine:WashingMachineDTO) {
+  onView(washingMachine: WashingMachineFullResponseDTO) {
     if(!washingMachine.washingMachineDetailDTO) {
       this._washingMachineDataService.loadExpanded(washingMachine.serialNumber).subscribe(response => {
         console.log("Response for details => ",response);
@@ -198,7 +197,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     }      
   }
 
-  openDialog(washingMachine: WashingMachineDTO) { 
+  openDialog(washingMachine: WashingMachineFullResponseDTO) { 
     const dialogRef = this.dialog.open(HistoryViewComponent, {
       disableClose: true,
       width: '35%',
