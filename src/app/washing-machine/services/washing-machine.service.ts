@@ -3,7 +3,7 @@ import { MatStepper } from "@angular/material/stepper";
 import { BehaviorSubject} from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
 import { WashingMachineDetailDTO } from "../models/dtos/washing-machine-detail.dto";
-import { CreateWashingMachineRequestDTO } from "../models/dtos/washing-machine.dto";
+import { CreateWashingMachineRequestDTO } from "../models/dtos/create-washing-machine-request.dto";
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
 import { WashingMachineDataService } from "./washing-machine.data.service";

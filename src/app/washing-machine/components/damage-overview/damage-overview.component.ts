@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
 import { WashingMachineDetailDTO } from '../../models/dtos/washing-machine-detail.dto';
-import { CreateWashingMachineRequestDTO } from '../../models/dtos/washing-machine.dto';
+import { CreateWashingMachineRequestDTO } from '../../models/dtos/create-washing-machine-request.dto';
 import { WashingMachineService } from '../../services/washing-machine.service';
 
 @Component({

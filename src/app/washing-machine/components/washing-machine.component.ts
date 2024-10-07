@@ -2,7 +2,7 @@ import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { UntypedFormBuilder, Validators} from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Observable } from 'rxjs';
-import { CreateWashingMachineRequestDTO } from '../models/dtos/washing-machine.dto';
+import { CreateWashingMachineRequestDTO } from '../models/dtos/create-washing-machine-request.dto';
 import { WashingMachineService } from '../services/washing-machine.service';
 
 @Component({
