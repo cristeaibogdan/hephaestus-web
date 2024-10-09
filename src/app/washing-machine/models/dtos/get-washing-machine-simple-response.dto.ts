@@ -3,21 +3,18 @@ import { IdentificationMode } from '../../enums/identification-mode.enum';
 import { Recommendation } from '../../enums/recommendation.enum';
 import { ReturnType } from '../../enums/return-type.enum';
 
-export interface PageRequestDTO {
-  pageIndex: number;
-  pageSize: number;
-  
+export interface GetWashingMachineSimpleResponseDTO {
+  category: string;
   identificationMode: IdentificationMode;
   manufacturer: string;
-  
+
   model: string;
   type: string;
   serialNumber: string;
-  
+
   returnType: ReturnType;
   damageType: DamageType;
-  
+
   recommendation: Recommendation;
-  
-  createdAt: string;
+  createdAt: Date;
 }

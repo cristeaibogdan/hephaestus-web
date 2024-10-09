@@ -3,7 +3,7 @@ import { MatStepper } from "@angular/material/stepper";
 import { BehaviorSubject} from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
 import { WashingMachineDetailDTO } from "../models/dtos/washing-machine-detail.dto";
-import { WashingMachineDTO } from "../models/dtos/washing-machine.dto";
+import { CreateWashingMachineRequestDTO } from "../models/dtos/create-washing-machine-request.dto";
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
 import { WashingMachineDataService } from "./washing-machine.data.service";
@@ -23,7 +23,7 @@ export class WashingMachineService {
 // *** STEP 1 = PRODUCT IDENTIFICATION
 // **************************************
 
-  private washingMachine = new BehaviorSubject<WashingMachineDTO>({
+  private washingMachine = new BehaviorSubject<CreateWashingMachineRequestDTO>({
     category: "",
 
     damageType: null,
@@ -144,7 +144,7 @@ previousStep() {
 // *** STEP 2 = SELECTED FILES
 // **************************************
   
-  private selectedFiles!:ImageFile[];
+  private selectedFiles:ImageFile[] = [];
 
   setSelectedFiles(selectedFiles :ImageFile[]) {
     this.selectedFiles = selectedFiles;
@@ -218,7 +218,7 @@ previousStep() {
 // **************************************
 
   save() {
-    const washingMachine:WashingMachineDTO = {
+    const washingMachine: CreateWashingMachineRequestDTO = {
       category: this.washingMachine.value.category,
       manufacturer: this.washingMachine.value.manufacturer,
 
@@ -237,7 +237,7 @@ previousStep() {
     
     console.log("Saving = ", washingMachine);
     const formData = new FormData();
-    formData.append("washingMachineDTO", new Blob ([JSON.stringify(washingMachine)],{type: 'application/json'}));
+    formData.append("createWashingMachineRequestDTO", new Blob ([JSON.stringify(washingMachine)],{type: 'application/json'}));
 
     this.selectedFiles.forEach(file => {
       formData.append("imageFiles", file.file);

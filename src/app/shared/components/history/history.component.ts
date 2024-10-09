@@ -4,10 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { PageRequestDTO } from '../../../washing-machine/models/dtos/page-request.dto';
+import { SearchWashingMachineRequestDTO } from '../../../washing-machine/models/dtos/search-washing-machine-request.dto';
 import { FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
-import { WashingMachineDTO } from 'src/app/washing-machine/models/dtos/washing-machine.dto';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 import { ReturnType } from 'src/app/washing-machine/enums/return-type.enum';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -15,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DamageType } from 'src/app/washing-machine/enums/damage-type.enum';
 import { IdentificationMode } from 'src/app/washing-machine/enums/identification-mode.enum';
 import { Recommendation } from 'src/app/washing-machine/enums/recommendation.enum';
+import { WashingMachineFullResponseDTO } from 'src/app/washing-machine/models/dtos/washing-machine-full-response.dto';
 
 @Component({
   selector: 'app-history',
@@ -31,7 +31,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     private fb:FormBuilder
   ) { }
 
-  washingMachines = new MatTableDataSource<WashingMachineDTO>();
+  washingMachines = new MatTableDataSource<WashingMachineFullResponseDTO>();
     
   displayedColumns: string[] = [
     "createdAt",
@@ -115,24 +115,24 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
   // 3. USE VALUES OF PAGINATOR TO REQUEST DATA
   loadPaginatedAndFiltered() {
-    const pageRequestDTO:PageRequestDTO = {
+    const searchWashingMachineRequestDTO: SearchWashingMachineRequestDTO = {
       pageIndex: this.pageNumber,
       pageSize: this.pageSize,
-      identificationMode: this.filterForm.value.identificationMode!,
-      manufacturer: this.filterForm.value.manufacturer!,
-      model: this.filterForm.value.model!,
-      type: this.filterForm.value.type!,
-      serialNumber: this.filterForm.value.serialNumber!,
-      returnType: this.filterForm.value.returnType!,
-      damageType: this.filterForm.value.damageType!,
-      recommendation: this.filterForm.value.recommendation!,
-      createdAt: this.handleDate(this.filterForm.value.createdAt!)! 
+      identificationMode: this.filterForm.value.identificationMode || null,
+      manufacturer: this.filterForm.value.manufacturer || null,
+      model: this.filterForm.value.model || null,
+      type: this.filterForm.value.type || null,
+      serialNumber: this.filterForm.value.serialNumber || null,
+      returnType: this.filterForm.value.returnType || null,
+      damageType: this.filterForm.value.damageType || null,
+      recommendation: this.filterForm.value.recommendation || null,
+      createdAt: this.handleDate(this.filterForm.value.createdAt!) 
     };
 
-    console.log("pageRequestDTO = ", pageRequestDTO);
+    console.log("searchWashingMachineRequestDTO = ", searchWashingMachineRequestDTO);
 
     // 4. UPDATE VALUES OF PAGINATOR FROM RESPONSE
-    this._washingMachineDataService.loadPaginatedAndFiltered(pageRequestDTO).subscribe({
+    this._washingMachineDataService.loadPaginatedAndFiltered(searchWashingMachineRequestDTO).subscribe({
       next: response => {
         console.log("Response = ",response);
 
@@ -182,7 +182,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 // *** ROW ACTIONS
 // *****************************************
 
-  onView(washingMachine:WashingMachineDTO) {
+  onView(washingMachine: WashingMachineFullResponseDTO) {
     if(!washingMachine.washingMachineDetailDTO) {
       this._washingMachineDataService.loadExpanded(washingMachine.serialNumber).subscribe(response => {
         console.log("Response for details => ",response);
@@ -197,7 +197,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     }      
   }
 
-  openDialog(washingMachine: WashingMachineDTO) { 
+  openDialog(washingMachine: WashingMachineFullResponseDTO) { 
     const dialogRef = this.dialog.open(HistoryViewComponent, {
       disableClose: true,
       width: '35%',

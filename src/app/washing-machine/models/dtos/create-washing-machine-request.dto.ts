@@ -3,9 +3,8 @@ import { IdentificationMode } from '../../enums/identification-mode.enum';
 import { Recommendation } from '../../enums/recommendation.enum';
 import { ReturnType } from '../../enums/return-type.enum';
 import { WashingMachineDetailDTO } from './washing-machine-detail.dto';
-import { WashingMachineImageDTO } from './washing-machine-image.dto';
 
-export interface WashingMachineDTO {
+export interface CreateWashingMachineRequestDTO {
   category: string;
   identificationMode: IdentificationMode | null;
   manufacturer: string;
@@ -18,8 +17,6 @@ export interface WashingMachineDTO {
   damageType: DamageType | null;
 
   recommendation?: Recommendation | null;
-  createdAt?: Date;
 
   washingMachineDetailDTO?: WashingMachineDetailDTO;
-  washingMachineImages?: WashingMachineImageDTO[];
 }

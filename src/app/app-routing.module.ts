@@ -24,6 +24,11 @@ const appRoutes: Routes = [
         loadChildren: () => import("./washing-machine/washing-machine.module").then(m => m.WashingMachineModule) 
       },
 
+      { // TODO: Refactor the import if you change the packages
+        path: "solar-panels", 
+        loadChildren: () => import("./solar-panel/solar-panel.module").then(m => m.SolarPanelModule) 
+      },
+
       { path: "", redirectTo: "/home", pathMatch: "full" }
     ]
   },
