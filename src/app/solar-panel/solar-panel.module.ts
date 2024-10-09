@@ -8,7 +8,9 @@ const routes: Routes = [{
 }];
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SolarPanelComponent
+  ],
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
