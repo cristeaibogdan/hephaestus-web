@@ -20,6 +20,6 @@
   }
   
   /* Disable stepper header navigation */
-  ::ng-deep .mat-horizontal-stepper-header {
+  /* ::ng-deep .mat-horizontal-stepper-header {
     pointer-events: none;
-  }
+  } */

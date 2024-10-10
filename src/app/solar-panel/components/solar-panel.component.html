@@ -8,14 +8,14 @@
     <!-- STEP ONE -->
     <mat-step>
       <ng-template matStepLabel>Identification</ng-template>
-
+      <app-solar-panel-identification></app-solar-panel-identification>
     </mat-step>
 
     <!-- STEP TWO -->
     <mat-step>
       <ng-template matStepLabel>Damage Assessment</ng-template>
       <ng-template matStepContent>
-        
+        <app-solar-panel-damage></app-solar-panel-damage>
       </ng-template>
     </mat-step>
 
@@ -23,7 +23,7 @@
     <mat-step>
       <ng-template matStepLabel>Overview</ng-template>
       <ng-template matStepContent>
-        
+        <app-solar-panel-overview></app-solar-panel-overview>
       </ng-template>
     </mat-step>
 
@@ -31,7 +31,7 @@
     <mat-step>
       <ng-template matStepLabel>Recommendation</ng-template>
       <ng-template matStepContent>
-        
+        <app-solar-panel-recommendation></app-solar-panel-recommendation>
       </ng-template>
     </mat-step>
   </mat-stepper>
