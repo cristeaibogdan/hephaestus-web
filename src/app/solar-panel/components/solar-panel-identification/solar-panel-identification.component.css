@@ -1,0 +1,60 @@
+/* *************************************** */
+/* *** CONTENT POSITION RELATED */
+/* *************************************** */
+
+.mat-card {
+  padding: 0% 0% 2% 0%;
+  margin: 2% 20%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+  
+.mat-card-title {
+  text-align: center;
+  padding: 0.75rem;
+  margin-bottom: 2%;
+
+  color: #444;
+  font-size: 1.25rem;  
+  background-color:#cfd3e6;
+}
+  
+.product-information {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(2, 20%);
+  row-gap: 1.3rem;
+  column-gap: 0.5rem;
+}
+  
+/* *************************************** */
+/* *** CONTENT INDIVIDUAL POSITION RELATED */
+/* *************************************** */
+  
+fieldset, mat-form-field {
+  grid-column: 1 / -1;
+}
+
+.normal-span {
+  grid-column: auto;
+}
+  
+/* *************************************** */
+/* *** CONTENT STYLE */
+/* *************************************** */
+  
+legend {
+  display: flex;
+  align-items: center;
+}
+
+fieldset {
+  border-radius: 8px;
+  padding: 14px 10px;
+  margin-bottom: 21.5px;
+}
+
+legend span {
+  color: red;
+} 
+ 

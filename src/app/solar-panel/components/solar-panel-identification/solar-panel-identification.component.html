@@ -1,1 +1,54 @@
-<p>solar-panel-identification works!</p>
+<form [formGroup]="solarPanelForm" (ngSubmit)="(null)" (reset)="(null)">
+  <mat-card class="mat-elevation-z8">
+    <mat-card-title>Identification</mat-card-title>
+
+    <article class="product-information">
+      <mat-form-field appearance="fill">
+        <mat-label>{{ "I18N.COMMON.PRODUCT_CATEGORY" | translate }}</mat-label>
+        <input matInput formControlName="category"/>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{"I18N.COMMON.MANUFACTURER" | translate}}</mat-label>
+        <!-- I have to use ngModelChange or model and type won't be filled when i click scan on QR Code camera -->
+        <mat-select formControlName="manufacturer"> </mat-select>
+        <mat-error>{{"I18N.MAT_ERROR.MANUFACTURER_REQUIRED" | translate}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="normal-span" appearance="fill" formGroupName="modelAndType">
+        <mat-label>{{"I18N.COMMON.MODEL" | translate}}</mat-label>
+        <mat-select formControlName="model"> 
+
+        </mat-select>
+        <mat-error>{{"I18N.MAT_ERROR.MODEL_OR_TYPE_REQUIRED" | translate}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="normal-span" appearance="fill" formGroupName="modelAndType">
+        <mat-label>{{ "I18N.COMMON.TYPE" | translate }}</mat-label>
+        <mat-select formControlName="type"> 
+
+        </mat-select>
+        <mat-error>{{"I18N.MAT_ERROR.MODEL_OR_TYPE_REQUIRED" | translate}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{ "I18N.COMMON.SERIAL_NUMBER" | translate }}</mat-label>
+        <input matInput formControlName="serialNumber" />
+      </mat-form-field>
+    </article>
+  </mat-card>
+
+  <div stepper-buttons>
+    <button mat-raised-button type="reset" color="warn">
+      {{ "I18N.COMMON.RESET" | translate }}
+    </button>
+
+    <button mat-raised-button type="submit" color="primary">
+      {{ "I18N.COMMON.NEXT" | translate }}
+    </button>
+  </div>
+</form>
+
+<!-- <pre> ====== FORM ======
+  {{solarPanelForm.getRawValue() | json}}
+</pre> -->
