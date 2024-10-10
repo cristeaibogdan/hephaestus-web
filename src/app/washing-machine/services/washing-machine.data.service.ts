@@ -3,12 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment'
 import { Page } from '../../shared/models/page.model';
 import { SearchWashingMachineRequestDTO } from '../models/dtos/search-washing-machine-request.dto';
-import { ProductModelTypeDTO } from '../models/dtos/product-model-type.dto';
 import { WashingMachineDetailDTO } from '../models/dtos/washing-machine-detail.dto';
 import { GetWashingMachineExpandedResponseDTO } from '../models/dtos/get-washing-machine-expanded-response.dto';
 import { WashingMachineReportDTO } from '../models/dtos/washing-machine-report.dto';
 import { Recommendation } from '../enums/recommendation.enum';
 import { GetWashingMachineSimpleResponseDTO } from '../models/dtos/get-washing-machine-simple-response.dto';
+import { ProductModelTypeDTO } from 'src/app/shared/models/product-model-type.dto';
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineDataService {

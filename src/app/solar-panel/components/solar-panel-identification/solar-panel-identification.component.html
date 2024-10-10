@@ -10,7 +10,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>{{"I18N.COMMON.MANUFACTURER" | translate}}</mat-label>        
-        <mat-select formControlName="manufacturer">
+        <mat-select formControlName="manufacturer" (valueChange)="getModelsAndTypes($event)">
 
           <mat-option *ngFor="let manufacturer of availableManufacturers"
             [value]="manufacturer">{{manufacturer}}

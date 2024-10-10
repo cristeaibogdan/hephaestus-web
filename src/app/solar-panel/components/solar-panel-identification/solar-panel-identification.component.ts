@@ -50,6 +50,7 @@ export class SolarPanelIdentificationComponent implements OnInit {
   onReset(e:Event) {
     e.preventDefault(); // Prevent the default behavior. The disabled input will not appear empty and will preserve its value
     this.solarPanelForm.reset();
+    this.clearAvailableModelsAndTypes(); // clear model and type arrays
   }
 
 // **********************************
@@ -57,12 +58,35 @@ export class SolarPanelIdentificationComponent implements OnInit {
 // **********************************
 
   availableManufacturers: string[] = [];
-  availableModels: string[] = ["SunMax Pro 300", "EcoSolar Ultra 500", "PowerPeak 350W", "SolarWave Infinity 420", "GreenLight Horizon 275"];
-  availableTypes: string[] = ["QCPF-275-5B3F90", "QCUV-500-8D7E13", "BEPE-450-2E5F91", "BESM-300-7D1C37"];
+  availableModels: string[] = [];
+  availableTypes: string[] = [];
 
+  clearAvailableModelsAndTypes() {
+    this.availableModels = [];
+    this.availableTypes = [];
+  }
 
   getManufacturer(category: string) {   
     this.availableManufacturers = this._solarPanelDataService.getManufacturers(category);
+  }
+
+  getModelsAndTypes(manufacturer: string) {
+    
+    if (manufacturer === "") {// Do not execute a request if manufacturer is empty. Happens when form is reset
+      return;
+    }
+    
+    this.clearAvailableModelsAndTypes();
+
+    this._solarPanelDataService.getModelsAndTypes(manufacturer)?.forEach(modelAndDTO => {
+      this.availableModels.push(modelAndDTO.model);
+      this.availableTypes.push(modelAndDTO.type);
+    });
+
+    // Need to reset values, when you repopulate the models and types arrays
+    // the option doesn't appear in the select input BUT it's saved in the form 
+    // causing the controls to be valid
+    this.solarPanelForm.controls.modelAndType.reset();
   }
 
 }
