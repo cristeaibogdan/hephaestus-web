@@ -29,6 +29,23 @@ export class SolarPanelIdentificationComponent {
     }],
   });
 
+// *****************************************
+// *** FORM FUNCTIONALITY
+// *****************************************
+
+  onSubmit() {
+    if (this.solarPanelForm.invalid) {
+      return;
+    }
+
+    console.log("Identification submitted = ", this.solarPanelForm.getRawValue());
+  }
+
+  onReset(e:Event) {
+    e.preventDefault(); // Prevent the default behavior. The disabled input will not appear empty and will preserve its value
+    this.solarPanelForm.reset();
+  }
+
 // **********************************
 // *** POPULATE DATA MATRIX FIELDS
 // **********************************
