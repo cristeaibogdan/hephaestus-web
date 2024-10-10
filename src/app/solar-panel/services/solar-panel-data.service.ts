@@ -6,4 +6,12 @@ export class SolarPanelDataService {
   apiURL = environment.apiBaseUrl;
 
   constructor() { }
+
+//**************************************
+//*** STEP 1 = IDENTIFICATION
+//**************************************
+
+  getManufacturers(category: string) {
+    return ["Tesla", "Tongwei", "Qcells", "Bloom Energy"];
+  }
 }
