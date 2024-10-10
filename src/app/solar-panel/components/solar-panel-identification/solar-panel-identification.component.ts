@@ -29,4 +29,12 @@ export class SolarPanelIdentificationComponent {
     }],
   });
 
+// **********************************
+// *** POPULATE DATA MATRIX FIELDS
+// **********************************
+
+  availableManufacturers:string[] = ["Tesla", "Tongwei", "Qcells", "Bloom Energy"];
+  availableModels:string[] = ["SunMax Pro 300", "EcoSolar Ultra 500", "PowerPeak 350W", "SolarWave Infinity 420", "GreenLight Horizon 275"];
+  availableTypes:string[] = ["QCPF-275-5B3F90", "QCUV-500-8D7E13", "BEPE-450-2E5F91", "BESM-300-7D1C37"];
+
 }
