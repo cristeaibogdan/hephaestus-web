@@ -4,6 +4,7 @@ import { SerialNumberValidator } from 'src/app/shared/validators/async-validator
 import { CustomValidators } from 'src/app/shared/validators/custom.validators';
 import { SolarPanelDataService } from '../../services/solar-panel-data.service';
 import { SolarPanelIdentification } from '../../models/solar-panel-identification.model';
+import { SolarPanelService } from '../../services/solar-panel.service';
 
 @Component({
   selector: 'app-solar-panel-identification',
@@ -15,6 +16,7 @@ export class SolarPanelIdentificationComponent implements OnInit {
   constructor(
     private fb: NonNullableFormBuilder,
     private _solarPanelDataService: SolarPanelDataService,
+    private _solarPanelService: SolarPanelService,
 
     private serialNumberValidator: SerialNumberValidator //TODO: Use async validator to check the serial number
   ){}
@@ -47,8 +49,8 @@ export class SolarPanelIdentificationComponent implements OnInit {
     }
 
     const model:string = (this.solarPanelForm.controls.modelAndType.controls.model.value === '')
-    ? "N/A"
-    : this.solarPanelForm.controls.modelAndType.controls.model.value;
+      ? "N/A"
+      : this.solarPanelForm.controls.modelAndType.controls.model.value;
 
     const type:string = (this.solarPanelForm.controls.modelAndType.controls.type.value === '')
       ? "N/A"
@@ -61,8 +63,8 @@ export class SolarPanelIdentificationComponent implements OnInit {
       type: type,
       serialNumber: this.solarPanelForm.controls.serialNumber.value
     }
-
-    console.log("Identification submitted = ", solarPanelIdentification);
+    
+    this._solarPanelService.setSolarPanelIdentificationValues(solarPanelIdentification);
   }
 
   onReset(e:Event) {
