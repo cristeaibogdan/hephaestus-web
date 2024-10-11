@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { SerialNumberValidator } from 'src/app/shared/validators/async-validators/serial-number.validator';
 import { CustomValidators } from 'src/app/shared/validators/custom.validators';
 import { SolarPanelDataService } from '../../services/solar-panel-data.service';
 import { SolarPanelIdentification } from '../../models/solar-panel-identification.model';
 import { SolarPanelService } from '../../services/solar-panel.service';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-solar-panel-identification',
@@ -14,6 +15,7 @@ import { SolarPanelService } from '../../services/solar-panel.service';
 export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
   
   constructor(
+    @Inject(MatStepper) private stepper: MatStepper,
     private fb: NonNullableFormBuilder,
     private _solarPanelDataService: SolarPanelDataService,
     private _solarPanelService: SolarPanelService,
@@ -69,6 +71,7 @@ export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
     }
     
     this._solarPanelService.setSolarPanelIdentificationValues(solarPanelIdentification);
+    this.stepper.next();
   }
 
   onReset(e:Event) {

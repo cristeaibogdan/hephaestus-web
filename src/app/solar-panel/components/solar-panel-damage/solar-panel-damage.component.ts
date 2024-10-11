@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-solar-panel-damage',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class SolarPanelDamageComponent {
 
+  constructor(
+    @Inject(MatStepper) private stepper: MatStepper
+  ) { }
+
+  navigateToNextStep() {
+    this.stepper.next();
+  }
+
+  navigateToPreviousStep() {
+    this.stepper.previous();
+  }
 }
