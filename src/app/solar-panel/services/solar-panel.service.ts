@@ -26,6 +26,13 @@ export class SolarPanelService {
     this.createSolarPanelRequestDTO.value.model = solarPanelIdentification.model;
     this.createSolarPanelRequestDTO.value.type = solarPanelIdentification.type;
     this.createSolarPanelRequestDTO.value.serialNumber = solarPanelIdentification.serialNumber;
-    console.log("BehaviorSubject values = ", this.createSolarPanelRequestDTO.getValue());
+  }
+
+  clearSolarPanelIdentificationValues() {
+    this.createSolarPanelRequestDTO.value.category = "";
+    this.createSolarPanelRequestDTO.value.manufacturer = "";
+    this.createSolarPanelRequestDTO.value.model = "";
+    this.createSolarPanelRequestDTO.value.type = "";
+    this.createSolarPanelRequestDTO.value.serialNumber = "";
   }
 }

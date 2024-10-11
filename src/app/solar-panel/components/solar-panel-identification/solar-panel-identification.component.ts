@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { SerialNumberValidator } from 'src/app/shared/validators/async-validators/serial-number.validator';
 import { CustomValidators } from 'src/app/shared/validators/custom.validators';
@@ -11,7 +11,7 @@ import { SolarPanelService } from '../../services/solar-panel.service';
   templateUrl: './solar-panel-identification.component.html',
   styleUrls: ['./solar-panel-identification.component.css']
 })
-export class SolarPanelIdentificationComponent implements OnInit {
+export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
   
   constructor(
     private fb: NonNullableFormBuilder,
@@ -23,6 +23,10 @@ export class SolarPanelIdentificationComponent implements OnInit {
 
   ngOnInit() {
     this.getManufacturer(this.solarPanelForm.controls.category.value);
+  }
+
+  ngOnDestroy() {
+    this._solarPanelService.clearSolarPanelIdentificationValues();
   }
 
   solarPanelForm = this.fb.group({        
