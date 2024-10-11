@@ -3,6 +3,7 @@ import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { SerialNumberValidator } from 'src/app/shared/validators/async-validators/serial-number.validator';
 import { CustomValidators } from 'src/app/shared/validators/custom.validators';
 import { SolarPanelDataService } from '../../services/solar-panel-data.service';
+import { SolarPanelIdentification } from '../../models/solar-panel-identification.model';
 
 @Component({
   selector: 'app-solar-panel-identification',
@@ -13,8 +14,9 @@ export class SolarPanelIdentificationComponent implements OnInit {
   
   constructor(
     private fb: NonNullableFormBuilder,
-    private serialNumberValidator: SerialNumberValidator, //TODO: Use async validator to check the serial number
-    private _solarPanelDataService: SolarPanelDataService
+    private _solarPanelDataService: SolarPanelDataService,
+
+    private serialNumberValidator: SerialNumberValidator //TODO: Use async validator to check the serial number
   ){}
 
   ngOnInit() {
@@ -44,7 +46,23 @@ export class SolarPanelIdentificationComponent implements OnInit {
       return;
     }
 
-    console.log("Identification submitted = ", this.solarPanelForm.getRawValue());
+    const model:string = (this.solarPanelForm.controls.modelAndType.controls.model.value === '')
+    ? "N/A"
+    : this.solarPanelForm.controls.modelAndType.controls.model.value;
+
+    const type:string = (this.solarPanelForm.controls.modelAndType.controls.type.value === '')
+      ? "N/A"
+      : this.solarPanelForm.controls.modelAndType.controls.type.value;
+
+    const solarPanelIdentification: SolarPanelIdentification = {
+      category: this.solarPanelForm.controls.category.value,
+      manufacturer: this.solarPanelForm.controls.manufacturer.value,
+      model: model,
+      type: type,
+      serialNumber: this.solarPanelForm.controls.serialNumber.value
+    }
+
+    console.log("Identification submitted = ", solarPanelIdentification);
   }
 
   onReset(e:Event) {
