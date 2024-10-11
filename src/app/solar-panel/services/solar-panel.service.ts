@@ -32,7 +32,7 @@ export class SolarPanelService {
     this.createSolarPanelRequestDTO.value.type = solarPanelIdentification.type;
     this.createSolarPanelRequestDTO.value.serialNumber = solarPanelIdentification.serialNumber;
 
-    this.save(); //TODO: Remove after doing Damage Assessment page.
+    // this.save(); //TODO: Remove after doing Damage Assessment page.
   }
 
   clearSolarPanelIdentificationValues() {
