@@ -22,6 +22,8 @@ export class SolarPanelDamageComponent {
     additionalDetails: [""]
   });
 
+  charactersMaxLimit: number = 200;
+
 // *****************************************
 // *** FORM FUNCTIONALITY
 // *****************************************
