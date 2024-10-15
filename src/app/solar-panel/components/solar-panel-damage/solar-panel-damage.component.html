@@ -1,49 +1,46 @@
 <mat-card class="mat-elevation-z8">
-  <mat-card-title>{{"I18N.PRODUCT_DAMAGE.SELECT_DAMAGE_TITLE" | translate}} <span>*</span></mat-card-title>
+  <mat-card-title>Select Damage <span>*</span></mat-card-title>
 
-  <section class="damage-panels">   
-    <div>
-      <ul class="damages-list">
-        <div class = "damage-container">
-          <img src="../../../../assets/images/placeholder.jpg">
-          <mat-checkbox> 
-            Hot Spots
-          </mat-checkbox>
-        </div>
-        <div class = "damage-container">
-          <img src="../../../../assets/images/placeholder.jpg">
-          <mat-checkbox>
-            Micro Cracks
-          </mat-checkbox>
-        </div>
-        <div class = "damage-container">
-          <img src="../../../../assets/images/placeholder.jpg">
-          <mat-checkbox>
-            Snail Trails
-          </mat-checkbox>
-        </div>
-        <div class = "damage-container">
-          <img src="../../../../assets/images/placeholder.jpg">
-          <mat-checkbox>
-            Broken Glass
-          </mat-checkbox>
-        </div>
-      </ul>
-        
-      <article>  
-        <h4 class="text-align-center">placeholder description</h4>
-        
-        <div class="text-align-center">
-          <mat-form-field class="text-area" appearance="outline">
-            <mat-label>Description placeholder</mat-label>
-            <textarea matInput></textarea>
-            <mat-error>This is required!</mat-error>  
-            <mat-hint> 0 / 200 </mat-hint>
-          </mat-form-field>  
-        </div>
-      </article>       
+  <ul class="damages-list">
+    <div class = "damage-container">
+      <img src="../../../../assets/images/placeholder.jpg">
+      <mat-checkbox>
+        Hot Spots
+      </mat-checkbox>
     </div>
-  </section>
+    <div class = "damage-container">
+      <img src="../../../../assets/images/placeholder.jpg">
+      <mat-checkbox>
+        Micro Cracks
+      </mat-checkbox>
+    </div>
+    <div class = "damage-container">
+      <img src="../../../../assets/images/placeholder.jpg">
+      <mat-checkbox>
+        Snail Trails
+      </mat-checkbox>
+    </div>
+    <div class = "damage-container">
+      <img src="../../../../assets/images/placeholder.jpg">
+      <mat-checkbox>
+        Broken Glass
+      </mat-checkbox>
+    </div>
+  </ul>
+    
+  <article>  
+    <h4 class="text-align-center">Is there anything else we should know about the damage?</h4>
+    
+    <div class="text-align-center">
+      <mat-form-field class="text-area text-align-cente" appearance="outline">
+        <mat-label>Provide additional damage details</mat-label>
+        <textarea matInput 
+          rows="5"></textarea>            
+        <mat-hint> 0 / 200 </mat-hint>
+      </mat-form-field>
+    </div>
+  </article>       
+
 </mat-card>
 
 <div stepper-buttons>
