@@ -1,4 +1,51 @@
-<p>solar-panel-damage works!</p>
+<mat-card class="mat-elevation-z8">
+  <mat-card-title>{{"I18N.PRODUCT_DAMAGE.SELECT_DAMAGE_TITLE" | translate}} <span>*</span></mat-card-title>
+
+  <section class="damage-panels">   
+    <div>
+      <ul class="damages-list">
+        <div class = "damage-container">
+          <img src="../../../../assets/images/placeholder.jpg">
+          <mat-checkbox> 
+            Hot Spots
+          </mat-checkbox>
+        </div>
+        <div class = "damage-container">
+          <img src="../../../../assets/images/placeholder.jpg">
+          <mat-checkbox>
+            Micro Cracks
+          </mat-checkbox>
+        </div>
+        <div class = "damage-container">
+          <img src="../../../../assets/images/placeholder.jpg">
+          <mat-checkbox>
+            Snail Trails
+          </mat-checkbox>
+        </div>
+        <div class = "damage-container">
+          <img src="../../../../assets/images/placeholder.jpg">
+          <mat-checkbox>
+            Broken Glass
+          </mat-checkbox>
+        </div>
+      </ul>
+        
+      <article>  
+        <h4 class="text-align-center">placeholder description</h4>
+        
+        <div class="text-align-center">
+          <mat-form-field class="text-area" appearance="outline">
+            <mat-label>Description placeholder</mat-label>
+            <textarea matInput></textarea>
+            <mat-error>This is required!</mat-error>  
+            <mat-hint> 0 / 200 </mat-hint>
+          </mat-form-field>  
+        </div>
+      </article>       
+    </div>
+  </section>
+</mat-card>
+
 <div stepper-buttons>
   <button mat-raised-button type="reset" (click)="navigateToPreviousStep()">
     {{"I18N.COMMON.BACK" | translate}}
