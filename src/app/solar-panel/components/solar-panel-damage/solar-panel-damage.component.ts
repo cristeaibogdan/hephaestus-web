@@ -1,4 +1,5 @@
 import { Component, Inject } from '@angular/core';
+import { NonNullableFormBuilder } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 
 @Component({
@@ -9,8 +10,27 @@ import { MatStepper } from '@angular/material/stepper';
 export class SolarPanelDamageComponent {
 
   constructor(
-    @Inject(MatStepper) private stepper: MatStepper
+    @Inject(MatStepper) private stepper: MatStepper,
+    private fb: NonNullableFormBuilder,
   ) { }
+
+  solarPanelDamageForm = this.fb.group({    
+    hotSpots: [false],
+    microCracks: [false],
+    snailTrails: [false],
+    brokenGlass: [false],
+    additionalDetails: [""]
+  });
+
+// *****************************************
+// *** FORM FUNCTIONALITY
+// *****************************************
+
+
+
+// *****************************************
+// *** STEPPER FUNCTIONALITY
+// *****************************************
 
   navigateToNextStep() {
     this.stepper.next();
