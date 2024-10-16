@@ -14,7 +14,7 @@
   </ul>
 
   <h2>{{"I18N.COMMON.DAMAGES_TITLE" | translate}}</h2>
-  <section *ngIf="solarPanelDamage">
+  <section *ngIf="solarPanelDamage$ | async as solarPanelDamage">
     <ul class="damages-list">
       <li *ngIf="solarPanelDamage.hotSpots">
         Hot Spots

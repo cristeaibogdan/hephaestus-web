@@ -47,21 +47,20 @@ export class SolarPanelService {
 // *** STEP 2 = DAMAGE
 // **************************************
 
-  private solarPanelDamage: SolarPanelDamage = {
+  private solarPanelDamage$ = new BehaviorSubject<SolarPanelDamage>({
     hotSpots: false,
     microCracks: false,
     snailTrails: false,
     brokenGlass: false,
     additionalDetails: ''
-  }
+  });
 
   getSolarPanelDamageValues() {
-    return this.solarPanelDamage;
+    return this.solarPanelDamage$.asObservable();
   }
 
   setSolarPanelDamageValues(solarPanelDamage: SolarPanelDamage) {
-    this.solarPanelDamage = solarPanelDamage;
-    console.log(solarPanelDamage);
+    this.solarPanelDamage$.next(solarPanelDamage);
   }
   
 // **************************************
