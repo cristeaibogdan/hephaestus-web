@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CreateSolarPanelRequestDTO } from '../models/dtos/create-solar-panel-request.dto';
 import { SolarPanelIdentification } from '../models/solar-panel-identification.model';
 import { SolarPanelDataService } from './solar-panel-data.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -17,7 +16,7 @@ export class SolarPanelService {
 // *** STEP 1 = IDENTIFICATION
 // **************************************
 
-  private createSolarPanelRequestDTO = new BehaviorSubject<CreateSolarPanelRequestDTO>({
+  private createSolarPanelRequestDTO = new BehaviorSubject<SolarPanelIdentification>({
     category: "",  
     manufacturer: "",
     model: "",
@@ -26,11 +25,7 @@ export class SolarPanelService {
   });
 
   setSolarPanelIdentificationValues(solarPanelIdentification :SolarPanelIdentification) {
-    this.createSolarPanelRequestDTO.value.category = solarPanelIdentification.category;
-    this.createSolarPanelRequestDTO.value.manufacturer = solarPanelIdentification.manufacturer;
-    this.createSolarPanelRequestDTO.value.model = solarPanelIdentification.model;
-    this.createSolarPanelRequestDTO.value.type = solarPanelIdentification.type;
-    this.createSolarPanelRequestDTO.value.serialNumber = solarPanelIdentification.serialNumber;
+    this.createSolarPanelRequestDTO.next(solarPanelIdentification);
 
     // this.save(); //TODO: Remove after doing Damage Assessment page.
   }
