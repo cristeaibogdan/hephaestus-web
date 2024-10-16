@@ -17,7 +17,7 @@ export class SolarPanelService {
 // *** STEP 1 = IDENTIFICATION
 // **************************************
 
-  private createSolarPanelRequestDTO = new BehaviorSubject<SolarPanelIdentification>({
+  private solarPanelIdentification$ = new BehaviorSubject<SolarPanelIdentification>({
     category: "",  
     manufacturer: "",
     model: "",
@@ -25,18 +25,18 @@ export class SolarPanelService {
     serialNumber: ""
   });
 
-  setSolarPanelIdentificationValues(solarPanelIdentification :SolarPanelIdentification) {
-    this.createSolarPanelRequestDTO.next(solarPanelIdentification);
+  setSolarPanelIdentificationValues(solarPanelIdentification: SolarPanelIdentification) {
+    this.solarPanelIdentification$.next(solarPanelIdentification);
 
     // this.save(); //TODO: Remove after doing Damage Assessment page.
   }
 
   clearSolarPanelIdentificationValues() {
-    this.createSolarPanelRequestDTO.value.category = "";
-    this.createSolarPanelRequestDTO.value.manufacturer = "";
-    this.createSolarPanelRequestDTO.value.model = "";
-    this.createSolarPanelRequestDTO.value.type = "";
-    this.createSolarPanelRequestDTO.value.serialNumber = "";
+    this.solarPanelIdentification$.value.category = "";
+    this.solarPanelIdentification$.value.manufacturer = "";
+    this.solarPanelIdentification$.value.model = "";
+    this.solarPanelIdentification$.value.type = "";
+    this.solarPanelIdentification$.value.serialNumber = "";
   }
 
 // **************************************
@@ -60,7 +60,7 @@ export class SolarPanelService {
 // **************************************
 
   save() {
-    this._solarPanelDataService.save(this.createSolarPanelRequestDTO.value);
+    this._solarPanelDataService.save(this.solarPanelIdentification$.value);
     this._notifService.showSuccess("Solar Panel saved!", 0);
   }
 }
