@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { SolarPanelIdentification } from '../models/solar-panel-identification.model';
 import { SolarPanelDataService } from './solar-panel-data.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { SolarPanelDamage } from '../models/solar-panel-damage.model';
 
 @Injectable({providedIn: 'root'})
 export class SolarPanelService {
@@ -38,6 +39,22 @@ export class SolarPanelService {
     this.createSolarPanelRequestDTO.value.serialNumber = "";
   }
 
+// **************************************
+// *** STEP 2 = DAMAGE
+// **************************************
+
+  private solarPanelDamage: SolarPanelDamage = {
+    hotSpots: false,
+    microCracks: false,
+    snailTrails: false,
+    brokenGlass: false,
+    additionalDetails: ''
+  }
+
+  setSolarPanelDamageValues(solarPanelDamage: SolarPanelDamage) {
+    this.solarPanelDamage = solarPanelDamage;
+  }
+  
 // **************************************
 // *** STEP 4 = RECOMMENDATION
 // **************************************

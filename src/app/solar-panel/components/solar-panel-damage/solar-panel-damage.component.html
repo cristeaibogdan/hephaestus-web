@@ -1,4 +1,4 @@
-<form [formGroup]="solarPanelDamageForm" (ngSubmit)="null">
+<form [formGroup]="solarPanelDamageForm" (ngSubmit)="onSubmit()">
 <mat-card class="mat-elevation-z8">
   <mat-card-title>Select Damage <span>*</span></mat-card-title>
   
@@ -59,7 +59,7 @@
     {{ "I18N.COMMON.RESET" | translate }}
   </button>
 
-  <button mat-raised-button type="submit" color="primary" (click)="navigateToNextStep()">
+  <button mat-raised-button type="submit" color="primary">
     {{ "I18N.COMMON.NEXT" | translate }}
   </button>
 </div>
