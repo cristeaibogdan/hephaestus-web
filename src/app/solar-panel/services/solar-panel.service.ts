@@ -24,6 +24,10 @@ export class SolarPanelService {
     type: "",
     serialNumber: ""
   });
+  
+  getSolarPanelIdentification() {
+    return this.solarPanelIdentification$.asObservable();
+  }
 
   setSolarPanelIdentificationValues(solarPanelIdentification: SolarPanelIdentification) {
     this.solarPanelIdentification$.next(solarPanelIdentification);
@@ -51,8 +55,13 @@ export class SolarPanelService {
     additionalDetails: ''
   }
 
+  getSolarPanelDamageValues() {
+    return this.solarPanelDamage;
+  }
+
   setSolarPanelDamageValues(solarPanelDamage: SolarPanelDamage) {
     this.solarPanelDamage = solarPanelDamage;
+    console.log(solarPanelDamage);
   }
   
 // **************************************

@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
+import { SolarPanelService } from '../../services/solar-panel.service';
 
 @Component({
   selector: 'app-solar-panel-overview',
@@ -7,9 +8,14 @@ import { MatStepper } from '@angular/material/stepper';
   styleUrls: ['./solar-panel-overview.component.css']
 })
 export class SolarPanelOverviewComponent {
+
   constructor(
-    @Inject(MatStepper) private stepper: MatStepper
+    @Inject(MatStepper) private stepper: MatStepper,
+    private _solarPanelService: SolarPanelService
   ) { }
+
+  solarPanelIdenfitication$ = this._solarPanelService.getSolarPanelIdentification();
+  solarPanelDamage = this._solarPanelService.getSolarPanelDamageValues();
 
   navigateToNextStep() {
     this.stepper.next();
