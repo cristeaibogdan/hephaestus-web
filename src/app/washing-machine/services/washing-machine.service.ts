@@ -23,7 +23,7 @@ export class WashingMachineService {
 // *** STEP 1 = PRODUCT IDENTIFICATION
 // **************************************
 
-  private washingMachine = new BehaviorSubject<CreateWashingMachineRequestDTO>({
+  private washingMachine$ = new BehaviorSubject<CreateWashingMachineRequestDTO>({
     category: "",
 
     damageType: null,
@@ -39,35 +39,35 @@ export class WashingMachineService {
   });
 
   getWashingMachine() {
-    return this.washingMachine.asObservable();
+    return this.washingMachine$.asObservable();
   }
 
   getSerialNumber() {
-    return this.washingMachine.value.serialNumber;
+    return this.washingMachine$.value.serialNumber;
   }
 
   setWashingMachineIdentificationValues(washingMachineIdentification:WashingMachineIdentification) {
-    this.washingMachine.value.category = washingMachineIdentification.category;
-    this.washingMachine.value.damageType = washingMachineIdentification.damageType;
-    this.washingMachine.value.returnType = washingMachineIdentification.returnType;
-    this.washingMachine.value.identificationMode = washingMachineIdentification.identificationMode;
-    this.washingMachine.value.manufacturer = washingMachineIdentification.manufacturer;
-    this.washingMachine.value.serialNumber = washingMachineIdentification.serialNumber;
-    this.washingMachine.value.model = washingMachineIdentification.model;
-    this.washingMachine.value.type = washingMachineIdentification.type;
+    this.washingMachine$.value.category = washingMachineIdentification.category;
+    this.washingMachine$.value.damageType = washingMachineIdentification.damageType;
+    this.washingMachine$.value.returnType = washingMachineIdentification.returnType;
+    this.washingMachine$.value.identificationMode = washingMachineIdentification.identificationMode;
+    this.washingMachine$.value.manufacturer = washingMachineIdentification.manufacturer;
+    this.washingMachine$.value.serialNumber = washingMachineIdentification.serialNumber;
+    this.washingMachine$.value.model = washingMachineIdentification.model;
+    this.washingMachine$.value.type = washingMachineIdentification.type;
   }
 
   resetWashingMachineIdentificationValues() {
-    this.washingMachine.value.damageType = null;
-    this.washingMachine.value.returnType = null;
-    this.washingMachine.value.identificationMode = null;
+    this.washingMachine$.value.damageType = null;
+    this.washingMachine$.value.returnType = null;
+    this.washingMachine$.value.identificationMode = null;
 
-    this.washingMachine.value.manufacturer = "";
-    this.washingMachine.value.serialNumber = "";
-    this.washingMachine.value.model = "";
-    this.washingMachine.value.type = "";
+    this.washingMachine$.value.manufacturer = "";
+    this.washingMachine$.value.serialNumber = "";
+    this.washingMachine$.value.model = "";
+    this.washingMachine$.value.type = "";
 
-    this.washingMachine.value.recommendation = null;
+    this.washingMachine$.value.recommendation = null;
   }
 
 // **************************************
@@ -92,7 +92,7 @@ previousStep() {
 // *** STEP 2 = PRODUCT DAMAGE ASSESSMENT
 // *****************************************
 
-  private washingMachineDetail = new BehaviorSubject<WashingMachineDetailDTO>({
+  private washingMachineDetail$ = new BehaviorSubject<WashingMachineDetailDTO>({
     applicablePackageDamage:false,
     packageDamaged:false,
     packageDirty:false,
@@ -133,11 +133,11 @@ previousStep() {
   });
 
   setWashingMachineDetail(washingMachineDetail:WashingMachineDetailDTO) {
-    this.washingMachineDetail.next(washingMachineDetail);
+    this.washingMachineDetail$.next(washingMachineDetail);
   }
 
   getWashingMachineDetail() {
-    return this.washingMachineDetail.asObservable();
+    return this.washingMachineDetail$.asObservable();
   }
 
 // **************************************
@@ -159,43 +159,43 @@ previousStep() {
 // **************************************
 
   resetWashingMachineDamageAssessmentValues() {    
-    this.washingMachineDetail.value.applicablePackageDamage = false;
-    this.washingMachineDetail.value.packageDamaged = false;
-    this.washingMachineDetail.value.packageDirty = false;
-    this.washingMachineDetail.value.packageMaterialAvailable = false;
+    this.washingMachineDetail$.value.applicablePackageDamage = false;
+    this.washingMachineDetail$.value.packageDamaged = false;
+    this.washingMachineDetail$.value.packageDirty = false;
+    this.washingMachineDetail$.value.packageMaterialAvailable = false;
 
 
-    this.washingMachineDetail.value.applicableVisibleSurfacesDamage = false;
+    this.washingMachineDetail$.value.applicableVisibleSurfacesDamage = false;
 
-    this.washingMachineDetail.value.visibleSurfacesHasScratches = false;   
-    this.washingMachineDetail.value.visibleSurfacesScratchesLength = 0;
+    this.washingMachineDetail$.value.visibleSurfacesHasScratches = false;   
+    this.washingMachineDetail$.value.visibleSurfacesScratchesLength = 0;
 
-    this.washingMachineDetail.value.visibleSurfacesHasDents = false;   
-    this.washingMachineDetail.value.visibleSurfacesDentsDepth = 0;
+    this.washingMachineDetail$.value.visibleSurfacesHasDents = false;   
+    this.washingMachineDetail$.value.visibleSurfacesDentsDepth = 0;
 
-    this.washingMachineDetail.value.visibleSurfacesHasMinorDamage = false;   
-    this.washingMachineDetail.value.visibleSurfacesMinorDamage = "";
+    this.washingMachineDetail$.value.visibleSurfacesHasMinorDamage = false;   
+    this.washingMachineDetail$.value.visibleSurfacesMinorDamage = "";
 
-    this.washingMachineDetail.value.visibleSurfacesHasMajorDamage = false;   
-    this.washingMachineDetail.value.visibleSurfacesMajorDamage = "";
+    this.washingMachineDetail$.value.visibleSurfacesHasMajorDamage = false;   
+    this.washingMachineDetail$.value.visibleSurfacesMajorDamage = "";
 
     
-    this.washingMachineDetail.value.applicableHiddenSurfacesDamage = false;
+    this.washingMachineDetail$.value.applicableHiddenSurfacesDamage = false;
 
-    this.washingMachineDetail.value.hiddenSurfacesHasScratches = false;   
-    this.washingMachineDetail.value.hiddenSurfacesScratchesLength = 0;
+    this.washingMachineDetail$.value.hiddenSurfacesHasScratches = false;   
+    this.washingMachineDetail$.value.hiddenSurfacesScratchesLength = 0;
 
-    this.washingMachineDetail.value.hiddenSurfacesHasDents = false;   
-    this.washingMachineDetail.value.hiddenSurfacesDentsDepth = 0;
+    this.washingMachineDetail$.value.hiddenSurfacesHasDents = false;   
+    this.washingMachineDetail$.value.hiddenSurfacesDentsDepth = 0;
 
-    this.washingMachineDetail.value.hiddenSurfacesHasMinorDamage = false;   
-    this.washingMachineDetail.value.hiddenSurfacesMinorDamage = "";
+    this.washingMachineDetail$.value.hiddenSurfacesHasMinorDamage = false;   
+    this.washingMachineDetail$.value.hiddenSurfacesMinorDamage = "";
 
-    this.washingMachineDetail.value.hiddenSurfacesHasMajorDamage = false;   
-    this.washingMachineDetail.value.hiddenSurfacesMajorDamage = "";
+    this.washingMachineDetail$.value.hiddenSurfacesHasMajorDamage = false;   
+    this.washingMachineDetail$.value.hiddenSurfacesMajorDamage = "";
 
-    this.washingMachineDetail.value.price = 0;   
-    this.washingMachineDetail.value.repairPrice = 0; 
+    this.washingMachineDetail$.value.price = 0;   
+    this.washingMachineDetail$.value.repairPrice = 0; 
     
     this.selectedFiles = [];
   }
@@ -206,9 +206,9 @@ previousStep() {
 
 // Executes when NEXT on STEP 2 is clicked
   getRecommendationAndGoToNextStep() {
-    this._washingMachineDataService.getRecommendation(this.washingMachineDetail.getValue()).subscribe(
+    this._washingMachineDataService.getRecommendation(this.washingMachineDetail$.getValue()).subscribe(
       (response) => {        
-      this.washingMachine.value.recommendation = response;
+      this.washingMachine$.value.recommendation = response;
       this.nextStep();
     });
   }
@@ -219,20 +219,20 @@ previousStep() {
 
   save() {
     const washingMachine: CreateWashingMachineRequestDTO = {
-      category: this.washingMachine.value.category,
-      manufacturer: this.washingMachine.value.manufacturer,
+      category: this.washingMachine$.value.category,
+      manufacturer: this.washingMachine$.value.manufacturer,
 
-      damageType: this.washingMachine.value.damageType,
-      returnType: this.washingMachine.value.returnType,
-      identificationMode: this.washingMachine.value.identificationMode,
+      damageType: this.washingMachine$.value.damageType,
+      returnType: this.washingMachine$.value.returnType,
+      identificationMode: this.washingMachine$.value.identificationMode,
       
-      serialNumber: this.washingMachine.value.serialNumber,
-      model: this.washingMachine.value.model,
-      type: this.washingMachine.value.type,
+      serialNumber: this.washingMachine$.value.serialNumber,
+      model: this.washingMachine$.value.model,
+      type: this.washingMachine$.value.type,
 
-      recommendation: this.washingMachine.value.recommendation,
+      recommendation: this.washingMachine$.value.recommendation,
       
-      washingMachineDetailDTO: this.washingMachineDetail.getValue()
+      washingMachineDetailDTO: this.washingMachineDetail$.getValue()
     };
     
     console.log("Saving = ", washingMachine);
