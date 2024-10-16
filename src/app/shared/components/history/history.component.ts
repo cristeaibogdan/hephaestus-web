@@ -31,7 +31,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     private fb:FormBuilder
   ) { }
 
-  washingMachines = new MatTableDataSource<WashingMachineFullResponseDTO>();
+  washingMachines = new MatTableDataSource<Partial<WashingMachineFullResponseDTO>>();
     
   displayedColumns: string[] = [
     "createdAt",
@@ -183,10 +183,10 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 // *****************************************
 
   onView(washingMachine: WashingMachineFullResponseDTO) {
-    if(!washingMachine.washingMachineDetailDTO) {
+    if(!washingMachine.washingMachineDetail) {
       this._washingMachineDataService.loadExpanded(washingMachine.serialNumber).subscribe(response => {
         console.log("Response for details => ",response);
-        washingMachine.washingMachineDetailDTO = response.washingMachineDetail;
+        washingMachine.washingMachineDetail = response.washingMachineDetail;
         washingMachine.washingMachineImages = response.washingMachineImages;
 
         this.openDialog(washingMachine);
