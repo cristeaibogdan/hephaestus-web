@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ProductModelTypeDTO } from 'src/app/shared/models/product-model-type.dto';
 import { environment } from 'src/environments/environment';
-import { CreateSolarPanelRequestDTO } from '../models/dtos/create-solar-panel-request.dto';
+import { CreateSolarPanelRequest } from '../models/dtos/create-solar-panel-request.dto';
 
 @Injectable({providedIn: 'root'})
 export class SolarPanelDataService { //TODO: replace with proper backend api calls
@@ -128,7 +128,7 @@ export class SolarPanelDataService { //TODO: replace with proper backend api cal
 // *** STEP 4 = RECOMMENDATION
 // **************************************
 
-  save(createSolarPanelRequestDTO: CreateSolarPanelRequestDTO) {
+  save(createSolarPanelRequestDTO: CreateSolarPanelRequest) {
     console.log("Saving ...", createSolarPanelRequestDTO);
   }
 }

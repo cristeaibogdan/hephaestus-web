@@ -4,6 +4,7 @@ import { SolarPanelIdentification } from '../models/solar-panel-identification.m
 import { SolarPanelDataService } from './solar-panel-data.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SolarPanelDamage } from '../models/solar-panel-damage.model';
+import { CreateSolarPanelRequest } from '../models/dtos/create-solar-panel-request.dto';
 
 @Injectable({providedIn: 'root'})
 export class SolarPanelService {
@@ -72,7 +73,22 @@ export class SolarPanelService {
 // **************************************
 
   save() {
-    this._solarPanelDataService.save(this.solarPanelIdentification$.value);
+    const createSolarPanelRequest: CreateSolarPanelRequest = {
+      category: this.solarPanelIdentification$.value.category,
+      manufacturer: this.solarPanelIdentification$.value.manufacturer,
+      model: this.solarPanelIdentification$.value.model,
+      type: this.solarPanelIdentification$.value.type,
+      serialNumber: this.solarPanelIdentification$.value.serialNumber,
+      createSolarPanelDamage: {
+        hotSpots: this.solarPanelDamage$.value.hotSpots,
+        microCracks: this.solarPanelDamage$.value.microCracks,
+        snailTrails: this.solarPanelDamage$.value.snailTrails,
+        brokenGlass: this.solarPanelDamage$.value.brokenGlass,
+        additionalDetails: this.solarPanelDamage$.value.additionalDetails
+      }
+    }
+
+    this._solarPanelDataService.save(createSolarPanelRequest); //TODO: Add switchMap as in WashingMachineService
     this._notifService.showSuccess("Solar Panel saved!", 0);
   }
 }

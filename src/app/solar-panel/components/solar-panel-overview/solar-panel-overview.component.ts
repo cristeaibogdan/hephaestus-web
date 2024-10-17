@@ -17,7 +17,8 @@ export class SolarPanelOverviewComponent {
   solarPanelIdenfitication$ = this._solarPanelService.getSolarPanelIdentification();
   solarPanelDamage$ = this._solarPanelService.getSolarPanelDamageValues();
 
-  onNext() {
+  onNext() { //TODO: Use Promise to safely navigate to the next step
+    this._solarPanelService.save();
     this.stepper.next();
   }
 }
