@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { MatStepper } from "@angular/material/stepper";
 import { BehaviorSubject} from "rxjs";
 import { WashingMachineDetailDTO } from "../models/dtos/washing-machine-detail.dto";
 import { CreateWashingMachineRequest } from "../models/dtos/create-washing-machine-request.dto";
@@ -56,24 +55,6 @@ export class WashingMachineService {
     this.washingMachineIdentification$.value.model = "";
     this.washingMachineIdentification$.value.type = "";
   }
-
-// **************************************
-// *** STEP 1.1 = PRODUCT IDENTIFICATION - CAMERA DIALOG
-// **************************************
-
-private stepperContainer!: MatStepper;
-
-setStepper(stepper :MatStepper) {
-  this.stepperContainer = stepper;
-}
-
-nextStep() {
-  this.stepperContainer?.next();   
-}
-
-previousStep() {
-  this.stepperContainer?.previous();   
-}
   
 // *****************************************
 // *** STEP 2 = PRODUCT DAMAGE ASSESSMENT
