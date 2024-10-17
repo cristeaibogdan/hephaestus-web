@@ -125,10 +125,14 @@ export class SolarPanelDataService { //TODO: replace with proper backend api cal
   }
 
 // **************************************
-// *** STEP 4 = RECOMMENDATION
+// *** STEP 3 = OVERVIEW
 // **************************************
 
   save(createSolarPanelRequestDTO: CreateSolarPanelRequest) {
     console.log("Saving ...", createSolarPanelRequestDTO);
+  }
+
+  getRecommendation(serialNumber: string) {
+    console.log("Getting ... recommendation");
   }
 }
