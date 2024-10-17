@@ -135,4 +135,10 @@ export class SolarPanelDataService { //TODO: replace with proper backend api cal
   getRecommendation(serialNumber: string) {
     console.log("Getting ... recommendation");
   }
+
+// **************************************
+// *** STEP 4 = RECOMMENDATION
+// **************************************
+
+  
 }

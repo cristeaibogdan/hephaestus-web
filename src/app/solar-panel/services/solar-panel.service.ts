@@ -69,7 +69,7 @@ export class SolarPanelService {
   }
   
 // **************************************
-// *** STEP 4 = RECOMMENDATION
+// *** STEP 3 = OVERVIEW
 // **************************************
 
   save() {
@@ -91,4 +91,10 @@ export class SolarPanelService {
     this._solarPanelDataService.save(createSolarPanelRequest); //TODO: Add switchMap as in WashingMachineService
     this._notifService.showSuccess("Solar Panel saved!", 0);
   }
+
+// **************************************
+// *** STEP 4 = RECOMMENDATION
+// **************************************
+
+
 }
