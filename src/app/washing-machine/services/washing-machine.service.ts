@@ -1,92 +1,60 @@
 import { Injectable } from "@angular/core";
-import { MatStepper } from "@angular/material/stepper";
 import { BehaviorSubject} from "rxjs";
-import { TranslateService } from "@ngx-translate/core";
 import { WashingMachineDetailDTO } from "../models/dtos/washing-machine-detail.dto";
 import { CreateWashingMachineRequest } from "../models/dtos/create-washing-machine-request.dto";
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
 import { WashingMachineDataService } from "./washing-machine.data.service";
-import { NotificationService } from "src/app/services/notification.service";
-
+import { DamageType } from "../enums/damage-type.enum";
+import { ReturnType } from "../enums/return-type.enum";
+import { IdentificationMode } from "../enums/identification-mode.enum";
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineService {
   
   constructor(
-    private _washingMachineDataService: WashingMachineDataService,
-    private _notifService: NotificationService,
-    private _translate: TranslateService 
+    private _washingMachineDataService: WashingMachineDataService
   ) { }
 
 // **************************************
 // *** STEP 1 = PRODUCT IDENTIFICATION
 // **************************************
 
-  private washingMachine$ = new BehaviorSubject<CreateWashingMachineRequest>({
+  private washingMachineIdentification$ = new BehaviorSubject<WashingMachineIdentification>({
     category: "",
 
-    damageType: null,
-    returnType: null,
-    identificationMode: null,
+    damageType: DamageType.IN_TRANSIT,
+    returnType: ReturnType.COMMERCIAL,
+    identificationMode: IdentificationMode.DATA_MATRIX,
     
     manufacturer: "",
     serialNumber: "",
     model: "",
-    type: "",
-
-    recommendation: null
+    type: ""
   });
 
-  getWashingMachine() {
-    return this.washingMachine$.asObservable();
+  getWashingMachineIdentification() {
+    return this.washingMachineIdentification$.asObservable();
   }
 
   getSerialNumber() {
-    return this.washingMachine$.value.serialNumber;
+    return this.washingMachineIdentification$.value.serialNumber;
   }
 
   setWashingMachineIdentificationValues(washingMachineIdentification:WashingMachineIdentification) {
-    this.washingMachine$.value.category = washingMachineIdentification.category;
-    this.washingMachine$.value.damageType = washingMachineIdentification.damageType;
-    this.washingMachine$.value.returnType = washingMachineIdentification.returnType;
-    this.washingMachine$.value.identificationMode = washingMachineIdentification.identificationMode;
-    this.washingMachine$.value.manufacturer = washingMachineIdentification.manufacturer;
-    this.washingMachine$.value.serialNumber = washingMachineIdentification.serialNumber;
-    this.washingMachine$.value.model = washingMachineIdentification.model;
-    this.washingMachine$.value.type = washingMachineIdentification.type;
+    this.washingMachineIdentification$.next(washingMachineIdentification);
   }
 
   resetWashingMachineIdentificationValues() {
-    this.washingMachine$.value.damageType = null;
-    this.washingMachine$.value.returnType = null;
-    this.washingMachine$.value.identificationMode = null;
+    this.washingMachineIdentification$.value.damageType = DamageType.IN_TRANSIT;
+    this.washingMachineIdentification$.value.returnType = ReturnType.COMMERCIAL;
+    this.washingMachineIdentification$.value.identificationMode = IdentificationMode.DATA_MATRIX;
 
-    this.washingMachine$.value.manufacturer = "";
-    this.washingMachine$.value.serialNumber = "";
-    this.washingMachine$.value.model = "";
-    this.washingMachine$.value.type = "";
-
-    this.washingMachine$.value.recommendation = null;
+    this.washingMachineIdentification$.value.manufacturer = "";
+    this.washingMachineIdentification$.value.serialNumber = "";
+    this.washingMachineIdentification$.value.model = "";
+    this.washingMachineIdentification$.value.type = "";
   }
-
-// **************************************
-// *** STEP 1.1 = PRODUCT IDENTIFICATION - CAMERA DIALOG
-// **************************************
-
-private stepperContainer!: MatStepper;
-
-setStepper(stepper :MatStepper) {
-  this.stepperContainer = stepper;
-}
-
-nextStep() {
-  this.stepperContainer?.next();   
-}
-
-previousStep() {
-  this.stepperContainer?.previous();   
-}
   
 // *****************************************
 // *** STEP 2 = PRODUCT DAMAGE ASSESSMENT
@@ -204,48 +172,44 @@ previousStep() {
 // *** STEP 3 = OVERVIEW
 // **************************************
 
-// Executes when NEXT on STEP 2 is clicked
-  getRecommendationAndGoToNextStep() {
-    this._washingMachineDataService.getRecommendation(this.washingMachineDetail$.getValue()).subscribe(
-      (response) => {        
-      this.washingMachine$.value.recommendation = response;
-      this.nextStep();
-    });
-  }
 
 // **************************************
 // *** STEP 4 = RECOMMENDED DECISION
 // **************************************
 
-  save() {
+  save(): Promise<boolean> {
     const washingMachine: CreateWashingMachineRequest = {
-      category: this.washingMachine$.value.category,
-      manufacturer: this.washingMachine$.value.manufacturer,
+      category: this.washingMachineIdentification$.value.category,
+      manufacturer: this.washingMachineIdentification$.value.manufacturer,
 
-      damageType: this.washingMachine$.value.damageType,
-      returnType: this.washingMachine$.value.returnType,
-      identificationMode: this.washingMachine$.value.identificationMode,
+      damageType: this.washingMachineIdentification$.value.damageType,
+      returnType: this.washingMachineIdentification$.value.returnType,
+      identificationMode: this.washingMachineIdentification$.value.identificationMode,
       
-      serialNumber: this.washingMachine$.value.serialNumber,
-      model: this.washingMachine$.value.model,
-      type: this.washingMachine$.value.type,
-
-      recommendation: this.washingMachine$.value.recommendation,
+      serialNumber: this.washingMachineIdentification$.value.serialNumber,
+      model: this.washingMachineIdentification$.value.model,
+      type: this.washingMachineIdentification$.value.type,
       
       washingMachineDetailDTO: this.washingMachineDetail$.getValue()
     };
     
     console.log("Saving = ", washingMachine);
     const formData = new FormData();
-    formData.append("createWashingMachineRequestDTO", new Blob ([JSON.stringify(washingMachine)],{type: 'application/json'}));
+    formData.append("createWashingMachineRequest", new Blob ([JSON.stringify(washingMachine)],{type: 'application/json'}));
 
     this.selectedFiles.forEach(file => {
       formData.append("imageFiles", file.file);
     });
 
-    this._washingMachineDataService.save(formData).subscribe(() => {
-      this._notifService.showSuccess(this._translate.instant("I18N.CUSTOM_SUCCESS.PRODUCT_SAVED"),4000);       
+    return new Promise((resolve) => {
+      this._washingMachineDataService.save(formData).subscribe({
+        next: () => {          
+          resolve(true);
+        },
+        error: () => {
+          resolve(false);
+        },
+      })
     });
   }
-  
 }

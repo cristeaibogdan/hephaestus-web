@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit,} from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit,} from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { SerialNumberValidator } from 'src/app/shared/validators/async-validators/serial-number.validator';
@@ -11,6 +11,7 @@ import { WashingMachineDataService } from '../../services/washing-machine.data.s
 import { ReturnType } from '../../enums/return-type.enum';
 import { DamageType } from '../../enums/damage-type.enum';
 import { IdentificationMode } from '../../enums/identification-mode.enum';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-product-identification',
@@ -20,6 +21,7 @@ import { IdentificationMode } from '../../enums/identification-mode.enum';
 export class ProductIdentificationComponent implements OnInit, OnDestroy {
 
   constructor(
+    @Inject(MatStepper) private stepper: MatStepper,
     private _washingMachineService: WashingMachineService,
     private _washingMachineDataService:WashingMachineDataService, 
     private dialog:MatDialog, 
@@ -144,14 +146,13 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
     }
 
     this._washingMachineService.setWashingMachineIdentificationValues(productIdentificationResult);
-    this._washingMachineService.nextStep();
+    this.stepper.next();
   }
-
   
   onReset(e:Event) {
     e.preventDefault(); // Prevent the default behavior. The disabled input will not appear empty and will preserve its value
     this.washingMachineForm.reset();    
-    this.clearAvailableModelsAndTypes(); // clear model and type arrays
+    this.clearAvailableModelsAndTypes();
     this._washingMachineService.resetWashingMachineIdentificationValues();
   }
 
@@ -184,7 +185,6 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
 
     this._washingMachineDataService.getModelsAndTypes(manufacturer).subscribe(response => {    
 
-      // clear model and type arrays
       this.clearAvailableModelsAndTypes();
 
       response.forEach(ProductModelTypeDTO => {

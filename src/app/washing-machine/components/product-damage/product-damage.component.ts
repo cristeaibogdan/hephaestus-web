@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -8,6 +8,7 @@ import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
 import { WashingMachineDetailDTO } from '../../models/dtos/washing-machine-detail.dto';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-product-damage',
@@ -19,11 +20,12 @@ export class ProductDamage implements OnInit, OnDestroy {
   subscriptions:Subscription[] = [];
 
   constructor(
+    @Inject(MatStepper) private stepper: MatStepper,
     private _washingMachineService: WashingMachineService,
     private _notifService: NotificationService,
     private _translate: TranslateService,
     private sanitizer:DomSanitizer,
-    private fb:NonNullableFormBuilder,
+    private fb:NonNullableFormBuilder    
   ) {}
 
   washingMachineDetailForm = this.fb.group({
@@ -344,7 +346,7 @@ export class ProductDamage implements OnInit, OnDestroy {
 
     this._washingMachineService.setWashingMachineDetail(washingMachineDetail);
     this._washingMachineService.setSelectedFiles(this.selectedFiles);
-    this._washingMachineService.getRecommendationAndGoToNextStep();
+    this.stepper.next();
   }
 
 

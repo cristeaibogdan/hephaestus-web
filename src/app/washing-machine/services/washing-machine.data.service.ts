@@ -40,14 +40,17 @@ export class WashingMachineDataService {
 //*** STEP 3 = OVERVIEW
 //**************************************
   
-  getRecommendation(washingMachineDetail:WashingMachineDetailDTO) {
-    const url = this.apiURL.concat("/api/v1/washing-machines/recommendation");
-    return this.http.post<Recommendation>(url, washingMachineDetail);
-  }
 
 //**************************************
 //*** STEP 4 = RECOMMENDED DECISION
 //**************************************
+
+  getRecommendation(serialNumber:string) {
+    const url = this.apiURL.concat("/api/v1/washing-machines/")
+    .concat(serialNumber)
+    .concat("/recommendation");
+    return this.http.get<Recommendation>(url);
+  }
 
   save(washingMachine:FormData) {
     const url = this.apiURL.concat("/api/v1/washing-machines/save");

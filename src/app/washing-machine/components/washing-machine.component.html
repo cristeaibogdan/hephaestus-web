@@ -1,75 +1,64 @@
-<ng-container class="washing-machine-container" *ngIf="washingMachine$ | async as washingMachine">
+<ng-container class="washing-machine-container" *ngIf="washingMachineIdentification$ | async as washingMachineIdentification">
     
   <div class="washing-machine-status" >
-    <span *ngIf="washingMachine.identificationMode">    
-      {{"I18N.COMMON.IDENTIFICATION_MODE" | translate}}: {{washingMachine.identificationMode}}
+    <span *ngIf="washingMachineIdentification.identificationMode">    
+      {{"I18N.COMMON.IDENTIFICATION_MODE" | translate}}: {{washingMachineIdentification.identificationMode}}
     </span> 
 
-    <span *ngIf="washingMachine.damageType">
-      {{"I18N.COMMON.DAMAGE_TYPE" | translate}}: {{washingMachine.damageType}}
+    <span *ngIf="washingMachineIdentification.damageType">
+      {{"I18N.COMMON.DAMAGE_TYPE" | translate}}: {{washingMachineIdentification.damageType}}
     </span>
     
     <div class="washing-machine-title">{{"I18N.COMMON.WASHING_MACHINE" | translate | titlecase}}</div>    
  
-    <span *ngIf="washingMachine.manufacturer"> 
-      {{"I18N.COMMON.MANUFACTURER" | translate}}: {{washingMachine.manufacturer}}
+    <span *ngIf="washingMachineIdentification.manufacturer"> 
+      {{"I18N.COMMON.MANUFACTURER" | translate}}: {{washingMachineIdentification.manufacturer}}
     </span>
 
-    <span *ngIf="washingMachine.model && washingMachine.model !== 'N/A'">
-      {{"I18N.COMMON.MODEL" | translate}}: {{washingMachine.model}}
+    <span *ngIf="washingMachineIdentification.model && washingMachineIdentification.model !== 'N/A'">
+      {{"I18N.COMMON.MODEL" | translate}}: {{washingMachineIdentification.model}}
     </span>
 
-    <span *ngIf="washingMachine.type && washingMachine.type !== 'N/A'">
-      {{"I18N.COMMON.TYPE" | translate}}: {{washingMachine.type}}
+    <span *ngIf="washingMachineIdentification.type && washingMachineIdentification.type !== 'N/A'">
+      {{"I18N.COMMON.TYPE" | translate}}: {{washingMachineIdentification.type}}
     </span>
   </div>
 
-  <mat-stepper class="background-color" #stepper>
+  <mat-stepper class="background-color">
 
     <!-- STEP ONE -->
-
     <mat-step [stepControl]="firstFormGroup" >
-
       <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.PRODUCT_IDENTIFICATION" | translate}}</ng-template>
       <!-- TODO: Possible overflow usage. But needs to be in px, else it won't work... -->
       <!-- <div class="overflow-test"> -->
         <app-product-identification></app-product-identification>
       <!-- </div> -->
-
     </mat-step>
 
     <!-- STEP TWO -->
-
     <mat-step [stepControl]="secondFormGroup">
-
       <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.DAMAGE_ASSESSMENT" | translate}}</ng-template>
       <ng-template matStepContent>
         <app-product-damage></app-product-damage>
-      </ng-template>
- 
+      </ng-template> 
     </mat-step>
 
     <!-- STEP THREE -->
-
     <mat-step [stepControl]="thirdFormGroup">
-
       <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.DAMAGE_OVERVIEW" | translate}}</ng-template>   
       <ng-template matStepContent>
         <app-damage-overview></app-damage-overview>
       </ng-template>   
-
     </mat-step>
 
     <!-- STEP FOUR -->
-
-    <mat-step [stepControl]="fourthFormGroup">
-            
+    <mat-step [stepControl]="fourthFormGroup">            
       <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.RECOMMENDATION" | translate}}</ng-template>        
       <ng-template matStepContent>
         <app-product-recommendation></app-product-recommendation>
       </ng-template>
+    </mat-step> 
 
-    </mat-step>   
   </mat-stepper>
 
 </ng-container>

@@ -1,9 +1,8 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, Validators} from '@angular/forms';
-import { MatStepper } from '@angular/material/stepper';
 import { Observable } from 'rxjs';
-import { CreateWashingMachineRequest } from '../models/dtos/create-washing-machine-request.dto';
 import { WashingMachineService } from '../services/washing-machine.service';
+import { WashingMachineIdentification } from '../models/washing-machine-identification.model';
 
 @Component({
   selector: 'app-washing-machine',
@@ -11,20 +10,13 @@ import { WashingMachineService } from '../services/washing-machine.service';
   styleUrls: ['./washing-machine.component.css']
 })
 
-export class WashingMachineComponent implements AfterViewInit {
+export class WashingMachineComponent {
   constructor(   
     private _formBuilder: UntypedFormBuilder, 
     private _washingMachineService: WashingMachineService
   ) {}
-  
-  // Property from the HTML template, sent to the service via ngAfterViewInit
-  @ViewChild(MatStepper) stepper!: MatStepper;
 
-  washingMachine$:Observable<CreateWashingMachineRequest> = this._washingMachineService.getWashingMachine();
-
-  ngAfterViewInit() {
-    this._washingMachineService.setStepper(this.stepper);
-  }
+  washingMachineIdentification$: Observable<WashingMachineIdentification> = this._washingMachineService.getWashingMachineIdentification();
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
