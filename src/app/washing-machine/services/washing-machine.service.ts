@@ -173,17 +173,6 @@ export class WashingMachineService {
 // *** STEP 3 = OVERVIEW
 // **************************************
 
-
-// **************************************
-// *** STEP 4 = RECOMMENDED DECISION
-// **************************************
-
-  private recommendation!: Recommendation;
-
-  getRecommendation() {
-    return this.recommendation;
-  }
-
   save(): Promise<boolean> {
     const washingMachine: CreateWashingMachineRequest = {
       category: this.washingMachineIdentification$.value.category,
@@ -224,4 +213,14 @@ export class WashingMachineService {
       })
     });
   }
+
+// **************************************
+// *** STEP 4 = RECOMMENDED DECISION
+// **************************************
+
+  private recommendation!: Recommendation;
+
+  getRecommendation() {
+    return this.recommendation;
+  }  
 }

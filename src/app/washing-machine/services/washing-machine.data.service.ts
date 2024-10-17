@@ -40,11 +40,6 @@ export class WashingMachineDataService {
 //*** STEP 3 = OVERVIEW
 //**************************************
   
-
-//**************************************
-//*** STEP 4 = RECOMMENDED DECISION
-//**************************************
-
   getRecommendation(serialNumber:string) {
     const url = this.apiURL.concat("/api/v1/washing-machines/")
     .concat(serialNumber)
@@ -56,6 +51,10 @@ export class WashingMachineDataService {
     const url = this.apiURL.concat("/api/v1/washing-machines/save");
     return this.http.post(url, washingMachine);
   }
+
+//**************************************
+//*** STEP 4 = RECOMMENDED DECISION
+//**************************************
 
   getReport(serialNumber:string) {
     const url = this.apiURL.concat("/api/v1/washing-machines/")
