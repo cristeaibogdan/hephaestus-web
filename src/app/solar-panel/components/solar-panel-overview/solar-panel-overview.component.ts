@@ -17,11 +17,7 @@ export class SolarPanelOverviewComponent {
   solarPanelIdenfitication$ = this._solarPanelService.getSolarPanelIdentification();
   solarPanelDamage$ = this._solarPanelService.getSolarPanelDamageValues();
 
-  navigateToNextStep() {
+  onNext() {
     this.stepper.next();
-  }
-
-  navigateToPreviousStep() {
-    this.stepper.previous();
   }
 }

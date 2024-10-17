@@ -29,6 +29,10 @@ export class SolarPanelService {
     return this.solarPanelIdentification$.asObservable();
   }
 
+  getSerialNumber() {
+    return this.solarPanelIdentification$.value.serialNumber;
+  }
+
   setSolarPanelIdentificationValues(solarPanelIdentification: SolarPanelIdentification) {
     this.solarPanelIdentification$.next(solarPanelIdentification);
 

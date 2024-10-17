@@ -1,6 +1,30 @@
-<p>solar-panel-recommendation works!</p>
+<app-solar-panel-overview>
+  <div header class="text-align-center">
+    <ng-container *ngIf="solarPanelIdenfitication$ | async as solarPanelIdenfitication">
+      Based on the selected damages, the solar panel with serial number
+      {{solarPanelIdenfitication.serialNumber}} 
+      manufactured by {{solarPanelIdenfitication.manufacturer}}, is sent to:
+
+      <div class="text-align-center">
+        <button class="recommendation-text"
+          [ngClass]="{}">
+          {{washingMachineRecommendation}}
+        </button>
+      </div>
+    </ng-container>
+
+    <p class="before-overview">
+      {{"I18N.PRODUCT_RECOMMENDATION.SUBTITLE" | translate}}
+    </p>
+  </div>
+</app-solar-panel-overview>
+
 <div stepper-buttons>
-  <button mat-raised-button type="reset" (click)="navigateToPreviousStep()">
-    {{"I18N.COMMON.BACK" | translate}}
+  <button mat-raised-button color="primary">
+    {{"I18N.COMMON.DOWNLOAD_RECOMMENDATION" | translate}}
+  </button>
+  
+  <button type="button" color="primary" mat-raised-button routerLink="/home">
+    {{"I18N.COMMON.FINISH" | translate}}
   </button>
 </div>

@@ -1,0 +1,18 @@
+app-solar-panel-overview ::ng-deep .hide {
+  display: none !important;
+}
+
+.recommendation-text {
+  color: #444;
+  
+  font-size: 1.5rem;
+  padding: 8px 16px;
+  border-radius: 50px;
+
+  margin: 1.5rem 0;
+}
+
+.before-overview {
+  margin: 0;
+  margin-bottom: 1.5rem;
+}
