@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SolarPanelService } from '../../services/solar-panel.service';
 import { Observable } from 'rxjs';
 import { SolarPanelIdentification } from '../../models/solar-panel-identification.model';
+import { SolarPanelDataService } from '../../services/solar-panel-data.service';
 
 @Component({
   selector: 'app-solar-panel-recommendation',
@@ -15,7 +16,12 @@ export class SolarPanelRecommendationComponent {
   solarPanelRecommendation :any = "Placeholder";
 
   constructor(
-    private _solarPanelService: SolarPanelService
+    private _solarPanelService: SolarPanelService,
+    private _solarPanelDataService: SolarPanelDataService
   ) { }
+
+  onDownload() {
+    this._solarPanelDataService.getReport(this.serialNumber);
+  }
 
 }

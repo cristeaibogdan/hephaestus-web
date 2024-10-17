@@ -140,5 +140,7 @@ export class SolarPanelDataService { //TODO: replace with proper backend api cal
 // *** STEP 4 = RECOMMENDATION
 // **************************************
 
-  
+  getReport(serialNumber:string) {
+    console.warn("Not implemented, yet...");
+  }
 }
