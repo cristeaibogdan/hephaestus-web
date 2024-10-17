@@ -12,7 +12,7 @@ export class SolarPanelRecommendationComponent {
 
   solarPanelIdenfitication$: Observable<SolarPanelIdentification> = this._solarPanelService.getSolarPanelIdentification();
   serialNumber :string = this._solarPanelService.getSerialNumber();
-  washingMachineRecommendation :any = "Placeholder";
+  solarPanelRecommendation :any = "Placeholder";
 
   constructor(
     private _solarPanelService: SolarPanelService
