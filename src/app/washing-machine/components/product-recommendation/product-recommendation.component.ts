@@ -23,7 +23,7 @@ export class ProductRecommendationComponent implements OnInit {
     private _notifService: NotificationService
   ) { }
   
-  ngOnInit() {
+  ngOnInit() { //TODO: What happens if the internet is down ? How to retry?
     this._washingMachineDataService.getRecommendation(this.serialNumber).subscribe(response => {
       this.washingMachineRecommendation = response;
     });
