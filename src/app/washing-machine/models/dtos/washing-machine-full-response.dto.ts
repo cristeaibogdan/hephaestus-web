@@ -1,5 +1,5 @@
-import { GetWashingMachineExpandedResponseDTO } from './get-washing-machine-expanded-response.dto';
-import { GetWashingMachineSimpleResponseDTO } from './get-washing-machine-simple-response.dto';
+import { GetWashingMachineExpandedResponse } from './get-washing-machine-expanded-response.dto';
+import { GetWashingMachineSimpleResponse } from './get-washing-machine-simple-response.dto';
 
-export interface WashingMachineFullResponseDTO 
-extends GetWashingMachineSimpleResponseDTO, GetWashingMachineExpandedResponseDTO { }
+export interface WashingMachineFullResponse 
+extends GetWashingMachineSimpleResponse, GetWashingMachineExpandedResponse { }

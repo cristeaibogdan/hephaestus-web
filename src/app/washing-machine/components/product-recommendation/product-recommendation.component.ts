@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CreateWashingMachineRequestDTO } from '../../models/dtos/create-washing-machine-request.dto';
+import { CreateWashingMachineRequest } from '../../models/dtos/create-washing-machine-request.dto';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { WashingMachineDataService } from '../../services/washing-machine.data.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -12,7 +12,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 })
 export class ProductRecommendationComponent {
 
-  washingMachine$:Observable<CreateWashingMachineRequestDTO> = this._washingMachineService.getWashingMachine();
+  washingMachine$:Observable<CreateWashingMachineRequest> = this._washingMachineService.getWashingMachine();
 
   constructor(
     private _washingMachineService: WashingMachineService,

@@ -3,7 +3,7 @@ import { IdentificationMode } from '../../enums/identification-mode.enum';
 import { Recommendation } from '../../enums/recommendation.enum';
 import { ReturnType } from '../../enums/return-type.enum';
 
-export interface SearchWashingMachineRequestDTO {
+export interface SearchWashingMachineRequest {
   pageIndex: number;
   pageSize: number;
   

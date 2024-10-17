@@ -4,7 +4,7 @@ import { Recommendation } from '../../enums/recommendation.enum';
 import { ReturnType } from '../../enums/return-type.enum';
 import { WashingMachineDetailDTO } from './washing-machine-detail.dto';
 
-export interface CreateWashingMachineRequestDTO {
+export interface CreateWashingMachineRequest {
   category: string;
   identificationMode: IdentificationMode | null;
   manufacturer: string;
