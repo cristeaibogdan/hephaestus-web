@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject} from "rxjs";
+import { BehaviorSubject, switchMap} from "rxjs";
 import { WashingMachineDetailDTO } from "../models/dtos/washing-machine-detail.dto";
 import { CreateWashingMachineRequest } from "../models/dtos/create-washing-machine-request.dto";
 import { ImageFile } from "../models/image-file.model";
@@ -209,13 +209,14 @@ export class WashingMachineService {
     });
 
     return new Promise((resolve) => {
-      this._washingMachineDataService.save(formData).subscribe({
-        next: () => {
-          this._washingMachineDataService.getRecommendation(this.washingMachineIdentification$.value.serialNumber)
-            .subscribe(response => {
-              this.recommendation = response;
-              resolve(true);
-            });          
+      this._washingMachineDataService.save(formData).pipe(
+        switchMap(() => { 
+          return this._washingMachineDataService.getRecommendation(this.washingMachineIdentification$.value.serialNumber)
+        })
+      ).subscribe({
+        next: (response) => {
+          this.recommendation = response;
+          resolve(true);        
         },
         error: () => {
           resolve(false);
