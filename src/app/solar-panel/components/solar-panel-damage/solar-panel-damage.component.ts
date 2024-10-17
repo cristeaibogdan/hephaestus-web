@@ -58,13 +58,4 @@ export class SolarPanelDamageComponent {
     this._solarPanelService.setSolarPanelDamageValues(solarPanelDamage);
     this.stepper.next();
   }
-
-
-// *****************************************
-// *** STEPPER FUNCTIONALITY
-// *****************************************
-
-  navigateToPreviousStep() {
-    this.stepper.previous();
-  }
 }
