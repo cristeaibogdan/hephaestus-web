@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
 import { WashingMachineDetailDTO } from '../../models/dtos/washing-machine-detail.dto';
-import { CreateWashingMachineRequest } from '../../models/dtos/create-washing-machine-request.dto';
 import { WashingMachineService } from '../../services/washing-machine.service';
+import { WashingMachineIdentification } from '../../models/washing-machine-identification.model';
 
 @Component({
   selector: 'app-damage-overview',
@@ -12,7 +12,7 @@ import { WashingMachineService } from '../../services/washing-machine.service';
 })
 export class OverviewComponent {
 
-  washingMachine$:Observable<CreateWashingMachineRequest> = this._washingMachineService.getWashingMachine();
+  washingMachineIdentification$:Observable<WashingMachineIdentification> = this._washingMachineService.getWashingMachineIdentification();
   washingMachineDetail$:Observable<WashingMachineDetailDTO> = this._washingMachineService.getWashingMachineDetail(); 
    
   selectedFiles:ImageFile[] = this._washingMachineService.getSelectedFiles();

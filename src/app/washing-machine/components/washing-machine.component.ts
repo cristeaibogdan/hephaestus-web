@@ -2,8 +2,8 @@ import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { UntypedFormBuilder, Validators} from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Observable } from 'rxjs';
-import { CreateWashingMachineRequest } from '../models/dtos/create-washing-machine-request.dto';
 import { WashingMachineService } from '../services/washing-machine.service';
+import { WashingMachineIdentification } from '../models/washing-machine-identification.model';
 
 @Component({
   selector: 'app-washing-machine',
@@ -20,7 +20,7 @@ export class WashingMachineComponent implements AfterViewInit {
   // Property from the HTML template, sent to the service via ngAfterViewInit
   @ViewChild(MatStepper) stepper!: MatStepper;
 
-  washingMachine$:Observable<CreateWashingMachineRequest> = this._washingMachineService.getWashingMachine();
+  washingMachineIdentification$:Observable<WashingMachineIdentification> = this._washingMachineService.getWashingMachineIdentification();
 
   ngAfterViewInit() {
     this._washingMachineService.setStepper(this.stepper);

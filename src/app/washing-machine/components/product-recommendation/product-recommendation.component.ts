@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CreateWashingMachineRequest } from '../../models/dtos/create-washing-machine-request.dto';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { WashingMachineDataService } from '../../services/washing-machine.data.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { WashingMachineIdentification } from '../../models/washing-machine-identification.model';
+import { Recommendation } from '../../enums/recommendation.enum';
 
 @Component({
   selector: 'app-product-recommendation',
@@ -12,7 +13,8 @@ import { NotificationService } from 'src/app/services/notification.service';
 })
 export class ProductRecommendationComponent {
 
-  washingMachine$:Observable<CreateWashingMachineRequest> = this._washingMachineService.getWashingMachine();
+  washingMachineIdentification$:Observable<WashingMachineIdentification> = this._washingMachineService.getWashingMachineIdentification();
+  washingMachineRecommendation = Recommendation.REPACKAGE; //TODO replace
 
   constructor(
     private _washingMachineService: WashingMachineService,

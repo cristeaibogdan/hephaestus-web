@@ -1,4 +1,4 @@
-<div class="component-container mat-elevation-z8" *ngIf="washingMachine$ | async as washingMachine">
+<div class="component-container mat-elevation-z8" *ngIf="washingMachineIdentification$ | async as washingMachineIdentification">
 
   <ng-content select="[header]"></ng-content>
 
@@ -6,18 +6,18 @@
   
   <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | translate}}</h2>  
   <ul class="product-information-list">
-    <li>{{"I18N.COMMON.CATEGORY" | translate}}: {{washingMachine.category}}</li>
-    <li>{{"I18N.COMMON.MANUFACTURER" | translate}}: {{washingMachine.manufacturer}}</li>
-    <li>{{"I18N.COMMON.SERIAL_NUMBER" | translate}}: {{washingMachine.serialNumber}}</li>
-    <li>{{"I18N.COMMON.MODEL" | translate}}: {{washingMachine.model}}</li>
-    <li>{{"I18N.COMMON.TYPE" | translate}}: {{washingMachine.type}}</li>
+    <li>{{"I18N.COMMON.CATEGORY" | translate}}: {{washingMachineIdentification.category}}</li>
+    <li>{{"I18N.COMMON.MANUFACTURER" | translate}}: {{washingMachineIdentification.manufacturer}}</li>
+    <li>{{"I18N.COMMON.SERIAL_NUMBER" | translate}}: {{washingMachineIdentification.serialNumber}}</li>
+    <li>{{"I18N.COMMON.MODEL" | translate}}: {{washingMachineIdentification.model}}</li>
+    <li>{{"I18N.COMMON.TYPE" | translate}}: {{washingMachineIdentification.type}}</li>
   </ul>
 
   <h2>{{"I18N.COMMON.DAMAGE_IDENTIFICATION_TITLE" | translate}}</h2>
   <ul class="product-information-list">
-    <li>{{"I18N.COMMON.IDENTIFICATION_MODE" | translate}}: {{washingMachine.identificationMode}}</li>    
-    <li>{{"I18N.COMMON.RETURN_TYPE" | translate}}: {{washingMachine.returnType}}</li>
-    <li>{{"I18N.COMMON.DAMAGE_TYPE" | translate}}: {{washingMachine.damageType}}</li>
+    <li>{{"I18N.COMMON.IDENTIFICATION_MODE" | translate}}: {{washingMachineIdentification.identificationMode}}</li>    
+    <li>{{"I18N.COMMON.RETURN_TYPE" | translate}}: {{washingMachineIdentification.returnType}}</li>
+    <li>{{"I18N.COMMON.DAMAGE_TYPE" | translate}}: {{washingMachineIdentification.damageType}}</li>
   </ul>
 
   <h2>{{"I18N.COMMON.DAMAGED_PRODUCT_IMAGES_TITLE" | translate}}</h2>

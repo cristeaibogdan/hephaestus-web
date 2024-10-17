@@ -1,20 +1,20 @@
 <app-damage-overview>
   <div header class="text-align-center">
-    <ng-container *ngIf="washingMachine$ | async as washingMachine">
+    <ng-container *ngIf="washingMachineIdentification$ | async as washingMachineIdentification">
       {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_1" | translate}}
-      {{washingMachine.serialNumber}} 
-      {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_2" | translate}} {{washingMachine.manufacturer}},
+      {{washingMachineIdentification.serialNumber}} 
+      {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_2" | translate}} {{washingMachineIdentification.manufacturer}},
       {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_3" | translate}}:
 
       <div class="text-align-center">
         <button class="recommendation-text"
           [ngClass]="{
-            repackage: washingMachine.recommendation === 'REPACKAGE',
-            resale: washingMachine.recommendation === 'RESALE',
-            outlet: washingMachine.recommendation === 'OUTLET',
-            repair: washingMachine.recommendation === 'REPAIR',
-            disassemble: washingMachine.recommendation === 'DISASSEMBLE'}">
-          {{washingMachine.recommendation}}
+            repackage: washingMachineRecommendation === 'REPACKAGE',
+            resale: washingMachineRecommendation === 'RESALE',
+            outlet: washingMachineRecommendation === 'OUTLET',
+            repair: washingMachineRecommendation === 'REPAIR',
+            disassemble: washingMachineRecommendation === 'DISASSEMBLE'}">
+          {{washingMachineRecommendation}}
         </button>
       </div>
     </ng-container>
