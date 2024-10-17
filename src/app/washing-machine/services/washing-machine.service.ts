@@ -1,25 +1,20 @@
 import { Injectable } from "@angular/core";
 import { MatStepper } from "@angular/material/stepper";
 import { BehaviorSubject} from "rxjs";
-import { TranslateService } from "@ngx-translate/core";
 import { WashingMachineDetailDTO } from "../models/dtos/washing-machine-detail.dto";
 import { CreateWashingMachineRequest } from "../models/dtos/create-washing-machine-request.dto";
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
 import { WashingMachineDataService } from "./washing-machine.data.service";
-import { NotificationService } from "src/app/services/notification.service";
 import { DamageType } from "../enums/damage-type.enum";
 import { ReturnType } from "../enums/return-type.enum";
 import { IdentificationMode } from "../enums/identification-mode.enum";
-
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineService {
   
   constructor(
-    private _washingMachineDataService: WashingMachineDataService,
-    private _notifService: NotificationService,
-    private _translate: TranslateService 
+    private _washingMachineDataService: WashingMachineDataService
   ) { }
 
 // **************************************
@@ -196,21 +191,12 @@ previousStep() {
 // *** STEP 3 = OVERVIEW
 // **************************************
 
-// Executes when NEXT on STEP 2 is clicked
-  getRecommendationAndGoToNextStep() {
-    // this._washingMachineDataService.getRecommendation(this.washingMachineDetail$.getValue()).subscribe(
-    //   (response) => {        
-    //   this.washingMachineIdentification$.value.recommendation = response;
-    //   this.nextStep();
-    // });
-    this.nextStep();
-  }
 
 // **************************************
 // *** STEP 4 = RECOMMENDED DECISION
 // **************************************
 
-  save() {
+  save(): Promise<boolean> {
     const washingMachine: CreateWashingMachineRequest = {
       category: this.washingMachineIdentification$.value.category,
       manufacturer: this.washingMachineIdentification$.value.manufacturer,
@@ -234,9 +220,15 @@ previousStep() {
       formData.append("imageFiles", file.file);
     });
 
-    this._washingMachineDataService.save(formData).subscribe(() => {
-      this._notifService.showSuccess(this._translate.instant("I18N.CUSTOM_SUCCESS.PRODUCT_SAVED"),4000);       
+    return new Promise((resolve) => {
+      this._washingMachineDataService.save(formData).subscribe({
+        next: () => {          
+          resolve(true);
+        },
+        error: () => {
+          resolve(false);
+        },
+      })
     });
   }
-  
 }
