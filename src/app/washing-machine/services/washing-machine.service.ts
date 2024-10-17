@@ -8,6 +8,7 @@ import { WashingMachineDataService } from "./washing-machine.data.service";
 import { DamageType } from "../enums/damage-type.enum";
 import { ReturnType } from "../enums/return-type.enum";
 import { IdentificationMode } from "../enums/identification-mode.enum";
+import { Recommendation } from "../enums/recommendation.enum";
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineService {
@@ -177,6 +178,12 @@ export class WashingMachineService {
 // *** STEP 4 = RECOMMENDED DECISION
 // **************************************
 
+  private recommendation!: Recommendation;
+
+  getRecommendation() {
+    return this.recommendation;
+  }
+
   save(): Promise<boolean> {
     const washingMachine: CreateWashingMachineRequest = {
       category: this.washingMachineIdentification$.value.category,
@@ -203,8 +210,12 @@ export class WashingMachineService {
 
     return new Promise((resolve) => {
       this._washingMachineDataService.save(formData).subscribe({
-        next: () => {          
-          resolve(true);
+        next: () => {
+          this._washingMachineDataService.getRecommendation(this.washingMachineIdentification$.value.serialNumber)
+            .subscribe(response => {
+              this.recommendation = response;
+              resolve(true);
+            });          
         },
         error: () => {
           resolve(false);

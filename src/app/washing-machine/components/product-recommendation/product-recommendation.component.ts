@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { WashingMachineDataService } from '../../services/washing-machine.data.service';
@@ -11,23 +11,17 @@ import { Recommendation } from '../../enums/recommendation.enum';
   templateUrl: './product-recommendation.component.html',
   styleUrls: ['./product-recommendation.component.css']
 })
-export class ProductRecommendationComponent implements OnInit {
+export class ProductRecommendationComponent {
 
   washingMachineIdentification$:Observable<WashingMachineIdentification> = this._washingMachineService.getWashingMachineIdentification();
   serialNumber :string = this._washingMachineService.getSerialNumber();
-  washingMachineRecommendation! :Recommendation;
+  washingMachineRecommendation :Recommendation = this._washingMachineService.getRecommendation();
 
   constructor(
     private _washingMachineService: WashingMachineService,
     private _washingMachineDataService: WashingMachineDataService,
     private _notifService: NotificationService
   ) { }
-  
-  ngOnInit() { //TODO: What happens if the internet is down ? How to retry?
-    this._washingMachineDataService.getRecommendation(this.serialNumber).subscribe(response => {
-      this.washingMachineRecommendation = response;
-    });
-  }
 
 // **********************************
 // *** DOWNLOAD FILE FUNCTIONALITY
