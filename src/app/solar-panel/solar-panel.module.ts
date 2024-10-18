@@ -6,10 +6,12 @@ import { SolarPanelDamageComponent } from './components/solar-panel-damage/solar
 import { SolarPanelOverviewComponent } from './components/solar-panel-overview/solar-panel-overview.component';
 import { SolarPanelRecommendationComponent } from './components/solar-panel-recommendation/solar-panel-recommendation.component';
 import { SolarPanelComponent } from './components/solar-panel.component';
+import { SolarPanelHistoryComponent } from './components/solar-panel-history/solar-panel-history.component';
 
-const routes: Routes = [{
-  path: "", component: SolarPanelComponent
-}];
+const routes: Routes = [
+  { path: "", component: SolarPanelComponent },
+  { path: "history", component: SolarPanelHistoryComponent}
+];
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ const routes: Routes = [{
     SolarPanelIdentificationComponent,
     SolarPanelDamageComponent,
     SolarPanelOverviewComponent,
-    SolarPanelRecommendationComponent
+    SolarPanelRecommendationComponent,
+    SolarPanelHistoryComponent
   ],
   imports: [
     SharedModule,
