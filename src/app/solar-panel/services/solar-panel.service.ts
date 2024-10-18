@@ -97,14 +97,7 @@ export class SolarPanelService {
 // *** STEP 4 = RECOMMENDATION
 // **************************************
   
-  private recommendation!: SolarPanelRecommendation;
-
-  getRecommendation() {
-    this.recommendation = this.generateRecommendation();
-    return this.recommendation;
-  }
-
-  generateRecommendation() { //TODO: Replace with backend generation
+  getRecommendation() { //TODO: Replace with backend generation
     const integrity: number = 100 - (
       this.calculateForHotSpots(this.solarPanelDamage$.value.hotSpots) + 
       this.calculateForMicroCracks(this.solarPanelDamage$.value.microCracks) + 
