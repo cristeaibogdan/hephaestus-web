@@ -4,7 +4,9 @@ import { GetSolarPanelFullResponse } from '../../models/dtos/get-solar-panel-ful
 import { MatSort } from '@angular/material/sort';
 import { SolarPanelRecommendation } from '../../enums/solar-panel-recommendation.enum';
 import { FormBuilder } from '@angular/forms';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import * as moment from 'moment';
+import { SearchSolarPanelRequest } from '../../models/dtos/search-solar-panel-request.dto';
 
 
 const DUMMY_DATA: GetSolarPanelFullResponse[] = [
@@ -66,7 +68,7 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
     private fb:FormBuilder
   ) { }
 
-  solarPanels = new MatTableDataSource<Partial<GetSolarPanelFullResponse>>(DUMMY_DATA);
+  solarPanels = new MatTableDataSource<Partial<GetSolarPanelFullResponse>>();
 
   displayedColumns: string[] = [
     "createdAt",
@@ -79,7 +81,7 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
   ]; 
 
   ngOnInit(): void {
-    console.log("Initialized!");
+    this.loadPaginatedAndFiltered();
   }
 
 // *****************************************
@@ -113,11 +115,56 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
     recommendation: null
   });
 
+  handleDate(value:string) {
+    return (value == null)
+      ? null
+      : moment(this.filterForm.value.createdAt!).format("YYYY-MM-DD");
+  }
+
   // 1. STARTING VALUES FOR PAGINATOR
   pageNumber = 0;
   pageSize = 10;
 
   totalElements = 0;
   pageSizeOptions = [2, 5, 10, 20, 40];
-  
+
+  // 2. UPDATE VALUES FOR PAGINATOR ON EACH PAGE CHANGE
+  changePage(e:PageEvent) {
+    this.pageNumber = e.pageIndex;
+    this.pageSize = e.pageSize;
+    this.loadPaginatedAndFiltered();
+  }
+
+  onFilter() {     
+    this.pageNumber = 0; // Return to the first page after clicking on filter
+    this.loadPaginatedAndFiltered();
+  }
+
+  onReset() {
+    // Test to see if i need to return to first page after reset
+    this.loadPaginatedAndFiltered();
+  }
+
+  // 3. USE VALUES OF PAGINATOR TO REQUEST DATA
+  loadPaginatedAndFiltered() {
+    const searchSolarPanelRequest: SearchSolarPanelRequest = {
+      pageIndex: this.pageNumber,
+      pageSize: this.pageSize,
+
+      manufacturer: this.filterForm.value.manufacturer || null,
+      model: this.filterForm.value.model || null,
+      type: this.filterForm.value.type || null,
+      serialNumber: this.filterForm.value.serialNumber || null,
+
+      recommendation: this.filterForm.value.recommendation || null,
+      createdAt: this.handleDate(this.filterForm.value.createdAt!) 
+    };
+
+    console.log("searchSolarPanelRequest = ", searchSolarPanelRequest);
+
+    // 4. UPDATE VALUES OF PAGINATOR FROM RESPONSE
+    //TODO: API call to backend
+    this.solarPanels.data = DUMMY_DATA;
+  }
+
 }

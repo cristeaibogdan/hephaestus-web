@@ -1,7 +1,7 @@
 <h3>Solar Panels History</h3>
 
 <div class="table-container mat-elevation-z8">
-  <form [formGroup]="filterForm" (ngSubmit)="null" (reset)="null">    
+  <form [formGroup]="filterForm" (ngSubmit)="onFilter()" (reset)="onReset()">    
   <table mat-table matSort [dataSource]="solarPanels">
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
@@ -153,10 +153,10 @@
   </form>
 
   <mat-paginator showFirstLastButtons
-  [pageIndex]="pageNumber"
-  [pageSize]="pageSize"
-  [length]="totalElements"
-  [pageSizeOptions]="pageSizeOptions">
-</mat-paginator>
+    [pageIndex]="pageNumber"
+    [pageSize]="pageSize"
+    [length]="totalElements"
+    [pageSizeOptions]="pageSizeOptions">
+  </mat-paginator>
 
 </div>
