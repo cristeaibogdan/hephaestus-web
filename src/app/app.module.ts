@@ -11,7 +11,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS, HttpBackend, HttpClient } from '@a
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-import { A11yModule } from '@angular/cdk/a11y';
 import { SharedModule } from './shared/shared.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -34,8 +33,7 @@ export function createTranslateLoader(HttpBackend: HttpBackend) {
     SharedModule,
 
     BrowserModule,
-    BrowserAnimationsModule,
-    A11yModule,
+    BrowserAnimationsModule,    
 
     AppRoutingModule,    
     HttpClientModule,

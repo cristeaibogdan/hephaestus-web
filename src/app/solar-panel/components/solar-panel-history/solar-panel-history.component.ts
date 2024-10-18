@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { GetSolarPanelFullResponse } from '../../models/dtos/get-solar-panel-full-response.dto';
 import { MatSort } from '@angular/material/sort';
@@ -165,6 +165,25 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
     // 4. UPDATE VALUES OF PAGINATOR FROM RESPONSE
     //TODO: API call to backend
     this.solarPanels.data = DUMMY_DATA;
+  }
+  
+// *****************************************
+// *** TAB KEY HANDLER
+// *****************************************
+
+  @HostListener("window:keydown.tab", ["$event"])
+  handleTab(event: KeyboardEvent) {
+    const focusedElement = document.activeElement as HTMLElement;
+
+    const isOfTypeInput: boolean = focusedElement.tagName == "INPUT";
+    const isOfTypeMatSelect: boolean = focusedElement.tagName == "MAT-SELECT";
+
+    if (isOfTypeInput || isOfTypeMatSelect) {
+      return;
+    }
+
+    document.getElementById("first")?.focus();
+    event.preventDefault();
   }
 
 }
