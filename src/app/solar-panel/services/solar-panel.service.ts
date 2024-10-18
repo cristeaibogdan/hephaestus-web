@@ -5,6 +5,7 @@ import { SolarPanelDataService } from './solar-panel-data.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SolarPanelDamage } from '../models/solar-panel-damage.model';
 import { CreateSolarPanelRequest } from '../models/dtos/create-solar-panel-request.dto';
+import { SolarPanelRecommendation } from '../enums/solar-panel-recommendation.enum';
 
 @Injectable({providedIn: 'root'})
 export class SolarPanelService {
@@ -95,6 +96,57 @@ export class SolarPanelService {
 // **************************************
 // *** STEP 4 = RECOMMENDATION
 // **************************************
+  
+  private recommendation!: SolarPanelRecommendation;
 
+  getRecommendation() {
+    this.recommendation = this.generateRecommendation();
+    return this.recommendation;
+  }
+
+  generateRecommendation() { //TODO: Replace with backend generation
+    const integrity: number = 100 - (
+      this.calculateForHotSpots(this.solarPanelDamage$.value.hotSpots) + 
+      this.calculateForMicroCracks(this.solarPanelDamage$.value.microCracks) + 
+      this.calculateForSnailTrails(this.solarPanelDamage$.value.snailTrails) + 
+      this.calculateForBrokenGlass(this.solarPanelDamage$.value.brokenGlass)
+    );
+
+    return this.calculateRecommendation(integrity);
+  }
+
+  calculateRecommendation(integrity: number): SolarPanelRecommendation {
+    switch (integrity) {
+      case 100: return SolarPanelRecommendation.REPAIR;
+      case 75: return SolarPanelRecommendation.REPAIR;
+      case 50: return SolarPanelRecommendation.RECYCLE;
+      case 25: return SolarPanelRecommendation.DISPOSE;
+      default: throw new Error('Invalid integrity value');
+    }
+  }
+
+  calculateForHotSpots(hotSpots: boolean): number {
+    return hotSpots
+      ? 25
+      : 0;
+  }
+
+  calculateForMicroCracks(microCracks: boolean): number {
+    return microCracks
+      ? 25
+      : 0;
+  }
+
+  calculateForSnailTrails(snailTrails: boolean): number {
+    return snailTrails
+      ? 25
+      : 0;
+  }
+
+  calculateForBrokenGlass(brokenGlass: boolean): number {
+    return brokenGlass
+      ? 25
+      : 0;
+  }
 
 }
