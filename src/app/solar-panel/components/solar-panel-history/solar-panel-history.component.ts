@@ -4,6 +4,7 @@ import { GetSolarPanelFullResponse } from '../../models/dtos/get-solar-panel-ful
 import { MatSort } from '@angular/material/sort';
 import { SolarPanelRecommendation } from '../../enums/solar-panel-recommendation.enum';
 import { FormBuilder } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 const DUMMY_DATA: GetSolarPanelFullResponse[] = [
@@ -97,6 +98,8 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
 
   filterColumns: string[] = this.displayedColumns.map(column => column + "-filter");
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   recommendationOptions: SolarPanelRecommendation[] = Object.values(SolarPanelRecommendation);
 
   filterForm = this.fb.group({
@@ -109,4 +112,12 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
 
     recommendation: null
   });
+
+  // 1. STARTING VALUES FOR PAGINATOR
+  pageNumber = 0;
+  pageSize = 10;
+
+  totalElements = 0;
+  pageSizeOptions = [2, 5, 10, 20, 40];
+  
 }

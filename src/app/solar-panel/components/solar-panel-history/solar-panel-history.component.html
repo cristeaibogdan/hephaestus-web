@@ -150,6 +150,13 @@
           </th>
         </ng-container>  
   </table>
-</form>
+  </form>
+
+  <mat-paginator showFirstLastButtons
+  [pageIndex]="pageNumber"
+  [pageSize]="pageSize"
+  [length]="totalElements"
+  [pageSizeOptions]="pageSizeOptions">
+</mat-paginator>
 
 </div>
