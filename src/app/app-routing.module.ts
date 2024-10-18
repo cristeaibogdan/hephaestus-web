@@ -4,7 +4,6 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { CameraComponent } from './washing-machine/components/product-identification/camera/camera.component';
 import { RegisterComponent } from './components/register/register.component';
-import { HistoryComponent } from './shared/components/history/history.component';
 
 import { AuthGuard } from './services/auth-guard.service';
 
@@ -16,7 +15,6 @@ const appRoutes: Routes = [
     // canActivate:[AuthGuard],
     children:[
       { path: "home", component: HomeComponent },
-      { path: "history", component: HistoryComponent },
       { path: "test", component: CameraComponent},
       
       { // TODO: Refactor the import if you change the packages

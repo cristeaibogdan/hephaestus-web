@@ -8,10 +8,13 @@ import { OverviewComponent } from './components/damage-overview/damage-overview.
 import { ProductRecommendationComponent } from './components/product-recommendation/product-recommendation.component';
 import { SharedModule } from '../shared/shared.module';
 import { CameraComponent } from './components/product-identification/camera/camera.component';
+import { HistoryComponent } from './components/history/history.component';
+import { HistoryViewComponent } from './components/history/history-view/history-view.component';
 
-const routes: Routes = [{
-  path: "", component: WashingMachineComponent
-}];
+const routes: Routes = [
+  { path: "", component: WashingMachineComponent },
+  { path: "history", component: HistoryComponent }
+];
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ const routes: Routes = [{
     CameraComponent,
     ProductDamage,
     OverviewComponent,
-    ProductRecommendationComponent  
+    ProductRecommendationComponent,
+    HistoryComponent,
+    HistoryViewComponent
   ],
   imports: [
     SharedModule,

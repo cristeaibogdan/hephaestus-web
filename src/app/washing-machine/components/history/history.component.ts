@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { HistoryViewComponent } from './history-view/history-view.component';
+import { HistoryViewComponent } from '../../../washing-machine/components/history/history-view/history-view.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
