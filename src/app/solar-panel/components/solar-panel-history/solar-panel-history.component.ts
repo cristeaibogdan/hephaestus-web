@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { GetSolarPanelFullResponse } from '../../models/dtos/get-solar-panel-full-response.dto';
 import { MatSort } from '@angular/material/sort';
 import { SolarPanelRecommendation } from '../../enums/solar-panel-recommendation.enum';
+import { FormBuilder } from '@angular/forms';
 
 
 const DUMMY_DATA: GetSolarPanelFullResponse[] = [
@@ -60,6 +61,10 @@ const DUMMY_DATA: GetSolarPanelFullResponse[] = [
 })
 export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
 
+  constructor(
+    private fb:FormBuilder
+  ) { }
+
   solarPanels = new MatTableDataSource<Partial<GetSolarPanelFullResponse>>(DUMMY_DATA);
 
   displayedColumns: string[] = [
@@ -85,4 +90,23 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.solarPanels.sort = this.sort;
   }
+
+// *****************************************
+// *** PAGINATOR and FILTERING
+// *****************************************
+
+  filterColumns: string[] = this.displayedColumns.map(column => column + "-filter");
+
+  recommendationOptions: SolarPanelRecommendation[] = Object.values(SolarPanelRecommendation);
+
+  filterForm = this.fb.group({
+    createdAt: null,
+    manufacturer: null,
+
+    serialNumber: null,
+    model: null,
+    type: null,
+
+    recommendation: null
+  });
 }

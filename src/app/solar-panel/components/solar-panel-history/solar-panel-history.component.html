@@ -1,10 +1,11 @@
 <h3>Solar Panels History</h3>
 
 <div class="table-container mat-elevation-z8">
-    
+  <form [formGroup]="filterForm" (ngSubmit)="null" (reset)="null">    
   <table mat-table matSort [dataSource]="solarPanels">
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+    <tr mat-header-row *matHeaderRowDef="filterColumns; sticky:true" cdkTrapFocus></tr>
     <tr mat-row *matRowDef="let solarPanel; columns: displayedColumns;"></tr>
     
     <ng-container matColumnDef="createdAt" sticky>
@@ -12,25 +13,77 @@
       <td mat-cell *matCellDef="let solarPanel"> {{solarPanel.createdAt | date: "yyyy-MM-dd HH:mm:ss"}}  </td>
     </ng-container>
 
+        <!-- Additional filter column -->
+        <ng-container matColumnDef="createdAt-filter" sticky>
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-form-field class="filter-input" appearance="outline" dateFormat_YYYY-MM-DD>
+              <mat-icon matPrefix svgIcon="search"></mat-icon>
+              <input matInput [matDatepicker]="picker" id="first" formControlName="createdAt">
+              <mat-datepicker-toggle matSuffix [for]="picker" tabindex="-1"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </th>
+        </ng-container>
+
     <ng-container matColumnDef="manufacturer">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.MANUFACTURER" | translate | uppercase}}</th>
       <td mat-cell *matCellDef="let solarPanel"> {{solarPanel.manufacturer}} </td>
     </ng-container>
     
+        <!-- Additional filter column -->
+        <ng-container matColumnDef="manufacturer-filter">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-form-field class="filter-input" appearance="outline">
+              <mat-icon matPrefix svgIcon="search"></mat-icon>
+              <input matInput formControlName="manufacturer"/>
+            </mat-form-field>
+          </th>
+        </ng-container>
+
     <ng-container matColumnDef="model">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.MODEL" | translate | uppercase}}</th>
       <td mat-cell *matCellDef="let solarPanel"> {{solarPanel.model}} </td>
     </ng-container>
+
+        <!-- Additional filter column -->
+        <ng-container matColumnDef="model-filter">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-form-field class="filter-input" appearance="outline">
+              <mat-icon matPrefix svgIcon="search"></mat-icon>
+              <input matInput formControlName="model"/>
+            </mat-form-field>
+          </th>
+        </ng-container>
 
     <ng-container matColumnDef="type">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.TYPE" | translate | uppercase}}</th>
       <td mat-cell *matCellDef="let solarPanel"> {{solarPanel.type}} </td>
     </ng-container>
 
+        <!-- Additional filter column -->
+        <ng-container matColumnDef="type-filter">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-form-field class="filter-input" appearance="outline">
+              <mat-icon matPrefix svgIcon="search"></mat-icon>
+              <input matInput formControlName="type"/>
+            </mat-form-field>
+          </th>
+        </ng-container>
+
     <ng-container matColumnDef="serialNumber">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.SERIAL_NUMBER" | translate | uppercase}}</th>
       <td mat-cell *matCellDef="let solarPanel"> {{solarPanel.serialNumber}} </td>
     </ng-container>
+
+        <!-- Additional filter column -->
+        <ng-container matColumnDef="serialNumber-filter">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-form-field class="filter-input" appearance="outline">
+              <mat-icon matPrefix svgIcon="search"></mat-icon>
+              <input matInput formControlName="serialNumber"/>
+            </mat-form-field>
+          </th>
+        </ng-container>
   
     <ng-container matColumnDef="recommendation">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.RECOMMENDATION" | translate | uppercase}}</th>
@@ -46,6 +99,22 @@
       </td>
     </ng-container>
 
+        <!-- Additional filter column -->
+        <ng-container matColumnDef="recommendation-filter">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-form-field class="filter-input" appearance="outline">
+              <mat-icon matPrefix svgIcon="search"></mat-icon>
+              <mat-select matInput formControlName="recommendation"> 
+                <mat-option></mat-option> <!-- Empty option to ensure null is sent to backend -->
+                <mat-option *ngFor="let option of recommendationOptions"
+                  [value]= "option">
+                  {{option}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </th>
+        </ng-container>
+
     <ng-container matColumnDef="actions" stickyEnd>
       <th mat-header-cell *matHeaderCellDef>{{"I18N.COMMON.ACTIONS" | translate | uppercase}}</th>
       <td mat-cell *matCellDef="let solarPanel">
@@ -59,9 +128,28 @@
             {{"I18N.COMMON.DELETE" | translate}}
           </button>
         </div>
-
       </td>
+
     </ng-container> 
+
+        <!-- Additional filter column -->
+        <ng-container matColumnDef="actions-filter" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef>
+
+            <div class="actions-container">
+              <button mat-raised-button type="submit" color="primary" tabindex="-1"
+                [disabled]="filterForm.invalid">
+                Filter
+              </button>
+      
+              <button mat-raised-button type="reset" color="warn" tabindex="-1">
+                Reset
+              </button>            
+            </div>
+
+          </th>
+        </ng-container>  
   </table>
+</form>
 
 </div>

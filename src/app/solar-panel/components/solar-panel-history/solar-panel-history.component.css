@@ -64,6 +64,35 @@ tr {
   border-radius: 50px;
 }
 
+/* INDIVIDUAL WIDTH OF COLUMNS */
+.mat-column-createdAt, .mat-column-createdAt-filter {
+  max-width: 170px;
+}
+
+.mat-column-manufacturer, .mat-column-manufacturer-filter {
+  max-width: 150px;
+}
+
+.mat-column-serialNumber, .mat-column-serialNumber-filter {
+  max-width: 150px;
+}
+
+.mat-column-model, .mat-column-model-filter {
+  max-width: 160px;
+}
+
+.mat-column-type, .mat-column-type-filter {
+  max-width: 160px;
+}
+
+.mat-column-recommendation, .mat-column-recommendation-filter {
+  max-width: 160px;
+}
+
+.mat-column-actions, .mat-column-actions-filter {
+  min-width: 180px;
+}
+
 /* ************************************ */
 /* *** TABLE SORTING */
 /* ************************************ */
@@ -76,6 +105,52 @@ tr {
 /* Removes the default margin of the arrow */
 ::ng-deep .mat-sort-header-arrow {
   margin: 0 !important;
+}
+
+/* ************************************************************ */
+/* *** MATINPUTS STYLES */
+/* ************************************************************ */
+
+.filter-input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 10px;
+}
+
+/* REMOVE UNUSED SPACE, UNDERLINE AND TOP BORDER FOR ALL MAT-FORM-FIELDS */
+.filter-input ::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+.filter-input ::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+.filter-input ::ng-deep .mat-form-field-infix {
+  border: 0;
+  padding: 0.5rem 0;
+}
+
+/* FIX THE POSITION BUG OF THE PREFIX 
+KNOWN BUG FOR MATINPUT WITH OUTLINE */
+.filter-input ::ng-deep .mat-form-field-prefix {
+  top: 0.45rem;
+  color: #556eb0;
+  margin-right: 5px;
+}
+
+/* FIX THE POSITION BUG OF THE SUFFIX 
+KNOWN BUG FOR MATINPUT WITH OUTLINE */
+.filter-input ::ng-deep .mat-form-field-suffix {
+  top: 0.45rem;
+}
+
+/* FIX THE POSITION BUG OF DATEPICKER ICON */
+.filter-input ::ng-deep .mat-icon-button {
+  color: #556eb0;
+  position: relative;
+  width: 24px !important;
+  height: 24px !important;
 }
 
 /* ************************************************************ */
