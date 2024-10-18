@@ -91,6 +91,22 @@ body {
   border: none;
 }
 
+.recycle {
+  background-color: #4cd3c2;
+  color: #444;
+  font-weight: 500;
+
+  border: none;
+}
+
+.dispose {
+  background-color: #ff6bcb;
+  color: white;
+  font-weight: 500;
+
+  border: none;
+}
+
 /* **************************************
 // *** STYLES for MAT DIALOG
 // **************************************/

@@ -36,7 +36,11 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.RECOMMENDATION" | translate | uppercase}}</th>
       <td mat-cell *matCellDef="let solarPanel"> 
         <button class="recommendation-text" 
-          [ngClass]="{}">
+          [ngClass]="{
+            repair: solarPanel.recommendation === 'REPAIR',
+            recycle: solarPanel.recommendation === 'RECYCLE',
+            dispose: solarPanel.recommendation === 'DISPOSE'
+          }">
           {{solarPanel.recommendation}}
         </button> 
       </td>
