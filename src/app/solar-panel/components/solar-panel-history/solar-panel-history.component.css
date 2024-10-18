@@ -1,0 +1,92 @@
+h3 {
+  background-color: #BBC2CC;
+  color: #444;
+  padding: 5px;
+  text-align: center;
+  font-weight: 500;
+
+  margin:0;
+  margin-bottom: 2%;
+}
+
+table {
+  width: 100%;
+}
+
+/* ************************************ */
+/* *** TABLE POSITION */
+/* ************************************ */
+
+.table-container {
+  width: 95%;
+  margin: 0 auto;
+}
+
+/* ************************************ */
+/* *** TABLE RELATED */
+/* ************************************ */
+
+th, td {
+  color: #444;
+  font-size: 14px;
+  text-align: center !important;
+
+  border-right: 2px solid #909ca0;
+}
+
+th {
+  background-color: #d0ebff;
+  border-bottom: 2px solid #909ca0 !important;
+}
+
+tr:nth-child(odd) {
+  background-color: #e9edee;
+}
+
+tr:hover {
+  background-color: #d3f9d8;
+}
+
+/* BREAKES LONG TEXT SO IT DOESN'T APPEAR OUTSIDE THE CONTAINER */
+tr {
+  word-wrap: break-word;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.recommendation-text {
+  color: #444;  
+  padding: 8px 16px;
+  border-radius: 50px;
+}
+
+/* ************************************ */
+/* *** TABLE SORTING */
+/* ************************************ */
+
+/* Makes the arrow go beneath the header */
+::ng-deep .mat-sort-header-container {
+  flex-direction: column;
+}
+
+/* Removes the default margin of the arrow */
+::ng-deep .mat-sort-header-arrow {
+  margin: 0 !important;
+}
+
+/* ************************************************************ */
+/* *** REMOVE DEFAULT PADDING FROM FIRST AND LAST COLUMN */
+/* ************************************************************ */
+
+th:first-child, td:first-child {
+  padding: 0 !important;
+}
+
+th:last-child, td:last-child {
+  padding: 0 !important;
+  border-right: none;
+}
