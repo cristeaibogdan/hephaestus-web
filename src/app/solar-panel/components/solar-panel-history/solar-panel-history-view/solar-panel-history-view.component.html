@@ -1,7 +1,23 @@
 <h1>{{"I18N.COMMON.OVERVIEW" | translate}}</h1>
 
 <mat-dialog-content>
-  
+
+  <section>
+    <h2>{{"I18N.COMMON.RECOMMENDATION" | translate}}</h2>
+
+    <div class="text-align-center">
+      <button class="recommendation-text"
+        [ngClass]="{
+          repair: solarPanel.recommendation === 'REPAIR',
+          recycle: solarPanel.recommendation === 'RECYCLE',
+          dispose: solarPanel.recommendation === 'DISPOSE'}">
+        {{solarPanel.recommendation}}
+      </button>
+    </div>
+
+    <p>{{"I18N.COMMON.CREATED" | translate}}: {{solarPanel.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+  </section>
+
   <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | translate}}</h2>  
   <ul class="information-list">
     <li>{{"I18N.COMMON.CATEGORY" | translate}}: Solar Panel</li>
