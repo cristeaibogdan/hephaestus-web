@@ -37,11 +37,11 @@ const DUMMY_DATA: GetSolarPanelFullResponse[] = [
     serialNumber: 'SN987654321',
     recommendation: SolarPanelRecommendation.RECYCLE,
     solarPanelDamage: {
-      hotSpots: false,
+      hotSpots: true,
       microCracks: false,
-      snailTrails: false,
+      snailTrails: true,
       brokenGlass: false,
-      additionalDetails: ''
+      additionalDetails: 'Half properties true'
     },
   },
   {
@@ -53,11 +53,11 @@ const DUMMY_DATA: GetSolarPanelFullResponse[] = [
     serialNumber: 'SN543216789',
     recommendation: SolarPanelRecommendation.DISPOSE,
     solarPanelDamage: {
-      hotSpots: false,
-      microCracks: false,
-      snailTrails: false,
-      brokenGlass: false,
-      additionalDetails: ''
+      hotSpots: true,
+      microCracks: true,
+      snailTrails: true,
+      brokenGlass: true,
+      additionalDetails: 'All properties true'
     },
   },
 ];
