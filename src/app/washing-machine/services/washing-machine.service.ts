@@ -186,7 +186,24 @@ export class WashingMachineService {
       model: this.washingMachineIdentification$.value.model,
       type: this.washingMachineIdentification$.value.type,
       
-      washingMachineDetailDTO: this.washingMachineDetail$.getValue()
+      createWashingMachineDetailRequest: {
+        packageDamaged: this.washingMachineDetail$.value.packageDamaged,
+        packageDirty: this.washingMachineDetail$.value.packageDirty,
+        packageMaterialAvailable: this.washingMachineDetail$.value.packageMaterialAvailable,
+
+        visibleSurfacesScratchesLength: this.washingMachineDetail$.value.visibleSurfacesScratchesLength,
+        visibleSurfacesDentsDepth: this.washingMachineDetail$.value.visibleSurfacesDentsDepth,
+        visibleSurfacesMinorDamage: this.washingMachineDetail$.value.visibleSurfacesMinorDamage,
+        visibleSurfacesMajorDamage: this.washingMachineDetail$.value.visibleSurfacesMajorDamage,
+
+        hiddenSurfacesScratchesLength: this.washingMachineDetail$.value.hiddenSurfacesScratchesLength,
+        hiddenSurfacesDentsDepth: this.washingMachineDetail$.value.hiddenSurfacesDentsDepth,
+        hiddenSurfacesMinorDamage: this.washingMachineDetail$.value.hiddenSurfacesMinorDamage,
+        hiddenSurfacesMajorDamage: this.washingMachineDetail$.value.hiddenSurfacesMajorDamage,
+
+        price: this.washingMachineDetail$.value.price,
+        repairPrice: this.washingMachineDetail$.value.repairPrice
+      }
     };
     
     console.log("Saving = ", washingMachine);
