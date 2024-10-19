@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 const DUMMY_DATA: GetSolarPanelFullResponse[] = [
   {
     createdAt: new Date('2022-01-01'),
+    category: "Solar Panel",
     manufacturer: 'SolarCorp',
     model: 'SC-1000',
     type: 'Monocrystalline',
@@ -29,6 +30,7 @@ const DUMMY_DATA: GetSolarPanelFullResponse[] = [
   },
   {
     createdAt: new Date('2022-05-15'),
+    category: "Solar Panel",
     manufacturer: 'SunPower',
     model: 'SP-2000',
     type: 'Polycrystalline',
@@ -44,6 +46,7 @@ const DUMMY_DATA: GetSolarPanelFullResponse[] = [
   },
   {
     createdAt: new Date('2023-03-20'),
+    category: "Solar Panel",
     manufacturer: 'EcoEnergy',
     model: 'EE-1500',
     type: 'Thin-film',
