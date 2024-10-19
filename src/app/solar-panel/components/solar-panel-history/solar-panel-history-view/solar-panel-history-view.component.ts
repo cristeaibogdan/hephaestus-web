@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GetSolarPanelFullResponse } from 'src/app/solar-panel/models/dtos/get-solar-panel-full-response.dto';
+import { SolarPanelDataService } from 'src/app/solar-panel/services/solar-panel-data.service';
 
 @Component({
   selector: 'app-solar-panel-history-view',
@@ -12,10 +13,11 @@ export class SolarPanelHistoryViewComponent {
   solarPanel: GetSolarPanelFullResponse = this.data.solarPanel;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data:any
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private _solarPanelDataService: SolarPanelDataService
   ) {}
 
   onDownload() {
-    console.log("To be implemented!");
+    this._solarPanelDataService.getReport("to implement");
   }
 }
