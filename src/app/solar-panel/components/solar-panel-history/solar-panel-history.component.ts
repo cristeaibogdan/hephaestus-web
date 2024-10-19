@@ -7,6 +7,8 @@ import { FormBuilder } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import * as moment from 'moment';
 import { SearchSolarPanelRequest } from '../../models/dtos/search-solar-panel-request.dto';
+import { SolarPanelHistoryViewComponent } from './solar-panel-history-view/solar-panel-history-view.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 const DUMMY_DATA: GetSolarPanelFullResponse[] = [
@@ -65,6 +67,7 @@ const DUMMY_DATA: GetSolarPanelFullResponse[] = [
 export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
 
   constructor(
+    private dialog: MatDialog,
     private fb:FormBuilder
   ) { }
 
@@ -186,4 +189,27 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
     event.preventDefault();
   }
 
+// *****************************************
+// *** ROW ACTIONS
+// *****************************************
+
+  onView(solarPanel: GetSolarPanelFullResponse) {
+    if(!solarPanel.solarPanelDamage) {
+      //TODO: API call to get expanded, open dialog if successfull
+
+      this.openDialog(solarPanel);      
+      
+    } else {
+      this.openDialog(solarPanel);
+    }    
+  }
+
+  openDialog(solarPanel: GetSolarPanelFullResponse) { 
+    const dialogRef = this.dialog.open(SolarPanelHistoryViewComponent, {
+      disableClose: true,
+      width: '35%',
+      data: { solarPanel: solarPanel },
+      autoFocus: false
+    });
+  }
 }
