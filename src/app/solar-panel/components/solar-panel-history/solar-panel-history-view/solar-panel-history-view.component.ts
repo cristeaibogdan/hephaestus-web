@@ -14,4 +14,8 @@ export class SolarPanelHistoryViewComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) private data:any
   ) {}
+
+  onDownload() {
+    console.log("To be implemented!");
+  }
 }
