@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ProductModelTypeDTO } from 'src/app/shared/models/product-model-type.dto';
 import { environment } from 'src/environments/environment';
 import { CreateSolarPanelRequest } from '../models/dtos/create-solar-panel-request.dto';
+import { GetModelAndTypeResponse } from 'src/app/shared/models/get-model-and-type-response.dto';
 
 @Injectable({providedIn: 'root'})
 export class SolarPanelDataService { //TODO: replace with proper backend api calls
@@ -18,7 +18,7 @@ export class SolarPanelDataService { //TODO: replace with proper backend api cal
   }
 
   getModelsAndTypes(manufacturer: string) {
-    const teslaModelsAndTypes: ProductModelTypeDTO[] = [
+    const teslaModelsAndTypes: GetModelAndTypeResponse[] = [
       {
         model: 'Solar Edge 420',
         type: 'TSE-420-8A7C12'
@@ -41,7 +41,7 @@ export class SolarPanelDataService { //TODO: replace with proper backend api cal
       }
     ];
 
-    const tongweiModelsAndTypes: ProductModelTypeDTO[] = [
+    const tongweiModelsAndTypes: GetModelAndTypeResponse[] = [
       {
         model: 'AquaCell 350',
         type: 'TWAC-350-7E5G31'
@@ -64,7 +64,7 @@ export class SolarPanelDataService { //TODO: replace with proper backend api cal
       }
     ];
 
-    const qcellsModelsAndTypes: ProductModelTypeDTO[] = [
+    const qcellsModelsAndTypes: GetModelAndTypeResponse[] = [
       {
         model: 'PowerFlex 275',
         type: 'QCPF-275-5B3F90'
@@ -87,7 +87,7 @@ export class SolarPanelDataService { //TODO: replace with proper backend api cal
       }
     ];
     
-    const bloomEnergyModelsAndTypes: ProductModelTypeDTO[] = [
+    const bloomEnergyModelsAndTypes: GetModelAndTypeResponse[] = [
       {
         model: 'Solara 400',
         type: 'BES-400-9C8G12'

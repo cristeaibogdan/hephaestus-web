@@ -160,22 +160,22 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
 // *** POPULATE DATA MATRIX FIELDS
 // **********************************
 
-  availableManufacturers:string[] = [];
-  availableModels:string[] = [];
-  availableTypes:string[] = [];
+  availableManufacturers: string[] = [];
+  availableModels: string[] = [];
+  availableTypes: string[] = [];
 
   clearAvailableModelsAndTypes() {
     this.availableModels = [];
     this.availableTypes = [];
   }
 
-  populateDataMatrix_Manufacturer_Field(category:string) {   
+  populateDataMatrix_Manufacturer_Field(category: string) {   
     this._washingMachineDataService.getManufacturers(category).subscribe(response => {
       this.availableManufacturers = response;
     });  
   }
 
-  populateDataMatrix_Model_Type_Fields(manufacturer:string) {  
+  populateDataMatrix_Model_Type_Fields(manufacturer: string) {  
 
     // Do not execute a request if manufacturer is empty.
     // Happens when form is reset
@@ -187,9 +187,9 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
 
       this.clearAvailableModelsAndTypes();
 
-      response.forEach(ProductModelTypeDTO => {
-        this.availableModels.push(ProductModelTypeDTO.model);
-        this.availableTypes.push(ProductModelTypeDTO.type);
+      response.forEach(getModelAndTypeResponse => {
+        this.availableModels.push(getModelAndTypeResponse.model);
+        this.availableTypes.push(getModelAndTypeResponse.type);
       });
     });
     
