@@ -1,0 +1,68 @@
+/* ************************************ */
+/* *** TITLES */
+/* ************************************ */
+
+h1 {
+  color: #444;
+  font-weight: 550;
+  font-size: 2rem;
+
+  text-align: center;
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  color: #444;
+  font-weight: 550;
+  font-size: 1.5rem;
+
+  padding-bottom: 5px;
+  border-bottom: 2px solid #2121ff;
+
+  margin: 0;
+  margin-bottom: 1.5rem;
+}
+
+/* ************************************ */
+/* *** LISTS */
+/* ************************************ */
+
+ul {
+  margin: 0;
+  margin-bottom: 1.5rem;
+}
+
+.damages-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.5rem;
+}
+
+/* ************************************ */
+/* *** RECOMMENDATION */
+/* ************************************ */
+
+.recommendation-text {
+  color: #444;
+    
+  font-size: 1.5rem;
+  padding: 8px 16px;
+  border-radius: 50px;
+}
+
+/* BREAKES LONG TEXT SO IT DOESN'T APPEAR OUTSIDE THE CONTAINER */
+li {
+  color: #444;
+  word-wrap: break-word;
+}
+
+/* ************************************ */
+/* *** BUTTONS */
+/* ************************************ */
+
+.mat-dialog-actions-buttons {
+  justify-content: center;
+  gap: 1.5rem;
+}

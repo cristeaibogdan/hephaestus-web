@@ -1,1 +1,45 @@
-<p>solar-panel-history-view works!</p>
+<h1>{{"I18N.COMMON.OVERVIEW" | translate}}</h1>
+
+<mat-dialog-content>
+  
+  <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | translate}}</h2>  
+  <ul class="information-list">
+    <li>{{"I18N.COMMON.CATEGORY" | translate}}: Solar Panel</li>
+    <li>{{"I18N.COMMON.MANUFACTURER" | translate}}: {{solarPanel.manufacturer}}</li>
+    <li>{{"I18N.COMMON.SERIAL_NUMBER" | translate}}: {{solarPanel.serialNumber}}</li>
+    <li>{{"I18N.COMMON.MODEL" | translate}}: {{solarPanel.model}}</li>
+    <li>{{"I18N.COMMON.TYPE" | translate}}: {{solarPanel.type}}</li>
+  </ul>
+
+  <h2>{{"I18N.COMMON.DAMAGES_TITLE" | translate}}</h2>
+  <section *ngIf="solarPanel.solarPanelDamage as solarPanelDamage">
+    <ul class="damages-list">
+      <li *ngIf="solarPanelDamage.hotSpots">
+        Hot Spots
+      </li>
+      <li *ngIf="solarPanelDamage.microCracks">
+        Micro Cracks
+      </li>
+      <li *ngIf="solarPanelDamage.snailTrails">
+        Snail Trails
+      </li>
+      <li *ngIf="solarPanelDamage.brokenGlass">
+        Broken Glass
+      </li>
+      <li *ngIf="solarPanelDamage.additionalDetails">
+        Additional Details:
+        {{solarPanelDamage.additionalDetails}}
+      </li>
+    </ul>
+  </section>
+</mat-dialog-content>
+
+<mat-dialog-actions class="mat-dialog-actions-buttons">
+  <button mat-raised-button type="button" color="primary">
+    {{"I18N.COMMON.DOWNLOAD_RECOMMENDATION" | translate}}
+  </button>
+
+  <button mat-raised-button type="button" color="warn" mat-dialog-close>
+    {{"I18N.COMMON.CLOSE" | translate}}
+  </button>
+</mat-dialog-actions>
