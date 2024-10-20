@@ -28,7 +28,8 @@ export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._solarPanelService.clearSolarPanelIdentificationValues();
+    this._solarPanelService.resetSolarPanelIdentification();
+    this._solarPanelService.resetSolarPanelDamage();
   }
 
   solarPanelForm = this.fb.group({        

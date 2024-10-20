@@ -41,12 +41,15 @@ export class SolarPanelService {
     // this.save(); //TODO: Remove after doing Damage Assessment page.
   }
 
-  clearSolarPanelIdentificationValues() {
-    this.solarPanelIdentification$.value.category = "";
-    this.solarPanelIdentification$.value.manufacturer = "";
-    this.solarPanelIdentification$.value.model = "";
-    this.solarPanelIdentification$.value.type = "";
-    this.solarPanelIdentification$.value.serialNumber = "";
+  resetSolarPanelIdentification() {
+    const initialSolarPanelIdentification: SolarPanelIdentification = {
+      category: "",  
+      manufacturer: "",
+      model: "",
+      type: "",
+      serialNumber: ""
+    }
+    this.solarPanelIdentification$.next(initialSolarPanelIdentification);
   }
 
 // **************************************
@@ -67,6 +70,17 @@ export class SolarPanelService {
 
   setSolarPanelDamageValues(solarPanelDamage: SolarPanelDamage) {
     this.solarPanelDamage$.next(solarPanelDamage);
+  }
+
+  resetSolarPanelDamage() {
+    const initialSolarPanelDamage: SolarPanelDamage = {
+      hotSpots: false,
+      microCracks: false,
+      snailTrails: false,
+      brokenGlass: false,
+      additionalDetails: ''
+    }
+    this.solarPanelDamage$.next(initialSolarPanelDamage);
   }
   
 // **************************************
