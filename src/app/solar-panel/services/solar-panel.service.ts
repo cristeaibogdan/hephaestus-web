@@ -80,7 +80,7 @@ export class SolarPanelService {
       model: this.solarPanelIdentification$.value.model,
       type: this.solarPanelIdentification$.value.type,
       serialNumber: this.solarPanelIdentification$.value.serialNumber,
-      createSolarPanelDamage: {
+      createSolarPanelDamageRequest: {
         hotSpots: this.solarPanelDamage$.value.hotSpots,
         microCracks: this.solarPanelDamage$.value.microCracks,
         snailTrails: this.solarPanelDamage$.value.snailTrails,

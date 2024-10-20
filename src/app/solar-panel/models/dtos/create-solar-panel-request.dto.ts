@@ -7,5 +7,5 @@ export interface CreateSolarPanelRequest {
   type: string;
   serialNumber: string;
 
-  createSolarPanelDamage: CreateSolarPanelDamageRequest
+  createSolarPanelDamageRequest: CreateSolarPanelDamageRequest
 }
