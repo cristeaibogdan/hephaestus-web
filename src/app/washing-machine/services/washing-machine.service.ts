@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, switchMap} from "rxjs";
-import { WashingMachineDetailDTO } from "../models/dtos/washing-machine-detail.dto";
 import { CreateWashingMachineRequest } from "../models/dtos/create-washing-machine-request.dto";
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
@@ -9,6 +8,7 @@ import { DamageType } from "../enums/damage-type.enum";
 import { ReturnType } from "../enums/return-type.enum";
 import { IdentificationMode } from "../enums/identification-mode.enum";
 import { Recommendation } from "../enums/recommendation.enum";
+import { WashingMachineDetail } from "../models/washing-machine-detail.model";
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineService {
@@ -61,7 +61,7 @@ export class WashingMachineService {
 // *** STEP 2 = PRODUCT DAMAGE ASSESSMENT
 // *****************************************
 
-  private washingMachineDetail$ = new BehaviorSubject<WashingMachineDetailDTO>({
+  private washingMachineDetail$ = new BehaviorSubject<WashingMachineDetail>({
     applicablePackageDamage:false,
     packageDamaged:false,
     packageDirty:false,
@@ -101,7 +101,7 @@ export class WashingMachineService {
     repairPrice:0
   });
 
-  setWashingMachineDetail(washingMachineDetail:WashingMachineDetailDTO) {
+  setWashingMachineDetail(washingMachineDetail: WashingMachineDetail) {
     this.washingMachineDetail$.next(washingMachineDetail);
   }
 

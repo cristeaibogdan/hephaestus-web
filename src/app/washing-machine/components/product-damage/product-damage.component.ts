@@ -5,10 +5,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AbstractControl, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from '../../../shared/validators/custom.validators';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
-import { WashingMachineDetailDTO } from '../../models/dtos/washing-machine-detail.dto';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { MatStepper } from '@angular/material/stepper';
+import { WashingMachineDetail } from '../../models/washing-machine-detail.model';
 
 @Component({
   selector: 'app-product-damage',
@@ -304,7 +304,7 @@ export class ProductDamage implements OnInit, OnDestroy {
   }  
 
   onSubmit() {
-    const washingMachineDetail:WashingMachineDetailDTO = {
+    const washingMachineDetail: WashingMachineDetail = {
       applicablePackageDamage: this.washingMachineDetailForm.controls.applicablePackageDamage.value,
       packageDamaged: this.washingMachineDetailForm.controls.packageForm.controls.packageDamaged.value,
       packageDirty: this.washingMachineDetailForm.controls.packageForm.controls.packageDirty.value,
