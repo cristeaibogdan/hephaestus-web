@@ -1,7 +1,7 @@
-import { WashingMachineDetailDTO } from './washing-machine-detail.dto';
+import { GetWashingMachineDetailResponse } from './get-washing-machine-detail-response.dto';
 import { WashingMachineImageDTO } from './washing-machine-image.dto';
 
 export interface GetWashingMachineExpandedResponse {
-  washingMachineDetail: WashingMachineDetailDTO;
+  getWashingMachineDetailResponse: GetWashingMachineDetailResponse;
   washingMachineImages: WashingMachineImageDTO[];
 }

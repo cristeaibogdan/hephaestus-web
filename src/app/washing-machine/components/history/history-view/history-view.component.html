@@ -42,7 +42,7 @@
     </section>
   
     <h2>{{"I18N.COMMON.DAMAGES_TITLE" | translate}}</h2>                  
-    <section class="damages-container" *ngIf="washingMachine.washingMachineDetail as washingMachineDetail">
+    <section class="damages-container" *ngIf="washingMachine.getWashingMachineDetailResponse as washingMachineDetail">
 
       <article *ngIf="washingMachineDetail.applicablePackageDamage">
         <h3>{{"I18N.COMMON.PACKAGE" | translate}}</h3>

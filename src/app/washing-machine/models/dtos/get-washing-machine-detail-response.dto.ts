@@ -1,4 +1,4 @@
-export interface WashingMachineDetailDTO {
+export interface GetWashingMachineDetailResponse {
   
 // PACKAGE
     applicablePackageDamage:boolean,

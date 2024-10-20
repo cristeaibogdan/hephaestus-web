@@ -183,10 +183,10 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 // *****************************************
 
   onView(washingMachine: WashingMachineFullResponse) {
-    if(!washingMachine.washingMachineDetail) {
+    if(!washingMachine.getWashingMachineDetailResponse) {
       this._washingMachineDataService.loadExpanded(washingMachine.serialNumber).subscribe(response => {
         console.log("Response for details => ",response);
-        washingMachine.washingMachineDetail = response.washingMachineDetail;
+        washingMachine.getWashingMachineDetailResponse = response.getWashingMachineDetailResponse;
         washingMachine.washingMachineImages = response.washingMachineImages;
 
         this.openDialog(washingMachine);
