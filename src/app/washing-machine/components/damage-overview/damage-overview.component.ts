@@ -1,12 +1,12 @@
 import { Component, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
-import { WashingMachineDetailDTO } from '../../models/dtos/washing-machine-detail.dto';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { WashingMachineIdentification } from '../../models/washing-machine-identification.model';
 import { MatStepper } from '@angular/material/stepper';
 import { TranslateService } from '@ngx-translate/core';
 import { NotificationService } from 'src/app/services/notification.service';
+import { WashingMachineDetail } from '../../models/washing-machine-detail.model';
 
 @Component({
   selector: 'app-damage-overview',
@@ -16,7 +16,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 export class OverviewComponent {
 
   washingMachineIdentification$:Observable<WashingMachineIdentification> = this._washingMachineService.getWashingMachineIdentification();
-  washingMachineDetail$:Observable<WashingMachineDetailDTO> = this._washingMachineService.getWashingMachineDetail(); 
+  washingMachineDetail$:Observable<WashingMachineDetail> = this._washingMachineService.getWashingMachineDetail(); 
    
   selectedFiles:ImageFile[] = this._washingMachineService.getSelectedFiles();
 
