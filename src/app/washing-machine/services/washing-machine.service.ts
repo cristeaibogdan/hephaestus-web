@@ -125,6 +125,10 @@ export class WashingMachineService {
   getSelectedFiles() {
     return this.selectedFiles;
   }
+
+  clearSelectedFiles() {
+    this.selectedFiles = [];
+  }
     
 // **************************************
 // *** RESETS FOR STEP 2
@@ -171,8 +175,6 @@ export class WashingMachineService {
       repairPrice:0
     }
     this.washingMachineDetail$.next(initialWashingMachineDetail);
-    
-    this.selectedFiles = [];
   }
 
 // **************************************

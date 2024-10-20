@@ -37,6 +37,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this._washingMachineService.resetWashingMachineIdentification();
     this._washingMachineService.resetWashingMachineDetail();
+    this._washingMachineService.clearSelectedFiles();
   }
 
   returnType = ReturnType;
