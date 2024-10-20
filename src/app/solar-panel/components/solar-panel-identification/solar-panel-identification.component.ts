@@ -71,7 +71,7 @@ export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
       serialNumber: this.solarPanelForm.controls.serialNumber.value
     }
     
-    this._solarPanelService.setSolarPanelIdentificationValues(solarPanelIdentification);
+    this._solarPanelService.setSolarPanelIdentification(solarPanelIdentification);
     this.stepper.next();
   }
 

@@ -35,7 +35,7 @@ export class SolarPanelService {
     return this.solarPanelIdentification$.value.serialNumber;
   }
 
-  setSolarPanelIdentificationValues(solarPanelIdentification: SolarPanelIdentification) {
+  setSolarPanelIdentification(solarPanelIdentification: SolarPanelIdentification) {
     this.solarPanelIdentification$.next(solarPanelIdentification);
 
     // this.save(); //TODO: Remove after doing Damage Assessment page.
@@ -64,11 +64,11 @@ export class SolarPanelService {
     additionalDetails: ''
   });
 
-  getSolarPanelDamageValues() {
+  getSolarPanelDamage() {
     return this.solarPanelDamage$.asObservable();
   }
 
-  setSolarPanelDamageValues(solarPanelDamage: SolarPanelDamage) {
+  setSolarPanelDamage(solarPanelDamage: SolarPanelDamage) {
     this.solarPanelDamage$.next(solarPanelDamage);
   }
 

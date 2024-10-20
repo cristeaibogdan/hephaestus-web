@@ -145,7 +145,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
       damageType: this.washingMachineForm.controls.damageType.value as DamageType
     }
 
-    this._washingMachineService.setWashingMachineIdentificationValues(productIdentificationResult);
+    this._washingMachineService.setWashingMachineIdentification(productIdentificationResult);
     this.stepper.next();
   }
   

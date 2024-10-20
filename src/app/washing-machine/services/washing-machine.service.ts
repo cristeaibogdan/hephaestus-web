@@ -42,7 +42,7 @@ export class WashingMachineService {
     return this.washingMachineIdentification$.value.serialNumber;
   }
 
-  setWashingMachineIdentificationValues(washingMachineIdentification:WashingMachineIdentification) {
+  setWashingMachineIdentification(washingMachineIdentification: WashingMachineIdentification) {
     this.washingMachineIdentification$.next(washingMachineIdentification);
   }
 

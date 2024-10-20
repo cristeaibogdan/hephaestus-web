@@ -55,7 +55,7 @@ export class SolarPanelDamageComponent {
       additionalDetails: this.solarPanelDamageForm.value.additionalDetails!
     }
 
-    this._solarPanelService.setSolarPanelDamageValues(solarPanelDamage);
+    this._solarPanelService.setSolarPanelDamage(solarPanelDamage);
     this.stepper.next();
   }
 }
