@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CreateSolarPanelRequest } from '../models/dtos/create-solar-panel-request.dto';
 import { GetModelAndTypeResponse } from 'src/app/shared/models/get-model-and-type-response.dto';
+import { SearchSolarPanelRequest } from '../models/dtos/search-solar-panel-request.dto';
 
 @Injectable({providedIn: 'root'})
 export class SolarPanelDataService { //TODO: replace with proper backend api calls
@@ -143,4 +144,17 @@ export class SolarPanelDataService { //TODO: replace with proper backend api cal
   getReport(serialNumber:string) {
     console.warn("Not implemented, yet...");
   }
+
+//**************************************
+//*** HISTORY
+//**************************************
+
+  loadPaginatedAndFiltered(searchSolarPanelRequest: SearchSolarPanelRequest) {
+    console.warn("Not implemented, yet...");
+  }
+
+  loadExpanded(productSerialNumber:string) {
+    console.warn("Not implemented, yet...");
+  }
+
 }
