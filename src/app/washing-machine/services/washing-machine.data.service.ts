@@ -73,9 +73,9 @@ export class WashingMachineDataService {
     return this.http.post<Page<GetWashingMachineSimpleResponse>>(url, payload);
   }
 
-  loadExpanded(productSerialNumber:string) {
+  loadExpanded(serialNumber:string) {
     const url = this.apiURL.concat("/api/v1/washing-machines/")
-      .concat(productSerialNumber)
+      .concat(serialNumber)
       .concat("/expanded");
 
     return this.http.get<GetWashingMachineExpandedResponse>(url);
