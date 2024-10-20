@@ -46,15 +46,18 @@ export class WashingMachineService {
     this.washingMachineIdentification$.next(washingMachineIdentification);
   }
 
-  resetWashingMachineIdentificationValues() {
-    this.washingMachineIdentification$.value.damageType = DamageType.IN_TRANSIT;
-    this.washingMachineIdentification$.value.returnType = ReturnType.COMMERCIAL;
-    this.washingMachineIdentification$.value.identificationMode = IdentificationMode.DATA_MATRIX;
-
-    this.washingMachineIdentification$.value.manufacturer = "";
-    this.washingMachineIdentification$.value.serialNumber = "";
-    this.washingMachineIdentification$.value.model = "";
-    this.washingMachineIdentification$.value.type = "";
+  resetWashingMachineIdentification() {
+    const initialWashingMachineIdentification: WashingMachineIdentification = {
+      category: "",
+      damageType: DamageType.IN_TRANSIT,
+      returnType: ReturnType.COMMERCIAL,
+      identificationMode: IdentificationMode.DATA_MATRIX,
+      manufacturer: "",
+      serialNumber: "",
+      model: "",
+      type: "",
+    }
+    this.washingMachineIdentification$.next(initialWashingMachineIdentification);
   }
   
 // *****************************************
@@ -127,44 +130,47 @@ export class WashingMachineService {
 // *** RESETS FOR STEP 2
 // **************************************
 
-  resetWashingMachineDamageAssessmentValues() {    
-    this.washingMachineDetail$.value.applicablePackageDamage = false;
-    this.washingMachineDetail$.value.packageDamaged = false;
-    this.washingMachineDetail$.value.packageDirty = false;
-    this.washingMachineDetail$.value.packageMaterialAvailable = false;
-
-
-    this.washingMachineDetail$.value.applicableVisibleSurfacesDamage = false;
-
-    this.washingMachineDetail$.value.visibleSurfacesHasScratches = false;   
-    this.washingMachineDetail$.value.visibleSurfacesScratchesLength = 0;
-
-    this.washingMachineDetail$.value.visibleSurfacesHasDents = false;   
-    this.washingMachineDetail$.value.visibleSurfacesDentsDepth = 0;
-
-    this.washingMachineDetail$.value.visibleSurfacesHasMinorDamage = false;   
-    this.washingMachineDetail$.value.visibleSurfacesMinorDamage = "";
-
-    this.washingMachineDetail$.value.visibleSurfacesHasMajorDamage = false;   
-    this.washingMachineDetail$.value.visibleSurfacesMajorDamage = "";
-
-    
-    this.washingMachineDetail$.value.applicableHiddenSurfacesDamage = false;
-
-    this.washingMachineDetail$.value.hiddenSurfacesHasScratches = false;   
-    this.washingMachineDetail$.value.hiddenSurfacesScratchesLength = 0;
-
-    this.washingMachineDetail$.value.hiddenSurfacesHasDents = false;   
-    this.washingMachineDetail$.value.hiddenSurfacesDentsDepth = 0;
-
-    this.washingMachineDetail$.value.hiddenSurfacesHasMinorDamage = false;   
-    this.washingMachineDetail$.value.hiddenSurfacesMinorDamage = "";
-
-    this.washingMachineDetail$.value.hiddenSurfacesHasMajorDamage = false;   
-    this.washingMachineDetail$.value.hiddenSurfacesMajorDamage = "";
-
-    this.washingMachineDetail$.value.price = 0;   
-    this.washingMachineDetail$.value.repairPrice = 0; 
+  resetWashingMachineDetail() {    
+    const initialWashingMachineDetail: WashingMachineDetail = {
+      applicablePackageDamage:false,
+      packageDamaged:false,
+      packageDirty:false,
+      packageMaterialAvailable:false,
+  
+  
+      applicableVisibleSurfacesDamage:false,
+  
+      visibleSurfacesHasScratches:false,
+      visibleSurfacesScratchesLength:0,
+  
+      visibleSurfacesHasDents:false,
+      visibleSurfacesDentsDepth:0,
+  
+      visibleSurfacesHasMinorDamage:false,
+      visibleSurfacesMinorDamage:"",
+  
+      visibleSurfacesHasMajorDamage:false,
+      visibleSurfacesMajorDamage:"",
+  
+  
+      applicableHiddenSurfacesDamage:false,
+  
+      hiddenSurfacesHasScratches:false,
+      hiddenSurfacesScratchesLength:0,
+  
+      hiddenSurfacesHasDents:false,
+      hiddenSurfacesDentsDepth:0,
+  
+      hiddenSurfacesHasMinorDamage:false,
+      hiddenSurfacesMinorDamage:"",
+  
+      hiddenSurfacesHasMajorDamage:false,
+      hiddenSurfacesMajorDamage:"",
+  
+      price:0,
+      repairPrice:0
+    }
+    this.washingMachineDetail$.next(initialWashingMachineDetail);
     
     this.selectedFiles = [];
   }

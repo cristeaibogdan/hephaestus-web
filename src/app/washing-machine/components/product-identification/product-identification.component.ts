@@ -35,8 +35,8 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._washingMachineService.resetWashingMachineIdentificationValues();
-    this._washingMachineService.resetWashingMachineDamageAssessmentValues();
+    this._washingMachineService.resetWashingMachineIdentification();
+    this._washingMachineService.resetWashingMachineDetail();
   }
 
   returnType = ReturnType;
@@ -153,7 +153,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
     e.preventDefault(); // Prevent the default behavior. The disabled input will not appear empty and will preserve its value
     this.washingMachineForm.reset();    
     this.clearAvailableModelsAndTypes();
-    this._washingMachineService.resetWashingMachineIdentificationValues();
+    this._washingMachineService.resetWashingMachineIdentification();
   }
 
 // **********************************
