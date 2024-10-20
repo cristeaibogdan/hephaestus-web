@@ -208,7 +208,7 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
   }
 
   openDialog(solarPanel: GetSolarPanelFullResponse) { 
-    const dialogRef = this.dialog.open(SolarPanelHistoryViewComponent, {
+    this.dialog.open(SolarPanelHistoryViewComponent, {
       disableClose: true,
       width: '35%',
       data: { solarPanel: solarPanel },

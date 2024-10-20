@@ -198,7 +198,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   }
 
   openDialog(washingMachine: WashingMachineFullResponse) { 
-    const dialogRef = this.dialog.open(HistoryViewComponent, {
+    this.dialog.open(HistoryViewComponent, {
       disableClose: true,
       width: '35%',
       data: { washingMachine: washingMachine },
