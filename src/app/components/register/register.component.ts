@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators, NonNullableFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserAccountDTO } from '../../washing-machine/models/dtos/user-account.dto';
 import { Subscription } from 'rxjs';
 import { RegisterCodeValidator } from 'src/app/shared/validators/async-validators/register-code.validator';
 import { TranslateService } from '@ngx-translate/core';
 import { CustomValidators } from '../../shared/validators/custom.validators';
 import { AuthDataService } from 'src/app/services/auth.data.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { CreateUserRequest } from 'src/app/washing-machine/models/dtos/create-user-request.dto';
 
 @Component({
   selector: 'app-register',
@@ -70,7 +70,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const userAccount:UserAccountDTO = {
+    const userAccount: CreateUserRequest = {
       code: this.registerForm.controls.code.value.toString(),
       organization: this.registerForm.controls.organization.value,
       country: this.registerForm.controls.country.value,

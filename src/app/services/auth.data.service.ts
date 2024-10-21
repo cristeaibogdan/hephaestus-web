@@ -5,6 +5,7 @@ import { LoginUserRequest } from '../washing-machine/models/dtos/login-user-requ
 import { UserUpdateContainer } from '../washing-machine/models/dtos/user-update-container.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GetOrganizationAndCountryResponse } from '../washing-machine/models/dtos/get-organization-and-country-response.dto';
+import { CreateUserRequest } from '../washing-machine/models/dtos/create-user-request.dto';
 
 @Injectable({providedIn: 'root'})
 export class AuthDataService {
@@ -43,9 +44,9 @@ export class AuthDataService {
 //*** AUTH - REGISTER
 //******************************
 
-  register(userAccountDTO:UserAccountDTO) {
+  register(createUserRequest: CreateUserRequest) {
     const url = this.apiURL.concat("/api/v1/users/register");
-    const payload = userAccountDTO;
+    const payload = createUserRequest;
 
     return this.http
       .post<void>(url, payload);
