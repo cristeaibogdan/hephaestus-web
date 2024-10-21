@@ -44,30 +44,22 @@ export class ProductDamage implements OnInit, OnDestroy {
     applicableVisibleSurfacesDamage: [false],
     visibleSurfacesForm: this.fb.group({
       visibleSurfacesHasScratches: [false],
-      visibleSurfacesScratchesLength: [{
-        value: 0, 
-        disabled: true}, 
+      visibleSurfacesScratchesLength: [{value: 0, disabled: true}, 
         [Validators.required, Validators.min(0.5)]
       ],
 
       visibleSurfacesHasDents: [false],
-      visibleSurfacesDentsDepth: [{
-        value: 0, 
-        disabled: true}, 
+      visibleSurfacesDentsDepth: [{value: 0, disabled: true}, 
         [Validators.required, Validators.min(0.5)]
       ],
 
       visibleSurfacesHasMinorDamage: [false],
-      visibleSurfacesMinorDamage : [{
-        value:"",
-        disabled: true},
+      visibleSurfacesMinorDamage : [{value:"", disabled: true},
         [Validators.required]
       ],
 
       visibleSurfacesHasMajorDamage: [false],
-      visibleSurfacesMajorDamage : [{
-        value:"",
-        disabled: true},
+      visibleSurfacesMajorDamage : [{value:"", disabled: true},
         [Validators.required]
       ]
     }, {validators: CustomValidators.atLeastOneOutOfFourTrue(
@@ -82,30 +74,22 @@ export class ProductDamage implements OnInit, OnDestroy {
     applicableHiddenSurfacesDamage: [false],
     hiddenSurfacesForm: this.fb.group({
       hiddenSurfacesHasScratches: [false],
-      hiddenSurfacesScratchesLength: [{
-        value: 0, 
-        disabled: true}, 
+      hiddenSurfacesScratchesLength: [{value: 0, disabled: true}, 
         [Validators.required, Validators.min(0.5)]
       ],
 
       hiddenSurfacesHasDents: [false],
-      hiddenSurfacesDentsDepth: [{
-        value: 0, 
-        disabled: true}, 
+      hiddenSurfacesDentsDepth: [{value: 0, disabled: true}, 
         [Validators.required, Validators.min(0.5)]
       ],
 
       hiddenSurfacesHasMinorDamage: [false],
-      hiddenSurfacesMinorDamage : [{
-        value:"",
-        disabled: true},
+      hiddenSurfacesMinorDamage : [{value:"", disabled: true},
         [Validators.required]
       ],
 
       hiddenSurfacesHasMajorDamage: [false],
-      hiddenSurfacesMajorDamage : [{
-        value:"",
-        disabled: true},
+      hiddenSurfacesMajorDamage : [{value:"", disabled: true},
         [Validators.required]
       ]
     }, {validators: CustomValidators.atLeastOneOutOfFourTrue(
