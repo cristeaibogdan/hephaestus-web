@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private registerCodeValidator:RegisterCodeValidator
   ) {}
 
-  codeSubscription!:Subscription;
+  private codeSubscription!:Subscription;
 
   registerForm = this.fb.group({
     code: ["", {
@@ -44,12 +44,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Subscribe to registerCode statusChanges and call a HTTP method to retrieve values from BACKEND
-    this.codeSubscription = this.registerForm.controls.code.statusChanges.subscribe(() => {
-      if (this.registerForm.controls.code.valid) {
+    this.codeSubscription = this.registerForm.controls.code.statusChanges.subscribe((status) => {
+      if (status === "VALID") {
         this._authDataService.getOrganizationAndCountry(this.registerForm.controls.code.value.toString()).subscribe(organizationAndCountry => {
           this.registerForm.patchValue(organizationAndCountry);
         });
-
       } else {
         this.registerForm.controls.organization.reset();
         this.registerForm.controls.country.reset();
