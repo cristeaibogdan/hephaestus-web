@@ -112,28 +112,6 @@ export class WashingMachineService {
     return this.washingMachineDetail$.asObservable();
   }
 
-// **************************************
-// *** STEP 2 = SELECTED FILES
-// **************************************
-  
-  private selectedFiles:ImageFile[] = [];
-
-  setSelectedFiles(selectedFiles :ImageFile[]) {
-    this.selectedFiles = selectedFiles;
-  }
-
-  getSelectedFiles() {
-    return this.selectedFiles;
-  }
-
-  clearSelectedFiles() {
-    this.selectedFiles = [];
-  }
-    
-// **************************************
-// *** RESETS FOR STEP 2
-// **************************************
-
   resetWashingMachineDetail() {    
     const initialWashingMachineDetail: WashingMachineDetail = {
       applicablePackageDamage:false,
@@ -175,6 +153,24 @@ export class WashingMachineService {
       repairPrice:0
     }
     this.washingMachineDetail$.next(initialWashingMachineDetail);
+  }
+
+// **************************************
+// *** STEP 2 = SELECTED FILES
+// **************************************
+  
+  private selectedFiles:ImageFile[] = [];
+
+  setSelectedFiles(selectedFiles :ImageFile[]) {
+    this.selectedFiles = selectedFiles;
+  }
+
+  getSelectedFiles() {
+    return this.selectedFiles;
+  }
+
+  clearSelectedFiles() {
+    this.selectedFiles = [];
   }
 
 // **************************************
