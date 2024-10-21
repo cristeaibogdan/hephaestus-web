@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { UserAccountDTO } from '../../washing-machine/models/dtos/user-account.dto';
+import { LoginUserResponse } from '../../washing-machine/models/dtos/login-user-response.dto';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
     private router: Router
   ) { }
 
-  currentUser$!:Observable<UserAccountDTO>;
+  currentUser$!:Observable<LoginUserResponse>;
 
   ngOnInit() { 
     this.currentUser$ = this._authService.getCurrentUser();

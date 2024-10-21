@@ -1,9 +1,8 @@
-export interface UserAccountDTO {
+export interface LoginUserResponse {
   code:string,
   organization:string,
   country:string,
 
   email:string,
-  username:string,
-  password:string
+  username:string
 }

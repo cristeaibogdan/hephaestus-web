@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserAccountDTO } from '../washing-machine/models/dtos/user-account.dto';
+import { LoginUserResponse } from '../washing-machine/models/dtos/login-user-response.dto';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginUserRequest } from '../washing-machine/models/dtos/login-user-request.dto';
@@ -10,14 +10,13 @@ export class AuthService {
 
   isLoggedIn!:boolean;
 
-  private loggedUser = new BehaviorSubject<UserAccountDTO>({
+  private loggedUser = new BehaviorSubject<LoginUserResponse>({
     code:'',
     organization:'',
     country:'',
 
     email:'',
-    username:'',
-    password:''
+    username:''
   });
 
   constructor(
@@ -50,7 +49,7 @@ export class AuthService {
   }
 
   login(loginUserRequest: LoginUserRequest) { 
-    this._authDataService.login(loginUserRequest).subscribe((response:UserAccountDTO) => {
+    this._authDataService.login(loginUserRequest).subscribe((response) => {
       this.isLoggedIn = true;
       this.loggedUser.next(response);
 
