@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Validators, NonNullableFormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { UserCredentialsDTO } from '../../washing-machine/models/dtos/user-credentials.dto';
+import { LoginUserRequest } from '../../washing-machine/models/dtos/login-user-request.dto';
 
 @Component({
   selector: 'app-login',
@@ -25,11 +25,11 @@ export class LoginComponent {
       return;
     }
 
-    const userCredentialsDTO: UserCredentialsDTO = {
+    const loginUserRequest: LoginUserRequest = {
       username: this.loginForm.controls.username.value,
       password: this.loginForm.controls.password.value
     };
 
-    this._authService.login(userCredentialsDTO);
+    this._authService.login(loginUserRequest);
   }
 }

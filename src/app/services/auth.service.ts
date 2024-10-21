@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { UserAccountDTO } from '../washing-machine/models/dtos/user-account.dto';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
-import { UserCredentialsDTO } from '../washing-machine/models/dtos/user-credentials.dto';
+import { LoginUserRequest } from '../washing-machine/models/dtos/login-user-request.dto';
 import { AuthDataService } from './auth.data.service';
 
 @Injectable({providedIn: 'root'})
@@ -49,8 +49,8 @@ export class AuthService {
     return this.loggedUser.value.username=username;
   }
 
-  login(userCredentialsDTO: UserCredentialsDTO) { 
-    this._authDataService.login(userCredentialsDTO).subscribe((response:UserAccountDTO) => {
+  login(loginUserRequest: LoginUserRequest) { 
+    this._authDataService.login(loginUserRequest).subscribe((response:UserAccountDTO) => {
       this.isLoggedIn = true;
       this.loggedUser.next(response);
 

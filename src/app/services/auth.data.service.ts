@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { UserAccountDTO } from '../washing-machine/models/dtos/user-account.dto';
-import { UserCredentialsDTO } from '../washing-machine/models/dtos/user-credentials.dto';
+import { LoginUserRequest } from '../washing-machine/models/dtos/login-user-request.dto';
 import { UserUpdateContainer } from '../washing-machine/models/dtos/user-update-container.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { OrganizationAndCountryDTO } from '../washing-machine/models/dtos/organization-and-country.dto';
@@ -16,9 +16,9 @@ export class AuthDataService {
 //*** AUTH - LOGIN
 //******************************
 
-  login(userCredentialDTO: UserCredentialsDTO) {
+  login(loginUserRequest: LoginUserRequest) {
     const url = this.apiURL.concat("/api/v1/users/login");
-    const payload = userCredentialDTO;
+    const payload = loginUserRequest;
     return this.http
       .post<UserAccountDTO>(url, payload);
   }
