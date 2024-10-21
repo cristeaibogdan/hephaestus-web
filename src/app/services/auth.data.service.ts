@@ -4,7 +4,7 @@ import { UserAccountDTO } from '../washing-machine/models/dtos/user-account.dto'
 import { LoginUserRequest } from '../washing-machine/models/dtos/login-user-request.dto';
 import { UserUpdateContainer } from '../washing-machine/models/dtos/user-update-container.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { OrganizationAndCountryDTO } from '../washing-machine/models/dtos/organization-and-country.dto';
+import { GetOrganizationAndCountryResponse } from '../washing-machine/models/dtos/get-organization-and-country-response.dto';
 
 @Injectable({providedIn: 'root'})
 export class AuthDataService {
@@ -60,6 +60,6 @@ export class AuthDataService {
     const headers = new HttpHeaders().set('AsyncValidator', 'true');
 
     return this.http
-      .get<OrganizationAndCountryDTO>(url, {headers});
+      .get<GetOrganizationAndCountryResponse>(url, {headers});
   }
 }
