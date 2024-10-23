@@ -2,10 +2,10 @@
   <img matPrefix [src]="selectedLanguage.flag">
 
   <mat-select [(ngModel)]="selectedLanguage" (ngModelChange)="changeLanguage($event)">
-    <mat-option class="options" *ngFor="let language of languageList" [value]="language">
+    <mat-option class="options" *ngFor="let language of availableLanguages" [value]="language">
       <div class="language-option">
         <img [src]="language.flag">
-        {{language.display}}
+        {{language.name}}
       </div>
     </mat-option>
   </mat-select>

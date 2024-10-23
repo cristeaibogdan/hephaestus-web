@@ -3,31 +3,35 @@ import { TranslateService } from '@ngx-translate/core';
 
 export interface Language {
   flag: string,
-  display: string,
+  name: string,
   value: string
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class LanguageService {
-  private languageList:Language[] = [
-    {flag: "assets/images/country-flags/united-kingdom.png", display: "English (UK)", value: "EN"},
-    {flag: "assets/images/country-flags/slovenia.png", display: "Slovenčina", value: "SL"},
-    {flag: "assets/images/country-flags/spain.png", display: "Español", value: "ES"},
-    {flag: "assets/images/country-flags/italy.png", display: "Italiano", value: "IT"},
-    {flag: "assets/images/country-flags/romania.png", display: "Română", value: "RO"},
+  private readonly LANGUAGE_STORAGE_KEY = "selectedLanguage";
+  private readonly availableLanguages: Language[] = [
+    {flag: "assets/images/country-flags/united-kingdom.png", name: "English (UK)", value: "EN"},
+    {flag: "assets/images/country-flags/slovenia.png", name: "Slovenčina", value: "SL"},
+    {flag: "assets/images/country-flags/spain.png", name: "Español", value: "ES"},
+    {flag: "assets/images/country-flags/italy.png", name: "Italiano", value: "IT"},
+    {flag: "assets/images/country-flags/romania.png", name: "Română", value: "RO"},
   ];
-  private selectedLanguage = this.languageList[0];
+  private selectedLanguage: Language = this.getLanguageFromStorage();
 
-  constructor(
-    private _translateService: TranslateService
-  ) {
-    _translateService.setDefaultLang("EN");
+  constructor(private _translateService: TranslateService) {
+    this._translateService.setDefaultLang(this.availableLanguages[0].value);
+    this._translateService.use(this.selectedLanguage.value);
   }
 
-  getLanguageList() {
-    return this.languageList;
+  private getLanguageFromStorage() {
+    const savedLanguage = localStorage.getItem(this.LANGUAGE_STORAGE_KEY);    
+    return this.availableLanguages.find(lang => lang.value === savedLanguage)
+              || this.availableLanguages[0];
+  }
+
+  getAvailableLanguages() {
+    return this.availableLanguages;
   }
 
   getSelectedLanguage() {
@@ -37,5 +41,6 @@ export class LanguageService {
   changeLanguage(language: Language) {
     this.selectedLanguage = language;
     this._translateService.use(language.value);
+    localStorage.setItem(this.LANGUAGE_STORAGE_KEY, language.value);
   }
 }

@@ -8,12 +8,10 @@ import { Language, LanguageService } from 'src/app/services/language.service';
 })
 export class LanguageSelectorComponent {
 
-  constructor(
-    private _languageService: LanguageService    
-  ) { }
+  constructor(private _languageService: LanguageService) { }
 
-  languageList:Language[] = this._languageService.getLanguageList();
-  selectedLanguage:Language = this._languageService.getSelectedLanguage();
+  availableLanguages: Language[] = this._languageService.getAvailableLanguages();
+  selectedLanguage: Language = this._languageService.getSelectedLanguage();
 
   changeLanguage(language:Language) {
     this._languageService.changeLanguage(language);
