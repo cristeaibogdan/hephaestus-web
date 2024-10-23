@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NonNullableFormBuilder } from '@angular/forms';
 import { Language, LanguageService } from 'src/app/services/language.service';
 
 @Component({
@@ -7,11 +8,10 @@ import { Language, LanguageService } from 'src/app/services/language.service';
   styleUrls: ['./language-selector.component.css']
 })
 export class LanguageSelectorComponent {
-
-  constructor(private _languageService: LanguageService) { }
+  constructor(private _languageService: LanguageService, private fb: NonNullableFormBuilder) { }
 
   availableLanguages: Language[] = this._languageService.getAvailableLanguages();
-  selectedLanguage: Language = this._languageService.getSelectedLanguage();
+  selectedLanguage = this.fb.control(this._languageService.getSelectedLanguage());
 
   changeLanguage(language:Language) {
     this._languageService.changeLanguage(language);

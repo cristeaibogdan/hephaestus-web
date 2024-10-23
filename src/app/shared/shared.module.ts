@@ -5,7 +5,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { DragAndDropDirective } from './directives/drag-and-drop.directive';
 import { StepperButtonsDirective } from './directives/stepper-buttons.directive';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { LanguageSelectorComponent } from './components/language-selector/language-selector.component';
 import { DateFormatMMYYYYDirective } from './directives/date-format-mm-yyyy.directive';
 import { DateFormatSlashYYYYMMDDDirective } from './directives/date-format-slash-yyyy-mm-dd.directive';
@@ -33,7 +33,6 @@ import { A11yModule } from '@angular/cdk/a11y';
     AngularMaterialModule,    
     TranslateModule,
 
-    FormsModule,
     ReactiveFormsModule,
 
     A11yModule,
@@ -43,7 +42,6 @@ import { A11yModule } from '@angular/cdk/a11y';
     AngularMaterialModule,
     TranslateModule,    
 
-    FormsModule,
     ReactiveFormsModule,
 
     A11yModule,
