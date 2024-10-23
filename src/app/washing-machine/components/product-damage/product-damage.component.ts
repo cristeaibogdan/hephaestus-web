@@ -34,7 +34,7 @@ export class ProductDamage implements OnInit, OnDestroy {
       packageDamaged : [false],
       packageDirty : [false],
       packageMaterialAvailable : [false],
-    }, {validators: CustomValidators.atLeastOneOutOfThreeTrue(
+    }, {validators: CustomValidators.atLeastOneTrueOutOf(
       "packageDamaged", 
       "packageDirty", 
       "packageMaterialAvailable")}
@@ -62,12 +62,11 @@ export class ProductDamage implements OnInit, OnDestroy {
       visibleSurfacesMajorDamage : [{value:"", disabled: true},
         [Validators.required]
       ]
-    }, {validators: CustomValidators.atLeastOneOutOfFourTrue(
+    }, {validators: CustomValidators.atLeastOneTrueOutOf(
       "visibleSurfacesHasScratches",
       "visibleSurfacesHasDents",
       "visibleSurfacesHasMinorDamage",
-      "visibleSurfacesHasMajorDamage"
-    )}
+      "visibleSurfacesHasMajorDamage")}
     ),
 
 
@@ -92,18 +91,17 @@ export class ProductDamage implements OnInit, OnDestroy {
       hiddenSurfacesMajorDamage : [{value:"", disabled: true},
         [Validators.required]
       ]
-    }, {validators: CustomValidators.atLeastOneOutOfFourTrue(
+    }, {validators: CustomValidators.atLeastOneTrueOutOf(
         "hiddenSurfacesHasScratches",
         "hiddenSurfacesHasDents",
         "hiddenSurfacesHasMinorDamage",
-        "hiddenSurfacesHasMajorDamage"
-      )}
+        "hiddenSurfacesHasMajorDamage")}
     ),
-  },{validators: CustomValidators.atLeastOneOutOfThreeTrue(
+  }, {validators: CustomValidators.atLeastOneTrueOutOf(
       "applicablePackageDamage",
       "applicableVisibleSurfacesDamage",
-      "applicableHiddenSurfacesDamage")
-    });
+      "applicableHiddenSurfacesDamage")}
+  );
 
   washingMachinePricingForm = this.fb.group({
     price : [0, [Validators.min(0), Validators.max(10000)]],

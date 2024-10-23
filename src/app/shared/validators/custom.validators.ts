@@ -3,8 +3,8 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 export class CustomValidators {
 
   // TYPE => cross field validator
+  // CONDITION => values are different
   // RETURNS => passwordMismatch error on second control
-  // CONDITION => only if both control values are different
   static passwordsShouldMatch(passwordControlNameOne: string, confirmPasswordControlNameTwo:string): ValidatorFn {
     return (formGroup: AbstractControl): ValidationErrors | null => {
 
@@ -31,8 +31,8 @@ export class CustomValidators {
   }
 
   // TYPE => cross field validator
+  // CONDITION => if both values are "" (empty string)
   // RETURNS => atLeastOne error on both controls
-  // CONDITION => if both controls have the value "" (empty string)
   // It doesn't check for any prior errors. It assumes the controls have no other validators
   static atLeastOneControlRequired (controlNameOne:string, controlNameTwo:string): ValidatorFn {
     return (formGroup: AbstractControl) : ValidationErrors | null =>  {
@@ -54,9 +54,13 @@ export class CustomValidators {
     }
   }
 
+  /**
+   * @deprecated This method is deprecated. Use `atLeastOneTrueOutOf()` instead.
+   * This method does something important but has been replaced by a better implementation.
+  */
   // TYPE => cross field validator
+  // CONDITION => if all values are false
   // RETURNS => atLeastOneOutOfThreeTrue error on form group
-  // CONDITION => if all controls are false
   // It doesn't check for any prior errors. It assumes the controls have no other validators
   static atLeastOneOutOfThreeTrue (controlNameOne:string, controlNameTwo:string, controlNameThree:string): ValidatorFn {
     return (formGroup: AbstractControl) : ValidationErrors | null =>  {
@@ -74,9 +78,13 @@ export class CustomValidators {
     }
   }
 
+  /**
+   * @deprecated This method is deprecated. Use `atLeastOneTrueOutOf()` instead.
+   * This method does something important but has been replaced by a better implementation.
+  */
   // TYPE => cross field validator
+  // CONDITION => if all values are false
   // RETURNS => atLeastOneOutOfFourTrue error on form group
-  // CONDITION => if all controls are false
   // It doesn't check for any prior errors. It assumes the controls have no other validators
   static atLeastOneOutOfFourTrue (
     controlNameOne:string, 
@@ -100,5 +108,21 @@ export class CustomValidators {
       }  
     }
   }
-}
 
+  // TYPE => cross field validator
+  // CONDITION => if all values are false
+  // RETURNS => atLeastOneTrueError error on form group
+  // It doesn't check for any prior errors. It assumes the controls have no other validators
+  static atLeastOneTrueOutOf(...controlNames: string[]): ValidatorFn {
+    return (formGroup: AbstractControl) : ValidationErrors | null =>  {
+      const error = { atLeastOneTrueError: true };
+
+      // Use .some() to check if at least one control has a value of true
+      const atLeastOneIsTrue: boolean = controlNames.some(controlName => formGroup.get(controlName)?.value);
+
+      return atLeastOneIsTrue 
+        ? null
+        : error;
+    }
+  }
+}
