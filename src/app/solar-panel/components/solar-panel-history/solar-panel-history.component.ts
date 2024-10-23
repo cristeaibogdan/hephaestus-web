@@ -111,21 +111,15 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
   recommendationOptions: SolarPanelRecommendation[] = Object.values(SolarPanelRecommendation);
 
   filterForm = this.fb.group({
-    createdAt: null,
-    manufacturer: null,
+    createdAt: null as string | null,
+    manufacturer: null as string | null,
+    
+    serialNumber: null as string | null,
+    model: null as string | null,
+    type: null as string | null,
 
-    serialNumber: null,
-    model: null,
-    type: null,
-
-    recommendation: null
+    recommendation: null as SolarPanelRecommendation | null
   });
-
-  handleDate(value:string) {
-    return (value == null)
-      ? null
-      : moment(this.filterForm.value.createdAt!).format("YYYY-MM-DD");
-  }
 
   // 1. STARTING VALUES FOR PAGINATOR
   pageNumber = 0;
@@ -157,13 +151,13 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
       pageIndex: this.pageNumber,
       pageSize: this.pageSize,
 
-      manufacturer: this.filterForm.value.manufacturer || null,
-      model: this.filterForm.value.model || null,
-      type: this.filterForm.value.type || null,
-      serialNumber: this.filterForm.value.serialNumber || null,
+      manufacturer: this.filterForm.controls.manufacturer.value,
+      model: this.filterForm.controls.model.value,
+      type: this.filterForm.controls.type.value,
+      serialNumber: this.filterForm.controls.serialNumber.value,
 
-      recommendation: this.filterForm.value.recommendation || null,
-      createdAt: this.handleDate(this.filterForm.value.createdAt!) 
+      recommendation: this.filterForm.controls.recommendation.value,
+      createdAt: this.handleDate(this.filterForm.controls.createdAt.value) 
     };
 
     console.log("searchSolarPanelRequest = ", searchSolarPanelRequest);
@@ -171,6 +165,12 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
     // 4. UPDATE VALUES OF PAGINATOR FROM RESPONSE
     //TODO: API call to backend
     this.solarPanels.data = DUMMY_DATA;
+  }
+
+  private handleDate(value: string | null) {
+    return (value)
+      ? moment(value).format("YYYY-MM-DD")
+      : null;
   }
   
 // *****************************************
