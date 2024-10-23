@@ -74,18 +74,18 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   recommendationOptions: Recommendation[] = Object.values(Recommendation);
 
   filterForm = this.fb.group({
-    manufacturer: null,
-    damageType: null,
-    returnType: null,
-    identificationMode: null,
+    manufacturer: null as string | null,
+    damageType: null as DamageType | null,
+    returnType: null as ReturnType | null,
+    identificationMode: null as IdentificationMode | null,
 
-    serialNumber: null,
-    model: null,
-    type: null,
+    serialNumber: null as string | null,
+    model: null as string | null,
+    type: null as string | null,
 
-    recommendation: null,
+    recommendation: null as Recommendation | null,
 
-    createdAt: null
+    createdAt: null as string | null
   });
   
   // 1. STARTING VALUES FOR PAGINATOR
@@ -118,15 +118,15 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     const searchWashingMachineRequest: SearchWashingMachineRequest = {
       pageIndex: this.pageNumber,
       pageSize: this.pageSize,
-      identificationMode: this.filterForm.value.identificationMode || null,
-      manufacturer: this.filterForm.value.manufacturer || null,
-      model: this.filterForm.value.model || null,
-      type: this.filterForm.value.type || null,
-      serialNumber: this.filterForm.value.serialNumber || null,
-      returnType: this.filterForm.value.returnType || null,
-      damageType: this.filterForm.value.damageType || null,
-      recommendation: this.filterForm.value.recommendation || null,
-      createdAt: this.handleDate(this.filterForm.value.createdAt!) 
+      identificationMode: this.filterForm.controls.identificationMode.value,
+      manufacturer: this.filterForm.controls.manufacturer.value,
+      model: this.filterForm.controls.model.value,
+      type: this.filterForm.controls.type.value,
+      serialNumber: this.filterForm.controls.serialNumber.value,
+      returnType: this.filterForm.controls.returnType.value,
+      damageType: this.filterForm.controls.damageType.value,
+      recommendation: this.filterForm.controls.recommendation.value,
+      createdAt: this.handleDate(this.filterForm.controls.createdAt.value) 
     };
 
     console.log("searchWashingMachineRequest = ", searchWashingMachineRequest);
@@ -153,10 +153,10 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     });
   }
 
-  handleDate(value:string) {
-    return (value == null)
-      ? null
-      : moment(this.filterForm.value.createdAt!).format("YYYY-MM-DD");
+  private handleDate(value: string | null) {
+    return (value)
+      ? moment(value).format("YYYY-MM-DD")
+      : null;
   }
 
 // *****************************************
