@@ -1,0 +1,28 @@
+{
+  "I18N": {
+    "COMMON": {
+      "SERVICE_TITLE": "RO Household Appliance Recommendation Services",
+
+      "REGISTER": "Register",
+      "RESET": "Reset",
+
+      "REGISTER_CODE": "Register code",
+      "COUNTRY": "Country",
+      "ORGANIZATION": "Organization",
+      "EMAIL": "Email",
+      "USERNAME": "Username",
+      "PASSWORD": "Password",
+      "CONFIRM_PASSWORD": "Confirm password",
+      "LOG_IN": "Log in"
+    },
+
+    "MAT_INTERNAL": {
+      "PAGINATOR_OF": "din",
+      "PAGINATOR_PRODUCTS_PER_PAGE_LABEL": "Produse per pagină:",
+      "PAGINATOR_FIRST_PAGE": "Prima pagină",
+      "PAGINATOR_LAST_PAGE": "Ultima pagină",
+      "PAGINATOR_NEXT_PAGE": "Următoarea pagină",
+      "PAGINATOR_PREVIOUS_PAGE": "Precedenta pagină"
+    }
+  }
+}
