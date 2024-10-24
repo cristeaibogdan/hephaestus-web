@@ -19,7 +19,7 @@ export class AppComponent {
   ) {
 
   // used to hide the header on login and register page 
-  router.events.forEach((event) => {
+  this.router.events.forEach((event) => {
 
     if (event instanceof NavigationStart) {
       const currentUrl = event.url;
@@ -32,10 +32,9 @@ export class AppComponent {
     }
   });
 
-
   this.matIconRegistry
-    .addSvgIcon("profile",this.sanitizer.bypassSecurityTrustResourceUrl("/assets/svgs/profile.svg"))
-    .addSvgIcon("search",this.sanitizer.bypassSecurityTrustResourceUrl("/assets/svgs/search.svg"))
+    .addSvgIcon("profile",this.sanitizer.bypassSecurityTrustResourceUrl("assets/svgs/profile.svg"))
+    .addSvgIcon("search",this.sanitizer.bypassSecurityTrustResourceUrl("assets/svgs/search.svg"))
     .addSvgIcon('camera_ON', this.sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/camera_ON.svg'))
     .addSvgIcon('camera_OFF', this.sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/camera_OFF.svg'))
     .addSvgIcon('camera_SWITCH', this.sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/camera_SWITCH.svg'))
