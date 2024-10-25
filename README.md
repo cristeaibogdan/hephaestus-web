@@ -22,6 +22,13 @@ The project consists of two components:
    <img src="src\assets\images\Application.gif" >
 </div>
 
+## Technologies Used
+* Angular 
+* Angular Material
+* Reactive Forms
+* Zxing Library
+* i18n
+
 ## Requirements
 * Visual Studio Code (VSC)
 * Node.js
