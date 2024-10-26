@@ -23,11 +23,11 @@ The project consists of two components:
 </div>
 
 ## Technologies Used
-* Angular 
-* Angular Material
-* Reactive Forms
-* Zxing Library
-* i18n
+* **Angular 15** - The frontend is written in Angular 15, a framework for building efficient sinle-page applications (SPAs).
+* **Angular Material** - Offers a set of reusable UI components based on Material Design. Used to enhance the user interface with a modern look and feel.
+* **Reactive Forms** - Facilitates handling of form inputs and validations through a reactive programming approach.
+* **ZXing** - A library for scanning and decoding barcodes and QR codes.
+* **(i18n)** - Supports internationalization, making the application adaptable for various languages and regions.
 
 ## Requirements
 * Visual Studio Code (VSC)
