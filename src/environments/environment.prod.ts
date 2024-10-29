@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: "http://localhost:8083"
+  apiBaseUrl: "https://api-gateway-8rxu.onrender.com"
 };
