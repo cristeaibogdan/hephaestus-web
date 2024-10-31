@@ -31,6 +31,8 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     private fb:FormBuilder
   ) { }
 
+  readonly recommendation = Recommendation;
+
   washingMachines = new MatTableDataSource<Partial<WashingMachineFullResponse>>();
     
   displayedColumns: string[] = [

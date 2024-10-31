@@ -69,6 +69,8 @@ const DUMMY_DATA: GetSolarPanelFullResponse[] = [
 })
 export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
 
+  readonly solarPanelRecommendation = SolarPanelRecommendation;
+
   constructor(
     private dialog: MatDialog,
     private fb:FormBuilder
