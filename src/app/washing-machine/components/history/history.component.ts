@@ -19,7 +19,7 @@ import { WashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
-  styleUrls: ['./history.component.css'] 
+  styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit, AfterViewInit {
 
@@ -163,7 +163,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 // *** TAB KEY HANDLER
 // *****************************************
 
-  @HostListener("window:keydown.tab", ["$event"])
+  @HostListener("window:keydown.tab", ["$event"]) // The host property is not able to listen to window or document events directly, so the cleanest approach here is to stick with @HostListener for this specific event.
   handleTab(event: KeyboardEvent) {
     const focusedElement = document.activeElement as HTMLElement;
 

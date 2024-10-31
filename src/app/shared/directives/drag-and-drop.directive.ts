@@ -1,14 +1,20 @@
-import {Directive, ElementRef, EventEmitter, HostBinding, HostListener, Output, Renderer2} from "@angular/core";
+import {Directive, ElementRef, EventEmitter, Output, Renderer2} from "@angular/core";
 
 @Directive({
-  selector:'[dragAndDrop]'})
+  selector:'[dragAndDrop]',
+  host: {
+    '(dragover)': 'handleDragOver($event)',
+    '(dragleave)': 'handleDragLeave($event)',
+    '(drop)': 'handleDrop($event)',
+  }
+})
 export class DragAndDropDirective {
-
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   @Output() filesDropped = new EventEmitter<FileList>();
 
-  @HostListener("dragover", ["$event"]) onDragOver(e: DragEvent) {
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
+
+  handleDragOver(e: DragEvent) {
     e.preventDefault();
     e.stopPropagation();
 
@@ -16,7 +22,7 @@ export class DragAndDropDirective {
     this.renderer.setStyle(this.el.nativeElement, "border", "2px dashed #2196F3");
   }
 
-  @HostListener("dragleave", ["$event"]) onDragLeave(e: DragEvent) {
+  handleDragLeave(e: DragEvent) {
     e.preventDefault();
     e.stopPropagation();
 
@@ -24,7 +30,7 @@ export class DragAndDropDirective {
     this.renderer.setStyle(this.el.nativeElement, "border", "");
   }
 
-  @HostListener("drop", ["$event"]) onDrop(e: DragEvent) {
+  handleDrop(e: DragEvent) {
     e.preventDefault();
     e.stopPropagation();
     this.filesDropped.emit(e.dataTransfer?.files);
@@ -33,4 +39,3 @@ export class DragAndDropDirective {
     this.renderer.setStyle(this.el.nativeElement, "border", "");
   }
 }
-

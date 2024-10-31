@@ -1,12 +1,13 @@
-import {Directive, HostBinding} from "@angular/core";
+import {Directive} from "@angular/core";
 
 @Directive({
-  selector:'[stepper-buttons]'})
-  export class StepperButtonsDirective {
-
-    @HostBinding('style.display') display:string = 'flex';
-    @HostBinding('style.justify-content') justify:string = 'center';
-    @HostBinding('style.gap') gap:string = '5%';
-    @HostBinding('style.margin') margin:string = '1.5% 0';
+  selector: '[stepper-buttons]',
+  host: {
+    '[style.display]': `'flex'`,
+    '[style.justify-content]': `'center'`,
+    '[style.gap]': `'5%'`,
+    '[style.margin]': `'1.5% 0'`
   }
+})
+  export class StepperButtonsDirective {}
 
