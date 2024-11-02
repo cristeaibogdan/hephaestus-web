@@ -27,7 +27,6 @@ import { MatSortModule } from '@angular/material/sort';
     MatIconModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule,
     MatMenuModule,
     MatCardModule,
     MatProgressSpinnerModule,
