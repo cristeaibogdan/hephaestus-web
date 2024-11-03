@@ -54,14 +54,6 @@ fieldset {
   margin-bottom: 21.5px;  
 }
 
-.fieldset-invalid {
-  border-color: red;
-}
-
-.fieldset-invalid legend {
-  color:red;
-}
-
 legend span {
   color: red;
 }

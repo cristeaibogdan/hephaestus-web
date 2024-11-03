@@ -134,3 +134,14 @@ body {
   white-space: pre-line;
 }
 
+/* **************************************
+// *** STYLES FOR INVALID FIELDSETS
+// **************************************/
+
+.fieldset-invalid {
+  border-color: red;
+}
+
+.fieldset-invalid legend {
+  color:red;
+}
