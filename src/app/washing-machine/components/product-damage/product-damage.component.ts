@@ -280,7 +280,6 @@ export class ProductDamage implements OnInit, OnDestroy {
   
   onReset(e:Event) {
     e.preventDefault();
-    this.washingMachineDetailForm.reset();
     this.washingMachinePricingForm.reset();
     this.resetSelectedFiles();    
   }  
