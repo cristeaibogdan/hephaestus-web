@@ -1,11 +1,11 @@
 <ng-container class="washing-machine-container" *ngIf="washingMachineIdentification$ | async as washingMachineIdentification">
     
-  <div class="washing-machine-status" >
-    <span *ngIf="washingMachineIdentification.identificationMode">    
+  <div class="washing-machine-status">
+    <span *ngIf="washingMachineIdentification.manufacturer">
       {{"I18N.COMMON.IDENTIFICATION_MODE" | translate}}: {{washingMachineIdentification.identificationMode}}
     </span> 
 
-    <span *ngIf="washingMachineIdentification.damageType">
+    <span *ngIf="washingMachineIdentification.manufacturer">
       {{"I18N.COMMON.DAMAGE_TYPE" | translate}}: {{washingMachineIdentification.damageType}}
     </span>
     
