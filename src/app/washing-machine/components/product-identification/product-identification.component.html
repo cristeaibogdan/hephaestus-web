@@ -1,4 +1,4 @@
-<form [formGroup]="washingMachineForm" (ngSubmit)="onSubmit()" (reset)="onReset($event)">
+<form [formGroup]="washingMachineIdentificationForm" (ngSubmit)="onSubmit()" (reset)="onReset($event)">
 <mat-card class="mat-elevation-z8">
   <mat-card-title>{{"I18N.PRODUCT_IDENTIFICATION.TITLE" | translate}}</mat-card-title>
 
@@ -14,8 +14,8 @@
       </legend>
 
       <mat-button-toggle-group formControlName="identificationMode"
-        (valueChange)="disableDataFields_WHEN_QRCodeIsSelected()">
-        <mat-button-toggle [value]="identificationMode.QR_CODE" (change)="openCameraDialog()">
+        (change)="disableDataFields_WHEN_QRCodeIsSelected()">
+        <mat-button-toggle [value]="identificationMode.QR_CODE" (click)="openCameraDialog()">
           {{"I18N.PRODUCT_IDENTIFICATION.QR_CODE" | translate}}
         </mat-button-toggle>
         <mat-button-toggle [value]="identificationMode.DATA_MATRIX">
@@ -71,22 +71,22 @@
       <mat-label>{{"I18N.COMMON.SERIAL_NUMBER" | translate}}</mat-label>
       <input matInput formControlName="serialNumber">   
 
-      <mat-error *ngIf="washingMachineForm.controls.serialNumber.errors?.required">
+      <mat-error *ngIf="washingMachineIdentificationForm.controls.serialNumber.errors?.required">
         {{"I18N.MAT_ERROR.SERIAL_NUMBER_REQUIRED" | translate}}
       </mat-error>
 
-      <mat-error *ngIf="washingMachineForm.controls.serialNumber.errors?.backendError">
+      <mat-error *ngIf="washingMachineIdentificationForm.controls.serialNumber.errors?.backendError">
         {{"I18N.MAT_ERROR.NO_CONNECTION" | translate}}
       </mat-error>
 
-      <mat-error *ngIf="washingMachineForm.controls.serialNumber.errors?.invalid">
+      <mat-error *ngIf="washingMachineIdentificationForm.controls.serialNumber.errors?.invalid">
         {{"I18N.MAT_ERROR.SERIAL_NUMBER_TAKEN" | translate}}
       </mat-error>
       
-      <mat-hint *ngIf="washingMachineForm.controls.serialNumber.pending">
+      <mat-hint *ngIf="washingMachineIdentificationForm.controls.serialNumber.pending">
         {{"I18N.MAT_HINT.PENDING" | translate}}
       </mat-hint>
-      <mat-hint *ngIf="washingMachineForm.controls.serialNumber.valid">
+      <mat-hint *ngIf="washingMachineIdentificationForm.controls.serialNumber.valid">
         {{"I18N.MAT_HINT.SERIAL_NUMBER_VALID" | translate}}
       </mat-hint>
     </mat-form-field>
@@ -150,7 +150,7 @@
 </form>
 
 <!-- <pre> ====== FORM ======
-  {{washingMachineForm.getRawValue() | json}}
+  {{washingMachineIdentificationForm.getRawValue() | json}}
 </pre> -->
 
 <!-- <pre> ====== SERVICE ======

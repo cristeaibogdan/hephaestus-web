@@ -31,7 +31,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
   ) { }
   
   ngOnInit() {
-    this.populateDataMatrix_Manufacturer_Field(this.washingMachineForm.controls.category.value);
+    this.populateDataMatrix_Manufacturer_Field(this.washingMachineIdentificationForm.controls.category.value);
   }
 
   ngOnDestroy() {
@@ -44,7 +44,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
   damageType = DamageType;
   identificationMode = IdentificationMode;
 
-  washingMachineForm = this.fb.group({
+  washingMachineIdentificationForm = this.fb.group({
     identificationMode: ["", Validators.required],
         
     category: [{value:"Washing Machine", disabled:true}],
@@ -70,14 +70,14 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
 // *****************************************
 
   disableDataFields_WHEN_QRCodeIsSelected() {
-    this.washingMachineForm.controls.manufacturer.enable();
-    this.washingMachineForm.controls.serialNumber.enable();
-    this.washingMachineForm.controls.modelAndType.enable();
+    this.washingMachineIdentificationForm.controls.manufacturer.enable();
+    this.washingMachineIdentificationForm.controls.serialNumber.enable();
+    this.washingMachineIdentificationForm.controls.modelAndType.enable();
 
-    if (this.washingMachineForm.value.identificationMode === IdentificationMode.QR_CODE) {
-      this.washingMachineForm.controls.manufacturer.disable();
-      this.washingMachineForm.controls.serialNumber.disable();
-      this.washingMachineForm.controls.modelAndType.disable();
+    if (this.washingMachineIdentificationForm.value.identificationMode === IdentificationMode.QR_CODE) {
+      this.washingMachineIdentificationForm.controls.manufacturer.disable();
+      this.washingMachineIdentificationForm.controls.serialNumber.disable();
+      this.washingMachineIdentificationForm.controls.modelAndType.disable();
     }
   }
 
@@ -85,13 +85,13 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
   disableInTransit!:boolean;
 
   disableDamageTypeBasedOnReturnTypeValue() {    
-    this.disableInUse = (this.washingMachineForm.value.returnType === ReturnType.TRANSPORT);
+    this.disableInUse = (this.washingMachineIdentificationForm.value.returnType === ReturnType.TRANSPORT);
     this.disableInTransit = (
-      this.washingMachineForm.value.returnType === ReturnType.SERVICE || 
-      this.washingMachineForm.value.returnType === ReturnType.COMMERCIAL
+      this.washingMachineIdentificationForm.value.returnType === ReturnType.SERVICE || 
+      this.washingMachineIdentificationForm.value.returnType === ReturnType.COMMERCIAL
     );
 
-    this.washingMachineForm.controls.damageType.reset();
+    this.washingMachineIdentificationForm.controls.damageType.reset();
   }
 
   // TODO: refactor methods related to camera
@@ -105,45 +105,45 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
       // console.log("result from window = ", result);
 
       if(result) {
-        this.washingMachineForm.controls.manufacturer.patchValue(result.manufacturer);
-        this.washingMachineForm.controls.modelAndType.controls.model.patchValue(result.model);
-        this.washingMachineForm.controls.modelAndType.controls.type.patchValue(result.type);
-        this.washingMachineForm.controls.serialNumber.patchValue(result.serialNumber);
+        this.washingMachineIdentificationForm.controls.manufacturer.patchValue(result.manufacturer);
+        this.washingMachineIdentificationForm.controls.modelAndType.controls.model.patchValue(result.model);
+        this.washingMachineIdentificationForm.controls.modelAndType.controls.type.patchValue(result.type);
+        this.washingMachineIdentificationForm.controls.serialNumber.patchValue(result.serialNumber);
       } else {
-        this.washingMachineForm.controls.manufacturer.reset();
-        this.washingMachineForm.controls.modelAndType.reset();
-        this.washingMachineForm.controls.serialNumber.reset();
+        this.washingMachineIdentificationForm.controls.manufacturer.reset();
+        this.washingMachineIdentificationForm.controls.modelAndType.reset();
+        this.washingMachineIdentificationForm.controls.serialNumber.reset();
 
-        this.washingMachineForm.controls.identificationMode.reset();
+        this.washingMachineIdentificationForm.controls.identificationMode.reset();
         this.disableDataFields_WHEN_QRCodeIsSelected();
       }
     });
   }
 
   onSubmit() {
-    if (this.washingMachineForm.invalid) {
+    if (this.washingMachineIdentificationForm.invalid) {
       return;
     }
 
-    const washingMachineModel:string = (this.washingMachineForm.controls.modelAndType.controls.model.value === '')
+    const washingMachineModel:string = (this.washingMachineIdentificationForm.controls.modelAndType.controls.model.value === '')
       ? "N/A"
-      : this.washingMachineForm.controls.modelAndType.controls.model.value;
+      : this.washingMachineIdentificationForm.controls.modelAndType.controls.model.value;
 
-    const washingMachineType:string = (this.washingMachineForm.controls.modelAndType.controls.type.value === '')
+    const washingMachineType:string = (this.washingMachineIdentificationForm.controls.modelAndType.controls.type.value === '')
       ? "N/A"
-      : this.washingMachineForm.controls.modelAndType.controls.type.value;
+      : this.washingMachineIdentificationForm.controls.modelAndType.controls.type.value;
 
     const productIdentificationResult:WashingMachineIdentification = {
-      identificationMode: this.washingMachineForm.controls.identificationMode.value as IdentificationMode,
-      category: this.washingMachineForm.controls.category.value,
-      manufacturer: this.washingMachineForm.controls.manufacturer.value,
+      identificationMode: this.washingMachineIdentificationForm.controls.identificationMode.value as IdentificationMode,
+      category: this.washingMachineIdentificationForm.controls.category.value,
+      manufacturer: this.washingMachineIdentificationForm.controls.manufacturer.value,
 
       model: washingMachineModel,
       type: washingMachineType,
       
-      serialNumber: this.washingMachineForm.controls.serialNumber.value.toString(),
-      returnType: this.washingMachineForm.controls.returnType.value as ReturnType,
-      damageType: this.washingMachineForm.controls.damageType.value as DamageType
+      serialNumber: this.washingMachineIdentificationForm.controls.serialNumber.value.toString(),
+      returnType: this.washingMachineIdentificationForm.controls.returnType.value as ReturnType,
+      damageType: this.washingMachineIdentificationForm.controls.damageType.value as DamageType
     }
 
     this._washingMachineService.setWashingMachineIdentification(productIdentificationResult);
@@ -151,8 +151,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
   }
   
   onReset(e:Event) {
-    e.preventDefault(); // Prevent the default behavior. The disabled input will not appear empty and will preserve its value
-    this.washingMachineForm.reset();    
+    e.preventDefault(); // Prevent the default behavior. The disabled input will not appear empty and will preserve its value   
     this.clearAvailableModelsAndTypes();
     this._washingMachineService.resetWashingMachineIdentification();
   }
@@ -197,7 +196,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
     // Need to reset values, when you repopulate the models and types arrays
     // the option doesn't appear in the select input BUT it's saved in the productForm 
     // causing the controls to be valid
-    this.washingMachineForm.controls.modelAndType.reset();
+    this.washingMachineIdentificationForm.controls.modelAndType.reset();
   }
 }
 
