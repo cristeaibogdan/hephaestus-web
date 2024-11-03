@@ -120,8 +120,15 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
     });
   }
 
+  private markAllMatButtonToggleGroupsAsDirty(): void {
+    this.washingMachineIdentificationForm.controls.identificationMode.markAsTouched();
+    this.washingMachineIdentificationForm.controls.returnType.markAsTouched();
+    this.washingMachineIdentificationForm.controls.damageType.markAsTouched();
+  }
+
   onSubmit() {
     if (this.washingMachineIdentificationForm.invalid) {
+      this.markAllMatButtonToggleGroupsAsDirty();
       return;
     }
 

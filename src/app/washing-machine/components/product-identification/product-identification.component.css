@@ -51,7 +51,15 @@ legend {
 fieldset {
   border-radius: 8px;
   padding: 14px 10px;
-  margin-bottom: 21.5px;
+  margin-bottom: 21.5px;  
+}
+
+.fieldset-invalid {
+  border-color: red;
+}
+
+.fieldset-invalid legend {
+  color:red;
 }
 
 legend span {

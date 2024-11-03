@@ -3,7 +3,9 @@
   <mat-card-title>{{"I18N.PRODUCT_IDENTIFICATION.TITLE" | translate}}</mat-card-title>
 
   <article class="product-information">
-    <fieldset class="text-align-center">
+    <fieldset class="text-align-center" [class.fieldset-invalid] = 
+      "washingMachineIdentificationForm.controls.identificationMode.invalid &&
+      washingMachineIdentificationForm.controls.identificationMode.touched">
       <legend>&nbsp; {{"I18N.COMMON.IDENTIFICATION_MODE" | translate}} &nbsp; <span>*</span> &nbsp;
         <mat-icon 
           matTooltip='{{"I18N.HELP_TOOLTIP.IDENTIFICATION_MODE" | translate}}' 
@@ -91,7 +93,9 @@
       </mat-hint>
     </mat-form-field>
 
-    <fieldset class="text-align-center">
+    <fieldset class="text-align-center" [class.fieldset-invalid] = 
+      "washingMachineIdentificationForm.controls.returnType.invalid &&
+      washingMachineIdentificationForm.controls.returnType.touched">
       <legend>&nbsp; {{"I18N.COMMON.RETURN_TYPE" | translate}} &nbsp; <span>*</span> &nbsp;
         <mat-icon 
           matTooltip='{{"I18N.HELP_TOOLTIP.RETURN_TYPE" | translate}}' 
@@ -115,7 +119,9 @@
       </mat-button-toggle-group>
     </fieldset>
 
-    <fieldset class="text-align-center">
+    <fieldset class="text-align-center" [class.fieldset-invalid] = 
+      "washingMachineIdentificationForm.controls.damageType.invalid &&
+      washingMachineIdentificationForm.controls.damageType.touched">
       <legend>&nbsp; {{"I18N.COMMON.DAMAGE_TYPE" | translate}} &nbsp; <span>*</span> &nbsp;
         <mat-icon
           matTooltip='{{"I18N.HELP_TOOLTIP.DAMAGE_TYPE" | translate}}'
