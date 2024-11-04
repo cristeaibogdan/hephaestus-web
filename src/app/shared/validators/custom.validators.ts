@@ -125,4 +125,43 @@ export class CustomValidators {
         : error;
     }
   }
+
+  // TYPE => cross field validator
+  // CONDITION => minimum is HIGHER than maximum
+  // RETURNS => minMax error on both controllers
+  static minimumLowerThanMaximum(minControlName: string, maxControlName:string): ValidatorFn  {
+    return(formGroup: AbstractControl): ValidationErrors | null => {
+
+      const minControl = formGroup.get(minControlName);
+      const maxControl = formGroup.get(maxControlName);
+      const error = { minMaxError: true };
+
+      const min = minControl?.value;
+      const max = maxControl?.value;
+
+      // Use for debug purposes
+      // console.log("Min = ",min);
+      // console.log("Max = ",max);
+      // console.log("FormGroup = ",formGroup);
+
+      const priorMinControlErrors = (minControl?.errors && !minControl?.hasError("minMaxError"));
+      const priorMaxControlErrors = (maxControl?.errors && !maxControl?.hasError("minMaxError"));
+
+      // Check if there are prior errors AND minMaxError is NOT on the controls
+      // This ensures that minMaxError is set once all the other validators are passed
+      if (priorMinControlErrors || priorMaxControlErrors) {
+        return null;
+      }
+
+      if (min > max) {
+        minControl?.setErrors(error);
+        maxControl?.setErrors(error);
+      } else {
+        minControl?.setErrors(null);
+        maxControl?.setErrors(null);
+      }
+
+      return null;
+    }
+  }
 }

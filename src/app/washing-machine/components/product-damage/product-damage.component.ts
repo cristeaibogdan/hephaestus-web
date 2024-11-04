@@ -104,9 +104,12 @@ export class ProductDamage implements OnInit, OnDestroy {
   );
 
   washingMachinePricingForm = this.fb.group({
-    price : [0, [Validators.min(0), Validators.max(10000)]],
-    repairPrice : [0, [Validators.min(0), Validators.max(10000)]],
-  });
+    price : [0, [Validators.required, Validators.min(0), Validators.max(10000)]],
+    repairPrice : [0, [Validators.required, Validators.min(0), Validators.max(10000)]],
+  }, {validators: CustomValidators.minimumLowerThanMaximum(
+    "repairPrice",
+    "price")}
+  );
   
   minorDamageDescriptionCharacterLimit:number = 200;
   majorDamageDescriptionCharacterLimit:number = 200;

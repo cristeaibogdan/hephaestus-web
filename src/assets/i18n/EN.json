@@ -152,8 +152,14 @@
       "MAJOR_DAMAGES_REQUIRED": "Major damages field is required",
       "PRODUCT_PRICE_MINIMUM": "Product price must be above 0",
       "PRODUCT_PRICE_MAXIMUM": "Product price must be below 10000",
+
       "REPAIR_PRICE_MINIMUM": "Repair price must be above 0",
-      "REPAIR_PRICE_MAXIMUM": "Repair price must be below 10000"
+      "REPAIR_PRICE_MAXIMUM": "Repair price must be below 10000",
+
+      "REPAIR_PRICE_REQUIRED": "Repair price field is required",
+      "PRODUCT_PRICE_REQUIRED": "Price field is required",
+
+      "REPAIR_PRICE_EXCEEDS_PRODUCT_PRICE": "Repair price exceeds product price"
     },
 
     "MAT_INTERNAL": {

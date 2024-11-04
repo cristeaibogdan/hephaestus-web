@@ -331,6 +331,13 @@
       <mat-error *ngIf="washingMachinePricingForm.controls.price.errors?.max">
         {{"I18N.MAT_ERROR.PRODUCT_PRICE_MAXIMUM" | translate}}
       </mat-error>
+      <mat-error *ngIf="washingMachinePricingForm.controls.price.errors?.required">
+        {{"I18N.MAT_ERROR.PRODUCT_PRICE_REQUIRED" | translate}}
+      </mat-error>
+
+      <mat-error *ngIf="washingMachinePricingForm.controls.price.errors?.minMaxError">
+        {{"I18N.MAT_ERROR.REPAIR_PRICE_EXCEEDS_PRODUCT_PRICE" | translate}}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -343,6 +350,13 @@
       </mat-error>
       <mat-error *ngIf="washingMachinePricingForm.controls.repairPrice.errors?.max">
         {{"I18N.MAT_ERROR.REPAIR_PRICE_MAXIMUM" | translate}}
+      </mat-error>
+      <mat-error *ngIf="washingMachinePricingForm.controls.repairPrice.errors?.required">
+        {{"I18N.MAT_ERROR.REPAIR_PRICE_REQUIRED" | translate}}
+      </mat-error>
+      
+      <mat-error *ngIf="washingMachinePricingForm.controls.repairPrice.errors?.minMaxError">
+        {{"I18N.MAT_ERROR.REPAIR_PRICE_EXCEEDS_PRODUCT_PRICE" | translate}}
       </mat-error>
     </mat-form-field>
   </section>
