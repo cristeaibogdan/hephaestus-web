@@ -12,7 +12,9 @@
 </div>
 
 ## What does this project do?
-`Hephaestus` is a personal project designed to help users make informed decisions about household appliances. The application evaluates the condition and damage of the appliance and provides a recommendation on what action to take.
+`Hephaestus` is a personal project designed to help users make informed decisions about household appliances. The application evaluates the condition and damage of the appliance and provides a recommendation on what action to take. 
+
+A deployed version can be found at: https://cristeaibogdan.github.io/hephaestus-web/ 
 
 The project consists of two components:
  - Frontend built with Angular ( **you are here 📍** )
