@@ -299,7 +299,6 @@ export class ProductDamage implements OnInit, OnDestroy {
     }
 
     if(this.washingMachinePricingForm.invalid) {
-      this._notifService.showError("A valid value must be selected for price and repair price", 0);
       return;
     }
 
