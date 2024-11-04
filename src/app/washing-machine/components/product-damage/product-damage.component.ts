@@ -285,6 +285,21 @@ export class ProductDamage implements OnInit, OnDestroy {
   }  
 
   onSubmit() {
+    if(this.selectedFiles.length === 0) {
+      this._notifService.showError("At least one image must be uploaded", 0);
+      return;
+    }
+
+    if(this.washingMachineDetailForm.invalid) {
+      this._notifService.showError("At least one applicable damage must be selected", 0);
+      return;
+    }
+
+    if(this.washingMachinePricingForm.invalid) {
+      this._notifService.showError("A valid value must be selected for price and repair price", 0);
+      return;
+    }
+
     const washingMachineDetail: WashingMachineDetail = {
       applicablePackageDamage: this.washingMachineDetailForm.controls.applicablePackageDamage.value,
       packageDamaged: this.washingMachineDetailForm.controls.packageForm.controls.packageDamaged.value,
@@ -332,7 +347,7 @@ export class ProductDamage implements OnInit, OnDestroy {
 
 
 // *****************************
-// MULTIPLE PICTURES
+// *** MULTIPLE PICTURES
 // *****************************
 
   selectedFiles:ImageFile[] = [];

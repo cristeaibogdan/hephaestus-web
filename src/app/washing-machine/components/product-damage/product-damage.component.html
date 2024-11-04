@@ -363,10 +363,13 @@
     2. Disabled if productDamageForm is INVALID
     3. Disabled if productPricingForm is INVALID -->
 
-  <button mat-raised-button color="primary" type="submit" 
+  <!-- Old implementation -->
+  <!-- <button mat-raised-button color="primary" type="submit" 
     [disabled]="selectedFiles.length == 0 ||
       washingMachineDetailForm.invalid || 
-      washingMachinePricingForm.invalid">
+      washingMachinePricingForm.invalid"> --> 
+
+  <button mat-raised-button color="primary" type="submit">
     {{"I18N.COMMON.NEXT" | translate}}
   </button>  
 </div>
