@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +16,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageInterceptor } from './interceptors/language.interceptor';
 import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
+import { GlobalErrorHandler } from './services/global-error-handler.service';
 
 export function createTranslateLoader(HttpBackend: HttpBackend) {
   return new TranslateHttpLoader(new HttpClient(HttpBackend), "./assets/i18n/", ".json")
@@ -49,6 +50,10 @@ export function createTranslateLoader(HttpBackend: HttpBackend) {
     }),
   ],
   providers: [
+    // { // TODO: Enable this and refactor the interceptors.
+    //   provide: ErrorHandler, 
+    //   useClass: GlobalErrorHandler
+    // },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TimeoutInterceptor,
