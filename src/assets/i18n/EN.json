@@ -183,7 +183,8 @@
       "IMAGE_FILE": "File",
       "IMAGE_EXTENSION_TEXT": "is not suported. Only jpg, jpeg, png and bmp extensions are supported.",
       "IMAGE_SIZE_TEXT": "exceeds the limit of 3 MB",
-      "REPORT": "Error generating report. Please try again later."
+      "REPORT": "Error generating report. Please try again later.",
+      "TIMEOUT": "Request timed out. Please try again."
     },
 
     "CUSTOM_SUCCESS": {
