@@ -38,10 +38,6 @@ export class WashingMachineService {
     return this.washingMachineIdentification$.asObservable();
   }
 
-  getSerialNumber() {
-    return this.washingMachineIdentification$.value.serialNumber;
-  }
-
   setWashingMachineIdentification(washingMachineIdentification: WashingMachineIdentification) {
     this.washingMachineIdentification$.next(washingMachineIdentification);
   }
