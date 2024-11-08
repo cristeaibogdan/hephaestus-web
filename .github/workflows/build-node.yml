@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages (Manual)
+name: Build Angular App
 
 on:
   push:
