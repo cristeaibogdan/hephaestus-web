@@ -1,8 +1,7 @@
-name: Deploy Angular App to GitHub Pages
+name: Deploy Angular App to GitHub Pages (Manual)
 
 on:
-  push:
-    branches: [ "staging" ]
+  workflow_dispatch:
 
 jobs:
   deploy:
