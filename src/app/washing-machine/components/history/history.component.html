@@ -39,7 +39,7 @@
                 <mat-option></mat-option> <!-- Empty option to ensure null is sent to backend -->
                 <mat-option *ngFor="let option of identificationModeOptions"
                   [value]= "option">
-                  {{option}}
+                  {{option | toLabel}}
                 </mat-option>
               </mat-select>
             </mat-form-field>

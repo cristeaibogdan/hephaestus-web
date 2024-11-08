@@ -2,7 +2,7 @@
     
   <div class="washing-machine-status">
     <span *ngIf="washingMachineIdentification.manufacturer">
-      {{"I18N.COMMON.IDENTIFICATION_MODE" | translate}}: {{washingMachineIdentification.identificationMode}}
+      {{"I18N.COMMON.IDENTIFICATION_MODE" | translate}}: {{washingMachineIdentification.identificationMode | toLabel}}
     </span> 
 
     <span *ngIf="washingMachineIdentification.manufacturer">
