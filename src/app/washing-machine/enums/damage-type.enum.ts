@@ -1,4 +1,4 @@
 export enum DamageType {
-    IN_USE = "In Use",
-    IN_TRANSIT = "In Transit"
+    IN_USE = "IN_USE",
+    IN_TRANSIT = "IN_TRANSIT"
 }

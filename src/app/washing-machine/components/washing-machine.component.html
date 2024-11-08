@@ -6,7 +6,7 @@
     </span> 
 
     <span *ngIf="washingMachineIdentification.manufacturer">
-      {{"I18N.COMMON.DAMAGE_TYPE" | translate}}: {{washingMachineIdentification.damageType}}
+      {{"I18N.COMMON.DAMAGE_TYPE" | translate}}: {{washingMachineIdentification.damageType | toLabel}}
     </span>
     
     <div class="washing-machine-title">{{"I18N.COMMON.WASHING_MACHINE" | translate | titlecase}}</div>    
