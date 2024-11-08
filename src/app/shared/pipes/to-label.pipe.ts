@@ -3,17 +3,18 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({name: 'toLabel'})
 export class ToLabelPipe implements PipeTransform {
 
-  private readonly specialCases: { [key: string]: string } = {
-    'QR_CODE': 'QR Code',
-  };
+  private readonly specialCases: Map<string, string> = new Map([
+    ["QR_CODE", "QR Code"]
+  ]);
 
   transform(value: string): string {
     if(!value) {
       return "";
     }
 
-    if (this.specialCases[value]) {
-      return this.specialCases[value];
+    const specialCaseLabel = this.specialCases.get(value);
+    if (specialCaseLabel) {
+      return specialCaseLabel;
     }
 
     return value
