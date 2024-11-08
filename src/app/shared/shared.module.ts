@@ -15,11 +15,15 @@ import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { PaginatorI18n } from './paginator.i18n';
 import { A11yModule } from '@angular/cdk/a11y';
+import { ToLabelPipe } from './pipes/to-label.pipe';
 
 @NgModule({
   declarations: [
     SpinnerComponent,
     LanguageSelectorComponent,
+
+    // PIPES
+    ToLabelPipe,
     
     // DIRECTIVES
     DragAndDropDirective,
@@ -48,6 +52,9 @@ import { A11yModule } from '@angular/cdk/a11y';
 
     SpinnerComponent,
     LanguageSelectorComponent,
+
+    // PIPES
+    ToLabelPipe,
 
     // DIRECTIVES
     DragAndDropDirective,
