@@ -40,15 +40,6 @@ The project consists of two components:
 * **ZXing** - A library for scanning and decoding barcodes and QR codes.
 * **i18n** - Supports internationalization, making the application adaptable for various languages and regions.
 
-## Deployed Application
-The `Hephaestus` application is deployed and accessible via GitHub Pages. You can access the live version here:
-
-- **Live Application**: [https://cristeaibogdan.github.io/hephaestus-web/](https://cristeaibogdan.github.io/hephaestus-web/)
-
-Additionally, a **Zipkin server** is available to monitor and trace requests, which can be accessed at:
-
-- **Zipkin Server**: [https://zipkin-f3xe.onrender.com/zipkin/](https://zipkin-f3xe.onrender.com/zipkin/)
-
 ## Local Deployment
 
 ### Requirements
