@@ -43,6 +43,9 @@ The frontend application is deployed on **GitHub Pages** and is accessible here:
 ## Local Deployment
 
 ### Requirements
+To run the frontend locally, ensure that you have the following:
+
+* [Backend deployed with Docker](https://github.com/cristeaibogdan/hephaestus-api/blob/main/README.md)
 * Visual Studio Code (VSC)
 * Node.js
 * npm
