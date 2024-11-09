@@ -11,7 +11,7 @@
 
 </div>
 
-## What does this project do?
+## What Does This Project Do?
 `Hephaestus` is a personal project designed to help users make informed decisions about household appliances. The application evaluates the condition and damage of the appliance and provides a recommendation on what action to take. 
 
 A deployed version can be found at: https://cristeaibogdan.github.io/hephaestus-web/ 
@@ -25,22 +25,33 @@ The project consists of two components:
 </div>
 
 ## Technologies Used
-* **Angular 15** - The frontend is written in Angular 15, a framework for building efficient sinle-page applications (SPAs).
+* **Angular 15** - The frontend is written in Angular 15, a framework for building efficient single-page applications (SPAs).
 * **Angular Material** - Offers a set of reusable UI components based on Material Design. Used to enhance the user interface with a modern look and feel.
 * **Reactive Forms** - Facilitates handling of form inputs and validations through a reactive programming approach.
 * **Custom Sync Validators** - Implemented to enforce business logic and ensure that form data meets specific requirements.
 * **Custom Async Validators** - Used for backend validation, allowing asynchronous checks on form inputs against server data.
 * **Interceptor** - Displays error messages from the backend, using the user's selected language.
 * **ZXing** - A library for scanning and decoding barcodes and QR codes.
-* **(i18n)** - Supports internationalization, making the application adaptable for various languages and regions.
+* **i18n** - Supports internationalization, making the application adaptable for various languages and regions.
 
-## Requirements
+## Deployed Application
+The `Hephaestus` application is deployed and accessible via GitHub Pages. You can access the live version here:
+
+- **Live Application**: [https://cristeaibogdan.github.io/hephaestus-web/](https://cristeaibogdan.github.io/hephaestus-web/)
+
+Additionally, a **Zipkin server** is available to monitor and trace requests, which can be accessed at:
+
+- **Zipkin Server**: [https://zipkin-f3xe.onrender.com/zipkin/](https://zipkin-f3xe.onrender.com/zipkin/)
+
+## Local Deployment
+
+### Requirements
 * Visual Studio Code (VSC)
 * Node.js
 * npm
 * Angular CLI 15
 
-## Usage
+### Usage
 1. Clone the repository:
 ```bash
 git clone https://github.com/cristeaibogdan/hephaestus-web.git
@@ -54,12 +65,8 @@ npm install
 npm start
 ```
 
-## Important URLs
+### Important URLs
 - [Application](http://localhost:4200) - `localhost:4200`
-
-
-
-- [Zipkin server](http://localhost:9411) - `localhost:9411`
 
 ## Possible problems
 * None I am aware of ...
