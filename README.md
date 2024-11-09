@@ -20,11 +20,11 @@ The project consists of two components:
 
 The frontend application is deployed on **GitHub Pages** and is accessible here:
 
-- [Hephaestus on GitHub Pages](https://cristeaibogdan.github.io/hephaestus-web/)
+- **[Live Application](https://cristeaibogdan.github.io/hephaestus-web/)**  
+  Access the live version of the Hephaestus application, where you can interact with the user interface and make informed appliance decisions.
 
-Additionally, a **Zipkin server** is available to monitor and trace requests. You can access it here:
-
-- [Zipkin on Render](https://zipkin-f3xe.onrender.com/zipkin/)
+- **[Zipkin Server on Render](https://zipkin-f3xe.onrender.com/zipkin/)**  
+  Access Zipkin to monitor requests in real-time and trace how the frontend interacts with the backend.
 
 <div align="center">
    <img src="src\assets\images\Application.gif" >
