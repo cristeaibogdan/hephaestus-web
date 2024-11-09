@@ -18,13 +18,13 @@ The project consists of two components:
  - Frontend built with Angular ( **you are here 📍** )
  - Backend developed using Java
 
-The frontend application is deployed on GitHub Pages and is accessible here:
+The frontend application is deployed on **GitHub Pages** and is accessible here:
 
-- **Live Application**: [Hephaestus on GitHub Pages](https://cristeaibogdan.github.io/hephaestus-web/)
+- [Hephaestus on GitHub Pages](https://cristeaibogdan.github.io/hephaestus-web/)
 
 Additionally, a **Zipkin server** is available to monitor and trace requests. You can access it here:
 
-- **Zipkin Server**: [Zipkin on Render](https://zipkin-f3xe.onrender.com/zipkin/)
+- [Zipkin on Render](https://zipkin-f3xe.onrender.com/zipkin/)
 
 <div align="center">
    <img src="src\assets\images\Application.gif" >
