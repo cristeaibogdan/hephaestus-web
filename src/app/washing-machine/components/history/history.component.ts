@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { SearchWashingMachineRequest } from '../../../washing-machine/models/dtos/search-washing-machine-request.dto';
+import { SearchWashingMachineRequest } from '../../models/dtos/search-washing-machine.request';
 import { FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
@@ -14,7 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DamageType } from 'src/app/washing-machine/enums/damage-type.enum';
 import { IdentificationMode } from 'src/app/washing-machine/enums/identification-mode.enum';
 import { Recommendation } from 'src/app/washing-machine/enums/recommendation.enum';
-import { WashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/washing-machine-full-response.dto';
+import { WashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/washing-machine-full.response';
 
 @Component({
   selector: 'app-history',

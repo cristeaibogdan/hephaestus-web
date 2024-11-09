@@ -4,7 +4,7 @@ import { SolarPanelIdentification } from '../models/solar-panel-identification.m
 import { SolarPanelDataService } from './solar-panel-data.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SolarPanelDamage } from '../models/solar-panel-damage.model';
-import { CreateSolarPanelRequest } from '../models/dtos/create-solar-panel-request.dto';
+import { CreateSolarPanelRequest } from '../models/dtos/create-solar-panel.request';
 import { SolarPanelRecommendation } from '../enums/solar-panel-recommendation.enum';
 
 @Injectable({providedIn: 'root'})

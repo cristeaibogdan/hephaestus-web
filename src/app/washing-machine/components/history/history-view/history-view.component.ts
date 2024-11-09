@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { NotificationService } from 'src/app/services/notification.service';
-import { WashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/washing-machine-full-response.dto';
+import { WashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/washing-machine-full.response';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 
 @Component({

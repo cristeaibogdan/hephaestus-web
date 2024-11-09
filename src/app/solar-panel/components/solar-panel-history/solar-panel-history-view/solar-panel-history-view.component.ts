@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { GetSolarPanelFullResponse } from 'src/app/solar-panel/models/dtos/get-solar-panel-full-response.dto';
+import { GetSolarPanelFullResponse } from 'src/app/solar-panel/models/dtos/get-solar-panel-full.response';
 import { SolarPanelDataService } from 'src/app/solar-panel/services/solar-panel-data.service';
 
 @Component({

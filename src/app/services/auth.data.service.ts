@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { LoginUserResponse } from '../washing-machine/models/dtos/login-user-response.dto';
-import { LoginUserRequest } from '../washing-machine/models/dtos/login-user-request.dto';
-import { UserUpdateContainer } from '../washing-machine/models/dtos/user-update-container.model';
+import { LoginUserResponse } from '../washing-machine/models/dtos/login-user.response';
+import { LoginUserRequest } from '../washing-machine/models/dtos/login-user.request';
+import { UserUpdateContainer } from '../washing-machine/models/user-update-container.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { GetOrganizationAndCountryResponse } from '../washing-machine/models/dtos/get-organization-and-country-response.dto';
-import { CreateUserRequest } from '../washing-machine/models/dtos/create-user-request.dto';
+import { GetOrganizationAndCountryResponse } from '../washing-machine/models/dtos/get-organization-and-country.response';
+import { CreateUserRequest } from '../washing-machine/models/dtos/create-user.request';
 
 @Injectable({providedIn: 'root'})
 export class AuthDataService {

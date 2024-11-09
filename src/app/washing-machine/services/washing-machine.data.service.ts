@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment'
 import { Page } from '../../shared/models/page.model';
-import { SearchWashingMachineRequest } from '../models/dtos/search-washing-machine-request.dto';
-import { GetWashingMachineExpandedResponse } from '../models/dtos/get-washing-machine-expanded-response.dto';
-import { GetWashingMachineReportResponse } from '../models/dtos/get-washing-machine-report-response.dto';
+import { SearchWashingMachineRequest } from '../models/dtos/search-washing-machine.request';
+import { GetWashingMachineExpandedResponse } from '../models/dtos/get-washing-machine-expanded.response';
+import { GetWashingMachineReportResponse } from '../models/dtos/get-washing-machine-report.response';
 import { Recommendation } from '../enums/recommendation.enum';
-import { GetWashingMachineSimpleResponse } from '../models/dtos/get-washing-machine-simple-response.dto';
+import { GetWashingMachineSimpleResponse } from '../models/dtos/get-washing-machine-simple.response';
 import { GetModelAndTypeResponse } from 'src/app/shared/models/get-model-and-type-response.dto';
 
 @Injectable({providedIn: 'root'})

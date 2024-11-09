@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Validators, NonNullableFormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { LoginUserRequest } from '../../washing-machine/models/dtos/login-user-request.dto';
+import { LoginUserRequest } from '../../washing-machine/models/dtos/login-user.request';
 
 @Component({
   selector: 'app-login',

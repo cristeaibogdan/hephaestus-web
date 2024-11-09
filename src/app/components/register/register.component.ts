@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CustomValidators } from '../../shared/validators/custom.validators';
 import { AuthDataService } from 'src/app/services/auth.data.service';
 import { NotificationService } from 'src/app/services/notification.service';
-import { CreateUserRequest } from 'src/app/washing-machine/models/dtos/create-user-request.dto';
+import { CreateUserRequest } from 'src/app/washing-machine/models/dtos/create-user.request';
 
 @Component({
   selector: 'app-register',

@@ -1,4 +1,4 @@
-import { CreateSolarPanelDamageRequest } from "./create-solar-panel-damage-request.dto";
+import { CreateSolarPanelDamageRequest } from "./create-solar-panel-damage.request";
 
 export interface CreateSolarPanelRequest {
   category: string;
