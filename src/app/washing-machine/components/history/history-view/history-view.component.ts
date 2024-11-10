@@ -27,9 +27,6 @@ export class HistoryViewComponent {
       const blob = new Blob([arraybuffer], { type: 'application/pdf' });
       const blobUrl = window.URL.createObjectURL(blob);
 
-      // Open new tab with file
-      window.open(blobUrl, '_blank');
-
       // Format createdAt date
       const formattedDate = response.createdAt.slice(0,-7);
 
@@ -37,7 +34,13 @@ export class HistoryViewComponent {
       const downloadLink = document.createElement('a');
       downloadLink.href = blobUrl;
       downloadLink.download = 'Recommendation Report_'+formattedDate+'.pdf';
-      downloadLink.click();      
+      downloadLink.click();
+                  
+      // Open new tab with file
+      window.open(blobUrl, '_blank');
+
+      // Cleanup
+      window.URL.revokeObjectURL(blobUrl);
     });
   }
 }

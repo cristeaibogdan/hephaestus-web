@@ -33,14 +33,11 @@ export class ProductRecommendationComponent {
         this._washingMachineDataService.getReport(washingMachineIdentification.serialNumber)
       )
     ).subscribe(response => {
-
+      
       // Convert to blob
       const arraybuffer = this._notifService.base64ToArrayBuffer(response.report);
       const blob = new Blob([arraybuffer], { type: 'application/pdf' });
       const blobUrl = window.URL.createObjectURL(blob);
-
-      // Open new tab with file
-      window.open(blobUrl, '_blank');
 
       // Format createdAt date
       const formattedDate = response.createdAt.slice(0,-7);
@@ -49,7 +46,13 @@ export class ProductRecommendationComponent {
       const downloadLink = document.createElement('a');
       downloadLink.href = blobUrl;
       downloadLink.download = 'Recommendation Report_' + formattedDate + '.pdf';
-      downloadLink.click();      
+      downloadLink.click();
+      
+      // Open new tab with file
+      window.open(blobUrl, '_blank');
+
+      // Cleanup
+      window.URL.revokeObjectURL(blobUrl);
     });
   };
 }
