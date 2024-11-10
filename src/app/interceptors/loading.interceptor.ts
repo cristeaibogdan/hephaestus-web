@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { finalize} from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { SpinnerComponent } from '../shared/components/spinner/spinner.component';
+import { SKIP_INTERCEPTOR } from '../shared/validators/async-validators/skip-interceptor.token';
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
@@ -18,22 +19,19 @@ export class LoadingInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    // Ignore async validators
-    if (request.headers.has('AsyncValidator')) {
+    if (request.context.has(SKIP_INTERCEPTOR)) {
       return next.handle(request);
     }
    
-    const dialogSpinner = this.dialog.open(SpinnerComponent, {
+    const loadingSpinner = this.dialog.open(SpinnerComponent, {
       disableClose: true,
       panelClass: "borderless-dialog"
     });
 
-    return next.handle(request).pipe(
-      
+    return next.handle(request).pipe(      
       finalize(() => {
-        dialogSpinner.close();
+        loadingSpinner.close();
       })
-    );
-    
+    );    
   }
 }

@@ -1,32 +1,31 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
 import { AbstractControl, AsyncValidator, ValidationErrors } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { SKIP_INTERCEPTOR } from './skip-interceptor.token';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class SerialNumberValidator implements AsyncValidator {
 
   constructor(private httpClient: HttpClient) { }
 
-  apiURL = environment.apiBaseUrl;
+  private apiURL = environment.apiBaseUrl;
 
   validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
     const url = this.apiURL.concat("/api/v1/washing-machines/")
       .concat(control.value)
       .concat("/validate");
     
-    // Header so interceptor ignores it
-    const asyncHeader = new HttpHeaders().set('AsyncValidator', 'true');
+    // Context so interceptor ignores it
+    const context = new HttpContext().set(SKIP_INTERCEPTOR, true);
     
-    return this.httpClient.get<boolean>(url, {headers:asyncHeader}).pipe(
+    return this.httpClient.get<boolean>(url, {context}).pipe(
       map(response => 
         response
-        ? {invalid: true}
-        : null
+          ? {invalid: true}
+          : null
       ),
 
       // In case server can not be reached
