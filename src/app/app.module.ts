@@ -8,7 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpBackend, HttpClient } from '@angular/common/http';
-import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { SharedModule } from './shared/shared.module';
@@ -50,10 +50,10 @@ export function createTranslateLoader(HttpBackend: HttpBackend) {
     }),
   ],
   providers: [
-    // { // TODO: Enable this and refactor the interceptors.
-    //   provide: ErrorHandler, 
-    //   useClass: GlobalErrorHandler
-    // },
+    {
+      provide: ErrorHandler, 
+      useClass: GlobalErrorHandler
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TimeoutInterceptor,
@@ -66,7 +66,7 @@ export function createTranslateLoader(HttpBackend: HttpBackend) {
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptor,
+      useClass: LoadingInterceptor,
       multi:true
     }
   ],

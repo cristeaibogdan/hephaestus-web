@@ -20,8 +20,8 @@ export class GlobalErrorHandler extends ErrorHandler {
       The problem occurs because the GlobalErrorHandler runs outside of Angular's zone, 
       which affects the snackbar's positioning animation. To fix we need to use ngZone.
     **/
-    this.ngZone.run(() => { // 
-      // super.handleError(error); // Call the default error handler to log the error. Point of discussion. Yay or Nay.
+    this.ngZone.run(() => {
+      super.handleError(error); // Call the default error handler to log the error.
 
       if (error instanceof HttpErrorResponse) {
         switch (error.status) {
@@ -35,8 +35,8 @@ export class GlobalErrorHandler extends ErrorHandler {
 
           default: 
             (typeof error.error === "string") 
-              ? this._notifService.showError(error.error, 0)
-              : this._notifService.showError(this._translate.instant("I18N.GENERAL_ERROR.DEFAULT"), 0);       
+              ? this._notifService.showError(error.error, 0) // CUSTOM ERRORS FROM BACKEND
+              : this._notifService.showError(this._translate.instant("I18N.GENERAL_ERROR.DEFAULT"), 0); // GENERAL ERRORS FROM BACKEND       
             break;   
         }
       }
