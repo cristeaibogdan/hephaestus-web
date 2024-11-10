@@ -30,7 +30,7 @@ export class SerialNumberValidator implements AsyncValidator {
 
       // In case server can not be reached
       catchError((error: HttpErrorResponse): Observable<ValidationErrors | null> => {
-        return of<ValidationErrors | null>({ backendError: true });
+        return of ({ backendError: true });
       })
     );  
   }
