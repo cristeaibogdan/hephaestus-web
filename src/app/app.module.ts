@@ -7,16 +7,16 @@ import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HTTP_INTERCEPTORS, HttpBackend, HttpClient } from '@angular/common/http';
-import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { HttpClientModule, HttpBackend, HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { SharedModule } from './shared/shared.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { LanguageInterceptor } from './interceptors/language.interceptor';
-import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import { GlobalErrorHandler } from './services/global-error-handler.service';
+import { loadingInterceptor } from './interceptors/loading.interceptor';
+import { languageInterceptor } from './interceptors/language.interceptor';
+import { timeoutInterceptor } from './interceptors/timeout.interceptor';
 
 export function createTranslateLoader(HttpBackend: HttpBackend) {
   return new TranslateHttpLoader(new HttpClient(HttpBackend), "./assets/i18n/", ".json")
@@ -54,21 +54,13 @@ export function createTranslateLoader(HttpBackend: HttpBackend) {
       provide: ErrorHandler, 
       useClass: GlobalErrorHandler
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TimeoutInterceptor,
-      multi:true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: LanguageInterceptor,
-      multi:true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: LoadingInterceptor,
-      multi:true
-    }
+    provideHttpClient(
+      withInterceptors([
+        timeoutInterceptor,
+        languageInterceptor,
+        loadingInterceptor
+      ])
+    )
   ],
   bootstrap: [AppComponent]
 })
