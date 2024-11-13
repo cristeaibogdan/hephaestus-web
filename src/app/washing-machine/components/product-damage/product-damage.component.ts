@@ -360,16 +360,18 @@ export class ProductDamage implements OnInit, OnDestroy {
 
   onFileUpload(event: any) {
     // console.log(event);
-  
+    const htmlInput = event.target as HTMLInputElement;
+    
+    if (htmlInput.files) {
     // 1. Validate file length
-    const totalFilesCount = this.selectedFiles.length + event.target.files.length;
+    const totalFilesCount = this.selectedFiles.length + htmlInput.files.length;
     if (totalFilesCount > 3) {
       this._notifService.showError(this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_LIMIT"),0);
       return;
     }
       
-    for (let i = 0; i < event.target.files.length; i++) {
-      const uploadedFile:File = event.target.files[i];      
+    for (let i = 0; i < htmlInput.files.length; i++) {
+      const uploadedFile:File = htmlInput.files[i];      
       
       // 2. Validate file extension
       if(this.invalidFileExtension(uploadedFile.name)) {
@@ -398,6 +400,7 @@ export class ProductDamage implements OnInit, OnDestroy {
   
       this.selectedFiles.push(imageFile);  
     }
+   }
   }
 
   onRemoveImage(index:number) {
