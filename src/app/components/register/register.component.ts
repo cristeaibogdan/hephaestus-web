@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     confirmPassword: ["", Validators.required]
   }, {validators: CustomValidators.passwordsShouldMatch("password", "confirmPassword")});
 
-  ngOnInit() {
+  ngOnInit(): void {
     // Subscribe to registerCode statusChanges and call a HTTP method to retrieve values from BACKEND
     this.codeSubscription = this.registerForm.controls.code.statusChanges.subscribe((status) => {
       if (status === "VALID") {
@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy():void {
     this.codeSubscription.unsubscribe();
   }
 
@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 // *** REGISTER FUNCTIONALITY
 // *****************************************
 
-  onRegister() {
+  onRegister(): void {
     if (this.registerForm.invalid || this.registerForm.pending) {
       return;
     }
@@ -85,7 +85,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     );
   }
   
-  goToLoginPage() {
+  goToLoginPage(): void {
     this.router.navigate(["login"]);
   }
 }

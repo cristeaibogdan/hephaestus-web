@@ -20,7 +20,7 @@ export class LoginComponent {
     password: ["", [Validators.required, Validators.minLength(6)]]
   });
 
-  login() {
+  login(): void {
     if(this.loginForm.invalid) {
       return;
     }

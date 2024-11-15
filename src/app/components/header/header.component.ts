@@ -18,11 +18,11 @@ export class HeaderComponent implements OnInit {
 
   currentUser$!:Observable<LoginUserResponse>;
 
-  ngOnInit() { 
+  ngOnInit(): void { 
     this.currentUser$ = this._authService.getCurrentUser();
   }
 
-  logout() {
+  logout(): void {
     this._authService.isLoggedIn = false;
     this.router.navigate(["/login"]);
   }
