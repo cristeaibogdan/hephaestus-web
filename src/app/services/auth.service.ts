@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoginUserResponse } from '../washing-machine/models/dtos/login-user.response';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginUserRequest } from '../washing-machine/models/dtos/login-user.request';
 import { AuthDataService } from './auth.data.service';
@@ -24,31 +24,31 @@ export class AuthService {
     private router: Router
   ) {}
 
-  getIsLoggedIn() {
+  getIsLoggedIn(): boolean {
     return this.isLoggedIn;
   }
 
-  getCurrentUser() {
+  getCurrentUser(): Observable<LoginUserResponse> {
     return this.loggedUser.asObservable();    
   }
 
-  getEmail() {
+  getEmail(): string {
     return this.loggedUser.value.email;
   }
 
-  getUsername() {
+  getUsername(): string {
     return this.loggedUser.value.username;
   }
 
-  setEmail(email:string) {
-    return this.loggedUser.value.email=email;
+  setEmail(email:string): void {
+    this.loggedUser.value.email=email;
   }
 
-  setUsername(username:string) {
-    return this.loggedUser.value.username=username;
+  setUsername(username:string): void {
+    this.loggedUser.value.username=username;
   }
 
-  login(loginUserRequest: LoginUserRequest) { 
+  login(loginUserRequest: LoginUserRequest): void { 
     this._authDataService.login(loginUserRequest).subscribe((response) => {
       this.isLoggedIn = true;
       this.loggedUser.next(response);
