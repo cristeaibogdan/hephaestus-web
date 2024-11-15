@@ -24,21 +24,21 @@ export class LanguageService {
     this._translateService.use(this.selectedLanguage.value);
   }
 
-  private getLanguageFromStorage() {
+  private getLanguageFromStorage(): Language {
     const savedLanguage = localStorage.getItem(this.LANGUAGE_STORAGE_KEY);    
     return this.availableLanguages.find(lang => lang.value === savedLanguage)
               || this.availableLanguages[0];
   }
 
-  getAvailableLanguages() {
+  getAvailableLanguages(): Language[] {
     return this.availableLanguages;
   }
 
-  getSelectedLanguage() {
+  getSelectedLanguage(): Language {
     return this.selectedLanguage;
   }
 
-  changeLanguage(language: Language) {
+  changeLanguage(language: Language): void {
     this.selectedLanguage = language;
     this._translateService.use(language.value);
     localStorage.setItem(this.LANGUAGE_STORAGE_KEY, language.value);
