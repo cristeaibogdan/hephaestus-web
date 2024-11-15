@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, switchMap} from "rxjs";
+import { BehaviorSubject, Observable, switchMap} from "rxjs";
 import { CreateWashingMachineRequest } from "../models/dtos/create-washing-machine.request";
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
@@ -34,15 +34,15 @@ export class WashingMachineService {
     type: ""
   });
 
-  getWashingMachineIdentification() {
+  getWashingMachineIdentification(): Observable<WashingMachineIdentification> {
     return this.washingMachineIdentification$.asObservable();
   }
 
-  setWashingMachineIdentification(washingMachineIdentification: WashingMachineIdentification) {
+  setWashingMachineIdentification(washingMachineIdentification: WashingMachineIdentification): void {
     this.washingMachineIdentification$.next(washingMachineIdentification);
   }
 
-  resetWashingMachineIdentification() {
+  resetWashingMachineIdentification(): void {
     const initialWashingMachineIdentification: WashingMachineIdentification = {
       category: "",
       damageType: DamageType.IN_TRANSIT,
@@ -100,15 +100,15 @@ export class WashingMachineService {
     repairPrice:0
   });
 
-  setWashingMachineDetail(washingMachineDetail: WashingMachineDetail) {
+  setWashingMachineDetail(washingMachineDetail: WashingMachineDetail): void {
     this.washingMachineDetail$.next(washingMachineDetail);
   }
 
-  getWashingMachineDetail() {
+  getWashingMachineDetail(): Observable<WashingMachineDetail> {
     return this.washingMachineDetail$.asObservable();
   }
 
-  resetWashingMachineDetail() {    
+  resetWashingMachineDetail(): void {    
     const initialWashingMachineDetail: WashingMachineDetail = {
       applicablePackageDamage:false,
       packageDamaged:false,
@@ -155,17 +155,17 @@ export class WashingMachineService {
 // *** STEP 2 = SELECTED FILES
 // **************************************
   
-  private selectedFiles:ImageFile[] = [];
+  private selectedFiles: ImageFile[] = [];
 
-  setSelectedFiles(selectedFiles :ImageFile[]) {
+  setSelectedFiles(selectedFiles: ImageFile[]): void {
     this.selectedFiles = selectedFiles;
   }
 
-  getSelectedFiles() {
+  getSelectedFiles(): ImageFile[] {
     return this.selectedFiles;
   }
 
-  clearSelectedFiles() {
+  clearSelectedFiles(): void {
     this.selectedFiles = [];
   }
 
@@ -237,7 +237,7 @@ export class WashingMachineService {
 
   private recommendation!: Recommendation;
 
-  getRecommendation() {
+  getRecommendation(): Recommendation {
     return this.recommendation;
   }  
 }

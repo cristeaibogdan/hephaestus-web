@@ -8,6 +8,7 @@ import { GetWashingMachineReportResponse } from '../models/dtos/get-washing-mach
 import { Recommendation } from '../enums/recommendation.enum';
 import { GetWashingMachineSimpleResponse } from '../models/dtos/get-washing-machine-simple.response';
 import { GetModelAndTypeResponse } from 'src/app/shared/models/get-model-and-type.response';
+import { Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineDataService {
@@ -19,7 +20,7 @@ export class WashingMachineDataService {
 //*** STEP 1 = PRODUCT IDENTIFICATION
 //**************************************
 
-  getManufacturers(productCategory: string) {
+  getManufacturers(productCategory: string): Observable<string[]> {
     let url = this.apiURL.concat("/api/v1/products/")
       .concat(productCategory)
       .concat("/manufacturers");
@@ -27,7 +28,7 @@ export class WashingMachineDataService {
     return this.http.get<string[]>(url);
   }
   
-  getModelsAndTypes(productManufacturer: string) {
+  getModelsAndTypes(productManufacturer: string): Observable<GetModelAndTypeResponse[]> {
     const url = this.apiURL.concat("/api/v1/products/")
       .concat(productManufacturer)
       .concat("/models-and-types");
@@ -39,23 +40,23 @@ export class WashingMachineDataService {
 //*** STEP 3 = OVERVIEW
 //**************************************
   
-  getRecommendation(serialNumber:string) {
+  getRecommendation(serialNumber:string): Observable<Recommendation> {
     const url = this.apiURL.concat("/api/v1/washing-machines/")
     .concat(serialNumber)
     .concat("/recommendation");
     return this.http.get<Recommendation>(url);
   }
 
-  save(washingMachine:FormData) {
+  save(washingMachine:FormData): Observable<void> {
     const url = this.apiURL.concat("/api/v1/washing-machines/save");
-    return this.http.post(url, washingMachine);
+    return this.http.post<void>(url, washingMachine);
   }
 
 //**************************************
 //*** STEP 4 = RECOMMENDED DECISION
 //**************************************
 
-  getReport(serialNumber:string) {
+  getReport(serialNumber:string): Observable<GetWashingMachineReportResponse> {
     const url = this.apiURL.concat("/api/v1/washing-machines/")
       .concat(serialNumber)
       .concat("/report");
@@ -67,13 +68,13 @@ export class WashingMachineDataService {
 //*** HISTORY
 //**************************************
 
-  loadPaginatedAndFiltered(searchWashingMachineRequest: SearchWashingMachineRequest) {
+  loadPaginatedAndFiltered(searchWashingMachineRequest: SearchWashingMachineRequest): Observable<Page<GetWashingMachineSimpleResponse>> {
     const url = this.apiURL.concat("/api/v1/washing-machines");
     const payload = searchWashingMachineRequest;
     return this.http.post<Page<GetWashingMachineSimpleResponse>>(url, payload);
   }
 
-  loadExpanded(serialNumber:string) {
+  loadExpanded(serialNumber:string): Observable<GetWashingMachineExpandedResponse> {
     const url = this.apiURL.concat("/api/v1/washing-machines/")
       .concat(serialNumber)
       .concat("/expanded");
