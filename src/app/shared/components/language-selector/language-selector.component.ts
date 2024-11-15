@@ -13,7 +13,7 @@ export class LanguageSelectorComponent {
   availableLanguages: Language[] = this._languageService.getAvailableLanguages();
   selectedLanguage = this.fb.control(this._languageService.getSelectedLanguage());
 
-  changeLanguage(language:Language) {
+  changeLanguage(language:Language): void {
     this._languageService.changeLanguage(language);
   }
 

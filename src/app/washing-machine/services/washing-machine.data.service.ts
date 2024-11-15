@@ -7,7 +7,7 @@ import { GetWashingMachineExpandedResponse } from '../models/dtos/get-washing-ma
 import { GetWashingMachineReportResponse } from '../models/dtos/get-washing-machine-report.response';
 import { Recommendation } from '../enums/recommendation.enum';
 import { GetWashingMachineSimpleResponse } from '../models/dtos/get-washing-machine-simple.response';
-import { GetModelAndTypeResponse } from 'src/app/shared/models/get-model-and-type-response.dto';
+import { GetModelAndTypeResponse } from 'src/app/shared/models/get-model-and-type.response';
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineDataService {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CreateSolarPanelRequest } from '../models/dtos/create-solar-panel.request';
-import { GetModelAndTypeResponse } from 'src/app/shared/models/get-model-and-type-response.dto';
+import { GetModelAndTypeResponse } from 'src/app/shared/models/get-model-and-type.response';
 import { SearchSolarPanelRequest } from '../models/dtos/search-solar-panel.request';
 
 @Injectable({providedIn: 'root'})
