@@ -3,9 +3,11 @@ import { environment } from 'src/environments/environment';
 import { LoginUserResponse } from '../washing-machine/models/dtos/login-user.response';
 import { LoginUserRequest } from '../washing-machine/models/dtos/login-user.request';
 import { UserUpdateContainer } from '../washing-machine/models/user-update-container.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpHeaders } from '@angular/common/http';
 import { GetOrganizationAndCountryResponse } from '../washing-machine/models/dtos/get-organization-and-country.response';
 import { CreateUserRequest } from '../washing-machine/models/dtos/create-user.request';
+import { Observable } from 'rxjs';
+import { SKIP_INTERCEPTOR } from '../shared/validators/async-validators/skip-interceptor.token';
 
 @Injectable({providedIn: 'root'})
 export class AuthDataService {
@@ -17,7 +19,7 @@ export class AuthDataService {
 //*** AUTH - LOGIN
 //******************************
 
-  login(loginUserRequest: LoginUserRequest) {
+  login(loginUserRequest: LoginUserRequest): Observable<LoginUserResponse> {
     const url = this.apiURL.concat("/api/v1/users/login");
     const payload = loginUserRequest;
     return this.http
@@ -28,13 +30,13 @@ export class AuthDataService {
 //*** USER PROFILE => To be implemented
 //*****************************
 
-  updateUserAccount(userUpdateContainer:UserUpdateContainer) {
+  updateUserAccount(userUpdateContainer:UserUpdateContainer): Observable<any> {
     const url = this.apiURL.concat("/auth/update");
     const payload = userUpdateContainer
     return this.http.put(url, payload);
   }
 
-  updateUserAccountPassword(userUpdateContainer:UserUpdateContainer) {
+  updateUserAccountPassword(userUpdateContainer:UserUpdateContainer): Observable<any> {
     const url = this.apiURL.concat("/auth/password");
     const payload = userUpdateContainer
     return this.http.put(url, payload);
@@ -44,7 +46,7 @@ export class AuthDataService {
 //*** AUTH - REGISTER
 //******************************
 
-  register(createUserRequest: CreateUserRequest) {
+  register(createUserRequest: CreateUserRequest): Observable<void> {
     const url = this.apiURL.concat("/api/v1/users/register");
     const payload = createUserRequest;
 
@@ -52,15 +54,15 @@ export class AuthDataService {
       .post<void>(url, payload);
   }
 
-  getOrganizationAndCountry(registerCode: string) {
+  getOrganizationAndCountry(registerCode: string): Observable<GetOrganizationAndCountryResponse> {
     const url = this.apiURL.concat("/api/v1/users/")
       .concat(registerCode)
       .concat("/organization-and-country");
 
-    // Header so interceptor ignores it
-    const headers = new HttpHeaders().set('AsyncValidator', 'true');
+    // Context so interceptor ignores it
+    const context = new HttpContext().set(SKIP_INTERCEPTOR, true);
 
     return this.http
-      .get<GetOrganizationAndCountryResponse>(url, {headers});
+      .get<GetOrganizationAndCountryResponse>(url, {context});
   }
 }
