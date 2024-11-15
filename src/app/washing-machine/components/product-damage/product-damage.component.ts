@@ -24,8 +24,8 @@ export class ProductDamage implements OnInit, OnDestroy {
     private _washingMachineService: WashingMachineService,
     private _notifService: NotificationService,
     private _translate: TranslateService,
-    private sanitizer:DomSanitizer,
-    private fb:NonNullableFormBuilder    
+    private sanitizer: DomSanitizer,
+    private fb: NonNullableFormBuilder    
   ) {}
 
   washingMachineDetailForm = this.fb.group({
@@ -114,7 +114,7 @@ export class ProductDamage implements OnInit, OnDestroy {
   minorDamageDescriptionCharacterLimit:number = 200;
   majorDamageDescriptionCharacterLimit:number = 200;
 
-  ngOnInit() {
+  ngOnInit(): void {
     // *****************************
     // *** PACKAGE DAMAGE
     // *****************************
@@ -206,7 +206,7 @@ export class ProductDamage implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => {
       subscription.unsubscribe();
     });
@@ -216,7 +216,7 @@ export class ProductDamage implements OnInit, OnDestroy {
 // *** VISIBLE SURFACES DAMAGE TOGGLES
 // **********************************
 
-  toggleFormControl(control: AbstractControl, enableWhen: boolean) {
+  toggleFormControl(control: AbstractControl, enableWhen: boolean): void {
     if (enableWhen) {
       control.enable({ emitEvent: false });
     } else {
@@ -225,25 +225,25 @@ export class ProductDamage implements OnInit, OnDestroy {
     }
   }
 
-  toggle_VisibleSurfaces_ScratchesLength() {   
+  toggle_VisibleSurfaces_ScratchesLength(): void {   
     const control = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesScratchesLength;
     const enableWhen = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasScratches.value;
     this.toggleFormControl(control, enableWhen);
   }
 
-  toggle_VisibleSurfaces_DentsDepth() {
+  toggle_VisibleSurfaces_DentsDepth(): void {
     const control = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesDentsDepth;
     const enableWhen = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasDents.value;
     this.toggleFormControl(control, enableWhen);
   }
 
-  toggle_VisibleSurfaces_MinorDamage() {  
+  toggle_VisibleSurfaces_MinorDamage(): void {  
     const control = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesMinorDamage;
     const enableWhen = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMinorDamage.value;
     this.toggleFormControl(control, enableWhen);
   }
 
-  toggle_VisibleSurfaces_MajorDamage() {
+  toggle_VisibleSurfaces_MajorDamage(): void {
     const control = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesMajorDamage;
     const enableWhen = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMajorDamage.value;
     this.toggleFormControl(control, enableWhen);
@@ -253,25 +253,25 @@ export class ProductDamage implements OnInit, OnDestroy {
 // *** HIDDEN SURFACES DAMAGE TOGGLES
 // *********************************
 
-  toggle_HiddenSurfaces_ScratchesLength() {
+  toggle_HiddenSurfaces_ScratchesLength(): void {
     const control = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesScratchesLength;
     const enableWhen = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasScratches.value;
     this.toggleFormControl(control, enableWhen);
   }
 
-  toggle_HiddenSurfaces_DentsDepth() {  
+  toggle_HiddenSurfaces_DentsDepth(): void {  
     const control = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesDentsDepth;
     const enableWhen = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasDents.value;
     this.toggleFormControl(control, enableWhen);
   }
 
-  toggle_HiddenSurfaces_MinorDamage() {
+  toggle_HiddenSurfaces_MinorDamage(): void {
     const control = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMinorDamage;
     const enableWhen = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMinorDamage.value;
     this.toggleFormControl(control, enableWhen);
   }
 
-  toggle_HiddenSurfaces_MajorDamage() {  
+  toggle_HiddenSurfaces_MajorDamage(): void {  
     const control = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMajorDamage;
     const enableWhen = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMajorDamage.value;
     this.toggleFormControl(control, enableWhen);
@@ -281,13 +281,13 @@ export class ProductDamage implements OnInit, OnDestroy {
 // *** FORM RESET AND SUBMIT
 // *******************************
   
-  onReset(e:Event) {
+  onReset(e:Event): void {
     e.preventDefault();
     this.washingMachinePricingForm.reset();
     this.resetSelectedFiles();    
   }  
 
-  onSubmit() {
+  onSubmit(): void {
     if(this.selectedFiles.length === 0) {
       this._notifService.showError("At least one image must be uploaded", 0);
       return;
@@ -354,11 +354,11 @@ export class ProductDamage implements OnInit, OnDestroy {
 
   selectedFiles:ImageFile[] = [];
 
-  onDrop(droppedFiles:FileList) {
+  onDrop(droppedFiles:FileList): void {
     this.onFileUpload({target: {files: droppedFiles}});
   }
 
-  onFileUpload(event: any) {
+  onFileUpload(event: any): void {
     // console.log(event);
     const htmlInput = event.target as HTMLInputElement;
     
@@ -403,11 +403,11 @@ export class ProductDamage implements OnInit, OnDestroy {
    }
   }
 
-  onRemoveImage(index:number) {
+  onRemoveImage(index:number): void {
     this.selectedFiles.splice(index, 1);
   }
 
-  resetSelectedFiles() {
+  resetSelectedFiles(): void {
     this.selectedFiles = [];
   }
 
@@ -415,7 +415,7 @@ export class ProductDamage implements OnInit, OnDestroy {
 //***** HELPER METHODS
 //************************
   
-  invalidFileExtension(fileName: String) {
+  invalidFileExtension(fileName: string): boolean {
     const extension = fileName.substring(fileName.lastIndexOf('.') + 1);
   
     switch(extension.toLowerCase()) {
@@ -428,9 +428,11 @@ export class ProductDamage implements OnInit, OnDestroy {
     }
   }
 
-  invalidFileSize(fileSize:number, maxFileSizeInMB:number) {
+  invalidFileSize(fileSize:number, maxFileSizeInMB:number): boolean {
     const fileSizeInMB:number = fileSize / (1024 * 1024);
-    return (fileSizeInMB < maxFileSizeInMB) ? false : true;
+    return (fileSizeInMB < maxFileSizeInMB) 
+      ? false 
+      : true;
   }
 
 }

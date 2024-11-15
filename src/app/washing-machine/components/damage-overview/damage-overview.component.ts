@@ -27,7 +27,7 @@ export class OverviewComponent {
     private _translate: TranslateService,
   ) { }
 
-  save() {
+  save(): void {
     this._washingMachineService.save().then(success => {
       if(success) {
         this._notifService.showSuccess(this._translate.instant("I18N.CUSTOM_SUCCESS.PRODUCT_SAVED"),4000);
