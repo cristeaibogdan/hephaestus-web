@@ -36,7 +36,7 @@ The frontend application is deployed on **GitHub Pages** and is accessible here:
 * **Reactive Forms** - Facilitates handling of form inputs and validations through a reactive programming approach.
 * **Custom Sync Validators** - Implemented to enforce business logic and ensure that form data meets specific requirements.
 * **Custom Async Validators** - Used for backend validation, allowing asynchronous checks on form inputs against server data.
-* **Interceptor** - Displays error messages from the backend, using the user's selected language.
+* **Interceptors** - Used for: set header for the selected language, display loading indicator and set a predefined timeout to each request.
 * **ZXing** - A library for scanning and decoding barcodes and QR codes.
 * **i18n** - Supports internationalization, making the application adaptable for various languages and regions.
 
