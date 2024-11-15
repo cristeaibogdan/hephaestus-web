@@ -48,8 +48,8 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     "actions"
   ]; 
 
-  ngOnInit() {
-    this.loadPaginatedAndFiltered();    
+  ngOnInit(): void {
+    this.loadPaginatedAndFiltered();
   }
 
 // *****************************************
@@ -58,7 +58,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.washingMachines.sort = this.sort;
   }
   
@@ -98,25 +98,25 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   pageSizeOptions = [2, 5, 10, 20, 40];
 
   // 2. UPDATE VALUES FOR PAGINATOR ON EACH PAGE CHANGE
-  changePage(e:PageEvent) {
+  changePage(e:PageEvent): void {
     this.pageNumber = e.pageIndex;
     this.pageSize = e.pageSize;
     this.loadPaginatedAndFiltered();
   }
 
-  onFilter() {
+  onFilter(): void {
     // Return to the first page after clicking on filter
     this.pageNumber = 0;
     this.loadPaginatedAndFiltered();
   }
 
-  onReset() {
+  onReset(): void {
     // Test to see if i need to return to first page after reset
     this.loadPaginatedAndFiltered();
   }
 
   // 3. USE VALUES OF PAGINATOR TO REQUEST DATA
-  loadPaginatedAndFiltered() {
+  loadPaginatedAndFiltered(): void {
     const searchWashingMachineRequest: SearchWashingMachineRequest = {
       pageIndex: this.pageNumber,
       pageSize: this.pageSize,
@@ -155,7 +155,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private handleDate(value: string | null) {
+  private handleDate(value: string | null): string | null {
     return (value)
       ? moment(value).format("YYYY-MM-DD")
       : null;
@@ -166,7 +166,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 // *****************************************
 
   @HostListener("window:keydown.tab", ["$event"]) // The host property is not able to listen to window or document events directly, so the cleanest approach here is to stick with @HostListener for this specific event.
-  handleTab(event: KeyboardEvent) {
+  handleTab(event: KeyboardEvent): void {
     const focusedElement = document.activeElement as HTMLElement;
 
     const isOfTypeInput: boolean = focusedElement.tagName == "INPUT";
@@ -184,7 +184,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 // *** ROW ACTIONS
 // *****************************************
 
-  onView(washingMachine: WashingMachineFullResponse) {
+  onView(washingMachine: WashingMachineFullResponse): void {
     if(!washingMachine.washingMachineDetail) {
       this._washingMachineDataService.loadExpanded(washingMachine.serialNumber).subscribe(response => {
         console.log("Response for details => ",response);
@@ -199,7 +199,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     }      
   }
 
-  openDialog(washingMachine: WashingMachineFullResponse) { 
+  openDialog(washingMachine: WashingMachineFullResponse): void { 
     this.dialog.open(HistoryViewComponent, {
       disableClose: true,
       width: '35%',

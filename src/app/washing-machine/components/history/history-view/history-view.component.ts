@@ -19,7 +19,7 @@ export class HistoryViewComponent {
     private _notifService:NotificationService
   ) {}
 
-  onDownload() {
+  onDownload(): void {
     this._washingMachineDataService.getReport(this.washingMachine.serialNumber).subscribe(response => {
 
       // Convert to blob
@@ -44,6 +44,3 @@ export class HistoryViewComponent {
     });
   }
 }
-
-
-
