@@ -30,11 +30,11 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
     private serialNumberValidator:SerialNumberValidator,             
   ) { }
   
-  ngOnInit() {
+  ngOnInit(): void {
     this.populateDataMatrix_Manufacturer_Field(this.washingMachineIdentificationForm.controls.category.value);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this._washingMachineService.resetWashingMachineIdentification();
     this._washingMachineService.resetWashingMachineDetail();
     this._washingMachineService.clearSelectedFiles();
@@ -69,7 +69,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
 // *** FORM FUNCTIONALITY
 // *****************************************
 
-  disableDataFields_WHEN_QRCodeIsSelected() {
+  disableDataFields_WHEN_QRCodeIsSelected(): void {
     this.washingMachineIdentificationForm.controls.manufacturer.enable();
     this.washingMachineIdentificationForm.controls.serialNumber.enable();
     this.washingMachineIdentificationForm.controls.modelAndType.enable();
@@ -84,7 +84,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
   disableInUse!:boolean;
   disableInTransit!:boolean;
 
-  disableDamageTypeBasedOnReturnTypeValue() {    
+  disableDamageTypeBasedOnReturnTypeValue(): void {    
     this.disableInUse = (this.washingMachineIdentificationForm.value.returnType === ReturnType.TRANSPORT);
     this.disableInTransit = (
       this.washingMachineIdentificationForm.value.returnType === ReturnType.SERVICE || 
@@ -95,7 +95,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
   }
 
   // TODO: refactor methods related to camera
-  openCameraDialog() {
+  openCameraDialog(): void {
     const dialogRef = this.dialog.open(CameraComponent, {
       panelClass: "camera-dialog",
       disableClose: true
@@ -126,7 +126,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
     this.washingMachineIdentificationForm.controls.damageType.markAsTouched();
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.washingMachineIdentificationForm.invalid) {
       this.markAllMatButtonToggleGroupsAsTouched();
       return;
@@ -157,7 +157,7 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
     this.stepper.next();
   }
   
-  onReset(e:Event) {
+  onReset(e:Event): void {
     e.preventDefault(); // Prevent the default behavior. The disabled input will not appear empty and will preserve its value   
     this.clearAvailableModelsAndTypes();
     this._washingMachineService.resetWashingMachineIdentification();
@@ -171,18 +171,18 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
   availableModels: string[] = [];
   availableTypes: string[] = [];
 
-  clearAvailableModelsAndTypes() {
+  private clearAvailableModelsAndTypes(): void {
     this.availableModels = [];
     this.availableTypes = [];
   }
 
-  populateDataMatrix_Manufacturer_Field(category: string) {   
+  populateDataMatrix_Manufacturer_Field(category: string): void {   
     this._washingMachineDataService.getManufacturers(category).subscribe(response => {
       this.availableManufacturers = response;
     });  
   }
 
-  populateDataMatrix_Model_Type_Fields(manufacturer: string) {  
+  populateDataMatrix_Model_Type_Fields(manufacturer: string): void {  
 
     // Do not execute a request if manufacturer is empty.
     // Happens when form is reset

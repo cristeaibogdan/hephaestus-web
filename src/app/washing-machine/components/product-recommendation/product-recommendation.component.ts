@@ -26,7 +26,7 @@ export class ProductRecommendationComponent {
 // *** DOWNLOAD FILE FUNCTIONALITY
 // **********************************
 
-  onDownload() {
+  onDownload(): void {
     this.washingMachineIdentification$.pipe(
       take(1),
       switchMap(washingMachineIdentification => 
