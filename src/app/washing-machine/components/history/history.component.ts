@@ -207,6 +207,21 @@ export class HistoryComponent implements OnInit, AfterViewInit {
         washingMachine.washingMachineDetail = response.washingMachineDetail;
         washingMachine.washingMachineImages = response.washingMachineImages;
 
+        // washingMachine = { // TODO: Point of discussion.
+        //   category: response.category,
+        //   identificationMode: response.identificationMode,
+        //   manufacturer: response.manufacturer,
+        //   model: response.model,
+        //   type: response.type,
+        //   serialNumber: response.serialNumber,
+        //   returnType: response.returnType,
+        //   damageType: response.damageType,
+        //   recommendation: response.recommendation,
+        //   createdAt: response.createdAt,
+        //   washingMachineDetail: response.washingMachineDetail,
+        //   washingMachineImages: response.washingMachineImages
+        // };
+
         this.openDialog(washingMachine);
       });
       
