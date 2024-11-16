@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { NotificationService } from 'src/app/services/notification.service';
-import { WashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/washing-machine-full.response';
+import { GetWashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/get-washing-machine-full.response';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { WashingMachineDataService } from 'src/app/washing-machine/services/wash
 })
 export class HistoryViewComponent {
 
-  washingMachine: WashingMachineFullResponse = this.data.washingMachine;
+  washingMachine: GetWashingMachineFullResponse = this.data.washingMachine;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data:any,

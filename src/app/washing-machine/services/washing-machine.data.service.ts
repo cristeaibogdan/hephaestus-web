@@ -3,12 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment'
 import { Page } from '../../shared/models/page.model';
 import { SearchWashingMachineRequest } from '../models/dtos/search-washing-machine.request';
-import { GetWashingMachineExpandedResponse } from '../models/dtos/get-washing-machine-expanded.response';
 import { GetWashingMachineReportResponse } from '../models/dtos/get-washing-machine-report.response';
 import { Recommendation } from '../enums/recommendation.enum';
 import { GetWashingMachineSimpleResponse } from '../models/dtos/get-washing-machine-simple.response';
 import { GetModelAndTypeResponse } from 'src/app/shared/models/get-model-and-type.response';
 import { Observable } from 'rxjs';
+import { GetWashingMachineFullResponse } from '../models/dtos/get-washing-machine-full.response';
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineDataService {
@@ -74,12 +74,11 @@ export class WashingMachineDataService {
     return this.http.post<Page<GetWashingMachineSimpleResponse>>(url, payload);
   }
 
-  loadExpanded(serialNumber:string): Observable<GetWashingMachineExpandedResponse> {
+  load(serialNumber:string): Observable<GetWashingMachineFullResponse> {
     const url = this.apiURL.concat("/api/v1/washing-machines/")
-      .concat(serialNumber)
-      .concat("/expanded");
+      .concat(serialNumber);
 
-    return this.http.get<GetWashingMachineExpandedResponse>(url);
+    return this.http.get<GetWashingMachineFullResponse>(url);
   }
 }
 

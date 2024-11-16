@@ -14,7 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DamageType } from 'src/app/washing-machine/enums/damage-type.enum';
 import { IdentificationMode } from 'src/app/washing-machine/enums/identification-mode.enum';
 import { Recommendation } from 'src/app/washing-machine/enums/recommendation.enum';
-import { WashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/washing-machine-full.response';
+import { GetWashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/get-washing-machine-full.response';
 
 @Component({
   selector: 'app-history',
@@ -33,7 +33,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
   readonly recommendation = Recommendation;
 
-  washingMachines = new MatTableDataSource<Partial<WashingMachineFullResponse>>();
+  washingMachines = new MatTableDataSource<Partial<GetWashingMachineFullResponse>>();
     
   displayedColumns: string[] = [
     "createdAt",
@@ -184,10 +184,26 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 // *** ROW ACTIONS
 // *****************************************
 
-  onView(washingMachine: WashingMachineFullResponse): void {
+  onView(washingMachine: GetWashingMachineFullResponse): void {
+
     if(!washingMachine.washingMachineDetail) {
-      this._washingMachineDataService.loadExpanded(washingMachine.serialNumber).subscribe(response => {
+      this._washingMachineDataService.load(washingMachine.serialNumber).subscribe(response => {
         console.log("Response for details => ",response);
+
+        washingMachine.category = response.category;
+        washingMachine.identificationMode = response.identificationMode;
+        washingMachine.manufacturer = response.manufacturer;
+
+        washingMachine.model = response.model;
+        washingMachine.type = response.type;
+        washingMachine.serialNumber = response.serialNumber;
+
+        washingMachine.returnType = response.returnType;
+        washingMachine.damageType = response.damageType;
+
+        washingMachine.recommendation = response.recommendation;
+        washingMachine.createdAt = response.createdAt;
+
         washingMachine.washingMachineDetail = response.washingMachineDetail;
         washingMachine.washingMachineImages = response.washingMachineImages;
 
@@ -199,7 +215,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     }      
   }
 
-  openDialog(washingMachine: WashingMachineFullResponse): void { 
+  openDialog(washingMachine: GetWashingMachineFullResponse): void { 
     this.dialog.open(HistoryViewComponent, {
       disableClose: true,
       width: '35%',
