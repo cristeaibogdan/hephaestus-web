@@ -23,7 +23,7 @@ The frontend application is deployed on **GitHub Pages** and is accessible here:
 - **[Live Application](https://cristeaibogdan.github.io/hephaestus-web/)**  
   Access the live version of the Hephaestus application, where you can interact with the user interface and make informed appliance decisions.
 
-- **[Zipkin Server on Render](https://zipkin-f3xe.onrender.com/zipkin/)**  
+- **[Zipkin Server on Azure](https://zipkin.orangesmoke-f68e1158.northeurope.azurecontainerapps.io)**  
   Access Zipkin to monitor requests in real-time and trace how the frontend interacts with the backend.
 
 <div align="center">
