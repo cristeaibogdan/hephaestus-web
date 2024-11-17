@@ -25,10 +25,21 @@ export class WashingMachineService {
 // *** STEP 1 = PRODUCT IDENTIFICATION
 // **************************************
 
-  private washingMachineIdentification$ = new BehaviorSubject<WashingMachineIdentification | null>(null);
+  // TODO: Point of discussion
+  // private washingMachineIdentification$ = new BehaviorSubject<WashingMachineIdentification | null>(null);
+  private washingMachineIdentification$ = new BehaviorSubject<WashingMachineIdentification>({
+    category: "",
+    damageType: DamageType.IN_TRANSIT,
+    returnType: ReturnType.COMMERCIAL,
+    identificationMode: IdentificationMode.DATA_MATRIX,
+    manufacturer: "",
+    serialNumber: "",
+    model: "",
+    type: "",
+  });
 
   getWashingMachineIdentification(): Observable<WashingMachineIdentification> {
-    return this.washingMachineIdentification$.asObservable().pipe(filter(isNonNulled));
+    return this.washingMachineIdentification$.asObservable();
   }
 
   setWashingMachineIdentification(washingMachineIdentification: WashingMachineIdentification): void {
@@ -167,9 +178,9 @@ export class WashingMachineService {
 // **************************************
 
   save(): Promise<boolean> {
-    if (this.washingMachineIdentification$.value == null) {
-      return Promise.reject();
-    }
+    // if (this.washingMachineIdentification$.value == null) {
+    //   return Promise.reject();
+    // }
 
     const washingMachine: CreateWashingMachineRequest = {
       category: this.washingMachineIdentification$.value.category,

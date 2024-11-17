@@ -1,16 +1,17 @@
-<ng-container class="washing-machine-container" *ngIf="washingMachineIdentification$ | async as washingMachineIdentification">
-    
-  <div class="washing-machine-status">
-    <span *ngIf="washingMachineIdentification.identificationMode">
+<div class="washing-machine-status">
+  <ng-container *ngIf="washingMachineIdentification$ | async as washingMachineIdentification">
+    <span *ngIf="washingMachineIdentification.manufacturer">
       {{"I18N.COMMON.IDENTIFICATION_MODE" | translate}}: {{washingMachineIdentification.identificationMode | toLabel}}
     </span> 
 
-    <span *ngIf="washingMachineIdentification.damageType">
+    <span *ngIf="washingMachineIdentification.manufacturer">
       {{"I18N.COMMON.DAMAGE_TYPE" | translate}}: {{washingMachineIdentification.damageType | toLabel}}
     </span>
-    
-    <div class="washing-machine-title">{{"I18N.COMMON.WASHING_MACHINE" | translate | titlecase}}</div>    
- 
+  </ng-container>
+
+  <div class="washing-machine-title">{{"I18N.COMMON.WASHING_MACHINE" | translate | titlecase}}</div>    
+
+  <ng-container *ngIf="washingMachineIdentification$ | async as washingMachineIdentification">
     <span *ngIf="washingMachineIdentification.manufacturer"> 
       {{"I18N.COMMON.MANUFACTURER" | translate}}: {{washingMachineIdentification.manufacturer}}
     </span>
@@ -22,43 +23,37 @@
     <span *ngIf="washingMachineIdentification.type && washingMachineIdentification.type !== 'N/A'">
       {{"I18N.COMMON.TYPE" | translate}}: {{washingMachineIdentification.type}}
     </span>
-  </div>
-</ng-container>
+  </ng-container>
+</div>
 
-  <mat-stepper class="background-color">
-
-    <!-- STEP ONE -->
-    <mat-step [stepControl]="firstFormGroup" >
-      <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.PRODUCT_IDENTIFICATION" | translate}}</ng-template>
-      <!-- TODO: Possible overflow usage. But needs to be in px, else it won't work... -->
-      <!-- <div class="overflow-test"> -->
-        <app-product-identification></app-product-identification>
-      <!-- </div> -->
-    </mat-step>
-
-    <!-- STEP TWO -->
-    <mat-step [stepControl]="secondFormGroup">
-      <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.DAMAGE_ASSESSMENT" | translate}}</ng-template>
-      <ng-template matStepContent>
-        <app-product-damage></app-product-damage>
-      </ng-template> 
-    </mat-step>
-
-    <!-- STEP THREE -->
-    <mat-step [stepControl]="thirdFormGroup">
-      <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.DAMAGE_OVERVIEW" | translate}}</ng-template>   
-      <ng-template matStepContent>
-        <app-damage-overview></app-damage-overview>
-      </ng-template>   
-    </mat-step>
-
-    <!-- STEP FOUR -->
-    <mat-step [stepControl]="fourthFormGroup">            
-      <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.RECOMMENDATION" | translate}}</ng-template>        
-      <ng-template matStepContent>
-        <app-product-recommendation></app-product-recommendation>
-      </ng-template>
-    </mat-step> 
-
-  </mat-stepper>
+<mat-stepper class="background-color">  
+  <mat-step [stepControl]="firstFormGroup" > <!-- STEP ONE -->
+    <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.PRODUCT_IDENTIFICATION" | translate}}</ng-template>
+    <!-- TODO: Possible overflow usage. But needs to be in px, else it won't work... -->
+    <!-- <div class="overflow-test"> -->
+      <app-product-identification></app-product-identification>
+    <!-- </div> -->
+  </mat-step>
+  
+  <mat-step [stepControl]="secondFormGroup"> <!-- STEP TWO -->
+    <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.DAMAGE_ASSESSMENT" | translate}}</ng-template>
+    <ng-template matStepContent>
+      <app-product-damage></app-product-damage>
+    </ng-template> 
+  </mat-step>
+  
+  <mat-step [stepControl]="thirdFormGroup"> <!-- STEP THREE -->
+    <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.DAMAGE_OVERVIEW" | translate}}</ng-template>   
+    <ng-template matStepContent>
+      <app-damage-overview></app-damage-overview>
+    </ng-template>   
+  </mat-step>
+  
+  <mat-step [stepControl]="fourthFormGroup"> <!-- STEP FOUR -->            
+    <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.RECOMMENDATION" | translate}}</ng-template>        
+    <ng-template matStepContent>
+      <app-product-recommendation></app-product-recommendation>
+    </ng-template>
+  </mat-step>
+</mat-stepper>
 
