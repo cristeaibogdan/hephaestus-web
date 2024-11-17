@@ -186,48 +186,18 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
   onView(washingMachine: GetWashingMachineFullResponse): void {
 
-    if(!washingMachine.washingMachineDetail) {
-      this._washingMachineDataService.load(washingMachine.serialNumber).subscribe(response => {
-        console.log("Response for details => ",response);
+    if(washingMachine.washingMachineDetail) {
+      return this.openDialog(washingMachine);
+    }
+    
+    this._washingMachineDataService.load(washingMachine.serialNumber).subscribe(response => {
+      console.log("Response for details => ", response);
 
-        washingMachine.category = response.category;
-        washingMachine.identificationMode = response.identificationMode;
-        washingMachine.manufacturer = response.manufacturer;
+      washingMachine.washingMachineDetail = response.washingMachineDetail;
+      washingMachine.washingMachineImages = response.washingMachineImages;
 
-        washingMachine.model = response.model;
-        washingMachine.type = response.type;
-        washingMachine.serialNumber = response.serialNumber;
-
-        washingMachine.returnType = response.returnType;
-        washingMachine.damageType = response.damageType;
-
-        washingMachine.recommendation = response.recommendation;
-        washingMachine.createdAt = response.createdAt;
-
-        washingMachine.washingMachineDetail = response.washingMachineDetail;
-        washingMachine.washingMachineImages = response.washingMachineImages;
-
-        // washingMachine = { // TODO: Point of discussion.
-        //   category: response.category,
-        //   identificationMode: response.identificationMode,
-        //   manufacturer: response.manufacturer,
-        //   model: response.model,
-        //   type: response.type,
-        //   serialNumber: response.serialNumber,
-        //   returnType: response.returnType,
-        //   damageType: response.damageType,
-        //   recommendation: response.recommendation,
-        //   createdAt: response.createdAt,
-        //   washingMachineDetail: response.washingMachineDetail,
-        //   washingMachineImages: response.washingMachineImages
-        // };
-
-        this.openDialog(washingMachine);
-      });
-      
-    } else {
       this.openDialog(washingMachine);
-    }      
+    });
   }
 
   openDialog(washingMachine: GetWashingMachineFullResponse): void { 

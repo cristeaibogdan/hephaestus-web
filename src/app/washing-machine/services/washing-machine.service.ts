@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, switchMap} from "rxjs";
+import { BehaviorSubject, Observable, filter, switchMap, withLatestFrom} from "rxjs";
 import { CreateWashingMachineRequest } from "../models/dtos/create-washing-machine.request";
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
@@ -9,6 +9,10 @@ import { ReturnType } from "../enums/return-type.enum";
 import { IdentificationMode } from "../enums/identification-mode.enum";
 import { Recommendation } from "../enums/recommendation.enum";
 import { WashingMachineDetail } from "../models/washing-machine-detail.model";
+
+export function isNonNulled<T>(value: T): value is NonNullable<T> {
+  return value != null;
+}
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineService {
@@ -21,21 +25,10 @@ export class WashingMachineService {
 // *** STEP 1 = PRODUCT IDENTIFICATION
 // **************************************
 
-  private washingMachineIdentification$ = new BehaviorSubject<WashingMachineIdentification>({
-    category: "",
-
-    damageType: DamageType.IN_TRANSIT,
-    returnType: ReturnType.COMMERCIAL,
-    identificationMode: IdentificationMode.DATA_MATRIX,
-    
-    manufacturer: "",
-    serialNumber: "",
-    model: "",
-    type: ""
-  });
+  private washingMachineIdentification$ = new BehaviorSubject<WashingMachineIdentification | null>(null);
 
   getWashingMachineIdentification(): Observable<WashingMachineIdentification> {
-    return this.washingMachineIdentification$.asObservable();
+    return this.washingMachineIdentification$.asObservable().pipe(filter(isNonNulled));
   }
 
   setWashingMachineIdentification(washingMachineIdentification: WashingMachineIdentification): void {
@@ -174,6 +167,10 @@ export class WashingMachineService {
 // **************************************
 
   save(): Promise<boolean> {
+    if (this.washingMachineIdentification$.value == null) {
+      return Promise.reject();
+    }
+
     const washingMachine: CreateWashingMachineRequest = {
       category: this.washingMachineIdentification$.value.category,
       manufacturer: this.washingMachineIdentification$.value.manufacturer,
@@ -216,8 +213,9 @@ export class WashingMachineService {
 
     return new Promise((resolve) => {
       this._washingMachineDataService.save(formData).pipe(
-        switchMap(() => { 
-          return this._washingMachineDataService.getRecommendation(this.washingMachineIdentification$.value.serialNumber)
+        withLatestFrom(this.getWashingMachineIdentification()),
+        switchMap(([_, identification]) => { 
+          return this._washingMachineDataService.getRecommendation(identification.serialNumber)
         })
       ).subscribe({
         next: (response) => {

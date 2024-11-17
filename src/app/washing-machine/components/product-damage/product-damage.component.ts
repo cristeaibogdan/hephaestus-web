@@ -355,23 +355,28 @@ export class ProductDamage implements OnInit, OnDestroy {
   selectedFiles:ImageFile[] = [];
 
   onDrop(droppedFiles:FileList): void {
-    this.onFileUpload({target: {files: droppedFiles}});
+    this.uploadFiles(droppedFiles);
   }
 
   onFileUpload(event: any): void {
     // console.log(event);
     const htmlInput = event.target as HTMLInputElement;
+    if(htmlInput.files) {
+      this.uploadFiles(htmlInput.files);
+    }
+  }
+
+  private uploadFiles(files: FileList): void {
     
-    if (htmlInput.files) {
     // 1. Validate file length
-    const totalFilesCount = this.selectedFiles.length + htmlInput.files.length;
+    const totalFilesCount = this.selectedFiles.length + files.length;
     if (totalFilesCount > 3) {
       this._notifService.showError(this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_LIMIT"),0);
       return;
     }
       
-    for (let i = 0; i < htmlInput.files.length; i++) {
-      const uploadedFile:File = htmlInput.files[i];      
+    for (let i = 0; i < files.length; i++) {
+      const uploadedFile:File = files[i];      
       
       // 2. Validate file extension
       if(this.invalidFileExtension(uploadedFile.name)) {
@@ -397,10 +402,10 @@ export class ProductDamage implements OnInit, OnDestroy {
           URL.createObjectURL(uploadedFile)
         )
       }
-  
+
       this.selectedFiles.push(imageFile);  
     }
-   }
+    
   }
 
   onRemoveImage(index:number): void {
