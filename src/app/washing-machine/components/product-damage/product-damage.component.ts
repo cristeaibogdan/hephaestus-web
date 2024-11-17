@@ -355,18 +355,18 @@ export class ProductDamage implements OnInit, OnDestroy {
   selectedFiles:ImageFile[] = [];
 
   onDrop(droppedFiles:FileList): void {
-    this.uploadFiles(droppedFiles);
+    this.processFiles(droppedFiles);
   }
 
   onFileUpload(event: any): void {
     // console.log(event);
     const htmlInput = event.target as HTMLInputElement;
     if(htmlInput.files) {
-      this.uploadFiles(htmlInput.files);
+      this.processFiles(htmlInput.files);
     }
   }
 
-  private uploadFiles(files: FileList): void {
+  private processFiles(files: FileList): void {
     
     // 1. Validate file length
     const totalFilesCount = this.selectedFiles.length + files.length;
@@ -404,8 +404,7 @@ export class ProductDamage implements OnInit, OnDestroy {
       }
 
       this.selectedFiles.push(imageFile);  
-    }
-    
+    }    
   }
 
   onRemoveImage(index:number): void {
