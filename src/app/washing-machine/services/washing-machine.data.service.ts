@@ -80,5 +80,11 @@ export class WashingMachineDataService {
 
     return this.http.get<GetWashingMachineFullResponse>(url);
   }
+
+  loadMany(serialNumbers:string[]): Observable<Record<string, GetWashingMachineFullResponse>> {
+    const url = this.apiURL.concat("/api/v1/washing-machines/many");
+
+    return this.http.post<Record<string, GetWashingMachineFullResponse>>(url, serialNumbers);
+  }
 }
 

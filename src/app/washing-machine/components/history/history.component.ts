@@ -190,11 +190,23 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       return this.openDialog(washingMachine);
     }
     
-    this._washingMachineDataService.load(washingMachine.serialNumber).subscribe(response => {
+    // this._washingMachineDataService.load(washingMachine.serialNumber).subscribe(response => {
+    //   console.log("Response for details => ", response);
+
+    //   washingMachine.washingMachineDetail = response.washingMachineDetail;
+    //   washingMachine.washingMachineImages = response.washingMachineImages;
+
+    //   this.openDialog(washingMachine);
+    // });
+
+    this._washingMachineDataService.loadMany([washingMachine.serialNumber]).subscribe(response => {
       console.log("Response for details => ", response);
 
-      washingMachine.washingMachineDetail = response.washingMachineDetail;
-      washingMachine.washingMachineImages = response.washingMachineImages;
+      const washingMachineDetail = response[washingMachine.serialNumber];
+      if (washingMachineDetail) {
+        washingMachine.washingMachineDetail = washingMachineDetail.washingMachineDetail;
+        washingMachine.washingMachineImages = washingMachineDetail.washingMachineImages;
+      }
 
       this.openDialog(washingMachine);
     });
