@@ -74,6 +74,9 @@ export class WashingMachineDataService {
     return this.http.post<Page<GetWashingMachineSimpleResponse>>(url, payload);
   }
 
+  /**
+  * @deprecated This method is deprecated, use `loadMany` instead.
+  */
   load(serialNumber:string): Observable<GetWashingMachineFullResponse> {
     const url = this.apiURL.concat("/api/v1/washing-machines/")
       .concat(serialNumber);
