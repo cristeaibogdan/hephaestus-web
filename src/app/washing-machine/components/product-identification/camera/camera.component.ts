@@ -34,7 +34,6 @@ export class CameraComponent implements AfterViewInit {
   allowedFormats = [BarcodeFormat.QR_CODE];
 
   scannerEnabled:boolean = false;
-  scanResult!:string;
   productIdentification!: GetProductIdentificationResponse;
 
   cameraIsLoading:boolean = false;
@@ -59,9 +58,6 @@ export class CameraComponent implements AfterViewInit {
     if(this.scanner.device !== this.availableCameras[this.cameraIndex]) {
       this.scanner.device = this.availableCameras[this.cameraIndex];
     }
-
-    // Clear previous result
-    this.scanResult = "";
   }
 
   ngAfterViewInit(): void {
@@ -71,12 +67,8 @@ export class CameraComponent implements AfterViewInit {
   }
 
   onScanSuccess(result: string): void {
-    this.scanResult = this.getProductIdentification(result);
-    this.pauseScan(); 
-    
-    if(this.scanResult) {
-      this._notifService.showSuccess("QR code succesfully identified!", 0);
-    }
+    this.getProductIdentification(result);
+    this.pauseScan();
   }
 
   pauseScan(): void {
@@ -94,7 +86,7 @@ export class CameraComponent implements AfterViewInit {
     this.scanner.previewElemRef.nativeElement.play();  
   }
 
-  onClose(): void {
+  closeDialog(): void {
     if (this.productIdentification) {
       return this.dialogRef.close(this.productIdentification);
     }
@@ -144,12 +136,12 @@ export class CameraComponent implements AfterViewInit {
     );
 
     if(backCameraIndex > 0) {
-      this._notifService.showSuccess("back camera index = " + backCameraIndex, 0);
       this.cameraIndex = backCameraIndex;
+      this._notifService.showSuccess("back camera index = " + backCameraIndex, 0);
     }
   }
 
-  noCamerasFound:boolean = false;
+  noCamerasFound: boolean = false;
 
   camerasNotFoundHandler(): void {
     this.noCamerasFound = true;
@@ -159,15 +151,13 @@ export class CameraComponent implements AfterViewInit {
 //*** SELECT FILE FOR SCAN FUNCTIONALITY
 //****************************************
 
-  async uploadImage(event: any): Promise<void> {  
-    this.scanResult = "";
+  async uploadImage(event: any): Promise<void> {
 
     const uploadedFile:File = event.target.files[0];      
 
     // 0. Validate file extension
     if(this.invalidFileExtension(uploadedFile.name)) {
-      this._notifService.showError("File "+ uploadedFile.name +" is not supported. Only jpg, jpeg, png and bmp extensions are supported.",0);
-      return;
+      return this._notifService.showError("File "+ uploadedFile.name +" is not supported. Only jpg, jpeg, png and bmp extensions are supported.",0);
     }
 
     // 1. Get the image and generate an URL for it 
@@ -188,8 +178,8 @@ export class CameraComponent implements AfterViewInit {
       return this._notifService.showError("Unsupported Code. Only QR Codes are supported", 0);
     }
 
-    // 3. Verify the result string    
-    this.scanResult = this.getProductIdentification(resultFromQRCode);
+    // 3. Retrieve productIdentification   
+    this.getProductIdentification(resultFromQRCode);
   }
   
 //****************************************
@@ -209,17 +199,17 @@ export class CameraComponent implements AfterViewInit {
     }
   } 
 
-  private getProductIdentification(qrCode: string): string {
+  private getProductIdentification(qrCode: string): void {
+
     if(qrCode.startsWith("hephaestus-washing-machine-")) {
       this._washingMachineDataService.getProductIdentification(qrCode).subscribe(response => {
         this.productIdentification = response;
         this._notifService.showSuccess("QR code succesfully identified!", 0);
       });
-      return qrCode;
-    } else {
-      this._notifService.showError("The QR code does not belong to a supported washing machine. Scanned result: " + qrCode, 0);
-      return "";
+      return;
     }
+
+    this._notifService.showError("The QR code does not belong to a supported washing machine. Scanned result: " + qrCode, 0);    
   }
 
   uploadHelp: string = "* Only images with QR codes are supported. \n ** Only images with png, jpg, jpeg and bmp extension are supported";

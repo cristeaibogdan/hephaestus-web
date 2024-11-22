@@ -98,26 +98,6 @@ zxing-scanner ::ng-deep video {
 }
 
 /* ******************************************* */
-/* *** RESULT */
-/* ******************************************* */
-
-.result-container {
-  text-align: center;  
-
-  color: #444;
-  background-color: #b2f2bb;
-  padding: 15px 10px;
-  margin-bottom: 1.5rem;
-
-  border-radius: 10px;
-  font-size: 14px;
-}
-
-.result-title {
-  margin-bottom: 10px;
-}
-
-/* ******************************************* */
 /* *** UPLOAD IMAGE */
 /* ******************************************* */
 
