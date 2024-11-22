@@ -34,7 +34,7 @@ export class CameraComponent implements AfterViewInit {
   allowedFormats = [BarcodeFormat.QR_CODE];
 
   scannerEnabled:boolean = false;
-  productIdentification!: GetProductIdentificationResponse;
+  result!: GetProductIdentificationResponse | null;
 
   cameraIsLoading:boolean = false;
   cameraIsPaused:boolean = false;
@@ -58,6 +58,9 @@ export class CameraComponent implements AfterViewInit {
     if(this.scanner.device !== this.availableCameras[this.cameraIndex]) {
       this.scanner.device = this.availableCameras[this.cameraIndex];
     }
+
+    // Clear previous result
+    this.result = null;
   }
 
   ngAfterViewInit(): void {
@@ -87,8 +90,8 @@ export class CameraComponent implements AfterViewInit {
   }
 
   closeDialog(): void {
-    if (this.productIdentification) {
-      return this.dialogRef.close(this.productIdentification);
+    if (this.result) {
+      return this.dialogRef.close(this.result);
     }
 
     this.dialogRef.close();
@@ -153,7 +156,9 @@ export class CameraComponent implements AfterViewInit {
 
   async uploadImage(event: any): Promise<void> {
 
-    const uploadedFile:File = event.target.files[0];      
+    this.result = null;
+
+    const uploadedFile:File = event.target.files[0];
 
     // 0. Validate file extension
     if(this.invalidFileExtension(uploadedFile.name)) {
@@ -203,9 +208,8 @@ export class CameraComponent implements AfterViewInit {
 
     if(qrCode.startsWith("hephaestus-washing-machine-")) {
       this._washingMachineDataService.getProductIdentification(qrCode).subscribe(response => {
-        this.productIdentification = response;
+        this.result = response;
         this._notifService.showSuccess("QR code succesfully identified!", 0);
-        this.closeDialog();
       });
       return;
     }
