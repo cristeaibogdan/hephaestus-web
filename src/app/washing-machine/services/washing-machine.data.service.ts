@@ -9,6 +9,7 @@ import { GetWashingMachineSimpleResponse } from '../models/dtos/get-washing-mach
 import { GetModelAndTypeResponse } from 'src/app/shared/models/get-model-and-type.response';
 import { Observable } from 'rxjs';
 import { GetWashingMachineFullResponse } from '../models/dtos/get-washing-machine-full.response';
+import { GetProductIdentificationResponse } from 'src/app/shared/models/get-product-identification.response';
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineDataService {
@@ -20,6 +21,7 @@ export class WashingMachineDataService {
 //*** STEP 1 = PRODUCT IDENTIFICATION
 //**************************************
 
+  // TODO: Move these methods to a separate service?
   getManufacturers(productCategory: string): Observable<string[]> {
     let url = this.apiURL.concat("/api/v1/products/")
       .concat(productCategory)
@@ -34,6 +36,13 @@ export class WashingMachineDataService {
       .concat("/models-and-types");
 
     return this.http.get<GetModelAndTypeResponse[]>(url);
+  }
+
+  getProductIdentification(qrCode: string): Observable<GetProductIdentificationResponse> {
+    const url = this.apiURL.concat("/api/v1/products/")
+    .concat(qrCode);
+
+    return this.http.get<GetProductIdentificationResponse>(url);
   }
 
 //**************************************

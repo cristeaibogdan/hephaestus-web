@@ -5,9 +5,10 @@ import { ɵunwrapSafeValue } from "@angular/core"
 import { BrowserQRCodeReader } from '@zxing/browser/es2015/readers/BrowserQRCodeReader';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { MatDialogRef } from '@angular/material/dialog';
-import { QrResult } from 'src/app/washing-machine/models/qr-result.model';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
 import { NotificationService } from 'src/app/services/notification.service';
+import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
+import { GetProductIdentificationResponse } from 'src/app/shared/models/get-product-identification.response';
 
 @Component({
   selector: 'app-camera',
@@ -18,6 +19,7 @@ export class CameraComponent implements AfterViewInit {
 
   constructor(
     private _notifService: NotificationService,
+    private _washingMachineDataService: WashingMachineDataService,
     private sanitizer: DomSanitizer,
     private dialogRef: MatDialogRef<CameraComponent>
   ) { }
@@ -33,6 +35,7 @@ export class CameraComponent implements AfterViewInit {
 
   scannerEnabled:boolean = false;
   scanResult!:string;
+  productIdentification!: GetProductIdentificationResponse;
 
   cameraIsLoading:boolean = false;
   cameraIsPaused:boolean = false;
@@ -92,14 +95,8 @@ export class CameraComponent implements AfterViewInit {
   }
 
   onClose(): void {
-    if (this.scanResult) {
-      const qrResult:QrResult = {
-        manufacturer: "Gorenje",
-        model: "WA946",
-        type: "GOR001",
-        serialNumber: "QR_Code_"+Math.floor(Math.random() * 100)
-      }
-      return this.dialogRef.close(qrResult);
+    if (this.productIdentification) {
+      return this.dialogRef.close(this.productIdentification);
     }
 
     this.dialogRef.close();
@@ -162,7 +159,7 @@ export class CameraComponent implements AfterViewInit {
 //*** SELECT FILE FOR SCAN FUNCTIONALITY
 //****************************************
 
-QRCodeFile!:ImageFile;
+  QRCodeFile!:ImageFile;
 
   async onFileSelectedQR(event: any): Promise<void> {  
     this.scanResult = "";
@@ -222,13 +219,15 @@ QRCodeFile!:ImageFile;
     }
   } 
 
-  private validateQrCodeResult(QRCodeResult:string): string {
-    // if(QRCodeResult.startsWith("400")) {
-    if(QRCodeResult.startsWith("This")) {
-      return QRCodeResult;
+  private validateQrCodeResult(qrCode: string): string {
+    if(qrCode.startsWith("hephaestus-washing-machine-")) {
+      this._washingMachineDataService.getProductIdentification(qrCode).subscribe(response => {
+        this.productIdentification = response;
+      });
+      return qrCode;
     } else {
       this._notifService.showError(
-        "The QR code does not belong to a supported washing machine. Scanned result: "+QRCodeResult,0);
+        "The QR code does not belong to a supported washing machine. Scanned result: "+qrCode,0);
       return "";
     }
   }

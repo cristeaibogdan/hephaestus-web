@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { SerialNumberValidator } from 'src/app/shared/validators/async-validators/serial-number.validator';
 import { CameraComponent } from './camera/camera.component';
 import { CustomValidators } from '../../../shared/validators/custom.validators';
-import { QrResult } from 'src/app/washing-machine/models/qr-result.model';
 import { WashingMachineIdentification } from 'src/app/washing-machine/models/washing-machine-identification.model';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { WashingMachineDataService } from '../../services/washing-machine.data.service';
@@ -12,6 +11,7 @@ import { ReturnType } from '../../enums/return-type.enum';
 import { DamageType } from '../../enums/damage-type.enum';
 import { IdentificationMode } from '../../enums/identification-mode.enum';
 import { MatStepper } from '@angular/material/stepper';
+import { GetProductIdentificationResponse } from 'src/app/shared/models/get-product-identification.response';
 
 @Component({
   selector: 'app-product-identification',
@@ -71,12 +71,10 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
 
   disableDataFields_WHEN_QRCodeIsSelected(): void {
     this.washingMachineIdentificationForm.controls.manufacturer.enable();
-    this.washingMachineIdentificationForm.controls.serialNumber.enable();
     this.washingMachineIdentificationForm.controls.modelAndType.enable();
 
     if (this.washingMachineIdentificationForm.value.identificationMode === IdentificationMode.QR_CODE) {
       this.washingMachineIdentificationForm.controls.manufacturer.disable();
-      this.washingMachineIdentificationForm.controls.serialNumber.disable();
       this.washingMachineIdentificationForm.controls.modelAndType.disable();
     }
   }
@@ -101,14 +99,13 @@ export class ProductIdentificationComponent implements OnInit, OnDestroy {
       disableClose: true
     });
 
-    dialogRef.afterClosed().subscribe((result:QrResult) => {
+    dialogRef.afterClosed().subscribe((result: GetProductIdentificationResponse) => {
       // console.log("result from window = ", result);
 
       if(result) {
         this.washingMachineIdentificationForm.controls.manufacturer.patchValue(result.manufacturer);
         this.washingMachineIdentificationForm.controls.modelAndType.controls.model.patchValue(result.model);
-        this.washingMachineIdentificationForm.controls.modelAndType.controls.type.patchValue(result.type);
-        this.washingMachineIdentificationForm.controls.serialNumber.patchValue(result.serialNumber);
+        this.washingMachineIdentificationForm.controls.modelAndType.controls.type.patchValue(result.type);        
       } else {
         this.washingMachineIdentificationForm.controls.manufacturer.reset();
         this.washingMachineIdentificationForm.controls.modelAndType.reset();
