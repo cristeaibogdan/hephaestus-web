@@ -190,11 +190,6 @@ export class CameraComponent implements AfterViewInit {
 
     // 3. Verify the result string    
     this.scanResult = this.getProductIdentification(resultFromQRCode);
-
-    // 4. Send to backend to retrieve WashingMachine
-    if(this.scanResult) {
-      this._notifService.showSuccess("QR code succesfully identified!", 0);
-    }
   }
   
 //****************************************
@@ -218,11 +213,11 @@ export class CameraComponent implements AfterViewInit {
     if(qrCode.startsWith("hephaestus-washing-machine-")) {
       this._washingMachineDataService.getProductIdentification(qrCode).subscribe(response => {
         this.productIdentification = response;
+        this._notifService.showSuccess("QR code succesfully identified!", 0);
       });
       return qrCode;
     } else {
-      this._notifService.showError(
-        "The QR code does not belong to a supported washing machine. Scanned result: "+qrCode,0);
+      this._notifService.showError("The QR code does not belong to a supported washing machine. Scanned result: " + qrCode, 0);
       return "";
     }
   }
