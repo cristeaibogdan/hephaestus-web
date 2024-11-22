@@ -205,6 +205,7 @@ export class CameraComponent implements AfterViewInit {
       this._washingMachineDataService.getProductIdentification(qrCode).subscribe(response => {
         this.productIdentification = response;
         this._notifService.showSuccess("QR code succesfully identified!", 0);
+        this.closeDialog();
       });
       return;
     }
