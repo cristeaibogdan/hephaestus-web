@@ -70,8 +70,8 @@ export class CameraComponent implements AfterViewInit {
     };
   }
 
-  onScanSuccess(result:string): void {
-    this.scanResult = this.validateQrCodeResult(result);
+  onScanSuccess(result: string): void {
+    this.scanResult = this.getProductIdentification(result);
     this.pauseScan(); 
     
     if(this.scanResult) {
@@ -107,9 +107,9 @@ export class CameraComponent implements AfterViewInit {
 //****************************************
 
   availableCameras!: MediaDeviceInfo[];
-  cameraIndex:number = 0;
+  cameraIndex: number = 0;
 
-  onSwitch(): void {
+  switchCamera(): void {
     this.cameraIndex++;
 
     // if only one camera is present use it and exit method
@@ -144,7 +144,7 @@ export class CameraComponent implements AfterViewInit {
     );
 
     if(backCameraIndex > 0) {
-      this._notifService.showSuccess("back camera index = "+backCameraIndex, 0);
+      this._notifService.showSuccess("back camera index = " + backCameraIndex, 0);
       this.cameraIndex = backCameraIndex;
     }
   }
@@ -159,28 +159,24 @@ export class CameraComponent implements AfterViewInit {
 //*** SELECT FILE FOR SCAN FUNCTIONALITY
 //****************************************
 
-  QRCodeFile!:ImageFile;
-
-  async onFileSelectedQR(event: any): Promise<void> {  
+  async uploadImage(event: any): Promise<void> {  
     this.scanResult = "";
 
     const uploadedFile:File = event.target.files[0];      
 
     // 0. Validate file extension
     if(this.invalidFileExtension(uploadedFile.name)) {
-      this._notifService.showError("File "+uploadedFile.name+" is not supported. Only jpg, jpeg, png and bmp extensions are supported.",0);
+      this._notifService.showError("File "+ uploadedFile.name +" is not supported. Only jpg, jpeg, png and bmp extensions are supported.",0);
       return;
     }
 
     // 1. Get the image and generate an URL for it 
-    const handledFile:ImageFile = {
+    const handledFile: ImageFile = {
       file: uploadedFile,
       url: this.sanitizer.bypassSecurityTrustUrl( 
         window.URL.createObjectURL(uploadedFile)   
       )
     }
-
-    this.QRCodeFile = handledFile;
 
     // 2. Decode image
     const codeReader = new BrowserQRCodeReader();
@@ -189,12 +185,11 @@ export class CameraComponent implements AfterViewInit {
     try {
       resultFromQRCode = (await codeReader.decodeFromImageUrl(ɵunwrapSafeValue(handledFile.url))).getText();
     } catch (error) {
-      this._notifService.showError("Unsupported Code. Only QR Codes are supported", 0);
-      return;
+      return this._notifService.showError("Unsupported Code. Only QR Codes are supported", 0);
     }
 
     // 3. Verify the result string    
-    this.scanResult = this.validateQrCodeResult(resultFromQRCode);
+    this.scanResult = this.getProductIdentification(resultFromQRCode);
 
     // 4. Send to backend to retrieve WashingMachine
     if(this.scanResult) {
@@ -219,7 +214,7 @@ export class CameraComponent implements AfterViewInit {
     }
   } 
 
-  private validateQrCodeResult(qrCode: string): string {
+  private getProductIdentification(qrCode: string): string {
     if(qrCode.startsWith("hephaestus-washing-machine-")) {
       this._washingMachineDataService.getProductIdentification(qrCode).subscribe(response => {
         this.productIdentification = response;
@@ -232,6 +227,6 @@ export class CameraComponent implements AfterViewInit {
     }
   }
 
-  uploadHelp:string = "* Only images with QR codes are supported. \n ** Only images with png, jpg, jpeg and bmp extension are supported";
+  uploadHelp: string = "* Only images with QR codes are supported. \n ** Only images with png, jpg, jpeg and bmp extension are supported";
 
 }

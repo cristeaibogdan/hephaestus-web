@@ -27,7 +27,7 @@
 
     <div class="camera-scanner-switch" *ngIf="scannerEnabled">
       <button mat-raised-button type="button" color="primary"
-        (click)="onSwitch()"
+        (click)="switchCamera()"
         [disabled]="cameraIsLoading || availableCameras.length === 1">
         <mat-icon class="icon-camera" svgIcon="camera_SWITCH"></mat-icon>
       </button>
@@ -38,15 +38,12 @@
 <input #QRInput type="file" 
   accept=".png, .jpg, .jpeg, .bmp"
   onClick="this.value=null" 
-  (change)="onFileSelectedQR($event)"
+  (change)="uploadImage($event)"
 >
 
 <!-- TODO: Make background color span left to right, the whole width of the flexbox -->
 <mat-dialog-actions class="buttons-container">
-  <div class="result-container" *ngIf="scanResult">
-    <!-- <div>Here's the image (test purpose only)</div>
-    <img *ngIf="QRCodeFile" [src]="QRCodeFile.url"/> -->
-  
+  <div class="result-container" *ngIf="scanResult">  
     <div class="result-title"><b>QR Scan Result</b></div>
     <div>{{scanResult}}</div>
   </div>
