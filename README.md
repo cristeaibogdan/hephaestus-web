@@ -22,6 +22,7 @@ The frontend application is deployed on **GitHub Pages** and is accessible here:
 
 - **[Live Application](https://cristeaibogdan.github.io/hephaestus-web/)**  
   Access the live version of the Hephaestus application, where you can interact with the user interface and make informed appliance decisions.
+  
   **Backend is hosted on Azure with a burst configuration, which means it may temporarily shut down when idle. If the service doesn't respond immediately, try refreshing a few times to wake it up.**
 
 - **[Zipkin Server on Azure](https://zipkin.orangesmoke-f68e1158.northeurope.azurecontainerapps.io)**  
