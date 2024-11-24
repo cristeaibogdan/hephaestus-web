@@ -11,11 +11,11 @@ import { MatStepper } from '@angular/material/stepper';
 import { WashingMachineDetail } from '../../models/washing-machine-detail.model';
 
 @Component({
-  selector: 'app-product-damage',
-  templateUrl: './product-damage.component.html',
-  styleUrls: ['./product-damage.component.css']
+  selector: 'app-washing-machine-damage',
+  templateUrl: './washing-machine-damage.component.html',
+  styleUrls: ['./washing-machine-damage.component.css']
 })
-export class ProductDamage implements OnInit, OnDestroy {
+export class WashingMachineDamageComponent implements OnInit, OnDestroy {
   
   subscriptions:Subscription[] = [];
 

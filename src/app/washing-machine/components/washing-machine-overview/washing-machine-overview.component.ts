@@ -9,11 +9,11 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { WashingMachineDetail } from '../../models/washing-machine-detail.model';
 
 @Component({
-  selector: 'app-damage-overview',
-  templateUrl: './damage-overview.component.html',
-  styleUrls: ['./damage-overview.component.css']
+  selector: 'app-washing-machine-overview',
+  templateUrl: './washing-machine-overview.component.html',
+  styleUrls: ['./washing-machine-overview.component.css']
 })
-export class OverviewComponent {
+export class WashingMachineOverviewComponent {
 
   washingMachineIdentification$:Observable<WashingMachineIdentification> = this._washingMachineService.getWashingMachineIdentification();
   washingMachineDetail$:Observable<WashingMachineDetail> = this._washingMachineService.getWashingMachineDetail(); 

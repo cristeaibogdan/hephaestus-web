@@ -14,11 +14,11 @@ import { MatStepper } from '@angular/material/stepper';
 import { GetProductIdentificationResponse } from 'src/app/shared/models/get-product-identification.response';
 
 @Component({
-  selector: 'app-product-identification',
-  templateUrl: './product-identification.component.html',
-  styleUrls: ['./product-identification.component.css']
+  selector: 'app-washing-machine-identification',
+  templateUrl: './washing-machine-identification.component.html',
+  styleUrls: ['./washing-machine-identification.component.css']
 })
-export class ProductIdentificationComponent implements OnInit, OnDestroy {
+export class WashingMachineIdentificationComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(MatStepper) private stepper: MatStepper,
