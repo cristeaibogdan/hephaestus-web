@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { HistoryViewComponent } from '../../../washing-machine/components/history/history-view/history-view.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -15,13 +14,14 @@ import { DamageType } from 'src/app/washing-machine/enums/damage-type.enum';
 import { IdentificationMode } from 'src/app/washing-machine/enums/identification-mode.enum';
 import { Recommendation } from 'src/app/washing-machine/enums/recommendation.enum';
 import { GetWashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/get-washing-machine-full.response';
+import { WashingMachineHistoryViewComponent } from './washing-machine-history-view/washing-machine-history-view.component';
 
 @Component({
-  selector: 'app-history',
-  templateUrl: './history.component.html',
-  styleUrls: ['./history.component.css']
+  selector: 'app-washing-machine-history',
+  templateUrl: './washing-machine-history.component.html',
+  styleUrls: ['./washing-machine-history.component.css']
 })
-export class HistoryComponent implements OnInit, AfterViewInit {
+export class WashingMachineHistoryComponent implements OnInit, AfterViewInit {
 
   constructor(
     private dialog: MatDialog,
@@ -213,7 +213,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   }
 
   openDialog(washingMachine: GetWashingMachineFullResponse): void { 
-    this.dialog.open(HistoryViewComponent, {
+    this.dialog.open(WashingMachineHistoryViewComponent, {
       disableClose: true,
       width: '35%',
       data: { washingMachine: washingMachine },

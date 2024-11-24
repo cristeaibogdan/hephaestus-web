@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-import { CameraComponent } from './washing-machine/components/product-identification/camera/camera.component';
 import { RegisterComponent } from './components/register/register.component';
 
 import { AuthGuard } from './services/auth-guard.service';
+import { CameraComponent } from './washing-machine/components/washing-machine-identification/camera/camera.component';
 
 const appRoutes: Routes = [
   { path: "login", component: LoginComponent },

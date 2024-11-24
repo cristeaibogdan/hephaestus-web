@@ -7,11 +7,11 @@ import { WashingMachineIdentification } from '../../models/washing-machine-ident
 import { Recommendation } from '../../enums/recommendation.enum';
 
 @Component({
-  selector: 'app-product-recommendation',
-  templateUrl: './product-recommendation.component.html',
-  styleUrls: ['./product-recommendation.component.css']
+  selector: 'app-washing-machine-recommendation',
+  templateUrl: './washing-machine-recommendation.component.html',
+  styleUrls: ['./washing-machine-recommendation.component.css']
 })
-export class ProductRecommendationComponent {
+export class WashingMachineRecommendationComponent {
 
   washingMachineIdentification$:Observable<WashingMachineIdentification> = this._washingMachineService.getWashingMachineIdentification();
   washingMachineRecommendation :Recommendation = this._washingMachineService.getRecommendation();

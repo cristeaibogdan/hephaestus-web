@@ -31,28 +31,28 @@
     <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.PRODUCT_IDENTIFICATION" | translate}}</ng-template>
     <!-- TODO: Possible overflow usage. But needs to be in px, else it won't work... -->
     <!-- <div class="overflow-test"> -->
-      <app-product-identification></app-product-identification>
+      <app-washing-machine-identification></app-washing-machine-identification>
     <!-- </div> -->
   </mat-step>
   
   <mat-step [stepControl]="secondFormGroup"> <!-- STEP TWO -->
     <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.DAMAGE_ASSESSMENT" | translate}}</ng-template>
     <ng-template matStepContent>
-      <app-product-damage></app-product-damage>
+      <app-washing-machine-damage></app-washing-machine-damage>
     </ng-template> 
   </mat-step>
   
   <mat-step [stepControl]="thirdFormGroup"> <!-- STEP THREE -->
     <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.DAMAGE_OVERVIEW" | translate}}</ng-template>   
     <ng-template matStepContent>
-      <app-damage-overview></app-damage-overview>
+      <app-washing-machine-overview></app-washing-machine-overview>
     </ng-template>   
   </mat-step>
   
   <mat-step [stepControl]="fourthFormGroup"> <!-- STEP FOUR -->            
     <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.RECOMMENDATION" | translate}}</ng-template>        
     <ng-template matStepContent>
-      <app-product-recommendation></app-product-recommendation>
+      <app-washing-machine-recommendation></app-washing-machine-recommendation>
     </ng-template>
   </mat-step>
 </mat-stepper>

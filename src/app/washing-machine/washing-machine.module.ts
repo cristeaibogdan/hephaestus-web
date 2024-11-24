@@ -2,30 +2,30 @@ import { NgModule } from '@angular/core';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { RouterModule, Routes } from '@angular/router';
 import { WashingMachineComponent } from './components/washing-machine.component';
-import { ProductIdentificationComponent } from './components/product-identification/product-identification.component';
-import { ProductDamage } from './components/product-damage/product-damage.component';
-import { OverviewComponent } from './components/damage-overview/damage-overview.component';
-import { ProductRecommendationComponent } from './components/product-recommendation/product-recommendation.component';
+import { WashingMachineDamageComponent } from './components/washing-machine-damage/washing-machine-damage.component';
+import { WashingMachineOverviewComponent } from './components/washing-machine-overview/washing-machine-overview.component';
+import { WashingMachineRecommendationComponent } from './components/washing-machine-recommendation/washing-machine-recommendation.component';
 import { SharedModule } from '../shared/shared.module';
-import { CameraComponent } from './components/product-identification/camera/camera.component';
-import { HistoryComponent } from './components/history/history.component';
-import { HistoryViewComponent } from './components/history/history-view/history-view.component';
+import { CameraComponent } from './components/washing-machine-identification/camera/camera.component';
+import { WashingMachineIdentificationComponent } from './components/washing-machine-identification/washing-machine-identification.component';
+import { WashingMachineHistoryComponent } from './components/washing-machine-history/washing-machine-history.component';
+import { WashingMachineHistoryViewComponent } from './components/washing-machine-history/washing-machine-history-view/washing-machine-history-view.component';
 
 const routes: Routes = [
   { path: "", component: WashingMachineComponent },
-  { path: "history", component: HistoryComponent }
+  { path: "history", component: WashingMachineHistoryComponent }
 ];
 
 @NgModule({
   declarations: [
     WashingMachineComponent,
-    ProductIdentificationComponent,
+    WashingMachineIdentificationComponent,
     CameraComponent,
-    ProductDamage,
-    OverviewComponent,
-    ProductRecommendationComponent,
-    HistoryComponent,
-    HistoryViewComponent
+    WashingMachineDamageComponent,
+    WashingMachineOverviewComponent,
+    WashingMachineRecommendationComponent,
+    WashingMachineHistoryComponent,
+    WashingMachineHistoryViewComponent
   ],
   imports: [
     SharedModule,
