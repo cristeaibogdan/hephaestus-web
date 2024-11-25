@@ -13,7 +13,7 @@ import { Recommendation } from '../../enums/recommendation.enum';
 })
 export class WashingMachineRecommendationComponent {
 
-  washingMachineIdentification$:Observable<WashingMachineIdentification> = this._washingMachineService.getWashingMachineIdentification();
+  washingMachineIdentification$:Observable<WashingMachineIdentification | null> = this._washingMachineService.getWashingMachineIdentification();
   washingMachineRecommendation :Recommendation = this._washingMachineService.getRecommendation();
 
   constructor(
@@ -29,8 +29,8 @@ export class WashingMachineRecommendationComponent {
   onDownload(): void {
     this.washingMachineIdentification$.pipe(
       take(1),
-      switchMap(washingMachineIdentification => 
-        this._washingMachineDataService.getReport(washingMachineIdentification.serialNumber)
+      switchMap(washingMachineIdentification => // TODO: avoid using !
+        this._washingMachineDataService.getReport(washingMachineIdentification!.serialNumber)
       )
     ).subscribe(response => {
       
@@ -54,6 +54,6 @@ export class WashingMachineRecommendationComponent {
       // Cleanup
       window.URL.revokeObjectURL(blobUrl);
     });
-  };
+  }
 }
   

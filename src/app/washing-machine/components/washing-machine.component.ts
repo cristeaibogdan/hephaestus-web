@@ -16,7 +16,7 @@ export class WashingMachineComponent {
     private _washingMachineService: WashingMachineService
   ) {}
 
-  washingMachineIdentification$: Observable<WashingMachineIdentification> = this._washingMachineService.getWashingMachineIdentification();
+  washingMachineIdentification$: Observable<WashingMachineIdentification | null> = this._washingMachineService.getWashingMachineIdentification();
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],

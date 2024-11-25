@@ -15,7 +15,7 @@ import { WashingMachineDetail } from '../../models/washing-machine-detail.model'
 })
 export class WashingMachineOverviewComponent {
 
-  washingMachineIdentification$:Observable<WashingMachineIdentification> = this._washingMachineService.getWashingMachineIdentification();
+  washingMachineIdentification$:Observable<WashingMachineIdentification | null> = this._washingMachineService.getWashingMachineIdentification();
   washingMachineDetail$:Observable<WashingMachineDetail> = this._washingMachineService.getWashingMachineDetail(); 
    
   selectedFiles:ImageFile[] = this._washingMachineService.getSelectedFiles();

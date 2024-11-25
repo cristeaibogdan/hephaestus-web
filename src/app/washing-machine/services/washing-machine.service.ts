@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, filter, switchMap, withLatestFrom} from "rxjs";
+import { BehaviorSubject, Observable, switchMap, withLatestFrom} from "rxjs";
 import { CreateWashingMachineRequest } from "../models/dtos/create-washing-machine.request";
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
@@ -9,10 +9,6 @@ import { ReturnType } from "../enums/return-type.enum";
 import { IdentificationMode } from "../enums/identification-mode.enum";
 import { Recommendation } from "../enums/recommendation.enum";
 import { WashingMachineDetail } from "../models/washing-machine-detail.model";
-
-export function isNonNulled<T>(value: T): value is NonNullable<T> {
-  return value != null;
-}
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineService {
@@ -24,21 +20,10 @@ export class WashingMachineService {
 // **************************************
 // *** STEP 1 = PRODUCT IDENTIFICATION
 // **************************************
+  
+  private washingMachineIdentification$ = new BehaviorSubject<WashingMachineIdentification | null>(null);
 
-  // TODO: Point of discussion
-  // private washingMachineIdentification$ = new BehaviorSubject<WashingMachineIdentification | null>(null);
-  private washingMachineIdentification$ = new BehaviorSubject<WashingMachineIdentification>({
-    category: "",
-    damageType: DamageType.IN_TRANSIT,
-    returnType: ReturnType.COMMERCIAL,
-    identificationMode: IdentificationMode.DATA_MATRIX,
-    manufacturer: "",
-    serialNumber: "",
-    model: "",
-    type: "",
-  });
-
-  getWashingMachineIdentification(): Observable<WashingMachineIdentification> {
+  getWashingMachineIdentification(): Observable<WashingMachineIdentification | null> {
     return this.washingMachineIdentification$.asObservable();
   }
 
@@ -47,17 +32,7 @@ export class WashingMachineService {
   }
 
   resetWashingMachineIdentification(): void {
-    const initialWashingMachineIdentification: WashingMachineIdentification = {
-      category: "",
-      damageType: DamageType.IN_TRANSIT,
-      returnType: ReturnType.COMMERCIAL,
-      identificationMode: IdentificationMode.DATA_MATRIX,
-      manufacturer: "",
-      serialNumber: "",
-      model: "",
-      type: "",
-    }
-    this.washingMachineIdentification$.next(initialWashingMachineIdentification);
+    this.washingMachineIdentification$.next(null);
   }
   
 // *****************************************
@@ -178,9 +153,9 @@ export class WashingMachineService {
 // **************************************
 
   save(): Promise<boolean> {
-    // if (this.washingMachineIdentification$.value == null) {
-    //   return Promise.reject();
-    // }
+    if (this.washingMachineIdentification$.value == null) {
+      return Promise.reject();
+    }
 
     const washingMachine: CreateWashingMachineRequest = {
       category: this.washingMachineIdentification$.value.category,
@@ -226,7 +201,7 @@ export class WashingMachineService {
       this._washingMachineDataService.save(formData).pipe(
         withLatestFrom(this.getWashingMachineIdentification()),
         switchMap(([_, identification]) => { 
-          return this._washingMachineDataService.getRecommendation(identification.serialNumber)
+          return this._washingMachineDataService.getRecommendation(identification!.serialNumber) // TODO: avoid using !
         })
       ).subscribe({
         next: (response) => {
