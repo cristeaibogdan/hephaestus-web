@@ -4,9 +4,6 @@ import { CreateWashingMachineRequest } from "../models/dtos/create-washing-machi
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
 import { WashingMachineDataService } from "./washing-machine.data.service";
-import { DamageType } from "../enums/damage-type.enum";
-import { ReturnType } from "../enums/return-type.enum";
-import { IdentificationMode } from "../enums/identification-mode.enum";
 import { Recommendation } from "../enums/recommendation.enum";
 import { WashingMachineDetail } from "../models/washing-machine-detail.model";
 
@@ -39,95 +36,18 @@ export class WashingMachineService {
 // *** STEP 2 = PRODUCT DAMAGE ASSESSMENT
 // *****************************************
 
-  private washingMachineDetail$ = new BehaviorSubject<WashingMachineDetail>({
-    applicablePackageDamage:false,
-    packageDamaged:false,
-    packageDirty:false,
-    packageMaterialAvailable:false,
-
-
-    applicableVisibleSurfacesDamage:false,
-
-    visibleSurfacesHasScratches:false,
-    visibleSurfacesScratchesLength:0,
-
-    visibleSurfacesHasDents:false,
-    visibleSurfacesDentsDepth:0,
-
-    visibleSurfacesHasMinorDamage:false,
-    visibleSurfacesMinorDamage:"",
-
-    visibleSurfacesHasMajorDamage:false,
-    visibleSurfacesMajorDamage:"",
-
-
-    applicableHiddenSurfacesDamage:false,
-
-    hiddenSurfacesHasScratches:false,
-    hiddenSurfacesScratchesLength:0,
-
-    hiddenSurfacesHasDents:false,
-    hiddenSurfacesDentsDepth:0,
-
-    hiddenSurfacesHasMinorDamage:false,
-    hiddenSurfacesMinorDamage:"",
-
-    hiddenSurfacesHasMajorDamage:false,
-    hiddenSurfacesMajorDamage:"",
-
-    price:0,
-    repairPrice:0
-  });
+  private washingMachineDetail$ = new BehaviorSubject<WashingMachineDetail | null>(null);
 
   setWashingMachineDetail(washingMachineDetail: WashingMachineDetail): void {
     this.washingMachineDetail$.next(washingMachineDetail);
   }
 
-  getWashingMachineDetail(): Observable<WashingMachineDetail> {
+  getWashingMachineDetail(): Observable<WashingMachineDetail | null> {
     return this.washingMachineDetail$.asObservable();
   }
 
-  resetWashingMachineDetail(): void {    
-    const initialWashingMachineDetail: WashingMachineDetail = {
-      applicablePackageDamage:false,
-      packageDamaged:false,
-      packageDirty:false,
-      packageMaterialAvailable:false,
-  
-  
-      applicableVisibleSurfacesDamage:false,
-  
-      visibleSurfacesHasScratches:false,
-      visibleSurfacesScratchesLength:0,
-  
-      visibleSurfacesHasDents:false,
-      visibleSurfacesDentsDepth:0,
-  
-      visibleSurfacesHasMinorDamage:false,
-      visibleSurfacesMinorDamage:"",
-  
-      visibleSurfacesHasMajorDamage:false,
-      visibleSurfacesMajorDamage:"",
-  
-  
-      applicableHiddenSurfacesDamage:false,
-  
-      hiddenSurfacesHasScratches:false,
-      hiddenSurfacesScratchesLength:0,
-  
-      hiddenSurfacesHasDents:false,
-      hiddenSurfacesDentsDepth:0,
-  
-      hiddenSurfacesHasMinorDamage:false,
-      hiddenSurfacesMinorDamage:"",
-  
-      hiddenSurfacesHasMajorDamage:false,
-      hiddenSurfacesMajorDamage:"",
-  
-      price:0,
-      repairPrice:0
-    }
-    this.washingMachineDetail$.next(initialWashingMachineDetail);
+  resetWashingMachineDetail(): void {
+    this.washingMachineDetail$.next(null);
   }
 
 // **************************************
@@ -153,7 +73,7 @@ export class WashingMachineService {
 // **************************************
 
   save(): Promise<boolean> {
-    if (this.washingMachineIdentification$.value == null) {
+    if (this.washingMachineIdentification$.value == null || this.washingMachineDetail$.value == null) {
       return Promise.reject();
     }
 
