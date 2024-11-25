@@ -25,7 +25,7 @@ The frontend application is deployed on **GitHub Pages** and is accessible here:
   
   **Backend is hosted on Azure with a burst configuration, which means it may temporarily shut down when idle. If the service doesn't respond immediately, try refreshing a few times to wake it up.**
 
-- **[Zipkin Server on Azure](https://zipkin.orangesmoke-f68e1158.northeurope.azurecontainerapps.io)**  
+- **[Zipkin Server on Azure](https://zipkin.kindmeadow-812476e6.northeurope.azurecontainerapps.io)**  
   Access Zipkin to monitor requests in real-time and trace how the frontend interacts with the backend.
 
 <div align="center">
