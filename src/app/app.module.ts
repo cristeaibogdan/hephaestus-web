@@ -17,6 +17,8 @@ import { GlobalErrorHandler } from './services/global-error-handler.service';
 import { loadingInterceptor } from './interceptors/loading.interceptor';
 import { languageInterceptor } from './interceptors/language.interceptor';
 import { timeoutInterceptor } from './interceptors/timeout.interceptor';
+import { CompositePropagatorModule, OpenTelemetryInterceptorModule, ZipkinExporterModule } from '@jufab/opentelemetry-angular-interceptor';
+import { environment } from 'src/environments/environment';
 
 export function createTranslateLoader(HttpBackend: HttpBackend) {
   return new TranslateHttpLoader(new HttpClient(HttpBackend), "./assets/i18n/", ".json")
@@ -48,6 +50,21 @@ export function createTranslateLoader(HttpBackend: HttpBackend) {
         deps: [HttpBackend]
       }
     }),
+
+  // Zipkin tracing configuration start
+    OpenTelemetryInterceptorModule.forRoot({
+      commonConfig: {
+        serviceName: 'hephaestus-web', // Service name sent in trace
+        console: false, // Display trace in console
+        probabilitySampler: '1', // 100% sampling
+      },
+      zipkinConfig: {
+        url: environment.zipkinUrl, // URL of Zipkin
+      }
+    }),
+    ZipkinExporterModule, // Handles export to Zipkin
+    CompositePropagatorModule // Defines propagation in HTTP header
+  // Zipkin tracing configuration end
   ],
   providers: [
     {

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: "http://localhost:8083"
+  apiBaseUrl: "http://localhost:8083",
+  zipkinUrl: "http://localhost:9411/api/v2/spans"
 };
 
 /*
