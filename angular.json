@@ -14,7 +14,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "moment"
+              "moment", "shimmer"
             ],
             "outputPath": "dist/hephaestus-web",
             "index": "src/index.html",
