@@ -60,6 +60,9 @@ export function createTranslateLoader(HttpBackend: HttpBackend) {
       },
       zipkinConfig: {
         url: environment.zipkinUrl, // URL of Zipkin
+      },
+      ignoreUrls: {
+        urls: [/assets\/svgs\/.*/] // Ignore requests used to register svgs from assets/svgs
       }
     }),
     ZipkinExporterModule, // Handles export to Zipkin
