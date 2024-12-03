@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   apiBaseUrl: "https://api-gateaway.kindmeadow-812476e6.northeurope.azurecontainerapps.io",
-  zipkinUrl: "https://zipkin--90sx028.kindmeadow-812476e6.northeurope.azurecontainerapps.io/api/v2/spans"
+  zipkinUrl: "https://zipkin.kindmeadow-812476e6.northeurope.azurecontainerapps.io/api/v2/spans"
 };
