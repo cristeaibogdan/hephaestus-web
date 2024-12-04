@@ -126,10 +126,11 @@ export class WashingMachineService {
       ).subscribe({
         next: (response) => {
           this.recommendation = response;
-          resolve(true);        
+          resolve(true);
         },
-        error: () => {
+        error: (error) => {
           resolve(false);
+          throw error; // re-throw to be handled by GlobalErrorHandler
         },
       })
     });
