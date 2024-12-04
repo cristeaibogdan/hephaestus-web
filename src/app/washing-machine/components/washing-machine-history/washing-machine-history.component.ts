@@ -151,6 +151,7 @@ export class WashingMachineHistoryComponent implements OnInit, AfterViewInit {
         this.washingMachines.data = [];
         this.pageNumber = 0;
         this.totalElements = 0;
+        throw err; // re-throw to be handled by GlobalErrorHandler
       }
     });
   }

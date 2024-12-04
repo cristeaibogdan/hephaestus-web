@@ -33,10 +33,16 @@ export class GlobalErrorHandler extends ErrorHandler {
             this._notifService.showError(this._translate.instant("I18N.GENERAL_ERROR.404"), 0);
             break;
 
+          case 400:
+            (Array.isArray(error.error)) 
+              ? this._notifService.showError(error.error.join("\n"), 0) // CUSTOM VALIDATION ERRORS FROM BACKEND
+              : this._notifService.showError(this._translate.instant("I18N.GENERAL_ERROR.404_DEFAULT"), 0); // GENERAL ERRORS FROM BACKEND            
+            break;
+
           default: 
             (typeof error.error === "string") 
               ? this._notifService.showError(error.error, 0) // CUSTOM ERRORS FROM BACKEND
-              : this._notifService.showError(this._translate.instant("I18N.GENERAL_ERROR.DEFAULT"), 0); // GENERAL ERRORS FROM BACKEND       
+              : this._notifService.showError(this._translate.instant("I18N.GENERAL_ERROR.DEFAULT"), 0); // GENERAL ERRORS FROM BACKEND
             break;   
         }
       }
