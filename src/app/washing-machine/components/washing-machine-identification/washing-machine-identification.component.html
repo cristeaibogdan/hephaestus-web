@@ -1,11 +1,11 @@
-<form [formGroup]="washingMachineIdentificationForm" (ngSubmit)="onSubmit()" (reset)="onReset($event)">
+<form [formGroup]="washingMachineIdentificationForm" (ngSubmit)="onSubmit()" (reset)="onReset($event)" #ngForm="ngForm">
 <mat-card class="mat-elevation-z8">
   <mat-card-title>{{"I18N.PRODUCT_IDENTIFICATION.TITLE" | translate}}</mat-card-title>
 
   <article class="product-information">
     <fieldset class="text-align-center" [class.fieldset-invalid] = 
       "washingMachineIdentificationForm.controls.identificationMode.invalid &&
-      washingMachineIdentificationForm.controls.identificationMode.touched">
+      ngForm.submitted">
       <legend>&nbsp; {{"I18N.COMMON.IDENTIFICATION_MODE" | translate}} &nbsp; <span>*</span> &nbsp;
         <mat-icon 
           matTooltip='{{"I18N.HELP_TOOLTIP.IDENTIFICATION_MODE" | translate}}' 
@@ -95,7 +95,7 @@
 
     <fieldset class="text-align-center" [class.fieldset-invalid] = 
       "washingMachineIdentificationForm.controls.returnType.invalid &&
-      washingMachineIdentificationForm.controls.returnType.touched">
+      ngForm.submitted">
       <legend>&nbsp; {{"I18N.COMMON.RETURN_TYPE" | translate}} &nbsp; <span>*</span> &nbsp;
         <mat-icon 
           matTooltip='{{"I18N.HELP_TOOLTIP.RETURN_TYPE" | translate}}' 
@@ -121,7 +121,7 @@
 
     <fieldset class="text-align-center" [class.fieldset-invalid] = 
       "washingMachineIdentificationForm.controls.damageType.invalid &&
-      washingMachineIdentificationForm.controls.damageType.touched">
+      ngForm.submitted">
       <legend>&nbsp; {{"I18N.COMMON.DAMAGE_TYPE" | translate}} &nbsp; <span>*</span> &nbsp;
         <mat-icon
           matTooltip='{{"I18N.HELP_TOOLTIP.DAMAGE_TYPE" | translate}}'

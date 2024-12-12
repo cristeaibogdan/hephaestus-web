@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, switchMap, take } from 'rxjs';
+import { EMPTY, Observable, switchMap, take } from 'rxjs';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { WashingMachineDataService } from '../../services/washing-machine.data.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -29,9 +29,12 @@ export class WashingMachineRecommendationComponent {
   onDownload(): void {
     this.washingMachineIdentification$.pipe(
       take(1),
-      switchMap(washingMachineIdentification => // TODO: avoid using !
-        this._washingMachineDataService.getReport(washingMachineIdentification!.serialNumber)
-      )
+      switchMap(washingMachineIdentification => {
+        if(!washingMachineIdentification) {
+          return EMPTY;
+        }
+        return this._washingMachineDataService.getReport(washingMachineIdentification!.serialNumber)
+      })
     ).subscribe(response => {
       
       // Convert to blob

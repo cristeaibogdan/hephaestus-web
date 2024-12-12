@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, switchMap, withLatestFrom} from "rxjs";
+import { BehaviorSubject, EMPTY, Observable, switchMap, withLatestFrom} from "rxjs";
 import { CreateWashingMachineRequest } from "../models/dtos/create-washing-machine.request";
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
@@ -120,8 +120,11 @@ export class WashingMachineService {
     return new Promise((resolve) => {
       this._washingMachineDataService.save(formData).pipe(
         withLatestFrom(this.getWashingMachineIdentification()),
-        switchMap(([_, identification]) => { 
-          return this._washingMachineDataService.getRecommendation(identification!.serialNumber) // TODO: avoid using !
+        switchMap(([_, identification]) => {
+          if(!identification) {
+            return EMPTY;
+          }
+          return this._washingMachineDataService.getRecommendation(identification.serialNumber);
         })
       ).subscribe({
         next: (response) => {

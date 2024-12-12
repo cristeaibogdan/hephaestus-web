@@ -117,15 +117,8 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
     });
   }
 
-  private markAllMatButtonToggleGroupsAsTouched(): void {
-    this.washingMachineIdentificationForm.controls.identificationMode.markAsTouched();
-    this.washingMachineIdentificationForm.controls.returnType.markAsTouched();
-    this.washingMachineIdentificationForm.controls.damageType.markAsTouched();
-  }
-
   onSubmit(): void {
     if (this.washingMachineIdentificationForm.invalid) {
-      this.markAllMatButtonToggleGroupsAsTouched();
       return;
     }
 
