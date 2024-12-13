@@ -17,9 +17,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatSortModule } from '@angular/material/sort';
-
+import { MatDateFnsModule } from '@angular/material-date-fns-adapter';
 
 @NgModule({
   exports: [
@@ -41,7 +40,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatTableModule,
     MatPaginatorModule,
     MatDatepickerModule,
-    MatMomentDateModule,
+    MatDateFnsModule,
     MatSortModule
   ]
 })

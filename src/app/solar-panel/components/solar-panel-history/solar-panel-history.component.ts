@@ -5,10 +5,10 @@ import { MatSort } from '@angular/material/sort';
 import { SolarPanelRecommendation } from '../../enums/solar-panel-recommendation.enum';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import * as moment from 'moment';
 import { SearchSolarPanelRequest } from '../../models/dtos/search-solar-panel.request';
 import { SolarPanelHistoryViewComponent } from './solar-panel-history-view/solar-panel-history-view.component';
 import { MatDialog } from '@angular/material/dialog';
+import { format } from 'date-fns';
 
 
 const DUMMY_DATA: GetSolarPanelFullResponse[] = [
@@ -169,9 +169,9 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
     this.solarPanels.data = DUMMY_DATA;
   }
 
-  private handleDate(value: string | null) {
+  private handleDate(value: string | null): string | null {
     return (value)
-      ? moment(value).format("YYYY-MM-DD")
+      ? format(new Date(value), "yyyy-MM-dd")
       : null;
   }
   
