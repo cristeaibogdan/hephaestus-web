@@ -10,12 +10,13 @@ import { LanguageSelectorComponent } from './components/language-selector/langua
 import { DateFormatMMYYYYDirective } from './directives/date-format-mm-yyyy.directive';
 import { DateFormatSlashYYYYMMDDDirective } from './directives/date-format-slash-yyyy-mm-dd.directive';
 import { DateFormatYYYYMMDDDirective } from './directives/date-format-yyyy-mm-dd.directive';
-import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { PaginatorI18n } from './paginator.i18n';
 import { A11yModule } from '@angular/cdk/a11y';
 import { ToLabelPipe } from './pipes/to-label.pipe';
+import { DateFnsAdapter } from '@angular/material-date-fns-adapter';
+import { enUS } from 'date-fns/locale';
 
 @NgModule({
   declarations: [
@@ -65,12 +66,12 @@ import { ToLabelPipe } from './pipes/to-label.pipe';
     DateFormatSlashYYYYMMDDDirective,
     DateFormatMMYYYYDirective
   ],
-  providers: [
-    { // To be able to modify the datepicker format we need an adapter, hence MomentDateAdapter
+  providers: [     
+    { // To be able to modify the datepicker format we need an adapter, hence DateFnsAdapter
       provide: DateAdapter, 
-      useClass: MomentDateAdapter, 
-      deps: [MAT_DATE_LOCALE] 
+      useClass: DateFnsAdapter 
     },
+    { provide: MAT_DATE_LOCALE, useValue: enUS },
     { // Custom translation of paginator from HistoryComponent
       provide: MatPaginatorIntl,
       useClass: PaginatorI18n

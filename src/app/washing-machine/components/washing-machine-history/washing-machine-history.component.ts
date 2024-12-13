@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { SearchWashingMachineRequest } from '../../models/dtos/search-washing-machine.request';
 import { FormBuilder } from '@angular/forms';
-import * as moment from 'moment';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 import { ReturnType } from 'src/app/washing-machine/enums/return-type.enum';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -15,6 +14,7 @@ import { IdentificationMode } from 'src/app/washing-machine/enums/identification
 import { Recommendation } from 'src/app/washing-machine/enums/recommendation.enum';
 import { GetWashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/get-washing-machine-full.response';
 import { WashingMachineHistoryViewComponent } from './washing-machine-history-view/washing-machine-history-view.component';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-washing-machine-history',
@@ -158,7 +158,7 @@ export class WashingMachineHistoryComponent implements OnInit, AfterViewInit {
 
   private handleDate(value: string | null): string | null {
     return (value)
-      ? moment(value).format("YYYY-MM-DD")
+      ? format(new Date(value), "yyyy-MM-dd")
       : null;
   }
 
