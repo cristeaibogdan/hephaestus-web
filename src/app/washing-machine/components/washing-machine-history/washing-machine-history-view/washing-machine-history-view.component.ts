@@ -7,7 +7,7 @@ import { WashingMachineDataService } from 'src/app/washing-machine/services/wash
 @Component({
   selector: 'app-washing-machine-history-view',
   templateUrl: './washing-machine-history-view.component.html',
-  styleUrls: ['./washing-machine-history-view.component.css']
+  styleUrls: ['./washing-machine-history-view.component.scss']
 })
 export class WashingMachineHistoryViewComponent {
 

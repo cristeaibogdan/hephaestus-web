@@ -6,7 +6,7 @@ import { SolarPanelDataService } from 'src/app/solar-panel/services/solar-panel-
 @Component({
   selector: 'app-solar-panel-history-view',
   templateUrl: './solar-panel-history-view.component.html',
-  styleUrls: ['./solar-panel-history-view.component.css']
+  styleUrls: ['./solar-panel-history-view.component.scss']
 })
 export class SolarPanelHistoryViewComponent {
 

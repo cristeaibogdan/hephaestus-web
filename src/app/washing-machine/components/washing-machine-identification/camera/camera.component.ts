@@ -13,7 +13,7 @@ import { GetProductIdentificationResponse } from 'src/app/shared/models/get-prod
 @Component({
   selector: 'app-camera',
   templateUrl: './camera.component.html',
-  styleUrls: ['./camera.component.css']
+  styleUrls: ['./camera.component.scss']
 })
 export class CameraComponent implements AfterViewInit {
 

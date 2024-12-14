@@ -11,7 +11,7 @@ import { TranslocoService } from '@ngneat/transloco';
 @Component({
   selector: 'app-washing-machine-overview',
   templateUrl: './washing-machine-overview.component.html',
-  styleUrls: ['./washing-machine-overview.component.css']
+  styleUrls: ['./washing-machine-overview.component.scss']
 })
 export class WashingMachineOverviewComponent {
 

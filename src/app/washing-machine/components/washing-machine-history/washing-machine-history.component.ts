@@ -19,7 +19,7 @@ import { TranslocoService } from '@ngneat/transloco';
 @Component({
   selector: 'app-washing-machine-history',
   templateUrl: './washing-machine-history.component.html',
-  styleUrls: ['./washing-machine-history.component.css']
+  styleUrls: ['./washing-machine-history.component.scss']
 })
 export class WashingMachineHistoryComponent implements OnInit, AfterViewInit {
 

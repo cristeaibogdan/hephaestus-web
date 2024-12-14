@@ -16,7 +16,7 @@ import { GetProductIdentificationResponse } from 'src/app/shared/models/get-prod
 @Component({
   selector: 'app-washing-machine-identification',
   templateUrl: './washing-machine-identification.component.html',
-  styleUrls: ['./washing-machine-identification.component.css']
+  styleUrls: ['./washing-machine-identification.component.scss']
 })
 export class WashingMachineIdentificationComponent implements OnInit, OnDestroy {
 

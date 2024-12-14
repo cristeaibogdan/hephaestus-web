@@ -13,7 +13,7 @@ import { TranslocoService } from '@ngneat/transloco';
 @Component({
   selector: 'app-washing-machine-damage',
   templateUrl: './washing-machine-damage.component.html',
-  styleUrls: ['./washing-machine-damage.component.css']
+  styleUrls: ['./washing-machine-damage.component.scss']
 })
 export class WashingMachineDamageComponent implements OnInit, OnDestroy {
   
