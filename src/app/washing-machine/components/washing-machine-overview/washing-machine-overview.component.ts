@@ -4,9 +4,9 @@ import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { WashingMachineIdentification } from '../../models/washing-machine-identification.model';
 import { MatStepper } from '@angular/material/stepper';
-import { TranslateService } from '@ngx-translate/core';
 import { NotificationService } from 'src/app/services/notification.service';
 import { WashingMachineDetail } from '../../models/washing-machine-detail.model';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-washing-machine-overview',
@@ -24,13 +24,13 @@ export class WashingMachineOverviewComponent {
     @Inject(MatStepper) private stepper: MatStepper,
     private _washingMachineService: WashingMachineService,
     private _notifService: NotificationService,
-    private _translate: TranslateService,
+    private _translocoService: TranslocoService,
   ) { }
 
   save(): void {
     this._washingMachineService.save().then(success => {
       if(success) {
-        this._notifService.showSuccess(this._translate.instant("I18N.CUSTOM_SUCCESS.PRODUCT_SAVED"),4000);
+        this._notifService.showSuccess(this._translocoService.translate("I18N.CUSTOM_SUCCESS.PRODUCT_SAVED"),4000);
         this.stepper.next();
       }
     });

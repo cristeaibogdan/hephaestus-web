@@ -2,102 +2,102 @@
 
   <ng-content select="[header]"></ng-content>
 
-  <h1>{{"I18N.COMMON.OVERVIEW" | translate}}</h1>
+  <h1>{{"I18N.COMMON.OVERVIEW" | transloco}}</h1>
   
-  <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | translate}}</h2>  
+  <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | transloco}}</h2>  
   <ul class="product-information-list">
-    <li>{{"I18N.COMMON.CATEGORY" | translate}}: {{washingMachineIdentification.category}}</li>
-    <li>{{"I18N.COMMON.MANUFACTURER" | translate}}: {{washingMachineIdentification.manufacturer}}</li>
-    <li>{{"I18N.COMMON.SERIAL_NUMBER" | translate}}: {{washingMachineIdentification.serialNumber}}</li>
-    <li>{{"I18N.COMMON.MODEL" | translate}}: {{washingMachineIdentification.model}}</li>
-    <li>{{"I18N.COMMON.TYPE" | translate}}: {{washingMachineIdentification.type}}</li>
+    <li>{{"I18N.COMMON.CATEGORY" | transloco}}: {{washingMachineIdentification.category}}</li>
+    <li>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{washingMachineIdentification.manufacturer}}</li>
+    <li>{{"I18N.COMMON.SERIAL_NUMBER" | transloco}}: {{washingMachineIdentification.serialNumber}}</li>
+    <li>{{"I18N.COMMON.MODEL" | transloco}}: {{washingMachineIdentification.model}}</li>
+    <li>{{"I18N.COMMON.TYPE" | transloco}}: {{washingMachineIdentification.type}}</li>
   </ul>
 
-  <h2>{{"I18N.COMMON.DAMAGE_IDENTIFICATION_TITLE" | translate}}</h2>
+  <h2>{{"I18N.COMMON.DAMAGE_IDENTIFICATION_TITLE" | transloco}}</h2>
   <ul class="product-information-list">
-    <li>{{"I18N.COMMON.IDENTIFICATION_MODE" | translate}}: {{washingMachineIdentification.identificationMode | toLabel}}</li>    
-    <li>{{"I18N.COMMON.RETURN_TYPE" | translate}}: {{washingMachineIdentification.returnType | toLabel}}</li>
-    <li>{{"I18N.COMMON.DAMAGE_TYPE" | translate}}: {{washingMachineIdentification.damageType | toLabel}}</li>
+    <li>{{"I18N.COMMON.IDENTIFICATION_MODE" | transloco}}: {{washingMachineIdentification.identificationMode | toLabel}}</li>    
+    <li>{{"I18N.COMMON.RETURN_TYPE" | transloco}}: {{washingMachineIdentification.returnType | toLabel}}</li>
+    <li>{{"I18N.COMMON.DAMAGE_TYPE" | transloco}}: {{washingMachineIdentification.damageType | toLabel}}</li>
   </ul>
 
-  <h2>{{"I18N.COMMON.DAMAGED_PRODUCT_IMAGES_TITLE" | translate}}</h2>
+  <h2>{{"I18N.COMMON.DAMAGED_PRODUCT_IMAGES_TITLE" | transloco}}</h2>
   <section class="image-list">
     <img *ngFor="let file of selectedFiles" [src]="file.url">
   </section>
 
-  <h2>{{"I18N.COMMON.DAMAGES_TITLE" | translate}}</h2>
+  <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
   <section *ngIf="washingMachineDetail$ | async as washingMachineDetail">
     
     <div class="damages-container">
       <article *ngIf="washingMachineDetail.applicablePackageDamage">
-        <h3>{{"I18N.COMMON.PACKAGE" | translate}}</h3>
+        <h3>{{"I18N.COMMON.PACKAGE" | transloco}}</h3>
 
         <ul class="damages-list">
-          <li *ngIf="washingMachineDetail.packageDamaged">{{"I18N.COMMON.PACKAGE_DAMAGED" | translate}}</li>
-          <li *ngIf="washingMachineDetail.packageDirty">{{"I18N.COMMON.PACKAGE_DIRTY" | translate}}</li>
-          <li *ngIf="washingMachineDetail.packageMaterialAvailable">{{"I18N.COMMON.PACKAGE_REPACKAGE" | translate}}</li>
+          <li *ngIf="washingMachineDetail.packageDamaged">{{"I18N.COMMON.PACKAGE_DAMAGED" | transloco}}</li>
+          <li *ngIf="washingMachineDetail.packageDirty">{{"I18N.COMMON.PACKAGE_DIRTY" | transloco}}</li>
+          <li *ngIf="washingMachineDetail.packageMaterialAvailable">{{"I18N.COMMON.PACKAGE_REPACKAGE" | transloco}}</li>
         </ul>
       </article>
 
       <article *ngIf="washingMachineDetail.applicableVisibleSurfacesDamage">
-        <h3>{{"I18N.COMMON.VISIBLE_SURFACES" | translate}}</h3>
+        <h3>{{"I18N.COMMON.VISIBLE_SURFACES" | transloco}}</h3>
 
         <ul class="damages-list">
           <li *ngIf="washingMachineDetail.visibleSurfacesHasScratches">
-            {{"I18N.COMMON.SCRATCHES_LENGTH" | translate}}:
+            {{"I18N.COMMON.SCRATCHES_LENGTH" | transloco}}:
             {{washingMachineDetail.visibleSurfacesScratchesLength}} 
-            {{"I18N.COMMON.CM" | translate}}
+            {{"I18N.COMMON.CM" | transloco}}
           </li>
           <li *ngIf="washingMachineDetail.visibleSurfacesHasDents">
-            {{"I18N.COMMON.DENTS_DEPTH" | translate}}:
+            {{"I18N.COMMON.DENTS_DEPTH" | transloco}}:
             {{washingMachineDetail.visibleSurfacesDentsDepth}} 
-            {{"I18N.COMMON.CM" | translate}}
+            {{"I18N.COMMON.CM" | transloco}}
           </li>
           <li *ngIf="washingMachineDetail.visibleSurfacesHasMinorDamage">
-            {{"I18N.COMMON.MINOR_DAMAGES" | translate}}:
+            {{"I18N.COMMON.MINOR_DAMAGES" | transloco}}:
             {{washingMachineDetail.visibleSurfacesMinorDamage}}
           </li>
           <li *ngIf="washingMachineDetail.visibleSurfacesHasMajorDamage">
-            {{"I18N.COMMON.MAJOR_DAMAGES" | translate}}:
+            {{"I18N.COMMON.MAJOR_DAMAGES" | transloco}}:
             {{washingMachineDetail.visibleSurfacesMajorDamage}}
           </li>
         </ul>
       </article>
 
       <article *ngIf="washingMachineDetail.applicableHiddenSurfacesDamage">
-        <h3>{{"I18N.COMMON.HIDDEN_SURFACES" | translate}}</h3>
+        <h3>{{"I18N.COMMON.HIDDEN_SURFACES" | transloco}}</h3>
 
         <ul class="damages-list">
           <li *ngIf="washingMachineDetail.hiddenSurfacesHasScratches">
-            {{"I18N.COMMON.SCRATCHES_LENGTH" | translate}}:
+            {{"I18N.COMMON.SCRATCHES_LENGTH" | transloco}}:
             {{washingMachineDetail.hiddenSurfacesScratchesLength}} 
-            {{"I18N.COMMON.CM" | translate}}
+            {{"I18N.COMMON.CM" | transloco}}
           </li>
           <li *ngIf="washingMachineDetail.hiddenSurfacesHasDents">
-            {{"I18N.COMMON.DENTS_DEPTH" | translate}}:
+            {{"I18N.COMMON.DENTS_DEPTH" | transloco}}:
             {{washingMachineDetail.hiddenSurfacesDentsDepth}} 
-            {{"I18N.COMMON.CM" | translate}}
+            {{"I18N.COMMON.CM" | transloco}}
           </li>
           <li *ngIf="washingMachineDetail.hiddenSurfacesHasMinorDamage">
-            {{"I18N.COMMON.MINOR_DAMAGES" | translate}}:
+            {{"I18N.COMMON.MINOR_DAMAGES" | transloco}}:
             {{washingMachineDetail.hiddenSurfacesMinorDamage}}
           </li>
           <li *ngIf="washingMachineDetail.hiddenSurfacesHasMajorDamage">
-            {{"I18N.COMMON.MAJOR_DAMAGES" | translate}}:
+            {{"I18N.COMMON.MAJOR_DAMAGES" | transloco}}:
             {{washingMachineDetail.hiddenSurfacesMajorDamage}}
           </li>
         </ul>
       </article>
 
       <article *ngIf="washingMachineDetail.price > 0 && washingMachineDetail.repairPrice > 0">
-        <h3>{{"I18N.COMMON.PRICING" | translate}}</h3>
+        <h3>{{"I18N.COMMON.PRICING" | transloco}}</h3>
 
         <ul class="damages-list">
           <li>
-            {{"I18N.COMMON.PRODUCT_PRICE" | translate}}: {{washingMachineDetail.price}} €
+            {{"I18N.COMMON.PRODUCT_PRICE" | transloco}}: {{washingMachineDetail.price}} €
           </li>
           <li>
-            {{"I18N.COMMON.PRODUCT_REPAIR_PRICE" | translate}}: {{washingMachineDetail.repairPrice}} €
+            {{"I18N.COMMON.PRODUCT_REPAIR_PRICE" | transloco}}: {{washingMachineDetail.repairPrice}} €
           </li>
         </ul>
       </article>
@@ -108,10 +108,10 @@
 
 <div stepper-buttons class="hide">
   <button mat-raised-button type="button" matStepperPrevious>
-    {{"I18N.COMMON.BACK" | translate}}
+    {{"I18N.COMMON.BACK" | transloco}}
   </button>
   <button mat-raised-button type="button" color="primary"
     (click)="save()">
-    {{"I18N.PRODUCT_RECOMMENDATION.GENERATE_RECOMMENDATION" | translate}}
+    {{"I18N.PRODUCT_RECOMMENDATION.GENERATE_RECOMMENDATION" | transloco}}
   </button>
 </div>

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AngularMaterialModule } from './angular-material.module';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { TranslateModule } from '@ngx-translate/core';
 import { DragAndDropDirective } from './directives/drag-and-drop.directive';
 import { StepperButtonsDirective } from './directives/stepper-buttons.directive';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -17,6 +16,7 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { ToLabelPipe } from './pipes/to-label.pipe';
 import { DateFnsAdapter } from '@angular/material-date-fns-adapter';
 import { enUS } from 'date-fns/locale';
+import { TranslocoRootModule } from './transloco-root.module';
 
 @NgModule({
   declarations: [
@@ -35,17 +35,17 @@ import { enUS } from 'date-fns/locale';
   ],
   imports: [
     CommonModule,
-    AngularMaterialModule,    
-    TranslateModule,
+    AngularMaterialModule,
+    TranslocoRootModule,
 
     ReactiveFormsModule,
 
-    A11yModule,
+    A11yModule
   ],
   exports: [
     CommonModule,
-    AngularMaterialModule,
-    TranslateModule,    
+    AngularMaterialModule, 
+    TranslocoRootModule,
 
     ReactiveFormsModule,
 

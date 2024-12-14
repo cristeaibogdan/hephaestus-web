@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 
 export interface Language {
   flag: string,
@@ -19,9 +19,8 @@ export class LanguageService {
   ];
   private selectedLanguage: Language = this.getLanguageFromStorage();
 
-  constructor(private _translateService: TranslateService) {
-    this._translateService.setDefaultLang(this.availableLanguages[0].value);
-    this._translateService.use(this.selectedLanguage.value);
+  constructor(private _translocoService: TranslocoService) {
+    this._translocoService.setActiveLang(this.selectedLanguage.value);
   }
 
   private getLanguageFromStorage(): Language {
@@ -40,7 +39,7 @@ export class LanguageService {
 
   changeLanguage(language: Language): void {
     this.selectedLanguage = language;
-    this._translateService.use(language.value);
+    this._translocoService.setActiveLang(language.value);
     localStorage.setItem(this.LANGUAGE_STORAGE_KEY, language.value);
   }
 }
