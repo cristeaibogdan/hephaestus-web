@@ -7,7 +7,7 @@ export class PaginatorI18n extends MatPaginatorIntl {
 
   constructor(private _translocoService: TranslocoService) {
     super();
-    this.translateLabels();
+    // this.translateLabels(); // not needed?
     this._translocoService.langChanges$.subscribe(() => {
       this.translateLabels();
     });
