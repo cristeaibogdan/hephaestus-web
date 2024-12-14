@@ -29,7 +29,7 @@ body {
 // *** STYLES for snackbars
 // **************************************/
 
-.notif-error, .notif-error .mat-simple-snackbar-action {
+.notif-error .notif-error .mat-simple-snackbar-action {
   color: #f8e7e9 !important;
   background-color: #c72c41 !important;
   white-space: pre-wrap;
