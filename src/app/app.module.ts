@@ -17,6 +17,7 @@ import { languageInterceptor } from './interceptors/language.interceptor';
 import { timeoutInterceptor } from './interceptors/timeout.interceptor';
 import { CompositePropagatorModule, OpenTelemetryInterceptorModule, ZipkinExporterModule } from '@jufab/opentelemetry-angular-interceptor';
 import { environment } from 'src/environments/environment';
+import { WakeupComponent } from './components/wakeup/wakeup.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { environment } from 'src/environments/environment';
     
     RegisterComponent,
     LoginComponent,
+    WakeupComponent,
   ],
   imports: [    
     SharedModule,
