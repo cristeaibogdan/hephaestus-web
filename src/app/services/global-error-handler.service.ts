@@ -1,14 +1,14 @@
 import { ErrorHandler, Injectable, NgZone } from '@angular/core';
 import { NotificationService } from './notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { TranslateService } from '@ngx-translate/core';
 import { TimeoutError } from 'rxjs';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Injectable()
 export class GlobalErrorHandler extends ErrorHandler {
   constructor(
     private _notifService: NotificationService,
-    private _translate: TranslateService,
+    private _translocoService: TranslocoService,
     private ngZone: NgZone
   ) {
     super();
@@ -26,29 +26,29 @@ export class GlobalErrorHandler extends ErrorHandler {
       if (error instanceof HttpErrorResponse) {
         switch (error.status) {
           case 0:
-            this._notifService.showError(this._translate.instant("I18N.GENERAL_ERROR.0"), 0);
+            this._notifService.showError(this._translocoService.translate("I18N.GENERAL_ERROR.0"), 0);
             break;
 
           case 404:
-            this._notifService.showError(this._translate.instant("I18N.GENERAL_ERROR.404"), 0);
+            this._notifService.showError(this._translocoService.translate("I18N.GENERAL_ERROR.404"), 0);
             break;
 
           case 400:
             (Array.isArray(error.error)) 
               ? this._notifService.showError(error.error.join("\n"), 0) // CUSTOM VALIDATION ERRORS FROM BACKEND
-              : this._notifService.showError(this._translate.instant("I18N.GENERAL_ERROR.404_DEFAULT"), 0); // GENERAL ERRORS FROM BACKEND            
+              : this._notifService.showError(this._translocoService.translate("I18N.GENERAL_ERROR.404_DEFAULT"), 0); // GENERAL ERRORS FROM BACKEND            
             break;
 
           default: 
             (typeof error.error === "string") 
               ? this._notifService.showError(error.error, 0) // CUSTOM ERRORS FROM BACKEND
-              : this._notifService.showError(this._translate.instant("I18N.GENERAL_ERROR.DEFAULT"), 0); // GENERAL ERRORS FROM BACKEND
+              : this._notifService.showError(this._translocoService.translate("I18N.GENERAL_ERROR.DEFAULT"), 0); // GENERAL ERRORS FROM BACKEND
             break;   
         }
       }
 
       if (error instanceof TimeoutError) {
-        this._notifService.showError(this._translate.instant("I18N.CUSTOM_ERROR.TIMEOUT"), 0);
+        this._notifService.showError(this._translocoService.translate("I18N.CUSTOM_ERROR.TIMEOUT"), 0);
       }
     });
   }

@@ -7,7 +7,7 @@ import { WashingMachineIdentification } from '../models/washing-machine-identifi
 @Component({
   selector: 'app-washing-machine',
   templateUrl: './washing-machine.component.html',
-  styleUrls: ['./washing-machine.component.css']
+  styleUrls: ['./washing-machine.component.scss']
 })
 
 export class WashingMachineComponent {

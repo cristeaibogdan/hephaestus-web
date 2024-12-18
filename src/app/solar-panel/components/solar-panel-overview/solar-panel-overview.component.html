@@ -2,18 +2,18 @@
 
   <ng-content select="[header]"></ng-content>
 
-  <h1>{{"I18N.COMMON.OVERVIEW" | translate}}</h1>
+  <h1>{{"I18N.COMMON.OVERVIEW" | transloco}}</h1>
   
-  <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | translate}}</h2>  
+  <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | transloco}}</h2>  
   <ul class="information-list">
-    <li>{{"I18N.COMMON.CATEGORY" | translate}}: {{solarPanelIdenfitication.category}}</li>
-    <li>{{"I18N.COMMON.MANUFACTURER" | translate}}: {{solarPanelIdenfitication.manufacturer}}</li>
-    <li>{{"I18N.COMMON.SERIAL_NUMBER" | translate}}: {{solarPanelIdenfitication.serialNumber}}</li>
-    <li>{{"I18N.COMMON.MODEL" | translate}}: {{solarPanelIdenfitication.model}}</li>
-    <li>{{"I18N.COMMON.TYPE" | translate}}: {{solarPanelIdenfitication.type}}</li>
+    <li>{{"I18N.COMMON.CATEGORY" | transloco}}: {{solarPanelIdenfitication.category}}</li>
+    <li>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{solarPanelIdenfitication.manufacturer}}</li>
+    <li>{{"I18N.COMMON.SERIAL_NUMBER" | transloco}}: {{solarPanelIdenfitication.serialNumber}}</li>
+    <li>{{"I18N.COMMON.MODEL" | transloco}}: {{solarPanelIdenfitication.model}}</li>
+    <li>{{"I18N.COMMON.TYPE" | transloco}}: {{solarPanelIdenfitication.type}}</li>
   </ul>
 
-  <h2>{{"I18N.COMMON.DAMAGES_TITLE" | translate}}</h2>
+  <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
   <section *ngIf="solarPanelDamage$ | async as solarPanelDamage">
     <ul class="damages-list">
       <li *ngIf="solarPanelDamage.hotSpots">
@@ -38,7 +38,7 @@
 
 <div stepper-buttons class="hide">
   <button mat-raised-button type="button" matStepperPrevious>
-    {{"I18N.COMMON.BACK" | translate}}
+    {{"I18N.COMMON.BACK" | transloco}}
   </button>
   <button mat-raised-button type="button" color="primary"
     (click)="onNext()">

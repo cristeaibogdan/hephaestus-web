@@ -8,27 +8,27 @@ import { FormBuilder } from '@angular/forms';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 import { ReturnType } from 'src/app/washing-machine/enums/return-type.enum';
 import { NotificationService } from 'src/app/services/notification.service';
-import { TranslateService } from '@ngx-translate/core';
 import { DamageType } from 'src/app/washing-machine/enums/damage-type.enum';
 import { IdentificationMode } from 'src/app/washing-machine/enums/identification-mode.enum';
 import { Recommendation } from 'src/app/washing-machine/enums/recommendation.enum';
 import { GetWashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/get-washing-machine-full.response';
 import { WashingMachineHistoryViewComponent } from './washing-machine-history-view/washing-machine-history-view.component';
 import { format } from 'date-fns';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-washing-machine-history',
   templateUrl: './washing-machine-history.component.html',
-  styleUrls: ['./washing-machine-history.component.css']
+  styleUrls: ['./washing-machine-history.component.scss']
 })
 export class WashingMachineHistoryComponent implements OnInit, AfterViewInit {
 
   constructor(
     private dialog: MatDialog,
-    private _washingMachineDataService:WashingMachineDataService,
-    private _translate: TranslateService,
-    private _notifService:NotificationService,
-    private fb:FormBuilder
+    private _washingMachineDataService: WashingMachineDataService,
+    private _translocoService: TranslocoService,
+    private _notifService: NotificationService,
+    private fb: FormBuilder
   ) { }
 
   readonly recommendation = Recommendation;
@@ -139,7 +139,7 @@ export class WashingMachineHistoryComponent implements OnInit, AfterViewInit {
         console.log("Response = ",response);
 
         if(response.content.length == 0) {
-          this._notifService.showWarning(this._translate.instant("I18N.GENERAL_ERROR.EMPTY_PAGE"), 0);
+          this._notifService.showWarning(this._translocoService.translate("I18N.GENERAL_ERROR.EMPTY_PAGE"), 0);
         }
 
         this.washingMachines.data = response.content;

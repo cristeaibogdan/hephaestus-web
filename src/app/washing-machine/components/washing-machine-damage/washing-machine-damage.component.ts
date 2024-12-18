@@ -1,6 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AbstractControl, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from '../../../shared/validators/custom.validators';
@@ -9,11 +8,12 @@ import { WashingMachineService } from '../../services/washing-machine.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { MatStepper } from '@angular/material/stepper';
 import { WashingMachineDetail } from '../../models/washing-machine-detail.model';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-washing-machine-damage',
   templateUrl: './washing-machine-damage.component.html',
-  styleUrls: ['./washing-machine-damage.component.css']
+  styleUrls: ['./washing-machine-damage.component.scss']
 })
 export class WashingMachineDamageComponent implements OnInit, OnDestroy {
   
@@ -23,7 +23,7 @@ export class WashingMachineDamageComponent implements OnInit, OnDestroy {
     @Inject(MatStepper) private stepper: MatStepper,
     private _washingMachineService: WashingMachineService,
     private _notifService: NotificationService,
-    private _translate: TranslateService,
+    private _translocoService: TranslocoService,
     private sanitizer: DomSanitizer,
     private fb: NonNullableFormBuilder    
   ) {}
@@ -371,7 +371,7 @@ export class WashingMachineDamageComponent implements OnInit, OnDestroy {
     // 1. Validate file length
     const totalFilesCount = this.selectedFiles.length + files.length;
     if (totalFilesCount > 3) {
-      this._notifService.showError(this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_LIMIT"),0);
+      this._notifService.showError(this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_LIMIT"),0);
       return;
     }
       
@@ -381,18 +381,18 @@ export class WashingMachineDamageComponent implements OnInit, OnDestroy {
       // 2. Validate file extension
       if(this.invalidFileExtension(uploadedFile.name)) {
         this._notifService.showError(
-          this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_FILE")
+          this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_FILE")
           +" "+uploadedFile.name+" "+
-          this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_EXTENSION_TEXT"),0);
+          this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_EXTENSION_TEXT"),0);
         return;
       }
       
       // 3. Validate file size, must not exceed 3 MB
       if(this.invalidFileSize(uploadedFile.size, 3)) {
         this._notifService.showError(
-          this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_FILE")
+          this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_FILE")
           +" "+uploadedFile.name+" "+
-          this._translate.instant("I18N.CUSTOM_ERROR.IMAGE_SIZE_TEXT"),0);
+          this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_SIZE_TEXT"),0);
         return;
       }
             

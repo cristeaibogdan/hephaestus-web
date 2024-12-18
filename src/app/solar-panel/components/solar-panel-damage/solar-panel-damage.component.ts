@@ -9,7 +9,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 @Component({
   selector: 'app-solar-panel-damage',
   templateUrl: './solar-panel-damage.component.html',
-  styleUrls: ['./solar-panel-damage.component.css']
+  styleUrls: ['./solar-panel-damage.component.scss']
 })
 export class SolarPanelDamageComponent {
 

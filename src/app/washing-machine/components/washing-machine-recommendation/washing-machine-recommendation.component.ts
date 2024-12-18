@@ -9,7 +9,7 @@ import { Recommendation } from '../../enums/recommendation.enum';
 @Component({
   selector: 'app-washing-machine-recommendation',
   templateUrl: './washing-machine-recommendation.component.html',
-  styleUrls: ['./washing-machine-recommendation.component.css']
+  styleUrls: ['./washing-machine-recommendation.component.scss']
 })
 export class WashingMachineRecommendationComponent {
 

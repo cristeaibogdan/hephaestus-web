@@ -5,7 +5,7 @@ import { Language, LanguageService } from 'src/app/services/language.service';
 @Component({
   selector: 'app-language-selector',
   templateUrl: './language-selector.component.html',
-  styleUrls: ['./language-selector.component.css']
+  styleUrls: ['./language-selector.component.scss']
 })
 export class LanguageSelectorComponent {
   constructor(private _languageService: LanguageService, private fb: NonNullableFormBuilder) { }

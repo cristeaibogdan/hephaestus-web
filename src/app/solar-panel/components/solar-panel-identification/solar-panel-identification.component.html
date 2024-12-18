@@ -4,12 +4,12 @@
 
     <article class="product-information">
       <mat-form-field appearance="fill">
-        <mat-label>{{ "I18N.COMMON.PRODUCT_CATEGORY" | translate }}</mat-label>
+        <mat-label>{{ "I18N.COMMON.PRODUCT_CATEGORY" | transloco }}</mat-label>
         <input matInput formControlName="category"/>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>{{"I18N.COMMON.MANUFACTURER" | translate}}</mat-label>        
+        <mat-label>{{"I18N.COMMON.MANUFACTURER" | transloco}}</mat-label>        
         <mat-select formControlName="manufacturer" (valueChange)="getModelsAndTypes($event)">
 
           <mat-option *ngFor="let manufacturer of availableManufacturers"
@@ -17,11 +17,11 @@
           </mat-option>
 
         </mat-select>
-        <mat-error>{{"I18N.MAT_ERROR.MANUFACTURER_REQUIRED" | translate}}</mat-error>
+        <mat-error>{{"I18N.MAT_ERROR.MANUFACTURER_REQUIRED" | transloco}}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="normal-span" appearance="fill" formGroupName="modelAndType">
-        <mat-label>{{"I18N.COMMON.MODEL" | translate}}</mat-label>
+        <mat-label>{{"I18N.COMMON.MODEL" | transloco}}</mat-label>
         <mat-select formControlName="model">
 
           <mat-option *ngFor="let model of availableModels" 
@@ -29,11 +29,11 @@
           </mat-option>
 
         </mat-select>
-        <mat-error>{{"I18N.MAT_ERROR.MODEL_OR_TYPE_REQUIRED" | translate}}</mat-error>
+        <mat-error>{{"I18N.MAT_ERROR.MODEL_OR_TYPE_REQUIRED" | transloco}}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="normal-span" appearance="fill" formGroupName="modelAndType">
-        <mat-label>{{ "I18N.COMMON.TYPE" | translate }}</mat-label>
+        <mat-label>{{ "I18N.COMMON.TYPE" | transloco }}</mat-label>
         <mat-select formControlName="type"> 
 
           <mat-option *ngFor="let type of availableTypes" 
@@ -41,14 +41,14 @@
           </mat-option>
 
         </mat-select>
-        <mat-error>{{"I18N.MAT_ERROR.MODEL_OR_TYPE_REQUIRED" | translate}}</mat-error>
+        <mat-error>{{"I18N.MAT_ERROR.MODEL_OR_TYPE_REQUIRED" | transloco}}</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>{{ "I18N.COMMON.SERIAL_NUMBER" | translate }}</mat-label>
+        <mat-label>{{ "I18N.COMMON.SERIAL_NUMBER" | transloco }}</mat-label>
         <input matInput formControlName="serialNumber" />
         <mat-error *ngIf="solarPanelForm.controls.serialNumber.errors?.required">
-          {{"I18N.MAT_ERROR.SERIAL_NUMBER_REQUIRED" | translate}}
+          {{"I18N.MAT_ERROR.SERIAL_NUMBER_REQUIRED" | transloco}}
         </mat-error>
       </mat-form-field>
     </article>
@@ -56,11 +56,11 @@
 
   <div stepper-buttons>
     <button mat-raised-button type="reset" color="warn">
-      {{ "I18N.COMMON.RESET" | translate }}
+      {{ "I18N.COMMON.RESET" | transloco }}
     </button>
 
     <button mat-raised-button type="submit" color="primary">
-      {{ "I18N.COMMON.NEXT" | translate }}
+      {{ "I18N.COMMON.NEXT" | transloco }}
     </button>
   </div>
 </form>

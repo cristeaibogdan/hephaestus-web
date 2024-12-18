@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 import { MatPaginatorIntl } from '@angular/material/paginator';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Injectable()
 export class PaginatorI18n extends MatPaginatorIntl {
 
-  constructor(private _translate: TranslateService) {
+  constructor(private _translocoService: TranslocoService) {
     super();
-    this.translateLabels();
-    this._translate.onLangChange.subscribe(() => {
+    this._translocoService.langChanges$.subscribe(() => {
       this.translateLabels();
     });
   }
 
   override getRangeLabel = (page: number, pageSize: number, length: number) => {
-    const rangeLabel = this._translate.instant("I18N.MAT_INTERNAL.PAGINATOR_OF");
+    const rangeLabel = this._translocoService.translate("I18N.MAT_INTERNAL.PAGINATOR_OF");
 
     if (length === 0 || pageSize === 0) {
       return `0 ${rangeLabel} ${length }`;
@@ -29,7 +28,7 @@ export class PaginatorI18n extends MatPaginatorIntl {
   }
 
   translateLabels() {
-    this._translate.get([
+    this._translocoService.selectTranslate([
       "I18N.MAT_INTERNAL.PAGINATOR_PRODUCTS_PER_PAGE_LABEL",
       "I18N.MAT_INTERNAL.PAGINATOR_FIRST_PAGE",
       "I18N.MAT_INTERNAL.PAGINATOR_LAST_PAGE",
@@ -37,12 +36,12 @@ export class PaginatorI18n extends MatPaginatorIntl {
       "I18N.MAT_INTERNAL.PAGINATOR_PREVIOUS_PAGE"
     ])
     .subscribe(() => {
-      super.itemsPerPageLabel = this._translate.instant("I18N.MAT_INTERNAL.PAGINATOR_PRODUCTS_PER_PAGE_LABEL")
-      super.firstPageLabel = this._translate.instant("I18N.MAT_INTERNAL.PAGINATOR_FIRST_PAGE");
-      super.lastPageLabel = this._translate.instant("I18N.MAT_INTERNAL.PAGINATOR_LAST_PAGE");
-      super.nextPageLabel = this._translate.instant("I18N.MAT_INTERNAL.PAGINATOR_NEXT_PAGE");
-      super.previousPageLabel = this._translate.instant("I18N.MAT_INTERNAL.PAGINATOR_PREVIOUS_PAGE");
+      this.itemsPerPageLabel = this._translocoService.translate("I18N.MAT_INTERNAL.PAGINATOR_PRODUCTS_PER_PAGE_LABEL");
+      this.firstPageLabel = this._translocoService.translate("I18N.MAT_INTERNAL.PAGINATOR_FIRST_PAGE");
+      this.lastPageLabel = this._translocoService.translate("I18N.MAT_INTERNAL.PAGINATOR_LAST_PAGE");
+      this.nextPageLabel = this._translocoService.translate("I18N.MAT_INTERNAL.PAGINATOR_NEXT_PAGE");
+      this.previousPageLabel = this._translocoService.translate("I18N.MAT_INTERNAL.PAGINATOR_PREVIOUS_PAGE");
+      this.changes.next();
     });
-    this.changes.next();
   }
 }

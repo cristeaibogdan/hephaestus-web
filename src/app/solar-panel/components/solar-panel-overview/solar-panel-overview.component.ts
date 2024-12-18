@@ -5,7 +5,7 @@ import { SolarPanelService } from '../../services/solar-panel.service';
 @Component({
   selector: 'app-solar-panel-overview',
   templateUrl: './solar-panel-overview.component.html',
-  styleUrls: ['./solar-panel-overview.component.css']
+  styleUrls: ['./solar-panel-overview.component.scss']
 })
 export class SolarPanelOverviewComponent {
 

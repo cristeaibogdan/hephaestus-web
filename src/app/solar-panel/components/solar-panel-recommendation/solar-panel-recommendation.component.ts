@@ -8,7 +8,7 @@ import { SolarPanelRecommendation } from '../../enums/solar-panel-recommendation
 @Component({
   selector: 'app-solar-panel-recommendation',
   templateUrl: './solar-panel-recommendation.component.html',
-  styleUrls: ['./solar-panel-recommendation.component.css']
+  styleUrls: ['./solar-panel-recommendation.component.scss']
 })
 export class SolarPanelRecommendationComponent {
 

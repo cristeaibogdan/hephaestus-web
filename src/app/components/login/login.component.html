@@ -3,41 +3,41 @@
   <img class="service-logo" src="assets/logos/hephaestus-logo.png"/>
   <mat-card-content>
     <header class="service-title">
-      {{ "I18N.COMMON.SERVICE_TITLE" | translate | titlecase }}
+      {{ "I18N.COMMON.SERVICE_TITLE" | transloco | titlecase }}
     </header>
 
     <mat-form-field appearance="outline">
-      <mat-label>{{ "I18N.COMMON.USERNAME" | translate }}</mat-label>
+      <mat-label>{{ "I18N.COMMON.USERNAME" | transloco }}</mat-label>
       <input matInput formControlName="username" />
 
       <mat-error *ngIf="loginForm.controls.username.errors?.required">
-        {{ "I18N.MAT_ERROR.USERNAME_REQUIRED" | translate }}
+        {{ "I18N.MAT_ERROR.USERNAME_REQUIRED" | transloco }}
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>{{ "I18N.COMMON.PASSWORD" | translate }}</mat-label>
+      <mat-label>{{ "I18N.COMMON.PASSWORD" | transloco }}</mat-label>
       <input matInput type="password" formControlName="password"/>
 
       <mat-error *ngIf="loginForm.controls.password.errors?.required">
-        {{ "I18N.MAT_ERROR.PASSWORD_REQUIRED" | translate }}
+        {{ "I18N.MAT_ERROR.PASSWORD_REQUIRED" | transloco }}
       </mat-error>
 
       <mat-error *ngIf="loginForm.controls.password.errors?.minlength">
-        {{ "I18N.MAT_ERROR.PASSWORD_LENGTH" | translate }}
+        {{ "I18N.MAT_ERROR.PASSWORD_LENGTH" | transloco }}
       </mat-error>
     </mat-form-field>
   </mat-card-content>
 
   <button mat-raised-button type="submit" color="primary">
-    {{ "I18N.COMMON.LOG_IN" | translate | uppercase }}
+    {{ "I18N.COMMON.LOG_IN" | transloco | uppercase }}
   </button>
 
   <footer class="registration-text">
-    {{ "I18N.LOGIN.NO_ACCOUNT" | translate }}
+    {{ "I18N.LOGIN.NO_ACCOUNT" | transloco }}
     &nbsp;
     <span class="create-account" routerLink="/register">
-      {{ "I18N.LOGIN.TO_REGISTER" | translate }}
+      {{ "I18N.LOGIN.TO_REGISTER" | transloco }}
     </span>
   </footer>
     

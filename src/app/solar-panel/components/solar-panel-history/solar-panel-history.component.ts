@@ -65,7 +65,7 @@ const DUMMY_DATA: GetSolarPanelFullResponse[] = [
 @Component({
   selector: 'app-solar-panel-history',
   templateUrl: './solar-panel-history.component.html',
-  styleUrls: ['./solar-panel-history.component.css']
+  styleUrls: ['./solar-panel-history.component.scss']
 })
 export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
 

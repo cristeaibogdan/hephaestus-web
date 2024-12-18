@@ -1,4 +1,4 @@
-<h3>{{"I18N.HISTORY.TITLE" | translate}}</h3>
+<h3>{{"I18N.HISTORY.TITLE" | transloco}}</h3>
 
 <div class="table-container mat-elevation-z8">
   <form [formGroup]="filterForm" (ngSubmit)="onFilter()" (reset)="onReset()">    
@@ -9,7 +9,7 @@
     <tr mat-row *matRowDef="let washingMachine; columns: displayedColumns;"></tr>
     
     <ng-container matColumnDef="createdAt" sticky>
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.CREATED" | translate | uppercase}}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.CREATED" | transloco | uppercase}}</th>
       <td mat-cell *matCellDef="let washingMachine"> {{washingMachine.createdAt | date: "yyyy-MM-dd HH:mm:ss"}}  </td>
     </ng-container>
 
@@ -26,7 +26,7 @@
         </ng-container>
 
     <ng-container matColumnDef="identificationMode">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.IDENTIFICATION_MODE" | translate | uppercase}}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.IDENTIFICATION_MODE" | transloco | uppercase}}</th>
       <td mat-cell *matCellDef="let washingMachine"> {{washingMachine.identificationMode | toLabel}} </td>
     </ng-container>
 
@@ -47,7 +47,7 @@
         </ng-container>
 
     <ng-container matColumnDef="manufacturer">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.MANUFACTURER" | translate | uppercase}}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.MANUFACTURER" | transloco | uppercase}}</th>
       <td mat-cell *matCellDef="let washingMachine"> {{washingMachine.manufacturer}} </td>
     </ng-container>
 
@@ -62,7 +62,7 @@
         </ng-container>
     
     <ng-container matColumnDef="model">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.MODEL" | translate | uppercase}}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.MODEL" | transloco | uppercase}}</th>
       <td mat-cell *matCellDef="let washingMachine"> {{washingMachine.model}} </td>
     </ng-container>
 
@@ -77,7 +77,7 @@
         </ng-container>
 
     <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.TYPE" | translate | uppercase}}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.TYPE" | transloco | uppercase}}</th>
       <td mat-cell *matCellDef="let washingMachine"> {{washingMachine.type}} </td>
     </ng-container>
 
@@ -92,7 +92,7 @@
         </ng-container>
 
     <ng-container matColumnDef="serialNumber">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.SERIAL_NUMBER" | translate | uppercase}}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.SERIAL_NUMBER" | transloco | uppercase}}</th>
       <td mat-cell *matCellDef="let washingMachine"> {{washingMachine.serialNumber}} </td>
     </ng-container>
 
@@ -107,7 +107,7 @@
         </ng-container>
 
     <ng-container matColumnDef="returnType">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.RETURN_TYPE" | translate | uppercase}}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.RETURN_TYPE" | transloco | uppercase}}</th>
       <td mat-cell *matCellDef="let washingMachine"> {{washingMachine.returnType | toLabel}} </td>
     </ng-container>
     
@@ -128,7 +128,7 @@
         </ng-container>
 
     <ng-container matColumnDef="damageType">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.DAMAGE_TYPE" | translate | uppercase}}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.DAMAGE_TYPE" | transloco | uppercase}}</th>
       <td mat-cell *matCellDef="let washingMachine"> {{washingMachine.damageType | toLabel}} </td>
     </ng-container>
 
@@ -149,7 +149,7 @@
         </ng-container>
 
     <ng-container matColumnDef="recommendation">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.RECOMMENDATION" | translate | uppercase}}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.RECOMMENDATION" | transloco | uppercase}}</th>
       <td mat-cell *matCellDef="let washingMachine"> 
         <button class="recommendation-text" 
           [class.repackage]="washingMachine.recommendation === recommendation.REPACKAGE"
@@ -179,16 +179,16 @@
         </ng-container>
 
     <ng-container matColumnDef="actions" stickyEnd>
-      <th mat-header-cell *matHeaderCellDef>{{"I18N.COMMON.ACTIONS" | translate | uppercase}}</th>
+      <th mat-header-cell *matHeaderCellDef>{{"I18N.COMMON.ACTIONS" | transloco | uppercase}}</th>
       <td mat-cell *matCellDef="let washingMachine">
 
         <div class="actions-container">
           <button mat-raised-button type="button" (click)="onView(washingMachine)">
-            {{"I18N.COMMON.VIEW" | translate}}
+            {{"I18N.COMMON.VIEW" | transloco}}
           </button>
   
           <button mat-raised-button type="button" color="warn">
-            {{"I18N.COMMON.DELETE" | translate}}
+            {{"I18N.COMMON.DELETE" | transloco}}
           </button>
         </div>
 

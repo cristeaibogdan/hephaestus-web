@@ -10,7 +10,7 @@ import { MatStepper } from '@angular/material/stepper';
 @Component({
   selector: 'app-solar-panel-identification',
   templateUrl: './solar-panel-identification.component.html',
-  styleUrls: ['./solar-panel-identification.component.css']
+  styleUrls: ['./solar-panel-identification.component.scss']
 })
 export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
   

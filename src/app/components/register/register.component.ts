@@ -3,23 +3,23 @@ import { Validators, NonNullableFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RegisterCodeValidator } from 'src/app/shared/validators/async-validators/register-code.validator';
-import { TranslateService } from '@ngx-translate/core';
 import { CustomValidators } from '../../shared/validators/custom.validators';
 import { AuthDataService } from 'src/app/services/auth.data.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { CreateUserRequest } from 'src/app/washing-machine/models/dtos/create-user.request';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: NonNullableFormBuilder, 
     private router: Router,
-    private _translate:TranslateService,
+    private _translocoService: TranslocoService,
     private _authDataService: AuthDataService,
     private _notifService: NotificationService,
     private registerCodeValidator:RegisterCodeValidator
@@ -79,7 +79,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     };
 
     this._authDataService.register(userAccount).subscribe(() => {              
-        this._notifService.showSuccess(this._translate.instant("I18N.CUSTOM_SUCCESS.ACCOUNT_CREATED"),0);
+        this._notifService.showSuccess(this._translocoService.translate("I18N.CUSTOM_SUCCESS.ACCOUNT_CREATED"),0);
         this.goToLoginPage();
       }
     );
