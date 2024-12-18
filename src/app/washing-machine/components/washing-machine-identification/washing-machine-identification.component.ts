@@ -118,7 +118,7 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
   }
 
   onSubmit(): void {
-    if (this.washingMachineIdentificationForm.invalid) {
+    if (this.washingMachineIdentificationForm.invalid || this.washingMachineIdentificationForm.pending) {
       return;
     }
 
