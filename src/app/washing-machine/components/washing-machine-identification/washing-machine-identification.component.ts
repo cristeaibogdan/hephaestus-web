@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit,} from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { SerialNumberValidator } from 'src/app/shared/validators/async-validators/serial-number.validator';
 import { CameraComponent } from './camera/camera.component';
 import { CustomValidators } from '../../../shared/validators/custom.validators';
