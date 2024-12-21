@@ -2,7 +2,7 @@ import { ErrorHandler, Injectable, NgZone } from '@angular/core';
 import { NotificationService } from './notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TimeoutError } from 'rxjs';
-import { TranslocoService } from '@ngneat/transloco';
+import { TranslocoService } from '@jsverse/transloco';
 
 @Injectable()
 export class GlobalErrorHandler extends ErrorHandler {

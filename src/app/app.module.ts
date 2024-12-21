@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   provideHttpClient,
   withInterceptors,
-  withInterceptorsFromDi,
+  withInterceptorsFromDi, HttpClientModule,
 } from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
@@ -58,7 +58,7 @@ import { WakeupComponent } from './components/wakeup/wakeup.component';
       },
     }),
     ZipkinExporterModule, // Handles export to Zipkin
-    CompositePropagatorModule, // Defines propagation in HTTP header
+    CompositePropagatorModule, HttpClientModule, // Defines propagation in HTTP header
     // Zipkin tracing configuration end
   ],
   providers: [

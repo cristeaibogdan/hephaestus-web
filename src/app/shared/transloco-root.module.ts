@@ -1,30 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import {
-  TRANSLOCO_LOADER,
   Translation,
   TranslocoLoader,
-  TRANSLOCO_CONFIG,
-  translocoConfig,
-  TranslocoModule
-} from '@ngneat/transloco';
-import { Injectable, NgModule } from '@angular/core';
+  TranslocoModule,
+  provideTransloco
+} from '@jsverse/transloco';
+import { Injectable, NgModule, inject } from '@angular/core';
 import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class TranslocoHttpLoader implements TranslocoLoader {
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   getTranslation(lang: string) {
-    return this.http.get<Translation>(`./assets/i18n/${lang}.json`);
+      return this.http.get<Translation>(`./assets/i18n/${lang}.json`);
   }
 }
 
 @NgModule({
   exports: [ TranslocoModule ],
   providers: [
-    {
-      provide: TRANSLOCO_CONFIG,
-      useValue: translocoConfig({
+    provideTransloco({
+      config: {
         availableLangs: ['EN', 'ES', 'IT', 'RO', 'SL'],
         defaultLang: 'EN',
         fallbackLang: 'EN',
@@ -33,9 +30,9 @@ export class TranslocoHttpLoader implements TranslocoLoader {
         },
         reRenderOnLangChange: true, // Remove this option if your application doesn't support changing language in runtime.
         prodMode: environment.production,
-      })
-    },
-    { provide: TRANSLOCO_LOADER, useClass: TranslocoHttpLoader }
+      },
+      loader: TranslocoHttpLoader
+    })
   ]
 })
 export class TranslocoRootModule {}

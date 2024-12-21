@@ -6,7 +6,7 @@ import { WashingMachineIdentification } from '../../models/washing-machine-ident
 import { MatStepper } from '@angular/material/stepper';
 import { NotificationService } from 'src/app/services/notification.service';
 import { WashingMachineDetail } from '../../models/washing-machine-detail.model';
-import { TranslocoService } from '@ngneat/transloco';
+import { TranslocoService } from '@jsverse/transloco';
 
 @Component({
     selector: 'app-washing-machine-overview',

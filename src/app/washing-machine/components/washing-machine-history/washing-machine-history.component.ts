@@ -11,7 +11,7 @@ import { Recommendation } from 'src/app/washing-machine/enums/recommendation.enu
 import { GetWashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/get-washing-machine-full.response';
 import { WashingMachineHistoryViewComponent } from './washing-machine-history-view/washing-machine-history-view.component';
 import { format } from 'date-fns';
-import { TranslocoService } from '@ngneat/transloco';
+import { TranslocoService } from '@jsverse/transloco';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
