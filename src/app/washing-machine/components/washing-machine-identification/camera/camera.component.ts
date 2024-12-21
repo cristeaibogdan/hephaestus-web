@@ -11,9 +11,10 @@ import { GetProductIdentificationResponse } from 'src/app/shared/models/get-prod
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-camera',
-  templateUrl: './camera.component.html',
-  styleUrls: ['./camera.component.scss']
+    selector: 'app-camera',
+    templateUrl: './camera.component.html',
+    styleUrls: ['./camera.component.scss'],
+    standalone: false
 })
 export class CameraComponent implements AfterViewInit {
 

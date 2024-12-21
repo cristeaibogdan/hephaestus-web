@@ -4,9 +4,10 @@ import { GetSolarPanelFullResponse } from 'src/app/solar-panel/models/dtos/get-s
 import { SolarPanelDataService } from 'src/app/solar-panel/services/solar-panel-data.service';
 
 @Component({
-  selector: 'app-solar-panel-history-view',
-  templateUrl: './solar-panel-history-view.component.html',
-  styleUrls: ['./solar-panel-history-view.component.scss']
+    selector: 'app-solar-panel-history-view',
+    templateUrl: './solar-panel-history-view.component.html',
+    styleUrls: ['./solar-panel-history-view.component.scss'],
+    standalone: false
 })
 export class SolarPanelHistoryViewComponent {
 

@@ -7,9 +7,10 @@ import { CustomValidators } from 'src/app/shared/validators/custom.validators';
 import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
-  selector: 'app-solar-panel-damage',
-  templateUrl: './solar-panel-damage.component.html',
-  styleUrls: ['./solar-panel-damage.component.scss']
+    selector: 'app-solar-panel-damage',
+    templateUrl: './solar-panel-damage.component.html',
+    styleUrls: ['./solar-panel-damage.component.scss'],
+    standalone: false
 })
 export class SolarPanelDamageComponent {
 

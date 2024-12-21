@@ -8,9 +8,10 @@ import { SolarPanelService } from '../../services/solar-panel.service';
 import { MatStepper } from '@angular/material/stepper';
 
 @Component({
-  selector: 'app-solar-panel-identification',
-  templateUrl: './solar-panel-identification.component.html',
-  styleUrls: ['./solar-panel-identification.component.scss']
+    selector: 'app-solar-panel-identification',
+    templateUrl: './solar-panel-identification.component.html',
+    styleUrls: ['./solar-panel-identification.component.scss'],
+    standalone: false
 })
 export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
   

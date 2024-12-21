@@ -17,9 +17,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-washing-machine-history',
-  templateUrl: './washing-machine-history.component.html',
-  styleUrls: ['./washing-machine-history.component.scss']
+    selector: 'app-washing-machine-history',
+    templateUrl: './washing-machine-history.component.html',
+    styleUrls: ['./washing-machine-history.component.scss'],
+    standalone: false
 })
 export class WashingMachineHistoryComponent implements OnInit, AfterViewInit {
 

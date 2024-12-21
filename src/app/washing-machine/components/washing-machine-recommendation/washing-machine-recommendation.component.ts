@@ -7,9 +7,10 @@ import { WashingMachineIdentification } from '../../models/washing-machine-ident
 import { Recommendation } from '../../enums/recommendation.enum';
 
 @Component({
-  selector: 'app-washing-machine-recommendation',
-  templateUrl: './washing-machine-recommendation.component.html',
-  styleUrls: ['./washing-machine-recommendation.component.scss']
+    selector: 'app-washing-machine-recommendation',
+    templateUrl: './washing-machine-recommendation.component.html',
+    styleUrls: ['./washing-machine-recommendation.component.scss'],
+    standalone: false
 })
 export class WashingMachineRecommendationComponent {
 

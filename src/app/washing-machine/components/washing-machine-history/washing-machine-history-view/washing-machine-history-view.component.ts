@@ -5,9 +5,10 @@ import { GetWashingMachineFullResponse } from 'src/app/washing-machine/models/dt
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 
 @Component({
-  selector: 'app-washing-machine-history-view',
-  templateUrl: './washing-machine-history-view.component.html',
-  styleUrls: ['./washing-machine-history-view.component.scss']
+    selector: 'app-washing-machine-history-view',
+    templateUrl: './washing-machine-history-view.component.html',
+    styleUrls: ['./washing-machine-history-view.component.scss'],
+    standalone: false
 })
 export class WashingMachineHistoryViewComponent {
 

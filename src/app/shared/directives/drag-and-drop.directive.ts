@@ -1,12 +1,13 @@
 import {Directive, ElementRef, EventEmitter, Output, Renderer2} from "@angular/core";
 
 @Directive({
-  selector:'[dragAndDrop]',
-  host: {
-    '(dragover)': 'handleDragOver($event)',
-    '(dragleave)': 'handleDragLeave($event)',
-    '(drop)': 'handleDrop($event)',
-  }
+    selector: '[dragAndDrop]',
+    host: {
+        '(dragover)': 'handleDragOver($event)',
+        '(dragleave)': 'handleDragLeave($event)',
+        '(drop)': 'handleDrop($event)',
+    },
+    standalone: false
 })
 export class DragAndDropDirective {
 

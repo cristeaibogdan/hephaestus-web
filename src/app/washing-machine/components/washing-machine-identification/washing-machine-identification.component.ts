@@ -14,9 +14,10 @@ import { GetProductIdentificationResponse } from 'src/app/shared/models/get-prod
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-washing-machine-identification',
-  templateUrl: './washing-machine-identification.component.html',
-  styleUrls: ['./washing-machine-identification.component.scss']
+    selector: 'app-washing-machine-identification',
+    templateUrl: './washing-machine-identification.component.html',
+    styleUrls: ['./washing-machine-identification.component.scss'],
+    standalone: false
 })
 export class WashingMachineIdentificationComponent implements OnInit, OnDestroy {
 

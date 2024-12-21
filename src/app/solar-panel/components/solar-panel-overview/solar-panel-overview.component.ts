@@ -3,9 +3,10 @@ import { MatStepper } from '@angular/material/stepper';
 import { SolarPanelService } from '../../services/solar-panel.service';
 
 @Component({
-  selector: 'app-solar-panel-overview',
-  templateUrl: './solar-panel-overview.component.html',
-  styleUrls: ['./solar-panel-overview.component.scss']
+    selector: 'app-solar-panel-overview',
+    templateUrl: './solar-panel-overview.component.html',
+    styleUrls: ['./solar-panel-overview.component.scss'],
+    standalone: false
 })
 export class SolarPanelOverviewComponent {
 

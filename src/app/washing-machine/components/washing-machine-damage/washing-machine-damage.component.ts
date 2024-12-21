@@ -11,9 +11,10 @@ import { WashingMachineDetail } from '../../models/washing-machine-detail.model'
 import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
-  selector: 'app-washing-machine-damage',
-  templateUrl: './washing-machine-damage.component.html',
-  styleUrls: ['./washing-machine-damage.component.scss']
+    selector: 'app-washing-machine-damage',
+    templateUrl: './washing-machine-damage.component.html',
+    styleUrls: ['./washing-machine-damage.component.scss'],
+    standalone: false
 })
 export class WashingMachineDamageComponent implements OnInit, OnDestroy {
   

@@ -5,9 +5,10 @@ import { WashingMachineService } from '../services/washing-machine.service';
 import { WashingMachineIdentification } from '../models/washing-machine-identification.model';
 
 @Component({
-  selector: 'app-washing-machine',
-  templateUrl: './washing-machine.component.html',
-  styleUrls: ['./washing-machine.component.scss']
+    selector: 'app-washing-machine',
+    templateUrl: './washing-machine.component.html',
+    styleUrls: ['./washing-machine.component.scss'],
+    standalone: false
 })
 
 export class WashingMachineComponent {

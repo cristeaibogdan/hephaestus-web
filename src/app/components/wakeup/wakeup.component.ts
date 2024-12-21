@@ -4,9 +4,10 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-wakeup',
-  templateUrl: './wakeup.component.html',
-  styleUrls: ['./wakeup.component.scss']
+    selector: 'app-wakeup',
+    templateUrl: './wakeup.component.html',
+    styleUrls: ['./wakeup.component.scss'],
+    standalone: false
 })
 export class WakeupComponent implements OnInit {
 

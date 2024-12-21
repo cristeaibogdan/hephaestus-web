@@ -9,9 +9,10 @@ import { WashingMachineDetail } from '../../models/washing-machine-detail.model'
 import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
-  selector: 'app-washing-machine-overview',
-  templateUrl: './washing-machine-overview.component.html',
-  styleUrls: ['./washing-machine-overview.component.scss']
+    selector: 'app-washing-machine-overview',
+    templateUrl: './washing-machine-overview.component.html',
+    styleUrls: ['./washing-machine-overview.component.scss'],
+    standalone: false
 })
 export class WashingMachineOverviewComponent {
 
