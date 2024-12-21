@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "hephaestus-web:build:production"
+              "buildTarget": "hephaestus-web:build:production"
             },
             "development": {
-              "browserTarget": "hephaestus-web:build:development"
+              "buildTarget": "hephaestus-web:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "hephaestus-web:build"
+            "buildTarget": "hephaestus-web:build"
           }
         },
         "test": {
