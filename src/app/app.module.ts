@@ -9,8 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   provideHttpClient,
-  withInterceptors,
-  withInterceptorsFromDi, HttpClientModule,
+  withInterceptors
 } from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
@@ -58,7 +57,7 @@ import { WakeupComponent } from './components/wakeup/wakeup.component';
       },
     }),
     ZipkinExporterModule, // Handles export to Zipkin
-    CompositePropagatorModule, HttpClientModule, // Defines propagation in HTTP header
+    CompositePropagatorModule, // Defines propagation in HTTP header
     // Zipkin tracing configuration end
   ],
   providers: [
@@ -73,7 +72,6 @@ import { WakeupComponent } from './components/wakeup/wakeup.component';
         loadingInterceptor,
       ])
     ),
-    provideHttpClient(withInterceptorsFromDi()),
   ],
 })
 export class AppModule {}
