@@ -4,11 +4,11 @@ import { BarcodeFormat } from '@zxing/library';
 import { ɵunwrapSafeValue } from "@angular/core"
 import { BrowserQRCodeReader } from '@zxing/browser/es2015/readers/BrowserQRCodeReader';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
 import { NotificationService } from 'src/app/services/notification.service';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 import { GetProductIdentificationResponse } from 'src/app/shared/models/get-product-identification.response';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-camera',

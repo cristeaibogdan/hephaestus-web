@@ -1,6 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit,} from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { SerialNumberValidator } from 'src/app/shared/validators/async-validators/serial-number.validator';
 import { CameraComponent } from './camera/camera.component';
 import { CustomValidators } from '../../../shared/validators/custom.validators';
@@ -12,6 +11,7 @@ import { DamageType } from '../../enums/damage-type.enum';
 import { IdentificationMode } from '../../enums/identification-mode.enum';
 import { MatStepper } from '@angular/material/stepper';
 import { GetProductIdentificationResponse } from 'src/app/shared/models/get-product-identification.response';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-washing-machine-identification',

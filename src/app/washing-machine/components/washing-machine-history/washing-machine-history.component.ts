@@ -1,7 +1,4 @@
 import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
-import { MatLegacyPaginator as MatPaginator, LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { MatSort } from '@angular/material/sort';
 import { SearchWashingMachineRequest } from '../../models/dtos/search-washing-machine.request';
 import { FormBuilder } from '@angular/forms';
@@ -15,6 +12,9 @@ import { GetWashingMachineFullResponse } from 'src/app/washing-machine/models/dt
 import { WashingMachineHistoryViewComponent } from './washing-machine-history-view/washing-machine-history-view.component';
 import { format } from 'date-fns';
 import { TranslocoService } from '@ngneat/transloco';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-washing-machine-history',

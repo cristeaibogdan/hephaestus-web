@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { GetSolarPanelFullResponse } from '../../models/dtos/get-solar-panel-full.response';
 import { MatSort } from '@angular/material/sort';
 import { SolarPanelRecommendation } from '../../enums/solar-panel-recommendation.enum';
 import { FormBuilder } from '@angular/forms';
-import { MatLegacyPaginator as MatPaginator, LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
 import { SearchSolarPanelRequest } from '../../models/dtos/search-solar-panel.request';
 import { SolarPanelHistoryViewComponent } from './solar-panel-history-view/solar-panel-history-view.component';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { format } from 'date-fns';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 
 const DUMMY_DATA: GetSolarPanelFullResponse[] = [

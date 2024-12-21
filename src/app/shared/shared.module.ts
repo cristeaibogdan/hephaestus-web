@@ -10,13 +10,13 @@ import { DateFormatMMYYYYDirective } from './directives/date-format-mm-yyyy.dire
 import { DateFormatSlashYYYYMMDDDirective } from './directives/date-format-slash-yyyy-mm-dd.directive';
 import { DateFormatYYYYMMDDDirective } from './directives/date-format-yyyy-mm-dd.directive';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatLegacyPaginatorIntl as MatPaginatorIntl } from '@angular/material/legacy-paginator';
 import { PaginatorI18n } from './paginator.i18n';
 import { A11yModule } from '@angular/cdk/a11y';
 import { ToLabelPipe } from './pipes/to-label.pipe';
 import { DateFnsAdapter } from '@angular/material-date-fns-adapter';
 import { enUS } from 'date-fns/locale';
 import { TranslocoRootModule } from './transloco-root.module';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [

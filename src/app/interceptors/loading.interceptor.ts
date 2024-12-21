@@ -1,9 +1,9 @@
 import { inject } from '@angular/core';
 import { HttpInterceptorFn } from '@angular/common/http';
 import { finalize} from 'rxjs/operators';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { SpinnerComponent } from '../shared/components/spinner/spinner.component';
 import { SKIP_INTERCEPTOR } from '../shared/validators/async-validators/skip-interceptor.token';
+import { MatDialog } from '@angular/material/dialog';
 
 export const loadingInterceptor: HttpInterceptorFn = (request, next) => {
 
