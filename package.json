@@ -27,7 +27,7 @@
     "@zxing/library": "0.21.0",
     "@zxing/ngx-scanner": "19.0.0",
     "ajv": "^8.8.2",
-    "date-fns": "^2.29.3",
+    "date-fns": "^4.1.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
