@@ -44,5 +44,10 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "typescript": "~5.6.3"
+  },  
+  "overrides": {
+    "@opentelemetry/context-zone-peer-dep": {
+      "zone.js": "~0.15.0"
+    }
   }
 }
