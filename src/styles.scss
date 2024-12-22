@@ -134,6 +134,17 @@ body {
 }
 
 /* **************************************
+// *** STYLES for MAT DIALOG - LOADING SPINNER
+// **************************************/
+
+.borderless-dialog {
+  @include mat.dialog-overrides((
+    container-color: transparent,
+    container-elevation-shadow: none
+  ));
+}
+
+/* **************************************
 // *** STYLES for MAT TOOLTIP
 // **************************************/
 
