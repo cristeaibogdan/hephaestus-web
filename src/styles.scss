@@ -148,9 +148,11 @@ body {
 // *** STYLES for MAT TOOLTIP
 // **************************************/
 
-.mat-tooltip {
-  font-size: 12px;
+.mdc-tooltip {
   white-space: pre-line;
+  @include mat.tooltip-overrides((
+    supporting-text-size: 12px
+  ));
 }
 
 /* **************************************
