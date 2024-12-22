@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 /* You can add global styles to this file, and also import other style files */
 
 html, body { 
@@ -29,22 +31,28 @@ body {
 // *** STYLES for snackbars
 // **************************************/
 
-.notif-error, .notif-error .mat-simple-snackbar-action {
-  color: #f8e7e9 !important;
-  background-color: #c72c41 !important;
-  white-space: pre-wrap;
+.notif-error {
+  @include mat.snack-bar-overrides((
+    container-color: #c72c41,
+    supporting-text-color: #f8e7e9,
+    button-color: #f8e7e9
+  ));
 }
 
-.notif-success, .notif-success .mat-simple-snackbar-action {
-  color: #f8e7e9 !important;
-  background-color: #4e8d7c !important;
-  white-space: pre-wrap;
+.notif-warning {
+  @include mat.snack-bar-overrides((
+    container-color: #f08c00,
+    supporting-text-color: #f8e7e9,
+    button-color: #f8e7e9
+  ));
 }
 
-.notif-warning, .notif-warning .mat-simple-snackbar-action {
-  color: #f8e7e9 !important;
-  background-color: #f08c00 !important;
-  white-space: pre-wrap;
+.notif-success {
+  @include mat.snack-bar-overrides((
+    container-color: #4e8d7c,
+    supporting-text-color: #f8e7e9,
+    button-color: #f8e7e9
+  ));
 }
 
 /* **************************************
