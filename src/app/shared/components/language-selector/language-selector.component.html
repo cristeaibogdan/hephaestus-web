@@ -1,4 +1,4 @@
-<mat-form-field class="language-selector">
+<mat-form-field class="language-selector" appearance="outline">
   <img matPrefix [src]="selectedLanguage.value.flag">
 
   <mat-select [formControl]="selectedLanguage" (selectionChange)="changeLanguage($event.value)">
