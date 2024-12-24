@@ -92,12 +92,13 @@
               <br>
               {{"I18N.COMMON.CM" | transloco}}
             </span>
-            <mat-slider formControlName="visibleSurfacesScratchesLength" 
-              thumbLabel 
-              [min]=0 
-              [max]=10 
+            <mat-slider discrete
+              min=0 
+              max=10
               step=0.5
-              tickInterval=1>
+              tickInterval=1
+              showTickMarks>
+              <input matSliderThumb formControlName="visibleSurfacesScratchesLength">
             </mat-slider>
             <span class="slider-label">10
               <br>
@@ -119,12 +120,13 @@
               <br>
               {{"I18N.COMMON.CM" | transloco}}
             </span>
-            <mat-slider formControlName="visibleSurfacesDentsDepth" 
-              thumbLabel 
-              [min]=0
-              [max]=10
+            <mat-slider discrete 
+              min=0
+              max=10
               step=0.5 
-              tickInterval=1>
+              tickInterval=1
+              showTickMarks>
+              <input matSliderThumb formControlName="visibleSurfacesDentsDepth">
             </mat-slider>
             <span class="slider-label">10
               <br>
@@ -216,12 +218,13 @@
               <br>
               {{"I18N.COMMON.CM" | transloco}}
             </span>
-            <mat-slider formControlName="hiddenSurfacesScratchesLength" 
-              thumbLabel 
-              [min]=0 
-              [max]=10 
+            <mat-slider discrete
+              min=0 
+              max=10 
               step=0.5
-              tickInterval=1>
+              tickInterval=1 
+              showTickMarks>
+              <input matSliderThumb formControlName="hiddenSurfacesScratchesLength">
             </mat-slider>
             <span class="slider-label">10
               <br>
@@ -243,12 +246,13 @@
               <br>
               {{"I18N.COMMON.CM" | transloco}}
             </span>
-            <mat-slider formControlName="hiddenSurfacesDentsDepth" 
-              thumbLabel 
-              [min]=0
-              [max]=10
+            <mat-slider discrete
+              min=0
+              max=10
               step=0.5 
-              tickInterval=1>
+              tickInterval=1
+              >
+              <input matSliderThumb formControlName="hiddenSurfacesDentsDepth">
             </mat-slider>
             <span class="slider-label">10
               <br>
