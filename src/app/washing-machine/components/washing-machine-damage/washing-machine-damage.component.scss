@@ -19,13 +19,13 @@ ul {
   gap: 3rem;
 }
 
-.mat-card {
+mat-card {
   padding: 0% 0% 2% 0%;
   border-radius: 8px;
   overflow: hidden;
 }
 
-.mat-card-title {
+mat-card-title {
   text-align: center;
   padding: 0.75rem;
   margin-bottom: 2%;
@@ -35,7 +35,7 @@ ul {
   background-color:#cfd3e6;
 }
 
-.mat-card-title span {
+mat-card-title span {
   color: red;
 }
 
