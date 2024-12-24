@@ -323,7 +323,7 @@
     <mat-form-field appearance="fill">
       <mat-label>{{"I18N.COMMON.PRODUCT_PRICE" | transloco | titlecase}}</mat-label>
       <input matInput type="number" formControlName="price">
-      <span matPrefix>€&nbsp;</span>
+      <span matTextPrefix>€&nbsp;</span>
 
       <mat-error *ngIf="washingMachinePricingForm.controls.price.errors?.min">
         {{"I18N.MAT_ERROR.PRODUCT_PRICE_MINIMUM" | transloco}}
@@ -343,7 +343,7 @@
     <mat-form-field appearance="fill">
       <mat-label>{{"I18N.COMMON.PRODUCT_REPAIR_PRICE" | transloco | titlecase}}</mat-label>
       <input matInput type="number" formControlName="repairPrice">
-      <span matPrefix>€&nbsp;</span>
+      <span matTextPrefix>€&nbsp;</span>
 
       <mat-error *ngIf="washingMachinePricingForm.controls.repairPrice.errors?.min">
         {{"I18N.MAT_ERROR.REPAIR_PRICE_MINIMUM" | transloco}}
