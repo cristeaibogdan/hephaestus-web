@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AbstractControl, NonNullableFormBuilder, Validators } from '@angular/forms';
@@ -16,7 +16,7 @@ import { TranslocoService } from '@jsverse/transloco';
     styleUrls: ['./washing-machine-damage.component.scss'],
     standalone: false
 })
-export class WashingMachineDamageComponent implements OnInit, OnDestroy {
+export class WashingMachineDamageComponent implements OnDestroy {
   
   subscriptions:Subscription[] = [];
 
@@ -26,8 +26,10 @@ export class WashingMachineDamageComponent implements OnInit, OnDestroy {
     private _notifService: NotificationService,
     private _translocoService: TranslocoService,
     private sanitizer: DomSanitizer,
-    private fb: NonNullableFormBuilder    
+    // private fb: NonNullableFormBuilder    
   ) {}
+
+  private fb = inject(NonNullableFormBuilder);
 
   washingMachineDetailForm = this.fb.group({
     applicablePackageDamage: [false],

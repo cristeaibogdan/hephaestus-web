@@ -47,7 +47,7 @@
   <mat-card-title>{{"I18N.PRODUCT_DAMAGE.SELECT_DAMAGE_TITLE" | transloco}} <span>*</span></mat-card-title>
 
   <section class="damage-panels">    
-    <mat-expansion-panel [expanded]="washingMachineDetailForm.controls.applicablePackageDamage.value">
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>{{"I18N.COMMON.PACKAGE" | transloco}}</mat-panel-title>
         <mat-panel-description>
@@ -66,7 +66,7 @@
       </article>  
     </mat-expansion-panel>
   
-    <mat-expansion-panel [expanded]="washingMachineDetailForm.controls.applicableVisibleSurfacesDamage.value">
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>{{"I18N.COMMON.VISIBLE_SURFACES" | transloco}}</mat-panel-title>
         <mat-panel-description>
@@ -191,7 +191,7 @@
       </div>
     </mat-expansion-panel> 
 
-    <mat-expansion-panel [expanded]="washingMachineDetailForm.controls.applicableHiddenSurfacesDamage.value">
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>{{"I18N.COMMON.HIDDEN_SURFACES" | transloco}}</mat-panel-title>
         <mat-panel-description>
