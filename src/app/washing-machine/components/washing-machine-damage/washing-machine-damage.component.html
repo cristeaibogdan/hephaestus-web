@@ -47,13 +47,13 @@
   <mat-card-title>{{"I18N.PRODUCT_DAMAGE.SELECT_DAMAGE_TITLE" | transloco}} <span>*</span></mat-card-title>
 
   <section class="damage-panels">    
-    <mat-expansion-panel>
+    <mat-expansion-panel [expanded]="washingMachineDetailForm.controls.applicablePackageDamage.value">
       <mat-expansion-panel-header>
         <mat-panel-title>{{"I18N.COMMON.PACKAGE" | transloco}}</mat-panel-title>
         <mat-panel-description>
           {{"I18N.PRODUCT_DAMAGE.SELECT_APPLICABLE" | transloco}} 
           {{"I18N.COMMON.PACKAGE" | transloco}}
-          <mat-checkbox formControlName="applicablePackageDamage">
+          <mat-checkbox formControlName="applicablePackageDamage" (click)="$event.stopPropagation()">
             {{"I18N.COMMON.APPLICABLE" | transloco}}
           </mat-checkbox>
         </mat-panel-description>
@@ -66,13 +66,13 @@
       </article>  
     </mat-expansion-panel>
   
-    <mat-expansion-panel>
+    <mat-expansion-panel [expanded]="washingMachineDetailForm.controls.applicableVisibleSurfacesDamage.value">
       <mat-expansion-panel-header>
         <mat-panel-title>{{"I18N.COMMON.VISIBLE_SURFACES" | transloco}}</mat-panel-title>
         <mat-panel-description>
           {{"I18N.PRODUCT_DAMAGE.SELECT_APPLICABLE" | transloco}} 
           {{"I18N.COMMON.VISIBLE_SURFACES" | transloco}}
-          <mat-checkbox formControlName="applicableVisibleSurfacesDamage">
+          <mat-checkbox formControlName="applicableVisibleSurfacesDamage" (click)="$event.stopPropagation()">
             {{"I18N.COMMON.APPLICABLE" | transloco}}
           </mat-checkbox>
         </mat-panel-description>
@@ -191,13 +191,13 @@
       </div>
     </mat-expansion-panel> 
 
-    <mat-expansion-panel>
+    <mat-expansion-panel [expanded]="washingMachineDetailForm.controls.applicableHiddenSurfacesDamage.value">
       <mat-expansion-panel-header>
         <mat-panel-title>{{"I18N.COMMON.HIDDEN_SURFACES" | transloco}}</mat-panel-title>
         <mat-panel-description>
           {{"I18N.PRODUCT_DAMAGE.SELECT_APPLICABLE" | transloco}} 
           {{"I18N.COMMON.HIDDEN_SURFACES" | transloco}}
-          <mat-checkbox formControlName="applicableHiddenSurfacesDamage">
+          <mat-checkbox formControlName="applicableHiddenSurfacesDamage" (click)="$event.stopPropagation()">
             {{"I18N.COMMON.APPLICABLE" | transloco}}
           </mat-checkbox>
         </mat-panel-description>
@@ -375,17 +375,6 @@
   <button mat-raised-button color="warn" type="reset">
     {{"I18N.COMMON.RESET" | transloco}}
   </button>
-
-  <!-- Comments for Next button disable functionality:
-    1. Disabled if no files have been uploaded
-    2. Disabled if productDamageForm is INVALID
-    3. Disabled if productPricingForm is INVALID -->
-
-  <!-- Old implementation -->
-  <!-- <button mat-raised-button color="primary" type="submit" 
-    [disabled]="selectedFiles.length == 0 ||
-      washingMachineDetailForm.invalid || 
-      washingMachinePricingForm.invalid"> --> 
 
   <button mat-raised-button color="primary" type="submit">
     {{"I18N.COMMON.NEXT" | transloco}}
