@@ -29,14 +29,14 @@ table {
 th, td {
   color: #444;
   font-size: 14px;
-  text-align: center !important;
+  text-align: center;
 
   border-right: 2px solid #909ca0;
 }
 
 th {
-  background-color: #d0ebff;
-  border-bottom: 2px solid #909ca0 !important;
+  background-color: #d0ebff !important;
+  border-bottom: 2px solid #909ca0;
 }
 
 tr:nth-child(odd) {
