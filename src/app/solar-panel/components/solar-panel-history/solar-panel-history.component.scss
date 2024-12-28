@@ -131,28 +131,6 @@ tr {
   padding: 0.5rem 0;
 }
 
-/* FIX THE POSITION BUG OF THE PREFIX 
-KNOWN BUG FOR MATINPUT WITH OUTLINE */
-.filter-input ::ng-deep .mat-form-field-prefix {
-  top: 0.45rem;
-  color: #556eb0;
-  margin-right: 5px;
-}
-
-/* FIX THE POSITION BUG OF THE SUFFIX 
-KNOWN BUG FOR MATINPUT WITH OUTLINE */
-.filter-input ::ng-deep .mat-form-field-suffix {
-  top: 0.45rem;
-}
-
-/* FIX THE POSITION BUG OF DATEPICKER ICON */
-.filter-input ::ng-deep .mat-icon-button {
-  color: #556eb0;
-  position: relative;
-  width: 24px !important;
-  height: 24px !important;
-}
-
 /* ************************************************************ */
 /* *** REMOVE DEFAULT PADDING FROM FIRST AND LAST COLUMN */
 /* ************************************************************ */
