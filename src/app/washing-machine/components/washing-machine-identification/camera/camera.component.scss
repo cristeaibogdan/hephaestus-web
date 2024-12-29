@@ -15,8 +15,6 @@
 .camera-container {
   display: flex;
   justify-content: center;
-
-  margin-bottom: 2rem;
 }
 
 .camera-scanner {
@@ -76,13 +74,13 @@ zxing-scanner ::ng-deep video {
 /* ******************************************* */
 
 .mat-mdc-raised-button {
+  height: 50px;
   width: 100%;
 }
 
 .buttons-container {  
   width: 300px;
   margin: 0 auto;
-  display: block;
 }
 
 .upload-image-info {
@@ -105,10 +103,14 @@ input[type=file] {
   display: none;
 }
 
-.upload-image-button {
-  position: relative;
-  height: 50px;
-  margin-bottom: 2rem;  
+.upload-image-button { 
+  margin-bottom: 2rem;
+}
+
+.upload-image-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 /*
@@ -116,7 +118,6 @@ input[type=file] {
   if the element is preceded by another button. This.scss rule sets it to 0.
 */
 .close-button {
-  height: 50px;
   margin-left: 0px !important;
 }
 
@@ -127,20 +128,17 @@ input[type=file] {
 .icon-camera {
   width: 40px;
   height: 40px;
-  padding: 4% 0;
+  margin: 0; // Fix for weird margin of 8px right on mat-icon
+}
+
+.upload-icon {
+  width: 30px;
+  height: 30px;
 }
 
 .help-tip {
-  vertical-align: middle;
-  cursor: pointer;
   width: 30px;
   height: 30px;
 
   color: white;
-
-  position: absolute;
-  top: 50%;
-  right: 0;
-
-  transform: translate(-50%, -50%);
 }

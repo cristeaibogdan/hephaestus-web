@@ -29,6 +29,7 @@
       <button mat-raised-button type="button" color="primary"
         (click)="switchCamera()"
         [disabled]="cameraIsLoading || availableCameras.length === 1">
+
         <mat-icon class="icon-camera" svgIcon="camera_SWITCH"></mat-icon>
       </button>
     </div>
@@ -64,13 +65,17 @@
   </p>
 
   <button class="upload-image-button" mat-raised-button color="primary" type="button" (click)="QRInput.click()">
-    <mat-icon svgIcon="upload"></mat-icon> &nbsp; Upload Image
-    
-    <mat-icon class="text-color help-tip" 
-      [matTooltip]=uploadHelp
-      matTooltipPosition="right" 
-      svgIcon="help">
-    </mat-icon>
+    <div class="upload-image-content">
+      <mat-icon class="upload-icon" svgIcon="upload"></mat-icon>
+
+      <span>Upload Image</span>
+      
+      <mat-icon class="text-color help-tip" 
+        [matTooltip]=uploadHelp
+        matTooltipPosition="right" 
+        svgIcon="help">
+      </mat-icon>
+    </div>
   </button>
 
   <button class="close-button" mat-raised-button color="warn" type="button" (click)="closeDialog()"> 
