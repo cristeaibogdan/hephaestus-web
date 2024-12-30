@@ -1,4 +1,4 @@
-<mat-card class="mat-elevation-z8">
+<mat-card class="mat-mdc-elevation-specific mat-elevation-z8">
   <form [formGroup]="loginForm" (ngSubmit)="login()">
   <img class="service-logo" src="assets/logos/hephaestus-logo.png"/>
   <mat-card-content>
@@ -6,7 +6,7 @@
       {{ "I18N.COMMON.SERVICE_TITLE" | transloco | titlecase }}
     </header>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="test">
       <mat-label>{{ "I18N.COMMON.USERNAME" | transloco }}</mat-label>
       <input matInput formControlName="username" />
 
@@ -15,7 +15,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="test">
       <mat-label>{{ "I18N.COMMON.PASSWORD" | transloco }}</mat-label>
       <input matInput type="password" formControlName="password"/>
 
