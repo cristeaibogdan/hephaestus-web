@@ -5,11 +5,13 @@
     [formControl]="selectedLanguage"  
     (selectionChange)="changeLanguage($event.value)"
     >
-    <mat-option class="options" *ngFor="let language of availableLanguages" [value]="language">
-      <div class="language-option">
-        <img [src]="language.flag">
-        {{language.name}}
-      </div>
-    </mat-option>
+    @for (language of availableLanguages; track language) {
+      <mat-option class="options" [value]="language">
+        <div class="language-option">
+          <img [src]="language.flag">
+          {{language.name}}
+        </div>
+      </mat-option>
+    }  
   </mat-select>
 </mat-form-field>
