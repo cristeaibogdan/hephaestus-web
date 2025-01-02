@@ -34,13 +34,12 @@
     <mat-form-field appearance="fill">
       <mat-label>{{"I18N.COMMON.MANUFACTURER" | transloco}}</mat-label>
       <!-- I have to use ngModelChange or model and type won't be filled when i click scan on QR Code camera -->
-      <mat-select formControlName="manufacturer"
+      <mat-select formControlName="manufacturer" 
         (ngModelChange)="populateDataMatrix_Model_Type_Fields($event)">
 
-        <mat-option *ngFor="let manufacturer of availableManufacturers"
-          [value]="manufacturer">{{manufacturer}}
-        </mat-option>
-
+        @for (manufacturer of availableManufacturers; track manufacturer) {
+          <mat-option [value]="manufacturer">{{manufacturer}}</mat-option>
+        }
       </mat-select>
       <mat-error>{{"I18N.MAT_ERROR.MANUFACTURER_REQUIRED" | transloco}}</mat-error>
     </mat-form-field>
@@ -49,10 +48,9 @@
       <mat-label>{{"I18N.COMMON.MODEL" | transloco}}</mat-label>
       <mat-select formControlName="model">
         
-        <mat-option *ngFor="let model of availableModels" 
-          [value]="model">{{model}}
-        </mat-option>
-
+        @for (model of availableModels; track model) {
+          <mat-option [value]="model">{{model}}</mat-option>
+        }
       </mat-select>
       <mat-error>{{"I18N.MAT_ERROR.MODEL_OR_TYPE_REQUIRED" | transloco}}</mat-error>
     </mat-form-field>
@@ -61,10 +59,9 @@
       <mat-label>{{"I18N.COMMON.TYPE" | transloco}}</mat-label>
       <mat-select formControlName="type">
 
-        <mat-option *ngFor="let type of availableTypes" 
-          [value]="type">{{type}}
-        </mat-option>
-
+        @for (type of availableTypes; track type) {
+          <mat-option [value]="type">{{type}}</mat-option>
+        }
       </mat-select>
       <mat-error>{{"I18N.MAT_ERROR.MODEL_OR_TYPE_REQUIRED" | transloco}}</mat-error>
     </mat-form-field>    
@@ -73,24 +70,25 @@
       <mat-label>{{"I18N.COMMON.SERIAL_NUMBER" | transloco}}</mat-label>
       <input matInput formControlName="serialNumber">   
 
-      <mat-error *ngIf="washingMachineIdentificationForm.controls.serialNumber.errors?.required">
-        {{"I18N.MAT_ERROR.SERIAL_NUMBER_REQUIRED" | transloco}}
-      </mat-error>
+      @if(washingMachineIdentificationForm.controls.serialNumber.errors?.required) {
+        <mat-error>{{"I18N.MAT_ERROR.SERIAL_NUMBER_REQUIRED" | transloco}}</mat-error>
+      }
 
-      <mat-error *ngIf="washingMachineIdentificationForm.controls.serialNumber.errors?.backendError">
-        {{"I18N.MAT_ERROR.NO_CONNECTION" | transloco}}
-      </mat-error>
+      @if (washingMachineIdentificationForm.controls.serialNumber.errors?.backendError) {
+        <mat-error>{{"I18N.MAT_ERROR.NO_CONNECTION" | transloco}}</mat-error>
+      }
 
-      <mat-error *ngIf="washingMachineIdentificationForm.controls.serialNumber.errors?.invalid">
-        {{"I18N.MAT_ERROR.SERIAL_NUMBER_TAKEN" | transloco}}
-      </mat-error>
+      @if (washingMachineIdentificationForm.controls.serialNumber.errors?.invalid) {
+        <mat-error>{{"I18N.MAT_ERROR.SERIAL_NUMBER_TAKEN" | transloco}}</mat-error>
+      }
       
-      <mat-hint *ngIf="washingMachineIdentificationForm.controls.serialNumber.pending">
-        {{"I18N.MAT_HINT.PENDING" | transloco}}
-      </mat-hint>
-      <mat-hint *ngIf="washingMachineIdentificationForm.controls.serialNumber.valid">
-        {{"I18N.MAT_HINT.SERIAL_NUMBER_VALID" | transloco}}
-      </mat-hint>
+      @if (washingMachineIdentificationForm.controls.serialNumber.pending) {
+        <mat-hint>{{"I18N.MAT_HINT.PENDING" | transloco}}</mat-hint>
+      }
+
+      @if (washingMachineIdentificationForm.controls.serialNumber.valid) {
+        <mat-hint>{{"I18N.MAT_HINT.SERIAL_NUMBER_VALID" | transloco}}</mat-hint>        
+      }
     </mat-form-field>
 
     <fieldset class="text-align-center" [class.fieldset-invalid] = 
