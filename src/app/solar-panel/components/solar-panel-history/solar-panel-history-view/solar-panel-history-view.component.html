@@ -28,26 +28,20 @@
   </ul>
 
   <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
-  <section *ngIf="solarPanel.solarPanelDamage as solarPanelDamage">
+  @if (solarPanel.solarPanelDamage; as solarPanelDamage) {
     <ul class="damages-list">
-      <li *ngIf="solarPanelDamage.hotSpots">
-        Hot Spots
-      </li>
-      <li *ngIf="solarPanelDamage.microCracks">
-        Micro Cracks
-      </li>
-      <li *ngIf="solarPanelDamage.snailTrails">
-        Snail Trails
-      </li>
-      <li *ngIf="solarPanelDamage.brokenGlass">
-        Broken Glass
-      </li>
-      <li *ngIf="solarPanelDamage.additionalDetails">
-        Additional Details:
-        {{solarPanelDamage.additionalDetails}}
-      </li>
+      @if (solarPanelDamage.hotSpots) { <li>Hot Spots</li> }        
+      @if (solarPanelDamage.microCracks) { <li>Micro Cracks</li> }        
+      @if (solarPanelDamage.snailTrails) { <li>Snail Trails</li> }        
+      @if (solarPanelDamage.brokenGlass) { <li>Broken Glass</li> }
+      @if (solarPanelDamage.additionalDetails) {
+        <li>
+          Additional Details:
+          {{solarPanelDamage.additionalDetails}}
+        </li>
+      }
     </ul>
-  </section>
+  }
 </mat-dialog-content>
 
 <mat-dialog-actions class="mat-dialog-actions-buttons">
