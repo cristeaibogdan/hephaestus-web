@@ -13,26 +13,35 @@
       (scanSuccess)="onScanSuccess($event)">    
     </zxing-scanner>
 
-    <div class="camera-scanner-placeholder" *ngIf="!scannerEnabled">
-      <img src="assets/images/scanner-qr.png">
-      <p *ngIf="noCamerasFound"> 
-        No cameras found. <br> 
-        Use Upload Image to scan from an image file.
-      </p>
-    </div>
+    @if (!scannerEnabled) {
+      <div class="camera-scanner-placeholder">
+        <img src="assets/images/scanner-qr.png">
+        
+        @if (noCamerasFound) {
+          <p> 
+            No cameras found. <br> 
+            Use Upload Image to scan from an image file.
+          </p>
+        }
+      </div>
+    }
 
-    <div class="camera-scanner-loading" *ngIf="cameraIsLoading">
-      <app-spinner></app-spinner>
-    </div>
+    @if(cameraIsLoading) {
+      <div class="camera-scanner-loading">
+        <app-spinner></app-spinner>
+      </div>
+    }
 
-    <div class="camera-scanner-switch" *ngIf="scannerEnabled">
-      <button mat-raised-button type="button" color="primary"
-        (click)="switchCamera()"
-        [disabled]="cameraIsLoading || availableCameras.length === 1">
-
-        <mat-icon class="icon-camera" svgIcon="camera_SWITCH"></mat-icon>
-      </button>
-    </div>
+    @if (scannerEnabled) {
+      <div class="camera-scanner-switch">
+        <button mat-raised-button type="button" color="primary"
+          (click)="switchCamera()"
+          [disabled]="cameraIsLoading || availableCameras.length === 1">
+  
+          <mat-icon class="icon-camera" svgIcon="camera_SWITCH"></mat-icon>
+        </button>
+      </div>
+    }
   </section>
 </mat-dialog-content>
 
@@ -50,13 +59,11 @@
     (click)="onStart()"
     [disabled]="cameraIsLoading || noCamerasFound">
 
-    <ng-container *ngIf="scannerEnabled && !cameraIsPaused; else onButton">
+    @if (scannerEnabled && !cameraIsPaused) {
       <mat-icon class="icon-camera" svgIcon="camera_OFF"></mat-icon>
-    </ng-container>
-    
-    <ng-template #onButton>
+    } @else {
       <mat-icon class="icon-camera" svgIcon="camera_ON"></mat-icon>
-    </ng-template>      
+    }
   </button>
 
   <p class="upload-image-info">
@@ -83,14 +90,12 @@
   </button>
 </mat-dialog-actions>
  
-<!-- <pre *ngIf="availableCameras">
-  === Selected camera ===
-  {{availableCameras[cameraIndex] | json}}
-
-  === Available cameras ===
-  {{availableCameras | json}}
-</pre> -->
-
-
-
-
+<!-- @if(availableCameras) {
+  <pre>
+    === Selected camera ===
+    {{availableCameras[cameraIndex] | json}}
+  
+    === Available cameras ===
+    {{availableCameras | json}}
+  </pre>
+} -->
