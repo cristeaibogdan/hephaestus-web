@@ -37,10 +37,9 @@
               <mat-icon matPrefix svgIcon="search"></mat-icon>
               <mat-select matInput formControlName="identificationMode"> 
                 <mat-option></mat-option> <!-- Empty option to ensure null is sent to backend -->
-                <mat-option *ngFor="let option of identificationModeOptions"
-                  [value]= "option">
-                  {{option | toLabel}}
-                </mat-option>
+                @for (option of identificationModeOptions; track option) {
+                  <mat-option [value]= "option">{{option | toLabel}}</mat-option>
+                }
               </mat-select>
             </mat-form-field>
           </th>
@@ -118,10 +117,9 @@
               <mat-icon matPrefix svgIcon="search"></mat-icon>
               <mat-select matInput formControlName="returnType"> 
                 <mat-option></mat-option> <!-- Empty option to ensure null is sent to backend -->
-                <mat-option *ngFor="let option of returnTypeOptions"
-                  [value]= "option">
-                  {{option | toLabel}}
-                </mat-option>
+                @for (option of returnTypeOptions; track option) {
+                  <mat-option [value]= "option">{{option | toLabel}}</mat-option>
+                }
               </mat-select>
             </mat-form-field>
           </th>
@@ -139,10 +137,9 @@
               <mat-icon matPrefix svgIcon="search"></mat-icon>
               <mat-select matInput formControlName="damageType"> 
                 <mat-option></mat-option> <!-- Empty option to ensure null is sent to backend -->
-                <mat-option *ngFor="let option of damageTypeOptions"
-                  [value]= "option">
-                  {{option | toLabel}}
-                </mat-option>
+                @for (option of damageTypeOptions; track option) {
+                  <mat-option [value]= "option">{{option | toLabel}}</mat-option>
+                }
               </mat-select>
             </mat-form-field>
           </th>
@@ -169,10 +166,9 @@
               <mat-icon matPrefix svgIcon="search"></mat-icon>
               <mat-select matInput formControlName="recommendation"> 
                 <mat-option></mat-option> <!-- Empty option to ensure null is sent to backend -->
-                <mat-option *ngFor="let option of recommendationOptions"
-                  [value]= "option">
-                  {{option}}
-                </mat-option>
+                @for (option of recommendationOptions; track option) {
+                  <mat-option [value]= "option">{{option}}</mat-option>
+                }
               </mat-select>
             </mat-form-field>
           </th>
