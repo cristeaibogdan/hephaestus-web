@@ -1,5 +1,7 @@
 <div class="global-container">
-  <app-header *ngIf="showHeader"></app-header>
+  @if (showHeader) {
+    <app-header *ngIf="showHeader"></app-header>
+  }
 
   <div class="global-content">
     <router-outlet></router-outlet>
