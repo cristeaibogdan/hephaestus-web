@@ -1,4 +1,4 @@
-import { ErrorHandler, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -24,7 +24,8 @@ import {
   ZipkinExporterModule,
 } from '@jufab/opentelemetry-angular-interceptor';
 import { environment } from 'src/environments/environment';
-import { WakeupComponent } from './components/wakeup/wakeup.component';
+import { InitializationFailComponent } from './components/initialization-fail/initialization-fail.component';
+import { InitializationService } from './services/initialization.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { WakeupComponent } from './components/wakeup/wakeup.component';
     HeaderComponent,
     RegisterComponent,
     LoginComponent,
-    WakeupComponent,
+    InitializationFailComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -72,6 +73,15 @@ import { WakeupComponent } from './components/wakeup/wakeup.component';
         loadingInterceptor,
       ])
     ),
+
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (initService: InitializationService) => {
+        return () => initService.wakeupBackend();
+      },
+      deps: [InitializationService],
+      multi: true
+    }
   ],
 })
 export class AppModule {}

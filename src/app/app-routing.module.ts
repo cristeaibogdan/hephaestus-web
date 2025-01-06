@@ -6,12 +6,12 @@ import { RegisterComponent } from './components/register/register.component';
 
 import { AuthGuard } from './services/auth-guard.service';
 import { CameraComponent } from './washing-machine/components/washing-machine-identification/camera/camera.component';
-import { WakeupComponent } from './components/wakeup/wakeup.component';
+import { InitializationFailComponent } from './components/initialization-fail/initialization-fail.component';
 
 const appRoutes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
-  // { path: '', component: WakeupComponent },
+  { path: 'initialization-fail', component: InitializationFailComponent },
   {
     path: "",
     // canActivate:[AuthGuard],
