@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { firstValueFrom, retry, tap, timer } from 'rxjs';
+import { firstValueFrom, retry, timer } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
@@ -13,9 +13,17 @@ export class InitializationService {
 
   async wakeupBackend(): Promise<void>  {
 
-    let washingMachineAwake = false;
-    let productAwake = false;
-    
+    const washingMachineAwake = await this.wakeupWashingMachine();
+    const productAwake = await this.wakeupProduct();
+
+    // If one of services fail, the user will be redirected to InitializationFailComponent
+    if(!washingMachineAwake || !productAwake) {
+      this.router.navigate(['/initialization-fail']);
+    }
+  }
+
+  // First request to wakeup washing-machine service
+  private async wakeupProduct(): Promise<boolean> {
     try { // First request to wakeup washing-machine service
       await firstValueFrom(
         this.http.get(`${this.apiUrl}/api/v1/washing-machines/someSerialNumber/validate`).pipe(
@@ -28,12 +36,16 @@ export class InitializationService {
           })
         )
       );
-      washingMachineAwake = true;
+      return true;
     } catch (err) {
       console.warn('Washing Machine wake-up call failed:', err);
+      return false;
     }
-    
-    try { // Second request to wakeup washing-machine service
+  }
+  
+  // Second request to wakeup product service
+  private async wakeupWashingMachine(): Promise<boolean> {
+    try { 
       await firstValueFrom(
         this.http.get(`${this.apiUrl}/api/v1/products/Washing Machine/manufacturers`).pipe(
           retry({
@@ -45,14 +57,10 @@ export class InitializationService {
           })
         )
       );
-      productAwake = true;
+      return true;
     } catch (err) {
       console.warn('Product wake-up call failed:', err);
-    }
-
-    // If both services fail, the user will be redirected to InitializationFailComponent
-    if(!washingMachineAwake && !productAwake) {
-      this.router.navigate(['/initialization-fail']);
+      return false;
     }
   }
 }
