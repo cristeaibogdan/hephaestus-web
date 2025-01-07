@@ -23,7 +23,7 @@ export class InitializationService {
   }
 
   // First request to wakeup washing-machine service
-  private async wakeupProduct(): Promise<boolean> {
+  private async wakeupWashingMachine(): Promise<boolean> {
     try { // First request to wakeup washing-machine service
       await firstValueFrom(
         this.http.get(`${this.apiUrl}/api/v1/washing-machines/someSerialNumber/validate`).pipe(
@@ -44,7 +44,7 @@ export class InitializationService {
   }
   
   // Second request to wakeup product service
-  private async wakeupWashingMachine(): Promise<boolean> {
+  private async wakeupProduct(): Promise<boolean> {
     try { 
       await firstValueFrom(
         this.http.get(`${this.apiUrl}/api/v1/products/Washing Machine/manufacturers`).pipe(
