@@ -77,7 +77,7 @@ import { InitializationService } from './services/initialization.service';
     {
       provide: APP_INITIALIZER,
       useFactory: (initService: InitializationService) => {
-        return () => initService.wakeupBackend();
+        return () => initService.wakeupBackends();
       },
       deps: [InitializationService],
       multi: true

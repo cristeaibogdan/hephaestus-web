@@ -11,10 +11,11 @@ export class InitializationService {
   private http = inject(HttpClient);
   private router = inject(Router);
 
-  async wakeupBackend(): Promise<void>  {
-
-    const washingMachineAwake = await this.wakeupWashingMachine();
-    const productAwake = await this.wakeupProduct();
+  async wakeupBackends(): Promise<void>  {
+    const [washingMachineAwake, productAwake] = await Promise.all([
+      this.wakeupWashingMachine(),
+      this.wakeupProduct()
+    ]);
 
     // If one of services fail, the user will be redirected to InitializationFailComponent
     if(!washingMachineAwake || !productAwake) {
@@ -22,9 +23,8 @@ export class InitializationService {
     }
   }
 
-  // First request to wakeup washing-machine service
   private async wakeupWashingMachine(): Promise<boolean> {
-    try { // First request to wakeup washing-machine service
+    try {
       await firstValueFrom(
         this.http.get(`${this.apiUrl}/api/v1/washing-machines/someSerialNumber/validate`).pipe(
           retry({
@@ -42,8 +42,7 @@ export class InitializationService {
       return false;
     }
   }
-  
-  // Second request to wakeup product service
+
   private async wakeupProduct(): Promise<boolean> {
     try { 
       await firstValueFrom(
