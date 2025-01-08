@@ -139,6 +139,16 @@ body {
 }
 
 /* **************************************
+// *** STYLES for INITIALIZATION SPINNER
+// **************************************/
+
+.initialization-spinner {
+  @include mat.progress-spinner-overrides((
+    active-indicator-color: #F76707,
+  ));
+}
+
+/* **************************************
 // *** STYLES for MAT TOOLTIP
 // **************************************/
 
