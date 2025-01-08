@@ -17,8 +17,9 @@ export class InitializationService {
 
   async wakeupBackends(): Promise<void>  {
 
-    const loadingSpinner = this.dialog.open(InitializationSpinnerComponent, {
+    const initializationSpinner = this.dialog.open(InitializationSpinnerComponent, {
       disableClose: true,
+      panelClass: "initialization-dialog"
     });
 
     const [washingMachineAwake, productAwake] = await Promise.all([
@@ -31,7 +32,7 @@ export class InitializationService {
       this.router.navigate(['/initialization-fail']);
     }
 
-    loadingSpinner.close();
+    initializationSpinner.close();
   }
 
   private async wakeupWashingMachine(): Promise<boolean> {

@@ -139,12 +139,24 @@ body {
 }
 
 /* **************************************
+// *** STYLES for INITIALIZATION DIALOG
+// **************************************/
+
+.initialization-dialog {
+  @include mat.dialog-overrides((
+    container-shape: 20px, // corner radius
+    content-padding: 24px,
+    headline-padding: 24px
+  ));
+}
+
+/* **************************************
 // *** STYLES for INITIALIZATION SPINNER
 // **************************************/
 
 .initialization-spinner {
   @include mat.progress-spinner-overrides((
-    active-indicator-color: #F76707,
+    active-indicator-color: #F76707
   ));
 }
 
