@@ -1,10 +1,18 @@
 <h3>Welcome to Household Appliance Recommendation Services!</h3>
+
 <div mat-dialog-title class="spinner">
   <mat-spinner diameter="120" class="initialization-spinner"></mat-spinner>
 </div>
+
 <mat-dialog-content>
   <div class="subtitle"><strong>Waking up backend services ...</strong></div>
-  
-  This process might take up to <strong>3 minutes</strong>, depending on server availability. <br>
-  Once completed you will be redirected to the application. 
+    
+  <span>This process might take up to <strong>3 minutes</strong>, depending on server availability.</span><br>
+  <span>Once completed you will be redirected to the application.</span><br>
+  <span>If you'd like to skip the initialization, you can click the button below. </span>
+  <span>However, please note that some requests might fail until the backends are fully initialized.</span>
 </mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="data.onCancel()">Skip Initialization</button>
+</mat-dialog-actions>

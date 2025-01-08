@@ -74,14 +74,14 @@ import { InitializationService } from './services/initialization.service';
       ])
     ),
 
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (initService: InitializationService) => {
-        return () => initService.wakeupBackends();
-      },
-      deps: [InitializationService],
-      multi: true
-    }
+    // { // TODO: Migrate this to Angular 19 and test how it performs while deployed on GithubPages
+    //   provide: APP_INITIALIZER,
+    //   useFactory: (initService: InitializationService) => {
+    //     return () => initService.wakeupBackends();
+    //   },
+    //   deps: [InitializationService],
+    //   multi: true
+    // }
   ],
 })
 export class AppModule {}

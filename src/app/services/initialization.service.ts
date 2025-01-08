@@ -1,7 +1,7 @@
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { firstValueFrom, retry, timer } from 'rxjs';
+import { Subject, firstValueFrom, retry, takeUntil, timer } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SKIP_INTERCEPTOR } from '../shared/validators/async-validators/skip-interceptor.token';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,11 +15,15 @@ export class InitializationService {
   private router = inject(Router);
   private dialog = inject(MatDialog);
 
+  private cancel$ = new Subject<void>();
+
   async wakeupBackends(): Promise<void>  {
 
     const initializationSpinner = this.dialog.open(InitializationSpinnerComponent, {
       disableClose: true,
-      panelClass: "initialization-dialog"
+      autoFocus: false,
+      panelClass: "initialization-dialog",
+      data: { onCancel: () => this.cancel() }
     });
 
     const [washingMachineAwake, productAwake] = await Promise.all([
@@ -35,17 +39,24 @@ export class InitializationService {
     initializationSpinner.close();
   }
 
+  cancel(): void {
+    console.warn('Initialization aborted by user.');
+    this.cancel$.next();
+    this.cancel$.complete();
+  }
+
   private async wakeupWashingMachine(): Promise<boolean> {
     try {
       await firstValueFrom(
         this.http.get(`${this.apiUrl}/api/v1/washing-machines/someSerialNumber/validate`, {
-          context: new HttpContext().set(SKIP_INTERCEPTOR, true)
+          context: new HttpContext().set(SKIP_INTERCEPTOR, true),
         }).pipe(
+          takeUntil(this.cancel$),
           retry({
             count: 3,
             delay: (error, count) => {
               console.warn(`Washing Machine retry attempt ${count}/3`, error);
-              return timer(0);
+              return timer(1000);
             }
           })
         )
@@ -63,11 +74,12 @@ export class InitializationService {
         this.http.get(`${this.apiUrl}/api/v1/products/Washing Machine/manufacturers`, {
           context: new HttpContext().set(SKIP_INTERCEPTOR, true)
         }).pipe(
+          takeUntil(this.cancel$),
           retry({
             count: 3,
             delay: (error, count) => {
               console.warn(`Product retry attempt ${count}/3`, error);
-              return timer(0);
+              return timer(1000);
             }
           })
         )
