@@ -24,7 +24,6 @@ import {
   ZipkinExporterModule,
 } from '@jufab/opentelemetry-angular-interceptor';
 import { environment } from 'src/environments/environment';
-import { InitializationFailComponent } from './components/initialization-fail/initialization-fail.component';
 import { InitializationService } from './services/initialization.service';
 
 @NgModule({
@@ -34,8 +33,7 @@ import { InitializationService } from './services/initialization.service';
     FooterComponent,
     HeaderComponent,
     RegisterComponent,
-    LoginComponent,
-    InitializationFailComponent,
+    LoginComponent
   ],
   bootstrap: [AppComponent],
   imports: [
