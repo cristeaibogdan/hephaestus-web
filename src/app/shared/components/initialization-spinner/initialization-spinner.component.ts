@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {
   MatDialogTitle,
@@ -21,7 +21,5 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './initialization-spinner.component.scss'
 })
 export class InitializationSpinnerComponent { 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data:any
-  ) {}
+  data: any = inject(MAT_DIALOG_DATA);
 }
