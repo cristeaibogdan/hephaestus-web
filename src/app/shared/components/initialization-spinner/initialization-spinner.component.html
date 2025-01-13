@@ -2,6 +2,7 @@
 
 <div mat-dialog-title class="spinner">
   <mat-spinner diameter="120" class="initialization-spinner"></mat-spinner>
+  <div class="countdown-timer">{{countdown$ | async | date: 'mm:ss' }}</div>
 </div>
 
 <mat-dialog-content>

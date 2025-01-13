@@ -8,6 +8,13 @@ h3 {
   justify-content: center;
 }
 
+.countdown-timer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .mat-mdc-dialog-content {
   color: #444;
   line-height: 1.75;
