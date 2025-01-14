@@ -3,18 +3,30 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { BarcodeFormat } from '@zxing/library';
 import { ɵunwrapSafeValue } from "@angular/core"
 import { BrowserQRCodeReader } from '@zxing/browser/es2015/readers/BrowserQRCodeReader';
-import { ZXingScannerComponent } from '@zxing/ngx-scanner';
+import { ZXingScannerComponent, ZXingScannerModule } from '@zxing/ngx-scanner';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
 import { NotificationService } from 'src/app/services/notification.service';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 import { GetProductIdentificationResponse } from 'src/app/shared/models/get-product-identification.response';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
     selector: 'app-camera',
     templateUrl: './camera.component.html',
     styleUrls: ['./camera.component.scss'],
-    standalone: false
+    imports: [
+      MatDialogModule,
+      MatIconModule,
+      MatButtonModule,
+      MatTooltipModule,
+
+      ZXingScannerModule,
+      SpinnerComponent
+    ]
 })
 export class CameraComponent implements AfterViewInit {
 

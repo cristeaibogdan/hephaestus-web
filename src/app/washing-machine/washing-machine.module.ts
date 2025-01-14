@@ -6,7 +6,6 @@ import { WashingMachineDamageComponent } from './components/washing-machine-dama
 import { WashingMachineOverviewComponent } from './components/washing-machine-overview/washing-machine-overview.component';
 import { WashingMachineRecommendationComponent } from './components/washing-machine-recommendation/washing-machine-recommendation.component';
 import { SharedModule } from '../shared/shared.module';
-import { CameraComponent } from './components/washing-machine-identification/camera/camera.component';
 import { WashingMachineIdentificationComponent } from './components/washing-machine-identification/washing-machine-identification.component';
 import { WashingMachineHistoryComponent } from './components/washing-machine-history/washing-machine-history.component';
 import { WashingMachineHistoryViewComponent } from './components/washing-machine-history/washing-machine-history-view/washing-machine-history-view.component';
@@ -20,7 +19,6 @@ const routes: Routes = [
   declarations: [
     WashingMachineComponent,
     WashingMachineIdentificationComponent,
-    CameraComponent,
     WashingMachineDamageComponent,
     WashingMachineOverviewComponent,
     WashingMachineRecommendationComponent,
@@ -29,8 +27,7 @@ const routes: Routes = [
   ],
   imports: [
     SharedModule,
-    RouterModule.forChild(routes),
-    ZXingScannerModule
+    RouterModule.forChild(routes)
   ],
 })
 export class WashingMachineModule { }
