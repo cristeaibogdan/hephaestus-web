@@ -7,7 +7,7 @@ import {Directive, ElementRef, EventEmitter, Output, Renderer2} from "@angular/c
         '(dragleave)': 'handleDragLeave($event)',
         '(drop)': 'handleDrop($event)',
     },
-    standalone: false
+    standalone: true
 })
 export class DragAndDropDirective {
 

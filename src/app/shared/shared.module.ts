@@ -22,14 +22,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
     LanguageSelectorComponent,
 
     // PIPES
-    ToLabelPipe,
-    
-    // DIRECTIVES
-    DragAndDropDirective,
-    StepperButtonsDirective,
-    DateFormatYYYYMMDDDirective,
-    DateFormatSlashYYYYMMDDDirective,
-    DateFormatMMYYYYDirective
+    ToLabelPipe    
   ],
   imports: [
     CommonModule,
@@ -38,7 +31,14 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 
     ReactiveFormsModule,
 
-    A11yModule
+    A11yModule,
+
+    // DIRECTIVES
+    DragAndDropDirective,
+    StepperButtonsDirective,
+    DateFormatYYYYMMDDDirective,
+    DateFormatSlashYYYYMMDDDirective,
+    DateFormatMMYYYYDirective
   ],
   exports: [
     CommonModule,

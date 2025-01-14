@@ -8,7 +8,7 @@ import {Directive} from "@angular/core";
         '[style.gap]': `'5%'`,
         '[style.margin]': `'1.5% 0'`
     },
-    standalone: false
+    standalone: true
 })
   export class StepperButtonsDirective {}
 

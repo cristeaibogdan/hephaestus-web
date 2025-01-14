@@ -18,7 +18,7 @@ const CUSTOM_FORMAT = {
     providers: [
         { provide: MAT_DATE_FORMATS, useValue: CUSTOM_FORMAT }
     ],
-    standalone: false
+    standalone: true
 })
 export class DateFormatMMYYYYDirective {
   constructor() { }
