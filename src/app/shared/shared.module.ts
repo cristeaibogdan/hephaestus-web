@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AngularMaterialModule } from './angular-material.module';
-import { SpinnerComponent } from './components/spinner/spinner.component';
 import { DragAndDropDirective } from './directives/drag-and-drop.directive';
 import { StepperButtonsDirective } from './directives/stepper-buttons.directive';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,7 +19,6 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
-    SpinnerComponent,
     LanguageSelectorComponent,
 
     // PIPES
@@ -51,7 +49,6 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 
     A11yModule,
 
-    SpinnerComponent,
     LanguageSelectorComponent,
 
     // PIPES
