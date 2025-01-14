@@ -21,7 +21,6 @@ const routes: Routes = [
     SolarPanelDamageComponent,
     SolarPanelOverviewComponent,
     SolarPanelRecommendationComponent,
-    SolarPanelHistoryComponent,
     SolarPanelHistoryViewComponent
   ],
   imports: [

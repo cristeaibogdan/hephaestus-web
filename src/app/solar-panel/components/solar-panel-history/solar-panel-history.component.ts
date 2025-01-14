@@ -2,14 +2,23 @@ import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angu
 import { GetSolarPanelFullResponse } from '../../models/dtos/get-solar-panel-full.response';
 import { MatSort } from '@angular/material/sort';
 import { SolarPanelRecommendation } from '../../enums/solar-panel-recommendation.enum';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { SearchSolarPanelRequest } from '../../models/dtos/search-solar-panel.request';
 import { SolarPanelHistoryViewComponent } from './solar-panel-history-view/solar-panel-history-view.component';
 import { format } from 'date-fns';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { CommonModule } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
+import { MatInputModule } from '@angular/material/input';
+import { DateFormatYYYYMMDDDirective } from 'src/app/shared/directives/date-format-yyyy-mm-dd.directive';
+import { A11yModule } from '@angular/cdk/a11y';
+import { TranslocoModule } from '@jsverse/transloco';
 
 const DUMMY_DATA: GetSolarPanelFullResponse[] = [
   {
@@ -63,10 +72,24 @@ const DUMMY_DATA: GetSolarPanelFullResponse[] = [
 ];
 
 @Component({
-    selector: 'app-solar-panel-history',
-    templateUrl: './solar-panel-history.component.html',
-    styleUrls: ['./solar-panel-history.component.scss'],
-    standalone: false
+  selector: 'app-solar-panel-history',
+  templateUrl: './solar-panel-history.component.html',
+  styleUrls: ['./solar-panel-history.component.scss'],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TranslocoModule,
+    DateFormatYYYYMMDDDirective,
+    A11yModule,
+
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatTableModule,
+    MatPaginator
+  ]
 })
 export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
 
