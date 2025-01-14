@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { RouterModule, Routes } from '@angular/router';
 import { WashingMachineComponent } from './components/washing-machine.component';
 import { WashingMachineDamageComponent } from './components/washing-machine-damage/washing-machine-damage.component';
@@ -22,7 +21,6 @@ const routes: Routes = [
     WashingMachineDamageComponent,
     WashingMachineOverviewComponent,
     WashingMachineRecommendationComponent,
-    WashingMachineHistoryComponent,
     WashingMachineHistoryViewComponent
   ],
   imports: [

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { SearchWashingMachineRequest } from '../../models/dtos/search-washing-machine.request';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 import { ReturnType } from 'src/app/washing-machine/enums/return-type.enum';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -11,16 +11,40 @@ import { Recommendation } from 'src/app/washing-machine/enums/recommendation.enu
 import { GetWashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/get-washing-machine-full.response';
 import { WashingMachineHistoryViewComponent } from './washing-machine-history-view/washing-machine-history-view.component';
 import { format } from 'date-fns';
-import { TranslocoService } from '@jsverse/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { CommonModule } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
+import { MatInputModule } from '@angular/material/input';
+import { DateFormatYYYYMMDDDirective } from 'src/app/shared/directives/date-format-yyyy-mm-dd.directive';
+import { A11yModule } from '@angular/cdk/a11y';
 
 @Component({
-    selector: 'app-washing-machine-history',
-    templateUrl: './washing-machine-history.component.html',
-    styleUrls: ['./washing-machine-history.component.scss'],
-    standalone: false
+  selector: 'app-washing-machine-history',
+  templateUrl: './washing-machine-history.component.html',
+  styleUrls: ['./washing-machine-history.component.scss'],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TranslocoModule,
+    ToLabelPipe,
+    DateFormatYYYYMMDDDirective,
+    A11yModule,
+
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatTableModule,
+    MatPaginator
+  ]
 })
 export class WashingMachineHistoryComponent implements OnInit, AfterViewInit {
 

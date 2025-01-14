@@ -10,7 +10,6 @@ import { DateFormatSlashYYYYMMDDDirective } from './directives/date-format-slash
 import { DateFormatYYYYMMDDDirective } from './directives/date-format-yyyy-mm-dd.directive';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { PaginatorI18n } from './paginator.i18n';
-import { A11yModule } from '@angular/cdk/a11y';
 import { ToLabelPipe } from './pipes/to-label.pipe';
 import { DateFnsAdapter } from '@angular/material-date-fns-adapter';
 import { enUS } from 'date-fns/locale';
@@ -19,10 +18,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
-    LanguageSelectorComponent,
-
-    // PIPES
-    ToLabelPipe    
+    LanguageSelectorComponent   
   ],
   imports: [
     CommonModule,
@@ -31,7 +27,8 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 
     ReactiveFormsModule,
 
-    A11yModule,
+    // PIPES
+    ToLabelPipe,
 
     // DIRECTIVES
     DragAndDropDirective,
@@ -46,8 +43,6 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
     TranslocoRootModule,
 
     ReactiveFormsModule,
-
-    A11yModule,
 
     LanguageSelectorComponent,
 
