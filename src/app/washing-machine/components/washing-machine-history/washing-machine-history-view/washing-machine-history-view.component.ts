@@ -1,14 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { TranslocoModule } from '@jsverse/transloco';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
 import { GetWashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/get-washing-machine-full.response';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 
 @Component({
-    selector: 'app-washing-machine-history-view',
-    templateUrl: './washing-machine-history-view.component.html',
-    styleUrls: ['./washing-machine-history-view.component.scss'],
-    standalone: false
+  selector: 'app-washing-machine-history-view',
+  templateUrl: './washing-machine-history-view.component.html',
+  styleUrls: ['./washing-machine-history-view.component.scss'],
+  imports: [
+    CommonModule,
+    TranslocoModule,
+    ToLabelPipe,
+    
+    MatDialogModule,
+    MatButtonModule
+  ]
 })
 export class WashingMachineHistoryViewComponent {
 

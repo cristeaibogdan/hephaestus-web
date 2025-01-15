@@ -21,7 +21,6 @@ const routes: Routes = [
     WashingMachineDamageComponent,
     WashingMachineOverviewComponent,
     WashingMachineRecommendationComponent,
-    WashingMachineHistoryViewComponent
   ],
   imports: [
     SharedModule,
