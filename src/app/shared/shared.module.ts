@@ -32,10 +32,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 
     // DIRECTIVES
     DragAndDropDirective,
-    StepperButtonsDirective,
-    DateFormatYYYYMMDDDirective,
-    DateFormatSlashYYYYMMDDDirective,
-    DateFormatMMYYYYDirective
+    StepperButtonsDirective
   ],
   exports: [
     CommonModule,
@@ -51,12 +48,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 
     // DIRECTIVES
     DragAndDropDirective,
-    StepperButtonsDirective,   
-
-    // DIRECTIVES USED BY HISTORY - that's why they are also exported
-    DateFormatYYYYMMDDDirective,
-    DateFormatSlashYYYYMMDDDirective,
-    DateFormatMMYYYYDirective
+    StepperButtonsDirective,
   ],
   providers: [     
     { // To be able to modify the datepicker format we need an adapter, hence DateFnsAdapter
