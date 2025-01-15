@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit,} from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SerialNumberValidator } from 'src/app/shared/validators/async-validators/serial-number.validator';
 import { CameraComponent } from './camera/camera.component';
 import { CustomValidators } from '../../../shared/validators/custom.validators';
@@ -12,12 +12,37 @@ import { IdentificationMode } from '../../enums/identification-mode.enum';
 import { MatStepper } from '@angular/material/stepper';
 import { GetProductIdentificationResponse } from 'src/app/shared/models/get-product-identification.response';
 import { MatDialog } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslocoModule } from '@jsverse/transloco';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { CommonModule } from '@angular/common';
+import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 
 @Component({
     selector: 'app-washing-machine-identification',
     templateUrl: './washing-machine-identification.component.html',
     styleUrls: ['./washing-machine-identification.component.scss'],
-    standalone: false
+    imports: [
+      MatCardModule,
+      MatButtonToggleModule,
+      MatButtonModule,
+      MatIconModule,
+      MatTooltipModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatSelectModule,
+
+      CommonModule,
+      ReactiveFormsModule,
+      TranslocoModule,
+      StepperButtonsDirective
+    ]
 })
 export class WashingMachineIdentificationComponent implements OnInit, OnDestroy {
 

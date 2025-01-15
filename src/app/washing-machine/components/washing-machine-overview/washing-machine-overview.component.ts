@@ -3,16 +3,28 @@ import { Observable } from 'rxjs';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { WashingMachineIdentification } from '../../models/washing-machine-identification.model';
-import { MatStepper } from '@angular/material/stepper';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { NotificationService } from 'src/app/services/notification.service';
 import { WashingMachineDetail } from '../../models/washing-machine-detail.model';
-import { TranslocoService } from '@jsverse/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
+import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 
 @Component({
     selector: 'app-washing-machine-overview',
     templateUrl: './washing-machine-overview.component.html',
     styleUrls: ['./washing-machine-overview.component.scss'],
-    standalone: false
+    imports: [
+      MatButtonModule,
+      MatStepperModule, // for the directive matStepperPrevious
+
+      CommonModule,
+      TranslocoModule,
+      ToLabelPipe,
+      StepperButtonsDirective
+    ]
 })
 export class WashingMachineOverviewComponent {
 

@@ -1,35 +1,62 @@
 import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AbstractControl, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CustomValidators } from '../../../shared/validators/custom.validators';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { NotificationService } from 'src/app/services/notification.service';
-import { MatStepper } from '@angular/material/stepper';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { WashingMachineDetail } from '../../models/washing-machine-detail.model';
-import { TranslocoService } from '@jsverse/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
+import { DragAndDropDirective } from 'src/app/shared/directives/drag-and-drop.directive';
+import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
-    selector: 'app-washing-machine-damage',
-    templateUrl: './washing-machine-damage.component.html',
-    styleUrls: ['./washing-machine-damage.component.scss'],
-    standalone: false
+  selector: 'app-washing-machine-damage',
+  templateUrl: './washing-machine-damage.component.html',
+  styleUrls: ['./washing-machine-damage.component.scss'],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatExpansionModule,
+    MatSliderModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
+    MatInputModule,
+    MatStepperModule, // for the directive matStepperPrevious
+
+    CommonModule,
+    ReactiveFormsModule,
+    TranslocoModule,
+    DragAndDropDirective,
+    StepperButtonsDirective
+  ]
 })
 export class WashingMachineDamageComponent implements OnDestroy {
   
-  subscriptions:Subscription[] = [];
+  private subscriptions:Subscription[] = [];
+  private stepper = inject(MatStepper)
+  private fb = inject(NonNullableFormBuilder);
 
   constructor(
-    @Inject(MatStepper) private stepper: MatStepper,
     private _washingMachineService: WashingMachineService,
     private _notifService: NotificationService,
     private _translocoService: TranslocoService,
     private sanitizer: DomSanitizer,
-    // private fb: NonNullableFormBuilder    
   ) {}
-
-  private fb = inject(NonNullableFormBuilder);
 
   washingMachineDetailForm = this.fb.group({
     applicablePackageDamage: [false],

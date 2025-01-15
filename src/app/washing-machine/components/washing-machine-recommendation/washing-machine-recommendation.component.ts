@@ -5,12 +5,26 @@ import { WashingMachineDataService } from '../../services/washing-machine.data.s
 import { NotificationService } from 'src/app/services/notification.service';
 import { WashingMachineIdentification } from '../../models/washing-machine-identification.model';
 import { Recommendation } from '../../enums/recommendation.enum';
+import { MatButtonModule } from '@angular/material/button';
+import { WashingMachineOverviewComponent } from '../washing-machine-overview/washing-machine-overview.component';
+import { TranslocoModule } from '@jsverse/transloco';
+import { CommonModule } from '@angular/common';
+import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
+import { RouterLink } from '@angular/router';
 
 @Component({
-    selector: 'app-washing-machine-recommendation',
-    templateUrl: './washing-machine-recommendation.component.html',
-    styleUrls: ['./washing-machine-recommendation.component.scss'],
-    standalone: false
+  selector: 'app-washing-machine-recommendation',
+  templateUrl: './washing-machine-recommendation.component.html',
+  styleUrls: ['./washing-machine-recommendation.component.scss'],
+  imports: [
+    MatButtonModule,
+
+    CommonModule,
+    RouterLink,
+    TranslocoModule,
+    WashingMachineOverviewComponent,
+    StepperButtonsDirective
+  ]
 })
 export class WashingMachineRecommendationComponent {
 

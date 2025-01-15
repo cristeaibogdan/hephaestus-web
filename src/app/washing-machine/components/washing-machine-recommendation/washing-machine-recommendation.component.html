@@ -8,13 +8,12 @@
       {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_3" | transloco}}:
   
       <div class="text-align-center">
-        <button class="recommendation-text"
-          [ngClass]="{
-            repackage: washingMachineRecommendation === 'REPACKAGE',
-            resale: washingMachineRecommendation === 'RESALE',
-            outlet: washingMachineRecommendation === 'OUTLET',
-            repair: washingMachineRecommendation === 'REPAIR',
-            disassemble: washingMachineRecommendation === 'DISASSEMBLE'}">
+        <button class="recommendation-text"          
+          [class.repackage]="washingMachineRecommendation === 'REPACKAGE'"
+          [class.resale]="washingMachineRecommendation === 'RESALE'"
+          [class.outlet]="washingMachineRecommendation === 'OUTLET'"
+          [class.repair]="washingMachineRecommendation === 'REPAIR'"
+          [class.disassemble]="washingMachineRecommendation === 'DISASSEMBLE'">
           {{washingMachineRecommendation}}
         </button>
       </div>      
