@@ -6,12 +6,11 @@
     <h2>{{"I18N.COMMON.RECOMMENDATION" | transloco}}</h2>
 
     <div class="text-align-center">
-      <button class="recommendation-text"
-        [ngClass]="{
-          repair: solarPanel.recommendation === 'REPAIR',
-          recycle: solarPanel.recommendation === 'RECYCLE',
-          dispose: solarPanel.recommendation === 'DISPOSE'}">
-        {{solarPanel.recommendation}}
+      <button class="recommendation-text"        
+          [class.repair]="solarPanel.recommendation === 'REPAIR'"
+          [class.recycle] = "solarPanel.recommendation === 'RECYCLE'"
+          [class.dispose] = "solarPanel.recommendation === 'DISPOSE'">
+          {{solarPanel.recommendation}}
       </button>
     </div>
 

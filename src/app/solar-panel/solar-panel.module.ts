@@ -7,7 +7,6 @@ import { SolarPanelOverviewComponent } from './components/solar-panel-overview/s
 import { SolarPanelRecommendationComponent } from './components/solar-panel-recommendation/solar-panel-recommendation.component';
 import { SolarPanelComponent } from './components/solar-panel.component';
 import { SolarPanelHistoryComponent } from './components/solar-panel-history/solar-panel-history.component';
-import { SolarPanelHistoryViewComponent } from './components/solar-panel-history/solar-panel-history-view/solar-panel-history-view.component';
 
 const routes: Routes = [
   { path: "", component: SolarPanelComponent },
@@ -20,8 +19,7 @@ const routes: Routes = [
     SolarPanelIdentificationComponent,
     SolarPanelDamageComponent,
     SolarPanelOverviewComponent,
-    SolarPanelRecommendationComponent,
-    SolarPanelHistoryViewComponent
+    SolarPanelRecommendationComponent
   ],
   imports: [
     SharedModule,
