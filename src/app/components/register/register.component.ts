@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Validators, NonNullableFormBuilder } from '@angular/forms';
+import { Validators, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RegisterCodeValidator } from 'src/app/shared/validators/async-validators/register-code.validator';
@@ -7,13 +7,29 @@ import { CustomValidators } from '../../shared/validators/custom.validators';
 import { AuthDataService } from 'src/app/services/auth.data.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { CreateUserRequest } from 'src/app/washing-machine/models/dtos/create-user.request';
-import { TranslocoService } from '@jsverse/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { CommonModule } from '@angular/common';
+import { LanguageSelectorComponent } from 'src/app/shared/components/language-selector/language-selector.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-    selector: 'app-register',
-    templateUrl: './register.component.html',
-    styleUrls: ['./register.component.scss'],
-    standalone: false
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss'],
+  imports: [
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+
+    CommonModule,
+    TranslocoModule,
+    ReactiveFormsModule,
+    LanguageSelectorComponent
+  ]
 })
 export class RegisterComponent implements OnInit, OnDestroy {
 
