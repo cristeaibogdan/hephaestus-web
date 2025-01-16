@@ -1,12 +1,25 @@
 import { Component, Inject } from '@angular/core';
-import { MatStepper } from '@angular/material/stepper';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { SolarPanelService } from '../../services/solar-panel.service';
+import { CommonModule } from '@angular/common';
+import { TranslocoModule } from '@jsverse/transloco';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 
 @Component({
-    selector: 'app-solar-panel-overview',
-    templateUrl: './solar-panel-overview.component.html',
-    styleUrls: ['./solar-panel-overview.component.scss'],
-    standalone: false
+  selector: 'app-solar-panel-overview',
+  templateUrl: './solar-panel-overview.component.html',
+  styleUrls: ['./solar-panel-overview.component.scss'],
+  imports: [
+    MatButtonModule,
+    MatStepperModule, // for the directive matStepperPrevious
+    
+    CommonModule,
+    TranslocoModule,
+    ReactiveFormsModule,
+    StepperButtonsDirective
+  ]
 })
 export class SolarPanelOverviewComponent {
 

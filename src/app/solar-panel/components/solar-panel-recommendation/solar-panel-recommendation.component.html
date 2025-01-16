@@ -6,12 +6,11 @@
       manufactured by {{solarPanelIdenfitication.manufacturer}}, is sent to:
   
       <div class="text-align-center">
-        <button class="recommendation-text"
-          [ngClass]="{
-            repair: solarPanelRecommendation === 'REPAIR',
-            recycle: solarPanelRecommendation === 'RECYCLE',
-            dispose: solarPanelRecommendation === 'DISPOSE'
-          }">
+        <button class="recommendation-text"        
+          [class.repair]="solarPanelRecommendation === 'REPAIR'"
+          [class.recycle]="solarPanelRecommendation === 'RECYCLE'"
+          [class.dispose]="solarPanelRecommendation === 'DISPOSE'"
+        >
           {{solarPanelRecommendation}}
         </button>
       </div>
