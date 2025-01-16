@@ -28,7 +28,7 @@
         @for (file of selectedFiles; track file; let i = $index) {
           <div class="image-container">
             <img [src]="file.url"/>
-            <button class="button-remove-image" (click)="onRemoveImage(i)">x</button>
+            <button class="button-remove-image" type="button" (click)="onRemoveImage(i)">x</button>
           </div>
         }
       } @else {
