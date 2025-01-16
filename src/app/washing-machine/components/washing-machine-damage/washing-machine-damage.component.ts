@@ -318,15 +318,16 @@ export class WashingMachineDamageComponent implements OnDestroy {
   }  
 
   onSubmit(): void {
-    if(this.selectedFiles.length === 0) {
-      this._notifService.showError("At least one image must be uploaded", 0);
-      return;
-    }
+    // console.log("In onSUbmit");
+    // if(this.selectedFiles.length === 0) {
+    //   this._notifService.showError("At least one image must be uploaded", 0);
+    //   return;
+    // } // TODO: Strange bug. When 3 images are selected and an applicable damage is selected, removing one image would trigger onSubmit()
 
-    if(this.washingMachineDetailForm.invalid) {
-      this._notifService.showError("At least one applicable damage must be selected", 0);
-      return;
-    }
+    // if(this.washingMachineDetailForm.invalid) {
+    //   this._notifService.showError("At least one applicable damage must be selected", 0);
+    //   return;
+    // }
 
     if(this.washingMachinePricingForm.invalid) {
       return;
