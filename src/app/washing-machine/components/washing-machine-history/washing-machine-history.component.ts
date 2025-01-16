@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { SearchWashingMachineRequest } from '../../models/dtos/search-washing-machine.request';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
@@ -43,6 +43,7 @@ import { A11yModule } from '@angular/cdk/a11y';
     MatSelectModule,
     MatButtonModule,
     MatTableModule,
+    MatSortModule,
     MatPaginator
   ]
 })

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { GetSolarPanelFullResponse } from '../../models/dtos/get-solar-panel-full.response';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { SolarPanelRecommendation } from '../../enums/solar-panel-recommendation.enum';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { SearchSolarPanelRequest } from '../../models/dtos/search-solar-panel.request';
@@ -88,6 +88,7 @@ const DUMMY_DATA: GetSolarPanelFullResponse[] = [
     MatSelectModule,
     MatButtonModule,
     MatTableModule,
+    MatSortModule,
     MatPaginator
   ]
 })
