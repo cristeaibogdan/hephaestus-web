@@ -51,14 +51,14 @@ export class InitializationService {
         this.http.get(`${this.apiUrl}/api/v1/washing-machines/someSerialNumber/validate`, {
           context: new HttpContext().set(SKIP_INTERCEPTOR, true),
         }).pipe(
-          takeUntil(this.cancel$),
           retry({
             count: 3,
             delay: (error, count) => {
               console.warn(`Washing Machine retry attempt ${count}/3`, error);
               return timer(1000);
             }
-          })
+          }),
+          takeUntil(this.cancel$),
         )
       );
       return true;
@@ -74,14 +74,14 @@ export class InitializationService {
         this.http.get(`${this.apiUrl}/api/v1/products/Washing Machine/manufacturers`, {
           context: new HttpContext().set(SKIP_INTERCEPTOR, true)
         }).pipe(
-          takeUntil(this.cancel$),
           retry({
             count: 3,
             delay: (error, count) => {
               console.warn(`Product retry attempt ${count}/3`, error);
               return timer(1000);
             }
-          })
+          }),
+          takeUntil(this.cancel$),
         )
       );
       return true;
