@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, ApplicationConfig, ErrorHandler, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, ErrorHandler, importProvidersFrom, inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -59,14 +59,9 @@ export const appConfig: ApplicationConfig = {
       loader: TranslocoHttpLoader
     }),
 
-    // { // TODO: Migrate this to Angular 19 and test how it performs while deployed on GithubPages
-    //   provide: APP_INITIALIZER,
-    //   useFactory: (initService: InitializationService) => {
-    //     return () => initService.wakeupBackends();
-    //   },
-    //   deps: [InitializationService],
-    //   multi: true
-    // }
+    // TODO: Test how it performs while deployed on GithubPages    
+    // provideAppInitializer(() => inject(InitializationService).wakeupBackends()),
+
     importProvidersFrom( // Zipkin tracing configuration      
       OpenTelemetryInterceptorModule.forRoot({
         commonConfig: {
