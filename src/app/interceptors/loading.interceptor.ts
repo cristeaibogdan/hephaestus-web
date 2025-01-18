@@ -7,11 +7,11 @@ import { MatDialog } from '@angular/material/dialog';
 
 export const loadingInterceptor: HttpInterceptorFn = (request, next) => {
 
-  const dialog = inject(MatDialog);
-
   if (request.context.has(SKIP_INTERCEPTOR)) {
     return next(request);
   }
+
+  const dialog = inject(MatDialog);
   
   const loadingSpinner = dialog.open(SpinnerComponent, {
     disableClose: true,
