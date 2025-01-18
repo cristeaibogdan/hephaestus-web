@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { TranslocoService } from '@jsverse/transloco';
 
 @Injectable()
 export class PaginatorI18n extends MatPaginatorIntl {
 
-  constructor(private _translocoService: TranslocoService) {
+  private _translocoService = inject(TranslocoService);
+
+  constructor() {
     super();
     this._translocoService.langChanges$.subscribe(() => {
       this.translateLabels();

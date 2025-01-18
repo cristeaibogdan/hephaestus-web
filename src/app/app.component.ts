@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NavigationStart, Router, RouterOutlet } from '@angular/router';
@@ -16,15 +16,13 @@ import { FooterComponent } from './components/footer/footer.component';
   ]
 })
 export class AppComponent {
+  private router = inject( Router,);
+  private sanitizer = inject(DomSanitizer,);
+  private matIconRegistry = inject(MatIconRegistry);
 
   showHeader: boolean = true;
   
-  constructor(
-    private router: Router,
-    private sanitizer:DomSanitizer,
-    private matIconRegistry:MatIconRegistry
-  ) {
-
+  constructor() {
   // used to hide the header on login and register page 
   this.router.events.forEach((event) => {
 
