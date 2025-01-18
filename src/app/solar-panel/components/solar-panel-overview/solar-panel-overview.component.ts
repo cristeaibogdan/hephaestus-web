@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { SolarPanelService } from '../../services/solar-panel.service';
 import { CommonModule } from '@angular/common';
@@ -22,11 +22,8 @@ import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-butto
   ]
 })
 export class SolarPanelOverviewComponent {
-
-  constructor(
-    @Inject(MatStepper) private stepper: MatStepper,
-    private _solarPanelService: SolarPanelService
-  ) { }
+  private stepper = inject(MatStepper);
+  private _solarPanelService = inject(SolarPanelService);
 
   solarPanelIdenfitication$ = this._solarPanelService.getSolarPanelIdentification();
   solarPanelDamage$ = this._solarPanelService.getSolarPanelDamage();

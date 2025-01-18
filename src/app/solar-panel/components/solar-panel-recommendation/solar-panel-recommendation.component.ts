@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SolarPanelService } from '../../services/solar-panel.service';
 import { Observable } from 'rxjs';
 import { SolarPanelIdentification } from '../../models/solar-panel-identification.model';
@@ -26,15 +26,12 @@ import { RouterLink } from '@angular/router';
   ]
 })
 export class SolarPanelRecommendationComponent {
+  private _solarPanelService = inject(SolarPanelService);
+  private _solarPanelDataService = inject(SolarPanelDataService);
 
   solarPanelIdenfitication$: Observable<SolarPanelIdentification> = this._solarPanelService.getSolarPanelIdentification();
   serialNumber :string = this._solarPanelService.getSerialNumber();
   solarPanelRecommendation :SolarPanelRecommendation = this._solarPanelService.getRecommendation();;
-
-  constructor(
-    private _solarPanelService: SolarPanelService,
-    private _solarPanelDataService: SolarPanelDataService
-  ) { }
 
   onDownload() {
     this._solarPanelDataService.getReport(this.serialNumber);

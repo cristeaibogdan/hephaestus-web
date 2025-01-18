@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit, ViewChild, inject } from '@angular/core';
 import { GetSolarPanelFullResponse } from '../../models/dtos/get-solar-panel-full.response';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { SolarPanelRecommendation } from '../../enums/solar-panel-recommendation.enum';
@@ -93,13 +93,10 @@ const DUMMY_DATA: GetSolarPanelFullResponse[] = [
   ]
 })
 export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
+  private dialog = inject(MatDialog);
+  private fb = inject(FormBuilder);
 
   readonly solarPanelRecommendation = SolarPanelRecommendation;
-
-  constructor(
-    private dialog: MatDialog,
-    private fb:FormBuilder
-  ) { }
 
   solarPanels = new MatTableDataSource<Partial<GetSolarPanelFullResponse>>();
 

@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SerialNumberValidator } from 'src/app/shared/validators/async-validators/serial-number.validator';
 import { CustomValidators } from 'src/app/shared/validators/custom.validators';
@@ -30,16 +30,13 @@ import { MatButtonModule } from '@angular/material/button';
     StepperButtonsDirective
   ]
 })
-export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
-  
-  constructor(
-    @Inject(MatStepper) private stepper: MatStepper,
-    private fb: NonNullableFormBuilder,
-    private _solarPanelDataService: SolarPanelDataService,
-    private _solarPanelService: SolarPanelService,
+export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {  
+  private stepper = inject(MatStepper);
+  private fb = inject(NonNullableFormBuilder);
+  private _solarPanelDataService = inject(SolarPanelDataService);
+  private _solarPanelService = inject(SolarPanelService);
 
-    private serialNumberValidator: SerialNumberValidator //TODO: Use async validator to check the serial number
-  ){}
+  private serialNumberValidator = inject(SerialNumberValidator); //TODO: Use async validator to check the serial number
 
   ngOnInit() {
     this.getManufacturer(this.solarPanelForm.controls.category.value);

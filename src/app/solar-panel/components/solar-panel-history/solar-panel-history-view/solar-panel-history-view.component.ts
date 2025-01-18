@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -19,13 +19,10 @@ import { SolarPanelDataService } from 'src/app/solar-panel/services/solar-panel-
     ]
 })
 export class SolarPanelHistoryViewComponent {
+  private data = inject(MAT_DIALOG_DATA);
+  private _solarPanelDataService = inject(SolarPanelDataService);
 
   solarPanel: GetSolarPanelFullResponse = this.data.solarPanel;
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private data: any,
-    private _solarPanelDataService: SolarPanelDataService
-  ) {}
 
   onDownload() {
     this._solarPanelDataService.getReport("to implement");

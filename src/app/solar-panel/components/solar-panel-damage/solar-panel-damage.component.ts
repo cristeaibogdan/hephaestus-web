@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { SolarPanelDamage } from '../../models/solar-panel-damage.model';
@@ -31,13 +31,10 @@ import { MatInputModule } from '@angular/material/input';
   ]
 })
 export class SolarPanelDamageComponent {
-
-  constructor(
-    @Inject(MatStepper) private stepper: MatStepper,
-    private fb: NonNullableFormBuilder,
-    private _solarPanelService: SolarPanelService,
-    private _notificationService: NotificationService
-  ) { }
+  private stepper = inject(MatStepper);
+  private fb = inject(NonNullableFormBuilder);
+  private _solarPanelService = inject(SolarPanelService);
+  private _notificationService = inject(NotificationService);
 
   solarPanelDamageForm = this.fb.group({    
     hotSpots: [false],
