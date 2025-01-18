@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Validators, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginUserRequest } from '../../washing-machine/models/dtos/login-user.request';
@@ -9,6 +9,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { MatButtonModule } from '@angular/material/button';
 import { LanguageSelectorComponent } from 'src/app/shared/components/language-selector/language-selector.component';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ import { CommonModule } from '@angular/common';
     MatInputModule,
     MatButtonModule,
 
+    RouterLink,
     CommonModule,
     TranslocoModule,
     ReactiveFormsModule,
@@ -27,11 +29,8 @@ import { CommonModule } from '@angular/common';
   ]
 })
 export class LoginComponent {
-
-  constructor(
-    private fb: NonNullableFormBuilder,
-    private _authService: AuthService
-  ) {}
+  private fb = inject(NonNullableFormBuilder);
+  private _authService = inject(AuthService);
 
   loginForm = this.fb.group({
     username: ["", [Validators.required]],

@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Validators, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RegisterCodeValidator } from 'src/app/shared/validators/async-validators/register-code.validator';
 import { CustomValidators } from '../../shared/validators/custom.validators';
@@ -25,6 +25,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatButtonModule,
 
+    RouterLink,
     CommonModule,
     TranslocoModule,
     ReactiveFormsModule,
@@ -32,15 +33,12 @@ import { MatButtonModule } from '@angular/material/button';
   ]
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-
-  constructor(
-    private fb: NonNullableFormBuilder, 
-    private router: Router,
-    private _translocoService: TranslocoService,
-    private _authDataService: AuthDataService,
-    private _notifService: NotificationService,
-    private registerCodeValidator:RegisterCodeValidator
-  ) {}
+  private fb = inject(NonNullableFormBuilder);
+  private router = inject(Router);
+  private _translocoService = inject(TranslocoService);
+  private _authDataService = inject(AuthDataService);
+  private _notifService = inject(NotificationService);
+  private registerCodeValidator = inject(RegisterCodeValidator);
 
   private codeSubscription!:Subscription;
 
