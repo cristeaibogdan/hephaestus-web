@@ -20,6 +20,4 @@ const CUSTOM_FORMAT = {
     ],
     standalone: true
 })
-export class DateFormatMMYYYYDirective {
-  constructor() { }
-}
+export class DateFormatMMYYYYDirective { }

@@ -20,6 +20,4 @@ const CUSTOM_FORMAT = {
     ],
     standalone: true
 })
-export class DateFormatYYYYMMDDDirective {
-  constructor() { }
-}
+export class DateFormatYYYYMMDDDirective { }
