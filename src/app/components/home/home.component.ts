@@ -11,6 +11,4 @@ import { RouterLink } from '@angular/router';
       RouterLink
     ]
 })
-export class HomeComponent {
-  constructor() { }
-}
+export class HomeComponent { }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
@@ -24,12 +24,9 @@ import { LanguageSelectorComponent } from 'src/app/shared/components/language-se
   ]
 })
 export class HeaderComponent implements OnInit {
-
-  constructor(
-    private _authService: AuthService,
-    private router: Router
-  ) { }
-
+  private _authService = inject(AuthService);
+  private router = inject(Router);
+  
   currentUser$!:Observable<LoginUserResponse>;
 
   ngOnInit(): void { 
