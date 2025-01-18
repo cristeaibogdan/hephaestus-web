@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
 import { WashingMachineService } from '../../services/washing-machine.service';
@@ -27,18 +27,15 @@ import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-butto
     ]
 })
 export class WashingMachineOverviewComponent {
+  private stepper = inject(MatStepper);
+  private _washingMachineService = inject(WashingMachineService);
+  private _notifService = inject(NotificationService);
+  private _translocoService = inject(TranslocoService);
 
   washingMachineIdentification$:Observable<WashingMachineIdentification | null> = this._washingMachineService.getWashingMachineIdentification();
   washingMachineDetail$:Observable<WashingMachineDetail | null> = this._washingMachineService.getWashingMachineDetail(); 
    
   selectedFiles:ImageFile[] = this._washingMachineService.getSelectedFiles();
-
-  constructor(
-    @Inject(MatStepper) private stepper: MatStepper,
-    private _washingMachineService: WashingMachineService,
-    private _notifService: NotificationService,
-    private _translocoService: TranslocoService,
-  ) { }
 
   save(): void {
     this._washingMachineService.save().then(success => {

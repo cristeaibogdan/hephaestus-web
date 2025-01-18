@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { EMPTY, Observable, switchMap, take } from 'rxjs';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { WashingMachineDataService } from '../../services/washing-machine.data.service';
@@ -27,15 +27,12 @@ import { RouterLink } from '@angular/router';
   ]
 })
 export class WashingMachineRecommendationComponent {
+  private _washingMachineService = inject(WashingMachineService);
+  private _washingMachineDataService = inject(WashingMachineDataService);
+  private _notifService = inject(NotificationService);
 
   washingMachineIdentification$:Observable<WashingMachineIdentification | null> = this._washingMachineService.getWashingMachineIdentification();
   washingMachineRecommendation :Recommendation = this._washingMachineService.getRecommendation();
-
-  constructor(
-    private _washingMachineService: WashingMachineService,
-    private _washingMachineDataService: WashingMachineDataService,
-    private _notifService: NotificationService
-  ) { }
 
 // **********************************
 // *** DOWNLOAD FILE FUNCTIONALITY

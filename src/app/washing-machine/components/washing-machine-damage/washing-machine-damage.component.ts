@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AbstractControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -45,18 +45,15 @@ import { MatInputModule } from '@angular/material/input';
     StepperButtonsDirective
   ]
 })
-export class WashingMachineDamageComponent implements OnDestroy {
-  
-  private subscriptions:Subscription[] = [];
+export class WashingMachineDamageComponent implements OnDestroy {  
   private stepper = inject(MatStepper)
   private fb = inject(NonNullableFormBuilder);
-
-  constructor(
-    private _washingMachineService: WashingMachineService,
-    private _notifService: NotificationService,
-    private _translocoService: TranslocoService,
-    private sanitizer: DomSanitizer,
-  ) {}
+  private _washingMachineService = inject(WashingMachineService);
+  private _notifService = inject(NotificationService);
+  private _translocoService = inject(TranslocoService);
+  private sanitizer = inject(DomSanitizer);
+  
+  private subscriptions:Subscription[] = [];
 
   washingMachineDetailForm = this.fb.group({
     applicablePackageDamage: [false],

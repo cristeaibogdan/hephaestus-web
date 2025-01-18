@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit,} from '@angular/core';
+import { Component, OnDestroy, OnInit, inject,} from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SerialNumberValidator } from 'src/app/shared/validators/async-validators/serial-number.validator';
 import { CameraComponent } from './camera/camera.component';
@@ -45,16 +45,13 @@ import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-butto
     ]
 })
 export class WashingMachineIdentificationComponent implements OnInit, OnDestroy {
-
-  constructor(
-    @Inject(MatStepper) private stepper: MatStepper,
-    private _washingMachineService: WashingMachineService,
-    private _washingMachineDataService:WashingMachineDataService, 
-    private dialog:MatDialog, 
-    private fb:NonNullableFormBuilder,
-              
-    private serialNumberValidator:SerialNumberValidator,             
-  ) { }
+  private stepper = inject(MatStepper);
+  private _washingMachineService =  inject(WashingMachineService);
+  private _washingMachineDataService = inject(WashingMachineDataService);
+  private dialog = inject(MatDialog);
+  private fb = inject(NonNullableFormBuilder);
+            
+  private serialNumberValidator = inject(SerialNumberValidator);
   
   ngOnInit(): void {
     this.populateDataMatrix_Manufacturer_Field(this.washingMachineIdentificationForm.controls.category.value);

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BarcodeFormat } from '@zxing/library';
 import { ɵunwrapSafeValue } from "@angular/core"
@@ -29,19 +29,16 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ]
 })
 export class CameraComponent implements AfterViewInit {
-
-  constructor(
-    private _notifService: NotificationService,
-    private _washingMachineDataService: WashingMachineDataService,
-    private sanitizer: DomSanitizer,
-    private dialogRef: MatDialogRef<CameraComponent>
-  ) { }
+  private _notifService = inject(NotificationService);
+  private _washingMachineDataService = inject(WashingMachineDataService);
+  private sanitizer = inject(DomSanitizer);
+  private dialogRef = inject(MatDialogRef<CameraComponent>);
 
 //****************************************
 //*** QR CODE CAMERA SCANNER 
 //****************************************
 
-  @ViewChild(ZXingScannerComponent)
+  @ViewChild(ZXingScannerComponent) 
   scanner!: ZXingScannerComponent;
 
   allowedFormats = [BarcodeFormat.QR_CODE];

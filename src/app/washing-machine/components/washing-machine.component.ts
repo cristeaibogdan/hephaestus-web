@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UntypedFormBuilder, Validators} from '@angular/forms';
 import { Observable } from 'rxjs';
 import { WashingMachineService } from '../services/washing-machine.service';
@@ -32,10 +32,8 @@ import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
 })
 
 export class WashingMachineComponent {
-  constructor(   
-    private _formBuilder: UntypedFormBuilder, 
-    private _washingMachineService: WashingMachineService
-  ) {}
+  private _formBuilder = inject(UntypedFormBuilder);
+  private _washingMachineService = inject(WashingMachineService);
 
   washingMachineIdentification$: Observable<WashingMachineIdentification | null> = this._washingMachineService.getWashingMachineIdentification();
 

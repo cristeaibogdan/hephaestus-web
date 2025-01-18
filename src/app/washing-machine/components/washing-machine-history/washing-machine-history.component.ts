@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit, ViewChild, inject } from '@angular/core';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { SearchWashingMachineRequest } from '../../models/dtos/search-washing-machine.request';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -48,14 +48,11 @@ import { A11yModule } from '@angular/cdk/a11y';
   ]
 })
 export class WashingMachineHistoryComponent implements OnInit, AfterViewInit {
-
-  constructor(
-    private dialog: MatDialog,
-    private _washingMachineDataService: WashingMachineDataService,
-    private _translocoService: TranslocoService,
-    private _notifService: NotificationService,
-    private fb: FormBuilder
-  ) { }
+  private dialog = inject(MatDialog);
+  private _washingMachineDataService = inject(WashingMachineDataService);
+  private _translocoService = inject(TranslocoService);
+  private _notifService = inject(NotificationService);
+  private fb = inject(FormBuilder);
 
   readonly recommendation = Recommendation;
 
