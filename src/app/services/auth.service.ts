@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { LoginUserResponse } from '../washing-machine/models/dtos/login-user.response';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -7,6 +7,9 @@ import { AuthDataService } from './auth.data.service';
 
 @Injectable({providedIn: 'root'})
 export class AuthService { 
+
+  private _authDataService = inject(AuthDataService,);
+  private router = inject( Router);
 
   isLoggedIn!:boolean;
 
@@ -18,11 +21,6 @@ export class AuthService {
     email:'',
     username:''
   });
-
-  constructor(
-    private _authDataService: AuthDataService,
-    private router: Router
-  ) {}
 
   getIsLoggedIn(): boolean {
     return this.isLoggedIn;

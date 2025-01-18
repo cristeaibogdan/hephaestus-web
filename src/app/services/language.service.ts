@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 
 export interface Language {
@@ -9,6 +9,7 @@ export interface Language {
 
 @Injectable({providedIn: 'root'})
 export class LanguageService {
+  private _translocoService = inject(TranslocoService);
   private readonly LANGUAGE_STORAGE_KEY = "selectedLanguage";
   private readonly availableLanguages: Language[] = [
     {flag: "assets/images/country-flags/united-kingdom.png", name: "English (UK)", value: "EN"},
@@ -19,7 +20,7 @@ export class LanguageService {
   ];
   private selectedLanguage: Language = this.getLanguageFromStorage();
 
-  constructor(private _translocoService: TranslocoService) {
+  constructor() {
     this._translocoService.setActiveLang(this.selectedLanguage.value);
   }
 
