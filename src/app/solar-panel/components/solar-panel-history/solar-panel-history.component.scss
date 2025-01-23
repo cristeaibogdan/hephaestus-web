@@ -1,8 +1,4 @@
-// @use '@angular/material' as mat;
-
-// .filter-input {
-//   @include mat.form-field-density(-6);
-// }
+@use '@angular/material' as mat;
 
 h3 {
   background-color: #BBC2CC;
@@ -34,9 +30,7 @@ table {
 
 th, td {
   color: #444;
-  font-size: 14px;
   text-align: center;
-
   border-right: 2px solid #909ca0;
 }
 
@@ -120,23 +114,43 @@ tr {
 .filter-input {
   box-sizing: border-box;
   width: 100%;
-  padding: 0 10px;
+
+  /* Remove space below the form field */
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper { 
+    display: none; 
+  }
+
+  @include mat.form-field-density(-6);
+
+  /* Need to modify the calendar icon-button size so 
+  the form-field can apply density of -6 */
+  ::ng-deep .mat-mdc-icon-button.mat-mdc-button-base {
+    --mdc-icon-button-state-layer-size: 24px;
+    padding: 0;
+    margin-right: 12px;
+    color: #556eb0;    
+  }
+
+  /* Makes the clickable area of the datepicker smaller */
+  ::ng-deep .mat-mdc-icon-button .mat-mdc-button-touch-target {
+    height: 28px;
+    width: 28px;
+  }
 }
 
-/* Remove space below the form field */
-.filter-input ::ng-deep .mat-mdc-form-field-subscript-wrapper { 
-  display: none; 
+mat-icon {
+  padding: 0;
+}
+
+[matPrefix] { // Remove padding added by directive matPrefix
+  padding: 0;
+  padding-left: 12px;
 }
 
 /* ************************************************************ */
-/* *** REMOVE DEFAULT PADDING FROM FIRST AND LAST COLUMN */
+/* *** REMOVE BORDER FROM FIRST AND LAST COLUMN */
 /* ************************************************************ */
-
-th:first-child, td:first-child {
-  padding: 0 !important;
-}
 
 th:last-child, td:last-child {
-  padding: 0 !important;
   border-right: none;
 }
