@@ -24,6 +24,7 @@ import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
 import { MatInputModule } from '@angular/material/input';
 import { DateFormatYYYYMMDDDirective } from 'src/app/shared/directives/date-format-yyyy-mm-dd.directive';
 import { A11yModule } from '@angular/cdk/a11y';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-washing-machine-history',
@@ -39,6 +40,7 @@ import { A11yModule } from '@angular/cdk/a11y';
 
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
     MatDatepickerModule,
     MatSelectModule,
     MatButtonModule,

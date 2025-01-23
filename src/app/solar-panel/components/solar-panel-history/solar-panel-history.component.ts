@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { DateFormatYYYYMMDDDirective } from 'src/app/shared/directives/date-format-yyyy-mm-dd.directive';
 import { A11yModule } from '@angular/cdk/a11y';
 import { TranslocoModule } from '@jsverse/transloco';
+import { MatIconModule } from '@angular/material/icon';
 
 const DUMMY_DATA: GetSolarPanelFullResponse[] = [
   {
@@ -84,6 +85,7 @@ const DUMMY_DATA: GetSolarPanelFullResponse[] = [
 
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
     MatDatepickerModule,
     MatSelectModule,
     MatButtonModule,
