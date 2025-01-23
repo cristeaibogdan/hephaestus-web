@@ -1,4 +1,4 @@
-// @use '@angular/material' as mat;
+@use '@angular/material' as mat;
 
 // mat-card-content {
 //   @include mat.form-field-density(-1);
@@ -87,6 +87,9 @@ mat-card-content {
   left: 0;
 
   background-color: #d0ebff;
-  padding: 5px 10px 5px 0;
+  padding-left: 10px;
   border-bottom-right-radius: 8px;
+
+  // MAKE MAT-SELECT SMALLER
+  @include mat.form-field-density(-4);
 }
