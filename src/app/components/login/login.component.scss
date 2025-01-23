@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 .service-logo {
   max-width: 70%;
   margin-bottom: 4%;
@@ -58,6 +60,9 @@ mat-card-content {
   right: 0;
 
   background-color: #d0ebff;
-  // padding: 5px 10px 5px 0;
+  padding-left: 10px;
   border-bottom-left-radius: 8px;
+
+  // MAKE MAT-SELECT SMALLER
+  @include mat.form-field-density(-4);
 }
