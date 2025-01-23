@@ -5,7 +5,7 @@ import { Subject, firstValueFrom, retry, takeUntil, timer } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SKIP_INTERCEPTOR } from '../shared/validators/async-validators/skip-interceptor.token';
 import { MatDialog } from '@angular/material/dialog';
-import { InitializationSpinnerComponent } from '../shared/components/initialization-spinner/initialization-spinner.component';
+import { InitializationSpinnerComponent } from '../components/initialization-spinner/initialization-spinner.component';
 
 @Injectable({ providedIn: 'root' })
 export class InitializationService {
