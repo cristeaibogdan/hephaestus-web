@@ -170,9 +170,12 @@ fieldset {
   pointer-events: none;
 }
 
-/* Ensure checkbox's internal elements (like label or native input) are interactive */
-.mat-mdc-checkbox ::ng-deep .mdc-checkbox__native-control,
-.mat-mdc-checkbox ::ng-deep .mdc-label {
+/* 
+Enable click events for checkboxes on the panel header.
+However, you can slightly click outside the checkbox and expand the panel manually, 
+to fix that use together with (click)="$event.stopPropagation()" on mat-checkbox
+*/
+.mat-expansion-panel-header .mat-mdc-checkbox {
   pointer-events: auto;
 }
 
