@@ -8,8 +8,7 @@ h1 {
   font-size: 2rem;
 
   text-align: center;
-  margin: 0;
-  margin-bottom: 1rem;
+  margin: 12px 0 1rem 0;
 }
 
 h2 {
@@ -20,8 +19,7 @@ h2 {
   padding-bottom: 5px;
   border-bottom: 2px solid #2121ff;
 
-  margin: 0;
-  margin-bottom: 1.5rem;
+  margin: 0 0 1.5rem 0;
 }
 
 h3 {
@@ -105,6 +103,11 @@ li {
 /* ************************************ */
 
 .mat-dialog-actions-buttons {
-  justify-content: center;
   gap: 1.5rem;
+  margin-bottom: 12px;
+  
+  // remove margin added by angular material for 2 consecutive buttons
+  button:last-child { 
+    margin-left: 0px;
+  }
 }

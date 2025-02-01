@@ -115,12 +115,11 @@ body {
 // *** STYLES for MAT DIALOG
 // **************************************/
 
-.camera-dialog .mat-mdc-dialog-container {
-  --mdc-dialog-container-shape: 12px; //corner radius
-}
-
-.camera-dialog .mat-mdc-dialog-actions {
-  padding-bottom: 24px;
+:root {
+  @include mat.dialog-overrides((
+    container-shape: 12px,
+    actions-alignment: center
+  ));
 }
 
 /* **************************************
