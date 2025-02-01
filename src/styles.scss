@@ -23,10 +23,6 @@ body {
   color: #444;
 }
 
-.background-color {
-  background-color: #f2f2f2;
-}
-
 /* **************************************
 // *** STYLES for snackbars
 // **************************************/
@@ -184,4 +180,14 @@ body {
 
 .fieldset-invalid legend {
   color:red;
+}
+
+/* **************************************
+// *** STYLES FOR MAT STEPPER
+// **************************************/
+
+:root {
+  @include mat.stepper-overrides((
+    container-color: #f2f2f2
+  ));
 }
