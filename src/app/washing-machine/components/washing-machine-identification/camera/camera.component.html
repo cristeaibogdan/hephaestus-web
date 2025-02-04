@@ -34,7 +34,7 @@
 
     @if (scannerEnabled) {
       <div class="camera-scanner-switch">
-        <button mat-raised-button type="button" color="primary"
+        <button mat-raised-button type="button" class="primary"
           (click)="switchCamera()"
           [disabled]="cameraIsLoading || availableCameras.length === 1">
   
@@ -55,7 +55,7 @@
 <mat-dialog-actions class="buttons-container">
 
   <button mat-raised-button type="button"       
-    [color]="scannerEnabled && !cameraIsPaused ? 'warn' : 'primary'"
+    [class]="scannerEnabled && !cameraIsPaused ? 'warn' : 'primary'"
     (click)="onStart()"
     [disabled]="cameraIsLoading || noCamerasFound">
 
@@ -71,7 +71,7 @@
     use <b>Upload Image</b> option to scan from an image file.  
   </p>
 
-  <button class="upload-image-button" mat-raised-button color="primary" type="button" (click)="QRInput.click()">
+  <button class="upload-image-button" mat-raised-button class="primary" type="button" (click)="QRInput.click()">
     <div class="upload-image-content">
       <mat-icon class="upload-icon" svgIcon="upload"></mat-icon>
 
@@ -85,7 +85,7 @@
     </div>
   </button>
 
-  <button class="close-button" mat-raised-button color="warn" type="button" (click)="closeDialog()"> 
+  <button class="close-button" mat-raised-button class="warn" type="button" (click)="closeDialog()"> 
     Close
   </button>
 </mat-dialog-actions>

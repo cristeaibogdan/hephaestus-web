@@ -199,3 +199,30 @@ body {
     container-color: #f2f2f2
   ));
 }
+
+/* **************************************
+// *** STYLES FOR MAT RAISED BUTTON
+// **************************************/
+
+:root { // default for all mat-raised-button
+  @include mat.button-overrides((
+    protected-container-color: #faf9fd,
+    protected-label-text-color: #000000de,
+    protected-container-shape: 4px,
+    protected-horizontal-padding: 20px
+  ));
+}
+
+.warn {
+  @include mat.button-overrides((
+    protected-container-color: #f44336,
+    protected-label-text-color: #fff,
+  ));
+}
+
+.primary {
+  @include mat.button-overrides((
+    protected-container-color: #3f51b5,
+    protected-label-text-color: #fff,
+  ));
+}
