@@ -23,6 +23,15 @@ body {
   color: #444;
 }
 
+// Replacements for mat-elevation-zX
+.elevation-level5 { 
+  box-shadow: var(--mat-sys-level5) !important;
+}
+
+.elevation-level4 {
+  box-shadow: var(--mat-sys-level4) !important;
+}
+
 /* **************************************
 // *** STYLES for snackbars
 // **************************************/
