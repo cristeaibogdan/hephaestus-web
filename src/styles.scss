@@ -1,4 +1,9 @@
 @use '@angular/material' as mat;
+@use 'styles/recommendation';
+@use 'styles/snack-bar';
+@use 'styles/dialog';
+@use 'styles/stepper';
+@use 'styles/raised-button';
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -23,7 +28,10 @@ body {
   color: #444;
 }
 
-// Replacements for mat-elevation-zX
+/* **************************************
+// *** Replacements for mat-elevation-zX
+// **************************************/
+
 .elevation-level5 { 
   box-shadow: var(--mat-sys-level5) !important;
 }
@@ -33,128 +41,15 @@ body {
 }
 
 /* **************************************
-// *** STYLES for snackbars
+// *** STYLES FOR INVALID FIELDSETS
 // **************************************/
 
-.notif-error {
-  @include mat.snack-bar-overrides((
-    container-color: #c72c41,
-    supporting-text-color: #f8e7e9,
-    button-color: #f8e7e9
-  ));
+.fieldset-invalid {
+  border-color: red;
 }
 
-.notif-warning {
-  @include mat.snack-bar-overrides((
-    container-color: #f08c00,
-    supporting-text-color: #f8e7e9,
-    button-color: #f8e7e9
-  ));
-}
-
-.notif-success {
-  @include mat.snack-bar-overrides((
-    container-color: #4e8d7c,
-    supporting-text-color: #f8e7e9,
-    button-color: #f8e7e9
-  ));
-}
-
-/* **************************************
-// *** STYLES for recommendation
-// **************************************/
-
-.disassemble {
-  background-color: #fa5252;
-  color: white !important;
-  font-weight: 500;
-
-  border: none;
-}
-
-.repair {
-  background-color: #ffa94d;
-  color: #444;
-  font-weight: 500;
-  
-  border: none;
-}
-
-.repackage {
-  background-color: #a5d8ff;
-  color: #444;
-  font-weight: 500;
-
-  border: none;
-}
-
-.resale {
-  background-color: #c0eb75;
-  color: #444;
-  font-weight: 500;
-  
-  border: none;
-}
-
-.outlet {
-  background-color: #e0aaff;
-  color: #444;
-  font-weight: 500;
-  
-  border: none;
-}
-
-.recycle {
-  background-color: #4cd3c2;
-  color: #444;
-  font-weight: 500;
-
-  border: none;
-}
-
-.dispose {
-  background-color: #ff6bcb;
-  color: white;
-  font-weight: 500;
-
-  border: none;
-}
-
-/* **************************************
-// *** STYLES for MAT DIALOG
-// **************************************/
-
-:root {
-  @include mat.dialog-overrides((
-    container-shape: 12px,
-    actions-alignment: center
-  ));
-}
-
-/* **************************************
-// *** STYLES for MAT DIALOG - LOADING SPINNER
-// **************************************/
-
-.borderless-dialog {
-  @include mat.dialog-overrides((
-    container-color: transparent,
-    container-elevation-shadow: none
-  ));
-}
-
-/* **************************************
-// *** STYLES for INITIALIZATION DIALOG
-// **************************************/
-
-.initialization-dialog {
-  @include mat.dialog-overrides((
-    container-shape: 20px, // corner radius
-    content-padding: 24px,
-    headline-padding: 24px,
-    actions-padding: 0 0 24px 0,
-    actions-alignment: center,
-    container-max-width: 700px
-  ));
+.fieldset-invalid legend {
+  color:red;
 }
 
 /* **************************************
@@ -175,54 +70,5 @@ body {
   white-space: pre-line;
   @include mat.tooltip-overrides((
     supporting-text-size: 12px
-  ));
-}
-
-/* **************************************
-// *** STYLES FOR INVALID FIELDSETS
-// **************************************/
-
-.fieldset-invalid {
-  border-color: red;
-}
-
-.fieldset-invalid legend {
-  color:red;
-}
-
-/* **************************************
-// *** STYLES FOR MAT STEPPER
-// **************************************/
-
-:root {
-  @include mat.stepper-overrides((
-    container-color: #f2f2f2
-  ));
-}
-
-/* **************************************
-// *** STYLES FOR MAT RAISED BUTTON
-// **************************************/
-
-:root { // default for all mat-raised-button
-  @include mat.button-overrides((
-    protected-container-color: #faf9fd,
-    protected-label-text-color: #000000de,
-    protected-container-shape: 4px,
-    protected-horizontal-padding: 20px
-  ));
-}
-
-.warn {
-  @include mat.button-overrides((
-    protected-container-color: #f44336,
-    protected-label-text-color: #fff,
-  ));
-}
-
-.primary {
-  @include mat.button-overrides((
-    protected-container-color: #3f51b5,
-    protected-label-text-color: #fff,
   ));
 }

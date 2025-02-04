@@ -1,0 +1,38 @@
+@use '@angular/material' as mat;
+
+/* **************************************
+// *** STYLES for MAT DIALOG
+// **************************************/
+
+:root {
+  @include mat.dialog-overrides((
+    container-shape: 12px,
+    actions-alignment: center
+  ));
+}
+
+/* **************************************
+// *** STYLES for MAT DIALOG - LOADING SPINNER
+// **************************************/
+
+.borderless-dialog {
+  @include mat.dialog-overrides((
+    container-color: transparent,
+    container-elevation-shadow: none
+  ));
+}
+
+/* **************************************
+// *** STYLES for INITIALIZATION DIALOG
+// **************************************/
+
+.initialization-dialog {
+  @include mat.dialog-overrides((
+    container-shape: 20px, // corner radius
+    content-padding: 24px,
+    headline-padding: 24px,
+    actions-padding: 0 0 24px 0,
+    actions-alignment: center,
+    container-max-width: 700px
+  ));
+}
