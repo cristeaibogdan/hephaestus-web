@@ -118,7 +118,6 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
   // TODO: refactor methods related to camera
   openCameraDialog(): void {
     const dialogRef = this.dialog.open(CameraComponent, {
-      panelClass: "camera-dialog",
       disableClose: true
     });
 
