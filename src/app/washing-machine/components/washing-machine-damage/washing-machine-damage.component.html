@@ -10,7 +10,7 @@
   <mat-card-title>{{"I18N.PRODUCT_DAMAGE.UPLOAD_IMAGES_TITLE" | transloco}} <span>*</span></mat-card-title>
   <fieldset dragAndDrop (filesDropped)="onDrop($event)">
     <legend class="text-align-center">
-      <button mat-raised-button type="button" color="primary" 
+      <button mat-raised-button type="button" class="primary" 
         (click)="fileInput.click()"
         [disabled]="selectedFiles.length === 3">
         <mat-icon svgIcon="upload"></mat-icon> &nbsp; {{"I18N.COMMON.UPLOAD_IMAGES" | transloco}} &nbsp; {{selectedFiles.length}} / 3
