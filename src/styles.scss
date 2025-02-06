@@ -1,4 +1,3 @@
-@use '@angular/material' as mat;
 @use 'styles/recommendation';
 @use 'styles/mat-snack-bar';
 @use 'styles/mat-dialog';
@@ -6,6 +5,8 @@
 @use 'styles/mat-raised-button';
 @use 'styles/mat-card';
 @use 'styles/mat-toggle-button';
+@use 'styles/mat-progress-spinner';
+@use 'styles/mat-tooltip';
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -52,25 +53,4 @@ body {
 
 .fieldset-invalid legend {
   color:red;
-}
-
-/* **************************************
-// *** STYLES for INITIALIZATION SPINNER
-// **************************************/
-
-.initialization-spinner {
-  @include mat.progress-spinner-overrides((
-    active-indicator-color: #F76707
-  ));
-}
-
-/* **************************************
-// *** STYLES for MAT TOOLTIP
-// **************************************/
-
-.mdc-tooltip {
-  white-space: pre-line;
-  @include mat.tooltip-overrides((
-    supporting-text-size: 12px
-  ));
 }
