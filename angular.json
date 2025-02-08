@@ -21,7 +21,7 @@
               "shimmer"
             ],
             "outputPath": {
-              "base": "dist/hephaestus-web"
+              "base": "docs"
             },
             "index": "src/index.html",
             "polyfills": [
