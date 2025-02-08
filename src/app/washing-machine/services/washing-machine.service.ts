@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { BehaviorSubject, EMPTY, Observable, switchMap, withLatestFrom} from "rxjs";
 import { CreateWashingMachineRequest } from "../models/dtos/create-washing-machine.request";
 import { ImageFile } from "../models/image-file.model";
@@ -9,10 +9,7 @@ import { WashingMachineDetail } from "../models/washing-machine-detail.model";
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineService {
-  
-  constructor(
-    private _washingMachineDataService: WashingMachineDataService
-  ) { }
+  private _washingMachineDataService = inject(WashingMachineDataService);
 
 // **************************************
 // *** STEP 1 = PRODUCT IDENTIFICATION

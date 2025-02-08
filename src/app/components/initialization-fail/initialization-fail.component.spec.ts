@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WakeupComponent } from './wakeup.component';
+import { InitializationFailComponent } from './initialization-fail.component';
 
 describe('WakeupComponent', () => {
-  let component: WakeupComponent;
-  let fixture: ComponentFixture<WakeupComponent>;
+  let component: InitializationFailComponent;
+  let fixture: ComponentFixture<InitializationFailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WakeupComponent ]
+      declarations: [ InitializationFailComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(WakeupComponent);
+    fixture = TestBed.createComponent(InitializationFailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

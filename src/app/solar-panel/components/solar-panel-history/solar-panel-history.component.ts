@@ -1,15 +1,25 @@
-import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { AfterViewInit, Component, HostListener, OnInit, ViewChild, inject } from '@angular/core';
 import { GetSolarPanelFullResponse } from '../../models/dtos/get-solar-panel-full.response';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { SolarPanelRecommendation } from '../../enums/solar-panel-recommendation.enum';
-import { FormBuilder } from '@angular/forms';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { SearchSolarPanelRequest } from '../../models/dtos/search-solar-panel.request';
 import { SolarPanelHistoryViewComponent } from './solar-panel-history-view/solar-panel-history-view.component';
-import { MatDialog } from '@angular/material/dialog';
 import { format } from 'date-fns';
-
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { CommonModule } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
+import { MatInputModule } from '@angular/material/input';
+import { DateFormatYYYYMMDDDirective } from 'src/app/shared/directives/date-format-yyyy-mm-dd.directive';
+import { A11yModule } from '@angular/cdk/a11y';
+import { TranslocoModule } from '@jsverse/transloco';
+import { MatIconModule } from '@angular/material/icon';
 
 const DUMMY_DATA: GetSolarPanelFullResponse[] = [
   {
@@ -65,16 +75,30 @@ const DUMMY_DATA: GetSolarPanelFullResponse[] = [
 @Component({
   selector: 'app-solar-panel-history',
   templateUrl: './solar-panel-history.component.html',
-  styleUrls: ['./solar-panel-history.component.scss']
+  styleUrls: ['./solar-panel-history.component.scss'],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TranslocoModule,
+    DateFormatYYYYMMDDDirective,
+    A11yModule,
+
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginator
+  ]
 })
 export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
+  private dialog = inject(MatDialog);
+  private fb = inject(FormBuilder);
 
   readonly solarPanelRecommendation = SolarPanelRecommendation;
-
-  constructor(
-    private dialog: MatDialog,
-    private fb:FormBuilder
-  ) { }
 
   solarPanels = new MatTableDataSource<Partial<GetSolarPanelFullResponse>>();
 

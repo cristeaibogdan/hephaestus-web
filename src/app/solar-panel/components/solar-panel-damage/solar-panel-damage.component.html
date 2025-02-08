@@ -1,6 +1,6 @@
 <form [formGroup]="solarPanelDamageForm" (ngSubmit)="onSubmit()">
-<mat-card class="mat-elevation-z8">
-  <mat-card-title>Select Damage <span>*</span></mat-card-title>
+<mat-card class="elevation-level4">
+  <mat-card-title>Select Damage</mat-card-title>
   
   <ul class="damages-list">
     <div class = "damage-container">
@@ -55,11 +55,11 @@
     {{"I18N.COMMON.BACK" | transloco}}
   </button>
 
-  <button mat-raised-button type="reset" color="warn">
+  <button mat-raised-button type="reset" class="warn">
     {{ "I18N.COMMON.RESET" | transloco }}
   </button>
 
-  <button mat-raised-button type="submit" color="primary">
+  <button mat-raised-button type="submit" class="primary">
     {{ "I18N.COMMON.NEXT" | transloco }}
   </button>
 </div>

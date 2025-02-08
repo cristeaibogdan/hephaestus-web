@@ -1,32 +1,25 @@
 <div class="washing-machine-status">
-  <ng-container *ngIf="washingMachineIdentification$ | async as washingMachineIdentification">
-    <span *ngIf="washingMachineIdentification.identificationMode">
-      {{"I18N.COMMON.IDENTIFICATION_MODE" | transloco}}: {{washingMachineIdentification.identificationMode | toLabel}}
-    </span> 
-
-    <span *ngIf="washingMachineIdentification.damageType">
-      {{"I18N.COMMON.DAMAGE_TYPE" | transloco}}: {{washingMachineIdentification.damageType | toLabel}}
-    </span>
-  </ng-container>
+  @if (washingMachineIdentification$ | async; as washingMachineIdentification) {
+    <span>{{"I18N.COMMON.IDENTIFICATION_MODE" | transloco}}: {{washingMachineIdentification.identificationMode | toLabel}} </span> 
+  
+    <span>{{"I18N.COMMON.DAMAGE_TYPE" | transloco}}: {{washingMachineIdentification.damageType | toLabel}}</span>
+  }
 
   <div class="washing-machine-title">{{"I18N.COMMON.WASHING_MACHINE" | transloco | titlecase}}</div>    
 
-  <ng-container *ngIf="washingMachineIdentification$ | async as washingMachineIdentification">
-    <span *ngIf="washingMachineIdentification.manufacturer"> 
-      {{"I18N.COMMON.MANUFACTURER" | transloco}}: {{washingMachineIdentification.manufacturer}}
-    </span>
+  @if (washingMachineIdentification$ | async; as washingMachineIdentification) {
+    <span>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{washingMachineIdentification.manufacturer}}</span>
 
-    <span *ngIf="washingMachineIdentification.model && washingMachineIdentification.model !== 'N/A'">
-      {{"I18N.COMMON.MODEL" | transloco}}: {{washingMachineIdentification.model}}
-    </span>
+    @if (washingMachineIdentification.model !== 'N/A') {}
+    <span>{{"I18N.COMMON.MODEL" | transloco}}: {{washingMachineIdentification.model}}</span>
 
-    <span *ngIf="washingMachineIdentification.type && washingMachineIdentification.type !== 'N/A'">
-      {{"I18N.COMMON.TYPE" | transloco}}: {{washingMachineIdentification.type}}
-    </span>
-  </ng-container>
+    @if (washingMachineIdentification.type !== 'N/A') {
+      <span>{{"I18N.COMMON.TYPE" | transloco}}: {{washingMachineIdentification.type}} </span>
+    }
+  }
 </div>
 
-<mat-stepper class="background-color">  
+<mat-stepper>  
   <mat-step [stepControl]="firstFormGroup" > <!-- STEP ONE -->
     <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.PRODUCT_IDENTIFICATION" | transloco}}</ng-template>
     <!-- TODO: Possible overflow usage. But needs to be in px, else it won't work... -->

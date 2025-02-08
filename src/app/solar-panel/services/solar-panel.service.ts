@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SolarPanelIdentification } from '../models/solar-panel-identification.model';
 import { SolarPanelDataService } from './solar-panel-data.service';
@@ -9,11 +9,8 @@ import { SolarPanelRecommendation } from '../enums/solar-panel-recommendation.en
 
 @Injectable({providedIn: 'root'})
 export class SolarPanelService {
-
-  constructor(
-    private _solarPanelDataService: SolarPanelDataService,
-    private _notifService: NotificationService,
-  ) { }
+  private _solarPanelDataService = inject(SolarPanelDataService);
+  private _notifService = inject(NotificationService);
 
 // **************************************
 // *** STEP 1 = IDENTIFICATION

@@ -1,27 +1,42 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SerialNumberValidator } from 'src/app/shared/validators/async-validators/serial-number.validator';
 import { CustomValidators } from 'src/app/shared/validators/custom.validators';
 import { SolarPanelDataService } from '../../services/solar-panel-data.service';
 import { SolarPanelIdentification } from '../../models/solar-panel-identification.model';
 import { SolarPanelService } from '../../services/solar-panel.service';
 import { MatStepper } from '@angular/material/stepper';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormField } from '@angular/material/form-field';
+import { TranslocoModule } from '@jsverse/transloco';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-solar-panel-identification',
   templateUrl: './solar-panel-identification.component.html',
-  styleUrls: ['./solar-panel-identification.component.scss']
-})
-export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
-  
-  constructor(
-    @Inject(MatStepper) private stepper: MatStepper,
-    private fb: NonNullableFormBuilder,
-    private _solarPanelDataService: SolarPanelDataService,
-    private _solarPanelService: SolarPanelService,
+  styleUrls: ['./solar-panel-identification.component.scss'],
+  imports: [
+    MatCardModule,
+    MatFormField,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
 
-    private serialNumberValidator: SerialNumberValidator //TODO: Use async validator to check the serial number
-  ){}
+    ReactiveFormsModule,
+    TranslocoModule,
+    StepperButtonsDirective
+  ]
+})
+export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {  
+  private stepper = inject(MatStepper);
+  private fb = inject(NonNullableFormBuilder);
+  private _solarPanelDataService = inject(SolarPanelDataService);
+  private _solarPanelService = inject(SolarPanelService);
+
+  private serialNumberValidator = inject(SerialNumberValidator); //TODO: Use async validator to check the serial number
 
   ngOnInit() {
     this.getManufacturer(this.solarPanelForm.controls.category.value);

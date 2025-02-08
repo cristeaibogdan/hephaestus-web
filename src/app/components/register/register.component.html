@@ -1,4 +1,4 @@
-<mat-card class="mat-elevation-z8">
+<mat-card class="elevation-level4">
   <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
   <mat-card-content>
     <aside>
@@ -17,24 +17,25 @@
         <mat-label>{{"I18N.COMMON.REGISTER_CODE" | transloco}}</mat-label>
         <input matInput formControlName="code"/>
 
-        <mat-error *ngIf="registerForm.controls.code.errors?.required">
-          {{ "I18N.MAT_ERROR.REGISTER_CODE_REQUIRED" | transloco }}
-        </mat-error>
+        @if(registerForm.controls.code.errors?.required) {
+          <mat-error>{{ "I18N.MAT_ERROR.REGISTER_CODE_REQUIRED" | transloco }}</mat-error>          
+        }
 
-        <mat-error *ngIf="registerForm.controls.code.errors?.invalid">
-          {{ "I18N.MAT_ERROR.REGISTER_CODE_INVALID" | transloco }}
-        </mat-error>
+        @if(registerForm.controls.code.errors?.invalid) {
+          <mat-error>{{ "I18N.MAT_ERROR.REGISTER_CODE_INVALID" | transloco }}</mat-error>
+        }
 
-        <mat-error *ngIf="registerForm.controls.code.errors?.backendError">
-          {{ "I18N.MAT_ERROR.NO_CONNECTION" | transloco }}
-        </mat-error>
+        @if(registerForm.controls.code.errors?.backendError) {
+          <mat-error>{{ "I18N.MAT_ERROR.NO_CONNECTION" | transloco }}</mat-error>
+        }
 
-        <mat-hint *ngIf="registerForm.controls.code.pending">
-          {{ "I18N.MAT_HINT.PENDING" | transloco }}
-        </mat-hint>
-        <mat-hint *ngIf="registerForm.controls.code.valid">
-          {{ "I18N.MAT_HINT.REGISTER_CODE_VALID" | transloco }}
-        </mat-hint>
+        @if (registerForm.controls.code.pending) {
+          <mat-hint>{{ "I18N.MAT_HINT.PENDING" | transloco }}</mat-hint>          
+        }
+
+        @if(registerForm.controls.code.valid) {
+          <mat-hint>{{ "I18N.MAT_HINT.REGISTER_CODE_VALID" | transloco }}</mat-hint>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -51,13 +52,13 @@
         <mat-label>{{ "I18N.COMMON.EMAIL" | transloco }}</mat-label>
         <input matInput formControlName="email"/>
 
-        <mat-error *ngIf="registerForm.controls.email.errors?.required">
-          {{ "I18N.MAT_ERROR.EMAIL_REQUIRED" | transloco }}
-        </mat-error>
+        @if (registerForm.controls.email.errors?.required) {
+          <mat-error>{{ "I18N.MAT_ERROR.EMAIL_REQUIRED" | transloco }}</mat-error>
+        }
 
-        <mat-error *ngIf="registerForm.controls.email.errors?.email">
-          {{ "I18N.MAT_ERROR.EMAIL_INVALID" | transloco }}
-        </mat-error>
+        @if (registerForm.controls.email.errors?.email) {
+          <mat-error>{{ "I18N.MAT_ERROR.EMAIL_INVALID" | transloco }}</mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -73,34 +74,34 @@
         <mat-label>{{ "I18N.COMMON.PASSWORD" | transloco }}</mat-label>
         <input matInput type="password" formControlName="password"/>
 
-        <mat-error *ngIf="registerForm.controls.password.errors?.required">
-          {{ "I18N.MAT_ERROR.PASSWORD_REQUIRED" | transloco }}
-        </mat-error>
+        @if (registerForm.controls.password.errors?.required) {
+          <mat-error>{{ "I18N.MAT_ERROR.PASSWORD_REQUIRED" | transloco }}</mat-error>
+        }
 
-        <mat-error *ngIf="registerForm.controls.password.errors?.minlength">
-          {{ "I18N.MAT_ERROR.PASSWORD_LENGTH" | transloco }}
-        </mat-error>
+        @if(registerForm.controls.password.errors?.minlength) {
+          <mat-error>{{ "I18N.MAT_ERROR.PASSWORD_LENGTH" | transloco }}</mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>{{"I18N.COMMON.CONFIRM_PASSWORD" | transloco}}</mat-label>
         <input matInput type="password" formControlName="confirmPassword"/>
 
-        <mat-error *ngIf="registerForm.controls.confirmPassword.errors?.required">
-          {{ "I18N.MAT_ERROR.CONFIRM_PASSWORD_REQUIRED" | transloco }}
-        </mat-error>
+        @if (registerForm.controls.confirmPassword.errors?.required) {
+          <mat-error>{{ "I18N.MAT_ERROR.CONFIRM_PASSWORD_REQUIRED" | transloco }}</mat-error>
+        }
 
-        <mat-error *ngIf="registerForm.controls.confirmPassword.errors?.passwordMismatch">
-          {{ "I18N.MAT_ERROR.PASSWORDS_MATCHING" | transloco }}
-        </mat-error>
+        @if(registerForm.controls.confirmPassword.errors?.passwordMismatch) {
+          <mat-error>{{ "I18N.MAT_ERROR.PASSWORDS_MATCHING" | transloco }}</mat-error>
+        }
       </mat-form-field>
 
       <footer>
-        <button mat-raised-button type="submit" color="primary" class="margin-bottom">
+        <button mat-raised-button type="submit" class="primary margin-bottom">
           {{ "I18N.COMMON.REGISTER" | transloco | uppercase }}
         </button>
 
-        <button mat-raised-button type="reset" color="warn">
+        <button mat-raised-button type="reset" class="warn">
           {{ "I18N.COMMON.RESET" | transloco | uppercase }}
         </button>
 

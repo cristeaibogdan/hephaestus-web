@@ -1,0 +1,8 @@
+@use '@angular/material' as mat;
+
+.mdc-tooltip {
+  white-space: pre-line;
+  @include mat.tooltip-overrides((
+    supporting-text-size: 12px
+  ));
+}

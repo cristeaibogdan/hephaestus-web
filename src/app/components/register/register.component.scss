@@ -1,18 +1,31 @@
-.mat-card {
+@use '@angular/material' as mat;
+
+// mat-card-content {
+//   @include mat.form-field-density(-1);
+// }
+
+mat-card {
   margin: 4% 30%;
   border-radius: 8px;
   text-align: center;
   padding: 2%;
-  position: relative;
+
   overflow: hidden;
 }
 
-.mat-card-content {
+mat-card-content {
   display: grid;
   grid-template-columns: 50% 1fr;
   align-items: center;
   gap: 3%;
+
+  padding: 0;
   margin-bottom: 0;
+}
+
+mat-card-content {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .service-logo {
@@ -41,9 +54,9 @@
   gap: 0.75rem;
 }
 
-.mat-raised-button {
+.mat-mdc-raised-button {
   width: 100%;
-  padding: 1% 0;
+  height: 40px;
 
   font-size: 1rem;
 }
@@ -54,6 +67,7 @@
 
 .account-existence-text {
   margin-top: 8%;
+  font-size: 14px;
 }
 
 .login-text {
@@ -73,6 +87,9 @@
   left: 0;
 
   background-color: #d0ebff;
-  padding: 5px 10px 5px 0;
+  padding-left: 10px;
   border-bottom-right-radius: 8px;
+
+  // MAKE MAT-SELECT SMALLER
+  @include mat.form-field-density(-4);
 }

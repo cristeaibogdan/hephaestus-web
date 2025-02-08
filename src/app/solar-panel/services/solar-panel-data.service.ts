@@ -8,8 +8,6 @@ import { SearchSolarPanelRequest } from '../models/dtos/search-solar-panel.reque
 export class SolarPanelDataService { //TODO: replace with proper backend api calls
   apiURL = environment.apiBaseUrl;
 
-  constructor() { }
-
 //**************************************
 //*** STEP 1 = IDENTIFICATION
 //**************************************

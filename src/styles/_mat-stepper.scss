@@ -1,0 +1,9 @@
+@use '@angular/material' as mat;
+
+:root {
+  @include mat.stepper-overrides((
+    container-color: #f2f2f2,
+    line-color: #0000001f,
+    header-icon-background-color: #0000008a
+  ));
+}

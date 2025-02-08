@@ -1,23 +1,32 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { CommonModule } from '@angular/common';
+import { Component, Inject, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { TranslocoModule } from '@jsverse/transloco';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
 import { GetWashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/get-washing-machine-full.response';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 
 @Component({
   selector: 'app-washing-machine-history-view',
   templateUrl: './washing-machine-history-view.component.html',
-  styleUrls: ['./washing-machine-history-view.component.scss']
+  styleUrls: ['./washing-machine-history-view.component.scss'],
+  imports: [
+    CommonModule,
+    TranslocoModule,
+    ToLabelPipe,
+    
+    MatDialogModule,
+    MatButtonModule
+  ]
 })
 export class WashingMachineHistoryViewComponent {
+  private data = inject(MAT_DIALOG_DATA);
+  private _washingMachineDataService = inject(WashingMachineDataService,);
+  private _notifService = inject(NotificationService);
 
   washingMachine: GetWashingMachineFullResponse = this.data.washingMachine;
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private data:any,
-    private _washingMachineDataService:WashingMachineDataService,
-    private _notifService:NotificationService
-  ) {}
 
   onDownload(): void {
     this._washingMachineDataService.getReport(this.washingMachine.serialNumber).subscribe(response => {

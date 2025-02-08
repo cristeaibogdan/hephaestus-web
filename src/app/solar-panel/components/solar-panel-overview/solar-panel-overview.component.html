@@ -1,46 +1,42 @@
-<div class="component-container mat-elevation-z8" *ngIf="solarPanelIdenfitication$ | async as solarPanelIdenfitication">
-
-  <ng-content select="[header]"></ng-content>
-
-  <h1>{{"I18N.COMMON.OVERVIEW" | transloco}}</h1>
+@if (solarPanelIdenfitication$ | async; as solarPanelIdenfitication) {
+  <div class="component-container elevation-level4">
   
-  <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | transloco}}</h2>  
-  <ul class="information-list">
-    <li>{{"I18N.COMMON.CATEGORY" | transloco}}: {{solarPanelIdenfitication.category}}</li>
-    <li>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{solarPanelIdenfitication.manufacturer}}</li>
-    <li>{{"I18N.COMMON.SERIAL_NUMBER" | transloco}}: {{solarPanelIdenfitication.serialNumber}}</li>
-    <li>{{"I18N.COMMON.MODEL" | transloco}}: {{solarPanelIdenfitication.model}}</li>
-    <li>{{"I18N.COMMON.TYPE" | transloco}}: {{solarPanelIdenfitication.type}}</li>
-  </ul>
-
-  <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
-  <section *ngIf="solarPanelDamage$ | async as solarPanelDamage">
-    <ul class="damages-list">
-      <li *ngIf="solarPanelDamage.hotSpots">
-        Hot Spots
-      </li>
-      <li *ngIf="solarPanelDamage.microCracks">
-        Micro Cracks
-      </li>
-      <li *ngIf="solarPanelDamage.snailTrails">
-        Snail Trails
-      </li>
-      <li *ngIf="solarPanelDamage.brokenGlass">
-        Broken Glass
-      </li>
-      <li *ngIf="solarPanelDamage.additionalDetails">
-        Additional Details:
-        {{solarPanelDamage.additionalDetails}}
-      </li>
+    <ng-content select="[header]"></ng-content>
+  
+    <h1>{{"I18N.COMMON.OVERVIEW" | transloco}}</h1>
+    
+    <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | transloco}}</h2>  
+    <ul class="information-list">
+      <li>{{"I18N.COMMON.CATEGORY" | transloco}}: {{solarPanelIdenfitication.category}}</li>
+      <li>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{solarPanelIdenfitication.manufacturer}}</li>
+      <li>{{"I18N.COMMON.SERIAL_NUMBER" | transloco}}: {{solarPanelIdenfitication.serialNumber}}</li>
+      <li>{{"I18N.COMMON.MODEL" | transloco}}: {{solarPanelIdenfitication.model}}</li>
+      <li>{{"I18N.COMMON.TYPE" | transloco}}: {{solarPanelIdenfitication.type}}</li>
     </ul>
-  </section>
-</div>
+  
+    <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
+    @if (solarPanelDamage$ | async; as solarPanelDamage) {
+      <ul class="damages-list">
+        @if (solarPanelDamage.hotSpots) { <li>Hot Spots</li> }        
+        @if (solarPanelDamage.microCracks) { <li>Micro Cracks</li> }        
+        @if (solarPanelDamage.snailTrails) { <li>Snail Trails</li> }        
+        @if (solarPanelDamage.brokenGlass) { <li>Broken Glass</li> }
+        @if (solarPanelDamage.additionalDetails) {
+          <li>
+            Additional Details:
+            {{solarPanelDamage.additionalDetails}}
+          </li>
+        }
+      </ul>
+    }    
+  </div>
+}
 
 <div stepper-buttons class="hide">
   <button mat-raised-button type="button" matStepperPrevious>
     {{"I18N.COMMON.BACK" | transloco}}
   </button>
-  <button mat-raised-button type="button" color="primary"
+  <button mat-raised-button type="button" class="primary"
     (click)="onNext()">
     Generate Recommendation
   </button>

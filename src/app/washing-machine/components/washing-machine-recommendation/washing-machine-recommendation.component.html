@@ -1,37 +1,37 @@
 <app-washing-machine-overview>
+  
   <div header class="text-align-center">
-    <ng-container *ngIf="washingMachineIdentification$ | async as washingMachineIdentification">
+    @if (washingMachineIdentification$ | async; as washingMachineIdentification) {
       {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_1" | transloco}}
       {{washingMachineIdentification.serialNumber}} 
       {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_2" | transloco}} {{washingMachineIdentification.manufacturer}},
       {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_3" | transloco}}:
-
+  
       <div class="text-align-center">
-        <button class="recommendation-text"
-          [ngClass]="{
-            repackage: washingMachineRecommendation === 'REPACKAGE',
-            resale: washingMachineRecommendation === 'RESALE',
-            outlet: washingMachineRecommendation === 'OUTLET',
-            repair: washingMachineRecommendation === 'REPAIR',
-            disassemble: washingMachineRecommendation === 'DISASSEMBLE'}">
+        <button class="recommendation-text"          
+          [class.repackage]="washingMachineRecommendation === 'REPACKAGE'"
+          [class.resale]="washingMachineRecommendation === 'RESALE'"
+          [class.outlet]="washingMachineRecommendation === 'OUTLET'"
+          [class.repair]="washingMachineRecommendation === 'REPAIR'"
+          [class.disassemble]="washingMachineRecommendation === 'DISASSEMBLE'">
           {{washingMachineRecommendation}}
         </button>
-      </div>
-    </ng-container>
-
+      </div>      
+    }
     <p class="before-overview">
       {{"I18N.PRODUCT_RECOMMENDATION.SUBTITLE" | transloco}}
     </p>
   </div>
+
 </app-washing-machine-overview>
 
 <div stepper-buttons>
-  <button mat-raised-button color="primary"
+  <button mat-raised-button class="primary"
     (click)="onDownload()">
     {{"I18N.COMMON.DOWNLOAD_RECOMMENDATION" | transloco}}
   </button>
   
-  <button type="button" color="primary" mat-raised-button routerLink="/home">
+  <button type="button" class="primary" mat-raised-button routerLink="/home">
     {{"I18N.COMMON.FINISH" | transloco}}
   </button>
 </div>

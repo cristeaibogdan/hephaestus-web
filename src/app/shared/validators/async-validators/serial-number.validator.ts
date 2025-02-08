@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
 import { AbstractControl, AsyncValidator, ValidationErrors } from '@angular/forms';
 import { Observable, of } from 'rxjs';
@@ -9,8 +9,7 @@ import { SKIP_INTERCEPTOR } from './skip-interceptor.token';
 @Injectable({ providedIn: 'root' })
 export class SerialNumberValidator implements AsyncValidator {
 
-  constructor(private httpClient: HttpClient) { }
-
+  private httpClient = inject(HttpClient);
   private apiURL = environment.apiBaseUrl;
 
   validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {

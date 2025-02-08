@@ -1,31 +1,41 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { WashingMachineIdentification } from '../../models/washing-machine-identification.model';
-import { MatStepper } from '@angular/material/stepper';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { NotificationService } from 'src/app/services/notification.service';
 import { WashingMachineDetail } from '../../models/washing-machine-detail.model';
-import { TranslocoService } from '@ngneat/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
+import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 
 @Component({
-  selector: 'app-washing-machine-overview',
-  templateUrl: './washing-machine-overview.component.html',
-  styleUrls: ['./washing-machine-overview.component.scss']
+    selector: 'app-washing-machine-overview',
+    templateUrl: './washing-machine-overview.component.html',
+    styleUrls: ['./washing-machine-overview.component.scss'],
+    imports: [
+      MatButtonModule,
+      MatStepperModule, // for the directive matStepperPrevious
+
+      CommonModule,
+      TranslocoModule,
+      ToLabelPipe,
+      StepperButtonsDirective
+    ]
 })
 export class WashingMachineOverviewComponent {
+  private stepper = inject(MatStepper);
+  private _washingMachineService = inject(WashingMachineService);
+  private _notifService = inject(NotificationService);
+  private _translocoService = inject(TranslocoService);
 
   washingMachineIdentification$:Observable<WashingMachineIdentification | null> = this._washingMachineService.getWashingMachineIdentification();
   washingMachineDetail$:Observable<WashingMachineDetail | null> = this._washingMachineService.getWashingMachineDetail(); 
    
   selectedFiles:ImageFile[] = this._washingMachineService.getSelectedFiles();
-
-  constructor(
-    @Inject(MatStepper) private stepper: MatStepper,
-    private _washingMachineService: WashingMachineService,
-    private _notifService: NotificationService,
-    private _translocoService: TranslocoService,
-  ) { }
 
   save(): void {
     this._washingMachineService.save().then(success => {

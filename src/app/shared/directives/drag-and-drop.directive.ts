@@ -1,18 +1,20 @@
-import {Directive, ElementRef, EventEmitter, Output, Renderer2} from "@angular/core";
+import {Directive, ElementRef, EventEmitter, Output, Renderer2, inject} from "@angular/core";
 
 @Directive({
-  selector:'[dragAndDrop]',
-  host: {
-    '(dragover)': 'handleDragOver($event)',
-    '(dragleave)': 'handleDragLeave($event)',
-    '(drop)': 'handleDrop($event)',
-  }
+    selector: '[dragAndDrop]',
+    host: {
+        '(dragover)': 'handleDragOver($event)',
+        '(dragleave)': 'handleDragLeave($event)',
+        '(drop)': 'handleDrop($event)',
+    },
+    standalone: true
 })
 export class DragAndDropDirective {
 
   @Output() filesDropped = new EventEmitter<FileList>();
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  private el = inject(ElementRef);
+  private renderer = inject(Renderer2);
 
   handleDragOver(e: DragEvent) {
     e.preventDefault();

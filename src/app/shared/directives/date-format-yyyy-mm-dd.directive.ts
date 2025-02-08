@@ -14,11 +14,10 @@ const CUSTOM_FORMAT = {
 };
 
 @Directive({
-  selector: '[dateFormat_YYYY-MM-DD]',
-  providers: [
-    { provide: MAT_DATE_FORMATS, useValue: CUSTOM_FORMAT }
-  ]
+    selector: '[dateFormat_YYYY-MM-DD]',
+    providers: [
+        { provide: MAT_DATE_FORMATS, useValue: CUSTOM_FORMAT }
+    ],
+    standalone: true
 })
-export class DateFormatYYYYMMDDDirective {
-  constructor() { }
-}
+export class DateFormatYYYYMMDDDirective { }

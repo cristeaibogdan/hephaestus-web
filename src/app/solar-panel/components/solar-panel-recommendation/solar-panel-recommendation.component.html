@@ -1,22 +1,20 @@
 <app-solar-panel-overview>
   <div header class="text-align-center">
-    <ng-container *ngIf="solarPanelIdenfitication$ | async as solarPanelIdenfitication">
+    @if (solarPanelIdenfitication$ | async; as solarPanelIdenfitication) {      
       Based on the selected damages, the solar panel with serial number
       {{solarPanelIdenfitication.serialNumber}} 
       manufactured by {{solarPanelIdenfitication.manufacturer}}, is sent to:
-
+  
       <div class="text-align-center">
-        <button class="recommendation-text"
-          [ngClass]="{
-            repair: solarPanelRecommendation === 'REPAIR',
-            recycle: solarPanelRecommendation === 'RECYCLE',
-            dispose: solarPanelRecommendation === 'DISPOSE'
-          }">
+        <button class="recommendation-text"        
+          [class.repair]="solarPanelRecommendation === 'REPAIR'"
+          [class.recycle]="solarPanelRecommendation === 'RECYCLE'"
+          [class.dispose]="solarPanelRecommendation === 'DISPOSE'"
+        >
           {{solarPanelRecommendation}}
         </button>
       </div>
-    </ng-container>
-
+    }
     <p class="before-overview">
       {{"I18N.PRODUCT_RECOMMENDATION.SUBTITLE" | transloco}}
     </p>
@@ -24,11 +22,11 @@
 </app-solar-panel-overview>
 
 <div stepper-buttons>
-  <button mat-raised-button color="primary" (click)="onDownload()">
+  <button mat-raised-button class="primary" (click)="onDownload()">
     {{"I18N.COMMON.DOWNLOAD_RECOMMENDATION" | transloco}}
   </button>
   
-  <button type="button" color="primary" mat-raised-button routerLink="/home">
+  <button mat-raised-button type="button" class="primary" routerLink="/home">
     {{"I18N.COMMON.FINISH" | transloco}}
   </button>
 </div>

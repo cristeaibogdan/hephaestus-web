@@ -19,23 +19,22 @@ ul {
   gap: 3rem;
 }
 
-.mat-card {
+mat-card {
   padding: 0% 0% 2% 0%;
   border-radius: 8px;
   overflow: hidden;
 }
 
-.mat-card-title {
+mat-card-title {
   text-align: center;
   padding: 0.75rem;
   margin-bottom: 2%;
 
   color: #444;
-  font-size: 1.25rem;  
   background-color:#cfd3e6;
 }
 
-.mat-card-title span {
+mat-card-title span {
   color: red;
 }
 
@@ -170,8 +169,12 @@ fieldset {
   pointer-events: none;
 }
 
-/* Enable click events for checkboxes on the panel header */
-.mat-expansion-panel-header .mat-checkbox {
+/* 
+Enable click events for checkboxes on the panel header.
+However, you can slightly click outside the checkbox and expand the panel manually, 
+to fix that use together with (click)="$event.stopPropagation()" on mat-checkbox
+*/
+.mat-expansion-panel-header .mat-mdc-checkbox {
   pointer-events: auto;
 }
 
@@ -179,7 +182,7 @@ fieldset {
 /* *** MAT SLIDER RELATED */
 /* ********************************* */
 
-.mat-slider-horizontal {
+mat-slider {
   width: 300px;
 }
 
@@ -194,15 +197,19 @@ fieldset {
 }
 
 /* SLIDER = always display the thumb label */
-::ng-deep .mat-slider-thumb-label {
-  transform: rotate(45deg) !important;
-  border-radius: 50% 50% 0 !important;
+::ng-deep .mdc-slider .mdc-slider__value-indicator {
+  transform: scale(1);
 }
 
-::ng-deep .mat-slider-thumb {
-  transform: scale(0) !important;
-}
+// ::ng-deep .mat-mdc-slider .mdc-slider__thumb {
+//   transform: rotate(45deg) !important;
+//   border-radius: 50% 50% 0 !important;
+// }
 
-::ng-deep .mat-slider-thumb-label-text {
-  opacity: 1 !important;
-}
+// ::ng-deep .mat-mdc-slider .mdc-slider__thumb-knob {
+//   transform: scale(0) !important;
+// }
+
+// ::ng-deep .mat-mdc-slider .mdc-slider__value-indicator-text {
+//   opacity: 1 !important;
+// }

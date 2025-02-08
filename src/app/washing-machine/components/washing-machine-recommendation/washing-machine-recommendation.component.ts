@@ -1,26 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { EMPTY, Observable, switchMap, take } from 'rxjs';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { WashingMachineDataService } from '../../services/washing-machine.data.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { WashingMachineIdentification } from '../../models/washing-machine-identification.model';
 import { Recommendation } from '../../enums/recommendation.enum';
+import { MatButtonModule } from '@angular/material/button';
+import { WashingMachineOverviewComponent } from '../washing-machine-overview/washing-machine-overview.component';
+import { TranslocoModule } from '@jsverse/transloco';
+import { CommonModule } from '@angular/common';
+import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-washing-machine-recommendation',
   templateUrl: './washing-machine-recommendation.component.html',
-  styleUrls: ['./washing-machine-recommendation.component.scss']
+  styleUrls: ['./washing-machine-recommendation.component.scss'],
+  imports: [
+    MatButtonModule,
+
+    CommonModule,
+    RouterLink,
+    TranslocoModule,
+    WashingMachineOverviewComponent,
+    StepperButtonsDirective
+  ]
 })
 export class WashingMachineRecommendationComponent {
+  private _washingMachineService = inject(WashingMachineService);
+  private _washingMachineDataService = inject(WashingMachineDataService);
+  private _notifService = inject(NotificationService);
 
   washingMachineIdentification$:Observable<WashingMachineIdentification | null> = this._washingMachineService.getWashingMachineIdentification();
   washingMachineRecommendation :Recommendation = this._washingMachineService.getRecommendation();
-
-  constructor(
-    private _washingMachineService: WashingMachineService,
-    private _washingMachineDataService: WashingMachineDataService,
-    private _notifService: NotificationService
-  ) { }
 
 // **********************************
 // *** DOWNLOAD FILE FUNCTIONALITY

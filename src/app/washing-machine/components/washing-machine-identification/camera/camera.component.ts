@@ -1,34 +1,44 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BarcodeFormat } from '@zxing/library';
 import { ɵunwrapSafeValue } from "@angular/core"
 import { BrowserQRCodeReader } from '@zxing/browser/es2015/readers/BrowserQRCodeReader';
-import { ZXingScannerComponent } from '@zxing/ngx-scanner';
-import { MatDialogRef } from '@angular/material/dialog';
+import { ZXingScannerComponent, ZXingScannerModule } from '@zxing/ngx-scanner';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
 import { NotificationService } from 'src/app/services/notification.service';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 import { GetProductIdentificationResponse } from 'src/app/shared/models/get-product-identification.response';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  selector: 'app-camera',
-  templateUrl: './camera.component.html',
-  styleUrls: ['./camera.component.scss']
+    selector: 'app-camera',
+    templateUrl: './camera.component.html',
+    styleUrls: ['./camera.component.scss'],
+    imports: [
+      MatDialogModule,
+      MatIconModule,
+      MatButtonModule,
+      MatTooltipModule,
+
+      ZXingScannerModule,
+      SpinnerComponent
+    ]
 })
 export class CameraComponent implements AfterViewInit {
-
-  constructor(
-    private _notifService: NotificationService,
-    private _washingMachineDataService: WashingMachineDataService,
-    private sanitizer: DomSanitizer,
-    private dialogRef: MatDialogRef<CameraComponent>
-  ) { }
+  private _notifService = inject(NotificationService);
+  private _washingMachineDataService = inject(WashingMachineDataService);
+  private sanitizer = inject(DomSanitizer);
+  private dialogRef = inject(MatDialogRef<CameraComponent>);
 
 //****************************************
 //*** QR CODE CAMERA SCANNER 
 //****************************************
 
-  @ViewChild(ZXingScannerComponent)
+  @ViewChild(ZXingScannerComponent) 
   scanner!: ZXingScannerComponent;
 
   allowedFormats = [BarcodeFormat.QR_CODE];

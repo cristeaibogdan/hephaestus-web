@@ -1,134 +1,156 @@
-  <h1>{{"I18N.COMMON.OVERVIEW" | transloco}}</h1>
+<h1>{{"I18N.COMMON.OVERVIEW" | transloco}}</h1>
+
+<mat-dialog-content>
+
+  <section>
+    <h2>{{"I18N.COMMON.RECOMMENDATION" | transloco}}</h2>
+          
+    <div class="text-align-center">
+      <button class="recommendation-text"
+        [class.repackage]="washingMachine.recommendation === 'REPACKAGE'"
+        [class.resale]="washingMachine.recommendation === 'RESALE'"
+        [class.outlet]="washingMachine.recommendation === 'OUTLET'"
+        [class.repair]="washingMachine.recommendation === 'REPAIR'"
+        [class.disassemble]="washingMachine.recommendation === 'DISASSEMBLE'">
+        {{washingMachine.recommendation}}
+      </button>
+    </div>
+
+    <p>{{"I18N.COMMON.CREATED" | transloco}}: {{washingMachine.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+  </section>
+
+  <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | transloco}}</h2>
+  <ul class="product-information-list">  
+    <li>{{"I18N.COMMON.CATEGORY" | transloco}}: {{washingMachine.category}}</li>
+    <li>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{washingMachine.manufacturer}}</li>
+    <li>{{"I18N.COMMON.SERIAL_NUMBER" | transloco}}: {{washingMachine.serialNumber}}</li>
+    <li>{{"I18N.COMMON.MODEL" | transloco}}: {{washingMachine.model}}</li>
+    <li>{{"I18N.COMMON.TYPE" | transloco}}: {{washingMachine.type}}</li>
+  </ul>
+
+  <h2>{{"I18N.COMMON.DAMAGE_IDENTIFICATION_TITLE" | transloco}}</h2>
+  <ul class="product-information-list">  
+    <li>{{"I18N.COMMON.IDENTIFICATION_MODE" | transloco}}: {{washingMachine.identificationMode | toLabel}}</li>    
+    <li>{{"I18N.COMMON.RETURN_TYPE" | transloco}}: {{washingMachine.returnType | toLabel}}</li>
+    <li>{{"I18N.COMMON.DAMAGE_TYPE" | transloco}}: {{washingMachine.damageType | toLabel}}</li>
+  </ul>
+
+  <h2>{{"I18N.COMMON.DAMAGED_PRODUCT_IMAGES_TITLE" | transloco}}</h2>
+  <section class="image-list">
+    @for (image of washingMachine.washingMachineImages; track image) {
+      <img [src]="image.imagePrefix+image.image">
+    }
+  </section>
+
+  <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
+  @if (washingMachine.washingMachineDetail; as washingMachineDetail) {
+    <section class="damages-container">
+
+      @if (washingMachineDetail.applicablePackageDamage) {
+        <article>
+          <h3>{{"I18N.COMMON.PACKAGE" | transloco}}</h3>
   
-  <mat-dialog-content *ngIf="washingMachine">
+          <ul class="damages-list">
+            @if (washingMachineDetail.packageDamaged) { <li>{{"I18N.COMMON.PACKAGE_DAMAGED" | transloco}}</li> }
+            @if (washingMachineDetail.packageDirty) { <li>{{"I18N.COMMON.PACKAGE_DIRTY" | transloco}}</li> }
+            @if (washingMachineDetail.packageMaterialAvailable) { <li>{{"I18N.COMMON.PACKAGE_REPACKAGE" | transloco}}</li> }              
+          </ul>  
+        </article>
+      }
 
-    <section>
-      <h2>{{"I18N.COMMON.RECOMMENDATION" | transloco}}</h2>
-           
-      <div class="text-align-center">
-        <button class="recommendation-text"
-          [ngClass]="{
-            repackage: washingMachine.recommendation === 'REPACKAGE',
-            resale: washingMachine.recommendation === 'RESALE',
-            outlet: washingMachine.recommendation === 'OUTLET',
-            repair: washingMachine.recommendation === 'REPAIR',
-            disassemble: washingMachine.recommendation === 'DISASSEMBLE'}">
-          {{washingMachine.recommendation}}
-        </button>
-      </div>
+      @if (washingMachineDetail.applicableVisibleSurfacesDamage) {
+        <article>
+          <h3>{{"I18N.COMMON.VISIBLE_SURFACES" | transloco}}</h3>
+  
+          <ul class="damages-list">
+            @if (washingMachineDetail.visibleSurfacesHasScratches) {
+              <li>
+                {{"I18N.COMMON.SCRATCHES_LENGTH" | transloco}}:
+                {{washingMachineDetail.visibleSurfacesScratchesLength}} 
+                {{"I18N.COMMON.CM" | transloco}}
+              </li>
+            }
+            @if (washingMachineDetail.visibleSurfacesHasDents) {
+              <li>
+                {{"I18N.COMMON.DENTS_DEPTH" | transloco}}:
+                {{washingMachineDetail.visibleSurfacesDentsDepth}} 
+                {{"I18N.COMMON.CM" | transloco}}
+              </li>
+            }
+            @if (washingMachineDetail.visibleSurfacesHasMinorDamage) {
+              <li>
+                {{"I18N.COMMON.MINOR_DAMAGES" | transloco}}:
+                {{washingMachineDetail.visibleSurfacesMinorDamage}}
+              </li>
+            }
+            @if (washingMachineDetail.visibleSurfacesHasMajorDamage) {
+              <li>
+                {{"I18N.COMMON.MAJOR_DAMAGES" | transloco}}:
+                {{washingMachineDetail.visibleSurfacesMajorDamage}}
+              </li>
+            }
+          </ul>
+        </article>
+      }
 
-      <p>{{"I18N.COMMON.CREATED" | transloco}}: {{washingMachine.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+      @if (washingMachineDetail.applicableHiddenSurfacesDamage) {
+        <article>
+          <h3>{{"I18N.COMMON.HIDDEN_SURFACES" | transloco}}</h3>
+  
+          <ul class="damages-list">
+            @if (washingMachineDetail.hiddenSurfacesHasScratches) {
+              <li>
+                {{"I18N.COMMON.SCRATCHES_LENGTH" | transloco}}:
+                {{washingMachineDetail.hiddenSurfacesScratchesLength}} 
+                {{"I18N.COMMON.CM" | transloco}}
+              </li>
+            }
+            @if (washingMachineDetail.hiddenSurfacesHasDents) {
+              <li>
+                {{"I18N.COMMON.DENTS_DEPTH" | transloco}}:
+                {{washingMachineDetail.hiddenSurfacesDentsDepth}} 
+                {{"I18N.COMMON.CM" | transloco}}
+              </li>
+            }
+            @if (washingMachineDetail.hiddenSurfacesHasMinorDamage) {
+              <li>
+                {{"I18N.COMMON.MINOR_DAMAGES" | transloco}}:
+                {{washingMachineDetail.hiddenSurfacesMinorDamage}}
+              </li>
+            }
+            @if (washingMachineDetail.hiddenSurfacesHasMajorDamage) {
+              <li>
+                {{"I18N.COMMON.MAJOR_DAMAGES" | transloco}}:
+                {{washingMachineDetail.hiddenSurfacesMajorDamage}}
+              </li>
+            }
+          </ul>
+        </article>
+      }
+
+      @if (washingMachineDetail.price > 0 && washingMachineDetail.repairPrice > 0) {
+        <article>
+          <h3>{{"I18N.COMMON.PRICING" | transloco}}</h3>
+  
+          <ul class="damages-list">
+            <li>{{"I18N.COMMON.PRODUCT_PRICE" | transloco}}: {{washingMachineDetail.price}} €</li>
+            <li>{{"I18N.COMMON.PRODUCT_REPAIR_PRICE" | transloco}}: {{washingMachineDetail.repairPrice}} €</li>
+          </ul>
+        </article>
+      }
     </section>
-
-    <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | transloco}}</h2>
-    <ul class="product-information-list">  
-      <li>{{"I18N.COMMON.CATEGORY" | transloco}}: {{washingMachine.category}}</li>
-      <li>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{washingMachine.manufacturer}}</li>
-      <li>{{"I18N.COMMON.SERIAL_NUMBER" | transloco}}: {{washingMachine.serialNumber}}</li>
-      <li>{{"I18N.COMMON.MODEL" | transloco}}: {{washingMachine.model}}</li>
-      <li>{{"I18N.COMMON.TYPE" | transloco}}: {{washingMachine.type}}</li>
-    </ul>
-  
-    <h2>{{"I18N.COMMON.DAMAGE_IDENTIFICATION_TITLE" | transloco}}</h2>
-    <ul class="product-information-list">  
-      <li>{{"I18N.COMMON.IDENTIFICATION_MODE" | transloco}}: {{washingMachine.identificationMode | toLabel}}</li>    
-      <li>{{"I18N.COMMON.RETURN_TYPE" | transloco}}: {{washingMachine.returnType | toLabel}}</li>
-      <li>{{"I18N.COMMON.DAMAGE_TYPE" | transloco}}: {{washingMachine.damageType | toLabel}}</li>
-    </ul>
-  
-    <h2>{{"I18N.COMMON.DAMAGED_PRODUCT_IMAGES_TITLE" | transloco}}</h2>
-    <section class="image-list">
-      <img *ngFor="let image of washingMachine.washingMachineImages" [src]="image.imagePrefix+image.image">
-    </section>
-  
-    <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
-    <section class="damages-container" *ngIf="washingMachine.washingMachineDetail as washingMachineDetail">
-
-      <article *ngIf="washingMachineDetail.applicablePackageDamage">
-        <h3>{{"I18N.COMMON.PACKAGE" | transloco}}</h3>
-
-        <ul class="damages-list">
-          <li *ngIf="washingMachineDetail.packageDamaged">{{"I18N.COMMON.PACKAGE_DAMAGED" | transloco}}</li>
-          <li *ngIf="washingMachineDetail.packageDirty">{{"I18N.COMMON.PACKAGE_DIRTY" | transloco}}</li>
-          <li *ngIf="washingMachineDetail.packageMaterialAvailable">{{"I18N.COMMON.PACKAGE_REPACKAGE" | transloco}}</li>
-        </ul>  
-      </article>
-
-      <article *ngIf="washingMachineDetail.applicableVisibleSurfacesDamage">
-        <h3>{{"I18N.COMMON.VISIBLE_SURFACES" | transloco}}</h3>
-
-        <ul class="damages-list">
-          <li *ngIf="washingMachineDetail.visibleSurfacesHasScratches">
-            {{"I18N.COMMON.SCRATCHES_LENGTH" | transloco}}:
-            {{washingMachineDetail.visibleSurfacesScratchesLength}} 
-            {{"I18N.COMMON.CM" | transloco}}
-          </li>
-          <li *ngIf="washingMachineDetail.visibleSurfacesHasDents">
-            {{"I18N.COMMON.DENTS_DEPTH" | transloco}}:
-            {{washingMachineDetail.visibleSurfacesDentsDepth}} 
-            {{"I18N.COMMON.CM" | transloco}}
-          </li>
-          <li *ngIf="washingMachineDetail.visibleSurfacesHasMinorDamage">
-            {{"I18N.COMMON.MINOR_DAMAGES" | transloco}}:
-            {{washingMachineDetail.visibleSurfacesMinorDamage}}
-          </li>
-          <li *ngIf="washingMachineDetail.visibleSurfacesHasMajorDamage">
-            {{"I18N.COMMON.MAJOR_DAMAGES" | transloco}}:
-            {{washingMachineDetail.visibleSurfacesMajorDamage}}
-          </li>
-        </ul>
-      </article>
-
-      <article *ngIf="washingMachineDetail.applicableHiddenSurfacesDamage">
-        <h3>{{"I18N.COMMON.HIDDEN_SURFACES" | transloco}}</h3>
-
-        <ul class="damages-list">
-          <li *ngIf="washingMachineDetail.hiddenSurfacesHasScratches">
-            {{"I18N.COMMON.SCRATCHES_LENGTH" | transloco}}:
-            {{washingMachineDetail.hiddenSurfacesScratchesLength}} 
-            {{"I18N.COMMON.CM" | transloco}}
-          </li>
-          <li *ngIf="washingMachineDetail.hiddenSurfacesHasDents">
-            {{"I18N.COMMON.DENTS_DEPTH" | transloco}}:
-            {{washingMachineDetail.hiddenSurfacesDentsDepth}} 
-            {{"I18N.COMMON.CM" | transloco}}
-          </li>
-          <li *ngIf="washingMachineDetail.hiddenSurfacesHasMinorDamage">
-            {{"I18N.COMMON.MINOR_DAMAGES" | transloco}}:
-            {{washingMachineDetail.hiddenSurfacesMinorDamage}}
-          </li>
-          <li *ngIf="washingMachineDetail.hiddenSurfacesHasMajorDamage">
-            {{"I18N.COMMON.MAJOR_DAMAGES" | transloco}}:
-            {{washingMachineDetail.hiddenSurfacesMajorDamage}}
-          </li>
-        </ul>
-      </article>
-
-      <article *ngIf="washingMachineDetail.price > 0 && washingMachineDetail.repairPrice > 0">
-        <h3>{{"I18N.COMMON.PRICING" | transloco}}</h3>
-
-        <ul class="damages-list">
-          <li>
-            {{"I18N.COMMON.PRODUCT_PRICE" | transloco}}: {{washingMachineDetail.price}} €
-          </li>
-          <li>
-            {{"I18N.COMMON.PRODUCT_REPAIR_PRICE" | transloco}}: {{washingMachineDetail.repairPrice}} €
-          </li>
-        </ul>
-      </article>    
-    </section>    
-  </mat-dialog-content>
-  
+  }
+</mat-dialog-content>
 
 <mat-dialog-actions class="mat-dialog-actions-buttons">
-  <button mat-raised-button color="primary" 
+  <button mat-raised-button class="primary" 
     (click)="onDownload()">
     {{"I18N.COMMON.DOWNLOAD_RECOMMENDATION" | transloco}}
   </button>
 
-  <button mat-raised-button type="button" color="warn" mat-dialog-close>
+  <button mat-raised-button type="button" class="warn" mat-dialog-close>
     {{"I18N.COMMON.CLOSE" | transloco}}
   </button>
 </mat-dialog-actions>
 
-<!-- <mat-icon class="close-icon" color="warn" mat-dialog-close svgIcon="close"></mat-icon> -->
+<!-- <mat-icon class="close-icon" class="warn" mat-dialog-close svgIcon="close"></mat-icon> -->

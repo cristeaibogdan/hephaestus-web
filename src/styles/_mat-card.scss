@@ -1,0 +1,9 @@
+@use '@angular/material' as mat;
+
+:root {
+  @include mat.card-overrides((
+    elevated-container-color: #fff,
+    title-text-weight: 500,
+    title-text-size: 1.25rem
+  ));
+}

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { LoginUserResponse } from '../washing-machine/models/dtos/login-user.response';
 import { LoginUserRequest } from '../washing-machine/models/dtos/login-user.request';
@@ -12,8 +12,7 @@ import { SKIP_INTERCEPTOR } from '../shared/validators/async-validators/skip-int
 @Injectable({providedIn: 'root'})
 export class AuthDataService {
   apiURL = environment.apiBaseUrl;
-
-  constructor(private http: HttpClient) { }
+  private http = inject(HttpClient);
 
 //******************************
 //*** AUTH - LOGIN

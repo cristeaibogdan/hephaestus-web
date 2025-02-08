@@ -1,5 +1,5 @@
 <form [formGroup]="solarPanelForm" (ngSubmit)="onSubmit()" (reset)="onReset($event)">
-  <mat-card class="mat-elevation-z8">
+  <mat-card class="elevation-level4">
     <mat-card-title>Identification</mat-card-title>
 
     <article class="product-information">
@@ -12,9 +12,9 @@
         <mat-label>{{"I18N.COMMON.MANUFACTURER" | transloco}}</mat-label>        
         <mat-select formControlName="manufacturer" (valueChange)="getModelsAndTypes($event)">
 
-          <mat-option *ngFor="let manufacturer of availableManufacturers"
-            [value]="manufacturer">{{manufacturer}}
-          </mat-option>
+          @for (manufacturer of availableManufacturers; track manufacturer) {
+            <mat-option [value]="manufacturer">{{manufacturer}}</mat-option>
+          }
 
         </mat-select>
         <mat-error>{{"I18N.MAT_ERROR.MANUFACTURER_REQUIRED" | transloco}}</mat-error>
@@ -24,9 +24,9 @@
         <mat-label>{{"I18N.COMMON.MODEL" | transloco}}</mat-label>
         <mat-select formControlName="model">
 
-          <mat-option *ngFor="let model of availableModels" 
-            [value]="model">{{model}}
-          </mat-option>
+          @for (model of availableModels; track model) {
+            <mat-option [value]="model">{{model}}</mat-option>
+          }
 
         </mat-select>
         <mat-error>{{"I18N.MAT_ERROR.MODEL_OR_TYPE_REQUIRED" | transloco}}</mat-error>
@@ -36,9 +36,9 @@
         <mat-label>{{ "I18N.COMMON.TYPE" | transloco }}</mat-label>
         <mat-select formControlName="type"> 
 
-          <mat-option *ngFor="let type of availableTypes" 
-            [value]="type">{{type}}
-          </mat-option>
+          @for (type of availableTypes; track type) {
+            <mat-option [value]="type">{{type}}</mat-option>
+          }
 
         </mat-select>
         <mat-error>{{"I18N.MAT_ERROR.MODEL_OR_TYPE_REQUIRED" | transloco}}</mat-error>
@@ -47,19 +47,19 @@
       <mat-form-field appearance="fill">
         <mat-label>{{ "I18N.COMMON.SERIAL_NUMBER" | transloco }}</mat-label>
         <input matInput formControlName="serialNumber" />
-        <mat-error *ngIf="solarPanelForm.controls.serialNumber.errors?.required">
-          {{"I18N.MAT_ERROR.SERIAL_NUMBER_REQUIRED" | transloco}}
-        </mat-error>
+        @if (solarPanelForm.controls.serialNumber.errors?.required) {
+          <mat-error>{{"I18N.MAT_ERROR.SERIAL_NUMBER_REQUIRED" | transloco}}</mat-error>
+        }
       </mat-form-field>
     </article>
   </mat-card>
 
   <div stepper-buttons>
-    <button mat-raised-button type="reset" color="warn">
+    <button mat-raised-button type="reset" class="warn">
       {{ "I18N.COMMON.RESET" | transloco }}
     </button>
 
-    <button mat-raised-button type="submit" color="primary">
+    <button mat-raised-button type="submit" class="primary">
       {{ "I18N.COMMON.NEXT" | transloco }}
     </button>
   </div>

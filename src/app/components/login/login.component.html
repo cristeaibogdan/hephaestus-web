@@ -1,4 +1,4 @@
-<mat-card class="mat-elevation-z8">
+<mat-card class="elevation-level4">
   <form [formGroup]="loginForm" (ngSubmit)="login()">
   <img class="service-logo" src="assets/logos/hephaestus-logo.png"/>
   <mat-card-content>
@@ -6,30 +6,30 @@
       {{ "I18N.COMMON.SERVICE_TITLE" | transloco | titlecase }}
     </header>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="test">
       <mat-label>{{ "I18N.COMMON.USERNAME" | transloco }}</mat-label>
       <input matInput formControlName="username" />
 
-      <mat-error *ngIf="loginForm.controls.username.errors?.required">
-        {{ "I18N.MAT_ERROR.USERNAME_REQUIRED" | transloco }}
-      </mat-error>
+      @if(loginForm.controls.username.errors?.required) {
+        <mat-error>{{ "I18N.MAT_ERROR.USERNAME_REQUIRED" | transloco }}</mat-error>
+      }
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="test">
       <mat-label>{{ "I18N.COMMON.PASSWORD" | transloco }}</mat-label>
       <input matInput type="password" formControlName="password"/>
 
-      <mat-error *ngIf="loginForm.controls.password.errors?.required">
-        {{ "I18N.MAT_ERROR.PASSWORD_REQUIRED" | transloco }}
-      </mat-error>
-
-      <mat-error *ngIf="loginForm.controls.password.errors?.minlength">
-        {{ "I18N.MAT_ERROR.PASSWORD_LENGTH" | transloco }}
-      </mat-error>
+      @if(loginForm.controls.password.errors?.required) {
+        <mat-error>{{ "I18N.MAT_ERROR.PASSWORD_REQUIRED" | transloco }}</mat-error>
+      }
+      
+      @if(loginForm.controls.password.errors?.minlength) {
+        <mat-error>{{ "I18N.MAT_ERROR.PASSWORD_LENGTH" | transloco }}</mat-error>
+      }      
     </mat-form-field>
   </mat-card-content>
 
-  <button mat-raised-button type="submit" color="primary">
+  <button mat-raised-button type="submit" class="primary">
     {{ "I18N.COMMON.LOG_IN" | transloco | uppercase }}
   </button>
 

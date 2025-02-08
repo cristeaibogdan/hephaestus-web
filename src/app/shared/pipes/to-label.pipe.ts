@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({name: 'toLabel'})
+@Pipe({
+    name: 'toLabel',
+    standalone: true
+})
 export class ToLabelPipe implements PipeTransform {
 
   private readonly specialCases: Map<string, string> = new Map([

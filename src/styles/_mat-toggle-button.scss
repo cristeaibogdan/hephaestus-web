@@ -1,0 +1,13 @@
+@use '@angular/material' as mat;
+
+:root {
+  @include mat.button-toggle-overrides((
+    shape: 4px,
+    divider-color: #e0e0e0,
+    selected-state-background-color: #4361ee,
+    selected-state-text-color: white,
+    label-text-size: 16px,
+    label-text-line-height: 48px,
+    label-text-weight: normal
+  ));
+}

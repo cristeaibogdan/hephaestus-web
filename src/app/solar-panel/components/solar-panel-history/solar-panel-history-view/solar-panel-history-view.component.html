@@ -1,4 +1,4 @@
-<h1>{{"I18N.COMMON.OVERVIEW" | transloco}}</h1>
+<h1 mat-dialog-title>{{"I18N.COMMON.OVERVIEW" | transloco}}</h1>
 
 <mat-dialog-content>
 
@@ -6,12 +6,11 @@
     <h2>{{"I18N.COMMON.RECOMMENDATION" | transloco}}</h2>
 
     <div class="text-align-center">
-      <button class="recommendation-text"
-        [ngClass]="{
-          repair: solarPanel.recommendation === 'REPAIR',
-          recycle: solarPanel.recommendation === 'RECYCLE',
-          dispose: solarPanel.recommendation === 'DISPOSE'}">
-        {{solarPanel.recommendation}}
+      <button class="recommendation-text"        
+          [class.repair]="solarPanel.recommendation === 'REPAIR'"
+          [class.recycle] = "solarPanel.recommendation === 'RECYCLE'"
+          [class.dispose] = "solarPanel.recommendation === 'DISPOSE'">
+          {{solarPanel.recommendation}}
       </button>
     </div>
 
@@ -28,34 +27,28 @@
   </ul>
 
   <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
-  <section *ngIf="solarPanel.solarPanelDamage as solarPanelDamage">
+  @if (solarPanel.solarPanelDamage; as solarPanelDamage) {
     <ul class="damages-list">
-      <li *ngIf="solarPanelDamage.hotSpots">
-        Hot Spots
-      </li>
-      <li *ngIf="solarPanelDamage.microCracks">
-        Micro Cracks
-      </li>
-      <li *ngIf="solarPanelDamage.snailTrails">
-        Snail Trails
-      </li>
-      <li *ngIf="solarPanelDamage.brokenGlass">
-        Broken Glass
-      </li>
-      <li *ngIf="solarPanelDamage.additionalDetails">
-        Additional Details:
-        {{solarPanelDamage.additionalDetails}}
-      </li>
+      @if (solarPanelDamage.hotSpots) { <li>Hot Spots</li> }        
+      @if (solarPanelDamage.microCracks) { <li>Micro Cracks</li> }        
+      @if (solarPanelDamage.snailTrails) { <li>Snail Trails</li> }        
+      @if (solarPanelDamage.brokenGlass) { <li>Broken Glass</li> }
+      @if (solarPanelDamage.additionalDetails) {
+        <li>
+          Additional Details:
+          {{solarPanelDamage.additionalDetails}}
+        </li>
+      }
     </ul>
-  </section>
+  }
 </mat-dialog-content>
 
 <mat-dialog-actions class="mat-dialog-actions-buttons">
-  <button mat-raised-button type="button" color="primary" (click)="onDownload()">
+  <button mat-raised-button type="button" class="primary" (click)="onDownload()">
     {{"I18N.COMMON.DOWNLOAD_RECOMMENDATION" | transloco}}
   </button>
 
-  <button mat-raised-button type="button" color="warn" mat-dialog-close>
+  <button mat-raised-button type="button" class="warn" mat-dialog-close>
     {{"I18N.COMMON.CLOSE" | transloco}}
   </button>
 </mat-dialog-actions>
