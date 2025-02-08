@@ -23,7 +23,7 @@ The frontend application is deployed on **GitHub Pages** and is accessible here:
 - **[Live Application](https://cristeaibogdan.github.io/hephaestus-web/)**  
   Access the live version of the Hephaestus application, where you can interact with the user interface and make informed appliance decisions.
   
-  **⚠️ Backend is hosted on Azure with a burst configuration, which means it may temporarily shut down when idle. If the service doesn't respond immediately, try refreshing a few times to wake it up.**
+  **⚠️ Backend is hosted on Azure with a burst configuration, which means it may temporarily shut down when idle. Please wait for the initialization process to complete.**
 
 - **[Zipkin Server on Azure](https://zipkin.kindmeadow-812476e6.northeurope.azurecontainerapps.io)**  
   Access Zipkin to monitor requests in real-time and trace how the frontend interacts with the backend.
@@ -33,7 +33,7 @@ The frontend application is deployed on **GitHub Pages** and is accessible here:
 </div>
 
 ## Technologies Used
-* **Angular 15** - The frontend is written in Angular 15, a framework for building efficient single-page applications (SPAs).
+* **Angular 19** - The frontend was written in Angular 19, a framework for building efficient single-page applications (SPAs).
 * **Angular Material** - Offers a set of reusable UI components based on Material Design. Used to enhance the user interface with a modern look and feel.
 * **Reactive Forms** - Facilitates handling of form inputs and validations through a reactive programming approach.
 * **Custom Sync Validators** - Implemented to enforce business logic and ensure that form data meets specific requirements.
@@ -51,7 +51,7 @@ To run the frontend locally, ensure that you have the following:
 * Visual Studio Code (VSC)
 * Node.js
 * npm
-* Angular CLI 15
+* Angular CLI 19
 
 ### Usage
 1. Clone the repository:
