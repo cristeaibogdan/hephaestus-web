@@ -25,7 +25,7 @@ jobs:
         run: npm run build -- --configuration=production --output-path=docs --base-href=/hephaestus-web/
 
       - name: Create 404.html workaround for GitHub Pages
-        run: cp docs/index.html docs/404.html
+        run: cp docs/browser/index.html docs/browser/404.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
