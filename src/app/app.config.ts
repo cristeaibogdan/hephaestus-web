@@ -59,7 +59,6 @@ export const appConfig: ApplicationConfig = {
       loader: TranslocoHttpLoader
     }),
 
-    // TODO: Test how it performs while deployed on GithubPages    
     provideAppInitializer(() => inject(InitializationService).wakeupBackends()),
 
     importProvidersFrom( // Zipkin tracing configuration      
