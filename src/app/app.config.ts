@@ -60,7 +60,7 @@ export const appConfig: ApplicationConfig = {
     }),
 
     // TODO: Test how it performs while deployed on GithubPages    
-    // provideAppInitializer(() => inject(InitializationService).wakeupBackends()),
+    provideAppInitializer(() => inject(InitializationService).wakeupBackends()),
 
     importProvidersFrom( // Zipkin tracing configuration      
       OpenTelemetryInterceptorModule.forRoot({
