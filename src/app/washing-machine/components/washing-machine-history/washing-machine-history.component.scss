@@ -18,10 +18,14 @@ h3 {
 .table-container {
   width: 95%;
   margin: 0 auto;
+
+  max-height: calc(100% - 100px);
+  display: flex;
+  flex-direction: column;
 }
 
-.table-horizontal-scroll {
-  overflow: auto;
+form {
+  overflow-x: auto;
 }
 
 /* ************************************ */
