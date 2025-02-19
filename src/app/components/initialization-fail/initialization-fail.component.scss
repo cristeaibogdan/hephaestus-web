@@ -1,3 +1,10 @@
+:host {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 mat-card {
   padding: 24px;
   border-radius: 20px;
@@ -5,13 +12,7 @@ mat-card {
   width: 560px;
 
   align-items: center;
-  justify-content: center;
   gap: 32px;
-
-  position: fixed; /* Fixed position ensures it's centered on the screen */
-  top: 50%; /* Move to the middle vertically */
-  left: 50%; /* Move to the middle horizontally */
-  transform: translate(-50%, -50%); /* Adjust to center perfectly */
 }
 
 mat-card-title {

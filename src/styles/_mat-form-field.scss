@@ -3,3 +3,9 @@
 :root {
   @include mat.form-field-density(-1);
 }
+
+app-login, app-register {
+  @include mat.form-field-overrides((
+    outlined-outline-color: #e0e0e0
+  ));
+}
