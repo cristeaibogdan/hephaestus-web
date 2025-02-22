@@ -1,0 +1,45 @@
+<section class="container" [formGroup]="washingMachinePricingForm">
+  <mat-form-field appearance="fill">
+    <mat-label>{{"I18N.COMMON.PRODUCT_PRICE" | transloco | titlecase}}</mat-label>
+    <input matInput type="number" formControlName="price">
+    <span matTextPrefix>€&nbsp;</span>
+
+    @if(washingMachinePricingForm.controls.price.errors?.min) {
+      <mat-error>{{"I18N.MAT_ERROR.PRODUCT_PRICE_MINIMUM" | transloco}}</mat-error>
+    }
+
+    @if(washingMachinePricingForm.controls.price.errors?.max) {
+      <mat-error>{{"I18N.MAT_ERROR.PRODUCT_PRICE_MAXIMUM" | transloco}}</mat-error>
+    }
+
+    @if(washingMachinePricingForm.controls.price.errors?.required) {
+      <mat-error>{{"I18N.MAT_ERROR.PRODUCT_PRICE_REQUIRED" | transloco}}</mat-error>
+    }
+
+    @if(washingMachinePricingForm.controls.price.errors?.minMaxError) {
+      <mat-error>{{"I18N.MAT_ERROR.REPAIR_PRICE_EXCEEDS_PRODUCT_PRICE" | transloco}}</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>{{"I18N.COMMON.PRODUCT_REPAIR_PRICE" | transloco | titlecase}}</mat-label>
+    <input matInput type="number" formControlName="repairPrice">
+    <span matTextPrefix>€&nbsp;</span>
+
+    @if(washingMachinePricingForm.controls.repairPrice.errors?.min) {
+      <mat-error>{{"I18N.MAT_ERROR.REPAIR_PRICE_MINIMUM" | transloco}}</mat-error>
+    }
+
+    @if(washingMachinePricingForm.controls.repairPrice.errors?.max) {
+      <mat-error>{{"I18N.MAT_ERROR.REPAIR_PRICE_MAXIMUM" | transloco}}</mat-error>
+    }
+
+    @if(washingMachinePricingForm.controls.repairPrice.errors?.required) {
+      <mat-error>{{"I18N.MAT_ERROR.REPAIR_PRICE_REQUIRED" | transloco}}</mat-error>
+    }
+    
+    @if(washingMachinePricingForm.controls.repairPrice.errors?.minMaxError) {
+      <mat-error>{{"I18N.MAT_ERROR.REPAIR_PRICE_EXCEEDS_PRODUCT_PRICE" | transloco}}</mat-error>
+    }
+  </mat-form-field>
+</section>

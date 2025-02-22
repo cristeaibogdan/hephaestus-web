@@ -21,6 +21,7 @@ import { DragAndDropDirective } from 'src/app/shared/directives/drag-and-drop.di
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
+import { PricingFormComponent } from './pricing-form/pricing-form.component';
 
 @Component({
   selector: 'app-washing-machine-damage',
@@ -42,11 +43,13 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     TranslocoModule,
     DragAndDropDirective,
-    StepperButtonsDirective
+    StepperButtonsDirective,
+
+    PricingFormComponent
   ]
 })
 export class WashingMachineDamageComponent implements OnDestroy {  
-  private stepper = inject(MatStepper)
+  private stepper = inject(MatStepper);
   private fb = inject(NonNullableFormBuilder);
   private _washingMachineService = inject(WashingMachineService);
   private _notifService = inject(NotificationService);

@@ -321,7 +321,8 @@
 
 <mat-card class="elevation-level4">
   <mat-card-title>Evaluate Price</mat-card-title>
-
+  <app-pricing-form [washingMachinePricingForm] = "washingMachinePricingForm"></app-pricing-form>
+<!-- 
   <section class="container-price" [formGroup]="washingMachinePricingForm">
     <mat-form-field appearance="fill">
       <mat-label>{{"I18N.COMMON.PRODUCT_PRICE" | transloco | titlecase}}</mat-label>
@@ -366,14 +367,14 @@
         <mat-error>{{"I18N.MAT_ERROR.REPAIR_PRICE_EXCEEDS_PRODUCT_PRICE" | transloco}}</mat-error>
       }
     </mat-form-field>
-  </section>
+  </section> -->
 </mat-card>
 </ul>
 
 <div stepper-buttons>
-  <button mat-raised-button type="reset" matStepperPrevious>
+  <!-- <button mat-raised-button type="reset" matStepperPrevious>
     {{"I18N.COMMON.BACK" | transloco}}
-  </button>
+  </button> -->
 
   <button mat-raised-button class="warn" type="reset">
     {{"I18N.COMMON.RESET" | transloco}}
