@@ -22,6 +22,7 @@ import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-butto
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { PricingFormComponent } from './pricing-form/pricing-form.component';
+import { PackageFormComponent } from './package-damage-form/package-form.component';
 
 @Component({
   selector: 'app-washing-machine-damage',
@@ -45,7 +46,8 @@ import { PricingFormComponent } from './pricing-form/pricing-form.component';
     DragAndDropDirective,
     StepperButtonsDirective,
 
-    PricingFormComponent
+    PricingFormComponent,
+    PackageFormComponent
   ]
 })
 export class WashingMachineDamageComponent implements OnDestroy {  
@@ -145,42 +147,6 @@ export class WashingMachineDamageComponent implements OnDestroy {
   majorDamageDescriptionCharacterLimit:number = 200;
 
   ngOnInit(): void {
-    // *****************************
-    // *** PACKAGE DAMAGE
-    // *****************************
-
-    const applicablePackageDamage = this.washingMachineDetailForm.controls.applicablePackageDamage
-    const packageForm = this.washingMachineDetailForm.controls.packageForm;
-
-    // 1. If false from the start, reset and disable packageForm
-    if(!applicablePackageDamage.value) {
-      packageForm.reset();
-      packageForm.disable({emitEvent: false});
-    }
-
-    // 2. On every value change enable, reset and disable accordingly
-    this.subscriptions.push(applicablePackageDamage.valueChanges.subscribe(value =>{      
-      if(value) {
-        packageForm.enable({emitEvent: false});
-        packageForm.controls.packageMaterialAvailable.disable();
-      } else {
-        packageForm.reset();
-        packageForm.disable({emitEvent: false});
-      }
-    })
-    );
-
-    // 3. If packageDamaged or packageDirty is true, enable packageMaterialAvailable
-    this.subscriptions.push(packageForm.valueChanges.subscribe(value => {
-      if(value.packageDamaged || value.packageDirty) {
-        packageForm.controls.packageMaterialAvailable.enable({emitEvent: false});       
-      } else {
-        packageForm.controls.packageMaterialAvailable.setValue(false, {emitEvent: false});
-        packageForm.controls.packageMaterialAvailable.disable({emitEvent: false}); 
-      }
-    })
-    );
-
     // *****************************
     // *** VISIBLE SURFACES DAMAGE
     // *****************************

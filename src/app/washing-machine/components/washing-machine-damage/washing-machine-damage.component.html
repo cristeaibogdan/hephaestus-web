@@ -45,25 +45,11 @@
 <mat-card class="elevation-level4">
   <mat-card-title>{{"I18N.PRODUCT_DAMAGE.SELECT_DAMAGE_TITLE" | transloco}} <span>*</span></mat-card-title>
 
-  <section class="damage-panels">    
-    <mat-expansion-panel [expanded]="washingMachineDetailForm.controls.applicablePackageDamage.value">
-      <mat-expansion-panel-header>
-        <mat-panel-title>{{"I18N.COMMON.PACKAGE" | transloco}}</mat-panel-title>
-        <mat-panel-description>
-          {{"I18N.PRODUCT_DAMAGE.SELECT_APPLICABLE" | transloco}} 
-          {{"I18N.COMMON.PACKAGE" | transloco}}
-          <mat-checkbox formControlName="applicablePackageDamage" (click)="$event.stopPropagation()">
-            {{"I18N.COMMON.APPLICABLE" | transloco}}
-          </mat-checkbox>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-
-      <article class="container-damages-repackage" formGroupName="packageForm">
-        <mat-checkbox formControlName="packageDamaged">{{"I18N.COMMON.PACKAGE_DAMAGED" | transloco}}</mat-checkbox>
-        <mat-checkbox formControlName="packageDirty">{{"I18N.COMMON.PACKAGE_DIRTY" | transloco}}</mat-checkbox>
-        <mat-checkbox formControlName="packageMaterialAvailable">{{"I18N.COMMON.PACKAGE_REPACKAGE" | transloco}}</mat-checkbox>
-      </article>  
-    </mat-expansion-panel>
+  <section class="damage-panels">   
+    <app-package-form 
+      [applicablePackageDamage] = "washingMachineDetailForm.controls.applicablePackageDamage"
+      [packageForm] = "washingMachineDetailForm.controls.packageForm">
+    </app-package-form>
   
     <mat-expansion-panel [expanded]="washingMachineDetailForm.controls.applicableVisibleSurfacesDamage.value">
       <mat-expansion-panel-header>

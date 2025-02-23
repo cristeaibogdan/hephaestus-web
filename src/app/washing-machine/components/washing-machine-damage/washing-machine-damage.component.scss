@@ -112,7 +112,7 @@ fieldset {
 /* *** PACKAGE DAMAGE RELATED */
 /* *************************************************** */
 
-.container-damages-repackage {
+.container-damages-repackage { // TODO: Delete after extracting all form groups into components
   display: flex;
   justify-content: center;
   gap: 3rem;
@@ -139,7 +139,7 @@ fieldset {
 /* *************************************************** */
 /* *** EXPANSION PANEL RELATED */
 /* *************************************************** */
-
+// TODO: Delete after extracting all form groups into components
 .damage-panels {
   display: flex;
   flex-direction: column;
