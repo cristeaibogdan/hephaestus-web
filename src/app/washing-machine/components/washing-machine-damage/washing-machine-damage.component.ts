@@ -23,6 +23,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { PricingFormComponent } from './pricing-form/pricing-form.component';
 import { PackageFormComponent } from './package-damage-form/package-form.component';
+import { VisibleSurfacesFormComponent } from './visible-surfaces-form/visible-surfaces-form.component';
 
 @Component({
   selector: 'app-washing-machine-damage',
@@ -47,7 +48,8 @@ import { PackageFormComponent } from './package-damage-form/package-form.compone
     StepperButtonsDirective,
 
     PricingFormComponent,
-    PackageFormComponent
+    PackageFormComponent,
+    VisibleSurfacesFormComponent,
   ]
 })
 export class WashingMachineDamageComponent implements OnDestroy {  
@@ -148,33 +150,6 @@ export class WashingMachineDamageComponent implements OnDestroy {
 
   ngOnInit(): void {
     // *****************************
-    // *** VISIBLE SURFACES DAMAGE
-    // *****************************
-
-    const applicableVisibleSurfacesDamage = this.washingMachineDetailForm.controls.applicableVisibleSurfacesDamage
-    const visibleSurfacesForm = this.washingMachineDetailForm.controls.visibleSurfacesForm;
-
-    // 1. If false from the start, reset and disable visibleSurfacesForm
-    if(!applicableVisibleSurfacesDamage.value) {
-      visibleSurfacesForm.reset();
-      visibleSurfacesForm.disable({emitEvent: false});
-    }
-
-    // 2. On every value change enable, reset and disable accordingly
-    this.subscriptions.push(applicableVisibleSurfacesDamage.valueChanges.subscribe(value=> {
-      if(value) {
-        visibleSurfacesForm.controls.visibleSurfacesHasScratches.enable({emitEvent: false});
-        visibleSurfacesForm.controls.visibleSurfacesHasDents.enable({emitEvent: false});
-        visibleSurfacesForm.controls.visibleSurfacesHasMinorDamage.enable({emitEvent: false});
-        visibleSurfacesForm.controls.visibleSurfacesHasMajorDamage.enable({emitEvent: false});
-      } else {
-        visibleSurfacesForm.reset();
-        visibleSurfacesForm.disable({emitEvent: false});
-      }
-    })
-    );
-
-    // *****************************
     // *** HIDDEN SURFACES DAMAGE
     // *****************************
 
@@ -207,11 +182,10 @@ export class WashingMachineDamageComponent implements OnDestroy {
       subscription.unsubscribe();
     });
   }
-
-// **********************************
-// *** VISIBLE SURFACES DAMAGE TOGGLES
-// **********************************
-
+    
+// ********************************
+// *** HIDDEN SURFACES DAMAGE TOGGLES
+// *********************************
   toggleFormControl(control: AbstractControl, enableWhen: boolean): void {
     if (enableWhen) {
       control.enable({ emitEvent: false });
@@ -220,34 +194,6 @@ export class WashingMachineDamageComponent implements OnDestroy {
       control.disable({ emitEvent: false });
     }
   }
-
-  toggle_VisibleSurfaces_ScratchesLength(): void {   
-    const control = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesScratchesLength;
-    const enableWhen = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasScratches.value;
-    this.toggleFormControl(control, enableWhen);
-  }
-
-  toggle_VisibleSurfaces_DentsDepth(): void {
-    const control = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesDentsDepth;
-    const enableWhen = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasDents.value;
-    this.toggleFormControl(control, enableWhen);
-  }
-
-  toggle_VisibleSurfaces_MinorDamage(): void {  
-    const control = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesMinorDamage;
-    const enableWhen = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMinorDamage.value;
-    this.toggleFormControl(control, enableWhen);
-  }
-
-  toggle_VisibleSurfaces_MajorDamage(): void {
-    const control = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesMajorDamage;
-    const enableWhen = this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMajorDamage.value;
-    this.toggleFormControl(control, enableWhen);
-  }
-    
-// ********************************
-// *** HIDDEN SURFACES DAMAGE TOGGLES
-// *********************************
 
   toggle_HiddenSurfaces_ScratchesLength(): void {
     const control = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesScratchesLength;

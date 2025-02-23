@@ -109,20 +109,10 @@ fieldset {
 }
 
 /* *************************************************** */
-/* *** PACKAGE DAMAGE RELATED */
-/* *************************************************** */
-
-.container-damages-repackage { // TODO: Delete after extracting all form groups into components
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-}
-
-/* *************************************************** */
 /* *** VISIBLE & HIDDEN SURFACES RELATED */
 /* *************************************************** */
 
-.container-damages {
+.container-damages { // TODO: Delete after extracting all form groups into components
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(2, 1fr);
@@ -170,7 +160,7 @@ to fix that use together with (click)="$event.stopPropagation()" on mat-checkbox
 /* ********************************* */
 /* *** MAT SLIDER RELATED */
 /* ********************************* */
-
+// TODO: Delete after extracting all form groups into components
 mat-slider {
   width: 300px;
 }
