@@ -39,6 +39,18 @@ mat-card-title span {
 }
 
 /* *************************************************** */
+/* *** EXPANSION PANEL RELATED */
+/* *************************************************** */
+
+.damage-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  margin: 0 10%;
+}
+
+/* *************************************************** */
 /* *** UPLOAD IMAGES */
 /* *************************************************** */
 
@@ -107,88 +119,3 @@ fieldset {
   width: 30px;
   height: 30px;
 }
-
-/* *************************************************** */
-/* *** VISIBLE & HIDDEN SURFACES RELATED */
-/* *************************************************** */
-
-.container-damages { // TODO: Delete after extracting all form groups into components
-  display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(2, 1fr);
-
-  column-gap: 8rem;
-  row-gap: 4rem;
-  margin: 0 6%;
-}
-
-.text-area {
-  width: 350px;
-}
-
-/* *************************************************** */
-/* *** EXPANSION PANEL RELATED */
-/* *************************************************** */
-// TODO: Delete after extracting all form groups into components
-.damage-panels {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-
-  margin: 0 10%;
-}
-
-.mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Disable click events for the panel header only */
-.mat-expansion-panel-header {
-  pointer-events: none;
-}
-
-/* 
-Enable click events for checkboxes on the panel header.
-However, you can slightly click outside the checkbox and expand the panel manually, 
-to fix that use together with (click)="$event.stopPropagation()" on mat-checkbox
-*/
-.mat-expansion-panel-header .mat-mdc-checkbox {
-  pointer-events: auto;
-}
-
-/* ********************************* */
-/* *** MAT SLIDER RELATED */
-/* ********************************* */
-// TODO: Delete after extracting all form groups into components
-mat-slider {
-  width: 300px;
-}
-
-.container-slider {
-  display: flex;
-  justify-content: center;  
-  gap: 8px;
-}
-
-.slider-label {
-  text-align: center;
-}
-
-/* SLIDER = always display the thumb label */
-::ng-deep .mdc-slider .mdc-slider__value-indicator {
-  transform: scale(1);
-}
-
-// ::ng-deep .mat-mdc-slider .mdc-slider__thumb {
-//   transform: rotate(45deg) !important;
-//   border-radius: 50% 50% 0 !important;
-// }
-
-// ::ng-deep .mat-mdc-slider .mdc-slider__thumb-knob {
-//   transform: scale(0) !important;
-// }
-
-// ::ng-deep .mat-mdc-slider .mdc-slider__value-indicator-text {
-//   opacity: 1 !important;
-// }

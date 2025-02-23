@@ -57,3 +57,16 @@ to fix that use together with (click)="$event.stopPropagation()" on mat-checkbox
 .mat-expansion-panel-header .mat-mdc-checkbox {
   pointer-events: auto;
 }
+
+// ::ng-deep .mat-mdc-slider .mdc-slider__thumb {
+//   transform: rotate(45deg) !important;
+//   border-radius: 50% 50% 0 !important;
+// }
+
+// ::ng-deep .mat-mdc-slider .mdc-slider__thumb-knob {
+//   transform: scale(0) !important;
+// }
+
+// ::ng-deep .mat-mdc-slider .mdc-slider__value-indicator-text {
+//   opacity: 1 !important;
+// }

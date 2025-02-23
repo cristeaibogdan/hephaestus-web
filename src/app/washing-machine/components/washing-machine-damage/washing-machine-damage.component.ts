@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AbstractControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CustomValidators } from '../../../shared/validators/custom.validators';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
 import { WashingMachineService } from '../../services/washing-machine.service';
@@ -12,13 +12,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { DragAndDropDirective } from 'src/app/shared/directives/drag-and-drop.directive';
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { PricingFormComponent } from './pricing-form/pricing-form.component';
 import { PackageFormComponent } from './package-damage-form/package-form.component';
@@ -34,10 +31,7 @@ import { HiddenSurfacesFormComponent } from './hidden-surfaces-form/hidden-surfa
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
-    MatExpansionModule,
-    MatSliderModule,
     MatFormFieldModule,
-    MatCheckboxModule,
     MatInputModule,
     MatStepperModule, // for the directive matStepperPrevious
 
@@ -233,8 +227,7 @@ export class WashingMachineDamageComponent {
     }
   }
 
-  private processFiles(files: FileList): void {
-    
+  private processFiles(files: FileList): void {    
     // 1. Validate file length
     const totalFilesCount = this.selectedFiles.length + files.length;
     if (totalFilesCount > 3) {
