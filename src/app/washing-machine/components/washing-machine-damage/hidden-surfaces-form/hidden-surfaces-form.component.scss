@@ -1,0 +1,59 @@
+.container-damages {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(2, 1fr);
+
+  column-gap: 8rem;
+  row-gap: 4rem;
+  margin: 0 6%;
+}
+
+.text-area {
+  width: 350px;
+}
+
+/* ********************************* */
+/* *** MAT SLIDER RELATED */
+/* ********************************* */
+
+mat-slider {
+  width: 300px;
+}
+
+.container-slider {
+  display: flex;
+  justify-content: center;  
+  gap: 8px;
+}
+
+.slider-label {
+  text-align: center;
+}
+
+/* SLIDER = always display the thumb label */
+::ng-deep .mdc-slider .mdc-slider__value-indicator {
+  transform: scale(1);
+}
+
+/* ********************************* */
+/* *** MAT EXPANSION PANEL RELATED */
+/* ********************************* */
+
+.mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Disable click events for the panel header only */
+.mat-expansion-panel-header {
+  pointer-events: none;
+}
+
+/* 
+Enable click events for checkboxes on the panel header.
+However, you can slightly click outside the checkbox and expand the panel manually, 
+to fix that use together with (click)="$event.stopPropagation()" on mat-checkbox
+*/
+.mat-expansion-panel-header .mat-mdc-checkbox {
+  pointer-events: auto;
+}

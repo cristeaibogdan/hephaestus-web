@@ -1,5 +1,4 @@
-import { Component, OnDestroy, inject } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AbstractControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CustomValidators } from '../../../shared/validators/custom.validators';
@@ -24,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { PricingFormComponent } from './pricing-form/pricing-form.component';
 import { PackageFormComponent } from './package-damage-form/package-form.component';
 import { VisibleSurfacesFormComponent } from './visible-surfaces-form/visible-surfaces-form.component';
+import { HiddenSurfacesFormComponent } from './hidden-surfaces-form/hidden-surfaces-form.component';
 
 @Component({
   selector: 'app-washing-machine-damage',
@@ -50,9 +50,10 @@ import { VisibleSurfacesFormComponent } from './visible-surfaces-form/visible-su
     PricingFormComponent,
     PackageFormComponent,
     VisibleSurfacesFormComponent,
+    HiddenSurfacesFormComponent
   ]
 })
-export class WashingMachineDamageComponent implements OnDestroy {  
+export class WashingMachineDamageComponent {  
   private stepper = inject(MatStepper);
   private fb = inject(NonNullableFormBuilder);
   private _washingMachineService = inject(WashingMachineService);
@@ -60,8 +61,6 @@ export class WashingMachineDamageComponent implements OnDestroy {
   private _translocoService = inject(TranslocoService);
   private sanitizer = inject(DomSanitizer);
   
-  private subscriptions:Subscription[] = [];
-
   washingMachineDetailForm = this.fb.group({
     applicablePackageDamage: [false],
     packageForm : this.fb.group({
@@ -144,81 +143,7 @@ export class WashingMachineDamageComponent implements OnDestroy {
     "repairPrice",
     "price")}
   );
-  
-  minorDamageDescriptionCharacterLimit:number = 200;
-  majorDamageDescriptionCharacterLimit:number = 200;
-
-  ngOnInit(): void {
-    // *****************************
-    // *** HIDDEN SURFACES DAMAGE
-    // *****************************
-
-    const applicableHiddenSurfacesDamage = this.washingMachineDetailForm.controls.applicableHiddenSurfacesDamage
-    const hiddenSurfacesForm = this.washingMachineDetailForm.controls.hiddenSurfacesForm;
-
-    // 1. If false from the start, reset and disable hiddenSurfacesForm
-    if(!applicableHiddenSurfacesDamage.value) {
-      hiddenSurfacesForm.reset();
-      hiddenSurfacesForm.disable({emitEvent: false});
-    }
-
-    // 2. On every value change enable, reset and disable accordingly
-    this.subscriptions.push(applicableHiddenSurfacesDamage.valueChanges.subscribe(value=> {
-      if(value) {
-        hiddenSurfacesForm.controls.hiddenSurfacesHasScratches.enable({emitEvent: false});
-        hiddenSurfacesForm.controls.hiddenSurfacesHasDents.enable({emitEvent: false});
-        hiddenSurfacesForm.controls.hiddenSurfacesHasMinorDamage.enable({emitEvent: false});
-        hiddenSurfacesForm.controls.hiddenSurfacesHasMajorDamage.enable({emitEvent: false});
-      } else {
-        hiddenSurfacesForm.reset();
-        hiddenSurfacesForm.disable({emitEvent: false});
-      }
-    })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
-      subscription.unsubscribe();
-    });
-  }
     
-// ********************************
-// *** HIDDEN SURFACES DAMAGE TOGGLES
-// *********************************
-  toggleFormControl(control: AbstractControl, enableWhen: boolean): void {
-    if (enableWhen) {
-      control.enable({ emitEvent: false });
-    } else {
-      control.reset();
-      control.disable({ emitEvent: false });
-    }
-  }
-
-  toggle_HiddenSurfaces_ScratchesLength(): void {
-    const control = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesScratchesLength;
-    const enableWhen = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasScratches.value;
-    this.toggleFormControl(control, enableWhen);
-  }
-
-  toggle_HiddenSurfaces_DentsDepth(): void {  
-    const control = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesDentsDepth;
-    const enableWhen = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasDents.value;
-    this.toggleFormControl(control, enableWhen);
-  }
-
-  toggle_HiddenSurfaces_MinorDamage(): void {
-    const control = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMinorDamage;
-    const enableWhen = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMinorDamage.value;
-    this.toggleFormControl(control, enableWhen);
-  }
-
-  toggle_HiddenSurfaces_MajorDamage(): void {  
-    const control = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMajorDamage;
-    const enableWhen = this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMajorDamage.value;
-    this.toggleFormControl(control, enableWhen);
-  }
-
 // *******************************
 // *** FORM RESET AND SUBMIT
 // *******************************
