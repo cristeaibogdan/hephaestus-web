@@ -65,8 +65,8 @@ export class VisibleSurfacesFormComponent implements OnInit, OnDestroy {
 // *** DAMAGE TOGGLES
 // **********************************
 
-  toggleFormControl(control: AbstractControl, enableWhen: boolean): void {
-    if (enableWhen) {
+  toggleControlState(control: AbstractControl, enabled: boolean): void {
+    if (enabled) {
       control.enable({ emitEvent: false });
     } else {
       control.reset();
@@ -76,26 +76,26 @@ export class VisibleSurfacesFormComponent implements OnInit, OnDestroy {
 
   toggle_VisibleSurfaces_ScratchesLength(): void {   
     const control = this.visibleSurfacesForm.controls.visibleSurfacesScratchesLength;
-    const enableWhen = this.visibleSurfacesForm.controls.visibleSurfacesHasScratches.value;
-    this.toggleFormControl(control, enableWhen);
+    const enabled = this.visibleSurfacesForm.controls.visibleSurfacesHasScratches.value;
+    this.toggleControlState(control, enabled);
   }
 
   toggle_VisibleSurfaces_DentsDepth(): void {
     const control = this.visibleSurfacesForm.controls.visibleSurfacesDentsDepth;
-    const enableWhen = this.visibleSurfacesForm.controls.visibleSurfacesHasDents.value;
-    this.toggleFormControl(control, enableWhen);
+    const enabled = this.visibleSurfacesForm.controls.visibleSurfacesHasDents.value;
+    this.toggleControlState(control, enabled);
   }
 
   toggle_VisibleSurfaces_MinorDamage(): void {  
     const control = this.visibleSurfacesForm.controls.visibleSurfacesMinorDamage;
-    const enableWhen = this.visibleSurfacesForm.controls.visibleSurfacesHasMinorDamage.value;
-    this.toggleFormControl(control, enableWhen);
+    const enabled = this.visibleSurfacesForm.controls.visibleSurfacesHasMinorDamage.value;
+    this.toggleControlState(control, enabled);
   }
 
   toggle_VisibleSurfaces_MajorDamage(): void {
     const control = this.visibleSurfacesForm.controls.visibleSurfacesMajorDamage;
     const enableWhen = this.visibleSurfacesForm.controls.visibleSurfacesHasMajorDamage.value;
-    this.toggleFormControl(control, enableWhen);
+    this.toggleControlState(control, enableWhen);
   }
 
 }

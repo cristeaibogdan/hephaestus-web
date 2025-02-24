@@ -65,8 +65,8 @@ export class HiddenSurfacesFormComponent implements OnInit, OnDestroy {
 // *** DAMAGE TOGGLES
 // *********************************
 
-  toggleFormControl(control: AbstractControl, enableWhen: boolean): void {
-    if (enableWhen) {
+  toggleControlState(control: AbstractControl, enabled: boolean): void {
+    if (enabled) {
       control.enable({ emitEvent: false });
     } else {
       control.reset();
@@ -76,26 +76,26 @@ export class HiddenSurfacesFormComponent implements OnInit, OnDestroy {
 
   toggle_HiddenSurfaces_ScratchesLength(): void {
     const control = this.hiddenSurfacesForm.controls.hiddenSurfacesScratchesLength;
-    const enableWhen = this.hiddenSurfacesForm.controls.hiddenSurfacesHasScratches.value;
-    this.toggleFormControl(control, enableWhen);
+    const enabled = this.hiddenSurfacesForm.controls.hiddenSurfacesHasScratches.value;
+    this.toggleControlState(control, enabled);
   }
 
   toggle_HiddenSurfaces_DentsDepth(): void {  
     const control = this.hiddenSurfacesForm.controls.hiddenSurfacesDentsDepth;
-    const enableWhen = this.hiddenSurfacesForm.controls.hiddenSurfacesHasDents.value;
-    this.toggleFormControl(control, enableWhen);
+    const enabled = this.hiddenSurfacesForm.controls.hiddenSurfacesHasDents.value;
+    this.toggleControlState(control, enabled);
   }
 
   toggle_HiddenSurfaces_MinorDamage(): void {
     const control = this.hiddenSurfacesForm.controls.hiddenSurfacesMinorDamage;
-    const enableWhen = this.hiddenSurfacesForm.controls.hiddenSurfacesHasMinorDamage.value;
-    this.toggleFormControl(control, enableWhen);
+    const enabled = this.hiddenSurfacesForm.controls.hiddenSurfacesHasMinorDamage.value;
+    this.toggleControlState(control, enabled);
   }
 
   toggle_HiddenSurfaces_MajorDamage(): void {  
     const control = this.hiddenSurfacesForm.controls.hiddenSurfacesMajorDamage;
-    const enableWhen = this.hiddenSurfacesForm.controls.hiddenSurfacesHasMajorDamage.value;
-    this.toggleFormControl(control, enableWhen);
+    const enabled = this.hiddenSurfacesForm.controls.hiddenSurfacesHasMajorDamage.value;
+    this.toggleControlState(control, enabled);
   }
 
 }

@@ -12,11 +12,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { DragAndDropDirective } from 'src/app/shared/directives/drag-and-drop.directive';
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
-import { MatInputModule } from '@angular/material/input';
 import { PricingFormComponent } from './pricing-form/pricing-form.component';
 import { PackageFormComponent } from './package-damage-form/package-form.component';
 import { VisibleSurfacesFormComponent } from './visible-surfaces-form/visible-surfaces-form.component';
@@ -31,8 +29,6 @@ import { HiddenSurfacesFormComponent } from './hidden-surfaces-form/hidden-surfa
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
-    MatFormFieldModule,
-    MatInputModule,
     MatStepperModule, // for the directive matStepperPrevious
 
     CommonModule,
