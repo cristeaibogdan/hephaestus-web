@@ -1,0 +1,38 @@
+<input type="file" #fileInput
+  multiple
+  accept=".png, .jpg, .jpeg, .bmp" 
+  onClick="this.value=null"
+  (change)="onFileUpload($event)"> 
+
+<fieldset dragAndDrop (filesDropped)="onDrop($event)">
+  <legend class="text-align-center">
+    <button mat-raised-button type="button" class="primary" 
+      (click)="fileInput.click()"
+      [disabled]="selectedFiles.length === 3">
+      <mat-icon svgIcon="upload"></mat-icon> &nbsp; {{"I18N.COMMON.UPLOAD_IMAGES" | transloco}} &nbsp; {{selectedFiles.length}} / 3
+    </button>
+
+    <mat-icon class="text-color help-tip" 
+      matTooltip='{{"I18N.HELP_TOOLTIP.UPLOAD_IMAGES" | transloco}}'
+      matTooltipPosition='right' 
+      svgIcon="help">
+    </mat-icon>
+  </legend>
+
+  <section class="images-list">
+    @if (selectedFiles.length > 0) {
+      @for (file of selectedFiles; track file; let i = $index) {
+        <div class="image-container">
+          <img [src]="file.url"/>
+          <button class="button-remove-image" type="button" (click)="onRemoveImage(i)">x</button>
+        </div>
+      }
+    } @else {
+      <div class="text-color no-images-placeholder">
+        <img src="assets/images/drag-and-drop.png">
+        <div>{{"I18N.PRODUCT_DAMAGE.NO_IMAGES_PLACEHOLDER_1" | transloco}}</div>
+        <div>{{"I18N.PRODUCT_DAMAGE.NO_IMAGES_PLACEHOLDER_2" | transloco}}</div>
+      </div>
+    }
+  </section>
+</fieldset>

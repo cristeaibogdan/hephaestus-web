@@ -1,72 +1,37 @@
-<input type="file" #fileInput
-  multiple
-  accept=".png, .jpg, .jpeg, .bmp" 
-  onClick="this.value=null"
-  (change)="onFileUpload($event)"> 
-
 <form [formGroup]="washingMachineDetailForm" (ngSubmit)="onSubmit()" (reset)="onReset($event)">
 <ul>
-<mat-card class="elevation-level4">
-  <mat-card-title>{{"I18N.PRODUCT_DAMAGE.UPLOAD_IMAGES_TITLE" | transloco}} <span>*</span></mat-card-title>
-  <fieldset dragAndDrop (filesDropped)="onDrop($event)">
-    <legend class="text-align-center">
-      <button mat-raised-button type="button" class="primary" 
-        (click)="fileInput.click()"
-        [disabled]="selectedFiles.length === 3">
-        <mat-icon svgIcon="upload"></mat-icon> &nbsp; {{"I18N.COMMON.UPLOAD_IMAGES" | transloco}} &nbsp; {{selectedFiles.length}} / 3
-      </button>
-  
-      <mat-icon class="text-color help-tip" 
-        matTooltip='{{"I18N.HELP_TOOLTIP.UPLOAD_IMAGES" | transloco}}'
-        matTooltipPosition='right' 
-        svgIcon="help">
-      </mat-icon>
-    </legend>
-  
-    <section class="images-list">
-      @if (selectedFiles.length > 0) {
-        @for (file of selectedFiles; track file; let i = $index) {
-          <div class="image-container">
-            <img [src]="file.url"/>
-            <button class="button-remove-image" type="button" (click)="onRemoveImage(i)">x</button>
-          </div>
-        }
-      } @else {
-        <div class="text-color no-images-placeholder">
-          <img src="assets/images/drag-and-drop.png" class="placeholder-image">
-          <div>{{"I18N.PRODUCT_DAMAGE.NO_IMAGES_PLACEHOLDER_1" | transloco}}</div>
-          <div>{{"I18N.PRODUCT_DAMAGE.NO_IMAGES_PLACEHOLDER_2" | transloco}}</div>
-        </div>
-      }
-    </section>
-  </fieldset>
-</mat-card>
+  <mat-card class="elevation-level4">
+    <mat-card-title>{{"I18N.PRODUCT_DAMAGE.UPLOAD_IMAGES_TITLE" | transloco}} <span>*</span></mat-card-title>
+    <app-file-upload
+      [selectedFiles] = "selectedFiles">
+    </app-file-upload>    
+  </mat-card>
 
-<mat-card class="elevation-level4">
-  <mat-card-title>{{"I18N.PRODUCT_DAMAGE.SELECT_DAMAGE_TITLE" | transloco}} <span>*</span></mat-card-title>
+  <mat-card class="elevation-level4">
+    <mat-card-title>{{"I18N.PRODUCT_DAMAGE.SELECT_DAMAGE_TITLE" | transloco}} <span>*</span></mat-card-title>
 
-  <section class="damage-panels">   
-    <app-package-form 
-      [applicablePackageDamage] = "washingMachineDetailForm.controls.applicablePackageDamage"
-      [packageForm] = "washingMachineDetailForm.controls.packageForm">
-    </app-package-form>
+    <section class="damage-panels">   
+      <app-package-form 
+        [applicablePackageDamage] = "washingMachineDetailForm.controls.applicablePackageDamage"
+        [packageForm] = "washingMachineDetailForm.controls.packageForm">
+      </app-package-form>
 
-    <app-visible-surfaces-form
-      [applicableVisibleSurfacesDamage] = "washingMachineDetailForm.controls.applicableVisibleSurfacesDamage"
-      [visibleSurfacesForm] = "washingMachineDetailForm.controls.visibleSurfacesForm">
-    </app-visible-surfaces-form>
+      <app-visible-surfaces-form
+        [applicableVisibleSurfacesDamage] = "washingMachineDetailForm.controls.applicableVisibleSurfacesDamage"
+        [visibleSurfacesForm] = "washingMachineDetailForm.controls.visibleSurfacesForm">
+      </app-visible-surfaces-form>
 
-    <app-hidden-surfaces-form
-      [applicableHiddenSurfacesDamage] = "washingMachineDetailForm.controls.applicableHiddenSurfacesDamage"
-      [hiddenSurfacesForm] = "washingMachineDetailForm.controls.hiddenSurfacesForm">
-    </app-hidden-surfaces-form>
-  </section>  
-</mat-card>
+      <app-hidden-surfaces-form
+        [applicableHiddenSurfacesDamage] = "washingMachineDetailForm.controls.applicableHiddenSurfacesDamage"
+        [hiddenSurfacesForm] = "washingMachineDetailForm.controls.hiddenSurfacesForm">
+      </app-hidden-surfaces-form>
+    </section>  
+  </mat-card>
 
-<mat-card class="elevation-level4">
-  <mat-card-title>Evaluate Price</mat-card-title>
-  <app-pricing-form [washingMachinePricingForm] = "washingMachinePricingForm"></app-pricing-form>
-</mat-card>
+  <mat-card class="elevation-level4">
+    <mat-card-title>Evaluate Price</mat-card-title>
+    <app-pricing-form [washingMachinePricingForm] = "washingMachinePricingForm"></app-pricing-form>
+  </mat-card>
 </ul>
 
 <div stepper-buttons>
