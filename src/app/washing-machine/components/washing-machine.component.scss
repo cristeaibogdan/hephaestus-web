@@ -14,13 +14,13 @@
   font-size: 1rem;
 }
 
-// /* Span the stepper container to max left and right */
-// ::ng-deep .mat-horizontal-content-container {
-//   padding: 0 !important;
-// }
+/* Span the stepper container to max left and right */
+::ng-deep .mat-horizontal-content-container {
+  padding: 0 !important;
+}
 
-// /* Disable stepper header navigation */
-// ::ng-deep .mat-horizontal-stepper-header {
-//   pointer-events: none;
-// }
+/* Disable stepper header navigation */
+::ng-deep .mat-horizontal-stepper-header {
+  pointer-events: none;
+}
 
