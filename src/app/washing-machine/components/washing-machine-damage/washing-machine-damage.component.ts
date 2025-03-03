@@ -129,7 +129,7 @@ export class WashingMachineDamageComponent {
 
   selectedFiles:ImageFile[] = [];
     
-  private resetSelectedFiles(): void {
+  private clearSelectedFiles(): void {
     this.selectedFiles = [];
   }
 
@@ -140,7 +140,7 @@ export class WashingMachineDamageComponent {
   onReset(e:Event): void {
     e.preventDefault();
     this.washingMachinePricingForm.reset();
-    this.resetSelectedFiles();    
+    this.clearSelectedFiles();
   }  
 
   onSubmit(): void {
