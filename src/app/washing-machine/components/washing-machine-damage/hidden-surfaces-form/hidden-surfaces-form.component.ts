@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, Input, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, Input, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -14,7 +14,7 @@ import { TranslocoModule } from '@jsverse/transloco';
   templateUrl: './hidden-surfaces-form.component.html',
   styleUrl: './hidden-surfaces-form.component.scss',
   imports: [
-    MatFormFieldModule,    
+    MatFormFieldModule,
     MatExpansionModule,
     MatCheckboxModule,
     MatSliderModule,
@@ -45,10 +45,10 @@ export class HiddenSurfacesFormComponent implements OnInit {
       takeUntilDestroyed(this.destroyRef)
     ).subscribe(value=> {
       if(value) {
-        this.hiddenSurfacesForm.controls.hiddenSurfacesHasScratches.enable({emitEvent: false});
-        this.hiddenSurfacesForm.controls.hiddenSurfacesHasDents.enable({emitEvent: false});
-        this.hiddenSurfacesForm.controls.hiddenSurfacesHasMinorDamage.enable({emitEvent: false});
-        this.hiddenSurfacesForm.controls.hiddenSurfacesHasMajorDamage.enable({emitEvent: false});
+        this.hiddenSurfacesForm.controls.hasScratches.enable({emitEvent: false});
+        this.hiddenSurfacesForm.controls.hasDents.enable({emitEvent: false});
+        this.hiddenSurfacesForm.controls.hasMinorDamage.enable({emitEvent: false});
+        this.hiddenSurfacesForm.controls.hasMajorDamage.enable({emitEvent: false});
       } else {
         this.hiddenSurfacesForm.reset();
         this.hiddenSurfacesForm.disable({emitEvent: false});
@@ -69,27 +69,27 @@ export class HiddenSurfacesFormComponent implements OnInit {
     }
   }
 
-  toggle_HiddenSurfaces_ScratchesLength(): void {
-    const control = this.hiddenSurfacesForm.controls.hiddenSurfacesScratchesLength;
-    const enabled = this.hiddenSurfacesForm.controls.hiddenSurfacesHasScratches.value;
+  toggleScratchesLength(): void {
+    const control = this.hiddenSurfacesForm.controls.scratchesLength;
+    const enabled = this.hiddenSurfacesForm.controls.hasScratches.value;
     this.toggleControlState(control, enabled);
   }
 
-  toggle_HiddenSurfaces_DentsDepth(): void {  
-    const control = this.hiddenSurfacesForm.controls.hiddenSurfacesDentsDepth;
-    const enabled = this.hiddenSurfacesForm.controls.hiddenSurfacesHasDents.value;
+  toggleDentsDepth(): void {  
+    const control = this.hiddenSurfacesForm.controls.dentsDepth;
+    const enabled = this.hiddenSurfacesForm.controls.hasDents.value;
     this.toggleControlState(control, enabled);
   }
 
-  toggle_HiddenSurfaces_MinorDamage(): void {
-    const control = this.hiddenSurfacesForm.controls.hiddenSurfacesMinorDamage;
-    const enabled = this.hiddenSurfacesForm.controls.hiddenSurfacesHasMinorDamage.value;
+  toggleMinorDamage(): void {
+    const control = this.hiddenSurfacesForm.controls.minorDamage;
+    const enabled = this.hiddenSurfacesForm.controls.hasMinorDamage.value;
     this.toggleControlState(control, enabled);
   }
 
-  toggle_HiddenSurfaces_MajorDamage(): void {  
-    const control = this.hiddenSurfacesForm.controls.hiddenSurfacesMajorDamage;
-    const enabled = this.hiddenSurfacesForm.controls.hiddenSurfacesHasMajorDamage.value;
+  toggleMajorDamage(): void {  
+    const control = this.hiddenSurfacesForm.controls.majorDamage;
+    const enabled = this.hiddenSurfacesForm.controls.hasMajorDamage.value;
     this.toggleControlState(control, enabled);
   }
 

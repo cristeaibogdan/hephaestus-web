@@ -45,10 +45,10 @@ export class VisibleSurfacesFormComponent implements OnInit {
       takeUntilDestroyed(this.destroyRef)
     ).subscribe(value=> {
       if(value) {
-        this.visibleSurfacesForm.controls.visibleSurfacesHasScratches.enable({emitEvent: false});
-        this.visibleSurfacesForm.controls.visibleSurfacesHasDents.enable({emitEvent: false});
-        this.visibleSurfacesForm.controls.visibleSurfacesHasMinorDamage.enable({emitEvent: false});
-        this.visibleSurfacesForm.controls.visibleSurfacesHasMajorDamage.enable({emitEvent: false});
+        this.visibleSurfacesForm.controls.hasScratches.enable({emitEvent: false});
+        this.visibleSurfacesForm.controls.hasDents.enable({emitEvent: false});
+        this.visibleSurfacesForm.controls.hasMinorDamage.enable({emitEvent: false});
+        this.visibleSurfacesForm.controls.hasMajorDamage.enable({emitEvent: false});
       } else {
         this.visibleSurfacesForm.reset();
         this.visibleSurfacesForm.disable({emitEvent: false});
@@ -69,27 +69,27 @@ export class VisibleSurfacesFormComponent implements OnInit {
     }
   }
 
-  toggle_VisibleSurfaces_ScratchesLength(): void {   
-    const control = this.visibleSurfacesForm.controls.visibleSurfacesScratchesLength;
-    const enabled = this.visibleSurfacesForm.controls.visibleSurfacesHasScratches.value;
+  toggleScratchesLength(): void {   
+    const control = this.visibleSurfacesForm.controls.scratchesLength;
+    const enabled = this.visibleSurfacesForm.controls.hasScratches.value;
     this.toggleControlState(control, enabled);
   }
 
-  toggle_VisibleSurfaces_DentsDepth(): void {
-    const control = this.visibleSurfacesForm.controls.visibleSurfacesDentsDepth;
-    const enabled = this.visibleSurfacesForm.controls.visibleSurfacesHasDents.value;
+  toggleDentsDepth(): void {
+    const control = this.visibleSurfacesForm.controls.dentsDepth;
+    const enabled = this.visibleSurfacesForm.controls.hasDents.value;
     this.toggleControlState(control, enabled);
   }
 
-  toggle_VisibleSurfaces_MinorDamage(): void {  
-    const control = this.visibleSurfacesForm.controls.visibleSurfacesMinorDamage;
-    const enabled = this.visibleSurfacesForm.controls.visibleSurfacesHasMinorDamage.value;
+  toggleMinorDamage(): void {  
+    const control = this.visibleSurfacesForm.controls.minorDamage;
+    const enabled = this.visibleSurfacesForm.controls.hasMinorDamage.value;
     this.toggleControlState(control, enabled);
   }
 
-  toggle_VisibleSurfaces_MajorDamage(): void {
-    const control = this.visibleSurfacesForm.controls.visibleSurfacesMajorDamage;
-    const enableWhen = this.visibleSurfacesForm.controls.visibleSurfacesHasMajorDamage.value;
+  toggleMajorDamage(): void {
+    const control = this.visibleSurfacesForm.controls.majorDamage;
+    const enableWhen = this.visibleSurfacesForm.controls.hasMajorDamage.value;
     this.toggleControlState(control, enableWhen);
   }
 

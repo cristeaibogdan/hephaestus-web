@@ -50,7 +50,7 @@ export class PackageFormComponent implements OnInit {
     this.packageForm.valueChanges.pipe(
       takeUntilDestroyed(this.destroyRef)
     ).subscribe(value => {
-      if(value.packageDamaged || value.packageDirty) {
+      if(value.damaged || value.dirty) {
         this.packageForm.controls.packageMaterialAvailable.enable({emitEvent: false});       
       } else {
         this.packageForm.controls.packageMaterialAvailable.setValue(false, {emitEvent: false});

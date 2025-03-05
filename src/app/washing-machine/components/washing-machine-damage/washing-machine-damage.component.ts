@@ -47,71 +47,71 @@ export class WashingMachineDamageComponent {
   washingMachineDetailForm = this.fb.group({
     applicablePackageDamage: [false],
     packageForm : this.fb.group({
-      packageDamaged : [false],
-      packageDirty : [false],
+      damaged : [false],
+      dirty : [false],
       packageMaterialAvailable : [false],
     }, {validators: CustomValidators.atLeastOneTrueOutOf(
-      "packageDamaged", 
-      "packageDirty", 
+      "damaged", 
+      "dirty", 
       "packageMaterialAvailable")}
     ),
     
 
     applicableVisibleSurfacesDamage: [false],
     visibleSurfacesForm: this.fb.group({
-      visibleSurfacesHasScratches: [false],
-      visibleSurfacesScratchesLength: [{value: 0, disabled: true}, 
+      hasScratches: [false],
+      scratchesLength: [{value: 0, disabled: true}, 
         [Validators.required, Validators.min(0.5)]
       ],
 
-      visibleSurfacesHasDents: [false],
-      visibleSurfacesDentsDepth: [{value: 0, disabled: true}, 
+      hasDents: [false],
+      dentsDepth: [{value: 0, disabled: true}, 
         [Validators.required, Validators.min(0.5)]
       ],
 
-      visibleSurfacesHasMinorDamage: [false],
-      visibleSurfacesMinorDamage : [{value:"", disabled: true},
+      hasMinorDamage: [false],
+      minorDamage : [{value:"", disabled: true},
         [Validators.required]
       ],
 
-      visibleSurfacesHasMajorDamage: [false],
-      visibleSurfacesMajorDamage : [{value:"", disabled: true},
+      hasMajorDamage: [false],
+      majorDamage : [{value:"", disabled: true},
         [Validators.required]
       ]
     }, {validators: CustomValidators.atLeastOneTrueOutOf(
-      "visibleSurfacesHasScratches",
-      "visibleSurfacesHasDents",
-      "visibleSurfacesHasMinorDamage",
-      "visibleSurfacesHasMajorDamage")}
+      "hasScratches",
+      "hasDents",
+      "hasMinorDamage",
+      "hasMajorDamage")}
     ),
 
 
     applicableHiddenSurfacesDamage: [false],
     hiddenSurfacesForm: this.fb.group({
-      hiddenSurfacesHasScratches: [false],
-      hiddenSurfacesScratchesLength: [{value: 0, disabled: true}, 
+      hasScratches: [false],
+      scratchesLength: [{value: 0, disabled: true}, 
         [Validators.required, Validators.min(0.5)]
       ],
 
-      hiddenSurfacesHasDents: [false],
-      hiddenSurfacesDentsDepth: [{value: 0, disabled: true}, 
+      hasDents: [false],
+      dentsDepth: [{value: 0, disabled: true}, 
         [Validators.required, Validators.min(0.5)]
       ],
 
-      hiddenSurfacesHasMinorDamage: [false],
-      hiddenSurfacesMinorDamage : [{value:"", disabled: true},
+      hasMinorDamage: [false],
+      minorDamage : [{value:"", disabled: true},
         [Validators.required]
       ],
 
-      hiddenSurfacesHasMajorDamage: [false],
-      hiddenSurfacesMajorDamage : [{value:"", disabled: true},
+      hasMajorDamage: [false],
+      majorDamage : [{value:"", disabled: true},
         [Validators.required]
       ]
     }, {validators: CustomValidators.atLeastOneTrueOutOf(
-        "hiddenSurfacesHasScratches",
-        "hiddenSurfacesHasDents",
-        "hiddenSurfacesHasMinorDamage",
-        "hiddenSurfacesHasMajorDamage")}
+        "hasScratches",
+        "hasDents",
+        "hasMinorDamage",
+        "hasMajorDamage")}
     ),
   }, {validators: CustomValidators.atLeastOneTrueOutOf(
       "applicablePackageDamage",
@@ -160,39 +160,39 @@ export class WashingMachineDamageComponent {
 
     const washingMachineDetail: WashingMachineDetail = {
       applicablePackageDamage: this.washingMachineDetailForm.controls.applicablePackageDamage.value,
-      packageDamaged: this.washingMachineDetailForm.controls.packageForm.controls.packageDamaged.value,
-      packageDirty: this.washingMachineDetailForm.controls.packageForm.controls.packageDirty.value,
+      packageDamaged: this.washingMachineDetailForm.controls.packageForm.controls.damaged.value,
+      packageDirty: this.washingMachineDetailForm.controls.packageForm.controls.dirty.value,
       packageMaterialAvailable: this.washingMachineDetailForm.controls.packageForm.controls.packageMaterialAvailable.value,
 
 
       applicableVisibleSurfacesDamage: this.washingMachineDetailForm.controls.applicableVisibleSurfacesDamage.value,
 
-      visibleSurfacesHasScratches: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasScratches.value,
-      visibleSurfacesScratchesLength: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesScratchesLength.value,
+      visibleSurfacesHasScratches: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.hasScratches.value,
+      visibleSurfacesScratchesLength: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.scratchesLength.value,
 
-      visibleSurfacesHasDents: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasDents.value,
-      visibleSurfacesDentsDepth: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesDentsDepth.value,
+      visibleSurfacesHasDents: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.hasDents.value,
+      visibleSurfacesDentsDepth: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.dentsDepth.value,
 
-      visibleSurfacesHasMinorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMinorDamage.value,
-      visibleSurfacesMinorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesMinorDamage.value,
+      visibleSurfacesHasMinorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.hasMinorDamage.value,
+      visibleSurfacesMinorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.minorDamage.value,
 
-      visibleSurfacesHasMajorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesHasMajorDamage.value,
-      visibleSurfacesMajorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.visibleSurfacesMajorDamage.value,
+      visibleSurfacesHasMajorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.hasMajorDamage.value,
+      visibleSurfacesMajorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.majorDamage.value,
 
 
       applicableHiddenSurfacesDamage: this.washingMachineDetailForm.controls.applicableHiddenSurfacesDamage.value,
 
-      hiddenSurfacesHasScratches: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasScratches.value,
-      hiddenSurfacesScratchesLength: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesScratchesLength.value,
+      hiddenSurfacesHasScratches: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hasScratches.value,
+      hiddenSurfacesScratchesLength: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.scratchesLength.value,
 
-      hiddenSurfacesHasDents: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasDents.value,
-      hiddenSurfacesDentsDepth: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesDentsDepth.value,
+      hiddenSurfacesHasDents: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hasDents.value,
+      hiddenSurfacesDentsDepth: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.dentsDepth.value,
 
-      hiddenSurfacesHasMinorDamage: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMinorDamage.value,
-      hiddenSurfacesMinorDamage: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMinorDamage.value,
+      hiddenSurfacesHasMinorDamage: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hasMinorDamage.value,
+      hiddenSurfacesMinorDamage: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.minorDamage.value,
 
-      hiddenSurfacesHasMajorDamage: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesHasMajorDamage.value,
-      hiddenSurfacesMajorDamage: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hiddenSurfacesMajorDamage.value,
+      hiddenSurfacesHasMajorDamage: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hasMajorDamage.value,
+      hiddenSurfacesMajorDamage: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.majorDamage.value,
 
       price: this.washingMachinePricingForm.controls.price.value,
       repairPrice: this.washingMachinePricingForm.controls.repairPrice.value
@@ -201,5 +201,7 @@ export class WashingMachineDamageComponent {
     this._washingMachineService.setWashingMachineDetail(washingMachineDetail);
     this._washingMachineService.setSelectedFiles(this.selectedFiles);
     this.stepper.next();
+    // console.log("Sent = ", washingMachineDetail);
+    // TODO: Restructure the DTO into nested DTOs - package, visible, hidden, costAssessment
   }
 }
