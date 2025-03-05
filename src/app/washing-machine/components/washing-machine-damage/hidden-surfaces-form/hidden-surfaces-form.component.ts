@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, Input, OnDestroy, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -7,7 +8,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
 import { TranslocoModule } from '@jsverse/transloco';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-hidden-surfaces-form',  
@@ -25,10 +25,10 @@ import { Subscription } from 'rxjs';
     TranslocoModule
   ],
 })
-export class HiddenSurfacesFormComponent implements OnInit, OnDestroy {
+export class HiddenSurfacesFormComponent implements OnInit {
   @Input() applicableHiddenSurfacesDamage!: FormControl;
   @Input() hiddenSurfacesForm!: FormGroup;
-  private subscriptions: Subscription[] = [];
+  private destroyRef = inject(DestroyRef);
 
   minorDamageDescriptionCharacterLimit:number = 200;
   majorDamageDescriptionCharacterLimit:number = 200;
@@ -41,7 +41,9 @@ export class HiddenSurfacesFormComponent implements OnInit, OnDestroy {
     }
 
     // 2. On every value change enable, reset and disable accordingly
-    this.subscriptions.push(this.applicableHiddenSurfacesDamage.valueChanges.subscribe(value=> {
+    this.applicableHiddenSurfacesDamage.valueChanges.pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(value=> {
       if(value) {
         this.hiddenSurfacesForm.controls.hiddenSurfacesHasScratches.enable({emitEvent: false});
         this.hiddenSurfacesForm.controls.hiddenSurfacesHasDents.enable({emitEvent: false});
@@ -51,13 +53,6 @@ export class HiddenSurfacesFormComponent implements OnInit, OnDestroy {
         this.hiddenSurfacesForm.reset();
         this.hiddenSurfacesForm.disable({emitEvent: false});
       }
-    })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
-      subscription.unsubscribe();
     });
   }
 

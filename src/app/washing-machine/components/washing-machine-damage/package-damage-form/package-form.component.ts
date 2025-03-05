@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, Input, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TranslocoModule } from '@jsverse/transloco';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-package-form',
@@ -21,11 +21,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './package-form.component.html',
   styleUrl: './package-form.component.scss'
 })
-export class PackageFormComponent implements OnInit, OnDestroy {
+export class PackageFormComponent implements OnInit {
   @Input() applicablePackageDamage!: FormControl;
   @Input() packageForm!: FormGroup;
-
-  private subscriptions:Subscription[] = [];
+  private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
     // 1. If false from the start, reset and disable packageForm
@@ -35,7 +34,9 @@ export class PackageFormComponent implements OnInit, OnDestroy {
     }
 
     // 2. On every value change enable, reset and disable accordingly
-    this.subscriptions.push(this.applicablePackageDamage.valueChanges.subscribe(value =>{      
+    this.applicablePackageDamage.valueChanges.pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(value =>{
       if(value) {
         this.packageForm.enable({emitEvent: false});
         this.packageForm.controls.packageMaterialAvailable.disable();
@@ -43,24 +44,18 @@ export class PackageFormComponent implements OnInit, OnDestroy {
         this.packageForm.reset();
         this.packageForm.disable({emitEvent: false});
       }
-    })
-    );
+    });
 
     // 3. If packageDamaged or packageDirty is true, enable packageMaterialAvailable
-    this.subscriptions.push(this.packageForm.valueChanges.subscribe(value => {
+    this.packageForm.valueChanges.pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(value => {
       if(value.packageDamaged || value.packageDirty) {
         this.packageForm.controls.packageMaterialAvailable.enable({emitEvent: false});       
       } else {
         this.packageForm.controls.packageMaterialAvailable.setValue(false, {emitEvent: false});
         this.packageForm.controls.packageMaterialAvailable.disable({emitEvent: false}); 
       }
-    })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
-      subscription.unsubscribe();
     });
   }
 }

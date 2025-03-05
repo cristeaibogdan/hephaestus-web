@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, Input, OnInit, inject } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
 import { TranslocoModule } from '@jsverse/transloco';
-import { Subscription } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-visible-surfaces-form',  
@@ -25,10 +25,10 @@ import { Subscription } from 'rxjs';
     TranslocoModule
   ],
 })
-export class VisibleSurfacesFormComponent implements OnInit, OnDestroy {
+export class VisibleSurfacesFormComponent implements OnInit {
   @Input() applicableVisibleSurfacesDamage!: FormControl;
   @Input() visibleSurfacesForm!: FormGroup;
-  private subscriptions: Subscription[] = [];
+  private destroyRef = inject(DestroyRef);
 
   minorDamageDescriptionCharacterLimit:number = 200;
   majorDamageDescriptionCharacterLimit:number = 200;
@@ -41,7 +41,9 @@ export class VisibleSurfacesFormComponent implements OnInit, OnDestroy {
     }
 
     // 2. On every value change enable, reset and disable accordingly
-    this.subscriptions.push(this.applicableVisibleSurfacesDamage.valueChanges.subscribe(value=> {
+    this.applicableVisibleSurfacesDamage.valueChanges.pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(value=> {
       if(value) {
         this.visibleSurfacesForm.controls.visibleSurfacesHasScratches.enable({emitEvent: false});
         this.visibleSurfacesForm.controls.visibleSurfacesHasDents.enable({emitEvent: false});
@@ -51,16 +53,9 @@ export class VisibleSurfacesFormComponent implements OnInit, OnDestroy {
         this.visibleSurfacesForm.reset();
         this.visibleSurfacesForm.disable({emitEvent: false});
       }
-    })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => {
-      subscription.unsubscribe();
     });
   }
-
+  
 // **********************************
 // *** DAMAGE TOGGLES
 // **********************************
