@@ -1,0 +1,69 @@
+input[type=file] {
+  display: none;
+}
+
+legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 0 10px;
+}
+
+fieldset {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 1%;
+
+  border-radius: 10px;
+  border: 2px dashed #ddd;  
+}
+
+.images-list {
+  display: flex;
+  justify-content: center;
+  gap: 2%;
+
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.image-container {
+  position: relative;
+
+  img {
+    height: 150px;
+    width: auto;
+  }
+}
+
+.button-remove-image {
+  font-size: 1rem;
+  cursor: pointer;
+
+  position: absolute;
+  top: 3%;
+  right: 3%;
+}
+
+.no-images-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
+  img {
+    align-self: center;
+    height: 120px;
+    width: 120px;
+  
+    margin-bottom: 2%;
+  }
+}
+
+.help-tip {
+  vertical-align: -50%;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}

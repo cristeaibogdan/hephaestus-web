@@ -1,0 +1,129 @@
+<mat-expansion-panel [expanded]="applicableVisibleSurfacesDamage.value">
+  <mat-expansion-panel-header>
+    <mat-panel-title>{{"I18N.COMMON.VISIBLE_SURFACES" | transloco}}</mat-panel-title>
+    <mat-panel-description>
+      {{"I18N.PRODUCT_DAMAGE.SELECT_APPLICABLE" | transloco}} 
+      {{"I18N.COMMON.VISIBLE_SURFACES" | transloco}}
+      <mat-checkbox [formControl]="applicableVisibleSurfacesDamage" (click)="$event.stopPropagation()">
+        {{"I18N.COMMON.APPLICABLE" | transloco}}
+      </mat-checkbox>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <div class="container-damages" [formGroup]="visibleSurfacesForm">              
+    <article>
+      <mat-checkbox formControlName="hasScratches"
+        (change)="toggleScratchesLength()"> 
+        {{"I18N.PRODUCT_DAMAGE.SCRATCHES" | transloco}}
+      </mat-checkbox>
+
+      <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.SELECT_SCRATCHES_LENGTH" | transloco}}</h4>
+
+      <div class="container-slider">
+        <span class="slider-label">0
+          <br>
+          {{"I18N.COMMON.CM" | transloco}}
+        </span>
+        <mat-slider discrete
+          min=0 
+          max=10
+          step=0.5
+          tickInterval=1
+          showTickMarks>
+          <input matSliderThumb formControlName="scratchesLength">
+        </mat-slider>
+        <span class="slider-label">10
+          <br>
+          {{"I18N.COMMON.CM" | transloco}}
+        </span>
+      </div>
+    </article>
+
+    <article>
+      <mat-checkbox formControlName="hasDents"
+        (change)="toggleDentsDepth()">
+        {{"I18N.PRODUCT_DAMAGE.DENTS" | transloco}} 
+      </mat-checkbox>
+
+      <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.SELECT_DENTS_DEPTH" | transloco}}</h4>
+
+      <div class="container-slider">
+        <span class="slider-label">0
+          <br>
+          {{"I18N.COMMON.CM" | transloco}}
+        </span>
+        <mat-slider discrete 
+          min=0
+          max=10
+          step=0.5 
+          tickInterval=1
+          showTickMarks>
+          <input matSliderThumb formControlName="dentsDepth">
+        </mat-slider>
+        <span class="slider-label">10
+          <br>
+          {{"I18N.COMMON.CM" | transloco}}
+        </span>
+      </div>
+    </article>
+      
+    <article>
+      <mat-checkbox formControlName="hasMinorDamage"
+        (change)="toggleMinorDamage()">
+        {{"I18N.COMMON.MINOR_DAMAGES" | transloco}}
+      </mat-checkbox>
+
+      <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.INPUT_MINOR_DAMAGES" | transloco}}</h4>
+      
+      <div class="text-align-center">
+        <mat-form-field class="text-area" appearance="outline">
+          <mat-label>{{"I18N.COMMON.MINOR_DAMAGES" | transloco}}</mat-label>
+          <textarea matInput formControlName="minorDamage"
+            [maxlength]="minorDamageDescriptionCharacterLimit"                 
+            rows="5"></textarea>
+          <mat-error>{{"I18N.MAT_ERROR.MINOR_DAMAGES_REQUIRED" | transloco}}</mat-error>
+
+          <mat-hint>
+            {{
+              this.visibleSurfacesForm.controls.minorDamage.value.length
+              +" / "+
+              minorDamageDescriptionCharacterLimit
+            }}
+          </mat-hint>
+        </mat-form-field>  
+      </div>
+    </article>
+
+    <article>
+      <mat-checkbox formControlName="hasMajorDamage"
+        (change)="toggleMajorDamage()">
+        {{"I18N.COMMON.MAJOR_DAMAGES" | transloco}}
+      </mat-checkbox>
+
+      <h4 class="text-align-center">{{"I18N.PRODUCT_DAMAGE.INPUT_MAJOR_DAMAGES" | transloco}}</h4>
+      
+      <div class="text-align-center">
+        <mat-form-field class="text-area" appearance="outline">
+          <mat-label>{{"I18N.COMMON.MAJOR_DAMAGES" | transloco}}</mat-label>
+          <textarea matInput formControlName="majorDamage"
+            [maxlength]="majorDamageDescriptionCharacterLimit"                 
+            rows="5"></textarea>
+          <mat-error>{{"I18N.MAT_ERROR.MAJOR_DAMAGES_REQUIRED" | transloco}}</mat-error>
+
+          <mat-hint>
+            {{
+              this.visibleSurfacesForm.controls.majorDamage.value.length
+              +" / "+
+              majorDamageDescriptionCharacterLimit
+            }}
+          </mat-hint>
+        </mat-form-field>  
+      </div>
+    </article>          
+  </div>
+</mat-expansion-panel> 
+
+<!-- <pre>
+  Applicable : {{applicableVisibleSurfacesDamage.value}}
+  {{visibleSurfacesForm.getRawValue() | json}}
+</pre> -->
