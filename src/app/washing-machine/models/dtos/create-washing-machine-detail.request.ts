@@ -1,4 +1,4 @@
-export interface CreateWashingMachineDetailRequest {
+export interface SaveWashingMachineDetailRequest {
   
 // PACKAGE
     packageDamaged:boolean,

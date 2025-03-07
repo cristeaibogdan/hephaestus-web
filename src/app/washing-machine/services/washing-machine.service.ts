@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { BehaviorSubject, EMPTY, Observable, switchMap, withLatestFrom} from "rxjs";
-import { CreateWashingMachineRequest } from "../models/dtos/create-washing-machine.request";
+import { SaveWashingMachineRequest } from "../models/dtos/create-washing-machine.request";
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
 import { WashingMachineDataService } from "./washing-machine.data.service";
@@ -74,7 +74,7 @@ export class WashingMachineService {
       return Promise.reject();
     }
 
-    const washingMachine: CreateWashingMachineRequest = {
+    const washingMachine: SaveWashingMachineRequest = {
       category: this.washingMachineIdentification$.value.category,
       manufacturer: this.washingMachineIdentification$.value.manufacturer,
 
@@ -86,7 +86,7 @@ export class WashingMachineService {
       model: this.washingMachineIdentification$.value.model,
       type: this.washingMachineIdentification$.value.type,
       
-      createWashingMachineDetailRequest: {
+      saveWashingMachineDetailRequest: {
         packageDamaged: this.washingMachineDetail$.value.packageDamaged,
         packageDirty: this.washingMachineDetail$.value.packageDirty,
         packageMaterialAvailable: this.washingMachineDetail$.value.packageMaterialAvailable,
@@ -108,7 +108,7 @@ export class WashingMachineService {
     
     console.log("Saving = ", washingMachine);
     const formData = new FormData();
-    formData.append("createWashingMachineRequest", new Blob ([JSON.stringify(washingMachine)],{type: 'application/json'}));
+    formData.append("saveWashingMachineRequest", new Blob ([JSON.stringify(washingMachine)],{type: 'application/json'}));
 
     this.selectedFiles.forEach(file => {
       formData.append("imageFiles", file.file);

@@ -1,9 +1,9 @@
 import { DamageType } from '../../enums/damage-type.enum';
 import { IdentificationMode } from '../../enums/identification-mode.enum';
 import { ReturnType } from '../../enums/return-type.enum';
-import { CreateWashingMachineDetailRequest } from './create-washing-machine-detail.request';
+import { SaveWashingMachineDetailRequest } from './create-washing-machine-detail.request';
 
-export interface CreateWashingMachineRequest {
+export interface SaveWashingMachineRequest {
   category: string;
   identificationMode: IdentificationMode;
   manufacturer: string;
@@ -15,5 +15,5 @@ export interface CreateWashingMachineRequest {
   returnType: ReturnType;
   damageType: DamageType;
 
-  createWashingMachineDetailRequest: CreateWashingMachineDetailRequest;
+  saveWashingMachineDetailRequest: SaveWashingMachineDetailRequest;
 }
