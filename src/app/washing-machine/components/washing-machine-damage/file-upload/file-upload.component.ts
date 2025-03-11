@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -22,7 +22,8 @@ import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
   ]
 })
 export class FileUploadComponent {
-  @Input() selectedFiles!: ImageFile[];
+  selectedFiles: ImageFile[] = [];
+  // @Output() selectedFilesChange = new EventEmitter<ImageFile[]>
 
   private _notifService = inject(NotificationService);
   private _translocoService = inject(TranslocoService);
@@ -76,12 +77,26 @@ export class FileUploadComponent {
         )
       }
 
-      this.selectedFiles.push(imageFile);  
+      this.selectedFiles.push(imageFile);
+
+      // this.selectedFilesChange.emit(this.selectedFiles);
     }    
   }
 
   onRemoveImage(index:number): void {
     this.selectedFiles.splice(index, 1);
+    
+    // this.selectedFilesChange.emit(this.selectedFiles);
+  }
+
+  clearSelectedFiles(): void {
+    this.selectedFiles = [];
+    
+    // this.selectedFilesChange.emit(this.selectedFiles);
+  }
+
+  getSelectedFiles(): ImageFile[] {
+    return this.selectedFiles;
   }
 
 //************************
