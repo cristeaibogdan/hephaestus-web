@@ -1,5 +1,5 @@
-import { Component, ViewChild, inject } from '@angular/core';
-import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CustomValidators } from '../../../shared/validators/custom.validators';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
 import { WashingMachineService } from '../../services/washing-machine.service';
@@ -43,8 +43,6 @@ export class WashingMachineDamageComponent {
   private fb = inject(NonNullableFormBuilder);
   private _washingMachineService = inject(WashingMachineService);
   private _notifService = inject(NotificationService);
-
-  @ViewChild(FileUploadComponent) fileUploadComponent!: FileUploadComponent;
   
   washingMachineDetailForm = this.fb.group({
     applicablePackageDamage: [false],
@@ -129,16 +127,7 @@ export class WashingMachineDamageComponent {
     "price")}
   );
 
-  // selectedFiles:ImageFile[] = [];
-
-  // onSelectedFilesChange(imageFiles: ImageFile[]) :void {
-  //   this.selectedFiles = imageFiles;
-  //   console.log("files = ", imageFiles);
-  // }
-    
-  // clearSelectedFiles(): void {
-  //   this.selectedFiles = [];
-  // }
+  selectedFiles: FormControl<ImageFile[]> = this.fb.control([], [Validators.required]);
 
 // *******************************
 // *** FORM RESET AND SUBMIT
@@ -147,12 +136,11 @@ export class WashingMachineDamageComponent {
   onReset(e:Event): void {
     e.preventDefault();
     this.washingMachinePricingForm.reset();
-    this.fileUploadComponent.clearSelectedFiles();
-  }  
+    this.selectedFiles.reset();
+  }
 
   onSubmit(): void {
-    // if(this.selectedFiles.length === 0) {
-    if(this.fileUploadComponent.getSelectedFiles().length === 0) {
+    if(this.selectedFiles.value.length === 0) {
       this._notifService.showError("At least one image must be uploaded", 0);
       return;
     }
@@ -207,7 +195,7 @@ export class WashingMachineDamageComponent {
     };
 
     this._washingMachineService.setWashingMachineDetail(washingMachineDetail);
-    this._washingMachineService.setSelectedFiles(this.fileUploadComponent.getSelectedFiles());
+    this._washingMachineService.setSelectedFiles(this.selectedFiles.value);
     this.stepper.next();
     // console.log("Sent = ", washingMachineDetail);
     // TODO: Restructure the DTO into nested DTOs - package, visible, hidden, costAssessment

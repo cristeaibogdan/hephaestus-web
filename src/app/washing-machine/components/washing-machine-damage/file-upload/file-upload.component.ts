@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input, inject } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -17,13 +19,14 @@ import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
     MatIconModule,
     MatTooltipModule,
 
+    // CommonModule, // for json pipe in html, used for debugging.
+
     TranslocoModule,
     DragAndDropDirective,
   ]
 })
 export class FileUploadComponent {
-  selectedFiles: ImageFile[] = [];
-  // @Output() selectedFilesChange = new EventEmitter<ImageFile[]>
+  @Input() selectedFiles!: FormControl<ImageFile[]>;
 
   private _notifService = inject(NotificationService);
   private _translocoService = inject(TranslocoService);
@@ -43,14 +46,14 @@ export class FileUploadComponent {
 
   private processFiles(files: FileList): void {    
     // 1. Validate file length
-    const totalFilesCount = this.selectedFiles.length + files.length;
+    const totalFilesCount = this.selectedFiles.value.length + files.length;
     if (totalFilesCount > 3) {
       this._notifService.showError(this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_LIMIT"),0);
       return;
     }
       
     for (let i = 0; i < files.length; i++) {
-      const uploadedFile:File = files[i];      
+      const uploadedFile: File = files[i];      
       
       // 2. Validate file extension
       if(this.invalidFileExtension(uploadedFile.name)) {
@@ -77,26 +80,12 @@ export class FileUploadComponent {
         )
       }
 
-      this.selectedFiles.push(imageFile);
-
-      // this.selectedFilesChange.emit(this.selectedFiles);
-    }    
+      this.selectedFiles.setValue([...this.selectedFiles.value, imageFile]);
+    }
   }
 
   onRemoveImage(index:number): void {
-    this.selectedFiles.splice(index, 1);
-    
-    // this.selectedFilesChange.emit(this.selectedFiles);
-  }
-
-  clearSelectedFiles(): void {
-    this.selectedFiles = [];
-    
-    // this.selectedFilesChange.emit(this.selectedFiles);
-  }
-
-  getSelectedFiles(): ImageFile[] {
-    return this.selectedFiles;
+    this.selectedFiles.value.splice(index, 1);
   }
 
 //************************
