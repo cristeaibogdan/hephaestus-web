@@ -1,10 +1,10 @@
 <form [formGroup]="washingMachineDetailForm" (ngSubmit)="onSubmit()" (reset)="onReset($event)">
 <ul>
   <mat-card class="elevation-level4">
-    <mat-card-title>{{"I18N.PRODUCT_DAMAGE.UPLOAD_IMAGES_TITLE" | transloco}} <span>*</span></mat-card-title>
+    <mat-card-title>{{"I18N.PRODUCT_DAMAGE.UPLOAD_IMAGES_TITLE" | transloco}} <span>*</span></mat-card-title>    
     <app-file-upload
-      [selectedFiles] = "selectedFiles">
-    </app-file-upload>    
+      [selectedImages]="selectedImages">
+    </app-file-upload>
   </mat-card>
 
   <mat-card class="elevation-level4">

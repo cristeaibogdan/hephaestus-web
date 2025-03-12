@@ -8,8 +8,8 @@
   <legend class="text-align-center">
     <button mat-raised-button type="button" class="primary" 
       (click)="fileInput.click()"
-      [disabled]="selectedFiles.length === 3">
-      <mat-icon svgIcon="upload"></mat-icon> &nbsp; {{"I18N.COMMON.UPLOAD_IMAGES" | transloco}} &nbsp; {{selectedFiles.length}} / 3
+      [disabled]="selectedImages.value.length === 3">
+      <mat-icon svgIcon="upload"></mat-icon> &nbsp; {{"I18N.COMMON.UPLOAD_IMAGES" | transloco}} &nbsp; {{selectedImages.value.length}} / 3
     </button>
 
     <mat-icon class="text-color help-tip" 
@@ -20,8 +20,8 @@
   </legend>
 
   <section class="images-list">
-    @if (selectedFiles.length > 0) {
-      @for (file of selectedFiles; track file; let i = $index) {
+    @if (selectedImages.value.length > 0) {
+      @for (file of selectedImages.value; track file; let i = $index) {
         <div class="image-container">
           <img [src]="file.url"/>
           <button class="button-remove-image" type="button" (click)="onRemoveImage(i)">x</button>
@@ -36,3 +36,7 @@
     }
   </section>
 </fieldset>
+
+<!-- <pre>
+  {{selectedImages.getRawValue() | json}}
+</pre> -->
