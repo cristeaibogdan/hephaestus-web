@@ -26,7 +26,7 @@ import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
   ]
 })
 export class FileUploadComponent {
-  @Input() selectedFiles!: FormControl<ImageFile[]>;
+  @Input() selectedImages!: FormControl<ImageFile[]>;
 
   private _notifService = inject(NotificationService);
   private _translocoService = inject(TranslocoService);
@@ -46,7 +46,7 @@ export class FileUploadComponent {
 
   private processFiles(files: FileList): void {    
     // 1. Validate file length
-    const totalFilesCount = this.selectedFiles.value.length + files.length;
+    const totalFilesCount = this.selectedImages.value.length + files.length;
     if (totalFilesCount > 3) {
       this._notifService.showError(this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_LIMIT"),0);
       return;
@@ -80,12 +80,12 @@ export class FileUploadComponent {
         )
       }
 
-      this.selectedFiles.setValue([...this.selectedFiles.value, imageFile]);
+      this.selectedImages.setValue([...this.selectedImages.value, imageFile]);
     }
   }
 
   onRemoveImage(index:number): void {
-    this.selectedFiles.value.splice(index, 1);
+    this.selectedImages.value.splice(index, 1);
   }
 
 //************************

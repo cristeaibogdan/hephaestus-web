@@ -127,7 +127,7 @@ export class WashingMachineDamageComponent {
     "price")}
   );
 
-  selectedFiles: FormControl<ImageFile[]> = this.fb.control([], [Validators.required]);
+  selectedImages: FormControl<ImageFile[]> = this.fb.control([], [Validators.required]);
 
 // *******************************
 // *** FORM RESET AND SUBMIT
@@ -136,11 +136,11 @@ export class WashingMachineDamageComponent {
   onReset(e:Event): void {
     e.preventDefault();
     this.washingMachinePricingForm.reset();
-    this.selectedFiles.reset();
+    this.selectedImages.reset();
   }
 
   onSubmit(): void {
-    if(this.selectedFiles.value.length === 0) {
+    if(this.selectedImages.value.length === 0) {
       this._notifService.showError("At least one image must be uploaded", 0);
       return;
     }
@@ -195,7 +195,7 @@ export class WashingMachineDamageComponent {
     };
 
     this._washingMachineService.setWashingMachineDetail(washingMachineDetail);
-    this._washingMachineService.setSelectedFiles(this.selectedFiles.value);
+    this._washingMachineService.setSelectedFiles(this.selectedImages.value);
     this.stepper.next();
     // console.log("Sent = ", washingMachineDetail);
     // TODO: Restructure the DTO into nested DTOs - package, visible, hidden, costAssessment
