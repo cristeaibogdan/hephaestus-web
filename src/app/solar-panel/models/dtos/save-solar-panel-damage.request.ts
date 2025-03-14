@@ -1,4 +1,4 @@
-export interface CreateSolarPanelDamageRequest {
+export interface SaveSolarPanelDamageRequest {
   hotSpots: boolean;
   microCracks: boolean;
   snailTrails: boolean;

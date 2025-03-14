@@ -1,10 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CreateSolarPanelRequest } from '../models/dtos/create-solar-panel.request';
+import { SaveSolarPanelRequest } from '../models/dtos/save-solar-panel.request';
 import { GetModelAndTypeResponse } from 'src/app/shared/models/get-model-and-type.response';
 import { SearchSolarPanelRequest } from '../models/dtos/search-solar-panel.request';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { SolarPanelRecommendation } from '../enums/solar-panel-recommendation.enum';
 
 @Injectable({providedIn: 'root'})
 export class SolarPanelDataService { //TODO: replace with proper backend api calls
@@ -36,12 +37,16 @@ export class SolarPanelDataService { //TODO: replace with proper backend api cal
 // *** STEP 3 = OVERVIEW
 // **************************************
 
-  save(createSolarPanelRequestDTO: CreateSolarPanelRequest) {
-    console.log("Saving ...", createSolarPanelRequestDTO);
+  save(createSolarPanelRequestDTO: SaveSolarPanelRequest): Observable<void> {
+    const url = this.apiURL.concat("/v1/solar-panels/save");
+    return this.http.post<void>(url, createSolarPanelRequestDTO);
   }
 
-  getRecommendation(serialNumber: string) {
-    console.log("Getting ... recommendation");
+  getRecommendation(serialNumber:string): Observable<SolarPanelRecommendation> {
+    const url = this.apiURL.concat("/v1/solar-panels/")
+    .concat(serialNumber)
+    .concat("/recommendation");
+    return this.http.get<SolarPanelRecommendation>(url);
   }
 
 // **************************************

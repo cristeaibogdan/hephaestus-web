@@ -43,7 +43,7 @@ export class SolarPanelDamageComponent {
     brokenGlass: [false],
     additionalDetails: [""]
   },{
-    validators: CustomValidators.atLeastOneOutOfFourTrue(
+    validators: CustomValidators.atLeastOneTrueOutOf(
     "hotSpots",
     "microCracks",
     "snailTrails",
@@ -64,11 +64,11 @@ export class SolarPanelDamageComponent {
     }
 
     const solarPanelDamage: SolarPanelDamage = {
-      hotSpots: this.solarPanelDamageForm.value.hotSpots!,
-      microCracks: this.solarPanelDamageForm.value.microCracks!,
-      snailTrails: this.solarPanelDamageForm.value.snailTrails!,
-      brokenGlass: this.solarPanelDamageForm.value.brokenGlass!,
-      additionalDetails: this.solarPanelDamageForm.value.additionalDetails!
+      hotSpots: this.solarPanelDamageForm.controls.hotSpots.value,
+      microCracks: this.solarPanelDamageForm.controls.microCracks.value,
+      snailTrails: this.solarPanelDamageForm.controls.snailTrails.value,
+      brokenGlass: this.solarPanelDamageForm.controls.brokenGlass.value,
+      additionalDetails: this.solarPanelDamageForm.controls.additionalDetails.value
     }
 
     this._solarPanelService.setSolarPanelDamage(solarPanelDamage);

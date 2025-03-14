@@ -29,7 +29,7 @@ export class SolarPanelRecommendationComponent {
   private _solarPanelService = inject(SolarPanelService);
   private _solarPanelDataService = inject(SolarPanelDataService);
 
-  solarPanelIdenfitication$: Observable<SolarPanelIdentification> = this._solarPanelService.getSolarPanelIdentification();
+  solarPanelIdentitication$: Observable<SolarPanelIdentification> = this._solarPanelService.getSolarPanelIdentification();
   serialNumber :string = this._solarPanelService.getSerialNumber();
   solarPanelRecommendation :SolarPanelRecommendation = this._solarPanelService.getRecommendation();;
 
