@@ -108,21 +108,23 @@ export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
     this.availableTypes = [];
   }
 
-  getManufacturer(category: string) {   
-    this.availableManufacturers = this._solarPanelDataService.getManufacturers(category);
+  getManufacturer(category: string): void {   
+    this._solarPanelDataService.getManufacturers(category).subscribe(response => {
+      this.availableManufacturers = response;
+    });  
   }
 
-  getModelsAndTypes(manufacturer: string) {
-    
+  getModelsAndTypes(manufacturer: string): void {    
     if (manufacturer === "") {// Do not execute a request if manufacturer is empty. Happens when form is reset
       return;
     }
-    
-    this.clearAvailableModelsAndTypes();
 
-    this._solarPanelDataService.getModelsAndTypes(manufacturer)?.forEach(modelAndDTO => {
-      this.availableModels.push(modelAndDTO.model);
-      this.availableTypes.push(modelAndDTO.type);
+    this._solarPanelDataService.getModelsAndTypes(manufacturer).subscribe(response => {
+      this.clearAvailableModelsAndTypes();
+      response.forEach(getModelAndTypeResponse => {
+        this.availableModels.push(getModelAndTypeResponse.model);
+        this.availableTypes.push(getModelAndTypeResponse.type);
+      });
     });
 
     // Need to reset values, when you repopulate the models and types arrays
