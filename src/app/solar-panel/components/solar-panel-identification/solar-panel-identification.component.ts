@@ -96,7 +96,7 @@ export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
   }
 
 // **********************************
-// *** POPULATE DATA MATRIX FIELDS
+// *** POPULATE DROPDOWN SELECTORS
 // **********************************
 
   availableManufacturers: string[] = [];
