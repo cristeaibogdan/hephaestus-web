@@ -102,10 +102,10 @@ export class SolarPanelService {
     
     return firstValueFrom(this._solarPanelDataService.save(saveSolarPanelRequest).pipe(
       switchMap(() => {
-        if (!this.solarPanelIdentification$()) {
+        if (!solarPanelIdentification) {
           return EMPTY; // Prevent the next call if identification is missing
         }
-        return this._solarPanelDataService.getRecommendation(this.solarPanelIdentification$().serialNumber);
+        return this._solarPanelDataService.getRecommendation(solarPanelIdentification.serialNumber);
       })
     )).then((response) => {
       this.recommendation = response;
