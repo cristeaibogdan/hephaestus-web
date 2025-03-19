@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Signal, inject } from '@angular/core';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { SolarPanelService } from '../../services/solar-panel.service';
 import { CommonModule } from '@angular/common';
@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { NotificationService } from 'src/app/services/notification.service';
+import { SolarPanelIdentification } from '../../models/solar-panel-identification.model';
 
 @Component({
   selector: 'app-solar-panel-overview',
@@ -28,13 +29,13 @@ export class SolarPanelOverviewComponent {
   private _notifService = inject(NotificationService);
   private _translocoService = inject(TranslocoService);
 
-  solarPanelIdenfitication$ = this._solarPanelService.getSolarPanelIdentification();
+  solarPanelIdentification$: Signal<SolarPanelIdentification> = this._solarPanelService.getSolarPanelIdentification();
   solarPanelDamage$ = this._solarPanelService.getSolarPanelDamage();
 
   save(): void {
     this._solarPanelService.save().then(success => {
       if(success) {
-        this._notifService.showSuccess(this._translocoService.translate("I18N.CUSTOM_SUCCESS.PRODUCT_SAVED"),4000);
+        this._notifService.showSuccess(this._translocoService.translate("I18N.CUSTOM_SUCCESS.PRODUCT_SAVED"), 4000);
         this.stepper.next();
       }
     });

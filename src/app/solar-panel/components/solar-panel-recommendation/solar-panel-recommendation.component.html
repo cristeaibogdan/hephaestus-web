@@ -1,9 +1,9 @@
 <app-solar-panel-overview>
   <div header class="text-align-center">
-    @if (solarPanelIdentitication$ | async; as solarPanelIdentification) {      
+    @if (solarPanelIdentification$()) {      
       Based on the selected damages, the solar panel with serial number
-      {{solarPanelIdentification.serialNumber}} 
-      manufactured by {{solarPanelIdentification.manufacturer}}, is sent to:
+      {{solarPanelIdentification$().serialNumber}} 
+      manufactured by {{solarPanelIdentification$().manufacturer}}, is sent to:
   
       <div class="text-align-center">
         <button class="recommendation-text"        

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Signal, inject } from '@angular/core';
 import { SolarPanelService } from '../../services/solar-panel.service';
 import { Observable } from 'rxjs';
 import { SolarPanelIdentification } from '../../models/solar-panel-identification.model';
@@ -29,12 +29,11 @@ export class SolarPanelRecommendationComponent {
   private _solarPanelService = inject(SolarPanelService);
   private _solarPanelDataService = inject(SolarPanelDataService);
 
-  solarPanelIdentitication$: Observable<SolarPanelIdentification> = this._solarPanelService.getSolarPanelIdentification();
-  serialNumber :string = this._solarPanelService.getSerialNumber();
-  solarPanelRecommendation :SolarPanelRecommendation = this._solarPanelService.getRecommendation();;
+  solarPanelIdentification$: Signal<SolarPanelIdentification> = this._solarPanelService.getSolarPanelIdentification();
+  solarPanelRecommendation: SolarPanelRecommendation = this._solarPanelService.getRecommendation();;
 
   onDownload() {
-    this._solarPanelDataService.getReport(this.serialNumber);
+    this._solarPanelDataService.getReport(this.solarPanelIdentification$().serialNumber);
   }
 
 }

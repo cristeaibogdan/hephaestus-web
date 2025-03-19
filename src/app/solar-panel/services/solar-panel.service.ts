@@ -1,8 +1,7 @@
-import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, EMPTY, switchMap, withLatestFrom } from 'rxjs';
+import { Injectable, inject, signal } from '@angular/core';
+import { BehaviorSubject, EMPTY, firstValueFrom, switchMap, withLatestFrom } from 'rxjs';
 import { SolarPanelIdentification } from '../models/solar-panel-identification.model';
 import { SolarPanelDataService } from './solar-panel-data.service';
-import { NotificationService } from 'src/app/services/notification.service';
 import { SolarPanelDamage } from '../models/solar-panel-damage.model';
 import { SaveSolarPanelRequest } from '../models/dtos/save-solar-panel.request';
 import { SolarPanelRecommendation } from '../enums/solar-panel-recommendation.enum';
@@ -10,13 +9,12 @@ import { SolarPanelRecommendation } from '../enums/solar-panel-recommendation.en
 @Injectable({providedIn: 'root'})
 export class SolarPanelService {
   private _solarPanelDataService = inject(SolarPanelDataService);
-  private _notifService = inject(NotificationService);
 
 // **************************************
 // *** STEP 1 = IDENTIFICATION
 // **************************************
 
-  private solarPanelIdentification$ = new BehaviorSubject<SolarPanelIdentification>({
+  private solarPanelIdentification$ = signal<SolarPanelIdentification>({
     category: "",  
     manufacturer: "",
     model: "",
@@ -25,17 +23,11 @@ export class SolarPanelService {
   });
   
   getSolarPanelIdentification() {
-    return this.solarPanelIdentification$.asObservable();
-  }
-
-  getSerialNumber() {
-    return this.solarPanelIdentification$.value.serialNumber;
+    return this.solarPanelIdentification$;
   }
 
   setSolarPanelIdentification(solarPanelIdentification: SolarPanelIdentification) {
-    this.solarPanelIdentification$.next(solarPanelIdentification);
-
-    // this.save(); //TODO: Remove after doing Damage Assessment page.
+    this.solarPanelIdentification$.set(solarPanelIdentification);
   }
 
   resetSolarPanelIdentification() {
@@ -46,7 +38,7 @@ export class SolarPanelService {
       type: "",
       serialNumber: ""
     }
-    this.solarPanelIdentification$.next(initialSolarPanelIdentification);
+    this.solarPanelIdentification$.set(initialSolarPanelIdentification);
   }
 
 // **************************************
@@ -85,16 +77,16 @@ export class SolarPanelService {
 // **************************************
 
   save(): Promise<boolean> {
-    if (this.solarPanelIdentification$.value == null || this.solarPanelDamage$.value == null) {
+    if (this.solarPanelIdentification$() == null || this.solarPanelDamage$.value == null) {
       return Promise.reject();
     }
 
     const saveSolarPanelRequest: SaveSolarPanelRequest = {
-      category: this.solarPanelIdentification$.value.category,
-      manufacturer: this.solarPanelIdentification$.value.manufacturer,
-      model: this.solarPanelIdentification$.value.model,
-      type: this.solarPanelIdentification$.value.type,
-      serialNumber: this.solarPanelIdentification$.value.serialNumber,
+      category: this.solarPanelIdentification$().category,
+      manufacturer: this.solarPanelIdentification$().manufacturer,
+      model: this.solarPanelIdentification$().model,
+      type: this.solarPanelIdentification$().type,
+      serialNumber: this.solarPanelIdentification$().serialNumber,
       saveSolarPanelDamageRequest: {
         hotSpots: this.solarPanelDamage$.value.hotSpots,
         microCracks: this.solarPanelDamage$.value.microCracks,
@@ -105,26 +97,17 @@ export class SolarPanelService {
     }
 
     console.log("Saving = ", saveSolarPanelRequest)
-
-    return new Promise((resolve) => {
-      this._solarPanelDataService.save(saveSolarPanelRequest).pipe(
-        withLatestFrom(this.getSolarPanelIdentification()),
-        switchMap(([_, identification]) => {
-          if(!identification) {
-            return EMPTY;
-          }
-          return this._solarPanelDataService.getRecommendation(identification.serialNumber);
-        })
-      ).subscribe({
-        next: (response) => {
-          this.recommendation = response;
-          resolve(true);
-        },
-        error: (error) => {
-          resolve(false);
-          throw error; // re-throw to be handled by GlobalErrorHandler
-        },
+    
+    return firstValueFrom(this._solarPanelDataService.save(saveSolarPanelRequest).pipe(
+      switchMap(() => {
+        if (!this.solarPanelIdentification$()) {
+          return EMPTY; // Prevent the next call if identification is missing
+        }
+        return this._solarPanelDataService.getRecommendation(this.solarPanelIdentification$().serialNumber);
       })
+    )).then((response) => {
+      this.recommendation = response;
+      return true;
     });
   }
 
