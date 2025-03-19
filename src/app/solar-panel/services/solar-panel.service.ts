@@ -81,12 +81,14 @@ export class SolarPanelService {
       return Promise.reject();
     }
 
+    const solarPanelIdentification = this.solarPanelIdentification$();
+
     const saveSolarPanelRequest: SaveSolarPanelRequest = {
-      category: this.solarPanelIdentification$().category,
-      manufacturer: this.solarPanelIdentification$().manufacturer,
-      model: this.solarPanelIdentification$().model,
-      type: this.solarPanelIdentification$().type,
-      serialNumber: this.solarPanelIdentification$().serialNumber,
+      category: solarPanelIdentification.category,
+      manufacturer: solarPanelIdentification.manufacturer,
+      model: solarPanelIdentification.model,
+      type: solarPanelIdentification.type,
+      serialNumber: solarPanelIdentification.serialNumber,
       saveSolarPanelDamageRequest: {
         hotSpots: this.solarPanelDamage$.value.hotSpots,
         microCracks: this.solarPanelDamage$.value.microCracks,
