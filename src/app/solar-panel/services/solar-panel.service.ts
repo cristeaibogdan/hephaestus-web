@@ -14,13 +14,17 @@ export class SolarPanelService {
 // *** STEP 1 = IDENTIFICATION
 // **************************************
 
-  private solarPanelIdentification$ = signal<SolarPanelIdentification>({
-    category: "",  
-    manufacturer: "",
-    model: "",
-    type: "",
-    serialNumber: ""
-  });
+  private readonly solarPanelIdentificationDefault: SolarPanelIdentification = {
+    category: '',
+    manufacturer: '',
+    model: '',
+    type: '',
+    serialNumber: ''
+  }
+
+  private solarPanelIdentification$ = signal<SolarPanelIdentification>(
+    this.solarPanelIdentificationDefault
+  );
   
   getSolarPanelIdentification() {
     return this.solarPanelIdentification$;
@@ -30,28 +34,25 @@ export class SolarPanelService {
     this.solarPanelIdentification$.set(solarPanelIdentification);
   }
 
-  resetSolarPanelIdentification() {
-    const initialSolarPanelIdentification: SolarPanelIdentification = {
-      category: "",  
-      manufacturer: "",
-      model: "",
-      type: "",
-      serialNumber: ""
-    }
-    this.solarPanelIdentification$.set(initialSolarPanelIdentification);
+  resetSolarPanelIdentification() {    
+    this.solarPanelIdentification$.set(this.solarPanelIdentificationDefault);
   }
 
 // **************************************
 // *** STEP 2 = DAMAGE
 // **************************************
 
-  private solarPanelDamage$ = signal<SolarPanelDamage>({
+  private readonly solarPanelDamageDefault: SolarPanelDamage = {
     hotSpots: false,
     microCracks: false,
     snailTrails: false,
     brokenGlass: false,
     additionalDetails: ''
-  });
+  }
+
+  private solarPanelDamage$ = signal<SolarPanelDamage>(
+    this.solarPanelDamageDefault
+  );
 
   getSolarPanelDamage() {
     return this.solarPanelDamage$;
@@ -62,14 +63,7 @@ export class SolarPanelService {
   }
 
   resetSolarPanelDamage() {
-    const initialSolarPanelDamage: SolarPanelDamage = {
-      hotSpots: false,
-      microCracks: false,
-      snailTrails: false,
-      brokenGlass: false,
-      additionalDetails: ''
-    }
-    this.solarPanelDamage$.set(initialSolarPanelDamage);
+    this.solarPanelDamage$.set(this.solarPanelDamageDefault);
   }
   
 // **************************************
