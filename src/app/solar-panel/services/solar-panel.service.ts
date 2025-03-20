@@ -45,7 +45,7 @@ export class SolarPanelService {
 // *** STEP 2 = DAMAGE
 // **************************************
 
-  private solarPanelDamage$ = new BehaviorSubject<SolarPanelDamage>({
+  private solarPanelDamage$ = signal<SolarPanelDamage>({
     hotSpots: false,
     microCracks: false,
     snailTrails: false,
@@ -54,11 +54,11 @@ export class SolarPanelService {
   });
 
   getSolarPanelDamage() {
-    return this.solarPanelDamage$.asObservable();
+    return this.solarPanelDamage$;
   }
 
   setSolarPanelDamage(solarPanelDamage: SolarPanelDamage) {
-    this.solarPanelDamage$.next(solarPanelDamage);
+    this.solarPanelDamage$.set(solarPanelDamage);
   }
 
   resetSolarPanelDamage() {
@@ -69,7 +69,7 @@ export class SolarPanelService {
       brokenGlass: false,
       additionalDetails: ''
     }
-    this.solarPanelDamage$.next(initialSolarPanelDamage);
+    this.solarPanelDamage$.set(initialSolarPanelDamage);
   }
   
 // **************************************
@@ -77,11 +77,12 @@ export class SolarPanelService {
 // **************************************
 
   save(): Promise<boolean> {
-    if (this.solarPanelIdentification$() == null || this.solarPanelDamage$.value == null) {
+    if (this.solarPanelIdentification$() == null || this.solarPanelDamage$() == null) {
       return Promise.reject();
     }
 
     const solarPanelIdentification = this.solarPanelIdentification$();
+    const solarPanelDamage = this.solarPanelDamage$();
 
     const saveSolarPanelRequest: SaveSolarPanelRequest = {
       category: solarPanelIdentification.category,
@@ -90,11 +91,11 @@ export class SolarPanelService {
       type: solarPanelIdentification.type,
       serialNumber: solarPanelIdentification.serialNumber,
       saveSolarPanelDamageRequest: {
-        hotSpots: this.solarPanelDamage$.value.hotSpots,
-        microCracks: this.solarPanelDamage$.value.microCracks,
-        snailTrails: this.solarPanelDamage$.value.snailTrails,
-        brokenGlass: this.solarPanelDamage$.value.brokenGlass,
-        additionalDetails: this.solarPanelDamage$.value.additionalDetails
+        hotSpots: solarPanelDamage.hotSpots,
+        microCracks: solarPanelDamage.microCracks,
+        snailTrails: solarPanelDamage.snailTrails,
+        brokenGlass: solarPanelDamage.brokenGlass,
+        additionalDetails: solarPanelDamage.additionalDetails
       }
     }
 
