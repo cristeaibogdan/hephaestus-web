@@ -77,9 +77,6 @@ export class SolarPanelService {
 // **************************************
 
   save(): Promise<boolean> {
-    if (this.solarPanelIdentification$() == null || this.solarPanelDamage$() == null) {
-      return Promise.reject();
-    }
 
     const solarPanelIdentification = this.solarPanelIdentification$();
     const solarPanelDamage = this.solarPanelDamage$();
@@ -102,10 +99,7 @@ export class SolarPanelService {
     console.log("Saving = ", saveSolarPanelRequest)
     
     return firstValueFrom(this._solarPanelDataService.save(saveSolarPanelRequest).pipe(
-      switchMap(() => {
-        if (!solarPanelIdentification) {
-          return EMPTY; // Prevent the next call if identification is missing
-        }
+      switchMap(() => {        
         return this._solarPanelDataService.getRecommendation(solarPanelIdentification.serialNumber);
       })
     )).then((response) => {
