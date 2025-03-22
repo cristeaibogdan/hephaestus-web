@@ -1,6 +1,6 @@
 import { SolarPanelRecommendation } from "../../enums/solar-panel-recommendation.enum";
 
-export interface GetSolarPanelSimpleResponse {
+export interface SearchSolarPanelResponse {
   category: string;
   manufacturer: string;
   model: string;

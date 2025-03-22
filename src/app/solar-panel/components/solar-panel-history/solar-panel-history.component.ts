@@ -18,8 +18,10 @@ import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
 import { MatInputModule } from '@angular/material/input';
 import { DateFormatYYYYMMDDDirective } from 'src/app/shared/directives/date-format-yyyy-mm-dd.directive';
 import { A11yModule } from '@angular/cdk/a11y';
-import { TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { MatIconModule } from '@angular/material/icon';
+import { SolarPanelDataService } from '../../services/solar-panel-data.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 const DUMMY_DATA: GetSolarPanelFullResponse[] = [
   {
@@ -97,6 +99,9 @@ const DUMMY_DATA: GetSolarPanelFullResponse[] = [
 export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
   private dialog = inject(MatDialog);
   private fb = inject(FormBuilder);
+  private _solarPanelDataService = inject(SolarPanelDataService);
+  private _translocoService = inject(TranslocoService);
+  private _notifService = inject(NotificationService);
 
   readonly solarPanelRecommendation = SolarPanelRecommendation;
 
@@ -189,8 +194,26 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
     console.log("searchSolarPanelRequest = ", searchSolarPanelRequest);
 
     // 4. UPDATE VALUES OF PAGINATOR FROM RESPONSE
-    //TODO: API call to backend
-    this.solarPanels.data = DUMMY_DATA;
+    this._solarPanelDataService.loadPaginatedAndFiltered(searchSolarPanelRequest).subscribe({
+      next: response => {
+        console.log("Response = ", response);
+
+        if(response.content.length == 0) {
+          this._notifService.showWarning(this._translocoService.translate("I18N.GENERAL_ERROR.EMPTY_PAGE"), 0);
+        }
+
+        this.solarPanels.data = response.content;
+        this.pageNumber = response.number;
+        this.pageSize = response.size;
+        this.totalElements = response.totalElements;
+      },
+      error: err => {
+        this.solarPanels.data = [];
+        this.pageNumber = 0;
+        this.totalElements = 0;
+        throw err; // re-throw to be handled by GlobalErrorHandler
+      }
+    });
   }
 
   private handleDate(value: string | null): string | null {

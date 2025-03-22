@@ -1,6 +1,6 @@
 import { SolarPanelDamage } from "../solar-panel-damage.model";
-import { GetSolarPanelSimpleResponse } from "./get-solar-panel-simple.response";
+import { SearchSolarPanelResponse } from "./search-solar-panel.response";
 
-export interface GetSolarPanelFullResponse extends GetSolarPanelSimpleResponse { 
+export interface GetSolarPanelFullResponse extends SearchSolarPanelResponse { 
   solarPanelDamage: SolarPanelDamage;
 }

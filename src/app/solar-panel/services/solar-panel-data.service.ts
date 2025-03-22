@@ -6,6 +6,8 @@ import { SearchSolarPanelRequest } from '../models/dtos/search-solar-panel.reque
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SolarPanelRecommendation } from '../enums/solar-panel-recommendation.enum';
+import { Page } from 'src/app/shared/models/page.model';
+import { SearchSolarPanelResponse } from '../models/dtos/search-solar-panel.response';
 
 @Injectable({providedIn: 'root'})
 export class SolarPanelDataService { //TODO: replace with proper backend api calls
@@ -61,8 +63,9 @@ export class SolarPanelDataService { //TODO: replace with proper backend api cal
 //*** HISTORY
 //**************************************
 
-  loadPaginatedAndFiltered(searchSolarPanelRequest: SearchSolarPanelRequest) {
-    console.warn("Not implemented, yet...");
+  loadPaginatedAndFiltered(searchSolarPanelRequest: SearchSolarPanelRequest): Observable<Page<SearchSolarPanelResponse>> {
+    const url = this.apiURL.concat("/v1/solar-panels");
+    return this.http.post<Page<SearchSolarPanelResponse>>(url, searchSolarPanelRequest);
   }
 
   loadExpanded(productSerialNumber:string) {
