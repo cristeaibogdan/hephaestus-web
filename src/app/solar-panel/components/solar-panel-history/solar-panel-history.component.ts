@@ -22,57 +22,7 @@ import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { MatIconModule } from '@angular/material/icon';
 import { SolarPanelDataService } from '../../services/solar-panel-data.service';
 import { NotificationService } from 'src/app/services/notification.service';
-
-const DUMMY_DATA: GetSolarPanelFullResponse[] = [
-  {
-    createdAt: new Date('2022-01-01'),
-    category: "Solar Panel",
-    manufacturer: 'SolarCorp',
-    model: 'SC-1000',
-    type: 'Monocrystalline',
-    serialNumber: 'SN123456789',
-    recommendation: SolarPanelRecommendation.REPAIR,
-    solarPanelDamage: {
-      hotSpots: false,
-      microCracks: false,
-      snailTrails: false,
-      brokenGlass: false,
-      additionalDetails: ''
-    },
-  },
-  {
-    createdAt: new Date('2022-05-15'),
-    category: "Solar Panel",
-    manufacturer: 'SunPower',
-    model: 'SP-2000',
-    type: 'Polycrystalline',
-    serialNumber: 'SN987654321',
-    recommendation: SolarPanelRecommendation.RECYCLE,
-    solarPanelDamage: {
-      hotSpots: true,
-      microCracks: false,
-      snailTrails: true,
-      brokenGlass: false,
-      additionalDetails: 'Half properties true'
-    },
-  },
-  {
-    createdAt: new Date('2023-03-20'),
-    category: "Solar Panel",
-    manufacturer: 'EcoEnergy',
-    model: 'EE-1500',
-    type: 'Thin-film',
-    serialNumber: 'SN543216789',
-    recommendation: SolarPanelRecommendation.DISPOSE,
-    solarPanelDamage: {
-      hotSpots: true,
-      microCracks: true,
-      snailTrails: true,
-      brokenGlass: true,
-      additionalDetails: 'All properties true'
-    },
-  },
-];
+import { DataTableDataSource } from './data-table-datasource';
 
 @Component({
   selector: 'app-solar-panel-history',
@@ -106,6 +56,7 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
   readonly solarPanelRecommendation = SolarPanelRecommendation;
 
   solarPanels = new MatTableDataSource<Partial<GetSolarPanelFullResponse>>();
+  // dataSource = new DataTableDataSource(); //TODO: Create Custom Data Source for this table
 
   displayedColumns: string[] = [
     "createdAt",
