@@ -118,7 +118,7 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
   ]; 
 
   ngOnInit(): void {
-    this.loadPaginatedAndFiltered();
+    this.search();
   }
 
 // *****************************************
@@ -163,21 +163,21 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
   changePage(e:PageEvent) {
     this.pageNumber = e.pageIndex;
     this.pageSize = e.pageSize;
-    this.loadPaginatedAndFiltered();
+    this.search();
   }
 
   onFilter() {     
     this.pageNumber = 0; // Return to the first page after clicking on filter
-    this.loadPaginatedAndFiltered();
+    this.search();
   }
 
   onReset() {
     // Test to see if i need to return to first page after reset
-    this.loadPaginatedAndFiltered();
+    this.search();
   }
 
   // 3. USE VALUES OF PAGINATOR TO REQUEST DATA
-  loadPaginatedAndFiltered() {
+  search() {
     const searchSolarPanelRequest: SearchSolarPanelRequest = {
       pageIndex: this.pageNumber,
       pageSize: this.pageSize,
@@ -194,7 +194,7 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
     console.log("searchSolarPanelRequest = ", searchSolarPanelRequest);
 
     // 4. UPDATE VALUES OF PAGINATOR FROM RESPONSE
-    this._solarPanelDataService.loadPaginatedAndFiltered(searchSolarPanelRequest).subscribe({
+    this._solarPanelDataService.search(searchSolarPanelRequest).subscribe({
       next: response => {
         console.log("Response = ", response);
 

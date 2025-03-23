@@ -63,7 +63,7 @@ export class SolarPanelDataService { //TODO: replace with proper backend api cal
 //*** HISTORY
 //**************************************
 
-  loadPaginatedAndFiltered(searchSolarPanelRequest: SearchSolarPanelRequest): Observable<Page<SearchSolarPanelResponse>> {
+  search(searchSolarPanelRequest: SearchSolarPanelRequest): Observable<Page<SearchSolarPanelResponse>> {
     const url = this.apiURL.concat("/v1/solar-panels");
     return this.http.post<Page<SearchSolarPanelResponse>>(url, searchSolarPanelRequest);
   }
