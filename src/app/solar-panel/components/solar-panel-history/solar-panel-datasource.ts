@@ -39,7 +39,7 @@ const EXAMPLE_DATA: DataTableItem[] = [
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class DataTableDataSource extends DataSource<DataTableItem> {
+export class SolarPanelDataSource extends DataSource<DataTableItem> {
   data: DataTableItem[] = EXAMPLE_DATA;
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;

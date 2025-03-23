@@ -22,7 +22,7 @@ import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { MatIconModule } from '@angular/material/icon';
 import { SolarPanelDataService } from '../../services/solar-panel-data.service';
 import { NotificationService } from 'src/app/services/notification.service';
-import { DataTableDataSource } from './data-table-datasource';
+import { SolarPanelDataSource } from './solar-panel-datasource';
 
 @Component({
   selector: 'app-solar-panel-history',
@@ -56,7 +56,7 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
   readonly solarPanelRecommendation = SolarPanelRecommendation;
 
   solarPanels = new MatTableDataSource<Partial<GetSolarPanelFullResponse>>();
-  // dataSource = new DataTableDataSource(); //TODO: Create Custom Data Source for this table
+  // dataSource = inject(SolarPanelDataSource); //TODO: Create Custom Data Source for this table
 
   displayedColumns: string[] = [
     "createdAt",
