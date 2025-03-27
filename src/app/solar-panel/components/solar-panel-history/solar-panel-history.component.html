@@ -2,7 +2,7 @@
 
 <div class="table-container elevation-level4">
   <form [formGroup]="filterForm" (ngSubmit)="onFilter()" (reset)="onReset()">    
-  <table mat-table matSort [dataSource]="solarPanels">
+  <table mat-table matSort [dataSource]="dataSource">
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
     <tr mat-header-row *matHeaderRowDef="filterColumns; sticky:true" cdkTrapFocus></tr>
@@ -150,9 +150,8 @@
   </form>
 
   <mat-paginator showFirstLastButtons
-    [pageIndex]="pageNumber"
-    [pageSize]="pageSize"
-    [length]="totalElements"
-    [pageSizeOptions]="pageSizeOptions">
+    [pageSize]="10"
+    [pageSizeOptions]="dataSource.pageSizeOptions"
+    (page)="changePage($event)">
   </mat-paginator>
 </div>

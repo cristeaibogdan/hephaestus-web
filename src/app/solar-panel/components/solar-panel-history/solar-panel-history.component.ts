@@ -53,10 +53,9 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
   private _translocoService = inject(TranslocoService);
   private _notifService = inject(NotificationService);
 
-  readonly solarPanelRecommendation = SolarPanelRecommendation;
+  solarPanelRecommendation = SolarPanelRecommendation;
 
-  solarPanels = new MatTableDataSource<Partial<GetSolarPanelFullResponse>>();
-  // dataSource = inject(SolarPanelDataSource); //TODO: Create Custom Data Source for this table
+  dataSource!: SolarPanelDataSource; //TODO: Create Custom Data Source for this table
 
   displayedColumns: string[] = [
     "createdAt",
@@ -68,18 +67,26 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
     "actions"
   ]; 
 
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   ngOnInit(): void {
-    this.search();
+    this.dataSource = new SolarPanelDataSource(
+      this._solarPanelDataService,
+      this._translocoService,
+      this._notifService
+    );
   }
 
 // *****************************************
 // *** SORTING
 // *****************************************
 
-  @ViewChild(MatSort) sort!: MatSort;
-
+  // 1. SET PAGINATOR AND SORT TO DATA SOURCE
   ngAfterViewInit() {
-    this.solarPanels.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.applySearchFilters();
   }
 
 // *****************************************
@@ -88,50 +95,37 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
 
   filterColumns: string[] = this.displayedColumns.map(column => column + "-filter");
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
   recommendationOptions: SolarPanelRecommendation[] = Object.values(SolarPanelRecommendation);
 
   filterForm = this.fb.group({
     createdAt: null as string | null,
     manufacturer: null as string | null,
-    
     serialNumber: null as string | null,
     model: null as string | null,
     type: null as string | null,
-
     recommendation: null as SolarPanelRecommendation | null
   });
-
-  // 1. STARTING VALUES FOR PAGINATOR
-  pageNumber = 0;
-  pageSize = 10;
-
-  totalElements = 0;
-  pageSizeOptions = [2, 5, 10, 20, 40];
-
+    
   // 2. UPDATE VALUES FOR PAGINATOR ON EACH PAGE CHANGE
   changePage(e:PageEvent) {
-    this.pageNumber = e.pageIndex;
-    this.pageSize = e.pageSize;
-    this.search();
+    this.applySearchFilters();
   }
 
   onFilter() {     
-    this.pageNumber = 0; // Return to the first page after clicking on filter
-    this.search();
+    this.dataSource.paginator.pageIndex = 0;
+    this.applySearchFilters();
   }
 
   onReset() {
-    // Test to see if i need to return to first page after reset
-    this.search();
+    this.dataSource.paginator.pageIndex = 0;
+    this.applySearchFilters();
   }
 
-  // 3. USE VALUES OF PAGINATOR TO REQUEST DATA
-  search() {
+  // 3. USE VALUES OF FORM AND PAGINATOR TO REQUEST DATA
+  applySearchFilters() {
     const searchSolarPanelRequest: SearchSolarPanelRequest = {
-      pageIndex: this.pageNumber,
-      pageSize: this.pageSize,
+      pageIndex: this.dataSource.paginator.pageIndex,
+      pageSize: this.dataSource.paginator.pageSize,
 
       manufacturer: this.filterForm.controls.manufacturer.value,
       model: this.filterForm.controls.model.value,
@@ -142,29 +136,8 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
       createdAt: this.handleDate(this.filterForm.controls.createdAt.value) 
     };
 
-    console.log("searchSolarPanelRequest = ", searchSolarPanelRequest);
-
     // 4. UPDATE VALUES OF PAGINATOR FROM RESPONSE
-    this._solarPanelDataService.search(searchSolarPanelRequest).subscribe({
-      next: response => {
-        console.log("Response = ", response);
-
-        if(response.content.length == 0) {
-          this._notifService.showWarning(this._translocoService.translate("I18N.GENERAL_ERROR.EMPTY_PAGE"), 0);
-        }
-
-        this.solarPanels.data = response.content;
-        this.pageNumber = response.number;
-        this.pageSize = response.size;
-        this.totalElements = response.totalElements;
-      },
-      error: err => {
-        this.solarPanels.data = [];
-        this.pageNumber = 0;
-        this.totalElements = 0;
-        throw err; // re-throw to be handled by GlobalErrorHandler
-      }
-    });
+    this.dataSource.loadSolarPanels(searchSolarPanelRequest);
   }
 
   private handleDate(value: string | null): string | null {
