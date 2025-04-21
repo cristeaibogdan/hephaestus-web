@@ -68,7 +68,13 @@ export class SolarPanelHistoryComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
     this.applySearchFilters();
+
+    this.dataSource.sort.sortChange.subscribe(() => {
+      this.dataSource.paginator.firstPage();
+      this.applySearchFilters();
+    });    
   }
 
 // *****************************************
@@ -104,13 +110,16 @@ export class SolarPanelHistoryComponent implements AfterViewInit {
       pageIndex: this.dataSource.paginator.pageIndex,
       pageSize: this.dataSource.paginator.pageSize,
 
+      sortByField: this.dataSource.sort.active,
+      sortDirection: this.dataSource.sort.direction,
+
       manufacturer: this.filterForm.controls.manufacturer.value,
       model: this.filterForm.controls.model.value,
       type: this.filterForm.controls.type.value,
       serialNumber: this.filterForm.controls.serialNumber.value,
 
       recommendation: this.filterForm.controls.recommendation.value,
-      createdAt: this.handleDate(this.filterForm.controls.createdAt.value) 
+      createdAt: this.handleDate(this.filterForm.controls.createdAt.value)
     };
 
     // 3. SEARCH SOLARPANELS AND UPDATE PAGINATOR FROM RESPONSE
