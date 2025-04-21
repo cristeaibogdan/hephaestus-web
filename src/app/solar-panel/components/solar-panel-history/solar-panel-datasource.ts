@@ -1,8 +1,8 @@
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Observable, of as observableOf, merge } from 'rxjs';
-import { signal } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
 import { GetSolarPanelFullResponse } from '../../models/dtos/get-solar-panel-full.response';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { SearchSolarPanelRequest } from '../../models/dtos/search-solar-panel.request';
@@ -15,11 +15,12 @@ import { NotificationService } from 'src/app/services/notification.service';
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
+@Injectable()
 export class SolarPanelDataSource extends DataSource<Partial<GetSolarPanelFullResponse>> {
   
   private solarPanels$ = signal<Partial<GetSolarPanelFullResponse>[]>([]);
   
-  sort!: MatSort;  
+  sort!: MatSort;
   paginator!: MatPaginator;
   pageSizeOptions = [2, 5, 10, 20, 40];
 
@@ -46,13 +47,10 @@ export class SolarPanelDataSource extends DataSource<Partial<GetSolarPanelFullRe
    */
   disconnect(): void {}
 
-  loadSolarPanels(searchSolarPanelRequest: SearchSolarPanelRequest) {
-    console.log("searchSolarPanelRequest = ", searchSolarPanelRequest);
-
+  search(searchSolarPanelRequest: SearchSolarPanelRequest): void {
     this._solarPanelDataService.search(searchSolarPanelRequest).subscribe({
       next: response => {
-        console.log("Response = ", response);
-
+        
         if(response.content.length == 0) {
           this._notifService.showWarning(this._translocoService.translate("I18N.GENERAL_ERROR.EMPTY_PAGE"), 0);
         }
@@ -68,28 +66,5 @@ export class SolarPanelDataSource extends DataSource<Partial<GetSolarPanelFullRe
       }
     });
   }
-
-  /**
-   * Sort the data (client-side). If you're using server-side sorting,
-   * this would be replaced by requesting the appropriate data from the server.
-   */
-  // private getSortedData(data: DataTableItem[]): DataTableItem[] {
-  //   if (!this.sort || !this.sort.active || this.sort.direction === '') {
-  //     return data;
-  //   }
-
-  //   return data.sort((a, b) => {
-  //     const isAsc = this.sort?.direction === 'asc';
-  //     switch (this.sort?.active) {
-  //       case 'name': return compare(a.name, b.name, isAsc);
-  //       case 'id': return compare(+a.id, +b.id, isAsc);
-  //       default: return 0;
-  //     }
-  //   });
-  // }
 }
 
-/** Simple sort comparator for example ID/Name columns (for client-side sorting). */
-function compare(a: string | number, b: string | number, isAsc: boolean): number {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-}

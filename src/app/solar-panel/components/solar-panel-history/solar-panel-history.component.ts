@@ -7,27 +7,25 @@ import { SearchSolarPanelRequest } from '../../models/dtos/search-solar-panel.re
 import { SolarPanelHistoryViewComponent } from './solar-panel-history-view/solar-panel-history-view.component';
 import { format } from 'date-fns';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
 import { MatInputModule } from '@angular/material/input';
 import { DateFormatYYYYMMDDDirective } from 'src/app/shared/directives/date-format-yyyy-mm-dd.directive';
 import { A11yModule } from '@angular/cdk/a11y';
-import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { MatIconModule } from '@angular/material/icon';
-import { SolarPanelDataService } from '../../services/solar-panel-data.service';
-import { NotificationService } from 'src/app/services/notification.service';
 import { SolarPanelDataSource } from './solar-panel-datasource';
 
 @Component({
   selector: 'app-solar-panel-history',
   templateUrl: './solar-panel-history.component.html',
   styleUrls: ['./solar-panel-history.component.scss'],
+  providers: [SolarPanelDataSource],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -46,16 +44,12 @@ import { SolarPanelDataSource } from './solar-panel-datasource';
     MatPaginator
   ]
 })
-export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
+export class SolarPanelHistoryComponent implements AfterViewInit {
   private dialog = inject(MatDialog);
   private fb = inject(FormBuilder);
-  private _solarPanelDataService = inject(SolarPanelDataService);
-  private _translocoService = inject(TranslocoService);
-  private _notifService = inject(NotificationService);
 
   solarPanelRecommendation = SolarPanelRecommendation;
-
-  dataSource!: SolarPanelDataSource; //TODO: Create Custom Data Source for this table
+  dataSource: SolarPanelDataSource = inject(SolarPanelDataSource);
 
   displayedColumns: string[] = [
     "createdAt",
@@ -69,18 +63,6 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  ngOnInit(): void {
-    this.dataSource = new SolarPanelDataSource(
-      this._solarPanelDataService,
-      this._translocoService,
-      this._notifService
-    );
-  }
-
-// *****************************************
-// *** SORTING
-// *****************************************
 
   // 1. SET PAGINATOR AND SORT TO DATA SOURCE
   ngAfterViewInit() {
@@ -105,23 +87,18 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
     type: null as string | null,
     recommendation: null as SolarPanelRecommendation | null
   });
-    
-  // 2. UPDATE VALUES FOR PAGINATOR ON EACH PAGE CHANGE
-  changePage(e:PageEvent) {
-    this.applySearchFilters();
-  }
 
-  onFilter() {     
-    this.dataSource.paginator.pageIndex = 0;
+  onFilter() {
+    this.dataSource.paginator.firstPage();
     this.applySearchFilters();
   }
 
   onReset() {
-    this.dataSource.paginator.pageIndex = 0;
+    this.dataSource.paginator.firstPage();
     this.applySearchFilters();
   }
 
-  // 3. USE VALUES OF FORM AND PAGINATOR TO REQUEST DATA
+  // 2. USE VALUES OF FORM AND PAGINATOR TO REQUEST DATA
   applySearchFilters() {
     const searchSolarPanelRequest: SearchSolarPanelRequest = {
       pageIndex: this.dataSource.paginator.pageIndex,
@@ -136,8 +113,8 @@ export class SolarPanelHistoryComponent implements OnInit, AfterViewInit {
       createdAt: this.handleDate(this.filterForm.controls.createdAt.value) 
     };
 
-    // 4. UPDATE VALUES OF PAGINATOR FROM RESPONSE
-    this.dataSource.loadSolarPanels(searchSolarPanelRequest);
+    // 3. SEARCH SOLARPANELS AND UPDATE PAGINATOR FROM RESPONSE
+    this.dataSource.search(searchSolarPanelRequest);
   }
 
   private handleDate(value: string | null): string | null {

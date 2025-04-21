@@ -152,6 +152,6 @@
   <mat-paginator showFirstLastButtons
     [pageSize]="10"
     [pageSizeOptions]="dataSource.pageSizeOptions"
-    (page)="changePage($event)">
+    (page)="applySearchFilters()">
   </mat-paginator>
 </div>
