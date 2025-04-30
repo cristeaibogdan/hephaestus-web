@@ -156,7 +156,7 @@ export class SolarPanelHistoryComponent implements AfterViewInit {
 // *****************************************
 
   onView(solarPanel: GetSolarPanelFullResponse) {
-    if(!solarPanel.solarPanelDamage) {
+    if(!solarPanel.damage) {
       //TODO: API call to get expanded, open dialog if successfull
 
       this.openDialog(solarPanel);      
