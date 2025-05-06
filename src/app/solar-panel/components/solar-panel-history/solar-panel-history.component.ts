@@ -20,6 +20,7 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { TranslocoModule } from '@jsverse/transloco';
 import { MatIconModule } from '@angular/material/icon';
 import { SolarPanelDataSource } from './solar-panel-datasource';
+import { SolarPanelDataService } from '../../services/solar-panel-data.service';
 
 @Component({
   selector: 'app-solar-panel-history',
@@ -47,6 +48,7 @@ import { SolarPanelDataSource } from './solar-panel-datasource';
 export class SolarPanelHistoryComponent implements AfterViewInit {
   private dialog = inject(MatDialog);
   private fb = inject(FormBuilder);
+  private _solarPanelDataService = inject(SolarPanelDataService);
 
   solarPanelRecommendation = SolarPanelRecommendation;
   dataSource: SolarPanelDataSource = inject(SolarPanelDataSource);
@@ -63,6 +65,7 @@ export class SolarPanelHistoryComponent implements AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  pageSizeOptions = [2, 5, 10, 20, 40];
 
   // 1. SET PAGINATOR AND SORT TO DATA SOURCE
   ngAfterViewInit() {
@@ -156,14 +159,14 @@ export class SolarPanelHistoryComponent implements AfterViewInit {
 // *****************************************
 
   onView(solarPanel: GetSolarPanelFullResponse) {
-    if(!solarPanel.damage) {
-      //TODO: API call to get expanded, open dialog if successfull
+    if(solarPanel.damage) {
+      return this.openDialog(solarPanel);
+    }
 
-      this.openDialog(solarPanel);      
-      
-    } else {
+    this._solarPanelDataService.loadMany([solarPanel.serialNumber]).subscribe(response => {
+      solarPanel.damage = response[solarPanel.serialNumber].damage;
       this.openDialog(solarPanel);
-    }    
+    });      
   }
 
   openDialog(solarPanel: GetSolarPanelFullResponse) { 

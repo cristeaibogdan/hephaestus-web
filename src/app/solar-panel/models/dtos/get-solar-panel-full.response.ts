@@ -1,7 +1,7 @@
 import { SearchSolarPanelResponse } from "./search-solar-panel.response";
 
 export interface GetSolarPanelFullResponse extends SearchSolarPanelResponse { 
-  damage: DamageResponse;
+  damage?: DamageResponse;
 }
 
 export interface DamageResponse {

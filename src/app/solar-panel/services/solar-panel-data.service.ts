@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { SolarPanelRecommendation } from '../enums/solar-panel-recommendation.enum';
 import { Page } from 'src/app/shared/models/page.model';
 import { SearchSolarPanelResponse } from '../models/dtos/search-solar-panel.response';
+import { GetSolarPanelFullResponse } from '../models/dtos/get-solar-panel-full.response';
 
 @Injectable({providedIn: 'root'})
 export class SolarPanelDataService { //TODO: replace with proper backend api calls
@@ -68,8 +69,9 @@ export class SolarPanelDataService { //TODO: replace with proper backend api cal
     return this.http.post<Page<SearchSolarPanelResponse>>(url, searchSolarPanelRequest);
   }
 
-  loadExpanded(productSerialNumber:string) {
-    console.warn("Not implemented, yet...");
+  loadMany(serialNumbers: string[]): Observable<Record<string, GetSolarPanelFullResponse>> {
+    const url = this.apiURL.concat("/v1/solar-panels/many");
+    return this.http.post<Record<string, GetSolarPanelFullResponse>>(url, serialNumbers);
   }
 
 }

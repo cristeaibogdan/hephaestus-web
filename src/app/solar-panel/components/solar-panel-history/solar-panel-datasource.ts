@@ -16,13 +16,12 @@ import { NotificationService } from 'src/app/services/notification.service';
  * (including sorting, pagination, and filtering).
  */
 @Injectable()
-export class SolarPanelDataSource extends DataSource<Partial<GetSolarPanelFullResponse>> {
+export class SolarPanelDataSource extends DataSource<GetSolarPanelFullResponse> {
   
-  private solarPanels$ = signal<Partial<GetSolarPanelFullResponse>[]>([]);
+  private solarPanels$ = signal<GetSolarPanelFullResponse[]>([]);
   
   sort!: MatSort;
-  paginator!: MatPaginator;
-  pageSizeOptions = [2, 5, 10, 20, 40];
+  paginator!: MatPaginator;  
 
   constructor(
     private _solarPanelDataService: SolarPanelDataService,
@@ -37,7 +36,7 @@ export class SolarPanelDataSource extends DataSource<Partial<GetSolarPanelFullRe
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<Partial<GetSolarPanelFullResponse>[]> {
+  connect(): Observable<GetSolarPanelFullResponse[]> {
     return toObservable(this.solarPanels$);
   }
 
