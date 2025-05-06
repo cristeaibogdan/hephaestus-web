@@ -2,7 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { BehaviorSubject, EMPTY, firstValueFrom, switchMap, withLatestFrom } from 'rxjs';
 import { SolarPanelIdentification } from '../models/solar-panel-identification.model';
 import { SolarPanelDataService } from './solar-panel-data.service';
-import { SolarPanelDamage } from '../models/solar-panel-damage.model';
+import { DamageResponse } from "../models/dtos/get-solar-panel-full.response";
 import { SaveSolarPanelRequest } from '../models/dtos/save-solar-panel.request';
 import { SolarPanelRecommendation } from '../enums/solar-panel-recommendation.enum';
 
@@ -42,7 +42,7 @@ export class SolarPanelService {
 // *** STEP 2 = DAMAGE
 // **************************************
 
-  private readonly solarPanelDamageDefault: SolarPanelDamage = {
+  private readonly solarPanelDamageDefault: DamageResponse = {
     hotSpots: false,
     microCracks: false,
     snailTrails: false,
@@ -50,7 +50,7 @@ export class SolarPanelService {
     additionalDetails: ''
   }
 
-  private solarPanelDamage$ = signal<SolarPanelDamage>(
+  private solarPanelDamage$ = signal<DamageResponse>(
     this.solarPanelDamageDefault
   );
 
@@ -58,7 +58,7 @@ export class SolarPanelService {
     return this.solarPanelDamage$;
   }
 
-  setSolarPanelDamage(solarPanelDamage: SolarPanelDamage) {
+  setSolarPanelDamage(solarPanelDamage: DamageResponse) {
     this.solarPanelDamage$.set(solarPanelDamage);
   }
 
