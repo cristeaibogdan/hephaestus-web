@@ -5,6 +5,7 @@ import { SolarPanelDataService } from './solar-panel-data.service';
 import { Damage } from "../models/dtos/get-solar-panel-full.response";
 import { SaveSolarPanelRequest } from '../models/dtos/save-solar-panel.request';
 import { SolarPanelRecommendation } from '../enums/solar-panel-recommendation.enum';
+import { SolarPanelDamage } from '../models/solar-panel-damage.model';
 
 @Injectable({providedIn: 'root'})
 export class SolarPanelService {
@@ -40,7 +41,7 @@ export class SolarPanelService {
 // *** STEP 2 = DAMAGE
 // **************************************
 
-  private readonly solarPanelDamageDefault: Damage = {
+  private readonly solarPanelDamageDefault: SolarPanelDamage = {
     hotSpots: false,
     microCracks: false,
     snailTrails: false,
@@ -48,13 +49,13 @@ export class SolarPanelService {
     additionalDetails: ''
   }
 
-  private solarPanelDamage$ = signal<Damage>(this.solarPanelDamageDefault);
+  private solarPanelDamage$ = signal<SolarPanelDamage>(this.solarPanelDamageDefault);
 
   getSolarPanelDamage() {
     return this.solarPanelDamage$;
   }
 
-  setSolarPanelDamage(solarPanelDamage: Damage) {
+  setSolarPanelDamage(solarPanelDamage: SolarPanelDamage) {
     this.solarPanelDamage$.set(solarPanelDamage);
   }
 

@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SolarPanelIdentification } from '../../models/solar-panel-identification.model';
-import { Damage } from "../../models/dtos/get-solar-panel-full.response";
+import { SolarPanelDamage } from '../../models/solar-panel-damage.model';
 
 @Component({
   selector: 'app-solar-panel-overview',
@@ -31,7 +31,7 @@ export class SolarPanelOverviewComponent {
   private _translocoService = inject(TranslocoService);
 
   solarPanelIdentification$: Signal<SolarPanelIdentification> = this._solarPanelService.getSolarPanelIdentification();
-  solarPanelDamage$: Signal<Damage> = this._solarPanelService.getSolarPanelDamage();
+  solarPanelDamage$: Signal<SolarPanelDamage> = this._solarPanelService.getSolarPanelDamage();
 
   save(): void {
     this._solarPanelService.save().then(success => {

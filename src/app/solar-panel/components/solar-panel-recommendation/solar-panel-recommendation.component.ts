@@ -1,6 +1,5 @@
 import { Component, Signal, inject } from '@angular/core';
 import { SolarPanelService } from '../../services/solar-panel.service';
-import { Observable } from 'rxjs';
 import { SolarPanelIdentification } from '../../models/solar-panel-identification.model';
 import { SolarPanelDataService } from '../../services/solar-panel-data.service';
 import { SolarPanelRecommendation } from '../../enums/solar-panel-recommendation.enum';
