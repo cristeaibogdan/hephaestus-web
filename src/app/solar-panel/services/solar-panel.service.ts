@@ -1,5 +1,5 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { BehaviorSubject, EMPTY, firstValueFrom, switchMap, withLatestFrom } from 'rxjs';
+import { firstValueFrom, switchMap } from 'rxjs';
 import { SolarPanelIdentification } from '../models/solar-panel-identification.model';
 import { SolarPanelDataService } from './solar-panel-data.service';
 import { DamageResponse } from "../models/dtos/get-solar-panel-full.response";
@@ -22,9 +22,7 @@ export class SolarPanelService {
     serialNumber: ''
   }
 
-  private solarPanelIdentification$ = signal<SolarPanelIdentification>(
-    this.solarPanelIdentificationDefault
-  );
+  private solarPanelIdentification$ = signal<SolarPanelIdentification>(this.solarPanelIdentificationDefault);
   
   getSolarPanelIdentification() {
     return this.solarPanelIdentification$;
@@ -50,9 +48,7 @@ export class SolarPanelService {
     additionalDetails: ''
   }
 
-  private solarPanelDamage$ = signal<DamageResponse>(
-    this.solarPanelDamageDefault
-  );
+  private solarPanelDamage$ = signal<DamageResponse>(this.solarPanelDamageDefault);
 
   getSolarPanelDamage() {
     return this.solarPanelDamage$;
@@ -81,7 +77,7 @@ export class SolarPanelService {
       model: solarPanelIdentification.model,
       type: solarPanelIdentification.type,
       serialNumber: solarPanelIdentification.serialNumber,
-      saveSolarPanelDamageRequest: {
+      damage: {
         hotSpots: solarPanelDamage.hotSpots,
         microCracks: solarPanelDamage.microCracks,
         snailTrails: solarPanelDamage.snailTrails,

@@ -1,5 +1,3 @@
-import { SaveSolarPanelDamageRequest } from "./save-solar-panel-damage.request";
-
 export interface SaveSolarPanelRequest {
   category: string;
   manufacturer: string;
@@ -7,5 +5,13 @@ export interface SaveSolarPanelRequest {
   type: string;
   serialNumber: string;
 
-  saveSolarPanelDamageRequest: SaveSolarPanelDamageRequest
+  damage: Damage
+}
+
+export interface Damage {
+  hotSpots: boolean;
+  microCracks: boolean;
+  snailTrails: boolean;
+  brokenGlass: boolean;
+  additionalDetails: string;
 }

@@ -11,7 +11,7 @@ import { SearchSolarPanelResponse } from '../models/dtos/search-solar-panel.resp
 import { GetSolarPanelFullResponse } from '../models/dtos/get-solar-panel-full.response';
 
 @Injectable({providedIn: 'root'})
-export class SolarPanelDataService { //TODO: replace with proper backend api calls
+export class SolarPanelDataService {
   apiURL = environment.apiBaseUrl;
   private http = inject(HttpClient);
 
