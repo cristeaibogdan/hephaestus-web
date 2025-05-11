@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { BehaviorSubject, EMPTY, Observable, switchMap, withLatestFrom} from "rxjs";
-import { SaveWashingMachineRequest } from "../models/dtos/create-washing-machine.request";
+import { SaveWashingMachineRequest } from "../models/dtos/save-washing-machine.request";
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
 import { WashingMachineDataService } from "./washing-machine.data.service";
@@ -86,7 +86,7 @@ export class WashingMachineService {
       model: this.washingMachineIdentification$.value.model,
       type: this.washingMachineIdentification$.value.type,
       
-      saveWashingMachineDetailRequest: {
+      washingMachineDetail: {
         packageDamaged: this.washingMachineDetail$.value.packageDamaged,
         packageDirty: this.washingMachineDetail$.value.packageDirty,
         packageMaterialAvailable: this.washingMachineDetail$.value.packageMaterialAvailable,
