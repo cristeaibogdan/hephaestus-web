@@ -1,4 +1,4 @@
-export interface SaveSolarPanelRequest {
+export interface CreateSolarPanelRequest {
   category: string;
   manufacturer: string;
   model: string;

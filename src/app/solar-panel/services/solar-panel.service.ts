@@ -2,8 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { firstValueFrom, switchMap } from 'rxjs';
 import { SolarPanelIdentification } from '../models/solar-panel-identification.model';
 import { SolarPanelDataService } from './solar-panel-data.service';
-import { Damage } from "../models/dtos/get-solar-panel-full.response";
-import { SaveSolarPanelRequest } from '../models/dtos/save-solar-panel.request';
+import { CreateSolarPanelRequest } from '../models/dtos/create-solar-panel.request';
 import { SolarPanelRecommendation } from '../enums/solar-panel-recommendation.enum';
 import { SolarPanelDamage } from '../models/solar-panel-damage.model';
 
@@ -72,7 +71,7 @@ export class SolarPanelService {
     const solarPanelIdentification = this.solarPanelIdentification$();
     const solarPanelDamage = this.solarPanelDamage$();
 
-    const saveSolarPanelRequest: SaveSolarPanelRequest = {
+    const saveSolarPanelRequest: CreateSolarPanelRequest = {
       category: solarPanelIdentification.category,
       manufacturer: solarPanelIdentification.manufacturer,
       model: solarPanelIdentification.model,

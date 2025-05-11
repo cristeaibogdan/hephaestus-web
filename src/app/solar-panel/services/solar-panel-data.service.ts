@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { SaveSolarPanelRequest } from '../models/dtos/save-solar-panel.request';
+import { CreateSolarPanelRequest } from '../models/dtos/create-solar-panel.request';
 import { GetModelAndTypeResponse } from 'src/app/shared/models/get-model-and-type.response';
 import { SearchSolarPanelRequest } from '../models/dtos/search-solar-panel.request';
 import { HttpClient } from '@angular/common/http';
@@ -40,9 +40,9 @@ export class SolarPanelDataService {
 // *** STEP 3 = OVERVIEW
 // **************************************
 
-  save(createSolarPanelRequestDTO: SaveSolarPanelRequest): Observable<void> {
+  save(createSolarPanelRequest: CreateSolarPanelRequest): Observable<void> {
     const url = this.apiURL.concat("/v1/solar-panels/save");
-    return this.http.post<void>(url, createSolarPanelRequestDTO);
+    return this.http.post<void>(url, createSolarPanelRequest);
   }
 
   getRecommendation(serialNumber:string): Observable<SolarPanelRecommendation> {
