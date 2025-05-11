@@ -1,7 +1,7 @@
 import { Component, Inject, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
-import { DamageResponse } from "../../models/dtos/get-solar-panel-full.response";
+import { Damage } from "../../models/dtos/get-solar-panel-full.response";
 import { SolarPanelService } from '../../services/solar-panel.service';
 import { CustomValidators } from 'src/app/shared/validators/custom.validators';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -63,7 +63,7 @@ export class SolarPanelDamageComponent {
       return;
     }
 
-    const solarPanelDamage: DamageResponse = {
+    const solarPanelDamage: Damage = {
       hotSpots: this.solarPanelDamageForm.controls.hotSpots.value,
       microCracks: this.solarPanelDamageForm.controls.microCracks.value,
       snailTrails: this.solarPanelDamageForm.controls.snailTrails.value,

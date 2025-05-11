@@ -1,10 +1,10 @@
 import { SearchSolarPanelResponse } from "./search-solar-panel.response";
 
 export interface GetSolarPanelFullResponse extends SearchSolarPanelResponse { 
-  damage?: DamageResponse;
+  damage?: Damage;
 }
 
-export interface DamageResponse {
+export interface Damage {
   hotSpots: boolean;
   microCracks: boolean;
   snailTrails: boolean;
