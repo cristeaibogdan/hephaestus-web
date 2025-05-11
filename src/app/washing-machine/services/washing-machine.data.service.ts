@@ -5,7 +5,7 @@ import { Page } from '../../shared/models/page.model';
 import { SearchWashingMachineRequest } from '../models/dtos/search-washing-machine.request';
 import { GetWashingMachineReportResponse } from '../models/dtos/get-washing-machine-report.response';
 import { Recommendation } from '../enums/recommendation.enum';
-import { GetWashingMachineSimpleResponse } from '../models/dtos/get-washing-machine-simple.response';
+import { SearchWashingMachineResponse } from '../models/dtos/search-washing-machine.response';
 import { GetModelAndTypeResponse } from 'src/app/shared/models/get-model-and-type.response';
 import { Observable } from 'rxjs';
 import { GetWashingMachineFullResponse } from '../models/dtos/get-washing-machine-full.response';
@@ -76,10 +76,10 @@ export class WashingMachineDataService {
 //*** HISTORY
 //**************************************
 
-  loadPaginatedAndFiltered(searchWashingMachineRequest: SearchWashingMachineRequest): Observable<Page<GetWashingMachineSimpleResponse>> {
+  loadPaginatedAndFiltered(searchWashingMachineRequest: SearchWashingMachineRequest): Observable<Page<SearchWashingMachineResponse>> {
     const url = this.apiURL.concat("/api/v1/washing-machines");
     const payload = searchWashingMachineRequest;
-    return this.http.post<Page<GetWashingMachineSimpleResponse>>(url, payload);
+    return this.http.post<Page<SearchWashingMachineResponse>>(url, payload);
   }
 
   /**
