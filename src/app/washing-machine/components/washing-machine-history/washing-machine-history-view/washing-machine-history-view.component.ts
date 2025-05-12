@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -23,7 +23,7 @@ import { WashingMachineDataService } from 'src/app/washing-machine/services/wash
 })
 export class WashingMachineHistoryViewComponent {
   private data = inject(MAT_DIALOG_DATA);
-  private _washingMachineDataService = inject(WashingMachineDataService,);
+  private _washingMachineDataService = inject(WashingMachineDataService);
   private _notifService = inject(NotificationService);
 
   washingMachine: GetWashingMachineFullResponse = this.data.washingMachine;

@@ -1,25 +1,8 @@
-import { DamageType } from '../../enums/damage-type.enum';
-import { IdentificationMode } from '../../enums/identification-mode.enum';
-import { Recommendation } from '../../enums/recommendation.enum';
-import { ReturnType } from '../../enums/return-type.enum';
+import { SearchWashingMachineResponse } from './search-washing-machine.response';
 
-export interface GetWashingMachineFullResponse {
-  category: string,
-  identificationMode: IdentificationMode,
-  manufacturer: string,
-
-  model: string,
-  type: string,
-  serialNumber: string,
-
-  returnType: ReturnType,
-  damageType: DamageType,
-
-  recommendation: Recommendation,
-  createdAt: Date,
-
-  washingMachineDetail: WashingMachineDetail,
-  washingMachineImages: WashingMachineImage[]
+export interface GetWashingMachineFullResponse extends SearchWashingMachineResponse {
+  washingMachineDetail?: WashingMachineDetail,
+  washingMachineImages?: WashingMachineImage[]
 }
 
 export interface WashingMachineDetail {

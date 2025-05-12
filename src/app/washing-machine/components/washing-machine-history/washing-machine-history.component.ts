@@ -58,7 +58,7 @@ export class WashingMachineHistoryComponent implements OnInit, AfterViewInit {
 
   readonly recommendation = Recommendation;
 
-  washingMachines = new MatTableDataSource<Partial<GetWashingMachineFullResponse>>();
+  washingMachines = new MatTableDataSource<GetWashingMachineFullResponse>();
     
   displayedColumns: string[] = [
     "createdAt",
@@ -161,8 +161,6 @@ export class WashingMachineHistoryComponent implements OnInit, AfterViewInit {
     // 4. UPDATE VALUES OF PAGINATOR FROM RESPONSE
     this._washingMachineDataService.loadPaginatedAndFiltered(searchWashingMachineRequest).subscribe({
       next: response => {
-        console.log("Response = ",response);
-
         if(response.content.length == 0) {
           this._notifService.showWarning(this._translocoService.translate("I18N.GENERAL_ERROR.EMPTY_PAGE"), 0);
         }
@@ -211,29 +209,13 @@ export class WashingMachineHistoryComponent implements OnInit, AfterViewInit {
 // *****************************************
 
   onView(washingMachine: GetWashingMachineFullResponse): void {
-
     if(washingMachine.washingMachineDetail) {
       return this.openDialog(washingMachine);
     }
-    
-    // this._washingMachineDataService.load(washingMachine.serialNumber).subscribe(response => {
-    //   console.log("Response for details => ", response);
 
-    //   washingMachine.washingMachineDetail = response.washingMachineDetail;
-    //   washingMachine.washingMachineImages = response.washingMachineImages;
-
-    //   this.openDialog(washingMachine);
-    // });
-
-    this._washingMachineDataService.loadMany([washingMachine.serialNumber]).subscribe(response => {
-      console.log("Response for details => ", response);
-
-      const washingMachineDetail = response[washingMachine.serialNumber];
-      if (washingMachineDetail) {
-        washingMachine.washingMachineDetail = washingMachineDetail.washingMachineDetail;
-        washingMachine.washingMachineImages = washingMachineDetail.washingMachineImages;
-      }
-
+    this._washingMachineDataService.loadMany([washingMachine.serialNumber]).subscribe(response => {  
+      washingMachine.washingMachineDetail = response[washingMachine.serialNumber].washingMachineDetail;
+      washingMachine.washingMachineImages = response[washingMachine.serialNumber].washingMachineImages;
       this.openDialog(washingMachine);
     });
   }
