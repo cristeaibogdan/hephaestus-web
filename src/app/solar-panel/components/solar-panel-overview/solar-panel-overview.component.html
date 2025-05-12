@@ -15,16 +15,19 @@
     </ul>
   
     <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
-    @if (solarPanelDamage$()) {
+    
+    @let solarPanelDamage = solarPanelDamage$();
+    <!-- TODO: Is the if really needed? -->
+    @if (solarPanelDamage) {
       <ul class="damages-list">
-        @if (solarPanelDamage$().hotSpots) { <li>Hot Spots</li> }        
-        @if (solarPanelDamage$().microCracks) { <li>Micro Cracks</li> }        
-        @if (solarPanelDamage$().snailTrails) { <li>Snail Trails</li> }        
-        @if (solarPanelDamage$().brokenGlass) { <li>Broken Glass</li> }
-        @if (solarPanelDamage$().additionalDetails) {
+        @if (solarPanelDamage.hotSpots) { <li>Hot Spots</li> }        
+        @if (solarPanelDamage.microCracks) { <li>Micro Cracks</li> }        
+        @if (solarPanelDamage.snailTrails) { <li>Snail Trails</li> }        
+        @if (solarPanelDamage.brokenGlass) { <li>Broken Glass</li> }
+        @if (solarPanelDamage.additionalDetails) {
           <li>
             Additional Details:
-            {{solarPanelDamage$().additionalDetails}}
+            {{solarPanelDamage.additionalDetails}}
           </li>
         }
       </ul>

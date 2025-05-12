@@ -21,11 +21,12 @@ export class SolarPanelService {
     type: '',
     serialNumber: ''
   }
-
+  // TODO: Delete the $ from all signals.
+  // TODO: Put asReadonly() on getter for signal.
   private solarPanelIdentification$ = signal<SolarPanelIdentification>(this.solarPanelIdentificationDefault);
   
   getSolarPanelIdentification() {
-    return this.solarPanelIdentification$;
+    return this.solarPanelIdentification$.asReadonly();
   }
 
   setSolarPanelIdentification(solarPanelIdentification: SolarPanelIdentification) {
@@ -67,6 +68,32 @@ export class SolarPanelService {
 // **************************************
 
   save(): Promise<boolean> {
+    // Alternative solution (spreading), simpler but a bit harder to read.
+    // const saveSolarPanelRequest: CreateSolarPanelRequest = {
+    //   ...this.solarPanelIdentification$(),
+    //   damage: {
+    //     ...this.solarPanelDamage$()
+    //   }
+    // }
+
+    // Another alternative solution (destructuring)
+    // const {category, manufacturer, model, type, serialNumber}: SolarPanelIdentification = this.solarPanelIdentification$();
+    // const {hotSpots, microCracks, snailTrails, brokenGlass, additionalDetails}: SolarPanelDamage = this.solarPanelDamage$();
+
+    // const saveSolarPanelRequest: CreateSolarPanelRequest = {
+    //   category: category, 
+    //   manufacturer: manufacturer,
+    //   model: model,
+    //   type: type,
+    //   serialNumber: serialNumber,
+    //   damage: {
+    //     hotSpots: hotSpots,
+    //     microCracks: microCracks,
+    //     snailTrails: snailTrails,
+    //     brokenGlass: brokenGlass,
+    //     additionalDetails: additionalDetails
+    //   }
+    // }
 
     const solarPanelIdentification = this.solarPanelIdentification$();
     const solarPanelDamage = this.solarPanelDamage$();
