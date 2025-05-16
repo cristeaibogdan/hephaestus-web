@@ -23,18 +23,18 @@ export class SolarPanelService {
   }
   // TODO: Delete the $ from all signals.
   // TODO: Put asReadonly() on getter for signal.
-  private solarPanelIdentification$ = signal<SolarPanelIdentification>(this.solarPanelIdentificationDefault);
+  private solarPanelIdentification = signal<SolarPanelIdentification>(this.solarPanelIdentificationDefault);
   
   getSolarPanelIdentification() {
-    return this.solarPanelIdentification$.asReadonly();
+    return this.solarPanelIdentification.asReadonly();
   }
 
   setSolarPanelIdentification(solarPanelIdentification: SolarPanelIdentification) {
-    this.solarPanelIdentification$.set(solarPanelIdentification);
+    this.solarPanelIdentification.set(solarPanelIdentification);
   }
 
   resetSolarPanelIdentification() {    
-    this.solarPanelIdentification$.set(this.solarPanelIdentificationDefault);
+    this.solarPanelIdentification.set(this.solarPanelIdentificationDefault);
   }
 
 // **************************************
@@ -49,18 +49,18 @@ export class SolarPanelService {
     additionalDetails: ''
   }
 
-  private solarPanelDamage$ = signal<SolarPanelDamage>(this.solarPanelDamageDefault);
+  private solarPanelDamage = signal<SolarPanelDamage>(this.solarPanelDamageDefault);
 
   getSolarPanelDamage() {
-    return this.solarPanelDamage$;
+    return this.solarPanelDamage;
   }
 
   setSolarPanelDamage(solarPanelDamage: SolarPanelDamage) {
-    this.solarPanelDamage$.set(solarPanelDamage);
+    this.solarPanelDamage.set(solarPanelDamage);
   }
 
   resetSolarPanelDamage() {
-    this.solarPanelDamage$.set(this.solarPanelDamageDefault);
+    this.solarPanelDamage.set(this.solarPanelDamageDefault);
   }
   
 // **************************************
@@ -95,8 +95,8 @@ export class SolarPanelService {
     //   }
     // }
 
-    const solarPanelIdentification = this.solarPanelIdentification$();
-    const solarPanelDamage = this.solarPanelDamage$();
+    const solarPanelIdentification = this.solarPanelIdentification();
+    const solarPanelDamage = this.solarPanelDamage();
 
     const saveSolarPanelRequest: CreateSolarPanelRequest = {
       category: solarPanelIdentification.category,

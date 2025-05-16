@@ -28,11 +28,11 @@ export class SolarPanelRecommendationComponent {
   private _solarPanelService = inject(SolarPanelService);
   private _solarPanelDataService = inject(SolarPanelDataService);
 
-  solarPanelIdentification$: Signal<SolarPanelIdentification> = this._solarPanelService.getSolarPanelIdentification();
+  solarPanelIdentification: Signal<SolarPanelIdentification> = this._solarPanelService.getSolarPanelIdentification();
   solarPanelRecommendation: SolarPanelRecommendation = this._solarPanelService.getRecommendation();;
 
   onDownload() {
-    this._solarPanelDataService.getReport(this.solarPanelIdentification$().serialNumber);
+    this._solarPanelDataService.getReport(this.solarPanelIdentification().serialNumber);
   }
 
 }

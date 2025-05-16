@@ -30,8 +30,8 @@ export class SolarPanelOverviewComponent {
   private _notifService = inject(NotificationService);
   private _translocoService = inject(TranslocoService);
 
-  solarPanelIdentification$: Signal<SolarPanelIdentification> = this._solarPanelService.getSolarPanelIdentification();
-  solarPanelDamage$: Signal<SolarPanelDamage> = this._solarPanelService.getSolarPanelDamage();
+  solarPanelIdentification: Signal<SolarPanelIdentification> = this._solarPanelService.getSolarPanelIdentification();
+  solarPanelDamage: Signal<SolarPanelDamage> = this._solarPanelService.getSolarPanelDamage();
 
   save(): void {
     this._solarPanelService.save().then(success => {
