@@ -1,11 +1,14 @@
-import { Injectable, inject } from "@angular/core";
-import { BehaviorSubject, EMPTY, Observable, switchMap, withLatestFrom} from "rxjs";
+import { Injectable, Signal, inject, signal } from "@angular/core";
+import { BehaviorSubject, firstValueFrom, Observable, switchMap } from "rxjs";
 import { CreateWashingMachineRequest } from "../models/dtos/create-washing-machine.request";
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
 import { WashingMachineDataService } from "./washing-machine.data.service";
 import { Recommendation } from "../enums/recommendation.enum";
 import { WashingMachineDetail } from "../models/washing-machine-detail.model";
+import { ReturnType } from "../enums/return-type.enum";
+import { DamageType } from "../enums/damage-type.enum";
+import { IdentificationMode } from "../enums/identification-mode.enum";
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineService {
@@ -14,19 +17,30 @@ export class WashingMachineService {
 // **************************************
 // *** STEP 1 = PRODUCT IDENTIFICATION
 // **************************************
-  
-  private washingMachineIdentification$ = new BehaviorSubject<WashingMachineIdentification | null>(null);
 
-  getWashingMachineIdentification(): Observable<WashingMachineIdentification | null> {
-    return this.washingMachineIdentification$.asObservable();
+  private readonly washingMachineIdentificationDefault: WashingMachineIdentification = {
+    identificationMode: IdentificationMode.QR_CODE,
+    category: "",
+    manufacturer: "",
+    model: "",
+    type: "",
+    serialNumber: "",
+    returnType: ReturnType.SERVICE,
+    damageType: DamageType.IN_USE // TODO: Possible solution is to add a DEFAULT to each enum.
+  }
+  
+  private washingMachineIdentification = signal<WashingMachineIdentification>(this.washingMachineIdentificationDefault);
+
+  getWashingMachineIdentification(): Signal<WashingMachineIdentification> {
+    return this.washingMachineIdentification.asReadonly();
   }
 
   setWashingMachineIdentification(washingMachineIdentification: WashingMachineIdentification): void {
-    this.washingMachineIdentification$.next(washingMachineIdentification);
+    this.washingMachineIdentification.set(washingMachineIdentification);
   }
 
   resetWashingMachineIdentification(): void {
-    this.washingMachineIdentification$.next(null);
+    this.washingMachineIdentification.set(this.washingMachineIdentificationDefault);
   }
   
 // *****************************************
@@ -70,21 +84,23 @@ export class WashingMachineService {
 // **************************************
 
   save(): Promise<boolean> {
-    if (this.washingMachineIdentification$.value == null || this.washingMachineDetail$.value == null) {
-      return Promise.reject();
+    const washingMachineIdentification = this.washingMachineIdentification();
+
+    if (this.washingMachineDetail$.value == null) {
+      return Promise.reject(); //TODO: Remove this once Detail is a Signal
     }
 
-    const washingMachine: CreateWashingMachineRequest = {
-      category: this.washingMachineIdentification$.value.category,
-      manufacturer: this.washingMachineIdentification$.value.manufacturer,
+    const createWashingMachineRequest: CreateWashingMachineRequest = {
+      category: washingMachineIdentification.category,
+      manufacturer: washingMachineIdentification.manufacturer,
 
-      damageType: this.washingMachineIdentification$.value.damageType,
-      returnType: this.washingMachineIdentification$.value.returnType,
-      identificationMode: this.washingMachineIdentification$.value.identificationMode,
+      damageType: washingMachineIdentification.damageType,
+      returnType: washingMachineIdentification.returnType,
+      identificationMode: washingMachineIdentification.identificationMode,
       
-      serialNumber: this.washingMachineIdentification$.value.serialNumber,
-      model: this.washingMachineIdentification$.value.model,
-      type: this.washingMachineIdentification$.value.type,
+      serialNumber: washingMachineIdentification.serialNumber,
+      model: washingMachineIdentification.model,
+      type: washingMachineIdentification.type,
       
       washingMachineDetail: {
         packageDamaged: this.washingMachineDetail$.value.packageDamaged,
@@ -106,33 +122,21 @@ export class WashingMachineService {
       }
     };
     
-    console.log("Saving = ", washingMachine);
+    console.log("Saving = ", createWashingMachineRequest);
     const formData = new FormData();
-    formData.append("createWashingMachineRequest", new Blob ([JSON.stringify(washingMachine)],{type: 'application/json'}));
+    formData.append("createWashingMachineRequest", new Blob ([JSON.stringify(createWashingMachineRequest)],{type: 'application/json'}));
 
     this.selectedFiles.forEach(file => {
       formData.append("imageFiles", file.file);
     });
 
-    return new Promise((resolve) => {
-      this._washingMachineDataService.save(formData).pipe(
-        withLatestFrom(this.getWashingMachineIdentification()),
-        switchMap(([_, identification]) => {
-          if(!identification) {
-            return EMPTY;
-          }
-          return this._washingMachineDataService.getRecommendation(identification.serialNumber);
-        })
-      ).subscribe({
-        next: (response) => {
-          this.recommendation = response;
-          resolve(true);
-        },
-        error: (error) => {
-          resolve(false);
-          throw error; // re-throw to be handled by GlobalErrorHandler
-        },
+    return firstValueFrom(this._washingMachineDataService.save(formData).pipe(
+      switchMap(() => {
+        return this._washingMachineDataService.getRecommendation(washingMachineIdentification.serialNumber);
       })
+    )).then((response) => {
+      this.recommendation = response;
+      return true;
     });
   }
 

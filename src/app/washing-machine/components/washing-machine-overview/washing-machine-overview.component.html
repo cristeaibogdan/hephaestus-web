@@ -1,143 +1,142 @@
-@if (washingMachineIdentification$ | async; as washingMachineIdentification) {
-  <div class="component-container elevation-level4">
+<div class="component-container elevation-level4">
 
-    <ng-content select="[header]"></ng-content>
+  <ng-content select="[header]"></ng-content>
 
-    <h1>{{"I18N.COMMON.OVERVIEW" | transloco}}</h1>
-    
-    <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | transloco}}</h2>  
-    <ul class="product-information-list">
-      <li>{{"I18N.COMMON.CATEGORY" | transloco}}: {{washingMachineIdentification.category}}</li>
-      <li>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{washingMachineIdentification.manufacturer}}</li>
-      <li>{{"I18N.COMMON.SERIAL_NUMBER" | transloco}}: {{washingMachineIdentification.serialNumber}}</li>
-      <li>{{"I18N.COMMON.MODEL" | transloco}}: {{washingMachineIdentification.model}}</li>
-      <li>{{"I18N.COMMON.TYPE" | transloco}}: {{washingMachineIdentification.type}}</li>
-    </ul>
+  <h1>{{"I18N.COMMON.OVERVIEW" | transloco}}</h1>
+  @let identification = washingMachineIdentification();
+  <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | transloco}}</h2>  
+  <ul class="product-information-list">
+    <li>{{"I18N.COMMON.CATEGORY" | transloco}}: {{identification.category}}</li>
+    <li>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{identification.manufacturer}}</li>
+    <li>{{"I18N.COMMON.SERIAL_NUMBER" | transloco}}: {{identification.serialNumber}}</li>
+    <li>{{"I18N.COMMON.MODEL" | transloco}}: {{identification.model}}</li>
+    <li>{{"I18N.COMMON.TYPE" | transloco}}: {{identification.type}}</li>
+  </ul>
 
-    <h2>{{"I18N.COMMON.DAMAGE_IDENTIFICATION_TITLE" | transloco}}</h2>
-    <ul class="product-information-list">
-      <li>{{"I18N.COMMON.IDENTIFICATION_MODE" | transloco}}: {{washingMachineIdentification.identificationMode | toLabel}}</li>    
-      <li>{{"I18N.COMMON.RETURN_TYPE" | transloco}}: {{washingMachineIdentification.returnType | toLabel}}</li>
-      <li>{{"I18N.COMMON.DAMAGE_TYPE" | transloco}}: {{washingMachineIdentification.damageType | toLabel}}</li>
-    </ul>
+  <h2>{{"I18N.COMMON.DAMAGE_IDENTIFICATION_TITLE" | transloco}}</h2>
+  <ul class="product-information-list">
+    <li>{{"I18N.COMMON.IDENTIFICATION_MODE" | transloco}}: {{identification.identificationMode | toLabel}}</li>    
+    <li>{{"I18N.COMMON.RETURN_TYPE" | transloco}}: {{identification.returnType | toLabel}}</li>
+    <li>{{"I18N.COMMON.DAMAGE_TYPE" | transloco}}: {{identification.damageType | toLabel}}</li>
+  </ul>
 
-    <h2>{{"I18N.COMMON.DAMAGED_PRODUCT_IMAGES_TITLE" | transloco}}</h2>
-    <section class="image-list">
-      @for (file of selectedFiles; track file) {
-        <img [src]="file.url">
-      }
-    </section>
-
-    <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
-    @if (washingMachineDetail$ | async; as washingMachineDetail) {
-      <section class="damages-container">      
-        
-        @if (washingMachineDetail.applicablePackageDamage) {
-          <article>
-            <h3>{{"I18N.COMMON.PACKAGE" | transloco}}</h3>
-  
-            <ul class="damages-list">
-              @if (washingMachineDetail.packageDamaged) { <li>{{"I18N.COMMON.PACKAGE_DAMAGED" | transloco}}</li> }
-              @if (washingMachineDetail.packageDirty) { <li>{{"I18N.COMMON.PACKAGE_DIRTY" | transloco}}</li> }
-              @if (washingMachineDetail.packageMaterialAvailable) { <li>{{"I18N.COMMON.PACKAGE_REPACKAGE" | transloco}}</li> }            
-            </ul>
-          </article>
-        }
-        
-        @if (washingMachineDetail.applicableVisibleSurfacesDamage) {
-          <article>
-            <h3>{{"I18N.COMMON.VISIBLE_SURFACES" | transloco}}</h3>
-  
-            <ul class="damages-list">
-              @if (washingMachineDetail.visibleSurfacesHasScratches) {
-                <li>
-                  {{"I18N.COMMON.SCRATCHES_LENGTH" | transloco}}:
-                  {{washingMachineDetail.visibleSurfacesScratchesLength}} 
-                  {{"I18N.COMMON.CM" | transloco}}
-                </li>
-              }
-
-              @if (washingMachineDetail.visibleSurfacesHasDents) {
-                <li>
-                  {{"I18N.COMMON.DENTS_DEPTH" | transloco}}:
-                  {{washingMachineDetail.visibleSurfacesDentsDepth}} 
-                  {{"I18N.COMMON.CM" | transloco}}
-                </li>
-              }
-
-              @if (washingMachineDetail.visibleSurfacesHasMinorDamage) {
-                <li>
-                  {{"I18N.COMMON.MINOR_DAMAGES" | transloco}}:
-                  {{washingMachineDetail.visibleSurfacesMinorDamage}}
-                </li>
-              }
-
-              @if (washingMachineDetail.visibleSurfacesHasMajorDamage) {
-                <li>
-                  {{"I18N.COMMON.MAJOR_DAMAGES" | transloco}}:
-                  {{washingMachineDetail.visibleSurfacesMajorDamage}}
-                </li>
-              }
-            </ul>
-          </article>
-        }
-
-        @if (washingMachineDetail.applicableHiddenSurfacesDamage) {
-          <article>
-            <h3>{{"I18N.COMMON.HIDDEN_SURFACES" | transloco}}</h3>
-  
-            <ul class="damages-list">
-              @if (washingMachineDetail.hiddenSurfacesHasScratches) {
-                <li>
-                  {{"I18N.COMMON.SCRATCHES_LENGTH" | transloco}}:
-                  {{washingMachineDetail.hiddenSurfacesScratchesLength}} 
-                  {{"I18N.COMMON.CM" | transloco}}
-                </li>
-              }
-
-              @if (washingMachineDetail.hiddenSurfacesHasDents) {
-                <li>
-                  {{"I18N.COMMON.DENTS_DEPTH" | transloco}}:
-                  {{washingMachineDetail.hiddenSurfacesDentsDepth}} 
-                  {{"I18N.COMMON.CM" | transloco}}
-                </li>                
-              }
-
-              @if (washingMachineDetail.hiddenSurfacesHasMinorDamage) {
-                <li>
-                  {{"I18N.COMMON.MINOR_DAMAGES" | transloco}}:
-                  {{washingMachineDetail.hiddenSurfacesMinorDamage}}
-                </li>
-              }
-
-              @if (washingMachineDetail.hiddenSurfacesHasMajorDamage) {
-                <li>
-                  {{"I18N.COMMON.MAJOR_DAMAGES" | transloco}}:
-                  {{washingMachineDetail.hiddenSurfacesMajorDamage}}
-                </li>
-              }
-            </ul>
-          </article>
-        }
-
-        @if (washingMachineDetail.price > 0 && washingMachineDetail.repairPrice > 0) {
-          <article>
-            <h3>{{"I18N.COMMON.PRICING" | transloco}}</h3>
-  
-            <ul class="damages-list">
-              <li>
-                {{"I18N.COMMON.PRODUCT_PRICE" | transloco}}: {{washingMachineDetail.price}} €
-              </li>
-              <li>
-                {{"I18N.COMMON.PRODUCT_REPAIR_PRICE" | transloco}}: {{washingMachineDetail.repairPrice}} €
-              </li>
-            </ul>
-          </article>
-        }  
-      </section>
+  <h2>{{"I18N.COMMON.DAMAGED_PRODUCT_IMAGES_TITLE" | transloco}}</h2>
+  <section class="image-list">
+    @for (file of selectedFiles; track file) {
+      <img [src]="file.url">
     }
-  </div>
-}
+  </section>
+
+  <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
+  @if (washingMachineDetail$ | async; as washingMachineDetail) {
+    <section class="damages-container">      
+      
+      @if (washingMachineDetail.applicablePackageDamage) {
+        <article>
+          <h3>{{"I18N.COMMON.PACKAGE" | transloco}}</h3>
+
+          <ul class="damages-list">
+            @if (washingMachineDetail.packageDamaged) { <li>{{"I18N.COMMON.PACKAGE_DAMAGED" | transloco}}</li> }
+            @if (washingMachineDetail.packageDirty) { <li>{{"I18N.COMMON.PACKAGE_DIRTY" | transloco}}</li> }
+            @if (washingMachineDetail.packageMaterialAvailable) { <li>{{"I18N.COMMON.PACKAGE_REPACKAGE" | transloco}}</li> }            
+          </ul>
+        </article>
+      }
+      
+      @if (washingMachineDetail.applicableVisibleSurfacesDamage) {
+        <article>
+          <h3>{{"I18N.COMMON.VISIBLE_SURFACES" | transloco}}</h3>
+
+          <ul class="damages-list">
+            @if (washingMachineDetail.visibleSurfacesHasScratches) {
+              <li>
+                {{"I18N.COMMON.SCRATCHES_LENGTH" | transloco}}:
+                {{washingMachineDetail.visibleSurfacesScratchesLength}} 
+                {{"I18N.COMMON.CM" | transloco}}
+              </li>
+            }
+
+            @if (washingMachineDetail.visibleSurfacesHasDents) {
+              <li>
+                {{"I18N.COMMON.DENTS_DEPTH" | transloco}}:
+                {{washingMachineDetail.visibleSurfacesDentsDepth}} 
+                {{"I18N.COMMON.CM" | transloco}}
+              </li>
+            }
+
+            @if (washingMachineDetail.visibleSurfacesHasMinorDamage) {
+              <li>
+                {{"I18N.COMMON.MINOR_DAMAGES" | transloco}}:
+                {{washingMachineDetail.visibleSurfacesMinorDamage}}
+              </li>
+            }
+
+            @if (washingMachineDetail.visibleSurfacesHasMajorDamage) {
+              <li>
+                {{"I18N.COMMON.MAJOR_DAMAGES" | transloco}}:
+                {{washingMachineDetail.visibleSurfacesMajorDamage}}
+              </li>
+            }
+          </ul>
+        </article>
+      }
+
+      @if (washingMachineDetail.applicableHiddenSurfacesDamage) {
+        <article>
+          <h3>{{"I18N.COMMON.HIDDEN_SURFACES" | transloco}}</h3>
+
+          <ul class="damages-list">
+            @if (washingMachineDetail.hiddenSurfacesHasScratches) {
+              <li>
+                {{"I18N.COMMON.SCRATCHES_LENGTH" | transloco}}:
+                {{washingMachineDetail.hiddenSurfacesScratchesLength}} 
+                {{"I18N.COMMON.CM" | transloco}}
+              </li>
+            }
+
+            @if (washingMachineDetail.hiddenSurfacesHasDents) {
+              <li>
+                {{"I18N.COMMON.DENTS_DEPTH" | transloco}}:
+                {{washingMachineDetail.hiddenSurfacesDentsDepth}} 
+                {{"I18N.COMMON.CM" | transloco}}
+              </li>                
+            }
+
+            @if (washingMachineDetail.hiddenSurfacesHasMinorDamage) {
+              <li>
+                {{"I18N.COMMON.MINOR_DAMAGES" | transloco}}:
+                {{washingMachineDetail.hiddenSurfacesMinorDamage}}
+              </li>
+            }
+
+            @if (washingMachineDetail.hiddenSurfacesHasMajorDamage) {
+              <li>
+                {{"I18N.COMMON.MAJOR_DAMAGES" | transloco}}:
+                {{washingMachineDetail.hiddenSurfacesMajorDamage}}
+              </li>
+            }
+          </ul>
+        </article>
+      }
+
+      @if (washingMachineDetail.price > 0 && washingMachineDetail.repairPrice > 0) {
+        <article>
+          <h3>{{"I18N.COMMON.PRICING" | transloco}}</h3>
+
+          <ul class="damages-list">
+            <li>
+              {{"I18N.COMMON.PRODUCT_PRICE" | transloco}}: {{washingMachineDetail.price}} €
+            </li>
+            <li>
+              {{"I18N.COMMON.PRODUCT_REPAIR_PRICE" | transloco}}: {{washingMachineDetail.repairPrice}} €
+            </li>
+          </ul>
+        </article>
+      }  
+    </section>
+  }
+</div>
+
 
 <div stepper-buttons class="hide">
   <button mat-raised-button type="button" matStepperPrevious>

@@ -1,10 +1,10 @@
 <app-washing-machine-overview>
-  
+  @let identification = washingMachineIdentification();
   <div header class="text-align-center">
-    @if (washingMachineIdentification$ | async; as washingMachineIdentification) {
+    
       {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_1" | transloco}}
-      {{washingMachineIdentification.serialNumber}} 
-      {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_2" | transloco}} {{washingMachineIdentification.manufacturer}},
+      {{identification.serialNumber}} 
+      {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_2" | transloco}} {{identification.manufacturer}},
       {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_3" | transloco}}:
   
       <div class="text-align-center">
@@ -17,7 +17,7 @@
           {{washingMachineRecommendation}}
         </button>
       </div>      
-    }
+    
     <p class="before-overview">
       {{"I18N.PRODUCT_RECOMMENDATION.SUBTITLE" | transloco}}
     </p>
@@ -31,7 +31,7 @@
     {{"I18N.COMMON.DOWNLOAD_RECOMMENDATION" | transloco}}
   </button>
   
-  <button type="button" class="primary" mat-raised-button routerLink="/home">
+  <button mat-raised-button class="primary" type="button" routerLink="/home">
     {{"I18N.COMMON.FINISH" | transloco}}
   </button>
 </div>

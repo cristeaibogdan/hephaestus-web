@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { EMPTY, Observable, switchMap, take } from 'rxjs';
+import { Component, inject, Signal } from '@angular/core';
 import { WashingMachineService } from '../../services/washing-machine.service';
 import { WashingMachineDataService } from '../../services/washing-machine.data.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -31,24 +30,11 @@ export class WashingMachineRecommendationComponent {
   private _washingMachineDataService = inject(WashingMachineDataService);
   private _notifService = inject(NotificationService);
 
-  washingMachineIdentification$:Observable<WashingMachineIdentification | null> = this._washingMachineService.getWashingMachineIdentification();
-  washingMachineRecommendation :Recommendation = this._washingMachineService.getRecommendation();
-
-// **********************************
-// *** DOWNLOAD FILE FUNCTIONALITY
-// **********************************
+  washingMachineIdentification: Signal<WashingMachineIdentification> = this._washingMachineService.getWashingMachineIdentification();
+  washingMachineRecommendation: Recommendation = this._washingMachineService.getRecommendation();
 
   onDownload(): void {
-    this.washingMachineIdentification$.pipe(
-      take(1),
-      switchMap(washingMachineIdentification => {
-        if(!washingMachineIdentification) {
-          return EMPTY;
-        }
-        return this._washingMachineDataService.getReport(washingMachineIdentification!.serialNumber)
-      })
-    ).subscribe(response => {
-      
+    this._washingMachineDataService.getReport(this.washingMachineIdentification().serialNumber).subscribe(response => {        
       // Convert to blob
       const arraybuffer = this._notifService.base64ToArrayBuffer(response.report);
       const blob = new Blob([arraybuffer], { type: 'application/pdf' });

@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { UntypedFormBuilder, Validators} from '@angular/forms';
-import { Observable } from 'rxjs';
 import { WashingMachineService } from '../services/washing-machine.service';
 import { WashingMachineIdentification } from '../models/washing-machine-identification.model';
 import { WashingMachineIdentificationComponent } from './washing-machine-identification/washing-machine-identification.component';
@@ -35,7 +34,7 @@ export class WashingMachineComponent {
   private _formBuilder = inject(UntypedFormBuilder);
   private _washingMachineService = inject(WashingMachineService);
 
-  washingMachineIdentification$: Observable<WashingMachineIdentification | null> = this._washingMachineService.getWashingMachineIdentification();
+  washingMachineIdentification: Signal<WashingMachineIdentification> = this._washingMachineService.getWashingMachineIdentification();
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],

@@ -1,22 +1,25 @@
 <div class="washing-machine-status">
-  @if (washingMachineIdentification$ | async; as washingMachineIdentification) {
-    <span>{{"I18N.COMMON.IDENTIFICATION_MODE" | transloco}}: {{washingMachineIdentification.identificationMode | toLabel}} </span> 
+  @let identification = washingMachineIdentification();
   
-    <span>{{"I18N.COMMON.DAMAGE_TYPE" | transloco}}: {{washingMachineIdentification.damageType | toLabel}}</span>
+  <!-- TODO: Workaround till I find a decent default solution for enums -->
+  @if (identification.manufacturer) { 
+    <span>{{"I18N.COMMON.IDENTIFICATION_MODE" | transloco}}: {{identification.identificationMode | toLabel}}</span>    
+  }
+  @if (identification.manufacturer) { 
+    <span>{{"I18N.COMMON.DAMAGE_TYPE" | transloco}}: {{identification.damageType | toLabel}}</span>
   }
 
   <div class="washing-machine-title">{{"I18N.COMMON.WASHING_MACHINE" | transloco | titlecase}}</div>    
-
-  @if (washingMachineIdentification$ | async; as washingMachineIdentification) {
-    <span>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{washingMachineIdentification.manufacturer}}</span>
-
-    @if (washingMachineIdentification.model !== 'N/A') {}
-    <span>{{"I18N.COMMON.MODEL" | transloco}}: {{washingMachineIdentification.model}}</span>
-
-    @if (washingMachineIdentification.type !== 'N/A') {
-      <span>{{"I18N.COMMON.TYPE" | transloco}}: {{washingMachineIdentification.type}} </span>
-    }
+  
+  @if (identification.manufacturer) { 
+    <span>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{identification.manufacturer}}</span>
   }
+  @if (identification.model) {
+  <span>{{"I18N.COMMON.MODEL" | transloco}}: {{identification.model}}</span>
+  }  
+  @if (identification.type) {
+    <span>{{"I18N.COMMON.TYPE" | transloco}}: {{identification.type}}</span>
+  }  
 </div>
 
 <mat-stepper>  

@@ -112,7 +112,9 @@ export class SolarPanelService {
       }
     }
 
-    console.log("Saving = ", saveSolarPanelRequest)
+    //TODO: Rename constants to match type
+    //TODO: Add return types to methods
+    console.log("Saving = ", saveSolarPanelRequest);
     
     return firstValueFrom(this._solarPanelDataService.save(saveSolarPanelRequest).pipe(
       switchMap(() => {        

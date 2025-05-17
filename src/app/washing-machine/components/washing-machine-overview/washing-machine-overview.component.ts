@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
 import { WashingMachineService } from '../../services/washing-machine.service';
@@ -32,7 +32,7 @@ export class WashingMachineOverviewComponent {
   private _notifService = inject(NotificationService);
   private _translocoService = inject(TranslocoService);
 
-  washingMachineIdentification$:Observable<WashingMachineIdentification | null> = this._washingMachineService.getWashingMachineIdentification();
+  washingMachineIdentification: Signal<WashingMachineIdentification> = this._washingMachineService.getWashingMachineIdentification();
   washingMachineDetail$:Observable<WashingMachineDetail | null> = this._washingMachineService.getWashingMachineDetail(); 
    
   selectedFiles:ImageFile[] = this._washingMachineService.getSelectedFiles();
