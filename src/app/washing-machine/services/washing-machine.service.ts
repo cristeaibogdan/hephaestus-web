@@ -26,7 +26,9 @@ export class WashingMachineService {
     type: "",
     serialNumber: "",
     returnType: ReturnType.SERVICE,
-    damageType: DamageType.IN_USE // TODO: Possible solution is to add a DEFAULT to each enum.
+    damageType: DamageType.IN_USE 
+    // TODO: Possible solution is to add a DEFAULT to each enum.
+    // Possible solution = add DEFAULT, but exclude the option in each select, so inputs remain invalid
   }
   
   private washingMachineIdentification = signal<WashingMachineIdentification>(this.washingMachineIdentificationDefault);
