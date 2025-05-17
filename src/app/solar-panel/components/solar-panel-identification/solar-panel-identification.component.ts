@@ -93,6 +93,7 @@ export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
   onReset(e:Event) {
     e.preventDefault(); // Prevent the default behavior. The disabled input will not appear empty and will preserve its value
     this.clearAvailableModelsAndTypes();
+    this._solarPanelService.resetSolarPanelIdentification();
   }
 
 // **********************************

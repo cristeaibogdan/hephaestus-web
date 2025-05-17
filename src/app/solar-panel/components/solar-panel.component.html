@@ -1,7 +1,18 @@
 <div class="solar-panel-status" >
+  @let identification = solarPanelIdentification();  
+  @if (identification.manufacturer) {
+    <span>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{identification.manufacturer}}</span>
+  }
 
-  <div class="solar-panel-title">Solar Panel</div>    
+  <div class="solar-panel-title">Solar Panel</div>  
 
+  @if (identification.model) {
+    <span>{{"I18N.COMMON.MODEL" | transloco}}: {{identification.model}}</span>
+  }
+
+  @if (identification.type) {
+    <span>{{"I18N.COMMON.TYPE" | transloco}}: {{identification.type}} </span>    
+  }
 </div>
 
 <mat-stepper>
