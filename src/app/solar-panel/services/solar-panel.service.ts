@@ -21,8 +21,7 @@ export class SolarPanelService {
     type: '',
     serialNumber: ''
   }
-  // TODO: Delete the $ from all signals.
-  // TODO: Put asReadonly() on getter for signal.
+
   private solarPanelIdentification = signal<SolarPanelIdentification>(this.solarPanelIdentificationDefault);
   
   getSolarPanelIdentification() {
@@ -52,7 +51,7 @@ export class SolarPanelService {
   private solarPanelDamage = signal<SolarPanelDamage>(this.solarPanelDamageDefault);
 
   getSolarPanelDamage() {
-    return this.solarPanelDamage;
+    return this.solarPanelDamage.asReadonly();
   }
 
   setSolarPanelDamage(solarPanelDamage: SolarPanelDamage) {

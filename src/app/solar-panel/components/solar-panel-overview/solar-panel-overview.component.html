@@ -1,39 +1,36 @@
-@if (solarPanelIdentification()) {
-  <div class="component-container elevation-level4">
+<div class="component-container elevation-level4">
+
+  <ng-content select="[header]"></ng-content>
+
+  <h1>{{"I18N.COMMON.OVERVIEW" | transloco}}</h1>
   
-    <ng-content select="[header]"></ng-content>
+  <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | transloco}}</h2>
+  @let identification = solarPanelIdentification();
+  <ul class="information-list">
+    <li>{{"I18N.COMMON.CATEGORY" | transloco}}: {{identification.category}}</li>
+    <li>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{identification.manufacturer}}</li>
+    <li>{{"I18N.COMMON.SERIAL_NUMBER" | transloco}}: {{identification.serialNumber}}</li>
+    <li>{{"I18N.COMMON.MODEL" | transloco}}: {{identification.model}}</li>
+    <li>{{"I18N.COMMON.TYPE" | transloco}}: {{identification.type}}</li>
+  </ul>
+
+  <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
   
-    <h1>{{"I18N.COMMON.OVERVIEW" | transloco}}</h1>
-    
-    <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | transloco}}</h2>  
-    <ul class="information-list">
-      <li>{{"I18N.COMMON.CATEGORY" | transloco}}: {{solarPanelIdentification().category}}</li>
-      <li>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{solarPanelIdentification().manufacturer}}</li>
-      <li>{{"I18N.COMMON.SERIAL_NUMBER" | transloco}}: {{solarPanelIdentification().serialNumber}}</li>
-      <li>{{"I18N.COMMON.MODEL" | transloco}}: {{solarPanelIdentification().model}}</li>
-      <li>{{"I18N.COMMON.TYPE" | transloco}}: {{solarPanelIdentification().type}}</li>
-    </ul>
-  
-    <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
-    
-    @let damage = solarPanelDamage();
-    <!-- TODO: Is the if really needed? -->
-    @if (damage) {
-      <ul class="damages-list">
-        @if (damage.hotSpots) { <li>Hot Spots</li> }        
-        @if (damage.microCracks) { <li>Micro Cracks</li> }        
-        @if (damage.snailTrails) { <li>Snail Trails</li> }        
-        @if (damage.brokenGlass) { <li>Broken Glass</li> }
-        @if (damage.additionalDetails) {
-          <li>
-            Additional Details:
-            {{damage.additionalDetails}}
-          </li>
-        }
-      </ul>
-    }    
-  </div>
-}
+  @let damage = solarPanelDamage();
+  <ul class="damages-list">
+    @if (damage.hotSpots) { <li>Hot Spots</li> }        
+    @if (damage.microCracks) { <li>Micro Cracks</li> }        
+    @if (damage.snailTrails) { <li>Snail Trails</li> }        
+    @if (damage.brokenGlass) { <li>Broken Glass</li> }
+    @if (damage.additionalDetails) {
+      <li>
+        Additional Details:
+        {{damage.additionalDetails}}
+      </li>
+    }
+  </ul>        
+</div>
+
 
 <div stepper-buttons class="hide">
   <button mat-raised-button type="button" matStepperPrevious>
