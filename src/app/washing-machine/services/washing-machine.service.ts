@@ -1,5 +1,5 @@
 import { Injectable, Signal, inject, signal } from "@angular/core";
-import { BehaviorSubject, firstValueFrom, Observable, switchMap } from "rxjs";
+import { firstValueFrom, switchMap } from "rxjs";
 import { CreateWashingMachineRequest } from "../models/dtos/create-washing-machine.request";
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
@@ -49,18 +49,48 @@ export class WashingMachineService {
 // *** STEP 2 = PRODUCT DAMAGE ASSESSMENT
 // *****************************************
 
-  private washingMachineDetail$ = new BehaviorSubject<WashingMachineDetail | null>(null);
+  private readonly washingMachineDetailDefault: WashingMachineDetail = {
+    applicablePackageDamage: false,
+    packageDamaged: false,
+    packageDirty: false,
+    packageMaterialAvailable: false,
+
+    applicableVisibleSurfacesDamage: false,
+    visibleSurfacesHasScratches: false,
+    visibleSurfacesScratchesLength: 0,
+    visibleSurfacesHasDents: false,
+    visibleSurfacesDentsDepth: 0,
+    visibleSurfacesHasMinorDamage: false,
+    visibleSurfacesMinorDamage: "",
+    visibleSurfacesHasMajorDamage: false,
+    visibleSurfacesMajorDamage: "",
+
+    applicableHiddenSurfacesDamage: false,
+    hiddenSurfacesHasScratches: false,
+    hiddenSurfacesScratchesLength: 0,
+    hiddenSurfacesHasDents: false,
+    hiddenSurfacesDentsDepth: 0,
+    hiddenSurfacesHasMinorDamage: false,
+    hiddenSurfacesMinorDamage: "",
+    hiddenSurfacesHasMajorDamage: false,
+    hiddenSurfacesMajorDamage: "",
+
+    price: 0,
+    repairPrice: 0
+  };
+
+  private washingMachineDetail = signal<WashingMachineDetail>(this.washingMachineDetailDefault);
 
   setWashingMachineDetail(washingMachineDetail: WashingMachineDetail): void {
-    this.washingMachineDetail$.next(washingMachineDetail);
+    this.washingMachineDetail.set(washingMachineDetail);
   }
 
-  getWashingMachineDetail(): Observable<WashingMachineDetail | null> {
-    return this.washingMachineDetail$.asObservable();
+  getWashingMachineDetail(): Signal<WashingMachineDetail> {
+    return this.washingMachineDetail.asReadonly();
   }
 
   resetWashingMachineDetail(): void {
-    this.washingMachineDetail$.next(null);
+    this.washingMachineDetail.set(this.washingMachineDetailDefault);
   }
 
 // **************************************
@@ -87,10 +117,7 @@ export class WashingMachineService {
 
   save(): Promise<boolean> {
     const washingMachineIdentification = this.washingMachineIdentification();
-
-    if (this.washingMachineDetail$.value == null) {
-      return Promise.reject(); //TODO: Remove this once Detail is a Signal
-    }
+    const washingMachineDetail = this.washingMachineDetail();
 
     const createWashingMachineRequest: CreateWashingMachineRequest = {
       category: washingMachineIdentification.category,
@@ -105,28 +132,28 @@ export class WashingMachineService {
       type: washingMachineIdentification.type,
       
       washingMachineDetail: {
-        packageDamaged: this.washingMachineDetail$.value.packageDamaged,
-        packageDirty: this.washingMachineDetail$.value.packageDirty,
-        packageMaterialAvailable: this.washingMachineDetail$.value.packageMaterialAvailable,
+        packageDamaged: washingMachineDetail.packageDamaged,
+        packageDirty: washingMachineDetail.packageDirty,
+        packageMaterialAvailable: washingMachineDetail.packageMaterialAvailable,
 
-        visibleSurfacesScratchesLength: this.washingMachineDetail$.value.visibleSurfacesScratchesLength,
-        visibleSurfacesDentsDepth: this.washingMachineDetail$.value.visibleSurfacesDentsDepth,
-        visibleSurfacesMinorDamage: this.washingMachineDetail$.value.visibleSurfacesMinorDamage,
-        visibleSurfacesMajorDamage: this.washingMachineDetail$.value.visibleSurfacesMajorDamage,
+        visibleSurfacesScratchesLength: washingMachineDetail.visibleSurfacesScratchesLength,
+        visibleSurfacesDentsDepth: washingMachineDetail.visibleSurfacesDentsDepth,
+        visibleSurfacesMinorDamage: washingMachineDetail.visibleSurfacesMinorDamage,
+        visibleSurfacesMajorDamage: washingMachineDetail.visibleSurfacesMajorDamage,
 
-        hiddenSurfacesScratchesLength: this.washingMachineDetail$.value.hiddenSurfacesScratchesLength,
-        hiddenSurfacesDentsDepth: this.washingMachineDetail$.value.hiddenSurfacesDentsDepth,
-        hiddenSurfacesMinorDamage: this.washingMachineDetail$.value.hiddenSurfacesMinorDamage,
-        hiddenSurfacesMajorDamage: this.washingMachineDetail$.value.hiddenSurfacesMajorDamage,
+        hiddenSurfacesScratchesLength: washingMachineDetail.hiddenSurfacesScratchesLength,
+        hiddenSurfacesDentsDepth: washingMachineDetail.hiddenSurfacesDentsDepth,
+        hiddenSurfacesMinorDamage: washingMachineDetail.hiddenSurfacesMinorDamage,
+        hiddenSurfacesMajorDamage: washingMachineDetail.hiddenSurfacesMajorDamage,
 
-        price: this.washingMachineDetail$.value.price,
-        repairPrice: this.washingMachineDetail$.value.repairPrice
+        price: washingMachineDetail.price,
+        repairPrice: washingMachineDetail.repairPrice
       }
     };
     
     console.log("Saving = ", createWashingMachineRequest);
     const formData = new FormData();
-    formData.append("createWashingMachineRequest", new Blob ([JSON.stringify(createWashingMachineRequest)],{type: 'application/json'}));
+    formData.append("createWashingMachineRequest", new Blob ([JSON.stringify(createWashingMachineRequest)], {type: 'application/json'}));
 
     this.selectedFiles.forEach(file => {
       formData.append("imageFiles", file.file);
