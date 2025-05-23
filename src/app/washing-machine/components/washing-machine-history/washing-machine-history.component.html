@@ -2,7 +2,7 @@
 
 <div class="table-container elevation-level4">
   <form [formGroup]="filterForm" (ngSubmit)="onFilter()" (reset)="onReset()">
-  <table mat-table matSort [dataSource]="washingMachines">
+  <table mat-table matSort [dataSource]="dataSource">
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
     <tr mat-header-row *matHeaderRowDef="filterColumns; sticky:true" cdkTrapFocus></tr>
     <tr mat-row *matRowDef="let washingMachine; columns: displayedColumns;"></tr>

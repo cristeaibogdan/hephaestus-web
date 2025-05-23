@@ -1,18 +1,22 @@
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
 import { GetWashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/get-washing-machine-full.response';
-import { signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { WashingMachineDataService } from '../../services/washing-machine.data.service';
 
 /**
  * Data source for the DataTableExample view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
+@Injectable()
 export class WashingMachineDataSource extends DataSource<GetWashingMachineFullResponse> {  
   private washingMachines = signal<GetWashingMachineFullResponse[]>([]);
 
-  constructor() {
+  constructor(
+    private _washingMachineDataService: WashingMachineDataService,
+  ) {
     super();
   }
 

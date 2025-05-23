@@ -25,11 +25,13 @@ import { MatInputModule } from '@angular/material/input';
 import { DateFormatYYYYMMDDDirective } from 'src/app/shared/directives/date-format-yyyy-mm-dd.directive';
 import { A11yModule } from '@angular/cdk/a11y';
 import { MatIconModule } from '@angular/material/icon';
+import { WashingMachineDataSource } from './washing-machine-datasource';
 
 @Component({
   selector: 'app-washing-machine-history',
   templateUrl: './washing-machine-history.component.html',
   styleUrls: ['./washing-machine-history.component.scss'],
+  providers: [ WashingMachineDataSource ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -57,6 +59,8 @@ export class WashingMachineHistoryComponent implements OnInit, AfterViewInit {
   private fb = inject(FormBuilder);
 
   readonly recommendation = Recommendation;
+
+  dataSource: WashingMachineDataSource = inject(WashingMachineDataSource);
 
   washingMachines = new MatTableDataSource<GetWashingMachineFullResponse>();
     
