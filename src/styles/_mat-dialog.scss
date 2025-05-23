@@ -15,7 +15,7 @@
 // *** STYLES for MAT DIALOG - LOADING SPINNER
 // **************************************/
 
-.borderless-dialog {
+.loading-dialog {
   @include mat.dialog-overrides((
     container-color: transparent,
     container-elevation-shadow: none

@@ -15,7 +15,7 @@ export const loadingInterceptor: HttpInterceptorFn = (request, next) => {
   
   const loadingSpinner = dialog.open(SpinnerComponent, {
     disableClose: true,
-    panelClass: "borderless-dialog"
+    panelClass: "loading-dialog"
   });
 
   return next(request).pipe(
