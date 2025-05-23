@@ -7,6 +7,8 @@ import { WashingMachineDataService } from '../../services/washing-machine.data.s
 import { SearchWashingMachineRequest } from '../../models/dtos/search-washing-machine.request';
 import { NotificationService } from 'src/app/services/notification.service';
 import { TranslocoService } from '@jsverse/transloco';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 /**
  * Data source for the DataTableExample view. This class should
@@ -16,6 +18,9 @@ import { TranslocoService } from '@jsverse/transloco';
 @Injectable()
 export class WashingMachineDataSource extends DataSource<GetWashingMachineFullResponse> {  
   private washingMachines = signal<GetWashingMachineFullResponse[]>([]);
+
+  sort!: MatSort;
+  paginator!: MatPaginator;
 
   constructor(
     private _washingMachineDataService: WashingMachineDataService,
@@ -49,6 +54,9 @@ export class WashingMachineDataSource extends DataSource<GetWashingMachineFullRe
         }
 
         this.washingMachines.set(response.content);
+        this.paginator.pageIndex = response.number;
+        this.paginator.pageSize = response.size;
+        this.paginator.length = response.totalElements;
       },
       error: err => {
         this.washingMachines.set([]);

@@ -210,12 +210,10 @@
   </table>
   </form>
 
-  <mat-paginator showFirstLastButtons    
-    [pageIndex]="pageNumber"
-    [pageSize]="pageSize"
-    [length]="totalElements"
+  <mat-paginator showFirstLastButtons
+    [pageSize]="10"
     [pageSizeOptions]="pageSizeOptions"
-    (page)="changePage($event)">
+    (page)="applySearchFilters()">
   </mat-paginator>
 </div>
 
