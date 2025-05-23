@@ -6,6 +6,9 @@ import { ReturnType } from '../../enums/return-type.enum';
 export interface SearchWashingMachineRequest {
   pageIndex: number;
   pageSize: number;
+
+  sortByField: string | null;
+  sortDirection: string;
   
   identificationMode: IdentificationMode | null;
   manufacturer: string | null;
