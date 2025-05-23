@@ -54,15 +54,11 @@ import { WashingMachineDataSource } from './washing-machine-datasource';
 export class WashingMachineHistoryComponent implements OnInit, AfterViewInit {
   private dialog = inject(MatDialog);
   private _washingMachineDataService = inject(WashingMachineDataService);
-  private _translocoService = inject(TranslocoService);
-  private _notifService = inject(NotificationService);
   private fb = inject(FormBuilder);
 
-  readonly recommendation = Recommendation;
+  recommendation = Recommendation;
 
   dataSource: WashingMachineDataSource = inject(WashingMachineDataSource);
-
-  washingMachines = new MatTableDataSource<GetWashingMachineFullResponse>();
     
   displayedColumns: string[] = [
     "createdAt",
@@ -88,7 +84,7 @@ export class WashingMachineHistoryComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit(): void {
-    this.washingMachines.sort = this.sort;
+    // this.washingMachines.sort = this.sort;
   }
   
 // *****************************************
@@ -144,11 +140,12 @@ export class WashingMachineHistoryComponent implements OnInit, AfterViewInit {
     this.loadPaginatedAndFiltered();
   }
 
-  // 3. USE VALUES OF PAGINATOR TO REQUEST DATA
+   // 2. USE VALUES OF FORM AND PAGINATOR TO REQUEST DATA
   loadPaginatedAndFiltered(): void {
     const searchWashingMachineRequest: SearchWashingMachineRequest = {
       pageIndex: this.pageNumber,
       pageSize: this.pageSize,
+
       identificationMode: this.filterForm.controls.identificationMode.value,
       manufacturer: this.filterForm.controls.manufacturer.value,
       model: this.filterForm.controls.model.value,
@@ -162,25 +159,8 @@ export class WashingMachineHistoryComponent implements OnInit, AfterViewInit {
 
     console.log("searchWashingMachineRequest = ", searchWashingMachineRequest);
 
-    // 4. UPDATE VALUES OF PAGINATOR FROM RESPONSE
-    this._washingMachineDataService.loadPaginatedAndFiltered(searchWashingMachineRequest).subscribe({
-      next: response => {
-        if(response.content.length == 0) {
-          this._notifService.showWarning(this._translocoService.translate("I18N.GENERAL_ERROR.EMPTY_PAGE"), 0);
-        }
-
-        this.washingMachines.data = response.content;
-        this.pageNumber = response.number;
-        this.pageSize = response.size;
-        this.totalElements = response.totalElements;
-      },
-      error: err => {
-        this.washingMachines.data = [];
-        this.pageNumber = 0;
-        this.totalElements = 0;
-        throw err; // re-throw to be handled by GlobalErrorHandler
-      }
-    });
+    // 3. SEARCH WASHINGMACHINES
+    this.dataSource.search(searchWashingMachineRequest);
   }
 
   private handleDate(value: string | null): string | null {
