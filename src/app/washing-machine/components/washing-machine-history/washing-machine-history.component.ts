@@ -86,6 +86,11 @@ export class WashingMachineHistoryComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
 
     this.applySearchFilters();
+
+    this.dataSource.sort.sortChange.subscribe(() => {
+      this.dataSource.paginator.firstPage();
+      this.applySearchFilters();
+    });
   }
   
 // *****************************************
@@ -129,6 +134,9 @@ export class WashingMachineHistoryComponent implements AfterViewInit {
     const searchWashingMachineRequest: SearchWashingMachineRequest = {
       pageIndex: this.dataSource.paginator.pageIndex,
       pageSize: this.dataSource.paginator.pageSize,
+
+      sortByField: this.dataSource.sort.active,
+      sortDirection: this.dataSource.sort.direction,
 
       identificationMode: this.filterForm.controls.identificationMode.value,
       manufacturer: this.filterForm.controls.manufacturer.value,
