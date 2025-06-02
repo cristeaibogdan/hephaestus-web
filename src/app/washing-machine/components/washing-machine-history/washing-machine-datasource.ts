@@ -46,7 +46,7 @@ export class WashingMachineDataSource extends DataSource<GetWashingMachineFullRe
   disconnect(): void {}
 
   search(searchWashingMachineRequest: SearchWashingMachineRequest) {
-    this._washingMachineDataService.loadPaginatedAndFiltered(searchWashingMachineRequest).subscribe({
+    this._washingMachineDataService.search(searchWashingMachineRequest).subscribe({
       next: response => {
 
         if(response.content.length == 0) {

@@ -76,7 +76,7 @@ export class WashingMachineDataService {
 //*** HISTORY
 //**************************************
 
-  loadPaginatedAndFiltered(searchWashingMachineRequest: SearchWashingMachineRequest): Observable<Page<SearchWashingMachineResponse>> {
+  search(searchWashingMachineRequest: SearchWashingMachineRequest): Observable<Page<SearchWashingMachineResponse>> {
     const url = this.apiURL.concat("/api/v1/washing-machines");
     const payload = searchWashingMachineRequest;
     return this.http.post<Page<SearchWashingMachineResponse>>(url, payload);
