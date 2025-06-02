@@ -33,8 +33,8 @@ export class SolarPanelOverviewComponent {
   solarPanelIdentification: Signal<SolarPanelIdentification> = this._solarPanelService.getSolarPanelIdentification();
   solarPanelDamage: Signal<SolarPanelDamage> = this._solarPanelService.getSolarPanelDamage();
 
-  save(): void {
-    this._solarPanelService.save().then(success => {
+  create(): void {
+    this._solarPanelService.create().then(success => {
       if(success) {
         this._notifService.showSuccess(this._translocoService.translate("I18N.CUSTOM_SUCCESS.PRODUCT_SAVED"), 4000);
         this.stepper.next();

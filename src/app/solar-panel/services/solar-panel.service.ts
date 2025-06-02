@@ -66,7 +66,7 @@ export class SolarPanelService {
 // *** STEP 3 = OVERVIEW
 // **************************************
 
-  save(): Promise<boolean> {
+  create(): Promise<boolean> {
     // Alternative solution (spreading), simpler but a bit harder to read.
     // const saveSolarPanelRequest: CreateSolarPanelRequest = {
     //   ...this.solarPanelIdentification$(),
@@ -116,7 +116,7 @@ export class SolarPanelService {
     //TODO: Add return types to methods
     console.log("Saving = ", saveSolarPanelRequest);
     
-    return firstValueFrom(this._solarPanelDataService.save(saveSolarPanelRequest).pipe(
+    return firstValueFrom(this._solarPanelDataService.create(saveSolarPanelRequest).pipe(
       switchMap(() => {        
         return this._solarPanelDataService.getRecommendation(solarPanelIdentification.serialNumber);
       })

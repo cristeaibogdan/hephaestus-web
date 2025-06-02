@@ -40,8 +40,8 @@ export class SolarPanelDataService {
 // *** STEP 3 = OVERVIEW
 // **************************************
 
-  save(createSolarPanelRequest: CreateSolarPanelRequest): Observable<void> {
-    const url = this.apiURL.concat("/v1/solar-panels/save");
+  create(createSolarPanelRequest: CreateSolarPanelRequest): Observable<void> {
+    const url = this.apiURL.concat("/v1/solar-panels/create");
     return this.http.post<void>(url, createSolarPanelRequest);
   }
 
