@@ -115,7 +115,7 @@ export class WashingMachineService {
 // *** STEP 3 = OVERVIEW
 // **************************************
 
-  save(): Promise<boolean> {
+  create(): Promise<boolean> {
     const washingMachineIdentification = this.washingMachineIdentification();
     const washingMachineDetail = this.washingMachineDetail();
 
@@ -159,7 +159,7 @@ export class WashingMachineService {
       formData.append("imageFiles", file.file);
     });
 
-    return firstValueFrom(this._washingMachineDataService.save(formData).pipe(
+    return firstValueFrom(this._washingMachineDataService.create(formData).pipe(
       switchMap(() => {
         return this._washingMachineDataService.getRecommendation(washingMachineIdentification.serialNumber);
       })

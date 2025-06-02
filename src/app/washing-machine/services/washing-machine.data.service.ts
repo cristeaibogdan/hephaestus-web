@@ -55,8 +55,8 @@ export class WashingMachineDataService {
     return this.http.get<Recommendation>(url);
   }
 
-  save(washingMachine:FormData): Observable<void> {
-    const url = this.apiURL.concat("/api/v1/washing-machines/save");
+  create(washingMachine:FormData): Observable<void> {
+    const url = this.apiURL.concat("/api/v1/washing-machines/create");
     return this.http.post<void>(url, washingMachine);
   }
 

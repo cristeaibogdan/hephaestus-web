@@ -36,8 +36,8 @@ export class WashingMachineOverviewComponent {
    
   selectedFiles:ImageFile[] = this._washingMachineService.getSelectedFiles();
 
-  save(): void {
-    this._washingMachineService.save().then(success => {
+  create(): void {
+    this._washingMachineService.create().then(success => {
       if(success) {
         this._notifService.showSuccess(this._translocoService.translate("I18N.CUSTOM_SUCCESS.PRODUCT_SAVED"), 4000);
         this.stepper.next();
