@@ -18,7 +18,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 @Injectable()
 export class SolarPanelDataSource extends DataSource<GetSolarPanelFullResponse> {
   
-  private solarPanels$ = signal<GetSolarPanelFullResponse[]>([]);
+  private solarPanels = signal<GetSolarPanelFullResponse[]>([]);
   
   sort!: MatSort;
   paginator!: MatPaginator;  
@@ -37,7 +37,7 @@ export class SolarPanelDataSource extends DataSource<GetSolarPanelFullResponse> 
    * @returns A stream of the items to be rendered.
    */
   connect(): Observable<GetSolarPanelFullResponse[]> {
-    return toObservable(this.solarPanels$);
+    return toObservable(this.solarPanels);
   }
 
   /**
@@ -54,13 +54,13 @@ export class SolarPanelDataSource extends DataSource<GetSolarPanelFullResponse> 
           this._notifService.showWarning(this._translocoService.translate("I18N.GENERAL_ERROR.EMPTY_PAGE"), 0);
         }
 
-        this.solarPanels$.set(response.content);
+        this.solarPanels.set(response.content);
         this.paginator.pageIndex = response.number;
         this.paginator.pageSize = response.size;
         this.paginator.length = response.totalElements;
       },
       error: err => {
-        this.solarPanels$.set([]);
+        this.solarPanels.set([]);
         throw err; // re-throw to be handled by GlobalErrorHandler
       }
     });
