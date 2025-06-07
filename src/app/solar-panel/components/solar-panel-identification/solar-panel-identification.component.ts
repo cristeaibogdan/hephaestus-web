@@ -13,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { MatButtonModule } from '@angular/material/button';
+import { ProductDataService } from 'src/app/services/product-data.service';
 
 @Component({
   selector: 'app-solar-panel-identification',
@@ -35,6 +36,7 @@ export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
   private fb = inject(NonNullableFormBuilder);
   private _solarPanelDataService = inject(SolarPanelDataService);
   private _solarPanelService = inject(SolarPanelService);
+  private _productDataService = inject(ProductDataService);
 
   private serialNumberValidator = inject(SerialNumberValidator); //TODO: Use async validator to check the serial number
 
@@ -110,7 +112,7 @@ export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
   }
 
   getManufacturer(category: string): void {   
-    this._solarPanelDataService.getManufacturers(category).subscribe(response => {
+    this._productDataService.getManufacturers(category).subscribe(response => {
       this.availableManufacturers = response;
     });  
   }
@@ -120,7 +122,7 @@ export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this._solarPanelDataService.getModelsAndTypes(manufacturer).subscribe(response => {
+    this._productDataService.getModelsAndTypes(manufacturer).subscribe(response => {
       this.clearAvailableModelsAndTypes();
       response.forEach(getModelAndTypeResponse => {
         this.availableModels.push(getModelAndTypeResponse.model);

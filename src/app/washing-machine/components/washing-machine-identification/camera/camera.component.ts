@@ -6,13 +6,13 @@ import { BrowserQRCodeReader } from '@zxing/browser/es2015/readers/BrowserQRCode
 import { ZXingScannerComponent, ZXingScannerModule } from '@zxing/ngx-scanner';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
 import { NotificationService } from 'src/app/services/notification.service';
-import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 import { GetProductIdentificationResponse } from 'src/app/shared/models/get-product-identification.response';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ProductDataService } from 'src/app/services/product-data.service';
 
 @Component({
     selector: 'app-camera',
@@ -30,7 +30,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 })
 export class CameraComponent implements AfterViewInit {
   private _notifService = inject(NotificationService);
-  private _washingMachineDataService = inject(WashingMachineDataService);
+  private _productDataService = inject(ProductDataService);
   private sanitizer = inject(DomSanitizer);
   private dialogRef = inject(MatDialogRef<CameraComponent>);
 
@@ -217,7 +217,7 @@ export class CameraComponent implements AfterViewInit {
   private getProductIdentification(qrCode: string): void {
 
     if(qrCode.startsWith("hephaestus-washing-machine-")) {
-      this._washingMachineDataService.getProductIdentification(qrCode).subscribe(response => {
+      this._productDataService.getProductIdentification(qrCode).subscribe(response => {
         this.result = response;
         this._notifService.showSuccess("QR code succesfully identified!", 0);
       });

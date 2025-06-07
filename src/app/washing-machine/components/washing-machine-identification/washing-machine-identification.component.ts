@@ -23,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
+import { ProductDataService } from 'src/app/services/product-data.service';
 
 @Component({
     selector: 'app-washing-machine-identification',
@@ -48,6 +49,7 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
   private stepper = inject(MatStepper);
   private _washingMachineService =  inject(WashingMachineService);
   private _washingMachineDataService = inject(WashingMachineDataService);
+  private _productDataService = inject(ProductDataService);
   private dialog = inject(MatDialog);
   private fb = inject(NonNullableFormBuilder);
             
@@ -189,7 +191,7 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
   }
 
   populateDataMatrix_Manufacturer_Field(category: string): void {   
-    this._washingMachineDataService.getManufacturers(category).subscribe(response => {
+    this._productDataService.getManufacturers(category).subscribe(response => {
       this.availableManufacturers = response;
     });  
   }
@@ -202,7 +204,7 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
       return;
     }
 
-    this._washingMachineDataService.getModelsAndTypes(manufacturer).subscribe(response => {    
+    this._productDataService.getModelsAndTypes(manufacturer).subscribe(response => {    
 
       this.clearAvailableModelsAndTypes();
 
