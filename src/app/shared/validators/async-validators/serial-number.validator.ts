@@ -13,7 +13,7 @@ export class SerialNumberValidator implements AsyncValidator {
   private apiURL = environment.apiBaseUrl;
 
   validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
-    const url = this.apiURL.concat("/api/v1/washing-machines/")
+    const url = this.apiURL.concat("/v1/washing-machines/")
       .concat(control.value)
       .concat("/validate");
     

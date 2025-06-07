@@ -19,14 +19,14 @@ export class WashingMachineDataService {
 //**************************************
   
   getRecommendation(serialNumber:string): Observable<Recommendation> {
-    const url = this.apiURL.concat("/api/v1/washing-machines/")
+    const url = this.apiURL.concat("/v1/washing-machines/")
     .concat(serialNumber)
     .concat("/recommendation");
     return this.http.get<Recommendation>(url);
   }
 
   create(washingMachine:FormData): Observable<void> {
-    const url = this.apiURL.concat("/api/v1/washing-machines/create");
+    const url = this.apiURL.concat("/v1/washing-machines/create");
     return this.http.post<void>(url, washingMachine);
   }
 
@@ -35,7 +35,7 @@ export class WashingMachineDataService {
 //**************************************
 
   getReport(serialNumber:string): Observable<GetWashingMachineReportResponse> {
-    const url = this.apiURL.concat("/api/v1/washing-machines/")
+    const url = this.apiURL.concat("/v1/washing-machines/")
       .concat(serialNumber)
       .concat("/report");
 
@@ -47,7 +47,7 @@ export class WashingMachineDataService {
 //**************************************
 
   search(searchWashingMachineRequest: SearchWashingMachineRequest): Observable<Page<SearchWashingMachineResponse>> {
-    const url = this.apiURL.concat("/api/v1/washing-machines");
+    const url = this.apiURL.concat("/v1/washing-machines");
     const payload = searchWashingMachineRequest;
     return this.http.post<Page<SearchWashingMachineResponse>>(url, payload);
   }
@@ -56,14 +56,14 @@ export class WashingMachineDataService {
   * @deprecated This method is deprecated, use `loadMany` instead.
   */
   load(serialNumber:string): Observable<GetWashingMachineFullResponse> {
-    const url = this.apiURL.concat("/api/v1/washing-machines/")
+    const url = this.apiURL.concat("/v1/washing-machines/")
       .concat(serialNumber);
 
     return this.http.get<GetWashingMachineFullResponse>(url);
   }
 
   loadMany(serialNumbers:string[]): Observable<Record<string, GetWashingMachineFullResponse>> {
-    const url = this.apiURL.concat("/api/v1/washing-machines/many");
+    const url = this.apiURL.concat("/v1/washing-machines/many");
 
     return this.http.post<Record<string, GetWashingMachineFullResponse>>(url, serialNumbers);
   }

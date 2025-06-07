@@ -48,7 +48,7 @@ export class InitializationService {
   private async wakeupWashingMachine(): Promise<boolean> {
     try {
       await firstValueFrom(
-        this.http.get(`${this.apiUrl}/api/v1/washing-machines/someSerialNumber/validate`, {
+        this.http.get(`${this.apiUrl}/v1/washing-machines/someSerialNumber/validate`, {
           context: new HttpContext().set(SKIP_INTERCEPTOR, true),
         }).pipe(
           retry({
