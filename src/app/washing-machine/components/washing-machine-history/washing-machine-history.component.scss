@@ -141,7 +141,7 @@ tr {
   /* Need to modify the calendar icon-button size so 
   the form-field can apply density of -6 */
   ::ng-deep .mat-mdc-icon-button.mat-mdc-button-base {
-    --mdc-icon-button-state-layer-size: 24px;
+    --mat-icon-button-state-layer-size: 24px;
     padding: 0;
     margin-right: 12px;
     color: #556eb0;    

@@ -1,4 +1,4 @@
-import {Directive, ElementRef, EventEmitter, Output, Renderer2, inject} from "@angular/core";
+import {Directive, ElementRef, EventEmitter, OnInit, Output, Renderer2, inject} from "@angular/core";
 
 @Directive({
     selector: '[dragAndDrop]',
@@ -9,14 +9,17 @@ import {Directive, ElementRef, EventEmitter, Output, Renderer2, inject} from "@a
     },
     standalone: true
 })
-export class DragAndDropDirective {
-
+export class DragAndDropDirective implements OnInit {
   @Output() filesDropped = new EventEmitter<FileList>();
 
   private el = inject(ElementRef);
   private renderer = inject(Renderer2);
 
-  handleDragOver(e: DragEvent) {
+  ngOnInit(): void {
+    this.renderer.setStyle(this.el.nativeElement, "transition", "all 0.5s");
+  }
+
+  handleDragOver(e: DragEvent): void {
     e.preventDefault();
     e.stopPropagation();
 
@@ -24,7 +27,7 @@ export class DragAndDropDirective {
     this.renderer.setStyle(this.el.nativeElement, "border", "2px dashed #2196F3");
   }
 
-  handleDragLeave(e: DragEvent) {
+  handleDragLeave(e: DragEvent): void {
     e.preventDefault();
     e.stopPropagation();
 
@@ -32,7 +35,7 @@ export class DragAndDropDirective {
     this.renderer.setStyle(this.el.nativeElement, "border", "");
   }
 
-  handleDrop(e: DragEvent) {
+  handleDrop(e: DragEvent): void {
     e.preventDefault();
     e.stopPropagation();
     this.filesDropped.emit(e.dataTransfer?.files);
