@@ -55,6 +55,21 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
   
   ngOnInit(): void {
     this.populateDataMatrix_Manufacturer_Field(this.washingMachineIdentificationForm.controls.category.value);
+
+    this.washingMachineIdentificationForm.controls.manufacturer.valueChanges.subscribe(value => {
+      this.populateDataMatrix_Model_Type_Fields(value);
+    });
+
+    // DISABLE / ENABLE manufacturer and modelAndType based on identificationMode's value.
+    this.washingMachineIdentificationForm.controls.identificationMode.valueChanges.subscribe(value => {
+      this.washingMachineIdentificationForm.controls.manufacturer.enable();
+      this.washingMachineIdentificationForm.controls.modelAndType.enable();
+
+      if(value === IdentificationMode.QR_CODE) {
+        this.washingMachineIdentificationForm.controls.manufacturer.disable();
+        this.washingMachineIdentificationForm.controls.modelAndType.disable();
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -92,16 +107,6 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
 // *** FORM FUNCTIONALITY
 // *****************************************
 
-  disableDataFields_WHEN_QRCodeIsSelected(): void {
-    this.washingMachineIdentificationForm.controls.manufacturer.enable();
-    this.washingMachineIdentificationForm.controls.modelAndType.enable();
-
-    if (this.washingMachineIdentificationForm.value.identificationMode === IdentificationMode.QR_CODE) {
-      this.washingMachineIdentificationForm.controls.manufacturer.disable();
-      this.washingMachineIdentificationForm.controls.modelAndType.disable();
-    }
-  }
-
   disableInUse!:boolean;
   disableInTransit!:boolean;
 
@@ -125,16 +130,14 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
       // console.log("result from window = ", result);
 
       if(result) {
-        this.washingMachineIdentificationForm.controls.manufacturer.patchValue(result.manufacturer);
-        this.washingMachineIdentificationForm.controls.modelAndType.controls.model.patchValue(result.model);
-        this.washingMachineIdentificationForm.controls.modelAndType.controls.type.patchValue(result.type);        
+        this.washingMachineIdentificationForm.controls.manufacturer.setValue(result.manufacturer);
+        this.washingMachineIdentificationForm.controls.modelAndType.controls.model.setValue(result.model);
+        this.washingMachineIdentificationForm.controls.modelAndType.controls.type.setValue(result.type);        
       } else {
         this.washingMachineIdentificationForm.controls.manufacturer.reset();
         this.washingMachineIdentificationForm.controls.modelAndType.reset();
         this.washingMachineIdentificationForm.controls.serialNumber.reset();
-
         this.washingMachineIdentificationForm.controls.identificationMode.reset();
-        this.disableDataFields_WHEN_QRCodeIsSelected();
       }
     });
   }
