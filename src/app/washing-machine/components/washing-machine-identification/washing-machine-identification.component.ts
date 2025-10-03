@@ -21,29 +21,27 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { CommonModule } from '@angular/common';
+
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { ProductDataService } from 'src/app/services/product-data.service';
 
 @Component({
-    selector: 'app-washing-machine-identification',
-    templateUrl: './washing-machine-identification.component.html',
-    styleUrls: ['./washing-machine-identification.component.scss'],
-    imports: [
-      MatCardModule,
-      MatButtonToggleModule,
-      MatButtonModule,
-      MatIconModule,
-      MatTooltipModule,
-      MatFormFieldModule,
-      MatInputModule,
-      MatSelectModule,
-
-      CommonModule,
-      ReactiveFormsModule,
-      TranslocoModule,
-      StepperButtonsDirective
-    ]
+  selector: 'app-washing-machine-identification',
+  templateUrl: './washing-machine-identification.component.html',
+  styleUrls: ['./washing-machine-identification.component.scss'],
+  imports: [
+    MatCardModule,
+    MatButtonToggleModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    TranslocoModule,
+    StepperButtonsDirective
+  ]
 })
 export class WashingMachineIdentificationComponent implements OnInit, OnDestroy {
   private stepper = inject(MatStepper);

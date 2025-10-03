@@ -7,23 +7,21 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { WashingMachineDetail } from '../../models/washing-machine-detail.model';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
+
 import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 
 @Component({
-    selector: 'app-washing-machine-overview',
-    templateUrl: './washing-machine-overview.component.html',
-    styleUrls: ['./washing-machine-overview.component.scss'],
-    imports: [
-      MatButtonModule,
-      MatStepperModule, // for the directive matStepperPrevious
-
-      CommonModule,
-      TranslocoModule,
-      ToLabelPipe,
-      StepperButtonsDirective
-    ]
+  selector: 'app-washing-machine-overview',
+  templateUrl: './washing-machine-overview.component.html',
+  styleUrls: ['./washing-machine-overview.component.scss'],
+  imports: [
+    MatButtonModule,
+    MatStepperModule,
+    TranslocoModule,
+    ToLabelPipe,
+    StepperButtonsDirective
+  ]
 })
 export class WashingMachineOverviewComponent {
   private stepper = inject(MatStepper);

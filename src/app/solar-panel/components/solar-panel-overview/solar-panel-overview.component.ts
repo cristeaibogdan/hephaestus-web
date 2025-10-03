@@ -1,7 +1,7 @@
 import { Component, Signal, inject } from '@angular/core';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { SolarPanelService } from '../../services/solar-panel.service';
-import { CommonModule } from '@angular/common';
+
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,13 +16,11 @@ import { SolarPanelDamage } from '../../models/solar-panel-damage.model';
   styleUrls: ['./solar-panel-overview.component.scss'],
   imports: [
     MatButtonModule,
-    MatStepperModule, // for the directive matStepperPrevious
-    
-    CommonModule,
+    MatStepperModule,
     TranslocoModule,
     ReactiveFormsModule,
     StepperButtonsDirective
-  ]
+]
 })
 export class SolarPanelOverviewComponent {
   private stepper = inject(MatStepper);
