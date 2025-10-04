@@ -24,6 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { ProductDataService } from 'src/app/services/product-data.service';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-washing-machine-identification',
@@ -54,15 +55,19 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
   private serialNumberValidator = inject(SerialNumberValidator);
   
   ngOnInit(): void {
-    this.populateDataMatrix_Manufacturer_Field(this.washingMachineIdentificationForm.controls.category.value);
+    this.populateManufacturerField();
 
-    this.washingMachineIdentificationForm.controls.manufacturer.valueChanges.subscribe(value => {
-      this.populateDataMatrix_Model_Type_Fields(value);
-    });
+    // Does not clear availableType and availableModel arrays.
+    // this.washingMachineIdentificationForm.controls.manufacturer.valueChanges.subscribe(value => {
+    //   this.populateModelAndTypeFields(value);
+    // });
 
-    // DISABLE/ENABLE manufacturer and modelAndType based on identificationMode's value.
+    this.toggleManufacturerModelAndTypeControlsBasedOnIdentificationMode();
+  }
+
+  private toggleManufacturerModelAndTypeControlsBasedOnIdentificationMode() {
     this.washingMachineIdentificationForm.controls.identificationMode.valueChanges.subscribe(value => {
-      if(value === IdentificationMode.QR_CODE) {
+      if (value === IdentificationMode.QR_CODE) {
         this.washingMachineIdentificationForm.controls.manufacturer.disable();
         this.washingMachineIdentificationForm.controls.modelAndType.disable();
       } else {
@@ -173,7 +178,7 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
   }
   
   onReset(e:Event): void {
-    e.preventDefault(); // Prevent the default behavior. The disabled input will not appear empty and will preserve its value   
+    e.preventDefault(); // Prevent the default behavior. The disabled input will not appear empty and will preserve its value 
     this.clearAvailableModelsAndTypes();
     this._washingMachineService.resetWashingMachineIdentification();
   }
@@ -191,17 +196,14 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
     this.availableTypes = [];
   }
 
-  populateDataMatrix_Manufacturer_Field(category: string): void {   
-    this._productDataService.getManufacturers(category).subscribe(response => {
+  private populateManufacturerField(): void {
+    this._productDataService.getManufacturers(this.washingMachineIdentificationForm.controls.category.value).subscribe(response => {
       this.availableManufacturers = response;
-    });  
+    });
   }
 
-  populateDataMatrix_Model_Type_Fields(manufacturer: string): void {  
-
-    // Do not execute a request if manufacturer is empty.
-    // Happens when form is reset
-    if (manufacturer === "") {
+  populateModelAndTypeFields(manufacturer: string): void {
+    if (manufacturer === "") { // Do not execute a request if manufacturer is empty. Happens when form is reset.
       return;
     }
 
@@ -214,11 +216,6 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
         this.availableTypes.push(getModelAndTypeResponse.type);
       });
     });
-    
-    // Need to reset values, when you repopulate the models and types arrays
-    // the option doesn't appear in the select input BUT it's saved in the productForm 
-    // causing the controls to be valid
-    this.washingMachineIdentificationForm.controls.modelAndType.reset();
   }
 }
 
