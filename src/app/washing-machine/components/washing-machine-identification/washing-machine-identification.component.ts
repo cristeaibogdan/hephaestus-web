@@ -60,14 +60,14 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
       this.populateDataMatrix_Model_Type_Fields(value);
     });
 
-    // DISABLE / ENABLE manufacturer and modelAndType based on identificationMode's value.
+    // DISABLE/ENABLE manufacturer and modelAndType based on identificationMode's value.
     this.washingMachineIdentificationForm.controls.identificationMode.valueChanges.subscribe(value => {
-      this.washingMachineIdentificationForm.controls.manufacturer.enable();
-      this.washingMachineIdentificationForm.controls.modelAndType.enable();
-
       if(value === IdentificationMode.QR_CODE) {
         this.washingMachineIdentificationForm.controls.manufacturer.disable();
         this.washingMachineIdentificationForm.controls.modelAndType.disable();
+      } else {
+        this.washingMachineIdentificationForm.controls.manufacturer.enable();
+        this.washingMachineIdentificationForm.controls.modelAndType.enable();
       }
     });
   }
