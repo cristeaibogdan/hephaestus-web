@@ -138,12 +138,12 @@ export class WashingMachineDamageComponent {
 
   onSubmit(): void {
     if(this.selectedImages.value.length === 0) {
-      this._notifService.showError("At least one image must be uploaded", 0);
+      this._notifService.showError("At least one image must be uploaded");
       return;
     }
 
     if(this.washingMachineDetailForm.invalid) {
-      this._notifService.showError("At least one applicable damage must be selected", 0);
+      this._notifService.showError("At least one applicable damage must be selected");
       return;
     }
 

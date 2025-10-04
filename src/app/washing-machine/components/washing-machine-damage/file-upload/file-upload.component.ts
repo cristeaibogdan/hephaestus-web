@@ -48,7 +48,7 @@ export class FileUploadComponent {
     // 1. Validate file length
     const totalFilesCount = this.selectedImages.value.length + files.length;
     if (totalFilesCount > 3) {
-      this._notifService.showError(this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_LIMIT"),0);
+      this._notifService.showError(this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_LIMIT"));
       return;
     }
       
@@ -60,7 +60,7 @@ export class FileUploadComponent {
         this._notifService.showError(
           this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_FILE")
           +" "+uploadedFile.name+" "+
-          this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_EXTENSION_TEXT"),0);
+          this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_EXTENSION_TEXT"));
         return;
       }
       
@@ -69,7 +69,7 @@ export class FileUploadComponent {
         this._notifService.showError(
           this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_FILE")
           +" "+uploadedFile.name+" "+
-          this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_SIZE_TEXT"),0);
+          this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_SIZE_TEXT"));
         return;
       }
             

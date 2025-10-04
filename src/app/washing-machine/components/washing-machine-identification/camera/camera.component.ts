@@ -150,7 +150,7 @@ export class CameraComponent implements AfterViewInit {
 
     if(backCameraIndex > 0) {
       this.cameraIndex = backCameraIndex;
-      this._notifService.showSuccess("back camera index = " + backCameraIndex, 0);
+      this._notifService.showSuccess("back camera index = " + backCameraIndex);
     }
   }
 
@@ -172,7 +172,7 @@ export class CameraComponent implements AfterViewInit {
 
     // 0. Validate file extension
     if(this.invalidFileExtension(uploadedFile.name)) {
-      return this._notifService.showError("File "+ uploadedFile.name +" is not supported. Only jpg, jpeg, png and bmp extensions are supported.",0);
+      return this._notifService.showError("File "+ uploadedFile.name +" is not supported. Only jpg, jpeg, png and bmp extensions are supported.");
     }
 
     // 1. Get the image and generate an URL for it 
@@ -190,7 +190,7 @@ export class CameraComponent implements AfterViewInit {
     try {
       resultFromQRCode = (await codeReader.decodeFromImageUrl(ɵunwrapSafeValue(handledFile.url))).getText();
     } catch (error) {
-      return this._notifService.showError("Unsupported Code. Only QR Codes are supported", 0);
+      return this._notifService.showError("Unsupported Code. Only QR Codes are supported");
     }
 
     // 3. Retrieve productIdentification   
@@ -219,12 +219,12 @@ export class CameraComponent implements AfterViewInit {
     if(qrCode.startsWith("hephaestus-washing-machine-")) {
       this._productDataService.getProductIdentification(qrCode).subscribe(response => {
         this.result = response;
-        this._notifService.showSuccess("QR code succesfully identified!", 0);
+        this._notifService.showSuccess("QR code succesfully identified!");
       });
       return;
     }
 
-    this._notifService.showError("The QR code does not belong to a supported washing machine. Scanned result: " + qrCode, 0);    
+    this._notifService.showError("The QR code does not belong to a supported washing machine. Scanned result: " + qrCode);    
   }
 
   uploadHelp: string = "* Only images with QR codes are supported. \n ** Only images with png, jpg, jpeg and bmp extension are supported";

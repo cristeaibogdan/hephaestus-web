@@ -59,7 +59,7 @@ export class SolarPanelDamageComponent {
 
   onSubmit() {
     if(this.solarPanelDamageForm.invalid) {
-      this._notificationService.showError("At least one damage type has to be selected", 0);
+      this._notificationService.showError("At least one damage type has to be selected");
       return;
     }
 

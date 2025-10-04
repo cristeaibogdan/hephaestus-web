@@ -50,7 +50,7 @@ export class WashingMachineDataSource extends DataSource<GetWashingMachineFullRe
       next: response => {
 
         if(response.content.length == 0) {
-          this._notifService.showWarning(this._translocoService.translate("I18N.GENERAL_ERROR.EMPTY_PAGE"), 0);
+          this._notifService.showWarning(this._translocoService.translate("I18N.GENERAL_ERROR.EMPTY_PAGE"));
         }
 
         this.washingMachines.set(response.content);
