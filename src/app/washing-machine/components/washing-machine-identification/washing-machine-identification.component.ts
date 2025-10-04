@@ -24,7 +24,6 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { ProductDataService } from 'src/app/services/product-data.service';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-washing-machine-identification',
@@ -136,6 +135,7 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
 
       if(result) {
         this.washingMachineIdentificationForm.controls.manufacturer.setValue(result.manufacturer);
+        this.populateModelAndTypeFields(result.manufacturer); // necessary to properly update the fields model and type in the UI when QR code is identified.
         this.washingMachineIdentificationForm.controls.modelAndType.controls.model.setValue(result.model);
         this.washingMachineIdentificationForm.controls.modelAndType.controls.type.setValue(result.type);        
       } else {
@@ -178,7 +178,12 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
   }
   
   onReset(e:Event): void {
-    e.preventDefault(); // Prevent the default behavior. The disabled input will not appear empty and will preserve its value 
+    /*
+      e.preventDefault(); Prevents the default browser behavior for the event, 
+      which is typically the form submission or a button's default action. 
+      The disabled input (manufacturer) will not appear empty and will preserve its value when reset. 
+    */
+    e.preventDefault();
     this.clearAvailableModelsAndTypes();
     this._washingMachineService.resetWashingMachineIdentification();
   }
@@ -203,10 +208,6 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
   }
 
   populateModelAndTypeFields(manufacturer: string): void {
-    if (manufacturer === "") { // Do not execute a request if manufacturer is empty. Happens when form is reset.
-      return;
-    }
-
     this._productDataService.getModelsAndTypes(manufacturer).subscribe(response => {    
 
       this.clearAvailableModelsAndTypes();
