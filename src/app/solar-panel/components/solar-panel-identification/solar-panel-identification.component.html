@@ -10,7 +10,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>{{"I18N.COMMON.MANUFACTURER" | transloco}}</mat-label>        
-        <mat-select formControlName="manufacturer" (valueChange)="getModelsAndTypes($event)">
+        <mat-select formControlName="manufacturer" (valueChange)="populateModelAndTypeFields($event)">
 
           @for (manufacturer of availableManufacturers; track manufacturer) {
             <mat-option [value]="manufacturer">{{manufacturer}}</mat-option>

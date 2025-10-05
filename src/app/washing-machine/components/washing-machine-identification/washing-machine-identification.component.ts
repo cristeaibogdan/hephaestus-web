@@ -215,6 +215,21 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
         this.availableTypes.push(getModelAndTypeResponse.type);
       });
     });
+
+    /* 
+    Need to reset values, when you repopulate the models and types arrays
+    the option doesn't appear in the select input BUT it's saved in the form 
+    causing the controls to be valid. 
+    To reproduce:
+      1. Select manufacturer
+      2. Select model
+      3. Select a different manufacturer
+      4. Don't touch model / type
+      5. Type serialNumber and fill in the other fields
+      6. Click Next
+      7. Notice you are allowed to move to the next step.
+    */
+    this.washingMachineIdentificationForm.controls.modelAndType.reset();
   }
 }
 
