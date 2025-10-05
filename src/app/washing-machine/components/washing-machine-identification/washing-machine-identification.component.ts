@@ -5,7 +5,6 @@ import { CameraComponent } from './camera/camera.component';
 import { CustomValidators } from '../../../shared/validators/custom.validators';
 import { WashingMachineIdentification } from 'src/app/washing-machine/models/washing-machine-identification.model';
 import { WashingMachineService } from '../../services/washing-machine.service';
-import { WashingMachineDataService } from '../../services/washing-machine.data.service';
 import { ReturnType } from '../../enums/return-type.enum';
 import { DamageType } from '../../enums/damage-type.enum';
 import { IdentificationMode } from '../../enums/identification-mode.enum';
@@ -46,7 +45,6 @@ import { ProductDataService } from 'src/app/services/product-data.service';
 export class WashingMachineIdentificationComponent implements OnInit, OnDestroy {
   private stepper = inject(MatStepper);
   private _washingMachineService =  inject(WashingMachineService);
-  private _washingMachineDataService = inject(WashingMachineDataService);
   private _productDataService = inject(ProductDataService);
   private dialog = inject(MatDialog);
   private fb = inject(NonNullableFormBuilder);
@@ -62,18 +60,6 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
     // });
 
     this.toggleManufacturerModelAndTypeControlsBasedOnIdentificationMode();
-  }
-
-  private toggleManufacturerModelAndTypeControlsBasedOnIdentificationMode() {
-    this.washingMachineIdentificationForm.controls.identificationMode.valueChanges.subscribe(value => {
-      if (value === IdentificationMode.QR_CODE) {
-        this.washingMachineIdentificationForm.controls.manufacturer.disable();
-        this.washingMachineIdentificationForm.controls.modelAndType.disable();
-      } else {
-        this.washingMachineIdentificationForm.controls.manufacturer.enable();
-        this.washingMachineIdentificationForm.controls.modelAndType.enable();
-      }
-    });
   }
 
   ngOnDestroy(): void {
@@ -122,6 +108,18 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
     );
 
     this.washingMachineIdentificationForm.controls.damageType.reset();
+  }
+  
+  private toggleManufacturerModelAndTypeControlsBasedOnIdentificationMode(): void {
+    this.washingMachineIdentificationForm.controls.identificationMode.valueChanges.subscribe(value => {
+      if (value === IdentificationMode.QR_CODE) {
+        this.washingMachineIdentificationForm.controls.manufacturer.disable();
+        this.washingMachineIdentificationForm.controls.modelAndType.disable();
+      } else {
+        this.washingMachineIdentificationForm.controls.manufacturer.enable();
+        this.washingMachineIdentificationForm.controls.modelAndType.enable();
+      }
+    });
   }
 
   // TODO: refactor methods related to camera
