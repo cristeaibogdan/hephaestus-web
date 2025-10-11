@@ -42,8 +42,7 @@
        
     <mat-form-field class="normal-span" appearance="fill" formGroupName="modelAndType">
       <mat-label>{{"I18N.COMMON.MODEL" | transloco}}</mat-label>
-      <mat-select formControlName="model">
-        
+      <mat-select formControlName="model">        
         @for (model of availableModels; track model) {
           <mat-option [value]="model">{{model}}</mat-option>
         }
@@ -54,7 +53,6 @@
     <mat-form-field class="normal-span" appearance="fill" formGroupName="modelAndType">
       <mat-label>{{"I18N.COMMON.TYPE" | transloco}}</mat-label>
       <mat-select formControlName="type">
-
         @for (type of availableTypes; track type) {
           <mat-option [value]="type">{{type}}</mat-option>
         }
@@ -151,8 +149,8 @@
 
 <!-- <pre> ====== FORM ======
   {{washingMachineIdentificationForm.getRawValue() | json}}
-  AvailableModels = {{availableModels}}
-  AvailableTypes = {{availableTypes}}
+  AvailableModels = {{availableModels | json}}
+  AvailableTypes = {{availableTypes | json}}
 </pre> -->
 
 <!-- <pre> ====== SERVICE ======

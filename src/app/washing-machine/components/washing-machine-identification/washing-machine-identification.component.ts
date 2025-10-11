@@ -20,9 +20,9 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { ProductDataService } from 'src/app/services/product-data.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-washing-machine-identification',
@@ -50,16 +50,31 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
   private fb = inject(NonNullableFormBuilder);
             
   private serialNumberValidator = inject(SerialNumberValidator);
+
+  constructor() {
+    /**
+     * Subscriptions should be put inside the constructor so you can use takeUntilDestroyed()
+     */
+    this.toggleManufacturerModelAndTypeControlsBasedOnIdentificationMode();
+  }
   
   ngOnInit(): void {
     this.populateManufacturerField();
 
-    // Does not clear availableType and availableModel arrays.
+    /** Does not clear availableType and availableModel arrays from the inputs. 
+     * Before reproducing make sure this method is enabled and remove (selectionChange)="populateModelAndTypeFields($event.value)
+     * from the html template.
+     * To reproduce:
+        1. Select manufacturer
+        2. Select model
+        3. Click Reset
+        4. Select model / type
+        5. Notice you still have available options in the input.
+        Another bug is that populateModelAndTypeFields is called twice when you click reset.
+     */
     // this.washingMachineIdentificationForm.controls.manufacturer.valueChanges.subscribe(value => {
     //   this.populateModelAndTypeFields(value);
     // });
-
-    this.toggleManufacturerModelAndTypeControlsBasedOnIdentificationMode();
   }
 
   ngOnDestroy(): void {
@@ -109,17 +124,31 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
 
     this.washingMachineIdentificationForm.controls.damageType.reset();
   }
-  
+  // TODO: Use .pipe(takeUntilDestroyed()) for all forms that use valueChanges subscriptions
   private toggleManufacturerModelAndTypeControlsBasedOnIdentificationMode(): void {
-    this.washingMachineIdentificationForm.controls.identificationMode.valueChanges.subscribe(value => {
-      if (value === IdentificationMode.QR_CODE) {
-        this.washingMachineIdentificationForm.controls.manufacturer.disable();
-        this.washingMachineIdentificationForm.controls.modelAndType.disable();
-      } else {
-        this.washingMachineIdentificationForm.controls.manufacturer.enable();
-        this.washingMachineIdentificationForm.controls.modelAndType.enable();
-      }
-    });
+    this.washingMachineIdentificationForm.controls.identificationMode.valueChanges
+      .pipe(takeUntilDestroyed()) // Only works inside the constructor, reason why I moved it from onInit(). 
+      .subscribe(value => {
+        if (value === IdentificationMode.QR_CODE) {
+          this.washingMachineIdentificationForm.controls.manufacturer.disable();
+          this.washingMachineIdentificationForm.controls.modelAndType.disable();
+        } else {
+          this.washingMachineIdentificationForm.controls.manufacturer.enable();
+          this.washingMachineIdentificationForm.controls.modelAndType.enable();
+        }
+      });
+
+    /**
+     * Use this console log to see if subscriptions have been closed. 
+     * You get the sub by creating a variable to hold it: const sub = this.sadkajsda.valueChanges.subscribe()
+     * Navigation away from the component should have isStopped: true if the subscription was properly closed.
+     * Additionally, you can use a random to show people that you can have multiple active subs active, 
+     * when navigating away without unsubscribing.
+     */
+    // const id = Math.random();
+    // setInterval(() => {
+    //   console.log("id = ", id, "sub = ", sub);
+    // }, 1_000);
   }
 
   // TODO: refactor methods related to camera
@@ -130,7 +159,6 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
 
     dialogRef.afterClosed().subscribe((result: GetProductIdentificationResponse) => {
       // console.log("result from window = ", result);
-
       if(result) {
         this.washingMachineIdentificationForm.controls.manufacturer.setValue(result.manufacturer);
         this.populateModelAndTypeFields(result.manufacturer); // necessary to properly update the fields model and type in the UI when QR code is identified.
@@ -219,7 +247,6 @@ export class WashingMachineIdentificationComponent implements OnInit, OnDestroy 
         6. Click Next
         7. Notice you are allowed to move to the next step.
     */
-    this.washingMachineIdentificationForm.controls.modelAndType.reset();
     this.clearAvailableModelsAndTypes();
 
     this._productDataService.getModelsAndTypes(manufacturer).subscribe(response => {
