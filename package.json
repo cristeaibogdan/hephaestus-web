@@ -25,7 +25,7 @@
     "@jufab/opentelemetry-angular-interceptor": "^1.9.0",
     "@zxing/browser": "0.1.5",
     "@zxing/library": "0.21.0",
-    "@zxing/ngx-scanner": "19.0.0",
+    "@zxing/ngx-scanner": "20.0.0",
     "ajv": "^8.8.2",
     "date-fns": "^4.1.0",
     "rxjs": "~7.5.0",
