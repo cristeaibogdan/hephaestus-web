@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SerialNumberValidator } from 'src/app/shared/validators/async-validators/serial-number.validator';
 import { CustomValidators } from 'src/app/shared/validators/custom.validators';
-import { SolarPanelDataService } from '../../services/solar-panel-data.service';
 import { SolarPanelIdentification } from '../../models/solar-panel-identification.model';
 import { SolarPanelService } from '../../services/solar-panel.service';
 import { MatStepper } from '@angular/material/stepper';
@@ -34,14 +33,13 @@ import { ProductDataService } from 'src/app/services/product-data.service';
 export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {  
   private stepper = inject(MatStepper);
   private fb = inject(NonNullableFormBuilder);
-  private _solarPanelDataService = inject(SolarPanelDataService);
   private _solarPanelService = inject(SolarPanelService);
   private _productDataService = inject(ProductDataService);
 
   private serialNumberValidator = inject(SerialNumberValidator); //TODO: Use async validator to check the serial number
 
   ngOnInit() {
-    this.getManufacturer(this.solarPanelForm.controls.category.value);
+    this.populateManufacturerField();
   }
 
   ngOnDestroy() {
@@ -106,34 +104,40 @@ export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
   availableModels: string[] = [];
   availableTypes: string[] = [];
 
-  clearAvailableModelsAndTypes() {
+  private clearAvailableModelsAndTypes() {
     this.availableModels = [];
     this.availableTypes = [];
   }
 
-  getManufacturer(category: string): void {   
-    this._productDataService.getManufacturers(category).subscribe(response => {
+  private populateManufacturerField(): void {   
+    this._productDataService.getManufacturers(this.solarPanelForm.controls.category.value).subscribe(response => {
       this.availableManufacturers = response;
-    });  
+    });
   }
 
-  getModelsAndTypes(manufacturer: string): void {    
-    if (manufacturer === "") {// Do not execute a request if manufacturer is empty. Happens when form is reset
-      return;
-    }
+  populateModelAndTypeFields(manufacturer: string): void {    
+    /* 
+      Need to reset values, when you repopulate the models and types arrays
+      the option doesn't appear in the select input BUT it's saved in the form 
+      causing the controls to be valid. 
+      To reproduce:
+        1. Select manufacturer
+        2. Select model
+        3. Select a different manufacturer
+        4. Don't touch model / type
+        5. Type serialNumber
+        6. Click Next
+        7. Notice you are allowed to move to the next step.
+    */
+    this.solarPanelForm.controls.modelAndType.reset();
+    this.clearAvailableModelsAndTypes();
 
     this._productDataService.getModelsAndTypes(manufacturer).subscribe(response => {
-      this.clearAvailableModelsAndTypes();
       response.forEach(getModelAndTypeResponse => {
         this.availableModels.push(getModelAndTypeResponse.model);
         this.availableTypes.push(getModelAndTypeResponse.type);
       });
     });
-
-    // Need to reset values, when you repopulate the models and types arrays
-    // the option doesn't appear in the select input BUT it's saved in the form 
-    // causing the controls to be valid
-    this.solarPanelForm.controls.modelAndType.reset();
   }
 
 }

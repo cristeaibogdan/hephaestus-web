@@ -3,6 +3,7 @@
 .mdc-tooltip {
   white-space: pre-line;
   @include mat.tooltip-overrides((
+    container-color: #228be6,
     supporting-text-size: 12px
   ));
 }

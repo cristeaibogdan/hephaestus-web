@@ -5,7 +5,7 @@ import { SolarPanelDataService } from '../../services/solar-panel-data.service';
 import { SolarPanelRecommendation } from '../../enums/solar-panel-recommendation.enum';
 import { MatButtonModule } from '@angular/material/button';
 import { SolarPanelOverviewComponent } from '../solar-panel-overview/solar-panel-overview.component';
-import { CommonModule } from '@angular/common';
+
 import { TranslocoModule } from '@jsverse/transloco';
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { RouterLink } from '@angular/router';
@@ -16,13 +16,11 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./solar-panel-recommendation.component.scss'],
   imports: [
     MatButtonModule,
-
     RouterLink,
-    CommonModule,
     TranslocoModule,
     StepperButtonsDirective,
     SolarPanelOverviewComponent
-  ]
+]
 })
 export class SolarPanelRecommendationComponent {
   private _solarPanelService = inject(SolarPanelService);

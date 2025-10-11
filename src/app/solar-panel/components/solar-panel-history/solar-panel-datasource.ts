@@ -51,7 +51,7 @@ export class SolarPanelDataSource extends DataSource<GetSolarPanelFullResponse> 
       next: response => {
         
         if(response.content.length == 0) {
-          this._notifService.showWarning(this._translocoService.translate("I18N.GENERAL_ERROR.EMPTY_PAGE"), 0);
+          this._notifService.showWarning(this._translocoService.translate("I18N.GENERAL_ERROR.EMPTY_PAGE"));
         }
 
         this.solarPanels.set(response.content);

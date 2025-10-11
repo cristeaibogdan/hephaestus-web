@@ -94,7 +94,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     };
 
     this._authDataService.register(userAccount).subscribe(() => {              
-        this._notifService.showSuccess(this._translocoService.translate("I18N.CUSTOM_SUCCESS.ACCOUNT_CREATED"),0);
+        this._notifService.showSuccess(this._translocoService.translate("I18N.CUSTOM_SUCCESS.ACCOUNT_CREATED"));
         this.goToLoginPage();
       }
     );

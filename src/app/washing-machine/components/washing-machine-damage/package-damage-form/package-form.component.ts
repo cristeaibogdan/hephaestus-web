@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, DestroyRef, Input, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -10,14 +10,12 @@ import { TranslocoModule } from '@jsverse/transloco';
 @Component({
   selector: 'app-package-form',
   imports: [
-    MatFormFieldModule,    
+    MatFormFieldModule,
     MatExpansionModule,
     MatCheckboxModule,
-    
-    CommonModule,
     ReactiveFormsModule,
     TranslocoModule
-  ],
+],
   templateUrl: './package-form.component.html',
   styleUrl: './package-form.component.scss'
 })

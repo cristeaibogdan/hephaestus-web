@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, DestroyRef, Input, OnInit, inject } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -14,16 +14,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './visible-surfaces-form.component.html',
   styleUrl: './visible-surfaces-form.component.scss',
   imports: [
-    MatFormFieldModule,    
+    MatFormFieldModule,
     MatExpansionModule,
     MatCheckboxModule,
     MatSliderModule,
     MatInputModule,
-    
-    CommonModule,
     ReactiveFormsModule,
     TranslocoModule
-  ],
+],
 })
 export class VisibleSurfacesFormComponent implements OnInit {
   @Input() applicableVisibleSurfacesDamage!: FormControl;

@@ -15,17 +15,13 @@ import { enUS } from 'date-fns/locale';
 import { provideTransloco } from '@jsverse/transloco';
 import { environment } from 'src/environments/environment';
 import { TranslocoHttpLoader } from './shared/transloco-http.loader';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { InitializationService } from './services/initialization.service';
 import { CompositePropagatorModule, OpenTelemetryInterceptorModule, ZipkinExporterModule } from '@jufab/opentelemetry-angular-interceptor';
-import { MAT_DIALOG_SCROLL_STRATEGY } from '@angular/material/dialog';
-import { NoopScrollStrategy, Overlay } from '@angular/cdk/overlay';
 
 export const appConfig: ApplicationConfig = {
   providers: [    
     provideZoneChangeDetection({ eventCoalescing: true }), 
-    provideRouter(routes), 
-    provideAnimations(),
+    provideRouter(routes),
 
     provideHttpClient(
       withInterceptors([
@@ -38,14 +34,14 @@ export const appConfig: ApplicationConfig = {
       provide: DateAdapter, 
       useClass: DateFnsAdapter 
     },
-    {
-      // Workaround: Prevents black scrollbar issue when zoom is < 100% and a MatDialog is opened
-      provide: MAT_DIALOG_SCROLL_STRATEGY,
-      useFactory: () => {
-        const overlay = inject(Overlay);
-        return () => overlay.scrollStrategies.noop();
-      }
-    },
+    // { // Workaround not needed anymore, but kept for information purposes.
+    //   // Workaround: Prevents black scrollbar issue when zoom is < 100% and a MatDialog is opened
+    //   provide: MAT_DIALOG_SCROLL_STRATEGY,
+    //   useFactory: () => {
+    //     const overlay = inject(Overlay);
+    //     return () => overlay.scrollStrategies.noop();
+    //   }
+    // },
     { provide: MAT_DATE_LOCALE, useValue: enUS },
     { // Custom translation of paginator from HistoryComponent
       provide: MatPaginatorIntl,

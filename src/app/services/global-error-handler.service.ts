@@ -23,29 +23,29 @@ export class GlobalErrorHandler extends ErrorHandler {
       if (error instanceof HttpErrorResponse) {
         switch (error.status) {
           case 0:
-            this._notifService.showError(this._translocoService.translate("I18N.GENERAL_ERROR.0"), 0);
+            this._notifService.showError(this._translocoService.translate("I18N.GENERAL_ERROR.0"));
             break;
 
           case 404:
-            this._notifService.showError(this._translocoService.translate("I18N.GENERAL_ERROR.404"), 0);
+            this._notifService.showError(this._translocoService.translate("I18N.GENERAL_ERROR.404"));
             break;
 
           case 400:
             (Array.isArray(error.error)) 
               ? this._notifService.showError(error.error.join("\n"), 0) // CUSTOM VALIDATION ERRORS FROM BACKEND
-              : this._notifService.showError(this._translocoService.translate("I18N.GENERAL_ERROR.404_DEFAULT"), 0); // GENERAL ERRORS FROM BACKEND            
+              : this._notifService.showError(this._translocoService.translate("I18N.GENERAL_ERROR.404_DEFAULT")); // GENERAL ERRORS FROM BACKEND            
             break;
 
           default: 
             (typeof error.error === "string") 
               ? this._notifService.showError(error.error, 0) // CUSTOM ERRORS FROM BACKEND
-              : this._notifService.showError(this._translocoService.translate("I18N.GENERAL_ERROR.DEFAULT"), 0); // GENERAL ERRORS FROM BACKEND
+              : this._notifService.showError(this._translocoService.translate("I18N.GENERAL_ERROR.DEFAULT")); // GENERAL ERRORS FROM BACKEND
             break;   
         }
       }
 
       if (error instanceof TimeoutError) {
-        this._notifService.showError(this._translocoService.translate("I18N.CUSTOM_ERROR.TIMEOUT"), 0);
+        this._notifService.showError(this._translocoService.translate("I18N.CUSTOM_ERROR.TIMEOUT"));
       }
     });
   }

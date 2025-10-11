@@ -15,8 +15,7 @@
         &nbsp;
       </legend>
 
-      <mat-button-toggle-group hideSingleSelectionIndicator formControlName="identificationMode"
-        (change)="disableDataFields_WHEN_QRCodeIsSelected()">
+      <mat-button-toggle-group hideSingleSelectionIndicator formControlName="identificationMode">
         <mat-button-toggle [value]="identificationMode.QR_CODE" (click)="openCameraDialog()">
           {{"I18N.PRODUCT_IDENTIFICATION.QR_CODE" | transloco}}
         </mat-button-toggle>
@@ -33,10 +32,7 @@
 
     <mat-form-field appearance="fill">
       <mat-label>{{"I18N.COMMON.MANUFACTURER" | transloco}}</mat-label>
-      <!-- I have to use ngModelChange or model and type won't be filled when i click scan on QR Code camera -->
-      <mat-select formControlName="manufacturer" 
-        (ngModelChange)="populateDataMatrix_Model_Type_Fields($event)">
-
+      <mat-select formControlName="manufacturer" (selectionChange)="populateModelAndTypeFields($event.value)">
         @for (manufacturer of availableManufacturers; track manufacturer) {
           <mat-option [value]="manufacturer">{{manufacturer}}</mat-option>
         }
@@ -46,8 +42,7 @@
        
     <mat-form-field class="normal-span" appearance="fill" formGroupName="modelAndType">
       <mat-label>{{"I18N.COMMON.MODEL" | transloco}}</mat-label>
-      <mat-select formControlName="model">
-        
+      <mat-select formControlName="model">        
         @for (model of availableModels; track model) {
           <mat-option [value]="model">{{model}}</mat-option>
         }
@@ -58,7 +53,6 @@
     <mat-form-field class="normal-span" appearance="fill" formGroupName="modelAndType">
       <mat-label>{{"I18N.COMMON.TYPE" | transloco}}</mat-label>
       <mat-select formControlName="type">
-
         @for (type of availableTypes; track type) {
           <mat-option [value]="type">{{type}}</mat-option>
         }
@@ -155,6 +149,8 @@
 
 <!-- <pre> ====== FORM ======
   {{washingMachineIdentificationForm.getRawValue() | json}}
+  AvailableModels = {{availableModels | json}}
+  AvailableTypes = {{availableTypes | json}}
 </pre> -->
 
 <!-- <pre> ====== SERVICE ======

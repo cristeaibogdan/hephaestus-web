@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, DestroyRef, Input, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -19,11 +19,9 @@ import { TranslocoModule } from '@jsverse/transloco';
     MatCheckboxModule,
     MatSliderModule,
     MatInputModule,
-    
-    CommonModule,
     ReactiveFormsModule,
     TranslocoModule
-  ],
+],
 })
 export class HiddenSurfacesFormComponent implements OnInit {
   @Input() applicableHiddenSurfacesDamage!: FormControl;

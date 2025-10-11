@@ -9,7 +9,7 @@ import { WashingMachineDetail } from '../../models/washing-machine-detail.model'
 import { TranslocoModule } from '@jsverse/transloco';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
+
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { PricingFormComponent } from './pricing-form/pricing-form.component';
 import { PackageFormComponent } from './package-damage-form/package-form.component';
@@ -24,19 +24,16 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
   imports: [
     MatCardModule,
     MatButtonModule,
-    MatStepperModule, // for the directive matStepperPrevious
-
-    CommonModule,
+    MatStepperModule,
     TranslocoModule,
     ReactiveFormsModule,
     StepperButtonsDirective,
-
     FileUploadComponent,
     PackageFormComponent,
     VisibleSurfacesFormComponent,
     HiddenSurfacesFormComponent,
-    PricingFormComponent,
-  ]
+    PricingFormComponent
+]
 })
 export class WashingMachineDamageComponent {  
   private stepper = inject(MatStepper);
@@ -141,12 +138,12 @@ export class WashingMachineDamageComponent {
 
   onSubmit(): void {
     if(this.selectedImages.value.length === 0) {
-      this._notifService.showError("At least one image must be uploaded", 0);
+      this._notifService.showError("At least one image must be uploaded");
       return;
     }
 
     if(this.washingMachineDetailForm.invalid) {
-      this._notifService.showError("At least one applicable damage must be selected", 0);
+      this._notifService.showError("At least one applicable damage must be selected");
       return;
     }
 
