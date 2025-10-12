@@ -1,4 +1,3 @@
-
 import { Component, DestroyRef, Input, OnInit, inject } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -32,28 +31,31 @@ export class VisibleSurfacesFormComponent implements OnInit {
   majorDamageDescriptionCharacterLimit:number = 200;
   
   ngOnInit(): void {
-    // 1. If false from the start, reset and disable visibleSurfacesForm
+    // If false from the start, reset and disable visibleSurfacesForm
     if(!this.applicableVisibleSurfacesDamage.value) {
       this.visibleSurfacesForm.reset();
       this.visibleSurfacesForm.disable({emitEvent: false});
     }
 
-    // 2. On every value change enable, reset and disable accordingly
-    this.applicableVisibleSurfacesDamage.valueChanges.pipe(
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe(value=> {
-      if(value) {
-        this.visibleSurfacesForm.controls.hasScratches.enable({emitEvent: false});
-        this.visibleSurfacesForm.controls.hasDents.enable({emitEvent: false});
-        this.visibleSurfacesForm.controls.hasMinorDamage.enable({emitEvent: false});
-        this.visibleSurfacesForm.controls.hasMajorDamage.enable({emitEvent: false});
-      } else {
-        this.visibleSurfacesForm.reset();
-        this.visibleSurfacesForm.disable({emitEvent: false});
-      }
-    });
+    this.toggleVisibleSurfacesFormBasedOnApplicableVisibleSurfacesDamage();
   }
   
+  private toggleVisibleSurfacesFormBasedOnApplicableVisibleSurfacesDamage() {
+    this.applicableVisibleSurfacesDamage.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(value => {
+        if (value) {
+          this.visibleSurfacesForm.controls.hasScratches.enable({ emitEvent: false });
+          this.visibleSurfacesForm.controls.hasDents.enable({ emitEvent: false });
+          this.visibleSurfacesForm.controls.hasMinorDamage.enable({ emitEvent: false });
+          this.visibleSurfacesForm.controls.hasMajorDamage.enable({ emitEvent: false });
+        } else {
+          this.visibleSurfacesForm.reset();
+          this.visibleSurfacesForm.disable({ emitEvent: false });
+        }
+      });
+  }
+
 // **********************************
 // *** DAMAGE TOGGLES
 // **********************************

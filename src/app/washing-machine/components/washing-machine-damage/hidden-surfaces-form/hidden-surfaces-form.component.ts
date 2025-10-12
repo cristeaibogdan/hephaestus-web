@@ -32,24 +32,27 @@ export class HiddenSurfacesFormComponent implements OnInit {
   majorDamageDescriptionCharacterLimit:number = 200;
 
   ngOnInit(): void {
-    // 1. If false from the start, reset and disable hiddenSurfacesForm
+    // If false from the start, reset and disable hiddenSurfacesForm
     if(!this.applicableHiddenSurfacesDamage.value) {
       this.hiddenSurfacesForm.reset();
       this.hiddenSurfacesForm.disable({emitEvent: false});
     }
 
-    // 2. On every value change enable, reset and disable accordingly
+    this.toggleHiddenSurfacesFormBasedOnApplicableHiddenSurfacesDamage();
+  }
+
+  private toggleHiddenSurfacesFormBasedOnApplicableHiddenSurfacesDamage() {
     this.applicableHiddenSurfacesDamage.valueChanges.pipe(
       takeUntilDestroyed(this.destroyRef)
-    ).subscribe(value=> {
-      if(value) {
-        this.hiddenSurfacesForm.controls.hasScratches.enable({emitEvent: false});
-        this.hiddenSurfacesForm.controls.hasDents.enable({emitEvent: false});
-        this.hiddenSurfacesForm.controls.hasMinorDamage.enable({emitEvent: false});
-        this.hiddenSurfacesForm.controls.hasMajorDamage.enable({emitEvent: false});
+    ).subscribe(value => {
+      if (value) {
+        this.hiddenSurfacesForm.controls.hasScratches.enable({ emitEvent: false });
+        this.hiddenSurfacesForm.controls.hasDents.enable({ emitEvent: false });
+        this.hiddenSurfacesForm.controls.hasMinorDamage.enable({ emitEvent: false });
+        this.hiddenSurfacesForm.controls.hasMajorDamage.enable({ emitEvent: false });
       } else {
         this.hiddenSurfacesForm.reset();
-        this.hiddenSurfacesForm.disable({emitEvent: false});
+        this.hiddenSurfacesForm.disable({ emitEvent: false });
       }
     });
   }
