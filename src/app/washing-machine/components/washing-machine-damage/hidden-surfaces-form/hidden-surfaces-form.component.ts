@@ -42,19 +42,19 @@ export class HiddenSurfacesFormComponent implements OnInit {
   }
 
   private toggleHiddenSurfacesFormBasedOnApplicableHiddenSurfacesDamage() {
-    this.applicableHiddenSurfacesDamage.valueChanges.pipe(
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe(value => {
-      if (value) {
-        this.hiddenSurfacesForm.controls.hasScratches.enable({ emitEvent: false });
-        this.hiddenSurfacesForm.controls.hasDents.enable({ emitEvent: false });
-        this.hiddenSurfacesForm.controls.hasMinorDamage.enable({ emitEvent: false });
-        this.hiddenSurfacesForm.controls.hasMajorDamage.enable({ emitEvent: false });
-      } else {
-        this.hiddenSurfacesForm.reset();
-        this.hiddenSurfacesForm.disable({ emitEvent: false });
-      }
-    });
+    this.applicableHiddenSurfacesDamage.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(value => {
+        if (value) {
+          this.hiddenSurfacesForm.controls.hasScratches.enable({ emitEvent: false });
+          this.hiddenSurfacesForm.controls.hasDents.enable({ emitEvent: false });
+          this.hiddenSurfacesForm.controls.hasMinorDamage.enable({ emitEvent: false });
+          this.hiddenSurfacesForm.controls.hasMajorDamage.enable({ emitEvent: false });
+        } else {
+          this.hiddenSurfacesForm.reset();
+          this.hiddenSurfacesForm.disable({ emitEvent: false });
+        }
+      });
   }
 
 // ********************************
