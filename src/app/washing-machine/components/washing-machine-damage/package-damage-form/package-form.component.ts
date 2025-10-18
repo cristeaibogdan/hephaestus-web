@@ -5,6 +5,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TranslocoModule } from '@jsverse/transloco';
+import { combineLatest, merge } from 'rxjs';
 
 @Component({
   selector: 'app-package-form',
@@ -48,16 +49,36 @@ export class PackageFormComponent implements OnInit {
       });
   }
 
+  // Alternative: Using valueChanges on damaged and dirty control together with combine latest.
   private togglePackageMaterialAvailableBasedOnDamagedOrDirty() {
-    this.packageForm.valueChanges
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(value => {
-        if (value.damaged || value.dirty) {
-          this.packageForm.controls.packageMaterialAvailable.enable({ emitEvent: false });
-        } else {
-          this.packageForm.controls.packageMaterialAvailable.setValue(false, { emitEvent: false });
-          this.packageForm.controls.packageMaterialAvailable.disable({ emitEvent: false });
-        }
-      });
+    const damaged$ = this.packageForm.controls.damaged.valueChanges;
+    const dirty$ = this.packageForm.controls.dirty.valueChanges;
+
+    merge(damaged$, dirty$)
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe((value) => {
+      if (value) {
+        this.packageForm.controls.packageMaterialAvailable.enable();
+      } else {
+        this.packageForm.controls.packageMaterialAvailable.setValue(false);
+        this.packageForm.controls.packageMaterialAvailable.disable();
+      }
+    });
   }
+
+  // Alternative to document: Usage of distinctUntilChange(). 
+  
+  // Alternative old: valueChanges
+  // private togglePackageMaterialAvailableBasedOnDamagedOrDirty() {
+  //   this.packageForm.valueChanges
+  //     .pipe(takeUntilDestroyed(this.destroyRef))
+  //     .subscribe(value => {
+  //       if (value.damaged || value.dirty) {
+  //         this.packageForm.controls.packageMaterialAvailable.enable({ emitEvent: false });
+  //       } else {
+  //         this.packageForm.controls.packageMaterialAvailable.setValue(false, { emitEvent: false });
+  //         this.packageForm.controls.packageMaterialAvailable.disable({ emitEvent: false });
+  //       }
+  //     });
+  // }
 }
