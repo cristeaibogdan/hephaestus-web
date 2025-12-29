@@ -2,7 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { firstValueFrom, switchMap } from 'rxjs';
 import { SolarPanelIdentification } from '../models/solar-panel-identification.model';
 import { SolarPanelDataService } from './solar-panel-data.service';
-import { CreateSolarPanelRequest } from '../models/dtos/create-solar-panel.request';
+import { CreateSolarPanelRequest } from "../models/endpoints/create-solar-panel.endpoint";
 import { SolarPanelRecommendation } from '../enums/solar-panel-recommendation.enum';
 import { SolarPanelDamage } from '../models/solar-panel-damage.model';
 

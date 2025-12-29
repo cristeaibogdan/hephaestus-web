@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { TranslocoModule } from '@jsverse/transloco';
-import { GetSolarPanelFullResponse } from 'src/app/solar-panel/models/dtos/get-solar-panel-full.response';
+import { GetSolarPanelFullResponse } from "src/app/solar-panel/models/endpoints/get-solar-panel-full.endpoint";
 import { SolarPanelDataService } from 'src/app/solar-panel/services/solar-panel-data.service';
 
 @Component({
