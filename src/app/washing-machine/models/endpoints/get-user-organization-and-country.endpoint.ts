@@ -1,4 +1,4 @@
 export interface GetOrganizationAndCountryResponse {
-  organization:string,
-  country:string
+  organization: string;
+  country: string;
 }

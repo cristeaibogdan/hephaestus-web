@@ -2,12 +2,12 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment'
 import { Page } from '../../shared/models/page.model';
-import { SearchWashingMachineRequest } from '../models/dtos/search-washing-machine.request';
-import { GetWashingMachineReportResponse } from '../models/dtos/get-washing-machine-report.response';
+import { SearchWashingMachineRequest } from '../models/endpoints/search-washing-machine.endpoint';
+import { GetWashingMachineReportResponse } from "../models/endpoints/get-washing-machine-report.endpoint";
 import { Recommendation } from '../enums/recommendation.enum';
-import { SearchWashingMachineResponse } from '../models/dtos/search-washing-machine.response';
+import { SearchWashingMachineResponse } from '../models/endpoints/search-washing-machine.endpoint';
 import { Observable } from 'rxjs';
-import { GetWashingMachineFullResponse } from '../models/dtos/get-washing-machine-full.response';
+import { GetWashingMachineFullResponse } from '../models/endpoints/get-washing-machine-full.endpoint';
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineDataService {

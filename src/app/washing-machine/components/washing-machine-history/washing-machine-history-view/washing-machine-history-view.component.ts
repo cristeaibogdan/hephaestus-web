@@ -5,7 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { TranslocoModule } from '@jsverse/transloco';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
-import { GetWashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/get-washing-machine-full.response';
+import { GetWashingMachineFullResponse } from 'src/app/washing-machine/models/endpoints/get-washing-machine-full.endpoint';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 
 @Component({
