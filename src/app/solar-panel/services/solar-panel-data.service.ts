@@ -43,7 +43,7 @@ export class SolarPanelDataService {
 //**************************************
 
   search(searchSolarPanelRequest: SearchSolarPanelRequest): Observable<Page<SearchSolarPanelResponse>> {
-    const url = this.apiURL.concat("/v1/solar-panels");
+    const url = this.apiURL.concat("/v1/solar-panels/search");
     return this.http.post<Page<SearchSolarPanelResponse>>(url, searchSolarPanelRequest);
   }
 

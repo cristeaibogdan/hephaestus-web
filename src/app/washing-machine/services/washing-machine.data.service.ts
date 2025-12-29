@@ -47,7 +47,7 @@ export class WashingMachineDataService {
 //**************************************
 
   search(searchWashingMachineRequest: SearchWashingMachineRequest): Observable<Page<SearchWashingMachineResponse>> {
-    const url = this.apiURL.concat("/v1/washing-machines");
+    const url = this.apiURL.concat("/v1/washing-machines/search");
     const payload = searchWashingMachineRequest;
     return this.http.post<Page<SearchWashingMachineResponse>>(url, payload);
   }
