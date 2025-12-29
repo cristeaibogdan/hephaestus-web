@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, HostListener, ViewChild, inject } from '@angular/core';
 import { MatSort, MatSortModule } from '@angular/material/sort';
-import { SearchWashingMachineRequest } from '../../models/dtos/search-washing-machine.request';
+import { SearchWashingMachineRequest } from '../../models/endpoints/search-washing-machine.endpoint';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { WashingMachineDataService } from 'src/app/washing-machine/services/washing-machine.data.service';
 import { ReturnType } from 'src/app/washing-machine/enums/return-type.enum';
 import { DamageType } from 'src/app/washing-machine/enums/damage-type.enum';
 import { IdentificationMode } from 'src/app/washing-machine/enums/identification-mode.enum';
 import { Recommendation } from 'src/app/washing-machine/enums/recommendation.enum';
-import { GetWashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/get-washing-machine-full.response';
+import { GetWashingMachineFullResponse } from '../../models/endpoints/get-washing-machine-full.endpoint';
 import { WashingMachineHistoryViewComponent } from './washing-machine-history-view/washing-machine-history-view.component';
 import { format } from 'date-fns';
 import { TranslocoModule } from '@jsverse/transloco';

@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, HostListener, OnInit, ViewChild, inject } from '@angular/core';
-import { GetSolarPanelFullResponse } from '../../models/dtos/get-solar-panel-full.response';
+import { AfterViewInit, Component, HostListener, ViewChild, inject } from '@angular/core';
+import { GetSolarPanelFullResponse } from "../../models/endpoints/get-solar-panel-full.endpoint";
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { SolarPanelRecommendation } from '../../enums/solar-panel-recommendation.enum';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { SearchSolarPanelRequest } from '../../models/dtos/search-solar-panel.request';
+import { SearchSolarPanelRequest } from "../../models/endpoints/search-solar-panel.endpoint";
 import { SolarPanelHistoryViewComponent } from './solar-panel-history-view/solar-panel-history-view.component';
 import { format } from 'date-fns';
 import { MatDialog } from '@angular/material/dialog';

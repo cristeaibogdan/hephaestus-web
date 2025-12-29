@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { LoginUserResponse } from '../washing-machine/models/dtos/login-user.response';
+import { LoginUserResponse } from "../washing-machine/models/endpoints/login-user.endpoint";
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { LoginUserRequest } from '../washing-machine/models/dtos/login-user.request';
+import { LoginUserRequest } from "../washing-machine/models/endpoints/login-user.endpoint";
 import { AuthDataService } from './auth.data.service';
 
 @Injectable({providedIn: 'root'})

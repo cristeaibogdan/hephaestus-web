@@ -6,7 +6,7 @@ import { RegisterCodeValidator } from 'src/app/shared/validators/async-validator
 import { CustomValidators } from '../../shared/validators/custom.validators';
 import { AuthDataService } from 'src/app/services/auth.data.service';
 import { NotificationService } from 'src/app/services/notification.service';
-import { CreateUserRequest } from 'src/app/washing-machine/models/dtos/create-user.request';
+import { CreateUserRequest } from "src/app/washing-machine/models/endpoints/create-user.endpoint";
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { CommonModule } from '@angular/common';
 import { LanguageSelectorComponent } from 'src/app/shared/components/language-selector/language-selector.component';

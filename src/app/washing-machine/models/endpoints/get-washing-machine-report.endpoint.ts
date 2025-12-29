@@ -1,4 +1,4 @@
 export interface GetWashingMachineReportResponse {
-  report:string,
-  createdAt:string
+  report: string;
+  createdAt: string;
 }

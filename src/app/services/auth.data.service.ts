@@ -1,11 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { LoginUserResponse } from '../washing-machine/models/dtos/login-user.response';
-import { LoginUserRequest } from '../washing-machine/models/dtos/login-user.request';
+import { LoginUserResponse } from "../washing-machine/models/endpoints/login-user.endpoint";
+import { LoginUserRequest } from "../washing-machine/models/endpoints/login-user.endpoint";
 import { UserUpdateContainer } from '../washing-machine/models/user-update-container.model';
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { GetOrganizationAndCountryResponse } from '../washing-machine/models/dtos/get-organization-and-country.response';
-import { CreateUserRequest } from '../washing-machine/models/dtos/create-user.request';
+import { GetOrganizationAndCountryResponse } from "../washing-machine/models/endpoints/get-user-organization-and-country.endpoint";
+import { CreateUserRequest } from "../washing-machine/models/endpoints/create-user.endpoint";
 import { Observable } from 'rxjs';
 import { SKIP_INTERCEPTOR } from '../shared/validators/async-validators/skip-interceptor.token';
 

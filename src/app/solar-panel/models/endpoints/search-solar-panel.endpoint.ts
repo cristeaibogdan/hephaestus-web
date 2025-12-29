@@ -7,11 +7,22 @@ export interface SearchSolarPanelRequest {
   sortByField: string | null;
   sortDirection: string;
 
-  manufacturer: string | null;  
+  manufacturer: string | null;
   model: string | null;
   type: string | null;
   serialNumber: string | null;
 
   createdAt: string | null;
   recommendation: SolarPanelRecommendation | null;
+}
+
+export interface SearchSolarPanelResponse {
+  category: string;
+  manufacturer: string;
+  model: string;
+  type: string;
+  serialNumber: string;
+
+  createdAt: Date;
+  recommendation: SolarPanelRecommendation;
 }

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Validators, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { LoginUserRequest } from '../../washing-machine/models/dtos/login-user.request';
+import { LoginUserRequest } from "src/app/washing-machine/models/endpoints/login-user.endpoint";
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';

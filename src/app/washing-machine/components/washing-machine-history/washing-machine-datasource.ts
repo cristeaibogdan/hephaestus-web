@@ -1,10 +1,10 @@
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
-import { GetWashingMachineFullResponse } from 'src/app/washing-machine/models/dtos/get-washing-machine-full.response';
+import { GetWashingMachineFullResponse } from '../../models/endpoints/get-washing-machine-full.endpoint';
 import { Injectable, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { WashingMachineDataService } from '../../services/washing-machine.data.service';
-import { SearchWashingMachineRequest } from '../../models/dtos/search-washing-machine.request';
+import { SearchWashingMachineRequest } from '../../models/endpoints/search-washing-machine.endpoint';
 import { NotificationService } from 'src/app/services/notification.service';
 import { TranslocoService } from '@jsverse/transloco';
 import { MatSort } from '@angular/material/sort';

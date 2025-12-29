@@ -1,6 +1,6 @@
 import { Injectable, Signal, inject, signal } from "@angular/core";
 import { firstValueFrom, switchMap } from "rxjs";
-import { CreateWashingMachineRequest } from "../models/dtos/create-washing-machine.request";
+import { CreateWashingMachineRequest } from '../models/endpoints/create-washing-machine.endpoint';
 import { ImageFile } from "../models/image-file.model";
 import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
 import { WashingMachineDataService } from "./washing-machine.data.service";

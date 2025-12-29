@@ -5,10 +5,10 @@ export interface CreateSolarPanelRequest {
   type: string;
   serialNumber: string;
 
-  damage: Damage
+  damage: Damage;
 }
 
-export interface Damage {
+interface Damage {
   hotSpots: boolean;
   microCracks: boolean;
   snailTrails: boolean;

@@ -1,13 +1,13 @@
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CreateSolarPanelRequest } from '../models/dtos/create-solar-panel.request';
-import { SearchSolarPanelRequest } from '../models/dtos/search-solar-panel.request';
+import { CreateSolarPanelRequest } from "../models/endpoints/create-solar-panel.endpoint";
+import { SearchSolarPanelRequest } from "../models/endpoints/search-solar-panel.endpoint";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SolarPanelRecommendation } from '../enums/solar-panel-recommendation.enum';
 import { Page } from 'src/app/shared/models/page.model';
-import { SearchSolarPanelResponse } from '../models/dtos/search-solar-panel.response';
-import { GetSolarPanelFullResponse } from '../models/dtos/get-solar-panel-full.response';
+import { SearchSolarPanelResponse } from "../models/endpoints/search-solar-panel.endpoint";
+import { GetSolarPanelFullResponse } from "../models/endpoints/get-solar-panel-full.endpoint";
 
 @Injectable({providedIn: 'root'})
 export class SolarPanelDataService {
