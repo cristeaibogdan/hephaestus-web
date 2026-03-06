@@ -1,6 +1,5 @@
 
-import { Component, Input, inject } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, inject, model } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -26,7 +25,7 @@ import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
   ]
 })
 export class FileUploadComponent {
-  @Input() selectedImages!: FormControl<ImageFile[]>;
+  selectedImages = model.required<ImageFile[]>();
 
   private _notifService = inject(NotificationService);
   private _translocoService = inject(TranslocoService);
@@ -46,7 +45,7 @@ export class FileUploadComponent {
 
   private processFiles(files: FileList): void {    
     // 1. Validate file length
-    const totalFilesCount = this.selectedImages.value.length + files.length;
+    const totalFilesCount = this.selectedImages().length + files.length;
     if (totalFilesCount > 3) {
       this._notifService.showError(this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_LIMIT"));
       return;
@@ -80,12 +79,12 @@ export class FileUploadComponent {
         )
       }
 
-      this.selectedImages.setValue([...this.selectedImages.value, imageFile]);
+      this.selectedImages.update(current => [...current, imageFile]);
     }
   }
 
   onRemoveImage(index:number): void {
-    this.selectedImages.value.splice(index, 1);
+    this.selectedImages().splice(index, 1);
   }
 
 //************************

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CustomValidators } from '../../../shared/validators/custom.validators';
 import { ImageFile } from 'src/app/washing-machine/models/image-file.model';
@@ -124,7 +124,7 @@ export class WashingMachineDamageComponent {
     "price")}
   );
 
-  selectedImages: FormControl<ImageFile[]> = this.fb.control([], [Validators.required]);
+  selectedImages = signal<ImageFile[]>([]);
 
 // *******************************
 // *** FORM RESET AND SUBMIT
@@ -133,11 +133,11 @@ export class WashingMachineDamageComponent {
   onReset(e:Event): void {
     e.preventDefault();
     this.washingMachinePricingForm.reset();
-    this.selectedImages.reset();
+    this.selectedImages.set([]);
   }
 
   onSubmit(): void {
-    if(this.selectedImages.value.length === 0) {
+    if(this.selectedImages().length === 0) {
       this._notifService.showError("At least one image must be uploaded");
       return;
     }
@@ -192,7 +192,7 @@ export class WashingMachineDamageComponent {
     };
 
     this._washingMachineService.setWashingMachineDetail(washingMachineDetail);
-    this._washingMachineService.setSelectedFiles(this.selectedImages.value);
+    this._washingMachineService.setSelectedFiles(this.selectedImages());
     this.stepper.next();
     // console.log("Sent = ", washingMachineDetail);
     // TODO: Restructure the DTO into nested DTOs - package, visible, hidden, costAssessment
