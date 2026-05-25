@@ -70,6 +70,40 @@ npm start
 ### Important URLs
 - [Application](http://localhost:4200) - `localhost:4200`
 
+## Tests
+
+### Playwright
+Tests run against a locally started backend and frontend.
+
+1. Start the backend (see hephaestus-api [README.md](https://github.com/cristeaibogdan/hephaestus-api/blob/main/README.md))
+
+2. Start the frontend application
+```
+npm start
+```
+
+3. In another terminal, run Playwright
+```
+npx playwright test --ui
+```
+
+4. In UI mode, click `Run all`
+
+#### Reports
+Run tests and open the HTML report:
+```
+npx playwright test --reporter=html
+```
+
+Open the last generated report again:
+```
+npx playwright show-report
+```
+
+### Vitest
+TODO: Add vitest
+
+
 ## Possible problems
 If spans from the frontend fail to reach Zipkin, you may encounter an error like this in the browser console:
 ```

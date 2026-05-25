@@ -6,6 +6,8 @@ import { CreateSolarPanelRequest } from "../models/endpoints/create-solar-panel.
 import { SolarPanelRecommendation } from '../enums/solar-panel-recommendation.enum';
 import { SolarPanelDamage } from '../models/solar-panel-damage.model';
 
+// TODO: 1. Have 1 internal signal with _ and one public as readonly
+// TODO: 2. Use directly service.publicSignal in HTML reather than store it in another variable in the component
 @Injectable({providedIn: 'root'})
 export class SolarPanelService {
   private _solarPanelDataService = inject(SolarPanelDataService);

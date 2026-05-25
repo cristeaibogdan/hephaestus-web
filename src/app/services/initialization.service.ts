@@ -5,7 +5,7 @@ import { Subject, firstValueFrom, retry, takeUntil, timer } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SKIP_INTERCEPTOR } from '../shared/validators/async-validators/skip-interceptor.token';
 import { MatDialog } from '@angular/material/dialog';
-import { InitializationSpinnerComponent } from '../components/initialization-spinner/initialization-spinner.component';
+import { InitializationSpinnerModal } from '../initialization/initialization-spinner/initialization-spinner.modal';
 
 @Injectable({ providedIn: 'root' })
 export class InitializationService {
@@ -19,7 +19,7 @@ export class InitializationService {
 
   async wakeupBackends(): Promise<void>  {
 
-    const initializationSpinner = this.dialog.open(InitializationSpinnerComponent, {
+    const initializationSpinner = this.dialog.open(InitializationSpinnerModal, {
       disableClose: true,
       autoFocus: false,
       panelClass: "initialization-dialog",
