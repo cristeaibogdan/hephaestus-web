@@ -1,36 +1,36 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { InitializationFailComponent } from './components/initialization-fail/initialization-fail.component';
-import { HomeComponent } from './components/home/home.component';
-import { CameraComponent } from './washing-machine/components/washing-machine-identification/camera/camera.component';
-import { WashingMachineHistoryComponent } from './washing-machine/components/washing-machine-history/washing-machine-history.component';
-import { SolarPanelHistoryComponent } from './solar-panel/components/solar-panel-history/solar-panel-history.component';
-import { WashingMachineComponent } from './washing-machine/components/washing-machine.component';
-import { SolarPanelComponent } from './solar-panel/components/solar-panel.component';
+import { LoginPage } from './authentication/login/login.page';
+import { RegisterPage } from './authentication/register/register.page';
+import { InitializationFailedPage } from './initialization/initialization-failed/initialization-failed.page';
+import { HomePage } from './home/home.page';
+import { CameraComponent } from './washing-machine/components/washing-machine-create/identification/camera/camera.component';
+import { WashingMachineHistoryPage } from './washing-machine/components/washing-machine-history/washing-machine-history.page';
+import { SolarPanelHistoryPage } from './solar-panel/components/solar-panel-history/solar-panel-history.page';
+import { WashingMachineCreatePage } from './washing-machine/components/washing-machine-create/washing-machine-create.page';
+import { SolarPanelCreatePage } from './solar-panel/components/solar-panel-create/solar-panel-create.page';
 
 export const routes: Routes = [
-  { path: "login", component: LoginComponent },
-  { path: "register", component: RegisterComponent },
-  { path: 'initialization-fail', component: InitializationFailComponent },
+  { path: "login", component: LoginPage },
+  { path: "register", component: RegisterPage },
+  { path: 'initialization-fail', component: InitializationFailedPage },
   {
     path: "",
     // canActivate:[AuthGuard],
     children:[
-      { path: "home", component: HomeComponent },
+      { path: "home", component: HomePage },
       { path: "test", component: CameraComponent},      
       {
         path: "washing-machines", 
         children:[
-          { path: "", component: WashingMachineComponent },
-          { path: "history", component: WashingMachineHistoryComponent }
+          { path: "", component: WashingMachineCreatePage },
+          { path: "history", component: WashingMachineHistoryPage }
         ]
       },
       {
         path: "solar-panels", 
         children:[
-          { path: "", component: SolarPanelComponent },
-          { path: "history", component: SolarPanelHistoryComponent }
+          { path: "", component: SolarPanelCreatePage },
+          { path: "history", component: SolarPanelHistoryPage }
         ]
       },
       { path: "", redirectTo: "/home", pathMatch: "full" }

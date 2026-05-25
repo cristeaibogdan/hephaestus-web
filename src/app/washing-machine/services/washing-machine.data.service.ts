@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { GetWashingMachineFullResponse } from '../models/endpoints/get-washing-machine-full.endpoint';
 
 @Injectable({providedIn: 'root'})
-export class WashingMachineDataService {
+export class WashingMachineDataService { // TODO: Can be modified to washing-machine.api.ts
   private apiURL = environment.apiBaseUrl;
   private http = inject(HttpClient);
 
