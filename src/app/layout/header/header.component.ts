@@ -1,13 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
-import { LoginUserResponse } from "src/app/washing-machine/models/endpoints/login-user.endpoint";
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@jsverse/transloco';
 import { LanguageSelectorComponent } from 'src/app/shared/components/language-selector/language-selector.component';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { LoginUserResponse } from "../../features/authentication/models/endpoints/login-user.endpoint";
 
 @Component({
   selector: 'app-header',
@@ -26,10 +26,10 @@ import { LanguageSelectorComponent } from 'src/app/shared/components/language-se
 export class HeaderComponent implements OnInit {
   private _authService = inject(AuthService);
   private router = inject(Router);
-  
+
   currentUser$!:Observable<LoginUserResponse>;
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.currentUser$ = this._authService.getCurrentUser();
   }
 

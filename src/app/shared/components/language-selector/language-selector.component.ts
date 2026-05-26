@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { Language, LanguageService } from 'src/app/services/language.service';
+import { LanguageService, Language } from 'src/app/core/services/language.service';
 
 @Component({
   selector: 'app-language-selector',

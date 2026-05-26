@@ -3,10 +3,9 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { timeoutInterceptor } from './interceptors/timeout.interceptor';
-import { languageInterceptor } from './interceptors/language.interceptor';
-import { loadingInterceptor } from './interceptors/loading.interceptor';
-import { GlobalErrorHandler } from './services/global-error-handler.service';
+import { timeoutInterceptor } from './core/interceptors/timeout.interceptor';
+import { languageInterceptor } from './core/interceptors/language.interceptor';
+import { loadingInterceptor } from './core/interceptors/loading.interceptor';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DateFnsAdapter } from '@angular/material-date-fns-adapter';
 import { MatPaginatorIntl } from '@angular/material/paginator';
@@ -15,8 +14,9 @@ import { enUS } from 'date-fns/locale';
 import { provideTransloco } from '@jsverse/transloco';
 import { environment } from 'src/environments/environment';
 import { TranslocoHttpLoader } from './shared/transloco-http.loader';
-import { InitializationService } from './services/initialization.service';
 import { CompositePropagatorModule, OpenTelemetryInterceptorModule, ZipkinExporterModule } from '@jufab/opentelemetry-angular-interceptor';
+import { GlobalErrorHandler } from './core/services/global-error-handler.service';
+import { InitializationService } from './core/services/initialization.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [    

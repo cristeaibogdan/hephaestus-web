@@ -63,6 +63,10 @@ Domain-level folders are strictly for reuse across multiple pages.
 2. Used by multiple pages in same domain → move to domain-level folder
 3. Used across domains → move to `shared/`
 
+> **Services exception:** Services that cross domains default to `shared/services/`.
+> Promote to `core/services/` only if the service serves the app itself, not a feature
+> (e.g. auth, error handling, analytics, language, notification).
+
 **C. Layout Layer** - `app/layout/`
 Shell components rendered once at the app level.
 
