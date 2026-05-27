@@ -8,7 +8,7 @@ import { SearchWashingMachineRequest } from '../../models/endpoints/search-washi
 import { TranslocoService } from '@jsverse/transloco';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import {NotificationService} from "../../../../shared/services/notification.service";
 
 /**
  * Data source for the DataTableExample view. This class should
@@ -16,7 +16,7 @@ import { NotificationService } from 'src/app/core/services/notification.service'
  * (including sorting, pagination, and filtering).
  */
 @Injectable()
-export class WashingMachineDataSource extends DataSource<GetWashingMachineFullResponse> {  
+export class WashingMachineDataSource extends DataSource<GetWashingMachineFullResponse> {
   private washingMachines = signal<GetWashingMachineFullResponse[]>([]);
 
   sort!: MatSort;

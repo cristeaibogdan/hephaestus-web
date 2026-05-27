@@ -8,7 +8,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { SearchSolarPanelRequest } from "../../models/endpoints/search-solar-panel.endpoint";
 import { SolarPanelDataService } from '../../services/solar-panel-data.service';
 import { TranslocoService } from '@jsverse/transloco';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import {NotificationService} from "../../../../shared/services/notification.service";
 
 /**
  * Data source for the DataTable view. This class should
@@ -17,11 +17,11 @@ import { NotificationService } from 'src/app/core/services/notification.service'
  */
 @Injectable()
 export class SolarPanelDataSource extends DataSource<GetSolarPanelFullResponse> {
-  
+
   private solarPanels = signal<GetSolarPanelFullResponse[]>([]);
-  
+
   sort!: MatSort;
-  paginator!: MatPaginator;  
+  paginator!: MatPaginator;
 
   constructor(
     private _solarPanelDataService: SolarPanelDataService,
@@ -49,7 +49,7 @@ export class SolarPanelDataSource extends DataSource<GetSolarPanelFullResponse> 
   search(searchSolarPanelRequest: SearchSolarPanelRequest): void {
     this._solarPanelDataService.search(searchSolarPanelRequest).subscribe({
       next: response => {
-        
+
         if(response.content.length == 0) {
           this._notifService.showWarning(this._translocoService.translate("I18N.GENERAL_ERROR.EMPTY_PAGE"));
         }

@@ -8,7 +8,7 @@ import { WashingMachineOverviewComponent } from '../overview/washing-machine-ove
 import { TranslocoModule } from '@jsverse/transloco';
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { RouterLink } from '@angular/router';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { NotificationService } from "../../../../../shared/services/notification.service";
 
 @Component({
   selector: 'app-washing-machine-recommendation',
@@ -31,7 +31,7 @@ export class WashingMachineRecommendationComponent {
   washingMachineRecommendation: Recommendation = this._washingMachineService.getRecommendation();
 
   onDownload(): void {
-    this._washingMachineDataService.getReport(this.washingMachineIdentification().serialNumber).subscribe(response => {        
+    this._washingMachineDataService.getReport(this.washingMachineIdentification().serialNumber).subscribe(response => {
       // Convert to blob
       const arraybuffer = this._notifService.base64ToArrayBuffer(response.report);
       const blob = new Blob([arraybuffer], { type: 'application/pdf' });
@@ -45,7 +45,7 @@ export class WashingMachineRecommendationComponent {
       downloadLink.href = blobUrl;
       downloadLink.download = 'Recommendation Report_' + formattedDate + '.pdf';
       downloadLink.click();
-      
+
       // Open new tab with file
       window.open(blobUrl, '_blank');
 
@@ -54,4 +54,3 @@ export class WashingMachineRecommendationComponent {
     });
   }
 }
-  

@@ -10,9 +10,9 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { NotificationService } from 'src/app/core/services/notification.service';
 import { ImageFile } from 'src/app/features/washing-machine/models/image-file.model';
 import { ProductDataService } from 'src/app/shared/services/product-data.service';
+import {NotificationService} from "../../../../../../shared/services/notification.service";
 
 @Component({
     selector: 'app-camera',
@@ -35,10 +35,10 @@ export class CameraComponent implements AfterViewInit {
   private dialogRef = inject(MatDialogRef<CameraComponent>);
 
 //****************************************
-//*** QR CODE CAMERA SCANNER 
+//*** QR CODE CAMERA SCANNER
 //****************************************
 
-  @ViewChild(ZXingScannerComponent) 
+  @ViewChild(ZXingScannerComponent)
   scanner!: ZXingScannerComponent;
 
   allowedFormats = [BarcodeFormat.QR_CODE];
@@ -53,11 +53,11 @@ export class CameraComponent implements AfterViewInit {
     if (this.cameraIsPaused) {
       // RESUME
       this.cameraIsLoading = false;
-      this.resumeScan(); 
+      this.resumeScan();
     } else if (this.scannerEnabled) {
       // STOP
-      this.scannerEnabled = false; 
-      this.resumeScan();     
+      this.scannerEnabled = false;
+      this.resumeScan();
     } else {
       // START
       this.cameraIsLoading = true;
@@ -88,15 +88,15 @@ export class CameraComponent implements AfterViewInit {
     // A. change the format from QR CODE to something else, this way the onScanSuccess() won't be triggered anymore
     // workaround to stop from scanning continuously after pausing the video
     this.cameraIsPaused = true;
-    this.allowedFormats = [BarcodeFormat.AZTEC];  
-    this.scanner.previewElemRef.nativeElement.pause();  
+    this.allowedFormats = [BarcodeFormat.AZTEC];
+    this.scanner.previewElemRef.nativeElement.pause();
   }
 
   resumeScan(): void {
     // B. change the format to QR CODE so onScanSuccess() can be triggered again
     this.cameraIsPaused = false;
     this.allowedFormats = [BarcodeFormat.QR_CODE];
-    this.scanner.previewElemRef.nativeElement.play();  
+    this.scanner.previewElemRef.nativeElement.play();
   }
 
   closeDialog(): void {
@@ -134,15 +134,15 @@ export class CameraComponent implements AfterViewInit {
       // The loading indicator will start only if scannerEnabled is true
       this.cameraIsLoading = true;
     }
-    
-    this.scanner.device = this.availableCameras[this.cameraIndex];  
+
+    this.scanner.device = this.availableCameras[this.cameraIndex];
   }
 
-  camerasFoundHandler(foundCameras: MediaDeviceInfo[]): void {  
+  camerasFoundHandler(foundCameras: MediaDeviceInfo[]): void {
     this.availableCameras = foundCameras;
 
     // select the back camera index by default
-    const backCameraIndex = foundCameras.findIndex(camera => 
+    const backCameraIndex = foundCameras.findIndex(camera =>
         camera.label.toLowerCase().includes('back') ||
         camera.label.toLowerCase().includes('rear') ||
         camera.label.toLowerCase().includes('environment')
@@ -175,28 +175,28 @@ export class CameraComponent implements AfterViewInit {
       return this._notifService.showError("File "+ uploadedFile.name +" is not supported. Only jpg, jpeg, png and bmp extensions are supported.");
     }
 
-    // 1. Get the image and generate an URL for it 
+    // 1. Get the image and generate an URL for it
     const handledFile: ImageFile = {
       file: uploadedFile,
-      url: this.sanitizer.bypassSecurityTrustUrl( 
-        window.URL.createObjectURL(uploadedFile)   
+      url: this.sanitizer.bypassSecurityTrustUrl(
+        window.URL.createObjectURL(uploadedFile)
       )
     }
 
     // 2. Decode image
     const codeReader = new BrowserQRCodeReader();
     let resultFromQRCode!:string;
-    
+
     try {
       resultFromQRCode = (await codeReader.decodeFromImageUrl(ɵunwrapSafeValue(handledFile.url))).getText();
     } catch (error) {
       return this._notifService.showError("Unsupported Code. Only QR Codes are supported");
     }
 
-    // 3. Retrieve productIdentification   
+    // 3. Retrieve productIdentification
     this.getProductIdentification(resultFromQRCode);
   }
-  
+
 //****************************************
 //*** SELECT FILE VALIDATORS
 //****************************************
@@ -212,7 +212,7 @@ export class CameraComponent implements AfterViewInit {
 
       default: return true;
     }
-  } 
+  }
 
   private getProductIdentification(qrCode: string): void {
 
@@ -224,7 +224,7 @@ export class CameraComponent implements AfterViewInit {
       return;
     }
 
-    this._notifService.showError("The QR code does not belong to a supported washing machine. Scanned result: " + qrCode);    
+    this._notifService.showError("The QR code does not belong to a supported washing machine. Scanned result: " + qrCode);
   }
 
   uploadHelp: string = "* Only images with QR codes are supported. \n ** Only images with png, jpg, jpeg and bmp extension are supported";

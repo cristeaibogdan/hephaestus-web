@@ -11,7 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { SolarPanelDamage } from '../../../models/solar-panel-damage.model';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import {NotificationService} from "../../../../../shared/services/notification.service";
 
 @Component({
   selector: 'app-solar-panel-damage',
@@ -36,7 +36,7 @@ export class SolarPanelDamageComponent {
   private _solarPanelService = inject(SolarPanelService);
   private _notificationService = inject(NotificationService);
 
-  solarPanelDamageForm = this.fb.group({    
+  solarPanelDamageForm = this.fb.group({
     hotSpots: [false],
     microCracks: [false],
     snailTrails: [false],

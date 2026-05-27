@@ -1,21 +1,20 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WashingMachineService } from '../../../services/washing-machine.service';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { WashingMachineDetail } from '../../../models/washing-machine-detail.model';
 import { TranslocoModule } from '@jsverse/transloco';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { PricingFormComponent } from './pricing-form/pricing-form.component';
 import { PackageFormComponent } from './package-damage-form/package-form.component';
 import { VisibleSurfacesFormComponent } from './visible-surfaces-form/visible-surfaces-form.component';
 import { HiddenSurfacesFormComponent } from './hidden-surfaces-form/hidden-surfaces-form.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
-import { NotificationService } from 'src/app/core/services/notification.service';
 import { CustomValidators } from 'src/app/shared/validators/custom.validators';
 import { ImageFile } from '../../../models/image-file.model';
+import {NotificationService} from "../../../../../shared/services/notification.service";
 
 @Component({
   selector: 'app-washing-machine-damage',
@@ -35,12 +34,12 @@ import { ImageFile } from '../../../models/image-file.model';
     PricingFormComponent
 ]
 })
-export class WashingMachineDamageComponent {  
+export class WashingMachineDamageComponent {
   private stepper = inject(MatStepper);
   private fb = inject(NonNullableFormBuilder);
   private _washingMachineService = inject(WashingMachineService);
   private _notifService = inject(NotificationService);
-  
+
   washingMachineDetailForm = this.fb.group({
     applicablePackageDamage: [false],
     packageForm : this.fb.group({
@@ -48,21 +47,21 @@ export class WashingMachineDamageComponent {
       dirty : [false],
       packageMaterialAvailable : [false],
     }, {validators: CustomValidators.atLeastOneTrueOutOf(
-      "damaged", 
-      "dirty", 
+      "damaged",
+      "dirty",
       "packageMaterialAvailable")}
     ),
-    
+
 
     applicableVisibleSurfacesDamage: [false],
     visibleSurfacesForm: this.fb.group({
       hasScratches: [false],
-      scratchesLength: [{value: 0, disabled: true}, 
+      scratchesLength: [{value: 0, disabled: true},
         [Validators.required, Validators.min(0.5)]
       ],
 
       hasDents: [false],
-      dentsDepth: [{value: 0, disabled: true}, 
+      dentsDepth: [{value: 0, disabled: true},
         [Validators.required, Validators.min(0.5)]
       ],
 
@@ -86,12 +85,12 @@ export class WashingMachineDamageComponent {
     applicableHiddenSurfacesDamage: [false],
     hiddenSurfacesForm: this.fb.group({
       hasScratches: [false],
-      scratchesLength: [{value: 0, disabled: true}, 
+      scratchesLength: [{value: 0, disabled: true},
         [Validators.required, Validators.min(0.5)]
       ],
 
       hasDents: [false],
-      dentsDepth: [{value: 0, disabled: true}, 
+      dentsDepth: [{value: 0, disabled: true},
         [Validators.required, Validators.min(0.5)]
       ],
 

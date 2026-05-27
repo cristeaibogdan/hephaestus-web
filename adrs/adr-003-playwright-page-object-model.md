@@ -1,5 +1,11 @@
 ## Playwright Page Object Model with Fixtures
 
+
+!!!! TODO: Investigate this.
+POM class names use the full <Domain><Page>PagePom prefix (e.g. WashingMachineCreatePagePom).
+Unlike Angular components which are scoped by module and file path,
+POMs are imported together in a flat fixture context — without prefixing, names from different domains collide.
+
 ## Status
 Accepted: Decision approved and in effect. Please don't hesitate to challenge it.
 

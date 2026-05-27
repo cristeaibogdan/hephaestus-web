@@ -3,10 +3,10 @@ import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { TranslocoModule } from '@jsverse/transloco';
-import { NotificationService } from 'src/app/core/services/notification.service';
 import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
 import { GetWashingMachineFullResponse } from '../../../models/endpoints/get-washing-machine-full.endpoint';
 import { WashingMachineDataService } from '../../../services/washing-machine.data.service';
+import {NotificationService} from "../../../../../shared/services/notification.service";
 
 @Component({
   selector: 'app-washing-machine-history-view',
@@ -16,7 +16,7 @@ import { WashingMachineDataService } from '../../../services/washing-machine.dat
     CommonModule,
     TranslocoModule,
     ToLabelPipe,
-    
+
     MatDialogModule,
     MatButtonModule
   ]
@@ -44,7 +44,7 @@ export class WashingMachineHistoryViewModal {
       downloadLink.href = blobUrl;
       downloadLink.download = 'Recommendation Report_'+formattedDate+'.pdf';
       downloadLink.click();
-                  
+
       // Open new tab with file
       window.open(blobUrl, '_blank');
 

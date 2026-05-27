@@ -18,25 +18,12 @@ Pain points:
 ## Decision
 Adopt a layered folder structure as the standard for all new Angular projects.
 
-**A. Core Layer** - `app/core/`
-App-wide singletons. Instantiated once. Never domain-specific.
-
-```
-├── core/
-│   ├── guards/ (app-wide only, e.g. auth — feature-specific guards live in their domain)
-│   ├── interceptors/
-│   └── services/ (app-wide singletons: auth, error handling, amplitude, etc.)
-```
-
-**B. Features Layer** - `app/features/`
+**A. Features Layer** - `app/features/`
 Organized by business domain. Each domain contains pages, and each page can have multiple components.
 Domain-level folders are strictly for reuse across multiple pages.
 
-> Single-page domains (e.g. `home`, `not-found`) are acceptable — they follow
-> the same structure without the domain-level shared folders.
-
-> When the domain isn't obvious upfront, name it after the page. 
-> Rename the domain folder when a clearer grouping emerges.
+> Start with a page-focused structure when no broader domain is evident.
+> Introduce or rename to a domain folder once multiple related pages or shared business concepts emerge.
 
 ```
 ├── features/
@@ -63,11 +50,9 @@ Domain-level folders are strictly for reuse across multiple pages.
 2. Used by multiple pages in same domain → move to domain-level folder
 3. Used across domains → move to `shared/`
 
-> **Services exception:** Services that cross domains default to `shared/services/`.
-> Promote to `core/services/` only if the service serves the app itself, not a feature
-> (e.g. auth, error handling, analytics, language, notification).
+> App-wide services (auth, error handling, analytics) live in shared/services/. Feature-specific services live in their domain.
 
-**C. Layout Layer** - `app/layout/`
+**B. Layout Layer** - `app/layout/`
 Shell components rendered once at the app level.
 
 ```
@@ -76,7 +61,7 @@ Shell components rendered once at the app level.
 │   └── footer/
 ```
 
-**D. Shared Layer** - `app/shared/`
+**C. Shared Layer** - `app/shared/`
 Stateless, reusable building blocks. No business logic.
 
 ```
@@ -87,17 +72,14 @@ Stateless, reusable building blocks. No business logic.
     ├── pipes/
     ├── services/
     ├── validators/
+    ├── guards/
+    ├── interceptors/
     └── ...
 ```
 
 ## Example
 ```
 app/
-├── core/
-│   ├── guards/
-│   ├── interceptors/
-│   └── services/
-│
 ├── features/
 │   ├── authentication/
 │   │   ├── login/
@@ -161,6 +143,8 @@ app/
     ├── pipes/
     ├── services/
     ├── validators/
+    ├── guards/
+    ├── interceptors/
     └── ...
 ```
 

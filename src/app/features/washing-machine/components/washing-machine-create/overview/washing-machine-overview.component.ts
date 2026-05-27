@@ -7,8 +7,8 @@ import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { MatButtonModule } from '@angular/material/button';
 import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
-import { NotificationService } from 'src/app/core/services/notification.service';
 import { ImageFile } from '../../../models/image-file.model';
+import { NotificationService } from "../../../../../shared/services/notification.service";
 
 @Component({
   selector: 'app-washing-machine-overview',
@@ -29,8 +29,8 @@ export class WashingMachineOverviewComponent {
   private _translocoService = inject(TranslocoService);
 
   washingMachineIdentification: Signal<WashingMachineIdentification> = this._washingMachineService.getWashingMachineIdentification();
-  washingMachineDetail: Signal<WashingMachineDetail> = this._washingMachineService.getWashingMachineDetail(); 
-   
+  washingMachineDetail: Signal<WashingMachineDetail> = this._washingMachineService.getWashingMachineDetail();
+
   selectedFiles:ImageFile[] = this._washingMachineService.getSelectedFiles();
 
   create(): void {

@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { SolarPanelIdentification } from '../../../models/solar-panel-identification.model';
 import { SolarPanelDamage } from '../../../models/solar-panel-damage.model';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { NotificationService } from "../../../../../shared/services/notification.service";
 
 @Component({
   selector: 'app-solar-panel-overview',

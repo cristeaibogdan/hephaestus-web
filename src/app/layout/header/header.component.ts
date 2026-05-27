@@ -6,8 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@jsverse/transloco';
 import { LanguageSelectorComponent } from 'src/app/shared/components/language-selector/language-selector.component';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { LoginUserResponse } from "../../features/authentication/models/endpoints/login-user.endpoint";
+import {AuthService} from "../../shared/services/auth.service";
 
 @Component({
   selector: 'app-header',

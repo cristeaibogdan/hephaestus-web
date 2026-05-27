@@ -4,9 +4,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
-import { NotificationService } from 'src/app/core/services/notification.service';
 import { ImageFile } from 'src/app/features/washing-machine/models/image-file.model';
 import { DragAndDropDirective } from 'src/app/shared/directives/drag-and-drop.directive';
+import {NotificationService} from "../../../../../../shared/services/notification.service";
 
 @Component({
   selector: 'app-file-upload',
@@ -28,7 +28,7 @@ export class FileUploadComponent {
 
   private _notifService = inject(NotificationService);
   private _translocoService = inject(TranslocoService);
-  private sanitizer = inject(DomSanitizer);  
+  private sanitizer = inject(DomSanitizer);
 
   onDrop(droppedFiles:FileList): void {
     this.processFiles(droppedFiles);
@@ -42,17 +42,17 @@ export class FileUploadComponent {
     }
   }
 
-  private processFiles(files: FileList): void {    
+  private processFiles(files: FileList): void {
     // 1. Validate file length
     const totalFilesCount = this.selectedImages().length + files.length;
     if (totalFilesCount > 3) {
       this._notifService.showError(this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_LIMIT"));
       return;
     }
-      
+
     for (let i = 0; i < files.length; i++) {
-      const uploadedFile: File = files[i];      
-      
+      const uploadedFile: File = files[i];
+
       // 2. Validate file extension
       if(this.invalidFileExtension(uploadedFile.name)) {
         this._notifService.showError(
@@ -61,7 +61,7 @@ export class FileUploadComponent {
           this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_EXTENSION_TEXT"));
         return;
       }
-      
+
       // 3. Validate file size, must not exceed 3 MB
       if(this.invalidFileSize(uploadedFile.size, 3)) {
         this._notifService.showError(
@@ -70,7 +70,7 @@ export class FileUploadComponent {
           this._translocoService.translate("I18N.CUSTOM_ERROR.IMAGE_SIZE_TEXT"));
         return;
       }
-            
+
       const imageFile: ImageFile = {
         file: uploadedFile,
         url: this.sanitizer.bypassSecurityTrustUrl(
@@ -89,12 +89,12 @@ export class FileUploadComponent {
 //************************
 //***** HELPER METHODS
 //************************
-  
+
   private invalidFileExtension(fileName: string): boolean {
     const extension = fileName.substring(fileName.lastIndexOf('.') + 1);
-  
+
     switch(extension.toLowerCase()) {
-      case 'png': return false;  
+      case 'png': return false;
       case 'jpg': return false;
       case 'jpeg': return false;
       case 'bmp': return false;
@@ -105,8 +105,8 @@ export class FileUploadComponent {
 
   private invalidFileSize(fileSize:number, maxFileSizeInMB:number): boolean {
     const fileSizeInMB:number = fileSize / (1024 * 1024);
-    return (fileSizeInMB < maxFileSizeInMB) 
-      ? false 
+    return (fileSizeInMB < maxFileSizeInMB)
+      ? false
       : true;
   }
 }
