@@ -1,7 +1,7 @@
 ## Angular Project Structure
 
 ## Status
-Pending Implementation
+Accepted: Decision approved and in effect. Please don't hesitate to challenge it.
 
 ## Context
 As new Angular projects are started, there is no agreed-upon folder structure to
@@ -18,42 +18,50 @@ Pain points:
 ## Decision
 Adopt a layered folder structure as the standard for all new Angular projects.
 
-**A. Features Layer** - `app/features/`
+### A. Features Layer - `app/features/`
 Organized by business domain. Each domain contains pages, and each page can have multiple components.
 Domain-level folders are strictly for reuse across multiple pages.
 
-> Start with a page-focused structure when no broader domain is evident.
-> Introduce or rename to a domain folder once multiple related pages or shared business concepts emerge.
+- **Single-page domain** — page files sit directly in the domain folder. No page subfolder is needed.
+
+- **Multi-page domain** — each page gets its own subfolder. Page folders and files are prefixed with the domain name (e.g. washing-machine-create/)
+  to avoid class name collisions in app.routes.ts, which imports pages from all domains simultaneously.
+  Pages with inherently unique names (e.g. login, register) are exempt from prefixing.
 
 ```
 ├── features/
-│   └── <domain-1>/ (eg. `washing-machine`)
-│       ├── <page-name-1>/ (eg. `create`)
-│       │   ├── <component-1>/ (eg. `change-email`)
-│       │   ├── <component-2>/ (eg. `upload-file`)
-│       │   └── ...
-│       ├── <page-name-2>/ (eg. `history`)
-│       │   ├── <component-1>/ (eg. `view`)
-│       │   ├── <component-2>/ (eg. `edit`)
-│       │   └── ...
-│       ├── components/
-│       ├── models/
-│       ├── services/
-│       ├── stores/
-│       └── ...
-│   └── <domain-2>/
-│       └── ...
+    ├── <single-page-domain>/ (e.g. `home`)
+    │   ├── home.page.ts
+    │   └── ...
+    │
+    └── <multi-page-domain>/ (e.g. `washing-machine`)
+        ├── <domain-page-name>/ (e.g. `washing-machine-create`)
+        │   ├── <component-1>/ (e.g. `damage`)
+        │   └── ...
+        │
+        ├── <domain-page-name>/ (e.g. `washing-machine-history`)
+        │   ├── <component-1>/ (e.g. `view`)
+        │   └── ...
+        │
+        │ # Exactly 1 file of a given type → keep flat
+        ├── domain.enum.ts
+        ├── domain.model.ts
+        │
+        │ # 2+ files of a given type → create subfolder       
+        ├── models/
+        ├── services/
 ```
 
-**Extraction rules:**
+The following extraction rules determine where files within a domain should be placed:
 1. Used by one page → keep inside the page
+   (For single-page domains, the domain folder itself serves as the page folder)
 2. Used by multiple pages in same domain → move to domain-level folder
 3. Used across domains → move to `shared/`
+   Note: Some services belong in shared/services/ by nature (auth, error handling, analytics), even if currently used by only one domain.
 
-> App-wide services (auth, error handling, analytics) live in shared/services/. Feature-specific services live in their domain.
-
-**B. Layout Layer** - `app/layout/`
-Shell components rendered once at the app level.
+### B. Layout Layer - `app/layout/`
+Structural shell components that wrap the routed content and are rendered once at the app level. 
+Contains no business logic.
 
 ```
 ├── layout/
@@ -61,8 +69,8 @@ Shell components rendered once at the app level.
 │   └── footer/
 ```
 
-**C. Shared Layer** - `app/shared/`
-Stateless, reusable building blocks. No business logic.
+### C. Shared Layer - `app/shared/`
+Reusable code with no single domain owner.
 
 ```
 └── shared/
@@ -81,57 +89,50 @@ Stateless, reusable building blocks. No business logic.
 ```
 app/
 ├── features/
-│   ├── authentication/
+│   ├── authentication/ # multi-page domain — login/register are exempt (unique names)
 │   │   ├── login/
 │   │   │   ├── login.page.ts
-│   │   │   ├── login.page.html
-│   │   │   ├── login.page.scss
-│   │   │   └── login.page.spec.ts
+│   │   │   └── login.page.html
+│   │   │
 │   │   └── register/
 │   │       ├── register.page.ts
-│   │       ├── register.page.html
-│   │       ├── register.page.scss
-│   │       └── register.page.spec.ts
+│   │       └── register.page.html
 │   │
-│   ├── home/
+│   ├── home/ # single-page domain
 │   │   ├── home.page.ts
-│   │   ├── home.page.html
-│   │   ├── home.page.scss
-│   │   └── home.page.spec.ts
+│   │   └── home.page.html
 │   │
 │   └── washing-machine/
-│       ├── create/
+│       ├── washing-machine-create/
 │       │   ├── damage/
 │       │   │   ├── damage.component.ts
-│       │   │   ├── damage.component.html
-│       │   │   ├── damage.component.scss
-│       │   │   └── damage.component.spec.ts
+│       │   │   └── damage.component.html
 │       │   ├── identification/
 │       │   ├── overview/
 │       │   ├── recommendation/
-│       │   ├── create.page.ts
-│       │   ├── create.page.html
-│       │   ├── create.page.scss
-│       │   └── create.page.spec.ts
+│       │   ├── washing-machine-create.page.ts
+│       │   ├── washing-machine-create.page.html
+│       │   └── ...
 │       │
-│       └── history/
-│           ├── view/
-│           │   ├── view.modal.ts
-│           │   ├── view.modal.html
-│           │   ├── view.modal.scss
-│           │   └── view.modal.spec.ts
-│           │
-│           ├── edit/
-│           │   ├── edit.modal.ts
-│           │   ├── edit.modal.html
-│           │   ├── edit.modal.scss
-│           │   └── edit.modal.spec.ts
-│           │
-│           ├── history.page.ts
-│           ├── history.page.html
-│           ├── history.page.scss
-│           └── history.page.spec.ts
-│
+│       ├── washing-machine-history/
+│       │   ├── view/
+│       │   │   ├── view.modal.ts
+│       │   │   └── view.modal.html
+│       │   │
+│       │   ├── edit/
+│       │   │   ├── edit.modal.ts
+│       │   │   └── edit.modal.html
+│       │   │
+│       │   ├── washing-machine-history.page.ts
+│       │   ├── washing-machine-history.page.html
+│       │   └── ...
+│       │
+│       ├── washing-machine.api.ts                   # flat — exactly 1 service
+│       ├── washing-machine-recommendation.enum.ts   # flat — exactly 1 enum
+│       ├── models/                                  # 2+ models → subfolder created
+│       │     ├── washing-machine-damage.model.ts
+│       │     └── washing-machine-repair.model.ts
+│       └── ...
 ├── layout/
 │   ├── header/
 │   └── footer/
@@ -160,3 +161,6 @@ app/
 
 ## Compliance
 Enforcement is performed during code review
+
+## References
+- https://angular.dev/style-guide#organize-your-project-by-feature-areas

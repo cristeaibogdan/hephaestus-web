@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
-import { SolarPanelService } from '../../../services/solar-panel.service';
+import { SolarPanelCreateService } from "../solar-panel-create.service";
 import { CustomValidators } from 'src/app/shared/validators/custom.validators';
 import { TranslocoModule } from '@jsverse/transloco';
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
@@ -10,13 +10,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { SolarPanelDamage } from '../../../models/solar-panel-damage.model';
-import {NotificationService} from "../../../../../shared/services/notification.service";
+import { SolarPanelDamage } from '../../models/solar-panel-damage.model';
+import { NotificationService } from "../../../../shared/services/notification.service";
 
 @Component({
-  selector: 'app-solar-panel-damage',
-  templateUrl: './solar-panel-damage.component.html',
-  styleUrls: ['./solar-panel-damage.component.scss'],
+  selector: 'app-damage',
+  templateUrl: './damage.step.html',
+  styleUrls: ['./damage.step.scss'],
   imports: [
     MatCardModule,
     MatCheckboxModule,
@@ -30,10 +30,10 @@ import {NotificationService} from "../../../../../shared/services/notification.s
     StepperButtonsDirective
   ]
 })
-export class SolarPanelDamageComponent {
+export class DamageStep {
   private stepper = inject(MatStepper);
   private fb = inject(NonNullableFormBuilder);
-  private _solarPanelService = inject(SolarPanelService);
+  private _solarPanelService = inject(SolarPanelCreateService);
   private _notificationService = inject(NotificationService);
 
   solarPanelDamageForm = this.fb.group({

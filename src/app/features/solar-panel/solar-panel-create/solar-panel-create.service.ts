@@ -1,16 +1,20 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { firstValueFrom, switchMap } from 'rxjs';
 import { SolarPanelIdentification } from '../models/solar-panel-identification.model';
-import { SolarPanelDataService } from './solar-panel-data.service';
+import { SolarPanelApi } from "../solar-panel.api";
 import { CreateSolarPanelRequest } from "../models/endpoints/create-solar-panel.endpoint";
-import { SolarPanelRecommendation } from '../enums/solar-panel-recommendation.enum';
+import { SolarPanelRecommendation } from '../solar-panel-recommendation.enum';
 import { SolarPanelDamage } from '../models/solar-panel-damage.model';
 
-// TODO: 1. Have 1 internal signal with _ and one public as readonly
-// TODO: 2. Use directly service.publicSignal in HTML reather than store it in another variable in the component
+/**
+ * TODO:
+ *  1. Have 1 internal signal with _ and one public as readonly
+ *  2. Use directly service.publicSignal in HTML rather than store it in another variable in the component
+ *  3. Consider migrating to a signals-based store
+ */
 @Injectable({providedIn: 'root'})
-export class SolarPanelService {
-  private _solarPanelDataService = inject(SolarPanelDataService);
+export class SolarPanelCreateService {
+  private _solarPanelApi = inject(SolarPanelApi);
 
 // **************************************
 // *** STEP 1 = IDENTIFICATION
@@ -25,7 +29,7 @@ export class SolarPanelService {
   }
 
   private solarPanelIdentification = signal<SolarPanelIdentification>(this.solarPanelIdentificationDefault);
-  
+
   getSolarPanelIdentification() {
     return this.solarPanelIdentification.asReadonly();
   }
@@ -34,7 +38,7 @@ export class SolarPanelService {
     this.solarPanelIdentification.set(solarPanelIdentification);
   }
 
-  resetSolarPanelIdentification() {    
+  resetSolarPanelIdentification() {
     this.solarPanelIdentification.set(this.solarPanelIdentificationDefault);
   }
 
@@ -63,7 +67,7 @@ export class SolarPanelService {
   resetSolarPanelDamage() {
     this.solarPanelDamage.set(this.solarPanelDamageDefault);
   }
-  
+
 // **************************************
 // *** STEP 3 = OVERVIEW
 // **************************************
@@ -82,7 +86,7 @@ export class SolarPanelService {
     // const {hotSpots, microCracks, snailTrails, brokenGlass, additionalDetails}: SolarPanelDamage = this.solarPanelDamage$();
 
     // const saveSolarPanelRequest: CreateSolarPanelRequest = {
-    //   category: category, 
+    //   category: category,
     //   manufacturer: manufacturer,
     //   model: model,
     //   type: type,
@@ -117,10 +121,10 @@ export class SolarPanelService {
     //TODO: Rename constants to match type
     //TODO: Add return types to methods
     console.log("Saving = ", saveSolarPanelRequest);
-    
-    return firstValueFrom(this._solarPanelDataService.create(saveSolarPanelRequest).pipe(
-      switchMap(() => {        
-        return this._solarPanelDataService.getRecommendation(solarPanelIdentification.serialNumber);
+
+    return firstValueFrom(this._solarPanelApi.create(saveSolarPanelRequest).pipe(
+      switchMap(() => {
+        return this._solarPanelApi.getRecommendation(solarPanelIdentification.serialNumber);
       })
     )).then((response) => {
       this.recommendation = response;
@@ -131,11 +135,11 @@ export class SolarPanelService {
 // **************************************
 // *** STEP 4 = RECOMMENDATION
 // **************************************
-  
+
   private recommendation!: SolarPanelRecommendation;
 
   getRecommendation(): SolarPanelRecommendation {
     return this.recommendation;
-  }  
+  }
 
 }

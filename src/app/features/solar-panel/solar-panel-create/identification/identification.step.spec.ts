@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SolarPanelIdentificationComponent } from './solar-panel-identification.component';
+import { IdentificationStep } from './identification.step';
 
 describe('SolarPanelIdentificationComponent', () => {
-  let component: SolarPanelIdentificationComponent;
-  let fixture: ComponentFixture<SolarPanelIdentificationComponent>;
+  let component: IdentificationStep;
+  let fixture: ComponentFixture<IdentificationStep>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SolarPanelIdentificationComponent ]
+      declarations: [ IdentificationStep ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SolarPanelIdentificationComponent);
+    fixture = TestBed.createComponent(IdentificationStep);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

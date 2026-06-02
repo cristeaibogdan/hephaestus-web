@@ -1,4 +1,4 @@
-import { SolarPanelRecommendation } from "../../enums/solar-panel-recommendation.enum";
+import { SolarPanelRecommendation } from "../../solar-panel-recommendation.enum";
 
 export interface SearchSolarPanelRequest {
   pageIndex: number;

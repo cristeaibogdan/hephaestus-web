@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SolarPanelRecommendationComponent } from './solar-panel-recommendation.component';
+import { RecommendationStep } from './recommendation.step';
 
 describe('SolarPanelRecommendationComponent', () => {
-  let component: SolarPanelRecommendationComponent;
-  let fixture: ComponentFixture<SolarPanelRecommendationComponent>;
+  let component: RecommendationStep;
+  let fixture: ComponentFixture<RecommendationStep>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SolarPanelRecommendationComponent ]
+      declarations: [ RecommendationStep ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SolarPanelRecommendationComponent);
+    fixture = TestBed.createComponent(RecommendationStep);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

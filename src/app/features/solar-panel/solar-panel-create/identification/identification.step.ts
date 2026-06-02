@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SerialNumberValidator } from 'src/app/shared/validators/async-validators/serial-number.validator';
 import { CustomValidators } from 'src/app/shared/validators/custom.validators';
-import { SolarPanelIdentification } from '../../../models/solar-panel-identification.model';
-import { SolarPanelService } from '../../../services/solar-panel.service';
+import { SolarPanelIdentification } from '../../models/solar-panel-identification.model';
+import { SolarPanelCreateService } from "../solar-panel-create.service";
 import { MatStepper } from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormField } from '@angular/material/form-field';
@@ -15,9 +15,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { ProductDataService } from 'src/app/shared/services/product-data.service';
 
 @Component({
-  selector: 'app-solar-panel-identification',
-  templateUrl: './solar-panel-identification.component.html',
-  styleUrls: ['./solar-panel-identification.component.scss'],
+  selector: 'app-identification',
+  templateUrl: './identification.step.html',
+  styleUrls: ['./identification.step.scss'],
   imports: [
     MatCardModule,
     MatFormField,
@@ -30,10 +30,10 @@ import { ProductDataService } from 'src/app/shared/services/product-data.service
     StepperButtonsDirective
   ]
 })
-export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {  
+export class IdentificationStep implements OnInit, OnDestroy {
   private stepper = inject(MatStepper);
   private fb = inject(NonNullableFormBuilder);
-  private _solarPanelService = inject(SolarPanelService);
+  private _solarPanelService = inject(SolarPanelCreateService);
   private _productDataService = inject(ProductDataService);
 
   private serialNumberValidator = inject(SerialNumberValidator); //TODO: Use async validator to check the serial number
@@ -47,7 +47,7 @@ export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
     this._solarPanelService.resetSolarPanelDamage();
   }
 
-  solarPanelForm = this.fb.group({        
+  solarPanelForm = this.fb.group({
     category: [{value:"Solar Panel", disabled:true}],
     manufacturer: ["", Validators.required],
 
@@ -85,7 +85,7 @@ export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
       type: type,
       serialNumber: this.solarPanelForm.controls.serialNumber.value
     }
-    
+
     this._solarPanelService.setSolarPanelIdentification(solarPanelIdentification);
     this.stepper.next();
   }
@@ -109,17 +109,17 @@ export class SolarPanelIdentificationComponent implements OnInit, OnDestroy {
     this.availableTypes = [];
   }
 
-  private populateManufacturerField(): void {   
+  private populateManufacturerField(): void {
     this._productDataService.getManufacturers(this.solarPanelForm.controls.category.value).subscribe(response => {
       this.availableManufacturers = response;
     });
   }
 
-  populateModelAndTypeFields(manufacturer: string): void {    
-    /* 
+  populateModelAndTypeFields(manufacturer: string): void {
+    /*
       Need to reset values, when you repopulate the models and types arrays
-      the option doesn't appear in the select input BUT it's saved in the form 
-      causing the controls to be valid. 
+      the option doesn't appear in the select input BUT it's saved in the form
+      causing the controls to be valid.
       To reproduce:
         1. Select manufacturer
         2. Select model

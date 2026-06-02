@@ -1,8 +1,8 @@
-import { SolarPanelRecommendation } from "../../enums/solar-panel-recommendation.enum";
+import { SolarPanelRecommendation } from "../../solar-panel-recommendation.enum";
 
 /**
  * Complete solar panel information including damage.
- * 
+ *
  * This is an extended version of {@link SearchSolarPanelResponse} that includes
  * damage. To be kept in sync with {@link SearchSolarPanelResponse}.
  */

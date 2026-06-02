@@ -1,12 +1,12 @@
-<app-solar-panel-overview>
+<app-overview>
   @let identification = solarPanelIdentification();
   <div header class="text-align-center">
     Based on the selected damages, the solar panel with serial number
-    {{identification.serialNumber}} 
+    {{identification.serialNumber}}
     manufactured by {{identification.manufacturer}}, is sent to:
 
     <div class="text-align-center">
-      <button class="recommendation-text"        
+      <button class="recommendation-text"
         [class.repair]="solarPanelRecommendation === 'REPAIR'"
         [class.recycle]="solarPanelRecommendation === 'RECYCLE'"
         [class.dispose]="solarPanelRecommendation === 'DISPOSE'"
@@ -14,18 +14,18 @@
         {{solarPanelRecommendation}}
       </button>
     </div>
-    
+
     <p class="before-overview">
       {{"I18N.PRODUCT_RECOMMENDATION.SUBTITLE" | transloco}}
     </p>
   </div>
-</app-solar-panel-overview>
+</app-overview>
 
 <div stepper-buttons>
   <button mat-raised-button class="primary" (click)="onDownload()">
     {{"I18N.COMMON.DOWNLOAD_RECOMMENDATION" | transloco}}
   </button>
-  
+
   <button mat-raised-button type="button" class="primary" routerLink="/home">
     {{"I18N.COMMON.FINISH" | transloco}}
   </button>

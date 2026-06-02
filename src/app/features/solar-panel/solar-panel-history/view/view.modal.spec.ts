@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SolarPanelHistoryViewComponent } from './solar-panel-history-view.component';
+import { ViewModal } from './view.modal';
 
 describe('SolarPanelHistoryViewComponent', () => {
-  let component: SolarPanelHistoryViewComponent;
-  let fixture: ComponentFixture<SolarPanelHistoryViewComponent>;
+  let component: ViewModal;
+  let fixture: ComponentFixture<ViewModal>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SolarPanelHistoryViewComponent ]
+      declarations: [ ViewModal ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SolarPanelHistoryViewComponent);
+    fixture = TestBed.createComponent(ViewModal);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

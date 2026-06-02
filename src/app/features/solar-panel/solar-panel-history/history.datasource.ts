@@ -3,12 +3,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
 import { Injectable, signal } from '@angular/core';
-import { GetSolarPanelFullResponse } from "../../models/endpoints/get-solar-panel-full.endpoint";
+import { GetSolarPanelFullResponse } from "../models/endpoints/get-solar-panel-full.endpoint";
 import { toObservable } from '@angular/core/rxjs-interop';
-import { SearchSolarPanelRequest } from "../../models/endpoints/search-solar-panel.endpoint";
-import { SolarPanelDataService } from '../../services/solar-panel-data.service';
+import { SearchSolarPanelRequest } from "../models/endpoints/search-solar-panel.endpoint";
+import { SolarPanelApi } from '../solar-panel.api';
 import { TranslocoService } from '@jsverse/transloco';
-import {NotificationService} from "../../../../shared/services/notification.service";
+import {NotificationService} from "../../../shared/services/notification.service";
 
 /**
  * Data source for the DataTable view. This class should
@@ -16,7 +16,7 @@ import {NotificationService} from "../../../../shared/services/notification.serv
  * (including sorting, pagination, and filtering).
  */
 @Injectable()
-export class SolarPanelDataSource extends DataSource<GetSolarPanelFullResponse> {
+export class HistoryDatasource extends DataSource<GetSolarPanelFullResponse> {
 
   private solarPanels = signal<GetSolarPanelFullResponse[]>([]);
 
@@ -24,7 +24,7 @@ export class SolarPanelDataSource extends DataSource<GetSolarPanelFullResponse> 
   paginator!: MatPaginator;
 
   constructor(
-    private _solarPanelDataService: SolarPanelDataService,
+    private _solarPanelApi: SolarPanelApi,
     private _translocoService: TranslocoService,
     private _notifService: NotificationService
   ) {
@@ -47,7 +47,7 @@ export class SolarPanelDataSource extends DataSource<GetSolarPanelFullResponse> 
   disconnect(): void {}
 
   search(searchSolarPanelRequest: SearchSolarPanelRequest): void {
-    this._solarPanelDataService.search(searchSolarPanelRequest).subscribe({
+    this._solarPanelApi.search(searchSolarPanelRequest).subscribe({
       next: response => {
 
         if(response.content.length == 0) {

@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, HostListener, ViewChild, inject } from '@angular/core';
-import { GetSolarPanelFullResponse } from "../../models/endpoints/get-solar-panel-full.endpoint";
+import { GetSolarPanelFullResponse } from "../models/endpoints/get-solar-panel-full.endpoint";
 import { MatSort, MatSortModule } from '@angular/material/sort';
-import { SolarPanelRecommendation } from '../../enums/solar-panel-recommendation.enum';
+import { SolarPanelRecommendation } from '../solar-panel-recommendation.enum';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { SearchSolarPanelRequest } from "../../models/endpoints/search-solar-panel.endpoint";
-import { SolarPanelHistoryViewComponent } from './view/solar-panel-history-view.component';
+import { SearchSolarPanelRequest } from "../models/endpoints/search-solar-panel.endpoint";
+import { ViewModal } from './view/view.modal';
 import { format } from 'date-fns';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
@@ -19,14 +19,14 @@ import { DateFormatYYYYMMDDDirective } from 'src/app/shared/directives/date-form
 import { A11yModule } from '@angular/cdk/a11y';
 import { TranslocoModule } from '@jsverse/transloco';
 import { MatIconModule } from '@angular/material/icon';
-import { SolarPanelDataSource } from './solar-panel-datasource';
-import { SolarPanelDataService } from '../../services/solar-panel-data.service';
+import { HistoryDatasource } from './history.datasource';
+import { SolarPanelApi } from '../solar-panel.api';
 
 @Component({
   selector: 'app-solar-panel-history',
   templateUrl: './solar-panel-history.page.html',
   styleUrls: ['./solar-panel-history.page.scss'],
-  providers: [SolarPanelDataSource],
+  providers: [HistoryDatasource],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -48,10 +48,10 @@ import { SolarPanelDataService } from '../../services/solar-panel-data.service';
 export class SolarPanelHistoryPage implements AfterViewInit {
   private dialog = inject(MatDialog);
   private fb = inject(FormBuilder);
-  private _solarPanelDataService = inject(SolarPanelDataService);
+  private _solarPanelApi = inject(SolarPanelApi);
 
   solarPanelRecommendation = SolarPanelRecommendation;
-  dataSource: SolarPanelDataSource = inject(SolarPanelDataSource);
+  dataSource: HistoryDatasource = inject(HistoryDatasource);
 
   displayedColumns: string[] = [
     "createdAt",
@@ -61,7 +61,7 @@ export class SolarPanelHistoryPage implements AfterViewInit {
     "serialNumber",
     "recommendation",
     "actions"
-  ]; 
+  ];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -77,7 +77,7 @@ export class SolarPanelHistoryPage implements AfterViewInit {
     this.dataSource.sort.sortChange.subscribe(() => {
       this.dataSource.paginator.firstPage();
       this.applySearchFilters();
-    });    
+    });
   }
 
 // *****************************************
@@ -134,7 +134,7 @@ export class SolarPanelHistoryPage implements AfterViewInit {
       ? format(new Date(value), "yyyy-MM-dd")
       : null;
   }
-  
+
 // *****************************************
 // *** TAB KEY HANDLER
 // *****************************************
@@ -163,14 +163,14 @@ export class SolarPanelHistoryPage implements AfterViewInit {
       return this.openDialog(solarPanel);
     }
 
-    this._solarPanelDataService.loadMany([solarPanel.serialNumber]).subscribe(response => {
+    this._solarPanelApi.loadMany([solarPanel.serialNumber]).subscribe(response => {
       solarPanel.damage = response[solarPanel.serialNumber].damage;
       this.openDialog(solarPanel);
-    });      
+    });
   }
 
-  openDialog(solarPanel: GetSolarPanelFullResponse) { 
-    this.dialog.open(SolarPanelHistoryViewComponent, {
+  openDialog(solarPanel: GetSolarPanelFullResponse) {
+    this.dialog.open(ViewModal, {
       disableClose: true,
       width: '35%',
       data: { solarPanel: solarPanel },
