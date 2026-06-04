@@ -9,7 +9,7 @@ import {CreateUserRequest} from "../../features/authentication/models/endpoints/
 import {LoginUserRequest, LoginUserResponse} from "../../features/authentication/models/endpoints/login-user.endpoint";
 
 @Injectable({providedIn: 'root'})
-export class AuthDataService {
+export class AuthenticationApi {
   apiURL = environment.apiBaseUrl;
   private http = inject(HttpClient);
 

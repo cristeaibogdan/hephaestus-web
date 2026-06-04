@@ -154,10 +154,10 @@ app/
 │   │   │
 │   │   └── washing-machine-history/
 │   │       ├── view/
-│   │       │   ├── washing-machine-history-view.modal.html
-│   │       │   ├── washing-machine-history-view.modal.scss
+│   │       │   ├── view.modal.html
+│   │       │   ├── view.modal.scss
 │   │       │   ├── washing-machine-history-view.modal.spec.ts
-│   │       │   └── washing-machine-history-view.modal.ts
+│   │       │   └── view.modal.ts
 
 <!-- Playwright -->
 tests/ 
@@ -204,3 +204,4 @@ tests/
 8. Worth having one method call multiple methods inside pom
   a) multiple methods with one input help page tests
   b) single method with multiple (optional) inputs help readability in E2E tests
+9. Add translation ADR

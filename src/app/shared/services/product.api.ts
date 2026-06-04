@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { GetProductIdentificationResponse } from '../models/get-product-identification.response';
 
 @Injectable({providedIn: 'root'})
-export class ProductDataService {
+export class ProductApi {
   private apiURL = environment.apiBaseUrl;
   private http = inject(HttpClient);
 
@@ -14,10 +14,10 @@ export class ProductDataService {
     let url = this.apiURL.concat("/v1/products/")
       .concat(productCategory)
       .concat("/manufacturers");
-    
+
     return this.http.get<string[]>(url);
   }
-  
+
   getModelsAndTypes(productManufacturer: string): Observable<GetModelAndTypeResponse[]> {
     const url = this.apiURL.concat("/v1/products/")
       .concat(productManufacturer)

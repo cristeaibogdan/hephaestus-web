@@ -1,13 +1,13 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { AuthDataService } from './auth.data.service';
+import { AuthenticationApi } from './authentication.api';
 import { LoginUserRequest, LoginUserResponse } from "../../features/authentication/models/endpoints/login-user.endpoint";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
-  private _authDataService = inject(AuthDataService,);
+  private _authenticationApi = inject(AuthenticationApi,);
   private router = inject( Router);
 
   isLoggedIn!:boolean;
@@ -46,7 +46,7 @@ export class AuthService {
   }
 
   login(loginUserRequest: LoginUserRequest): void {
-    this._authDataService.login(loginUserRequest).subscribe((response) => {
+    this._authenticationApi.login(loginUserRequest).subscribe((response) => {
       this.isLoggedIn = true;
       this.loggedUser.next(response);
 

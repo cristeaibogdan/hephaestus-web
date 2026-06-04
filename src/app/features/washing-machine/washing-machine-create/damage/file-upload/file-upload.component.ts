@@ -6,7 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { ImageFile } from 'src/app/features/washing-machine/models/image-file.model';
 import { DragAndDropDirective } from 'src/app/shared/directives/drag-and-drop.directive';
-import {NotificationService} from "../../../../../../shared/services/notification.service";
+import {NotificationService} from "../../../../../shared/services/notification.service";
 
 @Component({
   selector: 'app-file-upload',

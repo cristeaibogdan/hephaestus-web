@@ -1,14 +1,14 @@
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
-import { GetWashingMachineFullResponse } from '../../models/endpoints/get-washing-machine-full.endpoint';
+import { GetWashingMachineFullResponse } from '../models/endpoints/get-washing-machine-full.endpoint';
 import { Injectable, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { WashingMachineDataService } from '../../services/washing-machine.data.service';
-import { SearchWashingMachineRequest } from '../../models/endpoints/search-washing-machine.endpoint';
+import { WashingMachineApi } from '../washing-machine.api';
+import { SearchWashingMachineRequest } from '../models/endpoints/search-washing-machine.endpoint';
 import { TranslocoService } from '@jsverse/transloco';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import {NotificationService} from "../../../../shared/services/notification.service";
+import {NotificationService} from "../../../shared/services/notification.service";
 
 /**
  * Data source for the DataTableExample view. This class should
@@ -16,14 +16,14 @@ import {NotificationService} from "../../../../shared/services/notification.serv
  * (including sorting, pagination, and filtering).
  */
 @Injectable()
-export class WashingMachineDataSource extends DataSource<GetWashingMachineFullResponse> {
+export class HistoryDatasource extends DataSource<GetWashingMachineFullResponse> {
   private washingMachines = signal<GetWashingMachineFullResponse[]>([]);
 
   sort!: MatSort;
   paginator!: MatPaginator;
 
   constructor(
-    private _washingMachineDataService: WashingMachineDataService,
+    private _washingMachineApi: WashingMachineApi,
     private _notifService: NotificationService,
     private _translocoService: TranslocoService
   ) {
@@ -46,7 +46,7 @@ export class WashingMachineDataSource extends DataSource<GetWashingMachineFullRe
   disconnect(): void {}
 
   search(searchWashingMachineRequest: SearchWashingMachineRequest) {
-    this._washingMachineDataService.search(searchWashingMachineRequest).subscribe({
+    this._washingMachineApi.search(searchWashingMachineRequest).subscribe({
       next: response => {
 
         if(response.content.length == 0) {

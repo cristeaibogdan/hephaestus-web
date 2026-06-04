@@ -1,8 +1,8 @@
 <input type="file" #fileInput
   multiple
-  accept=".png, .jpg, .jpeg, .bmp" 
+  accept=".png, .jpg, .jpeg, .bmp"
   onClick="this.value=null"
-  (change)="onFileUpload($event)"> 
+  (change)="onFileUpload($event)">
 
 <fieldset dragAndDrop (filesDropped)="onDrop($event)">
   <legend class="text-align-center">
@@ -12,9 +12,9 @@
       <mat-icon svgIcon="upload"></mat-icon> &nbsp; {{"I18N.COMMON.UPLOAD_IMAGES" | transloco}} &nbsp; {{selectedImages().length}} / 3
     </button>
 
-    <mat-icon class="text-color help-tip" 
+    <mat-icon class="text-color help-tip"
       matTooltip='{{"I18N.HELP_TOOLTIP.UPLOAD_IMAGES" | transloco}}'
-      matTooltipPosition='right' 
+      matTooltipPosition='right'
       svgIcon="help">
     </mat-icon>
   </legend>
@@ -29,7 +29,7 @@
       }
     } @else {
       <div class="text-color no-images-placeholder">
-        <img src="assets/images/drag-and-drop.png">
+        <img src="../../../../../../assets/images/drag-and-drop.png">
         <div>{{"I18N.PRODUCT_DAMAGE.NO_IMAGES_PLACEHOLDER_1" | transloco}}</div>
         <div>{{"I18N.PRODUCT_DAMAGE.NO_IMAGES_PLACEHOLDER_2" | transloco}}</div>
       </div>

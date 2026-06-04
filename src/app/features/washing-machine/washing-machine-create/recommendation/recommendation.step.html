@@ -1,14 +1,14 @@
-<app-washing-machine-overview>
+<app-overview>
   @let identification = washingMachineIdentification();
   <div header class="text-align-center">
-    
+
       {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_1" | transloco}}
-      {{identification.serialNumber}} 
+      {{identification.serialNumber}}
       {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_2" | transloco}} {{identification.manufacturer}},
       {{"I18N.PRODUCT_RECOMMENDATION.RECOMMENDATION_INFO_3" | transloco}}:
-  
+
       <div class="text-align-center">
-        <button class="recommendation-text"          
+        <button class="recommendation-text"
           [class.repackage]="washingMachineRecommendation === 'REPACKAGE'"
           [class.resale]="washingMachineRecommendation === 'RESALE'"
           [class.outlet]="washingMachineRecommendation === 'OUTLET'"
@@ -16,21 +16,21 @@
           [class.disassemble]="washingMachineRecommendation === 'DISASSEMBLE'">
           {{washingMachineRecommendation}}
         </button>
-      </div>      
-    
+      </div>
+
     <p class="before-overview">
       {{"I18N.PRODUCT_RECOMMENDATION.SUBTITLE" | transloco}}
     </p>
   </div>
 
-</app-washing-machine-overview>
+</app-overview>
 
 <div stepper-buttons>
   <button mat-raised-button class="primary"
     (click)="onDownload()">
     {{"I18N.COMMON.DOWNLOAD_RECOMMENDATION" | transloco}}
   </button>
-  
+
   <button mat-raised-button class="primary" type="button" routerLink="/home">
     {{"I18N.COMMON.FINISH" | transloco}}
   </button>

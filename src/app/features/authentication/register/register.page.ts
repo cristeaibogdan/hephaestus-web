@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CreateUserRequest } from "../models/endpoints/create-user.endpoint";
 import { NotificationService } from "../../../shared/services/notification.service";
-import { AuthDataService } from "../../../shared/services/auth.data.service";
+import { AuthenticationApi } from "../../../shared/services/authentication.api";
 
 @Component({
   selector: 'app-register',
@@ -36,7 +36,7 @@ export class RegisterPage implements OnInit, OnDestroy {
   private fb = inject(NonNullableFormBuilder);
   private router = inject(Router);
   private _translocoService = inject(TranslocoService);
-  private _authDataService = inject(AuthDataService);
+  private _authenticationApi = inject(AuthenticationApi);
   private _notifService = inject(NotificationService);
   private registerCodeValidator = inject(RegisterCodeValidator);
 
@@ -61,7 +61,7 @@ export class RegisterPage implements OnInit, OnDestroy {
     // Subscribe to registerCode statusChanges and call a HTTP method to retrieve values from BACKEND
     this.codeSubscription = this.registerForm.controls.code.statusChanges.subscribe((status) => {
       if (status === "VALID") {
-        this._authDataService.getOrganizationAndCountry(this.registerForm.controls.code.value.toString()).subscribe(organizationAndCountry => {
+        this._authenticationApi.getOrganizationAndCountry(this.registerForm.controls.code.value.toString()).subscribe(organizationAndCountry => {
           this.registerForm.patchValue(organizationAndCountry);
         });
       } else {
@@ -93,7 +93,7 @@ export class RegisterPage implements OnInit, OnDestroy {
       password: this.registerForm.controls.password.value
     };
 
-    this._authDataService.register(userAccount).subscribe(() => {
+    this._authenticationApi.register(userAccount).subscribe(() => {
         this._notifService.showSuccess(this._translocoService.translate("I18N.CUSTOM_SUCCESS.ACCOUNT_CREATED"));
         this.goToLoginPage();
       }

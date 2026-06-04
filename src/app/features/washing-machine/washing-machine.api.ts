@@ -1,23 +1,23 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SearchWashingMachineRequest } from '../models/endpoints/search-washing-machine.endpoint';
-import { GetWashingMachineReportResponse } from "../models/endpoints/get-washing-machine-report.endpoint";
-import { Recommendation } from '../enums/recommendation.enum';
-import { SearchWashingMachineResponse } from '../models/endpoints/search-washing-machine.endpoint';
+import { SearchWashingMachineRequest } from './models/endpoints/search-washing-machine.endpoint';
+import { GetWashingMachineReportResponse } from "./models/endpoints/get-washing-machine-report.endpoint";
+import { Recommendation } from './enums/recommendation.enum';
+import { SearchWashingMachineResponse } from './models/endpoints/search-washing-machine.endpoint';
 import { Observable } from 'rxjs';
-import { GetWashingMachineFullResponse } from '../models/endpoints/get-washing-machine-full.endpoint';
+import { GetWashingMachineFullResponse } from './models/endpoints/get-washing-machine-full.endpoint';
 import { environment } from 'src/environments/environment';
 import { Page } from 'src/app/shared/models/page.model';
 
 @Injectable({providedIn: 'root'})
-export class WashingMachineDataService { // TODO: Can be modified to washing-machine.api.ts
+export class WashingMachineApi {
   private apiURL = environment.apiBaseUrl;
   private http = inject(HttpClient);
 
 //**************************************
 //*** STEP 3 = OVERVIEW
 //**************************************
-  
+
   getRecommendation(serialNumber:string): Observable<Recommendation> {
     const url = this.apiURL.concat("/v1/washing-machines/")
     .concat(serialNumber)

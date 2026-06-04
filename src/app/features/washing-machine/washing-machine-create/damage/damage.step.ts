@@ -1,8 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { WashingMachineService } from '../../../services/washing-machine.service';
+import { WashingMachineCreateService } from '../washing-machine-create.service';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
-import { WashingMachineDetail } from '../../../models/washing-machine-detail.model';
+import { WashingMachineDetail } from '../../models/washing-machine-detail.model';
 import { TranslocoModule } from '@jsverse/transloco';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,13 +13,13 @@ import { VisibleSurfacesFormComponent } from './visible-surfaces-form/visible-su
 import { HiddenSurfacesFormComponent } from './hidden-surfaces-form/hidden-surfaces-form.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { CustomValidators } from 'src/app/shared/validators/custom.validators';
-import { ImageFile } from '../../../models/image-file.model';
-import {NotificationService} from "../../../../../shared/services/notification.service";
+import { ImageFile } from '../../models/image-file.model';
+import {NotificationService} from "../../../../shared/services/notification.service";
 
 @Component({
-  selector: 'app-washing-machine-damage',
-  templateUrl: './washing-machine-damage.component.html',
-  styleUrls: ['./washing-machine-damage.component.scss'],
+  selector: 'app-damage',
+  templateUrl: './damage.step.html',
+  styleUrls: ['./damage.step.scss'],
   imports: [
     MatCardModule,
     MatButtonModule,
@@ -34,10 +34,10 @@ import {NotificationService} from "../../../../../shared/services/notification.s
     PricingFormComponent
 ]
 })
-export class WashingMachineDamageComponent {
+export class DamageStep {
   private stepper = inject(MatStepper);
   private fb = inject(NonNullableFormBuilder);
-  private _washingMachineService = inject(WashingMachineService);
+  private _washingMachineCreateService = inject(WashingMachineCreateService);
   private _notifService = inject(NotificationService);
 
   washingMachineDetailForm = this.fb.group({
@@ -190,11 +190,11 @@ export class WashingMachineDamageComponent {
       repairPrice: this.washingMachinePricingForm.controls.repairPrice.value
     };
 
-    this._washingMachineService.setWashingMachineDetail(washingMachineDetail);
-    this._washingMachineService.setSelectedFiles(this.selectedImages());
+    this._washingMachineCreateService.setWashingMachineDetail(washingMachineDetail);
+    this._washingMachineCreateService.setSelectedFiles(this.selectedImages());
     this.stepper.next();
     // console.log("Sent = ", washingMachineDetail);
     // TODO: Restructure the DTO into nested DTOs - package, visible, hidden, costAssessment
-    console.log(this._washingMachineService.getSelectedFiles());
+    console.log(this._washingMachineCreateService.getSelectedFiles());
   }
 }

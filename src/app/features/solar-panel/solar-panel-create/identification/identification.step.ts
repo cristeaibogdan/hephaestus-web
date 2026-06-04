@@ -12,7 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { MatButtonModule } from '@angular/material/button';
-import { ProductDataService } from 'src/app/shared/services/product-data.service';
+import { ProductApi } from 'src/app/shared/services/product.api';
 
 @Component({
   selector: 'app-identification',
@@ -33,8 +33,8 @@ import { ProductDataService } from 'src/app/shared/services/product-data.service
 export class IdentificationStep implements OnInit, OnDestroy {
   private stepper = inject(MatStepper);
   private fb = inject(NonNullableFormBuilder);
-  private _solarPanelService = inject(SolarPanelCreateService);
-  private _productDataService = inject(ProductDataService);
+  private _solarPanelCreateService = inject(SolarPanelCreateService);
+  private _productDataApi = inject(ProductApi);
 
   private serialNumberValidator = inject(SerialNumberValidator); //TODO: Use async validator to check the serial number
 
@@ -43,8 +43,8 @@ export class IdentificationStep implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._solarPanelService.resetSolarPanelIdentification();
-    this._solarPanelService.resetSolarPanelDamage();
+    this._solarPanelCreateService.resetSolarPanelIdentification();
+    this._solarPanelCreateService.resetSolarPanelDamage();
   }
 
   solarPanelForm = this.fb.group({
@@ -86,14 +86,14 @@ export class IdentificationStep implements OnInit, OnDestroy {
       serialNumber: this.solarPanelForm.controls.serialNumber.value
     }
 
-    this._solarPanelService.setSolarPanelIdentification(solarPanelIdentification);
+    this._solarPanelCreateService.setSolarPanelIdentification(solarPanelIdentification);
     this.stepper.next();
   }
 
   onReset(e:Event) {
     e.preventDefault(); // Prevent the default behavior. The disabled input will not appear empty and will preserve its value
     this.clearAvailableModelsAndTypes();
-    this._solarPanelService.resetSolarPanelIdentification();
+    this._solarPanelCreateService.resetSolarPanelIdentification();
   }
 
 // **********************************
@@ -110,7 +110,7 @@ export class IdentificationStep implements OnInit, OnDestroy {
   }
 
   private populateManufacturerField(): void {
-    this._productDataService.getManufacturers(this.solarPanelForm.controls.category.value).subscribe(response => {
+    this._productDataApi.getManufacturers(this.solarPanelForm.controls.category.value).subscribe(response => {
       this.availableManufacturers = response;
     });
   }
@@ -132,7 +132,7 @@ export class IdentificationStep implements OnInit, OnDestroy {
     this.solarPanelForm.controls.modelAndType.reset();
     this.clearAvailableModelsAndTypes();
 
-    this._productDataService.getModelsAndTypes(manufacturer).subscribe(response => {
+    this._productDataApi.getModelsAndTypes(manufacturer).subscribe(response => {
       response.forEach(getModelAndTypeResponse => {
         this.availableModels.push(getModelAndTypeResponse.model);
         this.availableTypes.push(getModelAndTypeResponse.type);

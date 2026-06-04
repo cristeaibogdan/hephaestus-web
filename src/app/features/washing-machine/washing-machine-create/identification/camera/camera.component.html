@@ -1,6 +1,6 @@
 <div mat-dialog-title class="title">QR Scanner</div>
 
-<mat-dialog-content class="camera-container">  
+<mat-dialog-content class="camera-container">
 
   <section class="camera-scanner">
     <zxing-scanner
@@ -9,17 +9,17 @@
 
       (camerasFound)="camerasFoundHandler($event)"
       (camerasNotFound)="camerasNotFoundHandler()"
-      
-      (scanSuccess)="onScanSuccess($event)">    
+
+      (scanSuccess)="onScanSuccess($event)">
     </zxing-scanner>
 
     @if (!scannerEnabled) {
       <div class="camera-scanner-placeholder">
-        <img src="assets/images/scanner-qr.png">
-        
+        <img src="../../../../../../assets/images/scanner-qr.png">
+
         @if (noCamerasFound) {
-          <p> 
-            No cameras found. <br> 
+          <p>
+            No cameras found. <br>
             Use Upload Image to scan from an image file.
           </p>
         }
@@ -37,7 +37,7 @@
         <button mat-raised-button type="button" class="primary"
           (click)="switchCamera()"
           [disabled]="cameraIsLoading || availableCameras.length === 1">
-  
+
           <mat-icon class="icon-camera" svgIcon="camera_SWITCH"></mat-icon>
         </button>
       </div>
@@ -45,16 +45,16 @@
   </section>
 </mat-dialog-content>
 
-<input #QRInput type="file" 
+<input #QRInput type="file"
   accept=".png, .jpg, .jpeg, .bmp"
-  onClick="this.value=null" 
+  onClick="this.value=null"
   (change)="uploadImage($event)"
 >
 
 <!-- TODO: Make background color span left to right, the whole width of the flexbox -->
 <mat-dialog-actions class="buttons-container">
 
-  <button mat-raised-button type="button"       
+  <button mat-raised-button type="button"
     [class]="scannerEnabled && !cameraIsPaused ? 'warn' : 'primary'"
     (click)="onStart()"
     [disabled]="cameraIsLoading || noCamerasFound">
@@ -67,8 +67,8 @@
   </button>
 
   <p class="upload-image-info">
-    In case of scanning failure or unavailable cameras,    
-    use <b>Upload Image</b> option to scan from an image file.  
+    In case of scanning failure or unavailable cameras,
+    use <b>Upload Image</b> option to scan from an image file.
   </p>
 
   <button class="primary upload-image-button" mat-raised-button type="button" (click)="QRInput.click()">
@@ -76,25 +76,25 @@
       <mat-icon class="upload-icon" svgIcon="upload"></mat-icon>
 
       <span>Upload Image</span>
-      
-      <mat-icon class="text-color help-tip" 
+
+      <mat-icon class="text-color help-tip"
         [matTooltip]=uploadHelp
-        matTooltipPosition="right" 
+        matTooltipPosition="right"
         svgIcon="help">
       </mat-icon>
     </div>
   </button>
 
-  <button class="warn close-button" mat-raised-button type="button" (click)="closeDialog()"> 
+  <button class="warn close-button" mat-raised-button type="button" (click)="closeDialog()">
     Close
   </button>
 </mat-dialog-actions>
- 
+
 <!-- @if(availableCameras) {
   <pre>
     === Selected camera ===
     {{availableCameras[cameraIndex] | json}}
-  
+
     === Available cameras ===
     {{availableCameras | json}}
   </pre>

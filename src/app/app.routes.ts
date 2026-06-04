@@ -3,9 +3,9 @@ import { LoginPage } from './features/authentication/login/login.page';
 import { RegisterPage } from './features/authentication/register/register.page';
 import { InitializationFailedPage } from './features/initialization/initialization-failed/initialization-failed.page';
 import { HomePage } from './features/home/home.page';
-import { CameraComponent } from './features/washing-machine/components/washing-machine-create/identification/camera/camera.component';
-import { WashingMachineCreatePage } from './features/washing-machine/components/washing-machine-create/washing-machine-create.page';
-import { WashingMachineHistoryPage } from './features/washing-machine/components/washing-machine-history/washing-machine-history.page';
+import { CameraComponent } from './features/washing-machine/washing-machine-create/identification/camera/camera.component';
+import { WashingMachineCreatePage } from './features/washing-machine/washing-machine-create/washing-machine-create.page';
+import { WashingMachineHistoryPage } from './features/washing-machine/washing-machine-history/washing-machine-history.page';
 import { SolarPanelCreatePage } from "./features/solar-panel/solar-panel-create/solar-panel-create.page";
 import { SolarPanelHistoryPage } from "./features/solar-panel/solar-panel-history/solar-panel-history.page";
 

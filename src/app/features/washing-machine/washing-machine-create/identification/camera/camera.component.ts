@@ -11,8 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ImageFile } from 'src/app/features/washing-machine/models/image-file.model';
-import { ProductDataService } from 'src/app/shared/services/product-data.service';
-import {NotificationService} from "../../../../../../shared/services/notification.service";
+import { ProductApi } from 'src/app/shared/services/product.api';
+import {NotificationService} from "../../../../../shared/services/notification.service";
 
 @Component({
     selector: 'app-camera',
@@ -30,7 +30,7 @@ import {NotificationService} from "../../../../../../shared/services/notificatio
 })
 export class CameraComponent implements AfterViewInit {
   private _notifService = inject(NotificationService);
-  private _productDataService = inject(ProductDataService);
+  private _productApi = inject(ProductApi);
   private sanitizer = inject(DomSanitizer);
   private dialogRef = inject(MatDialogRef<CameraComponent>);
 
@@ -217,7 +217,7 @@ export class CameraComponent implements AfterViewInit {
   private getProductIdentification(qrCode: string): void {
 
     if(qrCode.startsWith("hephaestus-washing-machine-")) {
-      this._productDataService.getProductIdentification(qrCode).subscribe(response => {
+      this._productApi.getProductIdentification(qrCode).subscribe(response => {
         this.result = response;
         this._notifService.showSuccess("QR code succesfully identified!");
       });

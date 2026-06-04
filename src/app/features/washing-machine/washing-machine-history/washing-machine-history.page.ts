@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, HostListener, ViewChild, inject } from '@angular/core';
 import { MatSort, MatSortModule } from '@angular/material/sort';
-import { SearchWashingMachineRequest } from '../../models/endpoints/search-washing-machine.endpoint';
+import { SearchWashingMachineRequest } from '../models/endpoints/search-washing-machine.endpoint';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { GetWashingMachineFullResponse } from '../../models/endpoints/get-washing-machine-full.endpoint';
-import { WashingMachineHistoryViewModal } from './view/washing-machine-history-view.modal';
+import { GetWashingMachineFullResponse } from '../models/endpoints/get-washing-machine-full.endpoint';
+import { ViewModal } from './view/view.modal';
 import { format } from 'date-fns';
 import { TranslocoModule } from '@jsverse/transloco';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,18 +19,18 @@ import { MatInputModule } from '@angular/material/input';
 import { DateFormatYYYYMMDDDirective } from 'src/app/shared/directives/date-format-yyyy-mm-dd.directive';
 import { A11yModule } from '@angular/cdk/a11y';
 import { MatIconModule } from '@angular/material/icon';
-import { WashingMachineDataSource } from './washing-machine-datasource';
-import { WashingMachineDataService } from '../../services/washing-machine.data.service';
-import { DamageType } from '../../enums/damage-type.enum';
-import { IdentificationMode } from '../../enums/identification-mode.enum';
-import { Recommendation } from '../../enums/recommendation.enum';
-import { ReturnType } from '../../enums/return-type.enum';
+import { HistoryDatasource } from './history.datasource';
+import { WashingMachineApi } from '../washing-machine.api';
+import { DamageType } from '../enums/damage-type.enum';
+import { IdentificationMode } from '../enums/identification-mode.enum';
+import { Recommendation } from '../enums/recommendation.enum';
+import { ReturnType } from '../enums/return-type.enum';
 
 @Component({
   selector: 'app-washing-machine-history',
   templateUrl: './washing-machine-history.page.html',
   styleUrls: ['./washing-machine-history.page.scss'],
-  providers: [ WashingMachineDataSource ],
+  providers: [ HistoryDatasource ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -52,13 +52,13 @@ import { ReturnType } from '../../enums/return-type.enum';
 })
 export class WashingMachineHistoryPage implements AfterViewInit {
   private dialog = inject(MatDialog);
-  private _washingMachineDataService = inject(WashingMachineDataService);
+  private _washingMachineApi = inject(WashingMachineApi);
   private fb = inject(FormBuilder);
 
   recommendation = Recommendation;
 
-  dataSource: WashingMachineDataSource = inject(WashingMachineDataSource);
-    
+  dataSource: HistoryDatasource = inject(HistoryDatasource);
+
   displayedColumns: string[] = [
     "createdAt",
     "identificationMode",
@@ -70,7 +70,7 @@ export class WashingMachineHistoryPage implements AfterViewInit {
     "damageType",
     "recommendation",
     "actions"
-  ]; 
+  ];
 
 // *****************************************
 // *** SORTING
@@ -92,7 +92,7 @@ export class WashingMachineHistoryPage implements AfterViewInit {
       this.applySearchFilters();
     });
   }
-  
+
 // *****************************************
 // *** PAGINATOR and FILTERING
 // *****************************************
@@ -146,7 +146,7 @@ export class WashingMachineHistoryPage implements AfterViewInit {
       returnType: this.filterForm.controls.returnType.value,
       damageType: this.filterForm.controls.damageType.value,
       recommendation: this.filterForm.controls.recommendation.value,
-      createdAt: this.handleDate(this.filterForm.controls.createdAt.value) 
+      createdAt: this.handleDate(this.filterForm.controls.createdAt.value)
     };
 
     console.log("searchWashingMachineRequest = ", searchWashingMachineRequest);
@@ -166,7 +166,7 @@ export class WashingMachineHistoryPage implements AfterViewInit {
 // *****************************************
 
   // The host property is not able to listen to window or document events directly, so the cleanest approach here is to stick with @HostListener for this specific event.
-  @HostListener("window:keydown.tab", ["$event"]) 
+  @HostListener("window:keydown.tab", ["$event"])
   handleTab(event: KeyboardEvent): void {
     const focusedElement = document.activeElement as HTMLElement;
 
@@ -190,20 +190,20 @@ export class WashingMachineHistoryPage implements AfterViewInit {
       return this.openDialog(washingMachine);
     }
 
-    this._washingMachineDataService.loadMany([washingMachine.serialNumber]).subscribe(response => {  
+    this._washingMachineApi.loadMany([washingMachine.serialNumber]).subscribe(response => {
       washingMachine.washingMachineDetail = response[washingMachine.serialNumber].washingMachineDetail;
       washingMachine.washingMachineImages = response[washingMachine.serialNumber].washingMachineImages;
       this.openDialog(washingMachine);
     });
   }
 
-  openDialog(washingMachine: GetWashingMachineFullResponse): void { 
-    this.dialog.open(WashingMachineHistoryViewModal, {
+  openDialog(washingMachine: GetWashingMachineFullResponse): void {
+    this.dialog.open(ViewModal, {
       disableClose: true,
       width: '35%',
       data: { washingMachine: washingMachine },
       autoFocus: false
     });
   }
-    
+
 }

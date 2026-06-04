@@ -4,14 +4,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { TranslocoModule } from '@jsverse/transloco';
 import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
-import { GetWashingMachineFullResponse } from '../../../models/endpoints/get-washing-machine-full.endpoint';
-import { WashingMachineDataService } from '../../../services/washing-machine.data.service';
-import {NotificationService} from "../../../../../shared/services/notification.service";
+import { GetWashingMachineFullResponse } from '../../models/endpoints/get-washing-machine-full.endpoint';
+import { WashingMachineApi } from '../../washing-machine.api';
+import {NotificationService} from "../../../../shared/services/notification.service";
 
 @Component({
-  selector: 'app-washing-machine-history-view',
-  templateUrl: './washing-machine-history-view.modal.html',
-  styleUrls: ['./washing-machine-history-view.modal.scss'],
+  selector: 'app-view',
+  templateUrl: './view.modal.html',
+  styleUrls: ['./view.modal.scss'],
   imports: [
     CommonModule,
     TranslocoModule,
@@ -21,15 +21,15 @@ import {NotificationService} from "../../../../../shared/services/notification.s
     MatButtonModule
   ]
 })
-export class WashingMachineHistoryViewModal {
+export class ViewModal {
   private data = inject(MAT_DIALOG_DATA);
-  private _washingMachineDataService = inject(WashingMachineDataService);
+  private _washingMachineApi = inject(WashingMachineApi);
   private _notifService = inject(NotificationService);
 
   washingMachine: GetWashingMachineFullResponse = this.data.washingMachine;
 
   onDownload(): void {
-    this._washingMachineDataService.getReport(this.washingMachine.serialNumber).subscribe(response => {
+    this._washingMachineApi.getReport(this.washingMachine.serialNumber).subscribe(response => {
 
       // Convert to blob
       const arraybuffer = this._notifService.base64ToArrayBuffer(response.report);

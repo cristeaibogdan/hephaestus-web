@@ -1,54 +1,54 @@
 <div class="washing-machine-status">
   @let identification = washingMachineIdentification();
-  
+
   <!-- TODO: Workaround till I find a decent default solution for enums -->
-  @if (identification.manufacturer) { 
-    <span>{{"I18N.COMMON.IDENTIFICATION_MODE" | transloco}}: {{identification.identificationMode | toLabel}}</span>    
+  @if (identification.manufacturer) {
+    <span>{{"I18N.COMMON.IDENTIFICATION_MODE" | transloco}}: {{identification.identificationMode | toLabel}}</span>
   }
-  @if (identification.manufacturer) { 
+  @if (identification.manufacturer) {
     <span>{{"I18N.COMMON.DAMAGE_TYPE" | transloco}}: {{identification.damageType | toLabel}}</span>
   }
 
-  <div class="washing-machine-title">{{"I18N.COMMON.WASHING_MACHINE" | transloco | titlecase}}</div>    
-  
-  @if (identification.manufacturer) { 
+  <div class="washing-machine-title">{{"I18N.COMMON.WASHING_MACHINE" | transloco | titlecase}}</div>
+
+  @if (identification.manufacturer) {
     <span>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{identification.manufacturer}}</span>
   }
   @if (identification.model) {
   <span>{{"I18N.COMMON.MODEL" | transloco}}: {{identification.model}}</span>
-  }  
+  }
   @if (identification.type) {
     <span>{{"I18N.COMMON.TYPE" | transloco}}: {{identification.type}}</span>
-  }  
+  }
 </div>
 
-<mat-stepper>  
+<mat-stepper>
   <mat-step [stepControl]="firstFormGroup" > <!-- STEP ONE -->
     <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.PRODUCT_IDENTIFICATION" | transloco}}</ng-template>
     <!-- TODO: Possible overflow usage. But needs to be in px, else it won't work... -->
     <!-- <div class="overflow-test"> -->
-      <app-washing-machine-identification></app-washing-machine-identification>
+      <app-identification></app-identification>
     <!-- </div> -->
   </mat-step>
-  
+
   <mat-step [stepControl]="secondFormGroup"> <!-- STEP TWO -->
     <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.DAMAGE_ASSESSMENT" | transloco}}</ng-template>
     <ng-template matStepContent>
-      <app-washing-machine-damage></app-washing-machine-damage>
-    </ng-template> 
+      <app-damage></app-damage>
+    </ng-template>
   </mat-step>
-  
+
   <mat-step [stepControl]="thirdFormGroup"> <!-- STEP THREE -->
-    <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.DAMAGE_OVERVIEW" | transloco}}</ng-template>   
+    <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.DAMAGE_OVERVIEW" | transloco}}</ng-template>
     <ng-template matStepContent>
-      <app-washing-machine-overview></app-washing-machine-overview>
-    </ng-template>   
+      <app-overview></app-overview>
+    </ng-template>
   </mat-step>
-  
-  <mat-step [stepControl]="fourthFormGroup"> <!-- STEP FOUR -->            
-    <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.RECOMMENDATION" | transloco}}</ng-template>        
+
+  <mat-step [stepControl]="fourthFormGroup"> <!-- STEP FOUR -->
+    <ng-template matStepLabel>{{"I18N.WASHING_MACHINE.RECOMMENDATION" | transloco}}</ng-template>
     <ng-template matStepContent>
-      <app-washing-machine-recommendation></app-washing-machine-recommendation>
+      <app-recommendation></app-recommendation>
     </ng-template>
   </mat-step>
 </mat-stepper>
