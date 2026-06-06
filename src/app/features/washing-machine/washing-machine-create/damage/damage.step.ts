@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WashingMachineCreateService } from '../washing-machine-create.service';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
-import { WashingMachineDetail } from '../../models/washing-machine-detail.model';
+import { Detail } from '../../models/detail.model';
 import { TranslocoModule } from '@jsverse/transloco';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -150,7 +150,7 @@ export class DamageStep {
       return;
     }
 
-    const washingMachineDetail: WashingMachineDetail = {
+    const washingMachineDetail: Detail = {
       applicablePackageDamage: this.washingMachineDetailForm.controls.applicablePackageDamage.value,
       packageDamaged: this.washingMachineDetailForm.controls.packageForm.controls.damaged.value,
       packageDirty: this.washingMachineDetailForm.controls.packageForm.controls.dirty.value,

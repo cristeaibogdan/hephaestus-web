@@ -1,7 +1,7 @@
 import { Component, inject, Signal } from '@angular/core';
 import { WashingMachineCreateService } from '../washing-machine-create.service';
 import { WashingMachineApi } from '../../washing-machine.api';
-import { WashingMachineIdentification } from '../../models/washing-machine-identification.model';
+import { Identification } from '../../models/identification.model';
 import { Recommendation } from '../../enums/recommendation.enum';
 import { MatButtonModule } from '@angular/material/button';
 import { OverviewStep } from '../overview/overview.step';
@@ -27,7 +27,7 @@ export class RecommendationStep {
   private _washingMachineApi = inject(WashingMachineApi);
   private _notifService = inject(NotificationService);
 
-  washingMachineIdentification: Signal<WashingMachineIdentification> = this._washingMachineCreateService.getWashingMachineIdentification();
+  washingMachineIdentification: Signal<Identification> = this._washingMachineCreateService.getWashingMachineIdentification();
   washingMachineRecommendation: Recommendation = this._washingMachineCreateService.getRecommendation();
 
   onDownload(): void {

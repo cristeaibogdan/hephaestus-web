@@ -1,5 +1,5 @@
-export interface WashingMachineDetail {
-  
+export interface Detail {
+
 // PACKAGE
     applicablePackageDamage:boolean,
     packageDamaged:boolean,

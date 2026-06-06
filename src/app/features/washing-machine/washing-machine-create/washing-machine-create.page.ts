@@ -1,7 +1,7 @@
 import { Component, inject, Signal } from '@angular/core';
 import { UntypedFormBuilder, Validators} from '@angular/forms';
 import { WashingMachineCreateService } from './washing-machine-create.service';
-import { WashingMachineIdentification } from '../models/washing-machine-identification.model';
+import { Identification } from '../models/identification.model';
 import { IdentificationStep } from './identification/identification.step';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
@@ -34,7 +34,7 @@ export class WashingMachineCreatePage {
   private _formBuilder = inject(UntypedFormBuilder);
   private _washingMachineCreateService = inject(WashingMachineCreateService);
 
-  washingMachineIdentification: Signal<WashingMachineIdentification> = this._washingMachineCreateService.getWashingMachineIdentification();
+  washingMachineIdentification: Signal<Identification> = this._washingMachineCreateService.getWashingMachineIdentification();
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],

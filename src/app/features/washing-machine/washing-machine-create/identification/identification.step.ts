@@ -22,7 +22,7 @@ import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-butto
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductApi } from 'src/app/shared/services/product.api';
 import { CustomValidators } from 'src/app/shared/validators/custom.validators';
-import { WashingMachineIdentification } from '../../models/washing-machine-identification.model';
+import { Identification } from '../../models/identification.model';
 
 @Component({
   selector: 'app-identification',
@@ -186,7 +186,7 @@ export class IdentificationStep implements OnInit, OnDestroy {
       ? "N/A"
       : this.washingMachineIdentificationForm.controls.modelAndType.controls.type.value;
 
-    const productIdentificationResult:WashingMachineIdentification = {
+    const productIdentificationResult:Identification = {
       identificationMode: this.washingMachineIdentificationForm.controls.identificationMode.value as IdentificationMode,
       category: this.washingMachineIdentificationForm.controls.category.value,
       manufacturer: this.washingMachineIdentificationForm.controls.manufacturer.value,

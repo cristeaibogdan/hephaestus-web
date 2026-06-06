@@ -2,10 +2,10 @@ import { Injectable, Signal, inject, signal } from "@angular/core";
 import { firstValueFrom, switchMap } from "rxjs";
 import { CreateWashingMachineRequest } from '../models/endpoints/create-washing-machine.endpoint';
 import { ImageFile } from "../models/image-file.model";
-import { WashingMachineIdentification } from "../models/washing-machine-identification.model";
+import { Identification } from "../models/identification.model";
 import { WashingMachineApi } from "../washing-machine.api";
 import { Recommendation } from "../enums/recommendation.enum";
-import { WashingMachineDetail } from "../models/washing-machine-detail.model";
+import { Detail } from "../models/detail.model";
 import { ReturnType } from "../enums/return-type.enum";
 import { DamageType } from "../enums/damage-type.enum";
 import { IdentificationMode } from "../enums/identification-mode.enum";
@@ -18,7 +18,7 @@ export class WashingMachineCreateService {
 // *** STEP 1 = PRODUCT IDENTIFICATION
 // **************************************
 
-  private readonly washingMachineIdentificationDefault: WashingMachineIdentification = {
+  private readonly washingMachineIdentificationDefault: Identification = {
     identificationMode: IdentificationMode.QR_CODE,
     category: "",
     manufacturer: "",
@@ -31,13 +31,13 @@ export class WashingMachineCreateService {
     // Possible solution = add DEFAULT, but exclude the option in each select, so inputs remain invalid
   }
 
-  private washingMachineIdentification = signal<WashingMachineIdentification>(this.washingMachineIdentificationDefault);
+  private washingMachineIdentification = signal<Identification>(this.washingMachineIdentificationDefault);
 
-  getWashingMachineIdentification(): Signal<WashingMachineIdentification> {
+  getWashingMachineIdentification(): Signal<Identification> {
     return this.washingMachineIdentification.asReadonly();
   }
 
-  setWashingMachineIdentification(washingMachineIdentification: WashingMachineIdentification): void {
+  setWashingMachineIdentification(washingMachineIdentification: Identification): void {
     this.washingMachineIdentification.set(washingMachineIdentification);
   }
 
@@ -49,7 +49,7 @@ export class WashingMachineCreateService {
 // *** STEP 2 = PRODUCT DAMAGE ASSESSMENT
 // *****************************************
 
-  private readonly washingMachineDetailDefault: WashingMachineDetail = {
+  private readonly washingMachineDetailDefault: Detail = {
     applicablePackageDamage: false,
     packageDamaged: false,
     packageDirty: false,
@@ -79,13 +79,13 @@ export class WashingMachineCreateService {
     repairPrice: 0
   };
 
-  private washingMachineDetail = signal<WashingMachineDetail>(this.washingMachineDetailDefault);
+  private washingMachineDetail = signal<Detail>(this.washingMachineDetailDefault);
 
-  setWashingMachineDetail(washingMachineDetail: WashingMachineDetail): void {
+  setWashingMachineDetail(washingMachineDetail: Detail): void {
     this.washingMachineDetail.set(washingMachineDetail);
   }
 
-  getWashingMachineDetail(): Signal<WashingMachineDetail> {
+  getWashingMachineDetail(): Signal<Detail> {
     return this.washingMachineDetail.asReadonly();
   }
 
