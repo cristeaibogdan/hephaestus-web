@@ -1,22 +1,26 @@
 === Anthony ===
 Feature - search solar panel
-
 Input - serialNumber
 Output - Solar Panel with said serialNumber
 
+1. Create interface
 export interface SearchSolarPanelUseCase { // interface because we want to think of a contract.
   searchBySerialNumber(serialNumber: string): SearchSolarPanelResponse
 }
 
-We want to write a UI level implementation of the above interface.
-
-Write a test for the interface: 
-  Name of the file => search-solar-panel-use-case-test.spec.ts (name can be modified later)
+2. Write a test for the interface: 
+  Name of the file => search-solar-panel-use-case.spec.ts (name can be modified later)
   Name of the tests => SHOULD return solar panel (OUTPUT) WHEN given serialNumber (INPUT)
 
-We decided to write a PLAYWRIGHT TEST using the interface.
+3. We decided to write a PLAYWRIGHT TEST using the interface created previously.
 
-We create a PLAYWRIGHT DRIVER ADAPTER for the interface.
+4. We create a PLAYWRIGHT DRIVER ADAPTER (class) for the interface.
 
-Will continue next meeting.
-Create separate branch.
+Do on your own and see what you end up with.
+
+We are encapsulating playwright implementation details inside an interface.
+
+Homework:
+1. Write a simple test for the use case using the adapter we created.
+2. Create a second adapter called InMemoryStubAdapter 
+ (instead of going through playwright to search for your washing machine, you're going to do the search using this adapter).
