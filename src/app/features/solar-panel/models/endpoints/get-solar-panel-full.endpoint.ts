@@ -1,4 +1,4 @@
-import { SolarPanelRecommendation } from "../../solar-panel-recommendation.enum";
+import { Recommendation } from "../../recommendation.enum";
 
 /**
  * Complete solar panel information including damage.
@@ -14,7 +14,7 @@ export interface GetSolarPanelFullResponse {
   serialNumber: string;
 
   createdAt: Date;
-  recommendation: SolarPanelRecommendation;
+  recommendation: Recommendation;
 
   damage?: Damage;
 }

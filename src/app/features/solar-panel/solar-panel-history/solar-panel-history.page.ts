@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, HostListener, ViewChild, inject } from '@angular/core';
 import { GetSolarPanelFullResponse } from "../models/endpoints/get-solar-panel-full.endpoint";
 import { MatSort, MatSortModule } from '@angular/material/sort';
-import { SolarPanelRecommendation } from '../solar-panel-recommendation.enum';
+import { Recommendation } from '../recommendation.enum';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { SearchSolarPanelRequest } from "../models/endpoints/search-solar-panel.endpoint";
 import { ViewModal } from './view/view.modal';
@@ -50,7 +50,7 @@ export class SolarPanelHistoryPage implements AfterViewInit {
   private fb = inject(FormBuilder);
   private _solarPanelApi = inject(SolarPanelApi);
 
-  solarPanelRecommendation = SolarPanelRecommendation;
+  solarPanelRecommendation = Recommendation;
   dataSource: HistoryDatasource = inject(HistoryDatasource);
 
   displayedColumns: string[] = [
@@ -86,7 +86,7 @@ export class SolarPanelHistoryPage implements AfterViewInit {
 
   filterColumns: string[] = this.displayedColumns.map(column => column + "-filter");
 
-  recommendationOptions: SolarPanelRecommendation[] = Object.values(SolarPanelRecommendation);
+  recommendationOptions: Recommendation[] = Object.values(Recommendation);
 
   filterForm = this.fb.group({
     createdAt: null as string | null,
@@ -94,7 +94,7 @@ export class SolarPanelHistoryPage implements AfterViewInit {
     serialNumber: null as string | null,
     model: null as string | null,
     type: null as string | null,
-    recommendation: null as SolarPanelRecommendation | null
+    recommendation: null as Recommendation | null
   });
 
   onFilter() {

@@ -10,7 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { SolarPanelDamage } from '../../models/solar-panel-damage.model';
+import { Damage } from '../../models/damage.model';
 import { NotificationService } from "../../../../shared/services/notification.service";
 
 @Component({
@@ -63,7 +63,7 @@ export class DamageStep {
       return;
     }
 
-    const solarPanelDamage: SolarPanelDamage = {
+    const solarPanelDamage: Damage = {
       hotSpots: this.solarPanelDamageForm.controls.hotSpots.value,
       microCracks: this.solarPanelDamageForm.controls.microCracks.value,
       snailTrails: this.solarPanelDamageForm.controls.snailTrails.value,

@@ -1,4 +1,4 @@
-export interface SolarPanelIdentification {
+export interface Identification {
   category: string;
   manufacturer: string;
   model: string;

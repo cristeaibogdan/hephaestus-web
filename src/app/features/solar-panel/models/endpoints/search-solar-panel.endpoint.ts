@@ -1,4 +1,4 @@
-import { SolarPanelRecommendation } from "../../solar-panel-recommendation.enum";
+import { Recommendation } from "../../recommendation.enum";
 
 export interface SearchSolarPanelRequest {
   pageIndex: number;
@@ -13,7 +13,7 @@ export interface SearchSolarPanelRequest {
   serialNumber: string | null;
 
   createdAt: string | null;
-  recommendation: SolarPanelRecommendation | null;
+  recommendation: Recommendation | null;
 }
 
 export interface SearchSolarPanelResponse {
@@ -24,5 +24,5 @@ export interface SearchSolarPanelResponse {
   serialNumber: string;
 
   createdAt: Date;
-  recommendation: SolarPanelRecommendation;
+  recommendation: Recommendation;
 }

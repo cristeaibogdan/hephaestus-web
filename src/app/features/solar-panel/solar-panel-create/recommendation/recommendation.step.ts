@@ -1,8 +1,8 @@
 import { Component, Signal, inject } from '@angular/core';
 import { SolarPanelCreateService } from "../solar-panel-create.service";
-import { SolarPanelIdentification } from '../../models/solar-panel-identification.model';
+import { Identification } from '../../models/identification.model';
 import { SolarPanelApi } from '../../solar-panel.api';
-import { SolarPanelRecommendation } from '../../solar-panel-recommendation.enum';
+import { Recommendation } from '../../recommendation.enum';
 import { MatButtonModule } from '@angular/material/button';
 import { OverviewStep } from '../overview/overview.step';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -25,8 +25,8 @@ export class RecommendationStep {
   private _solarPanelCreateService = inject(SolarPanelCreateService);
   private _solarPanelApi = inject(SolarPanelApi);
 
-  solarPanelIdentification: Signal<SolarPanelIdentification> = this._solarPanelCreateService.getSolarPanelIdentification();
-  solarPanelRecommendation: SolarPanelRecommendation = this._solarPanelCreateService.getRecommendation();
+  solarPanelIdentification: Signal<Identification> = this._solarPanelCreateService.getSolarPanelIdentification();
+  solarPanelRecommendation: Recommendation = this._solarPanelCreateService.getRecommendation();
 
   onDownload() {
     this._solarPanelApi.getReport(this.solarPanelIdentification().serialNumber);

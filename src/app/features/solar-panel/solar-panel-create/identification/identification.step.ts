@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SerialNumberValidator } from 'src/app/shared/validators/async-validators/serial-number.validator';
 import { CustomValidators } from 'src/app/shared/validators/custom.validators';
-import { SolarPanelIdentification } from '../../models/solar-panel-identification.model';
+import { Identification } from '../../models/identification.model';
 import { SolarPanelCreateService } from "../solar-panel-create.service";
 import { MatStepper } from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';
@@ -78,7 +78,7 @@ export class IdentificationStep implements OnInit, OnDestroy {
       ? "N/A"
       : this.solarPanelForm.controls.modelAndType.controls.type.value;
 
-    const solarPanelIdentification: SolarPanelIdentification = {
+    const solarPanelIdentification: Identification = {
       category: this.solarPanelForm.controls.category.value,
       manufacturer: this.solarPanelForm.controls.manufacturer.value,
       model: model,

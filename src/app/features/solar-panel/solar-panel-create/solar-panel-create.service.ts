@@ -1,10 +1,10 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { firstValueFrom, switchMap } from 'rxjs';
-import { SolarPanelIdentification } from '../models/solar-panel-identification.model';
+import { Identification } from '../models/identification.model';
 import { SolarPanelApi } from "../solar-panel.api";
 import { CreateSolarPanelRequest } from "../models/endpoints/create-solar-panel.endpoint";
-import { SolarPanelRecommendation } from '../solar-panel-recommendation.enum';
-import { SolarPanelDamage } from '../models/solar-panel-damage.model';
+import { Recommendation } from '../recommendation.enum';
+import { Damage } from '../models/damage.model';
 
 /**
  * TODO:
@@ -20,7 +20,7 @@ export class SolarPanelCreateService {
 // *** STEP 1 = IDENTIFICATION
 // **************************************
 
-  private readonly solarPanelIdentificationDefault: SolarPanelIdentification = {
+  private readonly solarPanelIdentificationDefault: Identification = {
     category: '',
     manufacturer: '',
     model: '',
@@ -28,13 +28,13 @@ export class SolarPanelCreateService {
     serialNumber: ''
   }
 
-  private solarPanelIdentification = signal<SolarPanelIdentification>(this.solarPanelIdentificationDefault);
+  private solarPanelIdentification = signal<Identification>(this.solarPanelIdentificationDefault);
 
   getSolarPanelIdentification() {
     return this.solarPanelIdentification.asReadonly();
   }
 
-  setSolarPanelIdentification(solarPanelIdentification: SolarPanelIdentification) {
+  setSolarPanelIdentification(solarPanelIdentification: Identification) {
     this.solarPanelIdentification.set(solarPanelIdentification);
   }
 
@@ -46,7 +46,7 @@ export class SolarPanelCreateService {
 // *** STEP 2 = DAMAGE
 // **************************************
 
-  private readonly solarPanelDamageDefault: SolarPanelDamage = {
+  private readonly solarPanelDamageDefault: Damage = {
     hotSpots: false,
     microCracks: false,
     snailTrails: false,
@@ -54,13 +54,13 @@ export class SolarPanelCreateService {
     additionalDetails: ''
   }
 
-  private solarPanelDamage = signal<SolarPanelDamage>(this.solarPanelDamageDefault);
+  private solarPanelDamage = signal<Damage>(this.solarPanelDamageDefault);
 
   getSolarPanelDamage() {
     return this.solarPanelDamage.asReadonly();
   }
 
-  setSolarPanelDamage(solarPanelDamage: SolarPanelDamage) {
+  setSolarPanelDamage(solarPanelDamage: Damage) {
     this.solarPanelDamage.set(solarPanelDamage);
   }
 
@@ -136,9 +136,9 @@ export class SolarPanelCreateService {
 // *** STEP 4 = RECOMMENDATION
 // **************************************
 
-  private recommendation!: SolarPanelRecommendation;
+  private recommendation!: Recommendation;
 
-  getRecommendation(): SolarPanelRecommendation {
+  getRecommendation(): Recommendation {
     return this.recommendation;
   }
 

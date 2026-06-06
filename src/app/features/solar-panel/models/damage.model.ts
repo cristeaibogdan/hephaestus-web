@@ -1,4 +1,4 @@
-export interface SolarPanelDamage {
+export interface Damage {
   hotSpots: boolean;
   microCracks: boolean;
   snailTrails: boolean;

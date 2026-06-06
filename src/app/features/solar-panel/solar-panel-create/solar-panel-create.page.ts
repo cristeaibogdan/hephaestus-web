@@ -5,7 +5,7 @@ import { OverviewStep } from './overview/overview.step';
 import { RecommendationStep } from './recommendation/recommendation.step';
 import { MatStepperModule } from '@angular/material/stepper';
 import { TranslocoModule } from '@jsverse/transloco';
-import { SolarPanelIdentification } from '../models/solar-panel-identification.model';
+import { Identification } from '../models/identification.model';
 import { SolarPanelCreateService } from "./solar-panel-create.service";
 
 @Component({
@@ -24,5 +24,5 @@ import { SolarPanelCreateService } from "./solar-panel-create.service";
 })
 export class SolarPanelCreatePage {
   private _solarPanelCreateService = inject(SolarPanelCreateService);
-  solarPanelIdentification: Signal<SolarPanelIdentification> = this._solarPanelCreateService.getSolarPanelIdentification();
+  solarPanelIdentification: Signal<Identification> = this._solarPanelCreateService.getSolarPanelIdentification();
 }

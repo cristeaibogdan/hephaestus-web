@@ -4,7 +4,7 @@ import { CreateSolarPanelRequest } from "./models/endpoints/create-solar-panel.e
 import { SearchSolarPanelRequest } from "./models/endpoints/search-solar-panel.endpoint";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { SolarPanelRecommendation } from './solar-panel-recommendation.enum';
+import { Recommendation } from './recommendation.enum';
 import { Page } from 'src/app/shared/models/page.model';
 import { SearchSolarPanelResponse } from "./models/endpoints/search-solar-panel.endpoint";
 import { GetSolarPanelFullResponse } from "./models/endpoints/get-solar-panel-full.endpoint";
@@ -23,11 +23,11 @@ export class SolarPanelApi {
     return this.http.post<void>(url, createSolarPanelRequest);
   }
 
-  getRecommendation(serialNumber:string): Observable<SolarPanelRecommendation> {
+  getRecommendation(serialNumber:string): Observable<Recommendation> {
     const url = this.apiURL.concat("/v1/solar-panels/")
     .concat(serialNumber)
     .concat("/recommendation");
-    return this.http.get<SolarPanelRecommendation>(url);
+    return this.http.get<Recommendation>(url);
   }
 
 // **************************************

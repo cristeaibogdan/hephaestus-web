@@ -25,8 +25,10 @@ Domain-level folders are strictly for reuse across multiple pages.
 - **Single-page domain** — page files sit directly in the domain folder. No page subfolder is needed.
 
 - **Multi-page domain** — each page gets its own subfolder. Page folders and files are prefixed with the domain name (e.g. washing-machine-create/)
-  to avoid class name collisions in app.routes.ts, which imports pages from all domains simultaneously.
+  to avoid class name collisions in `app.routes.ts`, which imports pages from all domains simultaneously.
   Pages with inherently unique names (e.g. login, register) are exempt from prefixing.
+
+> Only page folders and their files are prefixed with the domain name. All other domain-level files rely on their folder path for context.
 
 ```
 ├── features/
@@ -103,7 +105,7 @@ app/
 │   │   └── home.page.html
 │   │
 │   └── washing-machine/
-│       ├── washing-machine-create/
+│       ├── washing-machine-create/    # page — prefixed (collision rule)
 │       │   ├── damage/
 │       │   │   ├── damage.component.ts
 │       │   │   └── damage.component.html
@@ -114,7 +116,7 @@ app/
 │       │   ├── washing-machine-create.page.html
 │       │   └── ...
 │       │
-│       ├── washing-machine-history/
+│       ├── washing-machine-history/    # page — prefixed (collision rule)
 │       │   ├── view/
 │       │   │   ├── view.modal.ts
 │       │   │   └── view.modal.html
@@ -127,11 +129,11 @@ app/
 │       │   ├── washing-machine-history.page.html
 │       │   └── ...
 │       │
-│       ├── washing-machine.api.ts                   # flat — exactly 1 service
-│       ├── washing-machine-recommendation.enum.ts   # flat — exactly 1 enum
-│       ├── models/                                  # 2+ models → subfolder created
-│       │     ├── washing-machine-damage.model.ts
-│       │     └── washing-machine-repair.model.ts
+│       ├── washing-machine.api.ts     # flat — exactly 1 service
+│       ├── recommendation.enum.ts     # flat — exactly 1 enum
+│       ├── models/                    # 2+ models → subfolder created
+│       │     ├── damage.model.ts
+│       │     └── repair.model.ts
 │       └── ...
 ├── layout/
 │   ├── header/
