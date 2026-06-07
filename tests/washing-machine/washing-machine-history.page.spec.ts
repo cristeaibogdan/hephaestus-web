@@ -1,29 +1,29 @@
 import { expect } from '@playwright/test';
 import { customTest } from '../base';
-import { WashingMachineHistoryPagePom } from './pages/washing-machine-history.page.pom';
+import { WashingMachineHistoryPom } from './pages/washing-machine-history.pom';
 
 /**
  * Given a serial number, find a washing machine with that serialNumber.
  * Other properties are implementation details.
- * 
- * 
+ *
+ *
  * Idea: Using resources in backend to point to a temporary database, that will be deleted at the end of the
- * test suite. Can use a file implementationinstead of the database, or a collection. 
+ * test suite. Can use a file implementationinstead of the database, or a collection.
  */
-customTest('filters and finds a single serialNumber', async ({ washingMachineHistoryPagePom }) => {
-  await washingMachineHistoryPagePom.goto(); // Can be extracted in a beforeEach
+customTest('filters and finds a single serialNumber', async ({ washingMachineHistoryPom }) => {
+  await washingMachineHistoryPom.goto(); // Can be extracted in a beforeEach
 
-  await filterBySerialNumber(washingMachineHistoryPagePom, 'fasda');
+  await filterBySerialNumber(washingMachineHistoryPom, 'fasda');
 
-  await washingMachineHistoryPagePom.applyFilter();
+  await washingMachineHistoryPom.applyFilter();
 
-  expect(washingMachineHistoryPagePom.findRowBySerialNumber('fasda')).toBeTruthy();
+  expect(washingMachineHistoryPom.findRowBySerialNumber('fasda')).toBeTruthy();
 });
 
-customTest('Finds specific row and aserts data', async ({ washingMachineHistoryPagePom }) => {
-  await washingMachineHistoryPagePom.goto();
+customTest('Finds specific row and aserts data', async ({ washingMachineHistoryPom }) => {
+  await washingMachineHistoryPom.goto();
 
-  const row = washingMachineHistoryPagePom.findRowBySerialNumber('sda');
+  const row = washingMachineHistoryPom.findRowBySerialNumber('sda');
   console.log(row);
 
   await expect(row.manufacturer()).toHaveText('Gorenje');
@@ -34,7 +34,7 @@ customTest('Finds specific row and aserts data', async ({ washingMachineHistoryP
 
 
 
-async function filterBySerialNumber(washingMachineHistoryPage: WashingMachineHistoryPagePom, serialNumber: string) {
+async function filterBySerialNumber(washingMachineHistoryPage: WashingMachineHistoryPom, serialNumber: string) {
   await washingMachineHistoryPage.filterByCreatedDate('2026-03-06');
   await washingMachineHistoryPage.filterByIdentificationMode('Data Matrix');
   await washingMachineHistoryPage.filterByManufacturer('Bosch');

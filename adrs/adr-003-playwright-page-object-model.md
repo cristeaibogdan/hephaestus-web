@@ -1,14 +1,5 @@
 ## Playwright Page Object Model with Fixtures
 
-
-!!!! TODO: Investigate this.
-POM class names use the full <Domain><Page>PagePom prefix (e.g. WashingMachineCreatePagePom).
-Unlike Angular components which are scoped by module and file path,
-POMs are imported together in a flat fixture context — without prefixing, names from different domains collide.
-Possible solution:
-- take washing-machine-create.page.ts and turn it into washing-machine-create.pom.ts
-  (replace page with pom, not worth keeping both, as POM stands for Page Object Model)
-
 ## Status
 Accepted: Decision approved and in effect. Please don't hesitate to challenge it.
 
@@ -30,17 +21,21 @@ instead of raw locator calls. Specs interact with the application through these 
 they never reference selectors directly.
 
 ```ts
-// washing-machine.page.ts
-export class WashingMachinePage {
+// washing-machine-create.pom.ts
+export class WashingMachineCreatePom {
   constructor(private readonly page: Page) {}
 
   async selectProgram(program: string) {
-   await this.page.getByTestId('program-select').click();
-   await this.page.getByRole('option', { name: program }).click();
+    await this.page.getByLabel('Program').click();
+    await this.page.getByRole('option', { name: program }).click();
   }
 
   async startCycle() {
-   await this.page.getByTestId('start-button').click();
+    await this.page.getByRole('button', { name: 'Start' }).click();
+  }
+
+  getCycleStatus() {
+    return this.page.getByTestId('cycle-status');
   }
 }
 ```
@@ -52,21 +47,19 @@ We extend this to inject our own Page Objects.
 ```ts
 // base.ts
 import { test as base } from '@playwright/test';
-import { WashingMachinePage } from './washing-machine/pages/washing-machine.page';
-import { SolarPanelHistoryPage } from './washing-machine/pages/washing-machine-history.page';
 
 type MyFixtures = {
-  washingMachinePage: WashingMachinePage;
-  washingMachineHistoryPage: SolarPanelHistoryPage;
+  washingMachineCreatePom: WashingMachineCreatePom;
+  solarPanelHistoryPom: SolarPanelHistoryPom;
 };
 
 export const customTest = base.extend<MyFixtures>({
-  washingMachinePage: async ({ page }, use) => {
-    await use(new WashingMachinePage(page));
+  washingMachineCreatePom: async ({ page }, use) => {
+    await use(new WashingMachineCreatePom(page));
   },
 
-  washingMachineHistoryPage: async ({ page }, use) => {
-    await use(new SolarPanelHistoryPage(page));
+  solarPanelHistoryPom: async ({ page }, use) => {
+    await use(new SolarPanelHistoryPom(page));
   },
 });
 ```
@@ -78,10 +71,10 @@ page objects it needs.
 import { customTest } from '../fixtures';
 import { expect } from '@playwright/test';
 
-customTest('starts a wash cycle', async ({ washingMachinePage }) => {
-  await washingMachinePage.selectProgram('Cotton');
-  await washingMachinePage.startCycle();
-  await expect(page.getByTestId('cycle-status')).toHaveText('Running');
+customTest('starts a wash cycle', async ({ washingMachineCreatePom }) => {
+  await washingMachineCreatePom.selectProgram('Cotton');
+  await washingMachineCreatePom.startCycle();
+  await expect(washingMachineCreatePom.getCycleStatus()).toHaveText('Running');
 });
 ```
 

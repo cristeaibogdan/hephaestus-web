@@ -1,13 +1,13 @@
 import { expect } from "@playwright/test";
 import { TEST_FILES } from "tests/assets/file.provider";
 import { customTest } from "tests/base";
-import { WashingMachineHistoryPagePom } from "tests/washing-machine/pages/washing-machine-history.page.pom";
+import { WashingMachineHistoryPom } from "tests/washing-machine/pages/washing-machine-history.pom";
 
-customTest('create and view washing machine', async ({ washingMachineCreatePagePom, washingMachineHistoryPagePom }) => {
-  await washingMachineCreatePagePom.goto();
+customTest('create and view washing machine', async ({ washingMachineCreatePom, washingMachineHistoryPom }) => {
+  await washingMachineCreatePom.goto();
 
-  const damageStep = washingMachineCreatePagePom.damageStep();
-  const identificationStep = washingMachineCreatePagePom.identificationStep();
+  const damageStep = washingMachineCreatePom.damageStep();
+  const identificationStep = washingMachineCreatePom.identificationStep();
 
   // 1. Identification
   await identificationStep.selectIdentificationMode('Data Matrix');
@@ -58,7 +58,7 @@ customTest('create and view washing machine', async ({ washingMachineCreatePageP
   await damageStep.next();
 
   // 3. Overview
-  const overview = washingMachineCreatePagePom.overviewStep();
+  const overview = washingMachineCreatePom.overviewStep();
   await expect(overview.category()).toContainText('Washing Machine');
   await expect(overview.manufacturer()).toContainText('Bosch');
   await expect(overview.serialNumber()).toContainText('Un serial');
@@ -94,23 +94,23 @@ customTest('create and view washing machine', async ({ washingMachineCreatePageP
   // Check if page loaded succesfully.
 
   // 5. History
-  await washingMachineHistoryPagePom.goto();
+  await washingMachineHistoryPom.goto();
 
-  const row = washingMachineHistoryPagePom.findRowBySerialNumber('fasda');
+  const row = washingMachineHistoryPom.findRowBySerialNumber('fasda');
 
   await expect(row.manufacturer()).toHaveText('Bosch');
   await expect(row.model()).toHaveText('WGB256A1GB');
   await expect(row.type()).toHaveText('N/A');
-    
-  async function filterBySerialNumber(washingMachineHistoryPagePom: WashingMachineHistoryPagePom, serialNumber: string) {
+
+  async function filterBySerialNumber(washingMachineHistoryPagePom: WashingMachineHistoryPom, serialNumber: string) {
     await washingMachineHistoryPagePom.filterByCreatedDate('2026-03-06');
     await washingMachineHistoryPagePom.filterByIdentificationMode('Data Matrix');
     await washingMachineHistoryPagePom.filterByManufacturer('Bosch');
     await washingMachineHistoryPagePom.filterByModel('WGB256A1GB');
     await washingMachineHistoryPagePom.filterByType('N/A');
-  
+
     await washingMachineHistoryPagePom.filterBySerialNumber(serialNumber);
-  
+
     await washingMachineHistoryPagePom.filterByReturnType('Service');
     await washingMachineHistoryPagePom.filterByDamageType('In Use');
     await washingMachineHistoryPagePom.filterByRecommendation('REPACKAGE');

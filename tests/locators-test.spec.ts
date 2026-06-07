@@ -1,10 +1,10 @@
 import { expect } from "@playwright/test";
 import { customTest } from "tests/base";
 
-customTest('playground-create', async ({ washingMachineCreatePagePom }) => {
-  await washingMachineCreatePagePom.goto();
+customTest('playground-create', async ({ washingMachineCreatePom }) => {
+  await washingMachineCreatePom.goto();
 
-  const identificationStep = washingMachineCreatePagePom.identificationStep();
+  const identificationStep = washingMachineCreatePom.identificationStep();
 
   await identificationStep.selectIdentificationMode('Data Matrix');
   await identificationStep.selectManufacturer('Bosch');
@@ -16,8 +16,8 @@ customTest('playground-create', async ({ washingMachineCreatePagePom }) => {
   await identificationStep.next();
 });
 
-customTest('playground-history', async ({ washingMachineHistoryPagePom }) => {
-  await washingMachineHistoryPagePom.goto();
+customTest('playground-history', async ({ washingMachineHistoryPom }) => {
+  await washingMachineHistoryPom.goto();
 
   // await washingMachineHistoryPagePom.filterByCreatedDate("2026-05-19");
   // await washingMachineHistoryPagePom.filterByIdentificationMode("Data Matrix");
@@ -30,7 +30,7 @@ customTest('playground-history', async ({ washingMachineHistoryPagePom }) => {
   // await washingMachineHistoryPagePom.filterByRecommendation("REPAIR");
 
   // TODO: Alternative:
-  await washingMachineHistoryPagePom.filterBy({
+  await washingMachineHistoryPom.filterBy({
     createdAt: "2026-05-19",
     identificationMode: "Data Matrix",
     manufacturer: "Bosch",
@@ -44,24 +44,24 @@ customTest('playground-history', async ({ washingMachineHistoryPagePom }) => {
 
 });
 
-customTest('playground-history-header-sort', async ({ washingMachineHistoryPagePom }) => {
-  await washingMachineHistoryPagePom.goto();
+customTest('playground-history-header-sort', async ({ washingMachineHistoryPom }) => {
+  await washingMachineHistoryPom.goto();
 
-  await washingMachineHistoryPagePom.sortBy("Created", "desc");
-  await washingMachineHistoryPagePom.sortBy("Identification Mode");
-  await washingMachineHistoryPagePom.sortBy("Manufacturer");
-  await washingMachineHistoryPagePom.sortBy("Model");
-  await washingMachineHistoryPagePom.sortBy("Type");
-  await washingMachineHistoryPagePom.sortBy("Serial Number");
-  await washingMachineHistoryPagePom.sortBy("Return Type");
-  await washingMachineHistoryPagePom.sortBy("Damage Type");
-  await washingMachineHistoryPagePom.sortBy("Recommendation");
+  await washingMachineHistoryPom.sortBy("Created", "desc");
+  await washingMachineHistoryPom.sortBy("Identification Mode");
+  await washingMachineHistoryPom.sortBy("Manufacturer");
+  await washingMachineHistoryPom.sortBy("Model");
+  await washingMachineHistoryPom.sortBy("Type");
+  await washingMachineHistoryPom.sortBy("Serial Number");
+  await washingMachineHistoryPom.sortBy("Return Type");
+  await washingMachineHistoryPom.sortBy("Damage Type");
+  await washingMachineHistoryPom.sortBy("Recommendation");
 });
 
-customTest('playground-history-open-view', async ({ washingMachineHistoryPagePom }) => {
-  await washingMachineHistoryPagePom.goto();
+customTest('playground-history-open-view', async ({ washingMachineHistoryPom }) => {
+  await washingMachineHistoryPom.goto();
 
-  const viewModal = washingMachineHistoryPagePom.viewModal;
+  const viewModal = washingMachineHistoryPom.viewModal;
 
   await viewModal.open(0);
   await expect(viewModal.category()).toContainText('Washing Machine');
@@ -76,6 +76,6 @@ customTest('playground-history-open-view', async ({ washingMachineHistoryPagePom
 
   await viewModal.close();
 
-  
+
 
 });

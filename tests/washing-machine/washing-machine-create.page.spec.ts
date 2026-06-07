@@ -8,9 +8,9 @@ test.describe('Identification', () => {
 
   let identificationStep: IdentificationStep;
 
-  customTest.beforeEach(async ({ washingMachineCreatePagePom }) => {
-    await washingMachineCreatePagePom.goto();
-    identificationStep = washingMachineCreatePagePom.identificationStep();
+  customTest.beforeEach(async ({ washingMachineCreatePom }) => {
+    await washingMachineCreatePom.goto();
+    identificationStep = washingMachineCreatePom.identificationStep();
   });
 
   customTest('cannot proceed to next step when fields are empty', async () => {
@@ -21,7 +21,7 @@ test.describe('Identification', () => {
     await expect(identificationStep.serialNumberRequired()).toBeVisible();
   });
 
-  customTest('navigates to next step when valid input is provided', async ({ washingMachineCreatePagePom }) => {
+  customTest('navigates to next step when valid input is provided', async ({ washingMachineCreatePom }) => {
     await identificationStep.selectIdentificationMode('Data Matrix');
     await identificationStep.selectManufacturer('Bosch');
     await identificationStep.selectModel('WGB256A1GB');
@@ -31,7 +31,7 @@ test.describe('Identification', () => {
     await identificationStep.selectDamageType('In Use');
     await identificationStep.next();
 
-    await expect(washingMachineCreatePagePom.damageStep().getDamageStepHeader()).toBeVisible();
+    await expect(washingMachineCreatePom.damageStep().getDamageStepHeader()).toBeVisible();
   });
 
 });
@@ -40,10 +40,10 @@ test.describe('Damage', () => {
 
   let damageStep: DamageStep;
 
-  customTest.beforeEach(async ({ washingMachineCreatePagePom }) => {
-    await washingMachineCreatePagePom.goto();
-    await washingMachineCreatePagePom.identificationStep().complete();
-    damageStep = washingMachineCreatePagePom.damageStep();
+  customTest.beforeEach(async ({ washingMachineCreatePom }) => {
+    await washingMachineCreatePom.goto();
+    await washingMachineCreatePom.identificationStep().complete();
+    damageStep = washingMachineCreatePom.damageStep();
   });
 
   customTest('shows error when no image is uploaded', async () => {
@@ -71,7 +71,7 @@ test.describe('Damage', () => {
     await expect(damageStep.invalidFileExtensionError()).toBeVisible();
   });
 
-  customTest('navigates to next step when valid input is provided', async ({ washingMachineCreatePagePom }) => {
+  customTest('navigates to next step when valid input is provided', async ({ washingMachineCreatePom }) => {
     await damageStep.uploadImages(
       TEST_FILES.images.jpg.landscape,
       TEST_FILES.images.jpeg.mountains,
@@ -109,16 +109,16 @@ test.describe('Damage', () => {
     await damageStep.fillProductRepairPrice(20);
 
     await damageStep.next();
-    await expect(washingMachineCreatePagePom.overviewStep().getOverviewStepHeader()).toBeVisible();
+    await expect(washingMachineCreatePom.overviewStep().getOverviewStepHeader()).toBeVisible();
   });
 });
 
 test.describe('Overview', () => {
-  
-  customTest('shows previously selected values when Overview is reached', async ({ washingMachineCreatePagePom }) => {
-    await washingMachineCreatePagePom.goto();
-    const damageStep = washingMachineCreatePagePom.damageStep();
-    const identificationStep = washingMachineCreatePagePom.identificationStep();
+
+  customTest('shows previously selected values when Overview is reached', async ({ washingMachineCreatePom }) => {
+    await washingMachineCreatePom.goto();
+    const damageStep = washingMachineCreatePom.damageStep();
+    const identificationStep = washingMachineCreatePom.identificationStep();
 
     // 1. Identification
     await identificationStep.selectIdentificationMode('Data Matrix');
@@ -169,7 +169,7 @@ test.describe('Overview', () => {
     await damageStep.next();
 
     // 3. Overview
-    const overview = washingMachineCreatePagePom.overviewStep();
+    const overview = washingMachineCreatePom.overviewStep();
     await expect(overview.category()).toContainText('Washing Machine');
     await expect(overview.manufacturer()).toContainText('Bosch');
     await expect(overview.serialNumber()).toContainText('Un serial');

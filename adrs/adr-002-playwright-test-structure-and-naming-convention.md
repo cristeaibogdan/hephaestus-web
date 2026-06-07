@@ -29,10 +29,10 @@ Adopt a folder structure and naming convention that organises tests by domain, m
 
 **B. Domain Layer** - `tests/<domain>/`
 
-| Path                        | Purpose                                          |
-| --------------------------- | -------------------------------------------------|
-| `pages/<name>.page.pom.ts`  | Holds locators and interactions for a page (POM) |
-| `<name>.page.spec.ts`       | Holds tests for a specific page                  |
+| Path                       | Purpose                                          |
+|----------------------------|--------------------------------------------------|
+| `pages/<page-name>.pom.ts` | Holds locators and interactions for a page (POM) |
+| `<name>.page.spec.ts`      | Holds tests for a specific page                  |
 
 **C. Assets Layer** - `tests/assets/`
 
@@ -85,7 +85,7 @@ tests/
 │
 ├── washing-machine/
 │   ├── pages/
-│   │   ├── washing-machine-create.page.pom.ts
+│   │   ├── washing-machine-create.pom.ts
 │   │   └── ...
 │   ├── washing-machine-create.page.spec.ts
 │   ├── washing-machine-history.page.spec.ts
@@ -93,13 +93,13 @@ tests/
 │
 ├── home/
 │   ├── pages/
-│   │   └── home.page.pom.ts
+│   │   └── home.pom.ts
 │   └── home.page.spec.ts
 │
 ├── authorization/
 │   ├── pages/
-│   │   ├── login.page.pom.ts
-│   │   └── register.page.pom.ts
+│   │   ├── login.pom.ts
+│   │   └── register.pom.ts
 │   ├── login.page.spec.ts
 │   └── register.page.spec.ts
 │
