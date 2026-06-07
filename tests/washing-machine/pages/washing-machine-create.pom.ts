@@ -3,7 +3,7 @@ import { IdentificationStep } from './identification.step';
 import { DamageStep } from './damage.step';
 import { OverviewStep } from './overview.step';
 
-export class WashingMachineCreatePagePom {
+export class WashingMachineCreatePom {
 
   constructor(
     private page: Page

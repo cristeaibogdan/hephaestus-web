@@ -1,13 +1,13 @@
 import { type Locator, type Page } from '@playwright/test';
-import { WashingMachineHistoryViewModal } from './washing-machine-history-view.modal';
+import { ViewModal } from './view.modal';
 
 /**
  * As per ADR-004, Angular Material filter rows lack labels and placeholders by default.
  * aria-label was added to each input/select in the template to enable getByRole().
  */
-export class WashingMachineHistoryPagePom {
+export class WashingMachineHistoryPom {
 
-  readonly viewModal = new WashingMachineHistoryViewModal(this.page);
+  readonly viewModal = new ViewModal(this.page);
 
   constructor(
     private page: Page
@@ -95,7 +95,7 @@ export class WashingMachineHistoryPagePom {
   //     .getByRole('button', { name: 'View' })
   //     .click();
   // }
-  
+
   async sortBy(
     columnName: "Created" | "Identification Mode" | "Manufacturer" | "Model" | "Type" | "Serial Number" | "Return Type" | "Damage Type" | "Recommendation",
     direction: "asc" | "desc" = "asc"
@@ -134,11 +134,11 @@ export class WashingMachineRow {
   constructor(private row: Locator) {}
 
   /**
-   * Angular Material automatically adds mat-column-{columnDef} to every cell based 
-   * on the matColumnDef value in template — these are stable as long as the column 
+   * Angular Material automatically adds mat-column-{columnDef} to every cell based
+   * on the matColumnDef value in template — these are stable as long as the column
    * definition name doesn't change, which is far less likely than column order changing.
    */
-  manufacturer(): Locator { 
+  manufacturer(): Locator {
     return this.row.locator('td.mat-column-manufacturer');
   }
 

@@ -1,11 +1,11 @@
 import { Locator, Page } from "@playwright/test";
 
-export class WashingMachineHistoryViewModal {
+export class ViewModal {
 
   constructor(
     private page: Page
   ) {}
-  
+
   async open(index: number): Promise<void> {
     await this.page
       .locator('tr.mat-mdc-row')

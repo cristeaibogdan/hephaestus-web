@@ -80,16 +80,6 @@ All tests run on the English version, so translation fragility is not a concern 
 However, tests will break if backend values change which for our backend is fine.
 
 
-
-
-
-
-
-
-
-
-
-
 # Page encapsulation
 
 Pages should be encapsulated and expose only behaviour outside.
@@ -112,96 +102,11 @@ Pages should be encapsulated and expose only behaviour outside.
 - For rows, it makes sense to get the whole data from the row using a custom object - ...Row
 
 # TODOs
-0. Enforce adr-001 project structure in a separate branch.
-1. Enforce adr-002 test structure and naming. Move status to accepted.
-2. Rename washing-machine.component, washing-machine-history.component to washing-machine.page, washing-machine-history.page
-3. Finish ADR 003 page object model
+1. Finish ADR 003 page object model
   - Should it expose convenience methods like complete step 1? => yes!
-4. Finish ADR 004 usage of locators
-5. Is the new naming convention with page creating problems with the pages I create for tests?
-6. Where do components like home, navbar, footer belong to? What domain package do they have?
-
-Application is composed of multiple domains which are composed of pages,
-and each page has multiple components.
-
-<!-- Application -->
-app/
-├── layout/
-│   ├── footer/
-│   │   ├── footer.component.html
-│   │   ├── footer.component.scss
-│   │   ├── footer.component.spec.ts
-│   │   └── footer.component.ts
-│   │
-│   └── header/
-│       ├── header.component.html
-│       ├── header.component.scss
-│       ├── header.component.spec.ts
-│       └── header.component.ts
-│
-├── washing-machine/ => domain
-│   ├── components/
-│   │   ├── washing-machine-create/
-│   │   │   ├── steps/
-│   │   │   │   ├── damage/
-│   │   │   │   ├── identification/
-│   │   │   │   ├── overview/
-│   │   │   │   └── recommendation/
-│   │   │   ├── washing-machine-create.page.html
-│   │   │   ├── washing-machine-create.page.scss
-│   │   │   ├── washing-machine-create.page.spec.ts
-│   │   │   └── washing-machine-create.page.ts
-│   │   │
-│   │   └── washing-machine-history/
-│   │       ├── view/
-│   │       │   ├── view.modal.html
-│   │       │   ├── view.modal.scss
-│   │       │   ├── washing-machine-history-view.modal.spec.ts
-│   │       │   └── view.modal.ts
-
-<!-- Playwright -->
-tests/ 
-├── e2e/
-│   ├── create-and-view-washing-machine.spec.ts
-│   ├── create-and-view-solar-panel.spec.ts
-│   └── ...
-│
-├── washing-machine/
-│   ├── pages/
-│   │   ├── washing-machine-create.page.pom.ts
-│   │   └── ...
-│   ├── washing-machine-create.page.spec.ts
-│   ├── washing-machine-history.page.spec.ts
-│   └── ...
-|
-├── layout/
-│   ├── pages/
-│   │   ├── footer.page.pom.ts
-│   │   └── header.page.pom.ts
-│   ├── footer.page.spec.ts
-│   └── header.page.spec.ts
-│
-├── home/
-│   ├── pages/
-│   │   └── home.page.pom.ts
-│   └── home.page.spec.ts
-│
-├── authorization/
-│   ├── pages/
-│   │   ├── login.page.pom.ts
-│   │   └── register.page.pom.ts
-│   ├── login.page.spec.ts
-│   └── register.page.spec.ts
-│
-├── initialization/
-│   ├── pages/
-│   │   ├── initialization-spinner.modal.pom.ts
-│   │   └── initialization-fail.page.pom.ts
-│   ├── initialization-spinner.modal.spec.ts
-│   └── initialization-fail.page.spec.ts
-
-7. Properties or methods for POMs and how to decide?
-8. Worth having one method call multiple methods inside pom
+2. Finish ADR 004 usage of locators
+3. Properties or methods for POMs and how to decide?
+4. Worth having one method call multiple methods inside pom
   a) multiple methods with one input help page tests
   b) single method with multiple (optional) inputs help readability in E2E tests
-9. Add translation ADR
+5. Add translation ADR

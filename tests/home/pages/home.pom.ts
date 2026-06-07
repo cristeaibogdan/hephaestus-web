@@ -1,6 +1,6 @@
 import { Locator, type Page } from '@playwright/test';
 
-export class HomePagePom {
+export class HomePom {
 
   constructor(
     private page: Page
