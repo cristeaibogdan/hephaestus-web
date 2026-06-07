@@ -12,7 +12,7 @@ import { provideTransloco } from '@jsverse/transloco';
 import { environment } from 'src/environments/environment';
 import { TranslocoHttpLoader } from './shared/transloco-http.loader';
 import { CompositePropagatorModule, OpenTelemetryInterceptorModule, ZipkinExporterModule } from '@jufab/opentelemetry-angular-interceptor';
-import { InitializationService } from "./shared/services/initialization.service";
+import { InitializationService } from "./features/initialization/initialization.service";
 import { GlobalErrorHandler } from "./shared/services/global-error-handler.service";
 import { timeoutInterceptor } from "./shared/interceptors/timeout.interceptor";
 import { languageInterceptor } from "./shared/interceptors/language.interceptor";

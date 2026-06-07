@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthenticationApi } from './authentication.api';
-import { LoginUserRequest, LoginUserResponse } from "../../features/authentication/models/endpoints/login-user.endpoint";
+import { LoginUserRequest, LoginUserResponse } from "./models/endpoints/login-user.endpoint";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
