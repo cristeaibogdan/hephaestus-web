@@ -1,0 +1,160 @@
+@use '@angular/material' as mat;
+
+h3 {
+  background-color: #BBC2CC;
+  color: #444;
+  padding: 5px;
+  text-align: center;
+  font-weight: 500;
+
+  margin:0;
+  margin-bottom: 2%;
+}
+
+/* ************************************ */
+/* *** TABLE POSITION */
+/* ************************************ */
+
+.table-container {
+  width: 95%;
+  margin: 0 auto;
+
+  max-height: calc(100% - 100px);
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  overflow-x: auto;
+}
+
+/* ************************************ */
+/* *** TABLE RELATED */
+/* ************************************ */
+
+th, td {
+  color: #444;
+  text-align: center;
+  border-right: 2px solid #909ca0;
+}
+
+th {
+  background-color: #d0ebff !important;
+  border-bottom: 2px solid #909ca0;
+}
+
+tr:nth-child(odd) {
+  background-color: #e9edee;
+}
+
+tr:hover {
+  background-color: #d3f9d8;
+}
+
+/* BREAKES LONG TEXT SO IT DOESN'T APPEAR OUTSIDE THE CONTAINER */
+tr {
+  word-wrap: break-word;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.recommendation-text {
+  color: #444;
+  padding: 8px 16px;
+  border-radius: 50px;
+}
+
+/* INDIVIDUAL WIDTH OF COLUMNS */
+.mat-column-createdAt, .mat-column-createdAt-filter {
+  max-width: 170px;
+}
+
+.mat-column-manufacturer, .mat-column-manufacturer-filter {
+  max-width: 150px;
+}
+
+.mat-column-serialNumber, .mat-column-serialNumber-filter {
+  max-width: 150px;
+}
+
+.mat-column-model, .mat-column-model-filter {
+  max-width: 160px;
+}
+
+.mat-column-type, .mat-column-type-filter {
+  max-width: 160px;
+}
+
+.mat-column-recommendation, .mat-column-recommendation-filter {
+  max-width: 160px;
+}
+
+.mat-column-actions, .mat-column-actions-filter {
+  min-width: 180px;
+}
+
+/* ************************************ */
+/* *** TABLE SORTING */
+/* ************************************ */
+
+/* Makes the arrow go beneath the header */
+::ng-deep .mat-sort-header-container {
+  flex-direction: column;
+}
+
+/* Removes the default margin of the arrow */
+::ng-deep .mat-sort-header-arrow {
+  margin: 0 !important;
+}
+
+/* ************************************************************ */
+/* *** MATINPUTS STYLES */
+/* ************************************************************ */
+
+.filter-input {
+  box-sizing: border-box;
+  width: 100%;
+
+  /* Remove space below the form field */
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+
+  @include mat.form-field-density(-6);
+
+  /* Need to modify the calendar icon-button size so
+  the form-field can apply density of -6 */
+  ::ng-deep .mat-mdc-icon-button.mat-mdc-button-base {
+    --mat-icon-button-state-layer-size: 24px;
+    padding: 0;
+    margin-right: 12px;
+    color: #556eb0;
+  }
+
+  /* Makes the clickable area of the datepicker smaller */
+  ::ng-deep .mat-mdc-icon-button .mat-mdc-button-touch-target {
+    height: 28px;
+    width: 28px;
+  }
+}
+
+mat-icon {
+  padding: 0;
+}
+
+[matPrefix] { // Remove padding added by directive matPrefix
+  padding: 0;
+  padding-left: 12px;
+}
+
+/* ************************************************************ */
+/* *** REMOVE BORDER FROM FIRST AND LAST COLUMN */
+/* ************************************************************ */
+
+th:last-child, td:last-child {
+  border-right: none;
+}

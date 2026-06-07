@@ -1,5 +1,14 @@
 ## Playwright Page Object Model with Fixtures
 
+
+!!!! TODO: Investigate this.
+POM class names use the full <Domain><Page>PagePom prefix (e.g. WashingMachineCreatePagePom).
+Unlike Angular components which are scoped by module and file path,
+POMs are imported together in a flat fixture context — without prefixing, names from different domains collide.
+Possible solution:
+- take washing-machine-create.page.ts and turn it into washing-machine-create.pom.ts
+  (replace page with pom, not worth keeping both, as POM stands for Page Object Model)
+
 ## Status
 Accepted: Decision approved and in effect. Please don't hesitate to challenge it.
 
@@ -44,11 +53,11 @@ We extend this to inject our own Page Objects.
 // base.ts
 import { test as base } from '@playwright/test';
 import { WashingMachinePage } from './washing-machine/pages/washing-machine.page';
-import { WashingMachineHistoryPage } from './washing-machine/pages/washing-machine-history.page';
+import { SolarPanelHistoryPage } from './washing-machine/pages/washing-machine-history.page';
 
 type MyFixtures = {
   washingMachinePage: WashingMachinePage;
-  washingMachineHistoryPage: WashingMachineHistoryPage;
+  washingMachineHistoryPage: SolarPanelHistoryPage;
 };
 
 export const customTest = base.extend<MyFixtures>({
@@ -57,7 +66,7 @@ export const customTest = base.extend<MyFixtures>({
   },
 
   washingMachineHistoryPage: async ({ page }, use) => {
-    await use(new WashingMachineHistoryPage(page));
+    await use(new SolarPanelHistoryPage(page));
   },
 });
 ```
