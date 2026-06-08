@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CreateUserRequest } from "../models/endpoints/create-user.endpoint";
 import { NotificationService } from "../../../shared/services/notification.service";
-import { AuthenticationApi } from "../authentication.api";
+import { AuthenticationApi } from "../../../shared/services/authentication.api";
 
 @Component({
   selector: 'app-register',

@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@jsverse/transloco';
 import { LanguageSelectorComponent } from 'src/app/shared/components/language-selector/language-selector.component';
 import { LoginUserResponse } from "../../features/authentication/models/endpoints/login-user.endpoint";
-import {AuthService} from "../../features/authentication/auth.service";
+import {AuthService} from "../../shared/services/auth.service";
 
 @Component({
   selector: 'app-header',

@@ -9,7 +9,7 @@ import { LanguageSelectorComponent } from 'src/app/shared/components/language-se
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { LoginUserRequest } from "../models/endpoints/login-user.endpoint";
-import { AuthService } from "../auth.service";
+import { AuthService } from "../../../shared/services/auth.service";
 
 @Component({
   selector: 'app-login',

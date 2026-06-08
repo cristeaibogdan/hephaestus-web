@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
 import { GetOrganizationAndCountryResponse } from 'src/app/features/authentication/models/endpoints/get-user-organization-and-country.endpoint';
 import { UserUpdateContainer } from 'src/app/features/authentication/models/endpoints/user-update-container.model';
 import { SKIP_INTERCEPTOR } from 'src/app/shared/validators/async-validators/skip-interceptor.token';
-import {CreateUserRequest} from "./models/endpoints/create-user.endpoint";
-import {LoginUserRequest, LoginUserResponse} from "./models/endpoints/login-user.endpoint";
+import {CreateUserRequest} from "../../features/authentication/models/endpoints/create-user.endpoint";
+import {LoginUserRequest, LoginUserResponse} from "../../features/authentication/models/endpoints/login-user.endpoint";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationApi {
