@@ -61,6 +61,11 @@ customTest('playground-history-header-sort', async ({ washingMachineHistoryPom }
 customTest('playground-history-open-view', async ({ washingMachineHistoryPom }) => {
   await washingMachineHistoryPom.goto();
 
+  await washingMachineHistoryPom.filterBy({
+    serialNumber: "sdajuu",
+  });
+  await washingMachineHistoryPom.applyFilter();
+
   const viewModal = washingMachineHistoryPom.viewModal;
 
   await viewModal.open(0);
@@ -75,7 +80,4 @@ customTest('playground-history-open-view', async ({ washingMachineHistoryPom }) 
   await expect(viewModal.damageType()).toContainText('In Use');
 
   await viewModal.close();
-
-
-
 });

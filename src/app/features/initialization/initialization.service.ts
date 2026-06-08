@@ -31,12 +31,12 @@ export class InitializationService {
       this.wakeupProduct()
     ]);
 
+    initializationSpinner.close();
+
     // If one of the services fail, redirect to InitializationFailComponent
     if(!washingMachineAwake || !productAwake) {
-      this.router.navigate(['/initialization-fail']);
+      await this.router.navigate(['/initialization-fail']);
     }
-
-    initializationSpinner.close();
   }
 
   cancel(): void {
@@ -55,7 +55,7 @@ export class InitializationService {
             count: 3,
             delay: (error, count) => {
               console.warn(`Washing Machine retry attempt ${count}/3`, error);
-              return timer(1000);
+              return timer(1_000);
             }
           }),
           takeUntil(this.cancel$),
@@ -69,7 +69,7 @@ export class InitializationService {
   }
 
   private async wakeupProduct(): Promise<boolean> {
-    try { 
+    try {
       await firstValueFrom(
         this.http.get(`${this.apiUrl}/v1/products/Washing Machine/manufacturers`, {
           context: new HttpContext().set(SKIP_INTERCEPTOR, true)
@@ -78,7 +78,7 @@ export class InitializationService {
             count: 3,
             delay: (error, count) => {
               console.warn(`Product retry attempt ${count}/3`, error);
-              return timer(1000);
+              return timer(1_000);
             }
           }),
           takeUntil(this.cancel$),
