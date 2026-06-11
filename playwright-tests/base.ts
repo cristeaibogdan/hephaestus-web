@@ -2,11 +2,13 @@ import { test as base } from '@playwright/test';
 import { WashingMachineCreatePom } from './washing-machine/pages/washing-machine-create.pom';
 import { WashingMachineHistoryPom } from './washing-machine/pages/washing-machine-history.pom';
 import { HomePom } from './home/pages/home.pom';
+import {SearchSolarPanelPlaywrightAdapter} from "../src/use-cases/search-solar-panel-playwright-adapter";
 
 type MyFixtures = {
   homePom: HomePom,
   washingMachineCreatePom: WashingMachineCreatePom,
-  washingMachineHistoryPom: WashingMachineHistoryPom
+  washingMachineHistoryPom: WashingMachineHistoryPom,
+  searchSolarPanelPlaywrightAdapter: SearchSolarPanelPlaywrightAdapter,
 }
 
 export const customTest = base.extend<MyFixtures>({
@@ -59,5 +61,9 @@ export const customTest = base.extend<MyFixtures>({
 
   washingMachineHistoryPom: async({ page }, use) => {
     await use(new WashingMachineHistoryPom(page))
+  },
+
+  searchSolarPanelPlaywrightAdapter: async ({ page }, use) => {
+    await use(new SearchSolarPanelPlaywrightAdapter(page));
   }
 })
