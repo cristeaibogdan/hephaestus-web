@@ -18,7 +18,7 @@ Adopt a folder structure and naming convention that organises tests by domain, m
 
 ## Folder Structure
 
-**A. Top Layer** - `tests/`
+**A. Top Layer** - `playwright-tests/`
 
 | Path          | Purpose                                                                                   |
 | ------------- | ------------------------------------------------------------------------------------------|
@@ -27,14 +27,14 @@ Adopt a folder structure and naming convention that organises tests by domain, m
 | `assets/`     | Shared files used across tests                                                            |
 | `base.ts`     | Declares Playwright fixtures and exports `customTest`                                     |
 
-**B. Domain Layer** - `tests/<domain>/`
+**B. Domain Layer** - `playwright-tests/<domain>/`
 
 | Path                       | Purpose                                          |
 |----------------------------|--------------------------------------------------|
 | `pages/<page-name>.pom.ts` | Holds locators and interactions for a page (POM) |
 | `<name>.page.spec.ts`      | Holds tests for a specific page                  |
 
-**C. Assets Layer** - `tests/assets/`
+**C. Assets Layer** - `playwright-tests/assets/`
 
 | Path               | Purpose                                                    |
 | ------------------ | -----------------------------------------------------------|
@@ -77,7 +77,7 @@ customTest('create and view washing machine', ...);
 
 ## Example
 ```
-tests/
+playwright-tests/
 ├── e2e/
 │   ├── create-and-view-washing-machine.spec.ts
 │   ├── create-and-view-solar-panel.spec.ts
