@@ -140,7 +140,9 @@ export class SolarPanelHistoryPage implements AfterViewInit {
 // *****************************************
 
   @HostListener("window:keydown.tab", ["$event"]) // The host property is not able to listen to window or document events directly, so the cleanest approach here is to stick with @HostListener for this specific event.
-  handleTab(event: KeyboardEvent) {
+  handleTab(event: Event) {
+    const keyboardEvent = event as KeyboardEvent; // TODO: Update documentation in Angular.
+
     const focusedElement = document.activeElement as HTMLElement;
 
     const isOfTypeInput: boolean = focusedElement.tagName == "INPUT";
@@ -151,7 +153,7 @@ export class SolarPanelHistoryPage implements AfterViewInit {
     }
 
     document.getElementById("first")?.focus();
-    event.preventDefault();
+    keyboardEvent.preventDefault();
   }
 
 // *****************************************

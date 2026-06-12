@@ -167,7 +167,9 @@ export class WashingMachineHistoryPage implements AfterViewInit {
 
   // The host property is not able to listen to window or document events directly, so the cleanest approach here is to stick with @HostListener for this specific event.
   @HostListener("window:keydown.tab", ["$event"])
-  handleTab(event: KeyboardEvent): void {
+  handleTab(event: Event): void {
+    const keyboardEvent = event as KeyboardEvent;
+
     const focusedElement = document.activeElement as HTMLElement;
 
     const isOfTypeInput: boolean = focusedElement.tagName == "INPUT";
@@ -178,7 +180,7 @@ export class WashingMachineHistoryPage implements AfterViewInit {
     }
 
     document.getElementById("first")?.focus();
-    event.preventDefault();
+    keyboardEvent.preventDefault();
   }
 
 // *****************************************
