@@ -27,6 +27,9 @@ import { SolarPanelApi } from '../solar-panel.api';
   templateUrl: './solar-panel-history.page.html',
   styleUrls: ['./solar-panel-history.page.scss'],
   providers: [HistoryDatasource],
+  host: {
+    '(window:keydown.tab)': 'handleTab($event)'
+  },
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -139,10 +142,7 @@ export class SolarPanelHistoryPage implements AfterViewInit {
 // *** TAB KEY HANDLER
 // *****************************************
 
-  @HostListener("window:keydown.tab", ["$event"]) // The host property is not able to listen to window or document events directly, so the cleanest approach here is to stick with @HostListener for this specific event.
   handleTab(event: Event) {
-    const keyboardEvent = event as KeyboardEvent;
-
     const focusedElement = document.activeElement as HTMLElement;
 
     const isOfTypeInput: boolean = focusedElement.tagName == "INPUT";
@@ -153,7 +153,7 @@ export class SolarPanelHistoryPage implements AfterViewInit {
     }
 
     document.getElementById("first")?.focus();
-    keyboardEvent.preventDefault();
+    event.preventDefault();
   }
 
 // *****************************************
