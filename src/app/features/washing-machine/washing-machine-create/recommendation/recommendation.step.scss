@@ -1,10 +1,10 @@
-app-washing-machine-overview ::ng-deep .hide {
+app-overview ::ng-deep .hide { // TODO: Look for a better solution
   display: none !important;
 }
 
 .recommendation-text {
   color: #444;
-  
+
   font-size: 1.5rem;
   padding: 8px 16px;
   border-radius: 50px;

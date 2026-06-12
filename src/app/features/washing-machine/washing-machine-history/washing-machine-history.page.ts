@@ -31,6 +31,9 @@ import { ReturnType } from '../enums/return-type.enum';
   templateUrl: './washing-machine-history.page.html',
   styleUrls: ['./washing-machine-history.page.scss'],
   providers: [ HistoryDatasource ],
+  host: {
+    '(window:keydown.tab)': 'handleTab($event)'
+  },
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -165,9 +168,7 @@ export class WashingMachineHistoryPage implements AfterViewInit {
 // *** TAB KEY HANDLER
 // *****************************************
 
-  // The host property is not able to listen to window or document events directly, so the cleanest approach here is to stick with @HostListener for this specific event.
-  @HostListener("window:keydown.tab", ["$event"])
-  handleTab(event: KeyboardEvent): void {
+  handleTab(event: Event) {
     const focusedElement = document.activeElement as HTMLElement;
 
     const isOfTypeInput: boolean = focusedElement.tagName == "INPUT";
