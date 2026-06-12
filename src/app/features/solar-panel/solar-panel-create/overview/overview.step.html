@@ -3,7 +3,7 @@
   <ng-content select="[header]"></ng-content>
 
   <h1>{{"I18N.COMMON.OVERVIEW" | transloco}}</h1>
-  
+
   <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | transloco}}</h2>
   @let identification = solarPanelIdentification();
   <ul class="information-list">
@@ -15,12 +15,12 @@
   </ul>
 
   <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
-  
+
   @let damage = solarPanelDamage();
   <ul class="damages-list">
-    @if (damage.hotSpots) { <li>Hot Spots</li> }        
-    @if (damage.microCracks) { <li>Micro Cracks</li> }        
-    @if (damage.snailTrails) { <li>Snail Trails</li> }        
+    @if (damage.hotSpots) { <li>Hot Spots</li> }
+    @if (damage.microCracks) { <li>Micro Cracks</li> }
+    @if (damage.snailTrails) { <li>Snail Trails</li> }
     @if (damage.brokenGlass) { <li>Broken Glass</li> }
     @if (damage.additionalDetails) {
       <li>
@@ -28,7 +28,7 @@
         {{damage.additionalDetails}}
       </li>
     }
-  </ul>        
+  </ul>
 </div>
 
 
