@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "vitest --ui",
+    "test-headless": "vitest run",
     "playwright": "playwright test --ui"
   },
   "private": true,
@@ -34,19 +35,17 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@analogjs/vite-plugin-angular": "^2.6.1",
     "@angular/build": "^21.2.15",
     "@angular/cli": "~21.2.15",
     "@angular/compiler-cli": "^21.2.17",
     "@playwright/test": "^1.59.1",
-    "@types/jasmine": "~4.0.0",
     "@types/node": "^25.6.0",
-    "jasmine-core": "~4.3.0",
-    "karma": "~6.4.0",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage": "~2.2.0",
-    "karma-jasmine": "~5.1.0",
-    "karma-jasmine-html-reporter": "~2.0.0",
-    "typescript": "~5.9.3"
+    "@vitest/browser-playwright": "^4.1.8",
+    "@vitest/ui": "^4.1.8",
+    "jsdom": "^29.1.1",
+    "typescript": "~5.9.3",
+    "vitest": "^4.1.8"
   },
   "overrides": {
     "@opentelemetry/context-zone-peer-dep": {

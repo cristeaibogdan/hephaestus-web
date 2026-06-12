@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HomePage } from './home.page';
+import {provideRouter} from "@angular/router";
 
 describe('HomeComponent', () => {
   let component: HomePage;
@@ -8,7 +8,8 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomePage ]
+      imports: [HomePage],
+      providers: [provideRouter([])]
     })
     .compileComponents();
 
@@ -17,7 +18,7 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  test('should create', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -20,6 +20,10 @@
     "module": "es2020",
     "useDefineForClassFields": false
   },
+  "references": [
+    {"path": "./tsconfig.spec.json"},
+    {"path": "./tsconfig.app.json"}
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
