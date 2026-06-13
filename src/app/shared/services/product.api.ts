@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { GetModelAndTypeResponse } from 'src/app/shared/models/get-model-and-type.response';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GetProductIdentificationResponse } from '../models/get-product-identification.response';
+import {environment} from "../../../environments/environment";
+import {GetModelAndTypeResponse} from "../models/get-model-and-type.response";
 
 @Injectable({providedIn: 'root'})
 export class ProductApi {

@@ -1,14 +1,38 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RecommendationStep } from './recommendation.step';
+import {MatStepper} from "@angular/material/stepper";
+import {TranslocoTestingModule} from "@jsverse/transloco";
+import {provideRouter} from "@angular/router";
+import {CdkStepper} from "@angular/cdk/stepper";
 
-describe('SolarPanelRecommendationComponent', () => {
+describe('RecommendationStep', () => {
   let component: RecommendationStep;
   let fixture: ComponentFixture<RecommendationStep>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RecommendationStep ]
+      imports: [
+        RecommendationStep,
+        TranslocoTestingModule.forRoot({
+          langs: { },
+          translocoConfig: {
+            availableLangs: ['en'],
+            defaultLang: 'en',
+          },
+        })
+      ],
+      providers: [
+        provideRouter([]),
+        {
+          provide: MatStepper,
+          useValue: {}
+        },
+        {
+          provide: CdkStepper,
+          useValue: {}
+        }
+      ]
     })
     .compileComponents();
 
@@ -17,7 +41,7 @@ describe('SolarPanelRecommendationComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  test('should create', () => {
     expect(component).toBeTruthy();
   });
 });

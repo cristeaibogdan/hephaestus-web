@@ -1,14 +1,42 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ViewModal } from './view.modal';
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {TranslocoTestingModule} from "@jsverse/transloco";
+import {Recommendation} from "../../recommendation.enum";
 
-describe('SolarPanelHistoryViewComponent', () => {
+describe('ViewModal', () => {
   let component: ViewModal;
   let fixture: ComponentFixture<ViewModal>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewModal ]
+      imports: [
+        ViewModal,
+        TranslocoTestingModule.forRoot({
+          langs: { },
+          translocoConfig: {
+            availableLangs: ['en'],
+            defaultLang: 'en',
+          },
+        })
+      ],
+      providers: [
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: {
+            solarPanel: {
+              category: "string",
+              manufacturer: "string",
+              model: "string",
+              type: "string",
+              serialNumber: "string",
+              createdAt: Date.now(),
+              recommendation: Recommendation.REPAIR
+            }
+          }
+        }
+      ]
     })
     .compileComponents();
 
@@ -17,7 +45,7 @@ describe('SolarPanelHistoryViewComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  test('should create', () => {
     expect(component).toBeTruthy();
   });
 });

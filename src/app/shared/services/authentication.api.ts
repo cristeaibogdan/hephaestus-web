@@ -1,12 +1,14 @@
 import { Injectable, inject } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { GetOrganizationAndCountryResponse } from 'src/app/features/authentication/models/endpoints/get-user-organization-and-country.endpoint';
-import { UserUpdateContainer } from 'src/app/features/authentication/models/endpoints/user-update-container.model';
-import { SKIP_INTERCEPTOR } from 'src/app/shared/validators/async-validators/skip-interceptor.token';
 import {CreateUserRequest} from "../../features/authentication/models/endpoints/create-user.endpoint";
 import {LoginUserRequest, LoginUserResponse} from "../../features/authentication/models/endpoints/login-user.endpoint";
+import {environment} from "../../../environments/environment";
+import {UserUpdateContainer} from "../../features/authentication/models/endpoints/user-update-container.model";
+import {
+  GetOrganizationAndCountryResponse
+} from "../../features/authentication/models/endpoints/get-user-organization-and-country.endpoint";
+import {SKIP_INTERCEPTOR} from "../validators/async-validators/skip-interceptor.token";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationApi {

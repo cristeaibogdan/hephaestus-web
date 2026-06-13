@@ -2,9 +2,7 @@ import { Component, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { SolarPanelCreateService } from "../solar-panel-create.service";
-import { CustomValidators } from 'src/app/shared/validators/custom.validators';
 import { TranslocoModule } from '@jsverse/transloco';
-import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,6 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { Damage } from '../../models/damage.model';
 import { NotificationService } from "../../../../shared/services/notification.service";
+import {CustomValidators} from "../../../../shared/validators/custom.validators";
+import {StepperButtonsDirective} from "../../../../shared/directives/stepper-buttons.directive";
 
 @Component({
   selector: 'app-damage',

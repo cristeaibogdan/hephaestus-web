@@ -1,7 +1,5 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SerialNumberValidator } from 'src/app/shared/validators/async-validators/serial-number.validator';
-import { CustomValidators } from 'src/app/shared/validators/custom.validators';
 import { Identification } from '../../models/identification.model';
 import { SolarPanelCreateService } from "../solar-panel-create.service";
 import { MatStepper } from '@angular/material/stepper';
@@ -10,9 +8,11 @@ import { MatFormField } from '@angular/material/form-field';
 import { TranslocoModule } from '@jsverse/transloco';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { MatButtonModule } from '@angular/material/button';
-import { ProductApi } from 'src/app/shared/services/product.api';
+import {SerialNumberValidator} from "../../../../shared/validators/async-validators/serial-number.validator";
+import {ProductApi} from "../../../../shared/services/product.api";
+import {CustomValidators} from "../../../../shared/validators/custom.validators";
+import {StepperButtonsDirective} from "../../../../shared/directives/stepper-buttons.directive";
 
 @Component({
   selector: 'app-identification',

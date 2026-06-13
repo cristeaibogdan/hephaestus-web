@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
 import { GetSolarPanelFullResponse } from "../models/endpoints/get-solar-panel-full.endpoint";
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { Recommendation } from '../recommendation.enum';
@@ -15,12 +15,12 @@ import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { DateFormatYYYYMMDDDirective } from 'src/app/shared/directives/date-format-yyyy-mm-dd.directive';
 import { A11yModule } from '@angular/cdk/a11y';
 import { TranslocoModule } from '@jsverse/transloco';
 import { MatIconModule } from '@angular/material/icon';
 import { HistoryDatasource } from './history.datasource';
 import { SolarPanelApi } from '../solar-panel.api';
+import {DateFormatYYYYMMDDDirective} from "../../../shared/directives/date-format-yyyy-mm-dd.directive";
 
 @Component({
   selector: 'app-solar-panel-history',

@@ -101,8 +101,10 @@ npx playwright show-report
 ```
 
 ### Vitest
-TODO: Add vitest
-
+Vitest is used to run tests:
+```
+npm run test
+```
 
 ## Possible problems
 If spans from the frontend fail to reach Zipkin, you may encounter an error like this in the browser console:

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InitializationFailedPage } from './initialization-failed.page';
+import {provideRouter} from "@angular/router";
 
 describe('InitializationFailedPage', () => {
   let component: InitializationFailedPage;
@@ -8,7 +9,10 @@ describe('InitializationFailedPage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InitializationFailedPage ]
+      imports: [ InitializationFailedPage ],
+      providers: [
+        provideRouter([]),
+      ]
     })
     .compileComponents();
 
@@ -17,7 +21,7 @@ describe('InitializationFailedPage', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  test('should create', () => {
     expect(component).toBeTruthy();
   });
 });

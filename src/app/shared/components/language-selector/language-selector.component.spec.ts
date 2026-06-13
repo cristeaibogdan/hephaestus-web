@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LanguageSelectorComponent } from './language-selector.component';
+import {TranslocoTestingModule} from "@jsverse/transloco";
 
 describe('LanguageSelectorComponent', () => {
   let component: LanguageSelectorComponent;
@@ -8,7 +9,10 @@ describe('LanguageSelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LanguageSelectorComponent ]
+      imports: [
+        LanguageSelectorComponent,
+        TranslocoTestingModule.forRoot({})
+      ]
     })
     .compileComponents();
 
@@ -17,7 +21,7 @@ describe('LanguageSelectorComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  test('should create', () => {
     expect(component).toBeTruthy();
   });
 });

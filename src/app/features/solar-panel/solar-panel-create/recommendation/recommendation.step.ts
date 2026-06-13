@@ -6,8 +6,8 @@ import { Recommendation } from '../../recommendation.enum';
 import { MatButtonModule } from '@angular/material/button';
 import { OverviewStep } from '../overview/overview.step';
 import { TranslocoModule } from '@jsverse/transloco';
-import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { RouterLink } from '@angular/router';
+import {StepperButtonsDirective} from "../../../../shared/directives/stepper-buttons.directive";
 
 @Component({
   selector: 'app-recommendation',

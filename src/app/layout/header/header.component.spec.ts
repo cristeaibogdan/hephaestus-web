@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { HeaderComponent } from './header.component';
+import {HeaderComponent} from "./header.component";
+import {provideRouter} from "@angular/router";
+import { TranslocoTestingModule } from '@jsverse/transloco';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -8,7 +9,19 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ]
+      imports: [
+        HeaderComponent,
+        TranslocoTestingModule.forRoot({
+          langs: { },
+          translocoConfig: {
+            availableLangs: ['en'],
+            defaultLang: 'en',
+          },
+        })
+      ],
+      providers: [
+        provideRouter([]),
+      ]
     })
     .compileComponents();
 
@@ -17,7 +30,7 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  test('should create', () => {
     expect(component).toBeTruthy();
   });
 });

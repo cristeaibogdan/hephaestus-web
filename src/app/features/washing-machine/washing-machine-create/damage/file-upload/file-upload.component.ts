@@ -4,9 +4,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
-import { ImageFile } from 'src/app/features/washing-machine/models/image-file.model';
-import { DragAndDropDirective } from 'src/app/shared/directives/drag-and-drop.directive';
 import {NotificationService} from "../../../../../shared/services/notification.service";
+import {DragAndDropDirective} from "../../../../../shared/directives/drag-and-drop.directive";
+import {ImageFile} from "../../../models/image-file.model";
 
 @Component({
   selector: 'app-file-upload',

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SolarPanelCreatePage } from './solar-panel-create.page';
+import {TranslocoTestingModule} from "@jsverse/transloco";
 
 describe('SolarPanelCreatePage', () => {
   let component: SolarPanelCreatePage;
@@ -8,7 +9,16 @@ describe('SolarPanelCreatePage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SolarPanelCreatePage ]
+      imports: [
+        SolarPanelCreatePage,
+        TranslocoTestingModule.forRoot({
+          langs: { },
+          translocoConfig: {
+            availableLangs: ['en'],
+            defaultLang: 'en',
+          },
+        })
+      ]
     })
     .compileComponents();
 
@@ -17,7 +27,7 @@ describe('SolarPanelCreatePage', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  test('should create', () => {
     expect(component).toBeTruthy();
   });
 });

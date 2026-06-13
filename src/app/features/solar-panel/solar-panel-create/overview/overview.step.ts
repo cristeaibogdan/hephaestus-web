@@ -4,10 +4,10 @@ import { SolarPanelCreateService } from "../solar-panel-create.service";
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { StepperButtonsDirective } from 'src/app/shared/directives/stepper-buttons.directive';
 import { Identification } from '../../models/identification.model';
 import { Damage } from '../../models/damage.model';
 import { NotificationService } from "../../../../shared/services/notification.service";
+import {StepperButtonsDirective} from "../../../../shared/directives/stepper-buttons.directive";
 
 @Component({
   selector: 'app-overview',

@@ -7,7 +7,7 @@ import { LoginUserRequest, LoginUserResponse } from "../../features/authenticati
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
-  private _authenticationApi = inject(AuthenticationApi,);
+  private _authenticationApi = inject(AuthenticationApi);
   private router = inject( Router);
 
   isLoggedIn!:boolean;
