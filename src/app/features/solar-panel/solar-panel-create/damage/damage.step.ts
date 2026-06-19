@@ -71,7 +71,7 @@ export class DamageStep {
       additionalDetails: this.solarPanelDamageForm.controls.additionalDetails.value
     }
 
-    this._solarPanelService.setSolarPanelDamage(solarPanelDamage);
+    this._solarPanelService.setDamage(solarPanelDamage);
     this.stepper.next();
   }
 }

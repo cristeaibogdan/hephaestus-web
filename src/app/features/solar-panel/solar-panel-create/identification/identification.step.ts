@@ -43,8 +43,8 @@ export class IdentificationStep implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._solarPanelCreateService.resetSolarPanelIdentification();
-    this._solarPanelCreateService.resetSolarPanelDamage();
+    this._solarPanelCreateService.resetIdentification();
+    this._solarPanelCreateService.resetDamage();
   }
 
   solarPanelForm = this.fb.group({
@@ -86,14 +86,14 @@ export class IdentificationStep implements OnInit, OnDestroy {
       serialNumber: this.solarPanelForm.controls.serialNumber.value
     }
 
-    this._solarPanelCreateService.setSolarPanelIdentification(solarPanelIdentification);
+    this._solarPanelCreateService.setIdentification(solarPanelIdentification);
     this.stepper.next();
   }
 
   onReset(e:Event) {
     e.preventDefault(); // Prevent the default behavior. The disabled input will not appear empty and will preserve its value
     this.clearAvailableModelsAndTypes();
-    this._solarPanelCreateService.resetSolarPanelIdentification();
+    this._solarPanelCreateService.resetIdentification();
   }
 
 // **********************************

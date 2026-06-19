@@ -15,7 +15,7 @@ export class SolarPanelCreateService {
 // *** STEP 1 = IDENTIFICATION
 // **************************************
 
-  private readonly solarPanelIdentificationDefault: Identification = {
+  private readonly identificationDefault: Identification = {
     category: '',
     manufacturer: '',
     model: '',
@@ -23,22 +23,22 @@ export class SolarPanelCreateService {
     serialNumber: ''
   }
 
-  private readonly _identification = signal<Identification>(this.solarPanelIdentificationDefault);
+  private readonly _identification = signal<Identification>(this.identificationDefault);
   readonly identification = computed(() => Object.freeze(this._identification()));
 
-  setSolarPanelIdentification(solarPanelIdentification: Identification) {
-    this._identification.set(solarPanelIdentification);
+  setIdentification(identification: Identification) {
+    this._identification.set(identification);
   }
 
-  resetSolarPanelIdentification() {
-    this._identification.set(this.solarPanelIdentificationDefault);
+  resetIdentification() {
+    this._identification.set(this.identificationDefault);
   }
 
 // **************************************
 // *** STEP 2 = DAMAGE
 // **************************************
 
-  private readonly solarPanelDamageDefault: Damage = {
+  private readonly damageDefault: Damage = {
     hotSpots: false,
     microCracks: false,
     snailTrails: false,
@@ -46,24 +46,24 @@ export class SolarPanelCreateService {
     additionalDetails: ''
   }
 
-  private readonly _damage = signal<Damage>(this.solarPanelDamageDefault);
+  private readonly _damage = signal<Damage>(this.damageDefault);
   readonly damage = computed(() => Object.freeze(this._damage()));
 
-  setSolarPanelDamage(solarPanelDamage: Damage) {
-    this._damage.set(solarPanelDamage);
+  setDamage(damage: Damage) {
+    this._damage.set(damage);
   }
 
-  resetSolarPanelDamage() {
-    this._damage.set(this.solarPanelDamageDefault);
+  resetDamage() {
+    this._damage.set(this.damageDefault);
   }
 
 // **************************************
 // *** STEP 3 = OVERVIEW
 // **************************************
 
-  create(): Promise<boolean> {
+  async create(): Promise<boolean> {
     // Alternative solution (spreading), simpler but a bit harder to read.
-    // const saveSolarPanelRequest: CreateSolarPanelRequest = {
+    // const createSolarPanelRequest: CreateSolarPanelRequest = {
     //   ...this._identification$(),
     //   _damage: {
     //     ...this._damage$()
@@ -74,7 +74,7 @@ export class SolarPanelCreateService {
     // const {category, manufacturer, model, type, serialNumber}: SolarPanelIdentification = this._identification$();
     // const {hotSpots, microCracks, snailTrails, brokenGlass, additionalDetails}: SolarPanelDamage = this._damage$();
 
-    // const saveSolarPanelRequest: CreateSolarPanelRequest = {
+    // const createSolarPanelRequest: CreateSolarPanelRequest = {
     //   category: category,
     //   manufacturer: manufacturer,
     //   model: model,
@@ -89,31 +89,31 @@ export class SolarPanelCreateService {
     //   }
     // }
 
-    const solarPanelIdentification = this._identification();
-    const solarPanelDamage = this._damage();
+    const identification = this._identification();
+    const damage = this._damage();
 
-    const saveSolarPanelRequest: CreateSolarPanelRequest = {
-      category: solarPanelIdentification.category,
-      manufacturer: solarPanelIdentification.manufacturer,
-      model: solarPanelIdentification.model,
-      type: solarPanelIdentification.type,
-      serialNumber: solarPanelIdentification.serialNumber,
+    const createSolarPanelRequest: CreateSolarPanelRequest = {
+      category: identification.category,
+      manufacturer: identification.manufacturer,
+      model: identification.model,
+      type: identification.type,
+      serialNumber: identification.serialNumber,
       damage: {
-        hotSpots: solarPanelDamage.hotSpots,
-        microCracks: solarPanelDamage.microCracks,
-        snailTrails: solarPanelDamage.snailTrails,
-        brokenGlass: solarPanelDamage.brokenGlass,
-        additionalDetails: solarPanelDamage.additionalDetails
+        hotSpots: damage.hotSpots,
+        microCracks: damage.microCracks,
+        snailTrails: damage.snailTrails,
+        brokenGlass: damage.brokenGlass,
+        additionalDetails: damage.additionalDetails
       }
     }
 
     //TODO: Rename constants to match type
     //TODO: Add return types to methods
-    console.log("Saving = ", saveSolarPanelRequest);
+    console.log("Saving = ", createSolarPanelRequest);
 
-    return firstValueFrom(this._solarPanelApi.create(saveSolarPanelRequest).pipe(
+    return firstValueFrom(this._solarPanelApi.create(createSolarPanelRequest).pipe(
       switchMap(() => {
-        return this._solarPanelApi.getRecommendation(solarPanelIdentification.serialNumber);
+        return this._solarPanelApi.getRecommendation(identification.serialNumber);
       })
     )).then((response) => {
       this.recommendation = response;

@@ -1,10 +1,9 @@
-import { Component, Signal, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { SolarPanelCreateService } from "../solar-panel-create.service";
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { Damage } from '../../models/damage.model';
 import { NotificationService } from "../../../../shared/services/notification.service";
 import {StepperButtonsDirective} from "../../../../shared/directives/stepper-buttons.directive";
 
