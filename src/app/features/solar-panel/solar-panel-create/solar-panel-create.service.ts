@@ -9,7 +9,7 @@ import { Damage } from '../models/damage.model';
 // TODO: Consider migrating to a signals-based store
 @Injectable({providedIn: 'root'})
 export class SolarPanelCreateService {
-  private _solarPanelApi = inject(SolarPanelApi);
+  private readonly _solarPanelApi = inject(SolarPanelApi);
 
 // **************************************
 // *** STEP 1 = IDENTIFICATION
@@ -26,11 +26,11 @@ export class SolarPanelCreateService {
   private readonly _identification = signal<Identification>(this.identificationDefault);
   readonly identification = computed(() => Object.freeze(this._identification()));
 
-  setIdentification(identification: Identification) {
+  setIdentification(identification: Identification): void {
     this._identification.set(identification);
   }
 
-  resetIdentification() {
+  resetIdentification(): void {
     this._identification.set(this.identificationDefault);
   }
 
@@ -49,11 +49,11 @@ export class SolarPanelCreateService {
   private readonly _damage = signal<Damage>(this.damageDefault);
   readonly damage = computed(() => Object.freeze(this._damage()));
 
-  setDamage(damage: Damage) {
+  setDamage(damage: Damage): void {
     this._damage.set(damage);
   }
 
-  resetDamage() {
+  resetDamage(): void {
     this._damage.set(this.damageDefault);
   }
 
@@ -107,8 +107,6 @@ export class SolarPanelCreateService {
       }
     }
 
-    //TODO: Rename constants to match type
-    //TODO: Add return types to methods
     console.log("Saving = ", createSolarPanelRequest);
 
     return firstValueFrom(this._solarPanelApi.create(createSolarPanelRequest).pipe(
