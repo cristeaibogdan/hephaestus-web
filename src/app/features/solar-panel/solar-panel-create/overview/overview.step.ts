@@ -26,8 +26,6 @@ export class OverviewStep {
   private _notifService = inject(NotificationService);
   private _translocoService = inject(TranslocoService);
 
-  solarPanelDamage: Signal<Damage> = this._solarPanelCreateService.getSolarPanelDamage();
-
   create(): void {
     this._solarPanelCreateService.create().then(success => {
       if(success) {

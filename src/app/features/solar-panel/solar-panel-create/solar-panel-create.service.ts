@@ -46,18 +46,15 @@ export class SolarPanelCreateService {
     additionalDetails: ''
   }
 
-  private solarPanelDamage = signal<Damage>(this.solarPanelDamageDefault);
-
-  getSolarPanelDamage() {
-    return this.solarPanelDamage.asReadonly();
-  }
+  private readonly _damage = signal<Damage>(this.solarPanelDamageDefault);
+  readonly damage = computed(() => Object.freeze(this._damage()));
 
   setSolarPanelDamage(solarPanelDamage: Damage) {
-    this.solarPanelDamage.set(solarPanelDamage);
+    this._damage.set(solarPanelDamage);
   }
 
   resetSolarPanelDamage() {
-    this.solarPanelDamage.set(this.solarPanelDamageDefault);
+    this._damage.set(this.solarPanelDamageDefault);
   }
 
 // **************************************
@@ -68,14 +65,14 @@ export class SolarPanelCreateService {
     // Alternative solution (spreading), simpler but a bit harder to read.
     // const saveSolarPanelRequest: CreateSolarPanelRequest = {
     //   ...this._identification$(),
-    //   damage: {
-    //     ...this.solarPanelDamage$()
+    //   _damage: {
+    //     ...this._damage$()
     //   }
     // }
 
     // Another alternative solution (destructuring)
     // const {category, manufacturer, model, type, serialNumber}: SolarPanelIdentification = this._identification$();
-    // const {hotSpots, microCracks, snailTrails, brokenGlass, additionalDetails}: SolarPanelDamage = this.solarPanelDamage$();
+    // const {hotSpots, microCracks, snailTrails, brokenGlass, additionalDetails}: SolarPanelDamage = this._damage$();
 
     // const saveSolarPanelRequest: CreateSolarPanelRequest = {
     //   category: category,
@@ -83,7 +80,7 @@ export class SolarPanelCreateService {
     //   model: model,
     //   type: type,
     //   serialNumber: serialNumber,
-    //   damage: {
+    //   _damage: {
     //     hotSpots: hotSpots,
     //     microCracks: microCracks,
     //     snailTrails: snailTrails,
@@ -93,7 +90,7 @@ export class SolarPanelCreateService {
     // }
 
     const solarPanelIdentification = this._identification();
-    const solarPanelDamage = this.solarPanelDamage();
+    const solarPanelDamage = this._damage();
 
     const saveSolarPanelRequest: CreateSolarPanelRequest = {
       category: solarPanelIdentification.category,

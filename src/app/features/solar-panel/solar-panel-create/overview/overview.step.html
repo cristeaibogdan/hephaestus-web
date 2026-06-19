@@ -16,7 +16,7 @@
 
   <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
 
-  @let damage = solarPanelDamage();
+  @let damage = _solarPanelCreateService.damage();
   <ul class="damages-list">
     @if (damage.hotSpots) { <li>Hot Spots</li> }
     @if (damage.microCracks) { <li>Micro Cracks</li> }
