@@ -4,7 +4,6 @@ import { SolarPanelCreateService } from "../solar-panel-create.service";
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { Identification } from '../../models/identification.model';
 import { Damage } from '../../models/damage.model';
 import { NotificationService } from "../../../../shared/services/notification.service";
 import {StepperButtonsDirective} from "../../../../shared/directives/stepper-buttons.directive";
@@ -23,11 +22,10 @@ import {StepperButtonsDirective} from "../../../../shared/directives/stepper-but
 })
 export class OverviewStep {
   private stepper = inject(MatStepper);
-  private _solarPanelCreateService = inject(SolarPanelCreateService);
+  protected readonly _solarPanelCreateService = inject(SolarPanelCreateService);
   private _notifService = inject(NotificationService);
   private _translocoService = inject(TranslocoService);
 
-  solarPanelIdentification: Signal<Identification> = this._solarPanelCreateService.getSolarPanelIdentification();
   solarPanelDamage: Signal<Damage> = this._solarPanelCreateService.getSolarPanelDamage();
 
   create(): void {

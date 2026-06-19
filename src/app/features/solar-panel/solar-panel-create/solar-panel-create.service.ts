@@ -1,4 +1,4 @@
-import { Injectable, inject, signal } from '@angular/core';
+import {Injectable, inject, signal, computed} from '@angular/core';
 import { firstValueFrom, switchMap } from 'rxjs';
 import { Identification } from '../models/identification.model';
 import { SolarPanelApi } from "../solar-panel.api";
@@ -6,12 +6,7 @@ import { CreateSolarPanelRequest } from "../models/endpoints/create-solar-panel.
 import { Recommendation } from '../recommendation.enum';
 import { Damage } from '../models/damage.model';
 
-/**
- * TODO:
- *  1. Have 1 internal signal with _ and one public as readonly
- *  2. Use directly service.publicSignal in HTML rather than store it in another variable in the component
- *  3. Consider migrating to a signals-based store
- */
+// TODO: Consider migrating to a signals-based store
 @Injectable({providedIn: 'root'})
 export class SolarPanelCreateService {
   private _solarPanelApi = inject(SolarPanelApi);
@@ -28,18 +23,15 @@ export class SolarPanelCreateService {
     serialNumber: ''
   }
 
-  private solarPanelIdentification = signal<Identification>(this.solarPanelIdentificationDefault);
-
-  getSolarPanelIdentification() {
-    return this.solarPanelIdentification.asReadonly();
-  }
+  private readonly _identification = signal<Identification>(this.solarPanelIdentificationDefault);
+  readonly identification = computed(() => Object.freeze(this._identification()));
 
   setSolarPanelIdentification(solarPanelIdentification: Identification) {
-    this.solarPanelIdentification.set(solarPanelIdentification);
+    this._identification.set(solarPanelIdentification);
   }
 
   resetSolarPanelIdentification() {
-    this.solarPanelIdentification.set(this.solarPanelIdentificationDefault);
+    this._identification.set(this.solarPanelIdentificationDefault);
   }
 
 // **************************************
@@ -75,14 +67,14 @@ export class SolarPanelCreateService {
   create(): Promise<boolean> {
     // Alternative solution (spreading), simpler but a bit harder to read.
     // const saveSolarPanelRequest: CreateSolarPanelRequest = {
-    //   ...this.solarPanelIdentification$(),
+    //   ...this._identification$(),
     //   damage: {
     //     ...this.solarPanelDamage$()
     //   }
     // }
 
     // Another alternative solution (destructuring)
-    // const {category, manufacturer, model, type, serialNumber}: SolarPanelIdentification = this.solarPanelIdentification$();
+    // const {category, manufacturer, model, type, serialNumber}: SolarPanelIdentification = this._identification$();
     // const {hotSpots, microCracks, snailTrails, brokenGlass, additionalDetails}: SolarPanelDamage = this.solarPanelDamage$();
 
     // const saveSolarPanelRequest: CreateSolarPanelRequest = {
@@ -100,7 +92,7 @@ export class SolarPanelCreateService {
     //   }
     // }
 
-    const solarPanelIdentification = this.solarPanelIdentification();
+    const solarPanelIdentification = this._identification();
     const solarPanelDamage = this.solarPanelDamage();
 
     const saveSolarPanelRequest: CreateSolarPanelRequest = {

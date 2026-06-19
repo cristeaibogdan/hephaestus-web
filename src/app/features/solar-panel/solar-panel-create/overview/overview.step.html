@@ -5,7 +5,7 @@
   <h1>{{"I18N.COMMON.OVERVIEW" | transloco}}</h1>
 
   <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | transloco}}</h2>
-  @let identification = solarPanelIdentification();
+  @let identification = _solarPanelCreateService.identification();
   <ul class="information-list">
     <li>{{"I18N.COMMON.CATEGORY" | transloco}}: {{identification.category}}</li>
     <li>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{identification.manufacturer}}</li>
