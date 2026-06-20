@@ -1,6 +1,5 @@
-import { Component, Signal, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SolarPanelCreateService } from "../solar-panel-create.service";
-import { Identification } from '../../models/identification.model';
 import { SolarPanelApi } from '../../solar-panel.api';
 import { Recommendation } from '../../recommendation.enum';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,14 +21,13 @@ import {StepperButtonsDirective} from "../../../../shared/directives/stepper-but
   ]
 })
 export class RecommendationStep {
-  private _solarPanelCreateService = inject(SolarPanelCreateService);
+  protected readonly _solarPanelCreateService = inject(SolarPanelCreateService);
   private _solarPanelApi = inject(SolarPanelApi);
 
-  solarPanelIdentification: Signal<Identification> = this._solarPanelCreateService.getSolarPanelIdentification();
   solarPanelRecommendation: Recommendation = this._solarPanelCreateService.getRecommendation();
 
   onDownload() {
-    this._solarPanelApi.getReport(this.solarPanelIdentification().serialNumber);
+    this._solarPanelApi.getReport(this._solarPanelCreateService.identification().serialNumber);
   }
 
 }

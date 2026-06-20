@@ -1,5 +1,5 @@
 <div class="solar-panel-status" >
-  @let identification = solarPanelIdentification();
+  @let identification = _solarPanelCreateService.identification();
   @if (identification.manufacturer) {
     <span>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{identification.manufacturer}}</span>
   }

@@ -1,11 +1,10 @@
-import { Component, inject, Signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IdentificationStep } from './identification/identification.step';
 import { DamageStep } from './damage/damage.step';
 import { OverviewStep } from './overview/overview.step';
 import { RecommendationStep } from './recommendation/recommendation.step';
 import { MatStepperModule } from '@angular/material/stepper';
 import { TranslocoModule } from '@jsverse/transloco';
-import { Identification } from '../models/identification.model';
 import { SolarPanelCreateService } from "./solar-panel-create.service";
 
 @Component({
@@ -23,6 +22,5 @@ import { SolarPanelCreateService } from "./solar-panel-create.service";
   ]
 })
 export class SolarPanelCreatePage {
-  private _solarPanelCreateService = inject(SolarPanelCreateService);
-  solarPanelIdentification: Signal<Identification> = this._solarPanelCreateService.getSolarPanelIdentification();
+  protected readonly _solarPanelCreateService = inject(SolarPanelCreateService);
 }
