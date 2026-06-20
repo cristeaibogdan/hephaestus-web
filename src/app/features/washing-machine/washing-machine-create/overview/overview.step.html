@@ -3,9 +3,9 @@
   <ng-content select="[header]"></ng-content>
 
   <h1>{{"I18N.COMMON.OVERVIEW" | transloco}}</h1>
-  @let identification = washingMachineIdentification();
+  @let identification = _washingMachineCreateService.identification();
 
-  <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | transloco}}</h2>  
+  <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | transloco}}</h2>
   <ul class="product-information-list">
     <li>{{"I18N.COMMON.CATEGORY" | transloco}}: {{identification.category}}</li>
     <li>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{identification.manufacturer}}</li>
@@ -16,127 +16,127 @@
 
   <h2>{{"I18N.COMMON.DAMAGE_IDENTIFICATION_TITLE" | transloco}}</h2>
   <ul class="product-information-list">
-    <li>{{"I18N.COMMON.IDENTIFICATION_MODE" | transloco}}: {{identification.identificationMode | toLabel}}</li>    
+    <li>{{"I18N.COMMON.IDENTIFICATION_MODE" | transloco}}: {{identification.identificationMode | toLabel}}</li>
     <li>{{"I18N.COMMON.RETURN_TYPE" | transloco}}: {{identification.returnType | toLabel}}</li>
     <li>{{"I18N.COMMON.DAMAGE_TYPE" | transloco}}: {{identification.damageType | toLabel}}</li>
   </ul>
 
   <h2>{{"I18N.COMMON.DAMAGED_PRODUCT_IMAGES_TITLE" | transloco}}</h2>
   <section class="image-list">
-    @for (file of selectedFiles; track file) {
+    @for (file of _washingMachineCreateService.selectedFiles(); track file) {
       <img [src]="file.url">
     }
   </section>
 
   <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
-  @let detail = washingMachineDetail();
-  
-  <section class="damages-container">      
-    
-    @if (detail.applicablePackageDamage) {
+  @let damage = _washingMachineCreateService.damage();
+
+  <section class="damages-container">
+
+    @if (damage.applicablePackageDamage) {
       <article>
         <h3>{{"I18N.COMMON.PACKAGE" | transloco}}</h3>
 
         <ul class="damages-list">
-          @if (detail.packageDamaged) { <li>{{"I18N.COMMON.PACKAGE_DAMAGED" | transloco}}</li> }
-          @if (detail.packageDirty) { <li>{{"I18N.COMMON.PACKAGE_DIRTY" | transloco}}</li> }
-          @if (detail.packageMaterialAvailable) { <li>{{"I18N.COMMON.PACKAGE_REPACKAGE" | transloco}}</li> }            
+          @if (damage.packageDamaged) { <li>{{"I18N.COMMON.PACKAGE_DAMAGED" | transloco}}</li> }
+          @if (damage.packageDirty) { <li>{{"I18N.COMMON.PACKAGE_DIRTY" | transloco}}</li> }
+          @if (damage.packageMaterialAvailable) { <li>{{"I18N.COMMON.PACKAGE_REPACKAGE" | transloco}}</li> }
         </ul>
       </article>
     }
-    
-    @if (detail.applicableVisibleSurfacesDamage) {
+
+    @if (damage.applicableVisibleSurfacesDamage) {
       <article>
         <h3>{{"I18N.COMMON.VISIBLE_SURFACES" | transloco}}</h3>
 
         <ul class="damages-list">
-          @if (detail.visibleSurfacesHasScratches) {
+          @if (damage.visibleSurfacesHasScratches) {
             <li>
               {{"I18N.COMMON.SCRATCHES_LENGTH" | transloco}}:
-              {{detail.visibleSurfacesScratchesLength}} 
+              {{damage.visibleSurfacesScratchesLength}}
               {{"I18N.COMMON.CM" | transloco}}
             </li>
           }
 
-          @if (detail.visibleSurfacesHasDents) {
+          @if (damage.visibleSurfacesHasDents) {
             <li>
               {{"I18N.COMMON.DENTS_DEPTH" | transloco}}:
-              {{detail.visibleSurfacesDentsDepth}} 
+              {{damage.visibleSurfacesDentsDepth}}
               {{"I18N.COMMON.CM" | transloco}}
             </li>
           }
 
-          @if (detail.visibleSurfacesHasMinorDamage) {
+          @if (damage.visibleSurfacesHasMinorDamage) {
             <li>
               {{"I18N.COMMON.MINOR_DAMAGES" | transloco}}:
-              {{detail.visibleSurfacesMinorDamage}}
+              {{damage.visibleSurfacesMinorDamage}}
             </li>
           }
 
-          @if (detail.visibleSurfacesHasMajorDamage) {
+          @if (damage.visibleSurfacesHasMajorDamage) {
             <li>
               {{"I18N.COMMON.MAJOR_DAMAGES" | transloco}}:
-              {{detail.visibleSurfacesMajorDamage}}
+              {{damage.visibleSurfacesMajorDamage}}
             </li>
           }
         </ul>
       </article>
     }
 
-    @if (detail.applicableHiddenSurfacesDamage) {
+    @if (damage.applicableHiddenSurfacesDamage) {
       <article>
         <h3>{{"I18N.COMMON.HIDDEN_SURFACES" | transloco}}</h3>
 
         <ul class="damages-list">
-          @if (detail.hiddenSurfacesHasScratches) {
+          @if (damage.hiddenSurfacesHasScratches) {
             <li>
               {{"I18N.COMMON.SCRATCHES_LENGTH" | transloco}}:
-              {{detail.hiddenSurfacesScratchesLength}} 
+              {{damage.hiddenSurfacesScratchesLength}}
               {{"I18N.COMMON.CM" | transloco}}
             </li>
           }
 
-          @if (detail.hiddenSurfacesHasDents) {
+          @if (damage.hiddenSurfacesHasDents) {
             <li>
               {{"I18N.COMMON.DENTS_DEPTH" | transloco}}:
-              {{detail.hiddenSurfacesDentsDepth}} 
+              {{damage.hiddenSurfacesDentsDepth}}
               {{"I18N.COMMON.CM" | transloco}}
-            </li>                
-          }
-
-          @if (detail.hiddenSurfacesHasMinorDamage) {
-            <li>
-              {{"I18N.COMMON.MINOR_DAMAGES" | transloco}}:
-              {{detail.hiddenSurfacesMinorDamage}}
             </li>
           }
 
-          @if (detail.hiddenSurfacesHasMajorDamage) {
+          @if (damage.hiddenSurfacesHasMinorDamage) {
+            <li>
+              {{"I18N.COMMON.MINOR_DAMAGES" | transloco}}:
+              {{damage.hiddenSurfacesMinorDamage}}
+            </li>
+          }
+
+          @if (damage.hiddenSurfacesHasMajorDamage) {
             <li>
               {{"I18N.COMMON.MAJOR_DAMAGES" | transloco}}:
-              {{detail.hiddenSurfacesMajorDamage}}
+              {{damage.hiddenSurfacesMajorDamage}}
             </li>
           }
         </ul>
       </article>
     }
 
-    @if (detail.price > 0 && detail.repairPrice > 0) {
+    @if (damage.price > 0 && damage.repairPrice > 0) {
       <article>
         <h3>{{"I18N.COMMON.PRICING" | transloco}}</h3>
 
         <ul class="damages-list">
           <li>
-            {{"I18N.COMMON.PRODUCT_PRICE" | transloco}}: {{detail.price}} €
+            {{"I18N.COMMON.PRODUCT_PRICE" | transloco}}: {{damage.price}} €
           </li>
           <li>
-            {{"I18N.COMMON.PRODUCT_REPAIR_PRICE" | transloco}}: {{detail.repairPrice}} €
+            {{"I18N.COMMON.PRODUCT_REPAIR_PRICE" | transloco}}: {{damage.repairPrice}} €
           </li>
         </ul>
       </article>
-    }  
+    }
   </section>
-  
+
 </div>
 
 

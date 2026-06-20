@@ -1,5 +1,5 @@
 <div class="washing-machine-status">
-  @let identification = washingMachineIdentification();
+  @let identification = _washingMachineCreateService.identification();
 
   <!-- TODO: Workaround till I find a decent default solution for enums -->
   @if (identification.manufacturer) {

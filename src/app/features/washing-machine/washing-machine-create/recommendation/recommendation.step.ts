@@ -23,15 +23,14 @@ import { NotificationService } from "../../../../shared/services/notification.se
 ]
 })
 export class RecommendationStep {
-  private _washingMachineCreateService = inject(WashingMachineCreateService);
+  protected readonly _washingMachineCreateService = inject(WashingMachineCreateService);
   private _washingMachineApi = inject(WashingMachineApi);
   private _notifService = inject(NotificationService);
 
-  washingMachineIdentification: Signal<Identification> = this._washingMachineCreateService.getWashingMachineIdentification();
   washingMachineRecommendation: Recommendation = this._washingMachineCreateService.getRecommendation();
 
   onDownload(): void {
-    this._washingMachineApi.getReport(this.washingMachineIdentification().serialNumber).subscribe(response => {
+    this._washingMachineApi.getReport(this._washingMachineCreateService.identification().serialNumber).subscribe(response => {
       // Convert to blob
       const arraybuffer = this._notifService.base64ToArrayBuffer(response.report);
       const blob = new Blob([arraybuffer], { type: 'application/pdf' });

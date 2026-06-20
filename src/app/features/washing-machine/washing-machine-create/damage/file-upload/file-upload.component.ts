@@ -83,7 +83,7 @@ export class FileUploadComponent {
   }
 
   onRemoveImage(index:number): void {
-    this.selectedImages().splice(index, 1);
+    this.selectedImages.update(files => files.filter((_, i) => i !== index));
   }
 
 //************************
