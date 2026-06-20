@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WashingMachineCreateService } from '../washing-machine-create.service';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
-import { Detail } from '../../models/detail.model';
+import { Damage } from '../../models/detail.model';
 import { TranslocoModule } from '@jsverse/transloco';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -150,7 +150,7 @@ export class DamageStep {
       return;
     }
 
-    const washingMachineDetail: Detail = {
+    const damage: Damage = {
       applicablePackageDamage: this.washingMachineDetailForm.controls.applicablePackageDamage.value,
       packageDamaged: this.washingMachineDetailForm.controls.packageForm.controls.damaged.value,
       packageDirty: this.washingMachineDetailForm.controls.packageForm.controls.dirty.value,
@@ -190,10 +190,10 @@ export class DamageStep {
       repairPrice: this.washingMachinePricingForm.controls.repairPrice.value
     };
 
-    this._washingMachineCreateService.setWashingMachineDetail(washingMachineDetail);
+    this._washingMachineCreateService.setDamage(damage);
     this._washingMachineCreateService.setSelectedFiles(this.selectedImages());
     this.stepper.next();
-    // console.log("Sent = ", washingMachineDetail);
+    // console.log("Sent = ", damage);
     // TODO: Restructure the DTO into nested DTOs - package, visible, hidden, costAssessment
     console.log(this._washingMachineCreateService.getSelectedFiles());
   }

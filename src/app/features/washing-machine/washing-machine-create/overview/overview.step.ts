@@ -2,7 +2,7 @@ import { Component, inject, Signal } from '@angular/core';
 import { WashingMachineCreateService } from '../washing-machine-create.service';
 import { Identification } from '../../models/identification.model';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
-import { Detail } from '../../models/detail.model';
+import { Damage } from '../../models/detail.model';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { MatButtonModule } from '@angular/material/button';
 import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
@@ -27,8 +27,6 @@ export class OverviewStep {
   protected _washingMachineCreateService = inject(WashingMachineCreateService);
   private _notifService = inject(NotificationService);
   private _translocoService = inject(TranslocoService);
-
-  washingMachineDetail: Signal<Detail> = this._washingMachineCreateService.getWashingMachineDetail();
 
   selectedFiles:ImageFile[] = this._washingMachineCreateService.getSelectedFiles();
 

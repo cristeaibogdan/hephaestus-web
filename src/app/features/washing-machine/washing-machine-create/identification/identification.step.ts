@@ -79,7 +79,7 @@ export class IdentificationStep implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._washingMachineCreateService.resetIdentification();
-    this._washingMachineCreateService.resetWashingMachineDetail();
+    this._washingMachineCreateService.resetDamage();
     this._washingMachineCreateService.clearSelectedFiles();
   }
 

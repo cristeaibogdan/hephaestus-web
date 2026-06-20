@@ -1,4 +1,4 @@
-export interface Detail {
+export interface Damage {
 
 // PACKAGE
     applicablePackageDamage:boolean,

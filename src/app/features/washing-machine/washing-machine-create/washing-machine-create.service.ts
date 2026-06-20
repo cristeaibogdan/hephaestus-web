@@ -5,7 +5,7 @@ import { ImageFile } from "../models/image-file.model";
 import { Identification } from "../models/identification.model";
 import { WashingMachineApi } from "../washing-machine.api";
 import { Recommendation } from "../enums/recommendation.enum";
-import { Detail } from "../models/detail.model";
+import { Damage } from "../models/detail.model";
 import { ReturnType } from "../enums/return-type.enum";
 import { DamageType } from "../enums/damage-type.enum";
 import { IdentificationMode } from "../enums/identification-mode.enum";
@@ -34,8 +34,8 @@ export class WashingMachineCreateService {
   private readonly _identification = signal<Identification>(this.identificationDefault);
   readonly identification = computed(() => Object.freeze(this._identification()));
 
-  setIdentification(washingMachineIdentification: Identification): void {
-    this._identification.set(washingMachineIdentification);
+  setIdentification(identification: Identification): void {
+    this._identification.set(identification);
   }
 
   resetIdentification(): void {
@@ -46,7 +46,7 @@ export class WashingMachineCreateService {
 // *** STEP 2 = PRODUCT DAMAGE ASSESSMENT
 // *****************************************
 
-  private readonly washingMachineDetailDefault: Detail = {
+  private readonly damageDefault: Damage = {
     applicablePackageDamage: false,
     packageDamaged: false,
     packageDirty: false,
@@ -76,18 +76,15 @@ export class WashingMachineCreateService {
     repairPrice: 0
   };
 
-  private washingMachineDetail = signal<Detail>(this.washingMachineDetailDefault);
+  private readonly _damage = signal<Damage>(this.damageDefault);
+  readonly damage = computed(() => Object.freeze(this._damage()));
 
-  setWashingMachineDetail(washingMachineDetail: Detail): void {
-    this.washingMachineDetail.set(washingMachineDetail);
+  setDamage(damage: Damage): void {
+    this._damage.set(damage);
   }
 
-  getWashingMachineDetail(): Signal<Detail> {
-    return this.washingMachineDetail.asReadonly();
-  }
-
-  resetWashingMachineDetail(): void {
-    this.washingMachineDetail.set(this.washingMachineDetailDefault);
+  resetDamage(): void {
+    this._damage.set(this.damageDefault);
   }
 
 // **************************************
@@ -113,38 +110,38 @@ export class WashingMachineCreateService {
 // **************************************
 
   create(): Promise<boolean> {
-    const washingMachineIdentification = this._identification();
-    const washingMachineDetail = this.washingMachineDetail();
+    const identification = this._identification();
+    const damage = this._damage();
 
     const createWashingMachineRequest: CreateWashingMachineRequest = {
-      category: washingMachineIdentification.category,
-      manufacturer: washingMachineIdentification.manufacturer,
+      category: identification.category,
+      manufacturer: identification.manufacturer,
 
-      damageType: washingMachineIdentification.damageType,
-      returnType: washingMachineIdentification.returnType,
-      identificationMode: washingMachineIdentification.identificationMode,
+      damageType: identification.damageType,
+      returnType: identification.returnType,
+      identificationMode: identification.identificationMode,
 
-      serialNumber: washingMachineIdentification.serialNumber,
-      model: washingMachineIdentification.model,
-      type: washingMachineIdentification.type,
+      serialNumber: identification.serialNumber,
+      model: identification.model,
+      type: identification.type,
 
       washingMachineDetail: {
-        packageDamaged: washingMachineDetail.packageDamaged,
-        packageDirty: washingMachineDetail.packageDirty,
-        packageMaterialAvailable: washingMachineDetail.packageMaterialAvailable,
+        packageDamaged: damage.packageDamaged,
+        packageDirty: damage.packageDirty,
+        packageMaterialAvailable: damage.packageMaterialAvailable,
 
-        visibleSurfacesScratchesLength: washingMachineDetail.visibleSurfacesScratchesLength,
-        visibleSurfacesDentsDepth: washingMachineDetail.visibleSurfacesDentsDepth,
-        visibleSurfacesMinorDamage: washingMachineDetail.visibleSurfacesMinorDamage,
-        visibleSurfacesMajorDamage: washingMachineDetail.visibleSurfacesMajorDamage,
+        visibleSurfacesScratchesLength: damage.visibleSurfacesScratchesLength,
+        visibleSurfacesDentsDepth: damage.visibleSurfacesDentsDepth,
+        visibleSurfacesMinorDamage: damage.visibleSurfacesMinorDamage,
+        visibleSurfacesMajorDamage: damage.visibleSurfacesMajorDamage,
 
-        hiddenSurfacesScratchesLength: washingMachineDetail.hiddenSurfacesScratchesLength,
-        hiddenSurfacesDentsDepth: washingMachineDetail.hiddenSurfacesDentsDepth,
-        hiddenSurfacesMinorDamage: washingMachineDetail.hiddenSurfacesMinorDamage,
-        hiddenSurfacesMajorDamage: washingMachineDetail.hiddenSurfacesMajorDamage,
+        hiddenSurfacesScratchesLength: damage.hiddenSurfacesScratchesLength,
+        hiddenSurfacesDentsDepth: damage.hiddenSurfacesDentsDepth,
+        hiddenSurfacesMinorDamage: damage.hiddenSurfacesMinorDamage,
+        hiddenSurfacesMajorDamage: damage.hiddenSurfacesMajorDamage,
 
-        price: washingMachineDetail.price,
-        repairPrice: washingMachineDetail.repairPrice
+        price: damage.price,
+        repairPrice: damage.repairPrice
       }
     };
 
@@ -158,7 +155,7 @@ export class WashingMachineCreateService {
 
     return firstValueFrom(this._washingMachineApi.create(formData).pipe(
       switchMap(() => {
-        return this._washingMachineApi.getRecommendation(washingMachineIdentification.serialNumber);
+        return this._washingMachineApi.getRecommendation(identification.serialNumber);
       })
     )).then((response) => {
       this.recommendation = response;
