@@ -78,7 +78,7 @@ export class IdentificationStep implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._washingMachineCreateService.resetWashingMachineIdentification();
+    this._washingMachineCreateService.resetIdentification();
     this._washingMachineCreateService.resetWashingMachineDetail();
     this._washingMachineCreateService.clearSelectedFiles();
   }
@@ -199,7 +199,7 @@ export class IdentificationStep implements OnInit, OnDestroy {
       damageType: this.washingMachineIdentificationForm.controls.damageType.value as DamageType
     }
 
-    this._washingMachineCreateService.setWashingMachineIdentification(productIdentificationResult);
+    this._washingMachineCreateService.setIdentification(productIdentificationResult);
     this.stepper.next();
   }
 
@@ -211,7 +211,7 @@ export class IdentificationStep implements OnInit, OnDestroy {
     */
     e.preventDefault();
     this.clearAvailableModelsAndTypes();
-    this._washingMachineCreateService.resetWashingMachineIdentification();
+    this._washingMachineCreateService.resetIdentification();
   }
 
 // **********************************

@@ -32,9 +32,7 @@ import { ToLabelPipe } from 'src/app/shared/pipes/to-label.pipe';
 
 export class WashingMachineCreatePage {
   private _formBuilder = inject(UntypedFormBuilder);
-  private _washingMachineCreateService = inject(WashingMachineCreateService);
-
-  washingMachineIdentification: Signal<Identification> = this._washingMachineCreateService.getWashingMachineIdentification();
+  protected readonly _washingMachineCreateService = inject(WashingMachineCreateService);
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],

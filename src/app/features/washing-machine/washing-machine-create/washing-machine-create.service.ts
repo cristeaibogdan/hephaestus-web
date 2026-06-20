@@ -1,4 +1,4 @@
-import { Injectable, Signal, inject, signal } from "@angular/core";
+import {Injectable, Signal, inject, signal, computed} from "@angular/core";
 import { firstValueFrom, switchMap } from "rxjs";
 import { CreateWashingMachineRequest } from '../models/endpoints/create-washing-machine.endpoint';
 import { ImageFile } from "../models/image-file.model";
@@ -18,7 +18,7 @@ export class WashingMachineCreateService {
 // *** STEP 1 = PRODUCT IDENTIFICATION
 // **************************************
 
-  private readonly washingMachineIdentificationDefault: Identification = {
+  private readonly identificationDefault: Identification = {
     identificationMode: IdentificationMode.QR_CODE,
     category: "",
     manufacturer: "",
@@ -31,18 +31,15 @@ export class WashingMachineCreateService {
     // Possible solution = add DEFAULT, but exclude the option in each select, so inputs remain invalid
   }
 
-  private washingMachineIdentification = signal<Identification>(this.washingMachineIdentificationDefault);
+  private readonly _identification = signal<Identification>(this.identificationDefault);
+  readonly identification = computed(() => Object.freeze(this._identification()));
 
-  getWashingMachineIdentification(): Signal<Identification> {
-    return this.washingMachineIdentification.asReadonly();
+  setIdentification(washingMachineIdentification: Identification): void {
+    this._identification.set(washingMachineIdentification);
   }
 
-  setWashingMachineIdentification(washingMachineIdentification: Identification): void {
-    this.washingMachineIdentification.set(washingMachineIdentification);
-  }
-
-  resetWashingMachineIdentification(): void {
-    this.washingMachineIdentification.set(this.washingMachineIdentificationDefault);
+  resetIdentification(): void {
+    this._identification.set(this.identificationDefault);
   }
 
 // *****************************************
@@ -116,7 +113,7 @@ export class WashingMachineCreateService {
 // **************************************
 
   create(): Promise<boolean> {
-    const washingMachineIdentification = this.washingMachineIdentification();
+    const washingMachineIdentification = this._identification();
     const washingMachineDetail = this.washingMachineDetail();
 
     const createWashingMachineRequest: CreateWashingMachineRequest = {

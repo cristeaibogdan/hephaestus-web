@@ -24,11 +24,10 @@ import { NotificationService } from "../../../../shared/services/notification.se
 })
 export class OverviewStep {
   private stepper = inject(MatStepper);
-  private _washingMachineCreateService = inject(WashingMachineCreateService);
+  protected _washingMachineCreateService = inject(WashingMachineCreateService);
   private _notifService = inject(NotificationService);
   private _translocoService = inject(TranslocoService);
 
-  washingMachineIdentification: Signal<Identification> = this._washingMachineCreateService.getWashingMachineIdentification();
   washingMachineDetail: Signal<Detail> = this._washingMachineCreateService.getWashingMachineDetail();
 
   selectedFiles:ImageFile[] = this._washingMachineCreateService.getSelectedFiles();

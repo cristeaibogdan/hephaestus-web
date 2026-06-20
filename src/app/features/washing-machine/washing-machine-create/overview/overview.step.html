@@ -3,9 +3,9 @@
   <ng-content select="[header]"></ng-content>
 
   <h1>{{"I18N.COMMON.OVERVIEW" | transloco}}</h1>
-  @let identification = washingMachineIdentification();
+  @let identification = _washingMachineCreateService.identification();
 
-  <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | transloco}}</h2>  
+  <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | transloco}}</h2>
   <ul class="product-information-list">
     <li>{{"I18N.COMMON.CATEGORY" | transloco}}: {{identification.category}}</li>
     <li>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{identification.manufacturer}}</li>
@@ -16,7 +16,7 @@
 
   <h2>{{"I18N.COMMON.DAMAGE_IDENTIFICATION_TITLE" | transloco}}</h2>
   <ul class="product-information-list">
-    <li>{{"I18N.COMMON.IDENTIFICATION_MODE" | transloco}}: {{identification.identificationMode | toLabel}}</li>    
+    <li>{{"I18N.COMMON.IDENTIFICATION_MODE" | transloco}}: {{identification.identificationMode | toLabel}}</li>
     <li>{{"I18N.COMMON.RETURN_TYPE" | transloco}}: {{identification.returnType | toLabel}}</li>
     <li>{{"I18N.COMMON.DAMAGE_TYPE" | transloco}}: {{identification.damageType | toLabel}}</li>
   </ul>
@@ -30,9 +30,9 @@
 
   <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
   @let detail = washingMachineDetail();
-  
-  <section class="damages-container">      
-    
+
+  <section class="damages-container">
+
     @if (detail.applicablePackageDamage) {
       <article>
         <h3>{{"I18N.COMMON.PACKAGE" | transloco}}</h3>
@@ -40,11 +40,11 @@
         <ul class="damages-list">
           @if (detail.packageDamaged) { <li>{{"I18N.COMMON.PACKAGE_DAMAGED" | transloco}}</li> }
           @if (detail.packageDirty) { <li>{{"I18N.COMMON.PACKAGE_DIRTY" | transloco}}</li> }
-          @if (detail.packageMaterialAvailable) { <li>{{"I18N.COMMON.PACKAGE_REPACKAGE" | transloco}}</li> }            
+          @if (detail.packageMaterialAvailable) { <li>{{"I18N.COMMON.PACKAGE_REPACKAGE" | transloco}}</li> }
         </ul>
       </article>
     }
-    
+
     @if (detail.applicableVisibleSurfacesDamage) {
       <article>
         <h3>{{"I18N.COMMON.VISIBLE_SURFACES" | transloco}}</h3>
@@ -53,7 +53,7 @@
           @if (detail.visibleSurfacesHasScratches) {
             <li>
               {{"I18N.COMMON.SCRATCHES_LENGTH" | transloco}}:
-              {{detail.visibleSurfacesScratchesLength}} 
+              {{detail.visibleSurfacesScratchesLength}}
               {{"I18N.COMMON.CM" | transloco}}
             </li>
           }
@@ -61,7 +61,7 @@
           @if (detail.visibleSurfacesHasDents) {
             <li>
               {{"I18N.COMMON.DENTS_DEPTH" | transloco}}:
-              {{detail.visibleSurfacesDentsDepth}} 
+              {{detail.visibleSurfacesDentsDepth}}
               {{"I18N.COMMON.CM" | transloco}}
             </li>
           }
@@ -91,7 +91,7 @@
           @if (detail.hiddenSurfacesHasScratches) {
             <li>
               {{"I18N.COMMON.SCRATCHES_LENGTH" | transloco}}:
-              {{detail.hiddenSurfacesScratchesLength}} 
+              {{detail.hiddenSurfacesScratchesLength}}
               {{"I18N.COMMON.CM" | transloco}}
             </li>
           }
@@ -99,9 +99,9 @@
           @if (detail.hiddenSurfacesHasDents) {
             <li>
               {{"I18N.COMMON.DENTS_DEPTH" | transloco}}:
-              {{detail.hiddenSurfacesDentsDepth}} 
+              {{detail.hiddenSurfacesDentsDepth}}
               {{"I18N.COMMON.CM" | transloco}}
-            </li>                
+            </li>
           }
 
           @if (detail.hiddenSurfacesHasMinorDamage) {
@@ -134,9 +134,9 @@
           </li>
         </ul>
       </article>
-    }  
+    }
   </section>
-  
+
 </div>
 
 
