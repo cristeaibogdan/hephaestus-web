@@ -23,7 +23,7 @@
 
   <h2>{{"I18N.COMMON.DAMAGED_PRODUCT_IMAGES_TITLE" | transloco}}</h2>
   <section class="image-list">
-    @for (file of selectedFiles; track file) {
+    @for (file of _washingMachineCreateService.selectedFiles(); track file) {
       <img [src]="file.url">
     }
   </section>

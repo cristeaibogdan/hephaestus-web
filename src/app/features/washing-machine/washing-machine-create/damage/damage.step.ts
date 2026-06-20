@@ -195,6 +195,6 @@ export class DamageStep {
     this.stepper.next();
     // console.log("Sent = ", damage);
     // TODO: Restructure the DTO into nested DTOs - package, visible, hidden, costAssessment
-    console.log(this._washingMachineCreateService.getSelectedFiles());
+    console.log(this._washingMachineCreateService.selectedFiles());
   }
 }

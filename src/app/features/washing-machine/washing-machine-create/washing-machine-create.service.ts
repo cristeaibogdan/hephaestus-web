@@ -1,4 +1,4 @@
-import {Injectable, Signal, inject, signal, computed} from "@angular/core";
+import {Injectable, inject, signal, computed} from "@angular/core";
 import { firstValueFrom, switchMap } from "rxjs";
 import { CreateWashingMachineRequest } from '../models/endpoints/create-washing-machine.endpoint';
 import { ImageFile } from "../models/image-file.model";
@@ -91,25 +91,22 @@ export class WashingMachineCreateService {
 // *** STEP 2 = SELECTED FILES
 // **************************************
 
-  private selectedFiles: ImageFile[] = [];
+  private readonly _selectedFiles = signal<ImageFile[]>([]);
+  readonly selectedFiles = computed(() => Object.freeze(this._selectedFiles()));
 
   setSelectedFiles(selectedFiles: ImageFile[]): void {
-    this.selectedFiles = selectedFiles;
-  }
-
-  getSelectedFiles(): ImageFile[] {
-    return this.selectedFiles;
+    this._selectedFiles.set(selectedFiles);
   }
 
   clearSelectedFiles(): void {
-    this.selectedFiles = [];
+    this._selectedFiles.set([]);
   }
 
 // **************************************
 // *** STEP 3 = OVERVIEW
 // **************************************
 
-  create(): Promise<boolean> {
+  async create(): Promise<boolean> {
     const identification = this._identification();
     const damage = this._damage();
 
@@ -149,7 +146,7 @@ export class WashingMachineCreateService {
     const formData = new FormData();
     formData.append("createWashingMachineRequest", new Blob ([JSON.stringify(createWashingMachineRequest)], {type: 'application/json'}));
 
-    this.selectedFiles.forEach(file => {
+    this._selectedFiles().forEach(file => {
       formData.append("imageFiles", file.file);
     });
 

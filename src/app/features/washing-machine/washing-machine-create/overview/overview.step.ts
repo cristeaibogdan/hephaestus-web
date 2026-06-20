@@ -28,8 +28,6 @@ export class OverviewStep {
   private _notifService = inject(NotificationService);
   private _translocoService = inject(TranslocoService);
 
-  selectedFiles:ImageFile[] = this._washingMachineCreateService.getSelectedFiles();
-
   create(): void {
     this._washingMachineCreateService.create().then(success => {
       if(success) {
