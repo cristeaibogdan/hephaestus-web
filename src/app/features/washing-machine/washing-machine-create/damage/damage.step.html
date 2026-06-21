@@ -1,29 +1,29 @@
-<form [formGroup]="washingMachineDetailForm" (ngSubmit)="onSubmit()" (reset)="onReset($event)">
+<form [formGroup]="washingMachineDamageForm" (ngSubmit)="onSubmit()" (reset)="onReset($event)">
 <ul>
   <mat-card class="elevation-level4">
-    <mat-card-title>{{"I18N.PRODUCT_DAMAGE.UPLOAD_IMAGES_TITLE" | transloco}} <span>*</span></mat-card-title>    
+    <mat-card-title>{{"I18N.PRODUCT_DAMAGE.UPLOAD_IMAGES_TITLE" | transloco}} <span>*</span></mat-card-title>
     <app-file-upload [(selectedImages)]="selectedImages"></app-file-upload>
   </mat-card>
 
   <mat-card class="elevation-level4">
     <mat-card-title>{{"I18N.PRODUCT_DAMAGE.SELECT_DAMAGE_TITLE" | transloco}} <span>*</span></mat-card-title>
 
-    <section class="damage-panels">   
-      <app-package-form 
-        [applicablePackageDamage] = "washingMachineDetailForm.controls.applicablePackageDamage"
-        [packageForm] = "washingMachineDetailForm.controls.packageForm">
+    <section class="damage-panels">
+      <app-package-form
+        [applicablePackageDamage] = "washingMachineDamageForm.controls.applicablePackageDamage"
+        [packageForm] = "washingMachineDamageForm.controls.packageForm">
       </app-package-form>
 
       <app-visible-surfaces-form
-        [applicableVisibleSurfacesDamage] = "washingMachineDetailForm.controls.applicableVisibleSurfacesDamage"
-        [visibleSurfacesForm] = "washingMachineDetailForm.controls.visibleSurfacesForm">
+        [applicableVisibleSurfacesDamage] = "washingMachineDamageForm.controls.applicableVisibleSurfacesDamage"
+        [visibleSurfacesForm] = "washingMachineDamageForm.controls.visibleSurfacesForm">
       </app-visible-surfaces-form>
 
       <app-hidden-surfaces-form
-        [applicableHiddenSurfacesDamage] = "washingMachineDetailForm.controls.applicableHiddenSurfacesDamage"
-        [hiddenSurfacesForm] = "washingMachineDetailForm.controls.hiddenSurfacesForm">
+        [applicableHiddenSurfacesDamage] = "washingMachineDamageForm.controls.applicableHiddenSurfacesDamage"
+        [hiddenSurfacesForm] = "washingMachineDamageForm.controls.hiddenSurfacesForm">
       </app-hidden-surfaces-form>
-    </section>  
+    </section>
   </mat-card>
 
   <mat-card class="elevation-level4">
@@ -43,7 +43,7 @@
 
   <button mat-raised-button class="primary" type="submit">
     {{"I18N.COMMON.NEXT" | transloco}}
-  </button>  
+  </button>
 </div>
 </form>
 
@@ -54,7 +54,7 @@
 </pre> -->
 
 <!-- <pre>
-  {{washingMachineDetailForm.getRawValue() | json}}
+  {{washingMachineDamageForm.getRawValue() | json}}
 </pre> -->
 
 <!-- <pre>

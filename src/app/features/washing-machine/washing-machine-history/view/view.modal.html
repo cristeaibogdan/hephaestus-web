@@ -4,7 +4,7 @@
 
   <section>
     <h2>{{"I18N.COMMON.RECOMMENDATION" | transloco}}</h2>
-          
+
     <div class="text-align-center">
       <button class="recommendation-text"
         [class.repackage]="washingMachine.recommendation === 'REPACKAGE'"
@@ -20,7 +20,7 @@
   </section>
 
   <h2>{{"I18N.COMMON.PRODUCT_INFORMATION_TITLE" | transloco}}</h2>
-  <ul class="product-information-list">  
+  <ul class="product-information-list">
     <li>{{"I18N.COMMON.CATEGORY" | transloco}}: {{washingMachine.category}}</li>
     <li>{{"I18N.COMMON.MANUFACTURER" | transloco}}: {{washingMachine.manufacturer}}</li>
     <li>{{"I18N.COMMON.SERIAL_NUMBER" | transloco}}: {{washingMachine.serialNumber}}</li>
@@ -29,8 +29,8 @@
   </ul>
 
   <h2>{{"I18N.COMMON.DAMAGE_IDENTIFICATION_TITLE" | transloco}}</h2>
-  <ul class="product-information-list">  
-    <li>{{"I18N.COMMON.IDENTIFICATION_MODE" | transloco}}: {{washingMachine.identificationMode | toLabel}}</li>    
+  <ul class="product-information-list">
+    <li>{{"I18N.COMMON.IDENTIFICATION_MODE" | transloco}}: {{washingMachine.identificationMode | toLabel}}</li>
     <li>{{"I18N.COMMON.RETURN_TYPE" | transloco}}: {{washingMachine.returnType | toLabel}}</li>
     <li>{{"I18N.COMMON.DAMAGE_TYPE" | transloco}}: {{washingMachine.damageType | toLabel}}</li>
   </ul>
@@ -43,98 +43,99 @@
   </section>
 
   <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
-  @if (washingMachine.washingMachineDetail; as washingMachineDetail) {
+  @let damage = washingMachine.washingMachineDamage;
+  @if (damage) {
     <section class="damages-container">
 
-      @if (washingMachineDetail.applicablePackageDamage) {
+      @if (damage.applicablePackageDamage) {
         <article>
           <h3>{{"I18N.COMMON.PACKAGE" | transloco}}</h3>
-  
+
           <ul class="damages-list">
-            @if (washingMachineDetail.packageDamaged) { <li>{{"I18N.COMMON.PACKAGE_DAMAGED" | transloco}}</li> }
-            @if (washingMachineDetail.packageDirty) { <li>{{"I18N.COMMON.PACKAGE_DIRTY" | transloco}}</li> }
-            @if (washingMachineDetail.packageMaterialAvailable) { <li>{{"I18N.COMMON.PACKAGE_REPACKAGE" | transloco}}</li> }              
-          </ul>  
+            @if (damage.packageDamaged) { <li>{{"I18N.COMMON.PACKAGE_DAMAGED" | transloco}}</li> }
+            @if (damage.packageDirty) { <li>{{"I18N.COMMON.PACKAGE_DIRTY" | transloco}}</li> }
+            @if (damage.packageMaterialAvailable) { <li>{{"I18N.COMMON.PACKAGE_REPACKAGE" | transloco}}</li> }
+          </ul>
         </article>
       }
 
-      @if (washingMachineDetail.applicableVisibleSurfacesDamage) {
+      @if (damage.applicableVisibleSurfacesDamage) {
         <article>
           <h3>{{"I18N.COMMON.VISIBLE_SURFACES" | transloco}}</h3>
-  
+
           <ul class="damages-list">
-            @if (washingMachineDetail.visibleSurfacesHasScratches) {
+            @if (damage.visibleSurfacesHasScratches) {
               <li>
                 {{"I18N.COMMON.SCRATCHES_LENGTH" | transloco}}:
-                {{washingMachineDetail.visibleSurfacesScratchesLength}} 
+                {{damage.visibleSurfacesScratchesLength}}
                 {{"I18N.COMMON.CM" | transloco}}
               </li>
             }
-            @if (washingMachineDetail.visibleSurfacesHasDents) {
+            @if (damage.visibleSurfacesHasDents) {
               <li>
                 {{"I18N.COMMON.DENTS_DEPTH" | transloco}}:
-                {{washingMachineDetail.visibleSurfacesDentsDepth}} 
+                {{damage.visibleSurfacesDentsDepth}}
                 {{"I18N.COMMON.CM" | transloco}}
               </li>
             }
-            @if (washingMachineDetail.visibleSurfacesHasMinorDamage) {
+            @if (damage.visibleSurfacesHasMinorDamage) {
               <li>
                 {{"I18N.COMMON.MINOR_DAMAGES" | transloco}}:
-                {{washingMachineDetail.visibleSurfacesMinorDamage}}
+                {{damage.visibleSurfacesMinorDamage}}
               </li>
             }
-            @if (washingMachineDetail.visibleSurfacesHasMajorDamage) {
+            @if (damage.visibleSurfacesHasMajorDamage) {
               <li>
                 {{"I18N.COMMON.MAJOR_DAMAGES" | transloco}}:
-                {{washingMachineDetail.visibleSurfacesMajorDamage}}
+                {{damage.visibleSurfacesMajorDamage}}
               </li>
             }
           </ul>
         </article>
       }
 
-      @if (washingMachineDetail.applicableHiddenSurfacesDamage) {
+      @if (damage.applicableHiddenSurfacesDamage) {
         <article>
           <h3>{{"I18N.COMMON.HIDDEN_SURFACES" | transloco}}</h3>
-  
+
           <ul class="damages-list">
-            @if (washingMachineDetail.hiddenSurfacesHasScratches) {
+            @if (damage.hiddenSurfacesHasScratches) {
               <li>
                 {{"I18N.COMMON.SCRATCHES_LENGTH" | transloco}}:
-                {{washingMachineDetail.hiddenSurfacesScratchesLength}} 
+                {{damage.hiddenSurfacesScratchesLength}}
                 {{"I18N.COMMON.CM" | transloco}}
               </li>
             }
-            @if (washingMachineDetail.hiddenSurfacesHasDents) {
+            @if (damage.hiddenSurfacesHasDents) {
               <li>
                 {{"I18N.COMMON.DENTS_DEPTH" | transloco}}:
-                {{washingMachineDetail.hiddenSurfacesDentsDepth}} 
+                {{damage.hiddenSurfacesDentsDepth}}
                 {{"I18N.COMMON.CM" | transloco}}
               </li>
             }
-            @if (washingMachineDetail.hiddenSurfacesHasMinorDamage) {
+            @if (damage.hiddenSurfacesHasMinorDamage) {
               <li>
                 {{"I18N.COMMON.MINOR_DAMAGES" | transloco}}:
-                {{washingMachineDetail.hiddenSurfacesMinorDamage}}
+                {{damage.hiddenSurfacesMinorDamage}}
               </li>
             }
-            @if (washingMachineDetail.hiddenSurfacesHasMajorDamage) {
+            @if (damage.hiddenSurfacesHasMajorDamage) {
               <li>
                 {{"I18N.COMMON.MAJOR_DAMAGES" | transloco}}:
-                {{washingMachineDetail.hiddenSurfacesMajorDamage}}
+                {{damage.hiddenSurfacesMajorDamage}}
               </li>
             }
           </ul>
         </article>
       }
 
-      @if (washingMachineDetail.price > 0 && washingMachineDetail.repairPrice > 0) {
+      @if (damage.price > 0 && damage.repairPrice > 0) {
         <article>
           <h3>{{"I18N.COMMON.PRICING" | transloco}}</h3>
-  
+
           <ul class="damages-list">
-            <li>{{"I18N.COMMON.PRODUCT_PRICE" | transloco}}: {{washingMachineDetail.price}} €</li>
-            <li>{{"I18N.COMMON.PRODUCT_REPAIR_PRICE" | transloco}}: {{washingMachineDetail.repairPrice}} €</li>
+            <li>{{"I18N.COMMON.PRODUCT_PRICE" | transloco}}: {{damage.price}} €</li>
+            <li>{{"I18N.COMMON.PRODUCT_REPAIR_PRICE" | transloco}}: {{damage.repairPrice}} €</li>
           </ul>
         </article>
       }
@@ -143,7 +144,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions class="mat-dialog-actions-buttons">
-  <button mat-raised-button class="primary" 
+  <button mat-raised-button class="primary"
     (click)="onDownload()">
     {{"I18N.COMMON.DOWNLOAD_RECOMMENDATION" | transloco}}
   </button>

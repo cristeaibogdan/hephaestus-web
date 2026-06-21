@@ -40,7 +40,7 @@ export class DamageStep {
   private _washingMachineCreateService = inject(WashingMachineCreateService);
   private _notifService = inject(NotificationService);
 
-  washingMachineDetailForm = this.fb.group({
+  washingMachineDamageForm = this.fb.group({
     applicablePackageDamage: [false],
     packageForm : this.fb.group({
       damaged : [false],
@@ -141,7 +141,7 @@ export class DamageStep {
       return;
     }
 
-    if(this.washingMachineDetailForm.invalid) {
+    if(this.washingMachineDamageForm.invalid) {
       this._notifService.showError("At least one applicable damage must be selected");
       return;
     }
@@ -151,40 +151,40 @@ export class DamageStep {
     }
 
     const damage: Damage = {
-      applicablePackageDamage: this.washingMachineDetailForm.controls.applicablePackageDamage.value,
-      packageDamaged: this.washingMachineDetailForm.controls.packageForm.controls.damaged.value,
-      packageDirty: this.washingMachineDetailForm.controls.packageForm.controls.dirty.value,
-      packageMaterialAvailable: this.washingMachineDetailForm.controls.packageForm.controls.packageMaterialAvailable.value,
+      applicablePackageDamage: this.washingMachineDamageForm.controls.applicablePackageDamage.value,
+      packageDamaged: this.washingMachineDamageForm.controls.packageForm.controls.damaged.value,
+      packageDirty: this.washingMachineDamageForm.controls.packageForm.controls.dirty.value,
+      packageMaterialAvailable: this.washingMachineDamageForm.controls.packageForm.controls.packageMaterialAvailable.value,
 
 
-      applicableVisibleSurfacesDamage: this.washingMachineDetailForm.controls.applicableVisibleSurfacesDamage.value,
+      applicableVisibleSurfacesDamage: this.washingMachineDamageForm.controls.applicableVisibleSurfacesDamage.value,
 
-      visibleSurfacesHasScratches: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.hasScratches.value,
-      visibleSurfacesScratchesLength: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.scratchesLength.value,
+      visibleSurfacesHasScratches: this.washingMachineDamageForm.controls.visibleSurfacesForm.controls.hasScratches.value,
+      visibleSurfacesScratchesLength: this.washingMachineDamageForm.controls.visibleSurfacesForm.controls.scratchesLength.value,
 
-      visibleSurfacesHasDents: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.hasDents.value,
-      visibleSurfacesDentsDepth: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.dentsDepth.value,
+      visibleSurfacesHasDents: this.washingMachineDamageForm.controls.visibleSurfacesForm.controls.hasDents.value,
+      visibleSurfacesDentsDepth: this.washingMachineDamageForm.controls.visibleSurfacesForm.controls.dentsDepth.value,
 
-      visibleSurfacesHasMinorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.hasMinorDamage.value,
-      visibleSurfacesMinorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.minorDamage.value,
+      visibleSurfacesHasMinorDamage: this.washingMachineDamageForm.controls.visibleSurfacesForm.controls.hasMinorDamage.value,
+      visibleSurfacesMinorDamage: this.washingMachineDamageForm.controls.visibleSurfacesForm.controls.minorDamage.value,
 
-      visibleSurfacesHasMajorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.hasMajorDamage.value,
-      visibleSurfacesMajorDamage: this.washingMachineDetailForm.controls.visibleSurfacesForm.controls.majorDamage.value,
+      visibleSurfacesHasMajorDamage: this.washingMachineDamageForm.controls.visibleSurfacesForm.controls.hasMajorDamage.value,
+      visibleSurfacesMajorDamage: this.washingMachineDamageForm.controls.visibleSurfacesForm.controls.majorDamage.value,
 
 
-      applicableHiddenSurfacesDamage: this.washingMachineDetailForm.controls.applicableHiddenSurfacesDamage.value,
+      applicableHiddenSurfacesDamage: this.washingMachineDamageForm.controls.applicableHiddenSurfacesDamage.value,
 
-      hiddenSurfacesHasScratches: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hasScratches.value,
-      hiddenSurfacesScratchesLength: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.scratchesLength.value,
+      hiddenSurfacesHasScratches: this.washingMachineDamageForm.controls.hiddenSurfacesForm.controls.hasScratches.value,
+      hiddenSurfacesScratchesLength: this.washingMachineDamageForm.controls.hiddenSurfacesForm.controls.scratchesLength.value,
 
-      hiddenSurfacesHasDents: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hasDents.value,
-      hiddenSurfacesDentsDepth: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.dentsDepth.value,
+      hiddenSurfacesHasDents: this.washingMachineDamageForm.controls.hiddenSurfacesForm.controls.hasDents.value,
+      hiddenSurfacesDentsDepth: this.washingMachineDamageForm.controls.hiddenSurfacesForm.controls.dentsDepth.value,
 
-      hiddenSurfacesHasMinorDamage: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hasMinorDamage.value,
-      hiddenSurfacesMinorDamage: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.minorDamage.value,
+      hiddenSurfacesHasMinorDamage: this.washingMachineDamageForm.controls.hiddenSurfacesForm.controls.hasMinorDamage.value,
+      hiddenSurfacesMinorDamage: this.washingMachineDamageForm.controls.hiddenSurfacesForm.controls.minorDamage.value,
 
-      hiddenSurfacesHasMajorDamage: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.hasMajorDamage.value,
-      hiddenSurfacesMajorDamage: this.washingMachineDetailForm.controls.hiddenSurfacesForm.controls.majorDamage.value,
+      hiddenSurfacesHasMajorDamage: this.washingMachineDamageForm.controls.hiddenSurfacesForm.controls.hasMajorDamage.value,
+      hiddenSurfacesMajorDamage: this.washingMachineDamageForm.controls.hiddenSurfacesForm.controls.majorDamage.value,
 
       price: this.washingMachinePricingForm.controls.price.value,
       repairPrice: this.washingMachinePricingForm.controls.repairPrice.value

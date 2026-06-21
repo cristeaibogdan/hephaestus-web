@@ -187,12 +187,12 @@ export class WashingMachineHistoryPage implements AfterViewInit {
 // *****************************************
 
   onView(washingMachine: GetWashingMachineFullResponse): void {
-    if(washingMachine.washingMachineDetail) {
+    if(washingMachine.washingMachineDamage) {
       return this.openDialog(washingMachine);
     }
 
     this._washingMachineApi.loadMany([washingMachine.serialNumber]).subscribe(response => {
-      washingMachine.washingMachineDetail = response[washingMachine.serialNumber].washingMachineDetail;
+      washingMachine.washingMachineDamage = response[washingMachine.serialNumber].washingMachineDamage;
       washingMachine.washingMachineImages = response[washingMachine.serialNumber].washingMachineImages;
       this.openDialog(washingMachine);
     });
