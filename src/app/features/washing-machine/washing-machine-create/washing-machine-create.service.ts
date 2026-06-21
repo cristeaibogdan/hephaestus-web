@@ -122,7 +122,7 @@ export class WashingMachineCreateService {
       model: identification.model,
       type: identification.type,
 
-      washingMachineDetail: {
+      washingMachineDamage: {
         packageDamaged: damage.packageDamaged,
         packageDirty: damage.packageDirty,
         packageMaterialAvailable: damage.packageMaterialAvailable,
