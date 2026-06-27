@@ -37,13 +37,13 @@
 
   <h2>{{"I18N.COMMON.DAMAGED_PRODUCT_IMAGES_TITLE" | transloco}}</h2>
   <section class="image-list">
-    @for (image of washingMachine.washingMachineImages; track image) {
+    @for (image of washingMachine.images; track image) {
       <img [src]="image.imagePrefix+image.image">
     }
   </section>
 
   <h2>{{"I18N.COMMON.DAMAGES_TITLE" | transloco}}</h2>
-  @let damage = washingMachine.washingMachineDamage;
+  @let damage = washingMachine.damage;
   @if (damage) {
     <section class="damages-container">
 

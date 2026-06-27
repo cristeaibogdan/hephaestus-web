@@ -18,11 +18,11 @@ export interface GetWashingMachineFullResponse {
   recommendation: Recommendation;
   createdAt: Date;
 
-  washingMachineDamage?: WashingMachineDamage;
-  washingMachineImages?: WashingMachineImage[];
+  damage?: Damage;
+  images?: Image[];
 }
 
-interface WashingMachineDamage {
+interface Damage {
   // PACKAGE
   applicablePackageDamage: boolean;
   packageDamaged: boolean;
@@ -64,7 +64,7 @@ interface WashingMachineDamage {
   repairPrice: number;
 }
 
-interface WashingMachineImage {
+interface Image {
   imagePrefix: string;
   image: string;
 }
