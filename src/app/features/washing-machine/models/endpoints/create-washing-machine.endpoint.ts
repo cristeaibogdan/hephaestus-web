@@ -14,10 +14,10 @@ export interface CreateWashingMachineRequest {
   returnType: ReturnType;
   damageType: DamageType;
 
-  washingMachineDamage: WashingMachineDamage;
+  damage: Damage;
 }
 
-export interface WashingMachineDamage {
+interface Damage {
   // PACKAGE
   packageDamaged: boolean;
   packageDirty: boolean;
