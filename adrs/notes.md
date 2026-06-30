@@ -110,3 +110,4 @@ Pages should be encapsulated and expose only behaviour outside.
   a) multiple methods with one input help page tests
   b) single method with multiple (optional) inputs help readability in E2E tests
 5. Add translation ADR
+6. Create delete endpoints and create an ADR to investigate the usage of test data slices for playwright tests
