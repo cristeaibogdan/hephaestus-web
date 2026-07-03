@@ -17,7 +17,7 @@ import {NotificationService} from "../../../shared/services/notification.service
  */
 @Injectable()
 export class HistoryDatasource extends DataSource<GetWashingMachineFullResponse> {
-  private washingMachines = signal<GetWashingMachineFullResponse[]>([]);
+  private readonly washingMachines = signal<GetWashingMachineFullResponse[]>([]);
 
   sort!: MatSort;
   paginator!: MatPaginator;
@@ -63,5 +63,12 @@ export class HistoryDatasource extends DataSource<GetWashingMachineFullResponse>
         throw err; // re-throw to be handled by GlobalErrorHandler
       }
     });
+  }
+
+  removeWashingMachine(serialNumber: string): void {
+    this.washingMachines.update(washingMachines =>
+      washingMachines.filter(wm => wm.serialNumber !== serialNumber)
+    );
+    this.paginator.length--;
   }
 }

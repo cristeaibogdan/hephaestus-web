@@ -19,7 +19,7 @@ export class CustomValidators {
       if (confirmPasswordControl?.errors && !confirmPasswordControl.hasError("passwordMismatch")) {
         return null;
       }
-      
+
       if (password != confirmPassword) {
         confirmPasswordControl?.setErrors(error);
       } else {
@@ -68,13 +68,13 @@ export class CustomValidators {
       const valueTwo = formGroup.get(controlNameTwo)?.value;
       const valueThree = formGroup.get(controlNameThree)?.value;
       const error = { atLeastOneOutOfThreeTrue: true };
-      
+
       // Error if all three applicableDamages are false
       if (!valueOne && !valueTwo && !valueThree) {
         return error;
       } else {
         return null;
-      }  
+      }
     }
   }
 
@@ -87,8 +87,8 @@ export class CustomValidators {
   // RETURNS => atLeastOneOutOfFourTrue error on form group
   // It doesn't check for any prior errors. It assumes the controls have no other validators
   static atLeastOneOutOfFourTrue (
-    controlNameOne:string, 
-    controlNameTwo:string, 
+    controlNameOne:string,
+    controlNameTwo:string,
     controlNameThree:string,
     controlNameFour:string
     ): ValidatorFn {
@@ -99,13 +99,13 @@ export class CustomValidators {
       const valueThree = formGroup.get(controlNameThree)?.value;
       const valueFour = formGroup.get(controlNameFour)?.value;
       const error = { atLeastOneOutOfFourTrue: true };
-      
+
       // Error if all three applicableDamages are false
       if (!valueOne && !valueTwo && !valueThree && !valueFour) {
         return error;
       } else {
         return null;
-      }  
+      }
     }
   }
 
@@ -120,7 +120,7 @@ export class CustomValidators {
       // Use .some() to check if at least one control has a value of true
       const atLeastOneIsTrue: boolean = controlNames.some(controlName => formGroup.get(controlName)?.value);
 
-      return atLeastOneIsTrue 
+      return atLeastOneIsTrue
         ? null
         : error;
     }
@@ -163,5 +163,16 @@ export class CustomValidators {
 
       return null;
     }
+  }
+
+  /**
+   * TYPE => field validator
+   * CONDITION => control value must match input value
+   * RETURNS => stringMismatch error on control
+   */
+  static stringShouldMatch(mustMatch:string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      return control.value === mustMatch ? null : { stringMismatch: true };
+    };
   }
 }

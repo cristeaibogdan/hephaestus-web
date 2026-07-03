@@ -67,5 +67,12 @@ export class WashingMachineApi {
 
     return this.http.post<Record<string, GetWashingMachineFullResponse>>(url, serialNumbers);
   }
+
+  delete(serialNumber:string): Observable<void> {
+    const url = this.apiURL.concat("/v1/washing-machines/")
+      .concat(serialNumber);
+
+    return this.http.delete<void>(url);
+  }
 }
 
