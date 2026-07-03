@@ -1,13 +1,13 @@
 <h3>Solar Panels History</h3>
 
 <div class="table-container elevation-level4">
-  <form [formGroup]="filterForm" (ngSubmit)="onFilter()" (reset)="onReset()">    
+  <form [formGroup]="filterForm" (ngSubmit)="onFilter()" (reset)="onReset()">
   <table mat-table matSort [dataSource]="dataSource">
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
     <tr mat-header-row *matHeaderRowDef="filterColumns; sticky:true" cdkTrapFocus></tr>
     <tr mat-row *matRowDef="let solarPanel; columns: displayedColumns;"></tr>
-    
+
     <ng-container matColumnDef="createdAt" sticky>
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.CREATED" | transloco | uppercase}}</th>
       <td mat-cell *matCellDef="let solarPanel"> {{solarPanel.createdAt | date: "yyyy-MM-dd HH:mm:ss"}}  </td>
@@ -29,7 +29,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.MANUFACTURER" | transloco | uppercase}}</th>
       <td mat-cell *matCellDef="let solarPanel"> {{solarPanel.manufacturer}} </td>
     </ng-container>
-    
+
         <!-- Additional filter column -->
         <ng-container matColumnDef="manufacturer-filter">
           <th mat-header-cell *matHeaderCellDef>
@@ -84,16 +84,16 @@
             </mat-form-field>
           </th>
         </ng-container>
-  
+
     <ng-container matColumnDef="recommendation">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"I18N.COMMON.RECOMMENDATION" | transloco | uppercase}}</th>
-      <td mat-cell *matCellDef="let solarPanel"> 
-        <button type="button" class="recommendation-text" 
+      <td mat-cell *matCellDef="let solarPanel">
+        <button type="button" class="recommendation-text"
           [class.repair]="solarPanel.recommendation === solarPanelRecommendation.REPAIR"
           [class.recycle]="solarPanel.recommendation === solarPanelRecommendation.RECYCLE"
           [class.dispose]="solarPanel.recommendation === solarPanelRecommendation.DISPOSE">
           {{solarPanel.recommendation}}
-        </button> 
+        </button>
       </td>
     </ng-container>
 
@@ -102,7 +102,7 @@
           <th mat-header-cell *matHeaderCellDef>
             <mat-form-field class="filter-input" appearance="outline">
               <mat-icon matPrefix svgIcon="search"></mat-icon>
-              <mat-select matInput formControlName="recommendation"> 
+              <mat-select matInput formControlName="recommendation">
                 <mat-option></mat-option> <!-- Empty option to ensure null is sent to backend -->
                 @for (option of recommendationOptions; track option) {
                   <mat-option [value]= "option">{{option}}</mat-option>
@@ -121,13 +121,13 @@
             {{"I18N.COMMON.VIEW" | transloco}}
           </button>
 
-          <button mat-raised-button type="button" class="warn">
+          <button mat-raised-button type="button" class="warn" (click)="delete(solarPanel.serialNumber)">
             {{"I18N.COMMON.DELETE" | transloco}}
           </button>
         </div>
       </td>
 
-    </ng-container> 
+    </ng-container>
 
         <!-- Additional filter column -->
         <ng-container matColumnDef="actions-filter" stickyEnd>
@@ -138,14 +138,14 @@
                 [disabled]="filterForm.invalid">
                 Filter
               </button>
-      
+
               <button mat-raised-button type="reset" class="warn" tabindex="-1">
                 Reset
-              </button>            
+              </button>
             </div>
 
           </th>
-        </ng-container>  
+        </ng-container>
   </table>
   </form>
 

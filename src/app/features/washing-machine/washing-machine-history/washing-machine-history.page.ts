@@ -219,7 +219,7 @@ export class WashingMachineHistoryPage implements AfterViewInit {
     dialogRef.afterClosed().subscribe(confirmed => {
       if (confirmed) {
         this._washingMachineApi.delete(serialNumber).subscribe(() => {
-          this.dataSource.removeWashingMachine(serialNumber);
+          this.dataSource.remove(serialNumber);
         });
       }
     });

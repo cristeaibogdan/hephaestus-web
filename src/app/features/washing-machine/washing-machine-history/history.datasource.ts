@@ -65,7 +65,7 @@ export class HistoryDatasource extends DataSource<GetWashingMachineFullResponse>
     });
   }
 
-  removeWashingMachine(serialNumber: string): void {
+  remove(serialNumber: string): void {
     this.washingMachines.update(washingMachines =>
       washingMachines.filter(wm => wm.serialNumber !== serialNumber)
     );

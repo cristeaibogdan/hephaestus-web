@@ -51,4 +51,11 @@ export class SolarPanelApi {
     return this.http.post<Record<string, GetSolarPanelFullResponse>>(url, serialNumbers);
   }
 
+  delete(serialNumber:string): Observable<void> {
+    const url = this.apiURL.concat("/v1/solar-panels/")
+      .concat(serialNumber);
+
+    return this.http.delete<void>(url);
+  }
+
 }

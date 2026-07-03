@@ -65,5 +65,12 @@ export class HistoryDatasource extends DataSource<GetSolarPanelFullResponse> {
       }
     });
   }
+
+  remove(serialNumber: string): void {
+    this.solarPanels.update(solarPanels =>
+      solarPanels.filter(wm => wm.serialNumber !== serialNumber)
+    );
+    this.paginator.length--;
+  }
 }
 
