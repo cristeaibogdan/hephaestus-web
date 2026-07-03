@@ -21,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { HistoryDatasource } from './history.datasource';
 import { SolarPanelApi } from '../solar-panel.api';
 import {DateFormatYYYYMMDDDirective} from "../../../shared/directives/date-format-yyyy-mm-dd.directive";
+import {DeleteModal} from "./delete/delete.modal";
 
 @Component({
   selector: 'app-solar-panel-history',
@@ -177,6 +178,23 @@ export class SolarPanelHistoryPage implements AfterViewInit {
       width: '35%',
       data: { solarPanel: solarPanel },
       autoFocus: false
+    });
+  }
+
+  delete(serialNumber: string): void {
+    const dialogRef = this.dialog.open(DeleteModal, {
+      disableClose: true,
+      width: '35%',
+      data: { serialNumber: serialNumber },
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
+        this._solarPanelApi.delete(serialNumber).subscribe(() => {
+          this.dataSource.remove(serialNumber);
+        });
+      }
     });
   }
 }

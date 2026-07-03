@@ -25,6 +25,7 @@ import { DamageType } from '../enums/damage-type.enum';
 import { IdentificationMode } from '../enums/identification-mode.enum';
 import { Recommendation } from '../enums/recommendation.enum';
 import { ReturnType } from '../enums/return-type.enum';
+import {DeleteModal} from "./delete/delete.modal";
 
 @Component({
   selector: 'app-washing-machine-history',
@@ -187,7 +188,7 @@ export class WashingMachineHistoryPage implements AfterViewInit {
 // *****************************************
 
   onView(washingMachine: GetWashingMachineFullResponse): void {
-    if(washingMachine.damage) {
+    if (washingMachine.damage) {
       return this.openDialog(washingMachine);
     }
 
@@ -204,6 +205,23 @@ export class WashingMachineHistoryPage implements AfterViewInit {
       width: '35%',
       data: { washingMachine: washingMachine },
       autoFocus: false
+    });
+  }
+
+  delete(serialNumber: string): void {
+    const dialogRef = this.dialog.open(DeleteModal, {
+      disableClose: true,
+      width: '35%',
+      data: { serialNumber: serialNumber },
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
+        this._washingMachineApi.delete(serialNumber).subscribe(() => {
+          this.dataSource.remove(serialNumber);
+        });
+      }
     });
   }
 
