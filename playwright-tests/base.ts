@@ -2,11 +2,13 @@ import { test as base } from '@playwright/test';
 import { WashingMachineCreatePom } from './washing-machine/pages/washing-machine-create.pom';
 import { WashingMachineHistoryPom } from './washing-machine/pages/washing-machine-history.pom';
 import { HomePom } from './home/pages/home.pom';
+import {WashingMachineApi} from "./washing-machine/washing-machine.api";
 
 type MyFixtures = {
   homePom: HomePom,
   washingMachineCreatePom: WashingMachineCreatePom,
-  washingMachineHistoryPom: WashingMachineHistoryPom
+  washingMachineHistoryPom: WashingMachineHistoryPom,
+  washingMachineApi: WashingMachineApi
 }
 
 export const customTest = base.extend<MyFixtures>({
@@ -59,5 +61,14 @@ export const customTest = base.extend<MyFixtures>({
 
   washingMachineHistoryPom: async({ page }, use) => {
     await use(new WashingMachineHistoryPom(page))
-  }
+  },
+
+  washingMachineApi: async ({ request }, use) => {
+    const api = new WashingMachineApi(request);
+    try {
+      await use(api);
+    } finally {
+      await api.cleanup();
+    }
+  },
 })
