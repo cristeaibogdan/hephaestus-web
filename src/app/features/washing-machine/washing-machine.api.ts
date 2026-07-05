@@ -1,18 +1,22 @@
-import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { SearchWashingMachineRequest } from './models/endpoints/search-washing-machine.endpoint';
-import { GetWashingMachineReportResponse } from "./models/endpoints/get-washing-machine-report.endpoint";
-import { Recommendation } from './enums/recommendation.enum';
-import { SearchWashingMachineResponse } from './models/endpoints/search-washing-machine.endpoint';
-import { Observable } from 'rxjs';
-import { GetWashingMachineFullResponse } from './models/endpoints/get-washing-machine-full.endpoint';
-import { environment } from 'src/environments/environment';
-import { Page } from 'src/app/shared/models/page.model';
+import {inject, Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {
+  SearchWashingMachineRequest,
+  SearchWashingMachineResponse
+} from './models/endpoints/search-washing-machine.endpoint';
+import {GetWashingMachineReportResponse} from "./models/endpoints/get-washing-machine-report.endpoint";
+import {Recommendation} from './enums/recommendation.enum';
+import {Observable} from 'rxjs';
+import {GetWashingMachineFullResponse} from './models/endpoints/get-washing-machine-full.endpoint';
+import {environment} from 'src/environments/environment';
+import {Page} from 'src/app/shared/models/page.model';
+import {CreateWashingMachineRequest} from "./models/endpoints/create-washing-machine.endpoint";
+import {ImageFile} from "./models/image-file.model";
 
 @Injectable({providedIn: 'root'})
 export class WashingMachineApi {
-  private apiURL = environment.apiBaseUrl;
-  private http = inject(HttpClient);
+  private readonly apiURL = environment.apiBaseUrl;
+  private readonly http = inject(HttpClient);
 
 //**************************************
 //*** STEP 3 = OVERVIEW
@@ -25,9 +29,23 @@ export class WashingMachineApi {
     return this.http.get<Recommendation>(url);
   }
 
-  create(washingMachine:FormData): Observable<void> {
-    const url = this.apiURL.concat("/v1/washing-machines/create");
-    return this.http.post<void>(url, washingMachine);
+  create(createWashingMachineRequest: CreateWashingMachineRequest, files: ImageFile[]): Observable<void> {
+    const formData = new FormData();
+    formData.append(
+      'createWashingMachineRequest',
+      new Blob(
+        [JSON.stringify(createWashingMachineRequest)],
+        { type: 'application/json' }
+      )
+    );
+    for (const file of files) {
+      formData.append('imageFiles', file.file);
+    }
+
+    return this.http.post<void>(
+      this.apiURL.concat("/v1/washing-machines/create"),
+      formData
+    );
   }
 
 //**************************************
@@ -48,8 +66,7 @@ export class WashingMachineApi {
 
   search(searchWashingMachineRequest: SearchWashingMachineRequest): Observable<Page<SearchWashingMachineResponse>> {
     const url = this.apiURL.concat("/v1/washing-machines/search");
-    const payload = searchWashingMachineRequest;
-    return this.http.post<Page<SearchWashingMachineResponse>>(url, payload);
+    return this.http.post<Page<SearchWashingMachineResponse>>(url, searchWashingMachineRequest);
   }
 
   /**

@@ -143,14 +143,8 @@ export class WashingMachineCreateService {
     };
 
     console.log("Saving = ", createWashingMachineRequest);
-    const formData = new FormData();
-    formData.append("createWashingMachineRequest", new Blob ([JSON.stringify(createWashingMachineRequest)], {type: 'application/json'}));
 
-    this._selectedFiles().forEach(file => {
-      formData.append("imageFiles", file.file);
-    });
-
-    return firstValueFrom(this._washingMachineApi.create(formData).pipe(
+    return firstValueFrom(this._washingMachineApi.create(createWashingMachineRequest, this._selectedFiles()).pipe(
       switchMap(() => {
         return this._washingMachineApi.getRecommendation(identification.serialNumber);
       })
