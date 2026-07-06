@@ -100,10 +100,10 @@ Run Playwright against the real backend and use endpoints for seeding and deleti
 Each stateful Playwright test:
 
 - Creates its own test data via a test endpoint.
-- Serial numbers used in tests are prefixed with `test-`
+- Serial numbers used in tests must be **unique** and prefixed with `test-`
 - Executes the UI interactions.
 - Verifies the expected behavior.
-- Cleans up the created data in a finally block.
+- Cleans up the created data in a `finally` block.
 
 #### Example Implementation
 1. Create class that will call the endpoints and handle the cleanup:
@@ -210,9 +210,19 @@ customTest('should find washing machine when filtering by serialNumber', async (
 
 ## Questions & Answers
 - Q: What happens if the `create` endpoint fails?
-  A: `create()` throws before pushing to `createdSerialNumbers`, so a failed create is never tracked for cleanup.
+  A: It throws before pushing to `createdSerialNumbers`, so a failed serialNumber is never tracked for cleanup.
+- Q: What happens if the `delete` endpoint fails?
+  A: `delete()` throws for anything but `ok()/404`.
+  - If it fails inside `cleanup()`: caught by the try/catch, added to the aggregated error.
+  - If a test calls `delete()` directly: normal test failure. The serialNumber stays in
+    `createdSerialNumbers` (only `cleanup()` clears it), so the fixture's `finally` retries
+    the delete at teardown.
 - Q: What happens if the test throws an exception?
   A: Fixture's `try-finally` runs `cleanup()` regardless.
-- What happens if the cleanup throws an exception?
+- Q: What happens if the cleanup throws an exception?
   A: Every delete is attempted (for-loop + try/catch), failures are collected and thrown as one aggregated error at the end.
-
+- Q: What happens if the user interrupts the test before completion (Ctrl+C, stop button)?\
+  A: Depends on interrupt type. 
+  - A graceful stop (SIGINT/SIGTERM) — Playwright generally still runs fixture teardown for the in-flight test, so cleanup() fires. 
+  - A hard kill (process crash, kill -9, closing the terminal) skips teardown entirely — created data is orphaned with no retry.
+    TODO: Create an endpoint in the backend called deleteAllTestSerialNumbers
