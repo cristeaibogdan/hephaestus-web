@@ -57,7 +57,6 @@ export class WashingMachineHistoryPom {
     await this.page.getByRole('option', { name: value }).click();
   }
 
-  // TODO: Is this worth doing? YES!
   async filterBy(filters: {
     createdAt?: string;
     identificationMode?: 'Data Matrix' | 'QR Code';
@@ -78,6 +77,8 @@ export class WashingMachineHistoryPom {
     if (filters.returnType) await this.filterByReturnType(filters.returnType);
     if (filters.damageType) await this.filterByDamageType(filters.damageType);
     if (filters.recommendation) await this.filterByRecommendation(filters.recommendation);
+
+    await this.applyFilter();
   }
 
   async applyFilter(): Promise<void> {
@@ -128,6 +129,14 @@ export class WashingMachineHistoryPom {
 
     return new WashingMachineRow(row);
   }
+
+  getEmptyMessage(): Locator { // TODO: move to dedicated POM
+    return this.page.getByText('No products match the selected filter criteria');
+  }
+
+  getCustomMessage(message: string): Locator { // TODO: move to dedicated POM
+    return this.page.getByText(message);
+  }
 }
 
 export class WashingMachineRow {
@@ -148,5 +157,9 @@ export class WashingMachineRow {
 
   type(): Locator {
     return this.row.locator('td.mat-column-type');
+  }
+
+  serialNumber(): Locator {
+    return this.row.locator('td.mat-column-serialNumber');
   }
 }

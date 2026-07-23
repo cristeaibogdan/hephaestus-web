@@ -1,6 +1,7 @@
 import { type Locator, type Page } from '@playwright/test';
 import { VisibleSurfaces } from './visible.surfaces';
 import { HiddenSurfaces } from './hidden.surfaces';
+import {TEST_FILES} from "../../assets/file.provider";
 
 export class DamageStep {
 
@@ -61,7 +62,7 @@ export class DamageStep {
     await this.page.getByLabel('Product Repair Price')
       .fill(price.toString());
   }
-  
+
   async next(): Promise<void> {
     await this.page.getByRole('button', { name: 'Next' }).click();
   }
@@ -69,7 +70,7 @@ export class DamageStep {
   noImageUploadedError(): Locator {
     return this.page.getByText("At least one image must be uploaded");
   }
-  
+
   tooManyFilesError(): Locator {
     // exact: true is needed to avoid matching the hidden CDK tooltip that contains the same text
     return this.page.getByText('Upload is limited to 3 files', { exact: true });
@@ -77,5 +78,43 @@ export class DamageStep {
 
   invalidFileExtensionError(): Locator {
     return this.page.getByText('Only jpg, jpeg, png and bmp extensions are supported');
+  }
+
+  async complete(): Promise<void> {
+    await this.uploadImages(
+      TEST_FILES.images.jpg.landscape,
+      TEST_FILES.images.jpeg.mountains,
+      TEST_FILES.images.bmp.trail,
+    );
+
+    await this.enablePackageApplicable();
+    await this.checkPackageApplicableDamaged();
+    await this.checkPackageApplicableDirty();
+    await this.checkPackageApplicableRepackage();
+
+    const visibleSurfaces = this.visibleSurfaces();
+    await visibleSurfaces.enable();
+    await visibleSurfaces.checkScratches();
+    await visibleSurfaces.fillScratchesLength(5);
+    await visibleSurfaces.checkDents();
+    await visibleSurfaces.fillDentsDepth(8.5);
+    await visibleSurfaces.checkMinorDamages();
+    await visibleSurfaces.fillMinorDamages("Some Minor Damages");
+    await visibleSurfaces.checkMajorDamages();
+    await visibleSurfaces.fillMajorDamages("Some Major major Damages");
+
+    const hiddenSurfaces = this.hiddenSurfaces();
+    await hiddenSurfaces.enable();
+    await hiddenSurfaces.checkScratches();
+    await hiddenSurfaces.fillScratchesLength(9);
+    await hiddenSurfaces.checkDents();
+    await hiddenSurfaces.fillDentsDepth(10);
+    await hiddenSurfaces.checkMinorDamages();
+    await hiddenSurfaces.fillMinorDamages("Some tiny minor hidden Damage");
+    await hiddenSurfaces.checkMajorDamages();
+    await hiddenSurfaces.fillMajorDamages("Some Major hidden Damage");
+
+    await this.fillProductPrice(100);
+    await this.fillProductRepairPrice(20);
   }
 }

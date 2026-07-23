@@ -12,6 +12,8 @@ export class SerialNumberValidator implements AsyncValidator {
   private httpClient = inject(HttpClient);
   private apiURL = environment.apiBaseUrl;
 
+  // TODO: Return `of(null)` when `control.value` is null or an empty string
+  // to avoid unnecessary HTTP requests.
   validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
     const url = this.apiURL.concat("/v1/washing-machines/")
       .concat(control.value)

@@ -1,16 +1,25 @@
-import { test as base } from '@playwright/test';
+import {Page, test as base} from '@playwright/test';
 import { WashingMachineCreatePom } from './washing-machine/pages/washing-machine-create.pom';
 import { WashingMachineHistoryPom } from './washing-machine/pages/washing-machine-history.pom';
 import { HomePom } from './home/pages/home.pom';
+import {WashingMachineApi} from "./washing-machine/washing-machine.api";
+import {WashingMachineApiMock} from "./washing-machine/washing-machine.api-mock";
 
-type MyFixtures = {
+interface PomFixtures {
   homePom: HomePom,
   washingMachineCreatePom: WashingMachineCreatePom,
   washingMachineHistoryPom: WashingMachineHistoryPom
 }
 
-export const customTest = base.extend<MyFixtures>({
+interface PageTestFixtures extends PomFixtures {
+  washingMachineApiMock: WashingMachineApiMock
+}
 
+interface E2ETestFixtures extends PomFixtures {
+  washingMachineApi: WashingMachineApi
+}
+
+const sharedTest = base.extend<PomFixtures>({
   /**
    * Overrides the default `page` fixture to intercept Angular Material's initialization
    * spinner dialog before each test.
@@ -59,5 +68,39 @@ export const customTest = base.extend<MyFixtures>({
 
   washingMachineHistoryPom: async({ page }, use) => {
     await use(new WashingMachineHistoryPom(page))
+  },
+});
+
+export const e2eTest = sharedTest.extend<E2ETestFixtures>({
+  washingMachineApi: async ({ request }, use) => {
+    const api = new WashingMachineApi(request);
+    try {
+      await use(api);
+    } finally {
+      await api.cleanup();
+    }
+  },
+})
+
+export const pageTest = sharedTest.extend<PageTestFixtures>({
+  washingMachineApiMock: async ({ page }, use) => {
+    // await wakeupSuccessMock(page); // TODO: Causes collision issues in mocked tests. You can't mock a second time, so it always returns []
+    await use(new WashingMachineApiMock(page));
   }
 })
+
+/**
+ * Mocks the backend wake-up checks performed by `InitializationService` so that
+ * `wakeupBackends()` resolves immediately with both services reporting "awake".
+ *
+ * Without this, `pageTest` runs have no real backend behind these endpoints, causing
+ * `wakeupWashingMachine()` / `wakeupProduct()` to retry (3x, 1s delay) and potentially
+ * redirect to `/initialization-fail` mid-test — a race that manifests as an intermittent
+ * timeout depending on when it fires relative to the test's own assertions.
+ */
+async function wakeupSuccessMock(page: Page): Promise<void> {
+  await page.route("**/v1/washing-machines/*/validate", route => route.fulfill({ status: 200 }));
+  await page.route("**/v1/products/*/manufacturers", route =>
+    route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify([]) })
+  );
+}

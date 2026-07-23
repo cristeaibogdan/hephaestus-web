@@ -1,20 +1,20 @@
 import { expect } from "@playwright/test";
 import { TEST_FILES } from "playwright-tests/assets/file.provider";
-import { customTest } from "playwright-tests/base";
-import { WashingMachineHistoryPom } from "playwright-tests/washing-machine/pages/washing-machine-history.pom";
+import { e2eTest} from "playwright-tests/base";
 
-customTest('create and view washing machine', async ({ washingMachineCreatePom, washingMachineHistoryPom }) => {
+e2eTest('create and view washing machine', async ({ washingMachineCreatePom, washingMachineHistoryPom, washingMachineApi }) => {
   await washingMachineCreatePom.goto();
 
-  const damageStep = washingMachineCreatePom.damageStep();
   const identificationStep = washingMachineCreatePom.identificationStep();
+  const damageStep = washingMachineCreatePom.damageStep();
+  const serialNumber = washingMachineApi.reserveSerialNumber();
 
   // 1. Identification
   await identificationStep.selectIdentificationMode('Data Matrix');
   await identificationStep.selectManufacturer('Bosch');
   await identificationStep.selectModel('WGB256A1GB');
   await identificationStep.selectType('BOS001');
-  await identificationStep.fillSerialNumber('Un serial');
+  await identificationStep.fillSerialNumber(serialNumber);
   await identificationStep.selectReturnType('Service');
   await identificationStep.selectDamageType('In Use');
   await identificationStep.next();
@@ -61,7 +61,7 @@ customTest('create and view washing machine', async ({ washingMachineCreatePom, 
   const overview = washingMachineCreatePom.overviewStep();
   await expect(overview.category()).toContainText('Washing Machine');
   await expect(overview.manufacturer()).toContainText('Bosch');
-  await expect(overview.serialNumber()).toContainText('Un serial');
+  await expect(overview.serialNumber()).toContainText(serialNumber);
   await expect(overview.model()).toContainText('WGB256A1GB');
   await expect(overview.type()).toContainText('BOS001');
   await expect(overview.identificationMode()).toContainText('Data Matrix');
@@ -87,32 +87,17 @@ customTest('create and view washing machine', async ({ washingMachineCreatePom, 
   await expect(overview.productPrice()).toContainText('100 €');
   await expect(overview.repairPrice()).toContainText('20 €');
 
-  // extract all these fields into a type so we can assert them in the history page
-  // add function to click on next
+  await overview.generateRecommendation();
 
-  // 4. Overview
-  // Check if page loaded succesfully.
+  // 4. Recommendation
+  const recommendationStep = washingMachineCreatePom.recommendationStep();
+  await expect(recommendationStep.getText()).toBeVisible();
 
   // 5. History
   await washingMachineHistoryPom.goto();
 
-  const row = washingMachineHistoryPom.findRowBySerialNumber('fasda');
-
+  const row = washingMachineHistoryPom.findRowBySerialNumber(serialNumber);
   await expect(row.manufacturer()).toHaveText('Bosch');
   await expect(row.model()).toHaveText('WGB256A1GB');
-  await expect(row.type()).toHaveText('N/A');
-
-  async function filterBySerialNumber(washingMachineHistoryPagePom: WashingMachineHistoryPom, serialNumber: string) {
-    await washingMachineHistoryPagePom.filterByCreatedDate('2026-03-06');
-    await washingMachineHistoryPagePom.filterByIdentificationMode('Data Matrix');
-    await washingMachineHistoryPagePom.filterByManufacturer('Bosch');
-    await washingMachineHistoryPagePom.filterByModel('WGB256A1GB');
-    await washingMachineHistoryPagePom.filterByType('N/A');
-
-    await washingMachineHistoryPagePom.filterBySerialNumber(serialNumber);
-
-    await washingMachineHistoryPagePom.filterByReturnType('Service');
-    await washingMachineHistoryPagePom.filterByDamageType('In Use');
-    await washingMachineHistoryPagePom.filterByRecommendation('REPACKAGE');
-  }
+  await expect(row.type()).toHaveText('BOS001');
 });

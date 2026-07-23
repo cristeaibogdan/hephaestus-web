@@ -97,8 +97,7 @@ Pages should be encapsulated and expose only behaviour outside.
 - To see the report for tests run:
   `npx playwright test --reporter=html`
   `npx playwright show-report`
-- To see if they run in paraller, you'll just have to trust the config (bummer)
-
+- To see if they run in parallel, you'll just have to trust the config (bummer)
 - For rows, it makes sense to get the whole data from the row using a custom object - ...Row
 
 # TODOs
@@ -109,5 +108,7 @@ Pages should be encapsulated and expose only behaviour outside.
 4. Worth having one method call multiple methods inside pom
   a) multiple methods with one input help page tests
   b) single method with multiple (optional) inputs help readability in E2E tests
-5. Add translation ADR
+5. Add translation ADR - https://www.locize.com/blog/guide-to-i18n-key-naming
 6. Create delete endpoints and create an ADR to investigate the usage of test data slices for playwright tests
+7. Start with a prepopulated memory in a DB for playwright tests.
+8. Create an environment variable to centralize endpoints url.
