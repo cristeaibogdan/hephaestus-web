@@ -5,6 +5,8 @@ import {
 } from "../../src/app/features/washing-machine/models/endpoints/create-washing-machine.endpoint";
 import * as fs from "node:fs";
 import {TEST_FILES} from "../assets/file.provider";
+import crypto from "node:crypto";
+import {TestData} from "../test-data";
 
 export class WashingMachineApi {
   private readonly apiURL = environment.apiBaseUrl;
@@ -12,7 +14,21 @@ export class WashingMachineApi {
 
   constructor(private readonly request: APIRequestContext) {}
 
+  /**
+   * Reserves a valid test serial for cleanup immediately.
+   * The single entry point for obtaining a serial, whether it's later used
+   * with create() or with manual/UI creation — delete() tolerates 404, so
+   * marking before the entity exists is always safe.
+   */
+  reserveSerialNumber(): string {
+    const serialNumber = TestData.generateSerialNumber();
+    this.createdSerialNumbers.push(serialNumber);
+    return serialNumber;
+  }
+
   async create(request: CreateWashingMachineRequest): Promise<void> {
+    this.validateSerialNumber(request.serialNumber);
+
     const formData = new FormData();
     formData.append("createWashingMachineRequest", new Blob([JSON.stringify(request)]));
     formData.append("imageFiles", new File([fs.readFileSync(TEST_FILES.images.jpg.landscape)], "landscape.jpg"));
@@ -25,8 +41,12 @@ export class WashingMachineApi {
     if (!response.ok()) {
       throw new Error(`Failed to create ${request.serialNumber}: ${response.status()} ${await response.text()}`);
     }
+  }
 
-    this.createdSerialNumbers.push(request.serialNumber);
+  private validateSerialNumber(serialNumber : string): void {
+    if (!/^test-[0-9a-f]{8}$/.test(serialNumber)) {
+      throw new Error(`serialNumber must match "test-<8 hex chars>", received: "${serialNumber}"`);
+    }
   }
 
   async delete(serialNumber: string): Promise<void> {
@@ -52,6 +72,7 @@ export class WashingMachineApi {
   async cleanup(): Promise<void> {
     const serials = [...this.createdSerialNumbers];
     this.createdSerialNumbers = [];
+    console.log("Attempting cleanup for serials: ", serials);
 
     const errors: string[] = [];
     for (const serialNumber of serials) {
@@ -65,5 +86,7 @@ export class WashingMachineApi {
     if (errors.length) {
       throw new Error(`Cleanup failed for ${errors.length}: ${errors.join("; ")}`);
     }
+
+    console.log("Cleanup ended");
   }
 }

@@ -2,6 +2,7 @@
 
 ## Status
 Accepted: Decision approved and in effect. Please don't hesitate to challenge it.
+Fixture implementation superseded by ADR-005.
 
 ## Context
 We use Playwright for integration and e2e tests.
@@ -64,8 +65,7 @@ export const customTest = base.extend<MyFixtures>({
 });
 ```
 
-With the fixture in place, a spec only imports `customTest` and declares the 
-page objects it needs.
+With the fixture in place, a spec only imports `customTest` and declares the page objects it needs.
 
 ```ts
 import { customTest } from '../fixtures';
@@ -115,3 +115,6 @@ Enforcement is performed during code review. Reviewers should reject:
 - https://playwright.dev/docs/test-fixtures
 - https://www.youtube.com/watch?v=k488kAtT-Pw
 
+## Questions
+- Should there be a dedicated notification pom file?
+- How smart should a POM be? Should it be able to auto-fill everything in a page within a single function?

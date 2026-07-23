@@ -18,6 +18,7 @@ export class WashingMachineApi {
   private readonly apiURL = environment.apiBaseUrl;
   private readonly http = inject(HttpClient);
 
+  // TODO: Extract strings so they can be reused in playwright tests
 //**************************************
 //*** STEP 3 = OVERVIEW
 //**************************************

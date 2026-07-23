@@ -1,19 +1,22 @@
-import { test, expect } from '@playwright/test';
-import { customTest } from '../base';
-import { IdentificationStep } from './pages/identification.step';
-import { DamageStep } from './pages/damage.step';
-import { TEST_FILES } from 'playwright-tests/assets/file.provider';
+import {expect, test} from '@playwright/test';
+import {pageTest} from '../base';
+import {IdentificationStep} from './pages/identification.step';
+import {DamageStep} from './pages/damage.step';
+import {TEST_FILES} from 'playwright-tests/assets/file.provider';
+import {Recommendation} from "../../src/app/features/washing-machine/enums/recommendation.enum";
 
 test.describe('Identification', () => {
 
   let identificationStep: IdentificationStep;
 
-  customTest.beforeEach(async ({ washingMachineCreatePom }) => {
+  pageTest.beforeEach(async ({ washingMachineCreatePom }) => {
     await washingMachineCreatePom.goto();
     identificationStep = washingMachineCreatePom.identificationStep();
   });
 
-  customTest('cannot proceed to next step when fields are empty', async () => {
+  pageTest('cannot proceed to next step when fields are empty', async ({ washingMachineApiMock }) => {
+    await washingMachineApiMock.getManufacturers(["Model A", "Model B"]);
+
     await identificationStep.next();
 
     await expect(identificationStep.manufacturerRequired()).toBeVisible();
@@ -21,12 +24,21 @@ test.describe('Identification', () => {
     await expect(identificationStep.serialNumberRequired()).toBeVisible();
   });
 
-  customTest('navigates to next step when valid input is provided', async ({ washingMachineCreatePom }) => {
+  pageTest('navigates to next step when valid input is provided', async ({ washingMachineCreatePom, washingMachineApiMock }) => {
+    await washingMachineApiMock.getManufacturers(["Bosch"]);
+    await washingMachineApiMock.getModelsAndTypes([
+      {
+        model: "WGB256A1GB",
+        type: "BOS001"
+      }
+    ]);
+    await washingMachineApiMock.validate(false);
+
     await identificationStep.selectIdentificationMode('Data Matrix');
     await identificationStep.selectManufacturer('Bosch');
     await identificationStep.selectModel('WGB256A1GB');
     await identificationStep.selectType('BOS001');
-    await identificationStep.fillSerialNumber('Un serial');
+    await identificationStep.fillSerialNumber('someSerialNumber');
     await identificationStep.selectReturnType('Service');
     await identificationStep.selectDamageType('In Use');
     await identificationStep.next();
@@ -40,19 +52,33 @@ test.describe('Damage', () => {
 
   let damageStep: DamageStep;
 
-  customTest.beforeEach(async ({ washingMachineCreatePom }) => {
+  pageTest.beforeEach(async ({ washingMachineCreatePom, washingMachineApiMock }) => {
     await washingMachineCreatePom.goto();
-    await washingMachineCreatePom.identificationStep().complete();
+
+    await washingMachineApiMock.getManufacturers(["Bosch"]);
+    await washingMachineApiMock.getModelsAndTypes([
+      {
+        model: "WGB256A1GB",
+        type: "BOS001"
+      }
+    ]);
+    await washingMachineApiMock.validate(false);
+
+    await washingMachineCreatePom.identificationStep().complete({
+      manufacturer: "Bosch",
+      model: "WGB256A1GB",
+      type: "BOS001",
+    });
     damageStep = washingMachineCreatePom.damageStep();
   });
 
-  customTest('shows error when no image is uploaded', async () => {
+  pageTest('shows error when no image is uploaded', async () => {
     await damageStep.next();
 
     await expect(damageStep.noImageUploadedError()).toBeVisible();
   });
 
-  customTest('shows error when more than 3 images are uploaded', async () => {
+  pageTest('shows error when more than 3 images are uploaded', async () => {
     await damageStep.uploadImages(
       TEST_FILES.images.jpg.landscape,
       TEST_FILES.images.jpeg.mountains,
@@ -63,7 +89,7 @@ test.describe('Damage', () => {
     await expect(damageStep.tooManyFilesError()).toBeVisible();
   });
 
-  customTest('shows error when uploaded file has invalid extension', async () => {
+  pageTest('shows error when uploaded file has invalid extension', async () => {
     await damageStep.uploadImages(
       TEST_FILES.files.txt.empty
     );
@@ -71,7 +97,7 @@ test.describe('Damage', () => {
     await expect(damageStep.invalidFileExtensionError()).toBeVisible();
   });
 
-  customTest('navigates to next step when valid input is provided', async ({ washingMachineCreatePom }) => {
+  pageTest('navigates to next step when valid input is provided', async ({ washingMachineCreatePom }) => {
     await damageStep.uploadImages(
       TEST_FILES.images.jpg.landscape,
       TEST_FILES.images.jpeg.mountains,
@@ -115,22 +141,30 @@ test.describe('Damage', () => {
 
 test.describe('Overview', () => {
 
-  customTest('shows previously selected values when Overview is reached', async ({ washingMachineCreatePom }) => {
+  pageTest('shows previously selected values when Overview is reached', async ({ washingMachineCreatePom, washingMachineApiMock }) => {
     await washingMachineCreatePom.goto();
-    const damageStep = washingMachineCreatePom.damageStep();
-    const identificationStep = washingMachineCreatePom.identificationStep();
+    await washingMachineApiMock.getManufacturers(["Bosch"]);
+    await washingMachineApiMock.getModelsAndTypes([
+      {
+        model: "WGB256A1GB",
+        type: "BOS001"
+      }
+    ]);
+    await washingMachineApiMock.validate(false);
 
     // 1. Identification
-    await identificationStep.selectIdentificationMode('Data Matrix');
-    await identificationStep.selectManufacturer('Bosch');
-    await identificationStep.selectModel('WGB256A1GB');
-    await identificationStep.selectType('BOS001');
-    await identificationStep.fillSerialNumber('Un serial');
-    await identificationStep.selectReturnType('Service');
-    await identificationStep.selectDamageType('In Use');
-    await identificationStep.next();
+    await washingMachineCreatePom.identificationStep().complete({
+      identificationMode: 'Data Matrix',
+      manufacturer: "Bosch",
+      model: "WGB256A1GB",
+      type: "BOS001",
+      serialNumber: 'someSerial',
+      returnType: 'Service',
+      damageType: 'In Use'
+    });
 
     // 2. Damage
+    const damageStep = washingMachineCreatePom.damageStep();
     await damageStep.uploadImages(
       TEST_FILES.images.jpg.landscape,
       TEST_FILES.images.jpeg.mountains,
@@ -169,10 +203,11 @@ test.describe('Overview', () => {
     await damageStep.next();
 
     // 3. Overview
+    // TODO: Worth exposing a single method that returns everything on the page?
     const overview = washingMachineCreatePom.overviewStep();
     await expect(overview.category()).toContainText('Washing Machine');
     await expect(overview.manufacturer()).toContainText('Bosch');
-    await expect(overview.serialNumber()).toContainText('Un serial');
+    await expect(overview.serialNumber()).toContainText('someSerial');
     await expect(overview.model()).toContainText('WGB256A1GB');
     await expect(overview.type()).toContainText('BOS001');
     await expect(overview.identificationMode()).toContainText('Data Matrix');
@@ -197,5 +232,44 @@ test.describe('Overview', () => {
 
     await expect(overview.productPrice()).toContainText('100 €');
     await expect(overview.repairPrice()).toContainText('20 €');
+  });
+});
+
+test.describe('Recommendation', () => {
+
+  pageTest('shows success message when Recommendation is reached', async ({ washingMachineCreatePom, washingMachineApiMock }) => {
+    await washingMachineCreatePom.goto();
+    await washingMachineApiMock.getManufacturers(["Bosch"]);
+    await washingMachineApiMock.getModelsAndTypes([
+      {
+        model: "WGB256A1GB",
+        type: "BOS001"
+      }
+    ]);
+    await washingMachineApiMock.validate(false);
+
+    // 1. Identification
+    await washingMachineCreatePom.identificationStep().complete({
+      identificationMode: 'Data Matrix',
+      manufacturer: "Bosch",
+      model: "WGB256A1GB",
+      type: "BOS001",
+      serialNumber: 'someSerial',
+      returnType: 'Service',
+      damageType: 'In Use'
+    });
+
+    // 2. Damage
+    const damageStep = washingMachineCreatePom.damageStep();
+    await damageStep.complete();
+    await damageStep.next();
+
+    // 3. Overview
+    await washingMachineApiMock.create();
+    await washingMachineApiMock.getRecommendation(Recommendation.DISASSEMBLE)
+    await washingMachineCreatePom.overviewStep().generateRecommendation();
+
+    // 4. Recommendation
+    await expect(washingMachineCreatePom.recommendationStep().getSuccessMessage()).toBeVisible();
   });
 });

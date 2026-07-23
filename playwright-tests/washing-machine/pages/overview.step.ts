@@ -127,4 +127,8 @@ export class OverviewStep {
   private pricingArticle(): Locator {
     return this.page.getByRole('article').filter({ hasText: 'Pricing' });
   }
+
+  async generateRecommendation(): Promise<void> {
+    await this.page.getByRole('button', { name: 'Generate Recommendation' }).click();
+  }
 }

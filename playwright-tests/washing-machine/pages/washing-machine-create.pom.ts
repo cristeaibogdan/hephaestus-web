@@ -2,6 +2,7 @@ import { type Page } from '@playwright/test';
 import { IdentificationStep } from './identification.step';
 import { DamageStep } from './damage.step';
 import { OverviewStep } from './overview.step';
+import {RecommendationStep} from "./recommendation.step";
 
 export class WashingMachineCreatePom {
 
@@ -23,5 +24,9 @@ export class WashingMachineCreatePom {
 
   overviewStep(): OverviewStep {
     return new OverviewStep(this.page);
+  }
+
+  recommendationStep(): RecommendationStep {
+    return new RecommendationStep(this.page);
   }
 }

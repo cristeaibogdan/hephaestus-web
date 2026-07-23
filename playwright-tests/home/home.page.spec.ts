@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
-import { customTest } from '../base';
+import { pageTest } from '../base';
 
-customTest('displays all product categories when Home is reached', async ({ homePom }) => {
+pageTest('displays all product categories when Home is reached', async ({ homePom }) => {
   await homePom.goto();
 
   await expect(homePom.washingMachines()).toBeVisible();

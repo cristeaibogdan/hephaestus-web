@@ -30,7 +30,7 @@ export class IdentificationStep {
     await this.page.getByLabel('Serial Number').fill(serialNumber);
 
     /**
-     * due to async validator which triggers on blur, we need to click outside 
+     * due to async validator which triggers on blur, we need to click outside
      * and wait for the hint to be visible before proceeding further
      */
     await this.page.locator('body').click();
@@ -52,27 +52,48 @@ export class IdentificationStep {
   /**
    * Both 'model' and 'type' fields share the same error message with no distinguishing attribute.
    * .first() is intentional — we only need to assert the error is visible at least once.
-   */ 
+   */
   modelAndTypeRequired(): Locator {
     return this.page.getByText('At least model or type is required').first()
   }
 
   serialNumberRequired(): Locator {
-    return this.page.getByText('Serial number is required');    
+    return this.page.getByText('Serial number is required');
   }
 
   async next(): Promise<void> {
     await this.page.getByRole('button', { name: 'Next' }).click();
   }
 
-  async complete(): Promise<void> {
-    await this.selectIdentificationMode('Data Matrix');
-    await this.selectManufacturer('Bosch');
-    await this.selectModel('WGB256A1GB');
-    await this.selectType('BOS001');
-    await this.fillSerialNumber('Un serial');
-    await this.selectReturnType('Service');
-    await this.selectDamageType('In Use');
+
+  // TODO: It is encouraged to have an override object here to go through steps quicker.
+  // TODO: Should be renamed to tell the user it also click on Next.
+  async complete({
+                   identificationMode = 'Data Matrix',
+                   manufacturer = 'Bosch',
+                   model = 'WGB256A1GB',
+                   type = 'BOS001',
+                   serialNumber = 'serialNumber',
+                   returnType = 'Service',
+                   damageType = 'In Use',
+                 }: Partial<CompleteOptions> = {}): Promise<void> {
+    await this.selectIdentificationMode(identificationMode);
+    await this.selectManufacturer(manufacturer);
+    await this.selectModel(model);
+    await this.selectType(type);
+    await this.fillSerialNumber(serialNumber);
+    await this.selectReturnType(returnType);
+    await this.selectDamageType(damageType);
     await this.next();
   }
 }
+
+type CompleteOptions = {
+  identificationMode: 'Data Matrix' | 'QR Code';
+  manufacturer: string;
+  model: string;
+  type: string;
+  serialNumber: string;
+  returnType: 'Service' | 'Commercial' | 'Transport';
+  damageType: 'In Use' | 'In Transit';
+};
