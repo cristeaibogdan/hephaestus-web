@@ -129,14 +129,6 @@ export class WashingMachineHistoryPom {
 
     return new WashingMachineRow(row);
   }
-
-  getEmptyMessage(): Locator { // TODO: move to dedicated POM
-    return this.page.getByText('No products match the selected filter criteria');
-  }
-
-  getCustomMessage(message: string): Locator { // TODO: move to dedicated POM
-    return this.page.getByText(message);
-  }
 }
 
 export class WashingMachineRow {

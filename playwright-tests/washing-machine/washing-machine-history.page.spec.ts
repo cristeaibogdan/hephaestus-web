@@ -20,20 +20,20 @@ pageTest('should find washing machine when filtering by serialNumber', async ({ 
   await expect(row.type()).toHaveText('N/A');
 });
 
-pageTest('should display message when no data is available in table', async ({ washingMachineHistoryPom, washingMachineApiMock }) => {
+pageTest('should display message when no data is available in table', async ({ washingMachineHistoryPom, washingMachineApiMock, notificationPom }) => {
   await washingMachineApiMock.search([]);
 
   await washingMachineHistoryPom.goto();
 
-  await expect(washingMachineHistoryPom.getEmptyMessage()).toBeVisible();
+  await expect(notificationPom.getMessage('No products match the selected filter criteria')).toBeVisible();
 });
 
-pageTest('should display backend message when something goes wrong', async ({ washingMachineHistoryPom, washingMachineApiMock }) => {
+pageTest('should display backend message when something goes wrong', async ({ washingMachineHistoryPom, washingMachineApiMock, notificationPom }) => {
   await washingMachineApiMock.searchError(500, "Custom Error From The Backend");
 
   await washingMachineHistoryPom.goto();
 
-  await expect(washingMachineHistoryPom.getCustomMessage("Custom Error From The Backend")).toBeVisible();
+  await expect(notificationPom.getMessage('Custom Error From The Backend')).toBeVisible();
 });
 
 

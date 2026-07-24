@@ -41,6 +41,18 @@ export class WashingMachineCreatePom {
 }
 ```
 
+Notifications are centralized in `notification.pom.ts`:
+
+```ts
+export class NotificationPom {
+  constructor(private page: Page) { }
+
+  getMessage(message: string, exact = false): Locator {
+    return this.page.getByText(message, { exact: exact });
+  }
+}
+```
+
 ### Fixtures
 By default, every test receives a `page` fixture from Playwright. 
 We extend this to inject our own Page Objects.
@@ -49,9 +61,10 @@ We extend this to inject our own Page Objects.
 // base.ts
 import { test as base } from '@playwright/test';
 
-type MyFixtures = {
-  washingMachineCreatePom: WashingMachineCreatePom;
-  solarPanelHistoryPom: SolarPanelHistoryPom;
+interface MyFixtures {
+  washingMachineCreatePom: WashingMachineCreatePom,
+  solarPanelHistoryPom: SolarPanelHistoryPom,
+  notificationPom: NotificationPom
 };
 
 export const customTest = base.extend<MyFixtures>({
@@ -62,11 +75,14 @@ export const customTest = base.extend<MyFixtures>({
   solarPanelHistoryPom: async ({ page }, use) => {
     await use(new SolarPanelHistoryPom(page));
   },
+
+  notificationPom: async ({ page }, use) => {
+    await use(new NotificationPom(page));
+  },
 });
 ```
 
 With the fixture in place, a spec only imports `customTest` and declares the page objects it needs.
-
 ```ts
 import { customTest } from '../fixtures';
 import { expect } from '@playwright/test';
@@ -80,7 +96,6 @@ customTest('starts a wash cycle', async ({ washingMachineCreatePom }) => {
 
 ### Rules
 1. Page Objects must not contain assertions.
-
 ```ts
 // ❌ Wrong — assertion inside POM
 async startCycle() {
@@ -116,5 +131,4 @@ Enforcement is performed during code review. Reviewers should reject:
 - https://www.youtube.com/watch?v=k488kAtT-Pw
 
 ## Questions
-- Should there be a dedicated notification pom file?
 - How smart should a POM be? Should it be able to auto-fill everything in a page within a single function?

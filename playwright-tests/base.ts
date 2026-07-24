@@ -4,11 +4,13 @@ import { WashingMachineHistoryPom } from './washing-machine/pages/washing-machin
 import { HomePom } from './home/pages/home.pom';
 import {WashingMachineApi} from "./washing-machine/washing-machine.api";
 import {WashingMachineApiMock} from "./washing-machine/washing-machine.api-mock";
+import {NotificationPom} from "./shared/notification.pom";
 
 interface PomFixtures {
   homePom: HomePom,
   washingMachineCreatePom: WashingMachineCreatePom,
-  washingMachineHistoryPom: WashingMachineHistoryPom
+  washingMachineHistoryPom: WashingMachineHistoryPom,
+  notificationPom: NotificationPom
 }
 
 interface PageTestFixtures extends PomFixtures {
@@ -68,6 +70,10 @@ const sharedTest = base.extend<PomFixtures>({
 
   washingMachineHistoryPom: async({ page }, use) => {
     await use(new WashingMachineHistoryPom(page))
+  },
+
+  notificationPom: async ({ page }, use) => {
+    await use(new NotificationPom(page));
   },
 });
 
