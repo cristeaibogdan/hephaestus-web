@@ -81,15 +81,12 @@ However, tests will break if backend values change which for our backend is fine
 
 
 # Page encapsulation
-
 Pages should be encapsulated and expose only behaviour outside.
-
 - Create methods that encapsulate how you get locators
 - Avoid putting expect inside methods (exception is async validator)
 - Perfectly fine to have methods that fill in the first step to help you test the second step
 
 # Others
-
 - Multiple assertions per test is fine when a single action produces multiple observable outcomes
 - Use semantic selectors first (`getByRole()`, `getByLabel()`, `getByText()`, `getByPlaceholder()`, etc.).
   Add data-testid only when semantic selectors are unstable or not possible.
@@ -101,14 +98,9 @@ Pages should be encapsulated and expose only behaviour outside.
 - For rows, it makes sense to get the whole data from the row using a custom object - ...Row
 
 # TODOs
-1. Finish ADR 003 page object model
-  - Should it expose convenience methods like complete step 1? => yes!
-2. Finish ADR 004 usage of locators
-3. Properties or methods for POMs and how to decide?
-4. Worth having one method call multiple methods inside pom
-  a) multiple methods with one input help page tests
-  b) single method with multiple (optional) inputs help readability in E2E tests
-5. Add translation ADR - https://www.locize.com/blog/guide-to-i18n-key-naming
-6. Create delete endpoints and create an ADR to investigate the usage of test data slices for playwright tests
-7. Start with a prepopulated memory in a DB for playwright tests.
-8. Create an environment variable to centralize endpoints url.
+1. Finish ADR 004 usage of locators
+2. Properties or methods for POMs and how to decide?
+3. Add translation ADR - https://www.locize.com/blog/guide-to-i18n-key-naming
+4. Review all ADRs and look for opportunities to merge. I feel like ADR are not completelty standalone.
+5. Start with a prepopulated memory in a DB for playwright tests.
+6. Create an environment variable to centralize endpoints url.

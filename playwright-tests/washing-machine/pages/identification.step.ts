@@ -65,10 +65,7 @@ export class IdentificationStep {
     await this.page.getByRole('button', { name: 'Next' }).click();
   }
 
-
-  // TODO: It is encouraged to have an override object here to go through steps quicker.
-  // TODO: Should be renamed to tell the user it also click on Next.
-  async complete({
+  async completeAndContinue({
                    identificationMode = 'Data Matrix',
                    manufacturer = 'Bosch',
                    model = 'WGB256A1GB',
@@ -88,12 +85,12 @@ export class IdentificationStep {
   }
 }
 
-type CompleteOptions = {
-  identificationMode: 'Data Matrix' | 'QR Code';
-  manufacturer: string;
-  model: string;
-  type: string;
-  serialNumber: string;
-  returnType: 'Service' | 'Commercial' | 'Transport';
-  damageType: 'In Use' | 'In Transit';
-};
+interface CompleteOptions {
+  identificationMode: 'Data Matrix' | 'QR Code',
+  manufacturer: string,
+  model: string,
+  type: string,
+  serialNumber: string,
+  returnType: 'Service' | 'Commercial' | 'Transport',
+  damageType: 'In Use' | 'In Transit'
+}

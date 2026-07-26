@@ -20,12 +20,13 @@ Adopt a folder structure and naming convention that organises tests by domain, m
 
 **A. Top Layer** - `playwright-tests/`
 
-| Path          | Purpose                                                                                   |
-| ------------- | ------------------------------------------------------------------------------------------|
-| `e2e/`        | Holds user flows spanning multiple pages (e.g. `create-and-view-washing-machine.spec.ts`) |
-| `<domain>/`   | Groups all page tests and page objects for a domain (e.g. `washing-machine/`)             |
-| `assets/`     | Shared files used across tests                                                            |
-| `base.ts`     | Declares Playwright fixtures and exports `customTest`                                     |
+| Path        | Purpose                                                                                   |
+|-------------|-------------------------------------------------------------------------------------------|
+| `e2e/`      | Holds user flows spanning multiple pages (e.g. `create-and-view-washing-machine.spec.ts`) |
+| `<domain>/` | Groups all page tests and page objects for a domain (e.g. `washing-machine/`)             |
+| `assets/`   | Shared files used across tests                                                            |
+| `shared/`   | Holds page objects reused across multiple domains (e.g. `notification`)                   |
+| `base.ts`   | Declares Playwright fixtures and exports `customTest`                                     |
 
 **B. Domain Layer** - `playwright-tests/<domain>/`
 
@@ -103,6 +104,9 @@ playwright-tests/
 │   ├── login.page.spec.ts
 │   └── register.page.spec.ts
 │
+├── shared/
+│   └── notification.pom.ts
+│
 ├── assets/
 │   ├── images/
 │   │   ├── trail.bmp
@@ -127,7 +131,7 @@ playwright-tests/
 - Spec files may grow large as all scenarios for a page are grouped together; `describe` blocks keep them navigable.
 
 ## Compliance
-- Enforcement is performed during code review. 
+- Enforcement is performed during code review.
 
 ## References
 - https://software-testing-tutorials-automation.com/2026/04/playwright-project-structure-typescript.html

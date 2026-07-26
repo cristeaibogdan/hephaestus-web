@@ -67,20 +67,7 @@ export class DamageStep {
     await this.page.getByRole('button', { name: 'Next' }).click();
   }
 
-  noImageUploadedError(): Locator {
-    return this.page.getByText("At least one image must be uploaded");
-  }
-
-  tooManyFilesError(): Locator {
-    // exact: true is needed to avoid matching the hidden CDK tooltip that contains the same text
-    return this.page.getByText('Upload is limited to 3 files', { exact: true });
-  }
-
-  invalidFileExtensionError(): Locator {
-    return this.page.getByText('Only jpg, jpeg, png and bmp extensions are supported');
-  }
-
-  async complete(): Promise<void> {
+  async completeAndContinue(): Promise<void> {
     await this.uploadImages(
       TEST_FILES.images.jpg.landscape,
       TEST_FILES.images.jpeg.mountains,
@@ -116,5 +103,7 @@ export class DamageStep {
 
     await this.fillProductPrice(100);
     await this.fillProductRepairPrice(20);
+
+    await this.next();
   }
 }

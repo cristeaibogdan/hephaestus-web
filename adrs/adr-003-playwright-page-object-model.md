@@ -14,7 +14,7 @@ Pain points:
 - Specs mix "*what is tested*" with "*how to drive the UI*"
 
 ## Decision
-Two complementary patterns address this: the **Page Object Model (POM)** and **Playwright Fixtures**.
+Two complementary concepts are used: **Page Object Model (POM)** and **Playwright Fixtures**.
 
 ### Page Object Model
 A Page Object is a class that wraps a page or component and exposes **intent-based methods**
@@ -40,6 +40,18 @@ export class WashingMachineCreatePom {
   }
 }
 ```
+Page Objects may represent either an entire page or a reusable UI component shared across multiple pages.
+For example, notifications are centralized in `notification.pom.ts`:
+
+```ts
+export class NotificationPom {
+  constructor(private page: Page) { }
+
+  getMessage(message: string, exact = false): Locator {
+    return this.page.getByText(message, { exact: exact });
+  }
+}
+```
 
 ### Fixtures
 By default, every test receives a `page` fixture from Playwright. 
@@ -49,9 +61,10 @@ We extend this to inject our own Page Objects.
 // base.ts
 import { test as base } from '@playwright/test';
 
-type MyFixtures = {
-  washingMachineCreatePom: WashingMachineCreatePom;
-  solarPanelHistoryPom: SolarPanelHistoryPom;
+interface MyFixtures {
+  washingMachineCreatePom: WashingMachineCreatePom,
+  solarPanelHistoryPom: SolarPanelHistoryPom,
+  notificationPom: NotificationPom
 };
 
 export const customTest = base.extend<MyFixtures>({
@@ -62,11 +75,14 @@ export const customTest = base.extend<MyFixtures>({
   solarPanelHistoryPom: async ({ page }, use) => {
     await use(new SolarPanelHistoryPom(page));
   },
+
+  notificationPom: async ({ page }, use) => {
+    await use(new NotificationPom(page));
+  },
 });
 ```
 
-With the fixture in place, a spec only imports `customTest` and declares the page objects it needs.
-
+With the fixture in place, a spec only imports `customTest` and declares only the Page Objects it requires.
 ```ts
 import { customTest } from '../fixtures';
 import { expect } from '@playwright/test';
@@ -79,8 +95,7 @@ customTest('starts a wash cycle', async ({ washingMachineCreatePom }) => {
 ```
 
 ### Rules
-1. Page Objects must not contain assertions.
-
+1. Page Objects must not contain assertions. 
 ```ts
 // ❌ Wrong — assertion inside POM
 async startCycle() {
@@ -92,6 +107,46 @@ async startCycle() {
 async startCycle() {
   await this.page.getByTestId('start-button').click();
 }
+```
+Exceptions are to be documented on the spot.
+```ts
+async fillSerialNumber(serialNumber: string): Promise<void> {
+  await this.page.getByLabel('Serial Number').fill(serialNumber);
+
+  /**
+   * due to async validator which triggers on blur, we need to click outside
+   * and wait for the hint to be visible before proceeding further.
+   */
+  await this.page.locator('body').click();
+  await expect(this.page.getByText('Serial number is valid')).toBeVisible();
+}
+```
+
+### POM Smartness
+Composite methods sit on top of atomic methods for pages filled out the same way in most tests.
+Atomic methods remain public for edge cases; composites are convenience only.
+
+Composite methods may either use predefined values or require caller-provided inputs, whichever best matches the scenario.
+```ts
+interface CompleteOptions {
+  identificationMode: 'Data Matrix' | 'QR Code',
+  manufacturer: string,
+  model: string
+}
+
+async completeAndContinue({
+    identificationMode = 'Data Matrix',
+    manufacturer = 'Bosch',
+    model = 'WGB256A1GB',
+}: Partial<CompleteOptions> = {}): Promise<void> {
+    await this.selectIdentificationMode(identificationMode);
+    await this.selectManufacturer(manufacturer);
+    await this.selectModel(model);
+    await this.next();
+}
+
+await identificationStep.completeAndContinue();                            // works with zero args
+await identificationStep.completeAndContinue({ manufacturer: 'Siemens' }); // overrides just one field
 ```
 
 ## Consequences
@@ -105,16 +160,10 @@ async startCycle() {
 - Page objects can grow large over time, reducing maintainability
 
 ## Compliance
-Enforcement is performed during code review. Reviewers should reject:
-- Raw locator calls (`page.locator()`, `page.getByTestId()`, etc.) inside spec files
-- Direct imports of `test` from `@playwright/test` in spec files
+Enforcement is performed during code review.
 
 ## References
 - https://www.reddit.com/r/QualityAssurance/comments/1248csz/playwright_framework_best_practicesstructure/ 
 - https://playwright.dev/docs/pom
 - https://playwright.dev/docs/test-fixtures
 - https://www.youtube.com/watch?v=k488kAtT-Pw
-
-## Questions
-- Should there be a dedicated notification pom file?
-- How smart should a POM be? Should it be able to auto-fill everything in a page within a single function?

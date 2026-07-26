@@ -69,7 +69,7 @@
     "LOGIN": {
       "NO_ACCOUNT": "Don't have an account?",
       "TO_REGISTER": "Create one"
-    },    
+    },
 
     "REGISTER": {
       "TITLE": "Registration",
@@ -144,7 +144,7 @@
       "PASSWORD_LENGTH": "Password should have at least 6 characters",
       "CONFIRM_PASSWORD_REQUIRED": "Confirm password is required",
       "PASSWORDS_MATCHING": "Passwords do not match",
-      "MANUFACTURER_REQUIRED": "Manufacturer is required",      
+      "MANUFACTURER_REQUIRED": "Manufacturer is required",
       "MODEL_OR_TYPE_REQUIRED": "At least model or type is required",
       "SERIAL_NUMBER_REQUIRED": "Serial number is required",
       "SERIAL_NUMBER_TAKEN": "Serial number is already in use",
@@ -182,7 +182,7 @@
     "CUSTOM_ERROR": {
       "IMAGE_LIMIT": "Upload is limited to 3 files",
       "IMAGE_FILE": "File",
-      "IMAGE_EXTENSION_TEXT": "is not suported. Only jpg, jpeg, png and bmp extensions are supported.",
+      "IMAGE_EXTENSION_TEXT": "is not supported. Only jpg, jpeg, png and bmp extensions are supported.",
       "IMAGE_SIZE_TEXT": "exceeds the limit of 3 MB",
       "REPORT": "Error generating report. Please try again later.",
       "TIMEOUT": "Request timed out. Please try again."

@@ -64,7 +64,7 @@ test.describe('Damage', () => {
     ]);
     await washingMachineApiMock.validate(false);
 
-    await washingMachineCreatePom.identificationStep().complete({
+    await washingMachineCreatePom.identificationStep().completeAndContinue({
       manufacturer: "Bosch",
       model: "WGB256A1GB",
       type: "BOS001",
@@ -72,13 +72,13 @@ test.describe('Damage', () => {
     damageStep = washingMachineCreatePom.damageStep();
   });
 
-  pageTest('shows error when no image is uploaded', async () => {
+  pageTest('shows error when no image is uploaded', async ({ notificationPom }) => {
     await damageStep.next();
 
-    await expect(damageStep.noImageUploadedError()).toBeVisible();
+    await expect(notificationPom.getMessage("At least one image must be uploaded")).toBeVisible();
   });
 
-  pageTest('shows error when more than 3 images are uploaded', async () => {
+  pageTest('shows error when more than 3 images are uploaded', async ({ notificationPom }) => {
     await damageStep.uploadImages(
       TEST_FILES.images.jpg.landscape,
       TEST_FILES.images.jpeg.mountains,
@@ -86,15 +86,15 @@ test.describe('Damage', () => {
       TEST_FILES.images.jpg.tree
     );
 
-    await expect(damageStep.tooManyFilesError()).toBeVisible();
+    await expect(notificationPom.getMessage('Upload is limited to 3 files', true)).toBeVisible();
   });
 
-  pageTest('shows error when uploaded file has invalid extension', async () => {
+  pageTest('shows error when uploaded file has invalid extension', async ({ notificationPom }) => {
     await damageStep.uploadImages(
       TEST_FILES.files.txt.empty
     );
 
-    await expect(damageStep.invalidFileExtensionError()).toBeVisible();
+    await expect(notificationPom.getMessage('File empty.txt is not supported. Only jpg, jpeg, png and bmp extensions are supported.')).toBeVisible();
   });
 
   pageTest('navigates to next step when valid input is provided', async ({ washingMachineCreatePom }) => {
@@ -153,7 +153,7 @@ test.describe('Overview', () => {
     await washingMachineApiMock.validate(false);
 
     // 1. Identification
-    await washingMachineCreatePom.identificationStep().complete({
+    await washingMachineCreatePom.identificationStep().completeAndContinue({
       identificationMode: 'Data Matrix',
       manufacturer: "Bosch",
       model: "WGB256A1GB",
@@ -237,7 +237,7 @@ test.describe('Overview', () => {
 
 test.describe('Recommendation', () => {
 
-  pageTest('shows success message when Recommendation is reached', async ({ washingMachineCreatePom, washingMachineApiMock }) => {
+  pageTest('shows success message when Recommendation is reached', async ({ washingMachineCreatePom, washingMachineApiMock, notificationPom }) => {
     await washingMachineCreatePom.goto();
     await washingMachineApiMock.getManufacturers(["Bosch"]);
     await washingMachineApiMock.getModelsAndTypes([
@@ -249,7 +249,7 @@ test.describe('Recommendation', () => {
     await washingMachineApiMock.validate(false);
 
     // 1. Identification
-    await washingMachineCreatePom.identificationStep().complete({
+    await washingMachineCreatePom.identificationStep().completeAndContinue({
       identificationMode: 'Data Matrix',
       manufacturer: "Bosch",
       model: "WGB256A1GB",
@@ -261,8 +261,7 @@ test.describe('Recommendation', () => {
 
     // 2. Damage
     const damageStep = washingMachineCreatePom.damageStep();
-    await damageStep.complete();
-    await damageStep.next();
+    await damageStep.completeAndContinue();
 
     // 3. Overview
     await washingMachineApiMock.create();
@@ -270,6 +269,7 @@ test.describe('Recommendation', () => {
     await washingMachineCreatePom.overviewStep().generateRecommendation();
 
     // 4. Recommendation
-    await expect(washingMachineCreatePom.recommendationStep().getSuccessMessage()).toBeVisible();
+    await expect(washingMachineCreatePom.recommendationStep().getText()).toBeVisible();
+    await expect(notificationPom.getMessage('Product has been successfully saved')).toBeVisible();
   });
 });
