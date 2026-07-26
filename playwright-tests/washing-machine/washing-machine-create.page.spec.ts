@@ -64,7 +64,7 @@ test.describe('Damage', () => {
     ]);
     await washingMachineApiMock.validate(false);
 
-    await washingMachineCreatePom.identificationStep().complete({
+    await washingMachineCreatePom.identificationStep().completeAndContinue({
       manufacturer: "Bosch",
       model: "WGB256A1GB",
       type: "BOS001",
@@ -86,7 +86,7 @@ test.describe('Damage', () => {
       TEST_FILES.images.jpg.tree
     );
 
-    await expect(notificationPom.getMessage('Upload is limited to 3 files')).toBeVisible();
+    await expect(notificationPom.getMessage('Upload is limited to 3 files', true)).toBeVisible();
   });
 
   pageTest('shows error when uploaded file has invalid extension', async ({ notificationPom }) => {
@@ -153,7 +153,7 @@ test.describe('Overview', () => {
     await washingMachineApiMock.validate(false);
 
     // 1. Identification
-    await washingMachineCreatePom.identificationStep().complete({
+    await washingMachineCreatePom.identificationStep().completeAndContinue({
       identificationMode: 'Data Matrix',
       manufacturer: "Bosch",
       model: "WGB256A1GB",
@@ -249,7 +249,7 @@ test.describe('Recommendation', () => {
     await washingMachineApiMock.validate(false);
 
     // 1. Identification
-    await washingMachineCreatePom.identificationStep().complete({
+    await washingMachineCreatePom.identificationStep().completeAndContinue({
       identificationMode: 'Data Matrix',
       manufacturer: "Bosch",
       model: "WGB256A1GB",
@@ -261,8 +261,7 @@ test.describe('Recommendation', () => {
 
     // 2. Damage
     const damageStep = washingMachineCreatePom.damageStep();
-    await damageStep.complete();
-    await damageStep.next();
+    await damageStep.completeAndContinue();
 
     // 3. Overview
     await washingMachineApiMock.create();

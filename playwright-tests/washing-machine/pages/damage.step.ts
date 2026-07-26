@@ -67,7 +67,7 @@ export class DamageStep {
     await this.page.getByRole('button', { name: 'Next' }).click();
   }
 
-  async complete(): Promise<void> {
+  async completeAndContinue(): Promise<void> {
     await this.uploadImages(
       TEST_FILES.images.jpg.landscape,
       TEST_FILES.images.jpeg.mountains,
@@ -103,5 +103,7 @@ export class DamageStep {
 
     await this.fillProductPrice(100);
     await this.fillProductRepairPrice(20);
+
+    await this.next();
   }
 }
