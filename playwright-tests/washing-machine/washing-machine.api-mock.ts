@@ -75,12 +75,17 @@ export class WashingMachineApiMock {
     });
   }
 
+  // TODO: Since frontend is using expecting a ProblemDetail, this method has been modified to return just that.
+  //  We might need methods that throw normal exceptions too.
   async searchError(status: number, message: string): Promise<void> {
     await this.page.route("**/v1/washing-machines/search", async route => {
       await route.fulfill({
         status,
-        contentType: "application/json",
-        body: JSON.stringify(message)
+        contentType: "application/problem+json",
+        body: JSON.stringify({
+          status,
+          detail: message
+        })
       });
     });
   }
