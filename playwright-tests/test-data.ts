@@ -5,7 +5,6 @@ import {ReturnType} from "../src/app/features/washing-machine/enums/return-type.
 import {IdentificationMode} from "../src/app/features/washing-machine/enums/identification-mode.enum";
 import {SearchWashingMachineResponse} from "../src/app/features/washing-machine/models/endpoints/search-washing-machine.endpoint";
 import {Recommendation} from "../src/app/features/washing-machine/enums/recommendation.enum";
-import {Damage} from "../src/app/features/washing-machine/models/detail.model";
 import {
   GetWashingMachineFullResponse
 } from "../src/app/features/washing-machine/models/endpoints/get-washing-machine-full.endpoint";

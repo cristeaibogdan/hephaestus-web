@@ -5,6 +5,7 @@ import { HomePom } from './home/pages/home.pom';
 import {WashingMachineApi} from "./washing-machine/washing-machine.api";
 import {WashingMachineApiMock} from "./washing-machine/washing-machine.api-mock";
 import {NotificationPom} from "./shared/notification.pom";
+import {PRODUCT_ENDPOINTS, WASHING_MACHINE_ENDPOINTS} from "../src/environments/endpoints";
 
 interface PomFixtures {
   homePom: HomePom,
@@ -105,8 +106,10 @@ export const pageTest = sharedTest.extend<PageTestFixtures>({
  * timeout depending on when it fires relative to the test's own assertions.
  */
 async function wakeupSuccessMock(page: Page): Promise<void> {
-  await page.route("**/v1/washing-machines/*/validate", route => route.fulfill({ status: 200 }));
-  await page.route("**/v1/products/*/manufacturers", route =>
+  const baseUrl: string = '**'
+
+  await page.route(baseUrl + WASHING_MACHINE_ENDPOINTS.validate("*"), route => route.fulfill({ status: 200 }));
+  await page.route(baseUrl + PRODUCT_ENDPOINTS.getManufacturers('*'), route =>
     route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify([]) })
   );
 }

@@ -5,21 +5,23 @@ import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { SKIP_INTERCEPTOR } from './skip-interceptor.token';
+import {AUTH_ENDPOINTS} from "../../../../environments/endpoints";
 
 @Injectable({ providedIn: 'root' })
 export class RegisterCodeValidator implements AsyncValidator {
 
-  private httpClient = inject(HttpClient);
-  private apiURL = environment.apiBaseUrl;
+  private readonly httpClient = inject(HttpClient);
+  private readonly baseUrl = environment.apiBaseUrl;
 
   validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
-    const url = this.apiURL.concat("/api/v1/users/").concat(control.value);
-    
     // Context so interceptor ignores it
     const context = new HttpContext().set(SKIP_INTERCEPTOR, true);
-    
-    return this.httpClient.get<boolean>(url, {context}).pipe(
-      map(response => 
+
+    return this.httpClient.get<boolean>(
+      this.baseUrl + AUTH_ENDPOINTS.validate(control.value),
+      {context}
+    ).pipe(
+      map(response =>
         response
           ? null
           : {invalid: true}
@@ -29,6 +31,6 @@ export class RegisterCodeValidator implements AsyncValidator {
       catchError((error: HttpErrorResponse): Observable<ValidationErrors | null> => {
         return of ({ backendError: true });
       })
-    );  
+    );
   }
 }

@@ -5,11 +5,11 @@ import {
 } from "../../src/app/features/washing-machine/models/endpoints/create-washing-machine.endpoint";
 import * as fs from "node:fs";
 import {TEST_FILES} from "../assets/file.provider";
-import crypto from "node:crypto";
 import {TestData} from "../test-data";
+import {WASHING_MACHINE_ENDPOINTS} from "../../src/environments/endpoints";
 
 export class WashingMachineApi {
-  private readonly apiURL = environment.apiBaseUrl;
+  private readonly baseUrl = environment.apiBaseUrl;
   private createdSerialNumbers: string[] = [];
 
   constructor(private readonly request: APIRequestContext) {}
@@ -34,7 +34,7 @@ export class WashingMachineApi {
     formData.append("imageFiles", new File([fs.readFileSync(TEST_FILES.images.jpg.landscape)], "landscape.jpg"));
 
     const response = await this.request.post(
-      this.apiURL.concat("/v1/washing-machines/create"),
+      this.baseUrl + WASHING_MACHINE_ENDPOINTS.create(),
       { multipart: formData }
     );
 
@@ -51,7 +51,7 @@ export class WashingMachineApi {
 
   async delete(serialNumber: string): Promise<void> {
     const response = await this.request.delete(
-      this.apiURL.concat(`/v1/washing-machines/${serialNumber}`)
+      this.baseUrl + WASHING_MACHINE_ENDPOINTS.delete(serialNumber)
     );
 
     /**

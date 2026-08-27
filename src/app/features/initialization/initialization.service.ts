@@ -6,16 +6,17 @@ import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { InitializationSpinnerModal } from 'src/app/features/initialization/initialization-spinner/initialization-spinner.modal';
 import { SKIP_INTERCEPTOR } from 'src/app/shared/validators/async-validators/skip-interceptor.token';
+import {PRODUCT_ENDPOINTS, WASHING_MACHINE_ENDPOINTS} from "../../../environments/endpoints";
 
 @Injectable({ providedIn: 'root' })
 export class InitializationService {
 
-  private apiUrl = environment.apiBaseUrl;
-  private http = inject(HttpClient);
-  private router = inject(Router);
-  private dialog = inject(MatDialog);
+  private readonly baseUrl = environment.apiBaseUrl;
+  private readonly http = inject(HttpClient);
+  private readonly router = inject(Router);
+  private readonly dialog = inject(MatDialog);
 
-  private cancel$ = new Subject<void>();
+  private readonly cancel$ = new Subject<void>();
 
   async wakeupBackends(): Promise<void>  {
 
@@ -48,7 +49,7 @@ export class InitializationService {
   private async wakeupWashingMachine(): Promise<boolean> {
     try {
       await firstValueFrom(
-        this.http.get(`${this.apiUrl}/v1/washing-machines/someSerialNumber/validate`, {
+        this.http.get(this.baseUrl + WASHING_MACHINE_ENDPOINTS.validate("someSerialNumber"), {
           context: new HttpContext().set(SKIP_INTERCEPTOR, true),
         }).pipe(
           retry({
@@ -71,7 +72,7 @@ export class InitializationService {
   private async wakeupProduct(): Promise<boolean> {
     try {
       await firstValueFrom(
-        this.http.get(`${this.apiUrl}/v1/products/Washing Machine/manufacturers`, {
+        this.http.get(this.baseUrl + PRODUCT_ENDPOINTS.getManufacturers("Washing Machine"), {
           context: new HttpContext().set(SKIP_INTERCEPTOR, true)
         }).pipe(
           retry({
