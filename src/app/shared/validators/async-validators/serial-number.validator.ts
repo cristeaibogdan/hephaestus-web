@@ -5,24 +5,23 @@ import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { SKIP_INTERCEPTOR } from './skip-interceptor.token';
 import {environment} from "../../../../environments/environment";
+import {WASHING_MACHINE_ENDPOINTS} from "../../../../environments/endpoints";
 
 @Injectable({ providedIn: 'root' })
 export class SerialNumberValidator implements AsyncValidator {
-
-  private httpClient = inject(HttpClient);
-  private apiURL = environment.apiBaseUrl;
+  private readonly httpClient = inject(HttpClient);
+  private readonly baseUrl = environment.apiBaseUrl;
 
   // TODO: Return `of(null)` when `control.value` is null or an empty string
   // to avoid unnecessary HTTP requests.
   validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
-    const url = this.apiURL.concat("/v1/washing-machines/")
-      .concat(control.value)
-      .concat("/validate");
-
     // Context so interceptor ignores it
     const context = new HttpContext().set(SKIP_INTERCEPTOR, true);
 
-    return this.httpClient.get<boolean>(url, {context}).pipe(
+    return this.httpClient.get<boolean>(
+      this.baseUrl + WASHING_MACHINE_ENDPOINTS.validate(control.value),
+      {context}
+    ).pipe(
       map(response =>
         response
           ? {invalid: true}

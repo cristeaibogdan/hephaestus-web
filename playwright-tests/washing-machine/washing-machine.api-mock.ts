@@ -7,12 +7,14 @@ import {Recommendation} from "../../src/app/features/washing-machine/enums/recom
 import {
   GetWashingMachineFullResponse
 } from "../../src/app/features/washing-machine/models/endpoints/get-washing-machine-full.endpoint";
+import {PRODUCT_ENDPOINTS, WASHING_MACHINE_ENDPOINTS} from "../../src/environments/endpoints";
 
 export class WashingMachineApiMock {
+  private readonly baseUrl = '**';
   constructor(private readonly page: Page) {}
 
   async getManufacturers(manufacturers: string[]): Promise<void> {
-    await this.page.route("**/v1/products/*/manufacturers", async route => {
+    await this.page.route(this.baseUrl + PRODUCT_ENDPOINTS.getManufacturers('*'), async route => {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -22,7 +24,7 @@ export class WashingMachineApiMock {
   }
 
   async getModelsAndTypes(modelsAndTypes: GetModelAndTypeResponse[]): Promise<void> {
-    await this.page.route("**/v1/products/*/models-and-types", async route => {
+    await this.page.route(this.baseUrl + PRODUCT_ENDPOINTS.getModelsAndTypes("*"), async route => {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -32,7 +34,7 @@ export class WashingMachineApiMock {
   }
 
   async validate(serialNumberIsInUse: boolean): Promise<void> {
-    await this.page.route("**/v1/washing-machines/*/validate", async route => {
+    await this.page.route(this.baseUrl + WASHING_MACHINE_ENDPOINTS.validate("*"), async route => {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -42,7 +44,7 @@ export class WashingMachineApiMock {
   }
 
   async create(): Promise<void> {
-    await this.page.route("**/v1/washing-machines/create", async route => {
+    await this.page.route(this.baseUrl + WASHING_MACHINE_ENDPOINTS.create(), async route => {
       await route.fulfill({
         status: 200,
       });
@@ -50,7 +52,7 @@ export class WashingMachineApiMock {
   }
 
   async getRecommendation(recommendation: Recommendation): Promise<void> {
-    await this.page.route("**/v1/washing-machines/*/recommendation", async route => {
+    await this.page.route(this.baseUrl + WASHING_MACHINE_ENDPOINTS.getRecommendation("*"), async route => {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -60,7 +62,7 @@ export class WashingMachineApiMock {
   }
 
   async search(washingMachines: SearchWashingMachineResponse[]): Promise<void> {
-    await this.page.route("**/v1/washing-machines/search", async route => {
+    await this.page.route(this.baseUrl + WASHING_MACHINE_ENDPOINTS.search(), async route => {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -78,7 +80,7 @@ export class WashingMachineApiMock {
   // TODO: Since frontend is using expecting a ProblemDetail, this method has been modified to return just that.
   //  We might need methods that throw normal exceptions too.
   async searchError(status: number, message: string): Promise<void> {
-    await this.page.route("**/v1/washing-machines/search", async route => {
+    await this.page.route(this.baseUrl + WASHING_MACHINE_ENDPOINTS.search(), async route => {
       await route.fulfill({
         status,
         contentType: "application/problem+json",
@@ -91,7 +93,7 @@ export class WashingMachineApiMock {
   }
 
   async loadMany(response: Record<string, GetWashingMachineFullResponse>): Promise<void> {
-    await this.page.route("**/v1/washing-machines/many", async route => {
+    await this.page.route(this.baseUrl + WASHING_MACHINE_ENDPOINTS.loadMany(), async route => {
       await route.fulfill({
         status: 200,
         contentType: "application/json",

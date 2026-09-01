@@ -7,26 +7,28 @@ import { Recommendation } from './recommendation.enum';
 import { GetSolarPanelFullResponse } from "./models/endpoints/get-solar-panel-full.endpoint";
 import {Page} from "../../shared/models/page.model";
 import {environment} from "../../../environments/environment";
+import {SOLAR_PANEL_ENDPOINTS} from "../../../environments/endpoints";
 
 @Injectable({providedIn: 'root'})
 export class SolarPanelApi {
-  private apiURL = environment.apiBaseUrl;
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
+  private readonly baseUrl = environment.apiBaseUrl;
 
 // **************************************
 // *** STEP 3 = OVERVIEW
 // **************************************
 
   create(createSolarPanelRequest: CreateSolarPanelRequest): Observable<void> {
-    const url = this.apiURL.concat("/v1/solar-panels/create");
-    return this.http.post<void>(url, createSolarPanelRequest);
+    return this.http.post<void>(
+      this.baseUrl + SOLAR_PANEL_ENDPOINTS.create(),
+      createSolarPanelRequest
+    );
   }
 
   getRecommendation(serialNumber:string): Observable<Recommendation> {
-    const url = this.apiURL.concat("/v1/solar-panels/")
-    .concat(serialNumber)
-    .concat("/recommendation");
-    return this.http.get<Recommendation>(url);
+    return this.http.get<Recommendation>(
+      this.baseUrl + SOLAR_PANEL_ENDPOINTS.getRecommendation(serialNumber)
+    );
   }
 
 // **************************************
@@ -42,20 +44,23 @@ export class SolarPanelApi {
 //**************************************
 
   search(searchSolarPanelRequest: SearchSolarPanelRequest): Observable<Page<SearchSolarPanelResponse>> {
-    const url = this.apiURL.concat("/v1/solar-panels/search");
-    return this.http.post<Page<SearchSolarPanelResponse>>(url, searchSolarPanelRequest);
+    return this.http.post<Page<SearchSolarPanelResponse>>(
+      this.baseUrl + SOLAR_PANEL_ENDPOINTS.search(),
+      searchSolarPanelRequest
+    );
   }
 
   loadMany(serialNumbers: string[]): Observable<Record<string, GetSolarPanelFullResponse>> {
-    const url = this.apiURL.concat("/v1/solar-panels/many");
-    return this.http.post<Record<string, GetSolarPanelFullResponse>>(url, serialNumbers);
+    return this.http.post<Record<string, GetSolarPanelFullResponse>>(
+      this.baseUrl + SOLAR_PANEL_ENDPOINTS.loadMany(),
+      serialNumbers
+    );
   }
 
   delete(serialNumber:string): Observable<void> {
-    const url = this.apiURL.concat("/v1/solar-panels/")
-      .concat(serialNumber);
-
-    return this.http.delete<void>(url);
+    return this.http.delete<void>(
+      this.baseUrl + SOLAR_PANEL_ENDPOINTS.delete(serialNumber)
+    );
   }
 
 }
