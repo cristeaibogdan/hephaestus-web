@@ -1,6 +1,5 @@
-import { ApplicationConfig, ErrorHandler, importProvidersFrom, inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -13,10 +12,10 @@ import { environment } from 'src/environments/environment';
 import { TranslocoHttpLoader } from './shared/transloco-http.loader';
 import { CompositePropagatorModule, OpenTelemetryInterceptorModule, ZipkinExporterModule } from '@jufab/opentelemetry-angular-interceptor';
 import { InitializationService } from "./features/initialization/initialization.service";
-import { GlobalErrorHandler } from "./shared/services/global-error-handler.service";
 import { timeoutInterceptor } from "./shared/interceptors/timeout.interceptor";
 import { languageInterceptor } from "./shared/interceptors/language.interceptor";
 import { loadingInterceptor } from "./shared/interceptors/loading.interceptor";
+import httpErrorInterceptor from "./shared/interceptors/http-error.interceptor";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,6 +27,7 @@ export const appConfig: ApplicationConfig = {
         timeoutInterceptor,
         languageInterceptor,
         loadingInterceptor,
+        httpErrorInterceptor
       ])
     ),
     { // To be able to modify the datepicker format we need an adapter, hence DateFnsAdapter
@@ -46,10 +46,6 @@ export const appConfig: ApplicationConfig = {
     { // Custom translation of paginator from HistoryComponent
       provide: MatPaginatorIntl,
       useClass: PaginatorI18n
-    },
-    {
-      provide: ErrorHandler,
-      useClass: GlobalErrorHandler,
     },
     provideTransloco({
       config: {
