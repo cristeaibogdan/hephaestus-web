@@ -59,9 +59,8 @@ export class HistoryDatasource extends DataSource<GetSolarPanelFullResponse> {
         this.paginator.pageSize = response.size;
         this.paginator.length = response.totalElements;
       },
-      error: err => {
+      error: () => {
         this.solarPanels.set([]);
-        throw err; // re-throw to be handled by GlobalErrorHandler
       }
     });
   }
