@@ -9,11 +9,18 @@ import {AUTH_ENDPOINTS} from "../../../../environments/endpoints";
 
 @Injectable({ providedIn: 'root' })
 export class RegisterCodeValidator implements AsyncValidator {
-
   private readonly httpClient = inject(HttpClient);
   private readonly baseUrl = environment.apiBaseUrl;
 
-  validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
+  validate(control: AbstractControl): Observable<ValidationErrors | null> {
+    /**
+     * Skip empty values — otherwise the field gets stuck "pending"
+     * and the submit button stays disabled while it waits on a useless request.
+     */
+    if (!control.value) {
+      return of(null);
+    }
+
     // Context so interceptor ignores it
     const context = new HttpContext().set(SKIP_INTERCEPTOR, true);
 
@@ -21,15 +28,15 @@ export class RegisterCodeValidator implements AsyncValidator {
       this.baseUrl + AUTH_ENDPOINTS.validate(control.value),
       {context}
     ).pipe(
-      map(response =>
-        response
+      map(isValid =>
+        isValid
           ? null
           : {invalid: true}
       ),
 
       // In case server can not be reached
-      catchError((error: HttpErrorResponse): Observable<ValidationErrors | null> => {
-        return of ({ backendError: true });
+      catchError((_error: HttpErrorResponse): Observable<ValidationErrors | null> => {
+        return of({ backendError: true });
       })
     );
   }
