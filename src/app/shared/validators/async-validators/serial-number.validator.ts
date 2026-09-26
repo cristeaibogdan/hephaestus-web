@@ -12,9 +12,15 @@ export class SerialNumberValidator implements AsyncValidator {
   private readonly httpClient = inject(HttpClient);
   private readonly baseUrl = environment.apiBaseUrl;
 
-  // TODO: Return `of(null)` when `control.value` is null or an empty string
-  // to avoid unnecessary HTTP requests.
-  validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
+  validate(control: AbstractControl): Observable<ValidationErrors | null> {
+    /**
+     * Skip empty values — otherwise the field gets stuck "pending"
+     * and the submit button stays disabled while it waits on a useless request.
+     */
+    if (!control.value) {
+      return of(null);
+    }
+
     // Context so interceptor ignores it
     const context = new HttpContext().set(SKIP_INTERCEPTOR, true);
 
@@ -22,15 +28,15 @@ export class SerialNumberValidator implements AsyncValidator {
       this.baseUrl + WASHING_MACHINE_ENDPOINTS.validate(control.value),
       {context}
     ).pipe(
-      map(response =>
-        response
-          ? {invalid: true}
+      map(isInUse =>
+        isInUse
+          ? { invalid: true }
           : null
       ),
 
       // In case server can not be reached
-      catchError((error: HttpErrorResponse): Observable<ValidationErrors | null> => {
-        return of ({ backendError: true });
+      catchError((_error: HttpErrorResponse): Observable<ValidationErrors | null> => {
+        return of({ backendError: true });
       })
     );
   }
