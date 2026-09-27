@@ -99,7 +99,6 @@ Pages should be encapsulated and expose only behaviour outside.
 
 # TODOs
 1. Finish ADR 004 usage of locators
-2. Properties or methods for POMs and how to decide?
-3. Add translation ADR - https://www.locize.com/blog/guide-to-i18n-key-naming
-4. Review all ADRs and look for opportunities to merge. I feel like ADR are not completelty standalone.
-5. Start with a prepopulated memory in a DB for playwright tests.
+2. Add translation ADR - https://www.locize.com/blog/guide-to-i18n-key-naming
+3. Review all ADRs and look for opportunities to merge. I feel like ADR are not completelty standalone.
+4. Start with a prepopulated memory in a DB for playwright tests.
