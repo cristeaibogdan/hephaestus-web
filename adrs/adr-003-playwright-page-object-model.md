@@ -47,6 +47,12 @@ For example, notifications are centralized in `notification.pom.ts`:
 export class NotificationPom {
   constructor(private page: Page) { }
 
+  /**
+   * `exact` defaults to false: notification text can include more than
+   * just the core message (e.g. multiple errors concatenated into one
+   * string), so a strict match would be too brittle. Pass `exact: true`
+   * when you need to rule out a partial/substring match.
+   */
   getMessage(message: string, exact = false): Locator {
     return this.page.getByText(message, { exact: exact });
   }
