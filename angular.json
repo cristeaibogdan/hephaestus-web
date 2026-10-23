@@ -83,6 +83,14 @@
           "options": {
             "buildTarget": "hephaestus-web:build"
           }
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "tsconfig.spec.json",
+            "include": ["src/**/*.spec.ts"],
+            "ui": true
+          }
         }
       }
     }
