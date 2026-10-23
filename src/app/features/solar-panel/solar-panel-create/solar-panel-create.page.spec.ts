@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SolarPanelCreatePage } from './solar-panel-create.page';
 import {TranslocoTestingModule} from "@jsverse/transloco";
+import {provideHttpClient} from "@angular/common/http";
+import {provideHttpClientTesting} from "@angular/common/http/testing";
 
 describe('SolarPanelCreatePage', () => {
   let component: SolarPanelCreatePage;
@@ -18,7 +20,11 @@ describe('SolarPanelCreatePage', () => {
             defaultLang: 'en',
           },
         })
-      ]
+      ],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ],
     })
     .compileComponents();
 
